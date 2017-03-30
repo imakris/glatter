@@ -28,7 +28,7 @@ from unittest import case
 input_root = r'.\input_headers'
 output_root = r'.'
 
-families = {'GL':'gl', 'GLX':'glX', 'EGL':'egl', 'GLU':'glu', 'WGL':'wgl'}
+families = {'GL':'gl', 'GLX':'glX', 'EGL':'egl', 'GLU':'glu', 'WGL':'wgl', 'khronos_':'khronos_'}
 
 extension_groups = {key: {} for key in families}
 
@@ -104,21 +104,27 @@ printable_c_types =  {
 	'int8_t': '%"PRId8"',
 	'int16_t': '%"PRId16"',
 	'int32_t': '%"PRId32"',
+	'int64_t': '%"PRId64"',
 	'int_fast8_t': '%"PRIdFAST8"',
 	'int_fast16_t': '%"PRIdFAST16"',
 	'int_fast32_t': '%"PRIdFAST32"',
+	'int_fast64_t': '%"PRIdFAST64"',
 	'int_least8_t': '%"PRIdLEAST8"',
 	'int_least16_t': '%"PRIdLEAST16"',
 	'int_least32_t': '%"PRIdLEAST32"',
+	'int_least64_t': '%"PRIdLEAST64"',
 	'uint8_t': '%"PRIu8"',
 	'uint16_t': '%"PRIu16"',
 	'uint32_t': '%"PRIu32"',
+	'uint64_t': '%"PRIu64"',
 	'uint_fast8_t': '%"PRIuFAST8"',
 	'uint_fast16_t': '%"PRIuFAST16"',
 	'uint_fast32_t': '%"PRIuFAST32"',
+	'uint_fast64_t': '%"PRIuFAST64"',
 	'uint_least8_t': '%"PRIuLEAST8"',
 	'uint_least16_t': '%"PRIuLEAST16"',
 	'uint_least32_t': '%"PRIuLEAST32"',
+	'uint_least64_t': '%"PRIuLEAST64"',
 	'intptr_t': '%"PRIxPTR"',
 	'uintptr_t': '%"PRIxPTR"',
 	'size_t': '%zu',
@@ -152,7 +158,7 @@ condblock_any_ifndef = re.compile('^# ?ifndef (?P<dname>\w+)')
 
 enum_pattern = re.compile('^# ?define ('+fm_sbp+'_\w*) ?(\w*)$')
 function_coarse_pattern = re.compile(r'(.*?) +('+fm_sbl+'[A-Z]\w+?) ?\( ?(.*?) ?\) ?;')
-function_fine_pattern = re.compile(r'^(?P<expkw>[A-Z0-9_]*?(API(CALL)?)? +)? ?(?P<rt>[\w* ]*?) ?(?P<cconv>\w*APIENTRY)?$')
+function_fine_pattern = re.compile(r'^((?P<expkw>[A-Z0-9_]*?(API(CALL)?)?) +)? ?(?P<rt>[\w* ]*?) ?(?P<cconv>\w*APIENTRY)?$')
 function_group_pattern = re.compile(r'\w*[a-z]+(?P<group>[A-Z0-9]{2,10})$')
 typedef_pattern = re.compile(r'^typedef(?P<type>.+?)(?P<name>'+fm_sbp+'\w+);$');
 
@@ -697,6 +703,11 @@ def get_function_mdnd(family): #macros, declarations and definitions
         a3s = '(' + get_args_string(x.args, 3, False) + ')'
         a6s = get_args_string(x.args, 6, False)
 
+
+        #fix for clang
+        if a1s == '()':
+            a1s = '(void)'
+
         dn_mac = '''
 #define ''' + x.name + a2s + ' glatter_' + x.name + '_debug' + a3e
 
@@ -729,9 +740,9 @@ extern ''' + pt_typ + ' ' + pt_nam + ';'
     return ''' + pt_nam + a2s + ''';
 }'''
 
-        printf_va_args = ''
+        printf_va_args = ', "\\n"'
         if len(x.args) != 0:
-            printf_va_args = ', ' + a6s[1]
+            printf_va_args += ', ' + a6s[1]
         df_def = df_dec[:-1] + '''
 {
     GLATTER_DBLOCK(file, line, ''' + x.name + ', (' + a6s[0] + ')' + printf_va_args + ')'

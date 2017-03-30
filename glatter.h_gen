@@ -84,7 +84,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glCopyTextureLevelsAPPLE, (GLuint destinationT
 #define glRenderbufferStorageMultisampleAPPLE(target, samples, internalformat, width, height) glatter_glRenderbufferStorageMultisampleAPPLE_ptr((target), (samples), (internalformat), (width), (height))
 GLATTER_UBLOCK(void, GL_APIENTRY, glRenderbufferStorageMultisampleAPPLE, (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
 #define glResolveMultisampleFramebufferAPPLE() glatter_glResolveMultisampleFramebufferAPPLE_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glResolveMultisampleFramebufferAPPLE, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glResolveMultisampleFramebufferAPPLE, (void))
 #endif // GL_APPLE_framebuffer_multisample
 #ifdef GL_APPLE_sync
 #define glClientWaitSyncAPPLE(sync, flags, timeout) glatter_glClientWaitSyncAPPLE_ptr((sync), (flags), (timeout))
@@ -144,7 +144,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glLabelObjectEXT, (GLenum type, GLuint object,
 #define glInsertEventMarkerEXT(length, marker) glatter_glInsertEventMarkerEXT_ptr((length), (marker))
 GLATTER_UBLOCK(void, GL_APIENTRY, glInsertEventMarkerEXT, (GLsizei length, const GLchar *marker))
 #define glPopGroupMarkerEXT() glatter_glPopGroupMarkerEXT_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glPopGroupMarkerEXT, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glPopGroupMarkerEXT, (void))
 #define glPushGroupMarkerEXT(length, marker) glatter_glPushGroupMarkerEXT_ptr((length), (marker))
 GLATTER_UBLOCK(void, GL_APIENTRY, glPushGroupMarkerEXT, (GLsizei length, const GLchar *marker))
 #endif // GL_EXT_debug_marker
@@ -274,7 +274,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glRasterSamplesEXT, (GLuint samples, GLboolean
 #endif // GL_EXT_raster_multisample
 #ifdef GL_EXT_robustness
 #define glGetGraphicsResetStatusEXT() glatter_glGetGraphicsResetStatusEXT_ptr()
-GLATTER_UBLOCK(GLenum, GL_APIENTRY, glGetGraphicsResetStatusEXT, ())
+GLATTER_UBLOCK(GLenum, GL_APIENTRY, glGetGraphicsResetStatusEXT, (void))
 #define glGetnUniformfvEXT(program, location, bufSize, params) glatter_glGetnUniformfvEXT_ptr((program), (location), (bufSize), (params))
 GLATTER_UBLOCK(void, GL_APIENTRY, glGetnUniformfvEXT, (GLuint program, GLint location, GLsizei bufSize, GLfloat *params))
 #define glGetnUniformivEXT(program, location, bufSize, params) glatter_glGetnUniformivEXT_ptr((program), (location), (bufSize), (params))
@@ -462,7 +462,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glRenderbufferStorageMultisampleIMG, (GLenum t
 #endif // GL_IMG_multisampled_render_to_texture
 #ifdef GL_INTEL_framebuffer_CMAA
 #define glApplyFramebufferAttachmentCMAAINTEL() glatter_glApplyFramebufferAttachmentCMAAINTEL_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glApplyFramebufferAttachmentCMAAINTEL, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glApplyFramebufferAttachmentCMAAINTEL, (void))
 #endif // GL_INTEL_framebuffer_CMAA
 #ifdef GL_INTEL_performance_query
 #define glBeginPerfQueryINTEL(queryHandle) glatter_glBeginPerfQueryINTEL_ptr((queryHandle))
@@ -488,7 +488,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glGetPerfQueryInfoINTEL, (GLuint queryId, GLui
 #endif // GL_INTEL_performance_query
 #ifdef GL_KHR_blend_equation_advanced
 #define glBlendBarrierKHR() glatter_glBlendBarrierKHR_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glBlendBarrierKHR, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glBlendBarrierKHR, (void))
 #endif // GL_KHR_blend_equation_advanced
 #ifdef GL_KHR_debug
 #define glDebugMessageCallbackKHR(callback, userParam) glatter_glDebugMessageCallbackKHR_ptr((callback), (userParam))
@@ -510,13 +510,13 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glObjectLabelKHR, (GLenum identifier, GLuint n
 #define glObjectPtrLabelKHR(ptr, length, label) glatter_glObjectPtrLabelKHR_ptr((ptr), (length), (label))
 GLATTER_UBLOCK(void, GL_APIENTRY, glObjectPtrLabelKHR, (const void *ptr, GLsizei length, const GLchar *label))
 #define glPopDebugGroupKHR() glatter_glPopDebugGroupKHR_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glPopDebugGroupKHR, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glPopDebugGroupKHR, (void))
 #define glPushDebugGroupKHR(source, id, length, message) glatter_glPushDebugGroupKHR_ptr((source), (id), (length), (message))
 GLATTER_UBLOCK(void, GL_APIENTRY, glPushDebugGroupKHR, (GLenum source, GLuint id, GLsizei length, const GLchar *message))
 #endif // GL_KHR_debug
 #ifdef GL_KHR_robustness
 #define glGetGraphicsResetStatusKHR() glatter_glGetGraphicsResetStatusKHR_ptr()
-GLATTER_UBLOCK(GLenum, GL_APIENTRY, glGetGraphicsResetStatusKHR, ())
+GLATTER_UBLOCK(GLenum, GL_APIENTRY, glGetGraphicsResetStatusKHR, (void))
 #define glGetnUniformfvKHR(program, location, bufSize, params) glatter_glGetnUniformfvKHR_ptr((program), (location), (bufSize), (params))
 GLATTER_UBLOCK(void, GL_APIENTRY, glGetnUniformfvKHR, (GLuint program, GLint location, GLsizei bufSize, GLfloat *params))
 #define glGetnUniformivKHR(program, location, bufSize, params) glatter_glGetnUniformivKHR_ptr((program), (location), (bufSize), (params))
@@ -556,7 +556,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glUniformHandleui64vNV, (GLint location, GLsiz
 #endif // GL_NV_bindless_texture
 #ifdef GL_NV_blend_equation_advanced
 #define glBlendBarrierNV() glatter_glBlendBarrierNV_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glBlendBarrierNV, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glBlendBarrierNV, (void))
 #define glBlendParameteriNV(pname, value) glatter_glBlendParameteriNV_ptr((pname), (value))
 GLATTER_UBLOCK(void, GL_APIENTRY, glBlendParameteriNV, (GLenum pname, GLint value))
 #endif // GL_NV_blend_equation_advanced
@@ -564,7 +564,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glBlendParameteriNV, (GLenum pname, GLint valu
 #define glBeginConditionalRenderNV(id, mode) glatter_glBeginConditionalRenderNV_ptr((id), (mode))
 GLATTER_UBLOCK(void, GL_APIENTRY, glBeginConditionalRenderNV, (GLuint id, GLenum mode))
 #define glEndConditionalRenderNV() glatter_glEndConditionalRenderNV_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glEndConditionalRenderNV, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glEndConditionalRenderNV, (void))
 #endif // GL_NV_conditional_render
 #ifdef GL_NV_conservative_raster
 #define glSubpixelPrecisionBiasNV(xbits, ybits) glatter_glSubpixelPrecisionBiasNV_ptr((xbits), (ybits))
@@ -850,7 +850,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glFramebufferSampleLocationsfvNV, (GLenum targ
 #define glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v) glatter_glNamedFramebufferSampleLocationsfvNV_ptr((framebuffer), (start), (count), (v))
 GLATTER_UBLOCK(void, GL_APIENTRY, glNamedFramebufferSampleLocationsfvNV, (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v))
 #define glResolveDepthValuesNV() glatter_glResolveDepthValuesNV_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glResolveDepthValuesNV, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glResolveDepthValuesNV, (void))
 #endif // GL_NV_sample_locations
 #ifdef GL_NV_viewport_array
 #define glDepthRangeArrayfvNV(first, count, v) glatter_glDepthRangeArrayfvNV_ptr((first), (count), (v))
@@ -1137,7 +1137,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glCopyTexImage2D, (GLenum target, GLint level,
 #define glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) glatter_glCopyTexSubImage2D_ptr((target), (level), (xoffset), (yoffset), (x), (y), (width), (height))
 GLATTER_UBLOCK(void, GL_APIENTRY, glCopyTexSubImage2D, (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
 #define glCreateProgram() glatter_glCreateProgram_ptr()
-GLATTER_UBLOCK(GLuint, GL_APIENTRY, glCreateProgram, ())
+GLATTER_UBLOCK(GLuint, GL_APIENTRY, glCreateProgram, (void))
 #define glCreateShader(type) glatter_glCreateShader_ptr((type))
 GLATTER_UBLOCK(GLuint, GL_APIENTRY, glCreateShader, (GLenum type))
 #define glCullFace(mode) glatter_glCullFace_ptr((mode))
@@ -1175,9 +1175,9 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glEnable, (GLenum cap))
 #define glEnableVertexAttribArray(index) glatter_glEnableVertexAttribArray_ptr((index))
 GLATTER_UBLOCK(void, GL_APIENTRY, glEnableVertexAttribArray, (GLuint index))
 #define glFinish() glatter_glFinish_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glFinish, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glFinish, (void))
 #define glFlush() glatter_glFlush_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glFlush, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glFlush, (void))
 #define glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) glatter_glFramebufferRenderbuffer_ptr((target), (attachment), (renderbuffertarget), (renderbuffer))
 GLATTER_UBLOCK(void, GL_APIENTRY, glFramebufferRenderbuffer, (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer))
 #define glFramebufferTexture2D(target, attachment, textarget, texture, level) glatter_glFramebufferTexture2D_ptr((target), (attachment), (textarget), (texture), (level))
@@ -1207,7 +1207,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glGetBooleanv, (GLenum pname, GLboolean *data)
 #define glGetBufferParameteriv(target, pname, params) glatter_glGetBufferParameteriv_ptr((target), (pname), (params))
 GLATTER_UBLOCK(void, GL_APIENTRY, glGetBufferParameteriv, (GLenum target, GLenum pname, GLint *params))
 #define glGetError() glatter_glGetError_ptr()
-GLATTER_UBLOCK(GLenum, GL_APIENTRY, glGetError, ())
+GLATTER_UBLOCK(GLenum, GL_APIENTRY, glGetError, (void))
 #define glGetFloatv(pname, data) glatter_glGetFloatv_ptr((pname), (data))
 GLATTER_UBLOCK(void, GL_APIENTRY, glGetFloatv, (GLenum pname, GLfloat *data))
 #define glGetFramebufferAttachmentParameteriv(target, attachment, pname, params) glatter_glGetFramebufferAttachmentParameteriv_ptr((target), (attachment), (pname), (params))
@@ -1273,7 +1273,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glPolygonOffset, (GLfloat factor, GLfloat unit
 #define glReadPixels(x, y, width, height, format, type, pixels) glatter_glReadPixels_ptr((x), (y), (width), (height), (format), (type), (pixels))
 GLATTER_UBLOCK(void, GL_APIENTRY, glReadPixels, (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void *pixels))
 #define glReleaseShaderCompiler() glatter_glReleaseShaderCompiler_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glReleaseShaderCompiler, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glReleaseShaderCompiler, (void))
 #define glRenderbufferStorage(target, internalformat, width, height) glatter_glRenderbufferStorage_ptr((target), (internalformat), (width), (height))
 GLATTER_UBLOCK(void, GL_APIENTRY, glRenderbufferStorage, (GLenum target, GLenum internalformat, GLsizei width, GLsizei height))
 #define glSampleCoverage(value, invert) glatter_glSampleCoverage_ptr((value), (invert))
@@ -1427,7 +1427,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glDrawRangeElements, (GLenum mode, GLuint star
 #define glEndQuery(target) glatter_glEndQuery_ptr((target))
 GLATTER_UBLOCK(void, GL_APIENTRY, glEndQuery, (GLenum target))
 #define glEndTransformFeedback() glatter_glEndTransformFeedback_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glEndTransformFeedback, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glEndTransformFeedback, (void))
 #define glFenceSync(condition, flags) glatter_glFenceSync_ptr((condition), (flags))
 GLATTER_UBLOCK(GLsync, GL_APIENTRY, glFenceSync, (GLenum condition, GLbitfield flags))
 #define glFlushMappedBufferRange(target, offset, length) glatter_glFlushMappedBufferRange_ptr((target), (offset), (length))
@@ -1505,7 +1505,7 @@ GLATTER_UBLOCK(GLboolean, GL_APIENTRY, glIsVertexArray, (GLuint array))
 #define glMapBufferRange(target, offset, length, access) glatter_glMapBufferRange_ptr((target), (offset), (length), (access))
 GLATTER_UBLOCK(void *, GL_APIENTRY, glMapBufferRange, (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access))
 #define glPauseTransformFeedback() glatter_glPauseTransformFeedback_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glPauseTransformFeedback, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glPauseTransformFeedback, (void))
 #define glProgramBinary(program, binaryFormat, binary, length) glatter_glProgramBinary_ptr((program), (binaryFormat), (binary), (length))
 GLATTER_UBLOCK(void, GL_APIENTRY, glProgramBinary, (GLuint program, GLenum binaryFormat, const void *binary, GLsizei length))
 #define glProgramParameteri(program, pname, value) glatter_glProgramParameteri_ptr((program), (pname), (value))
@@ -1515,7 +1515,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glReadBuffer, (GLenum src))
 #define glRenderbufferStorageMultisample(target, samples, internalformat, width, height) glatter_glRenderbufferStorageMultisample_ptr((target), (samples), (internalformat), (width), (height))
 GLATTER_UBLOCK(void, GL_APIENTRY, glRenderbufferStorageMultisample, (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
 #define glResumeTransformFeedback() glatter_glResumeTransformFeedback_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glResumeTransformFeedback, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glResumeTransformFeedback, (void))
 #define glSamplerParameterf(sampler, pname, param) glatter_glSamplerParameterf_ptr((sampler), (pname), (param))
 GLATTER_UBLOCK(void, GL_APIENTRY, glSamplerParameterf, (GLuint sampler, GLenum pname, GLfloat param))
 #define glSamplerParameterfv(sampler, pname, param) glatter_glSamplerParameterfv_ptr((sampler), (pname), (param))
@@ -1721,7 +1721,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glVertexBindingDivisor, (GLuint bindingindex, 
 #endif // GL_ES_VERSION_3_1
 #ifdef GL_ES_VERSION_3_2
 #define glBlendBarrier() glatter_glBlendBarrier_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glBlendBarrier, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glBlendBarrier, (void))
 #define glBlendEquationSeparatei(buf, modeRGB, modeAlpha) glatter_glBlendEquationSeparatei_ptr((buf), (modeRGB), (modeAlpha))
 GLATTER_UBLOCK(void, GL_APIENTRY, glBlendEquationSeparatei, (GLuint buf, GLenum modeRGB, GLenum modeAlpha))
 #define glBlendEquationi(buf, mode) glatter_glBlendEquationi_ptr((buf), (mode))
@@ -1755,7 +1755,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glFramebufferTexture, (GLenum target, GLenum a
 #define glGetDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths, messageLog) glatter_glGetDebugMessageLog_ptr((count), (bufSize), (sources), (types), (ids), (severities), (lengths), (messageLog))
 GLATTER_UBLOCK(GLuint, GL_APIENTRY, glGetDebugMessageLog, (GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog))
 #define glGetGraphicsResetStatus() glatter_glGetGraphicsResetStatus_ptr()
-GLATTER_UBLOCK(GLenum, GL_APIENTRY, glGetGraphicsResetStatus, ())
+GLATTER_UBLOCK(GLenum, GL_APIENTRY, glGetGraphicsResetStatus, (void))
 #define glGetObjectLabel(identifier, name, bufSize, length, label) glatter_glGetObjectLabel_ptr((identifier), (name), (bufSize), (length), (label))
 GLATTER_UBLOCK(void, GL_APIENTRY, glGetObjectLabel, (GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label))
 #define glGetObjectPtrLabel(ptr, bufSize, length, label) glatter_glGetObjectPtrLabel_ptr((ptr), (bufSize), (length), (label))
@@ -1787,7 +1787,7 @@ GLATTER_UBLOCK(void, GL_APIENTRY, glObjectPtrLabel, (const void *ptr, GLsizei le
 #define glPatchParameteri(pname, value) glatter_glPatchParameteri_ptr((pname), (value))
 GLATTER_UBLOCK(void, GL_APIENTRY, glPatchParameteri, (GLenum pname, GLint value))
 #define glPopDebugGroup() glatter_glPopDebugGroup_ptr()
-GLATTER_UBLOCK(void, GL_APIENTRY, glPopDebugGroup, ())
+GLATTER_UBLOCK(void, GL_APIENTRY, glPopDebugGroup, (void))
 #define glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) glatter_glPrimitiveBoundingBox_ptr((minX), (minY), (minZ), (minW), (maxX), (maxY), (maxZ), (maxW))
 GLATTER_UBLOCK(void, GL_APIENTRY, glPrimitiveBoundingBox, (GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW))
 #define glPushDebugGroup(source, id, length, message) glatter_glPushDebugGroup_ptr((source), (id), (length), (message))
@@ -1961,9 +1961,9 @@ GLATTER_UBLOCK(void, APIENTRY, glEnable, (GLenum cap))
 #define glEnableClientState(array) glatter_glEnableClientState_ptr((array))
 GLATTER_UBLOCK(void, APIENTRY, glEnableClientState, (GLenum array))
 #define glEnd() glatter_glEnd_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEnd, ())
+GLATTER_UBLOCK(void, APIENTRY, glEnd, (void))
 #define glEndList() glatter_glEndList_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndList, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndList, (void))
 #define glEvalCoord1d(u) glatter_glEvalCoord1d_ptr((u))
 GLATTER_UBLOCK(void, APIENTRY, glEvalCoord1d, (GLdouble u))
 #define glEvalCoord1dv(u) glatter_glEvalCoord1dv_ptr((u))
@@ -1991,9 +1991,9 @@ GLATTER_UBLOCK(void, APIENTRY, glEvalPoint2, (GLint i, GLint j))
 #define glFeedbackBuffer(size, type, buffer) glatter_glFeedbackBuffer_ptr((size), (type), (buffer))
 GLATTER_UBLOCK(void, APIENTRY, glFeedbackBuffer, (GLsizei size, GLenum type, GLfloat *buffer))
 #define glFinish() glatter_glFinish_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glFinish, ())
+GLATTER_UBLOCK(void, APIENTRY, glFinish, (void))
 #define glFlush() glatter_glFlush_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glFlush, ())
+GLATTER_UBLOCK(void, APIENTRY, glFlush, (void))
 #define glFogf(pname, param) glatter_glFogf_ptr((pname), (param))
 GLATTER_UBLOCK(void, APIENTRY, glFogf, (GLenum pname, GLfloat param))
 #define glFogfv(pname, params) glatter_glFogfv_ptr((pname), (params))
@@ -2017,7 +2017,7 @@ GLATTER_UBLOCK(void, APIENTRY, glGetClipPlane, (GLenum plane, GLdouble *equation
 #define glGetDoublev(pname, params) glatter_glGetDoublev_ptr((pname), (params))
 GLATTER_UBLOCK(void, APIENTRY, glGetDoublev, (GLenum pname, GLdouble *params))
 #define glGetError() glatter_glGetError_ptr()
-GLATTER_UBLOCK(GLenum, APIENTRY, glGetError, ())
+GLATTER_UBLOCK(GLenum, APIENTRY, glGetError, (void))
 #define glGetFloatv(pname, params) glatter_glGetFloatv_ptr((pname), (params))
 GLATTER_UBLOCK(void, APIENTRY, glGetFloatv, (GLenum pname, GLfloat *params))
 #define glGetIntegerv(pname, params) glatter_glGetIntegerv_ptr((pname), (params))
@@ -2095,7 +2095,7 @@ GLATTER_UBLOCK(void, APIENTRY, glIndexub, (GLubyte c))
 #define glIndexubv(c) glatter_glIndexubv_ptr((c))
 GLATTER_UBLOCK(void, APIENTRY, glIndexubv, (const GLubyte *c))
 #define glInitNames() glatter_glInitNames_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glInitNames, ())
+GLATTER_UBLOCK(void, APIENTRY, glInitNames, (void))
 #define glInterleavedArrays(format, stride, pointer) glatter_glInterleavedArrays_ptr((format), (stride), (pointer))
 GLATTER_UBLOCK(void, APIENTRY, glInterleavedArrays, (GLenum format, GLsizei stride, const GLvoid *pointer))
 #define glIsEnabled(cap) glatter_glIsEnabled_ptr((cap))
@@ -2127,7 +2127,7 @@ GLATTER_UBLOCK(void, APIENTRY, glLineWidth, (GLfloat width))
 #define glListBase(base) glatter_glListBase_ptr((base))
 GLATTER_UBLOCK(void, APIENTRY, glListBase, (GLuint base))
 #define glLoadIdentity() glatter_glLoadIdentity_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glLoadIdentity, ())
+GLATTER_UBLOCK(void, APIENTRY, glLoadIdentity, (void))
 #define glLoadMatrixd(m) glatter_glLoadMatrixd_ptr((m))
 GLATTER_UBLOCK(void, APIENTRY, glLoadMatrixd, (const GLdouble *m))
 #define glLoadMatrixf(m) glatter_glLoadMatrixf_ptr((m))
@@ -2219,13 +2219,13 @@ GLATTER_UBLOCK(void, APIENTRY, glPolygonOffset, (GLfloat factor, GLfloat units))
 #define glPolygonStipple(mask) glatter_glPolygonStipple_ptr((mask))
 GLATTER_UBLOCK(void, APIENTRY, glPolygonStipple, (const GLubyte *mask))
 #define glPopAttrib() glatter_glPopAttrib_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPopAttrib, ())
+GLATTER_UBLOCK(void, APIENTRY, glPopAttrib, (void))
 #define glPopClientAttrib() glatter_glPopClientAttrib_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPopClientAttrib, ())
+GLATTER_UBLOCK(void, APIENTRY, glPopClientAttrib, (void))
 #define glPopMatrix() glatter_glPopMatrix_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPopMatrix, ())
+GLATTER_UBLOCK(void, APIENTRY, glPopMatrix, (void))
 #define glPopName() glatter_glPopName_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPopName, ())
+GLATTER_UBLOCK(void, APIENTRY, glPopName, (void))
 #define glPrioritizeTextures(n, textures, priorities) glatter_glPrioritizeTextures_ptr((n), (textures), (priorities))
 GLATTER_UBLOCK(void, APIENTRY, glPrioritizeTextures, (GLsizei n, const GLuint *textures, const GLclampf *priorities))
 #define glPushAttrib(mask) glatter_glPushAttrib_ptr((mask))
@@ -2233,7 +2233,7 @@ GLATTER_UBLOCK(void, APIENTRY, glPushAttrib, (GLbitfield mask))
 #define glPushClientAttrib(mask) glatter_glPushClientAttrib_ptr((mask))
 GLATTER_UBLOCK(void, APIENTRY, glPushClientAttrib, (GLbitfield mask))
 #define glPushMatrix() glatter_glPushMatrix_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPushMatrix, ())
+GLATTER_UBLOCK(void, APIENTRY, glPushMatrix, (void))
 #define glPushName(name) glatter_glPushName_ptr((name))
 GLATTER_UBLOCK(void, APIENTRY, glPushName, (GLuint name))
 #define glRasterPos2d(x, y) glatter_glRasterPos2d_ptr((x), (y))
@@ -2619,7 +2619,7 @@ GLATTER_UBLOCK(void, APIENTRY, glMultiDrawElementsIndirectCountARB, (GLenum mode
 #endif // GL_ARB_indirect_parameters
 #ifdef GL_ARB_robustness
 #define glGetGraphicsResetStatusARB() glatter_glGetGraphicsResetStatusARB_ptr()
-GLATTER_UBLOCK(GLenum, APIENTRY, glGetGraphicsResetStatusARB, ())
+GLATTER_UBLOCK(GLenum, APIENTRY, glGetGraphicsResetStatusARB, (void))
 #define glGetnCompressedTexImageARB(target, lod, bufSize, img) glatter_glGetnCompressedTexImageARB_ptr((target), (lod), (bufSize), (img))
 GLATTER_UBLOCK(void, APIENTRY, glGetnCompressedTexImageARB, (GLenum target, GLint lod, GLsizei bufSize, void *img))
 #define glGetnTexImageARB(target, level, format, type, bufSize, img) glatter_glGetnTexImageARB_ptr((target), (level), (format), (type), (bufSize), (img))
@@ -2675,7 +2675,7 @@ GLATTER_UBLOCK(void, APIENTRY, glLabelObjectEXT, (GLenum type, GLuint object, GL
 #define glInsertEventMarkerEXT(length, marker) glatter_glInsertEventMarkerEXT_ptr((length), (marker))
 GLATTER_UBLOCK(void, APIENTRY, glInsertEventMarkerEXT, (GLsizei length, const GLchar *marker))
 #define glPopGroupMarkerEXT() glatter_glPopGroupMarkerEXT_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPopGroupMarkerEXT, ())
+GLATTER_UBLOCK(void, APIENTRY, glPopGroupMarkerEXT, (void))
 #define glPushGroupMarkerEXT(length, marker) glatter_glPushGroupMarkerEXT_ptr((length), (marker))
 GLATTER_UBLOCK(void, APIENTRY, glPushGroupMarkerEXT, (GLsizei length, const GLchar *marker))
 #endif // GL_EXT_debug_marker
@@ -2707,7 +2707,7 @@ GLATTER_UBLOCK(void, APIENTRY, glWindowRectanglesEXT, (GLenum mode, GLsizei coun
 #endif // GL_EXT_window_rectangles
 #ifdef GL_INTEL_framebuffer_CMAA
 #define glApplyFramebufferAttachmentCMAAINTEL() glatter_glApplyFramebufferAttachmentCMAAINTEL_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glApplyFramebufferAttachmentCMAAINTEL, ())
+GLATTER_UBLOCK(void, APIENTRY, glApplyFramebufferAttachmentCMAAINTEL, (void))
 #endif // GL_INTEL_framebuffer_CMAA
 #ifdef GL_INTEL_performance_query
 #define glBeginPerfQueryINTEL(queryHandle) glatter_glBeginPerfQueryINTEL_ptr((queryHandle))
@@ -2733,7 +2733,7 @@ GLATTER_UBLOCK(void, APIENTRY, glGetPerfQueryInfoINTEL, (GLuint queryId, GLuint 
 #endif // GL_INTEL_performance_query
 #ifdef GL_KHR_blend_equation_advanced
 #define glBlendBarrierKHR() glatter_glBlendBarrierKHR_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glBlendBarrierKHR, ())
+GLATTER_UBLOCK(void, APIENTRY, glBlendBarrierKHR, (void))
 #endif // GL_KHR_blend_equation_advanced
 #ifdef GL_NV_bindless_texture
 #define glGetImageHandleNV(texture, level, layered, layer, format) glatter_glGetImageHandleNV_ptr((texture), (level), (layered), (layer), (format))
@@ -2765,7 +2765,7 @@ GLATTER_UBLOCK(void, APIENTRY, glUniformHandleui64vNV, (GLint location, GLsizei 
 #endif // GL_NV_bindless_texture
 #ifdef GL_NV_blend_equation_advanced
 #define glBlendBarrierNV() glatter_glBlendBarrierNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glBlendBarrierNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glBlendBarrierNV, (void))
 #define glBlendParameteriNV(pname, value) glatter_glBlendParameteriNV_ptr((pname), (value))
 GLATTER_UBLOCK(void, APIENTRY, glBlendParameteriNV, (GLenum pname, GLint value))
 #endif // GL_NV_blend_equation_advanced
@@ -2773,7 +2773,7 @@ GLATTER_UBLOCK(void, APIENTRY, glBlendParameteriNV, (GLenum pname, GLint value))
 #define glBeginConditionalRenderNV(id, mode) glatter_glBeginConditionalRenderNV_ptr((id), (mode))
 GLATTER_UBLOCK(void, APIENTRY, glBeginConditionalRenderNV, (GLuint id, GLenum mode))
 #define glEndConditionalRenderNV() glatter_glEndConditionalRenderNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRenderNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRenderNV, (void))
 #endif // GL_NV_conditional_render
 #ifdef GL_NV_conservative_raster
 #define glSubpixelPrecisionBiasNV(xbits, ybits) glatter_glSubpixelPrecisionBiasNV_ptr((xbits), (ybits))
@@ -2989,7 +2989,7 @@ GLATTER_UBLOCK(void, APIENTRY, glFramebufferSampleLocationsfvNV, (GLenum target,
 #define glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v) glatter_glNamedFramebufferSampleLocationsfvNV_ptr((framebuffer), (start), (count), (v))
 GLATTER_UBLOCK(void, APIENTRY, glNamedFramebufferSampleLocationsfvNV, (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v))
 #define glResolveDepthValuesNV() glatter_glResolveDepthValuesNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glResolveDepthValuesNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glResolveDepthValuesNV, (void))
 #endif // GL_NV_sample_locations
 #ifdef GL_NV_viewport_swizzle
 #define glViewportSwizzleNV(index, swizzlex, swizzley, swizzlez, swizzlew) glatter_glViewportSwizzleNV_ptr((index), (swizzlex), (swizzley), (swizzlez), (swizzlew))
@@ -3027,9 +3027,9 @@ GLATTER_UBLOCK(void, APIENTRY, glDrawBuffer, (GLenum buf))
 #define glEnable(cap) glatter_glEnable_ptr((cap))
 GLATTER_UBLOCK(void, APIENTRY, glEnable, (GLenum cap))
 #define glFinish() glatter_glFinish_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glFinish, ())
+GLATTER_UBLOCK(void, APIENTRY, glFinish, (void))
 #define glFlush() glatter_glFlush_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glFlush, ())
+GLATTER_UBLOCK(void, APIENTRY, glFlush, (void))
 #define glFrontFace(mode) glatter_glFrontFace_ptr((mode))
 GLATTER_UBLOCK(void, APIENTRY, glFrontFace, (GLenum mode))
 #define glGetBooleanv(pname, data) glatter_glGetBooleanv_ptr((pname), (data))
@@ -3037,7 +3037,7 @@ GLATTER_UBLOCK(void, APIENTRY, glGetBooleanv, (GLenum pname, GLboolean *data))
 #define glGetDoublev(pname, data) glatter_glGetDoublev_ptr((pname), (data))
 GLATTER_UBLOCK(void, APIENTRY, glGetDoublev, (GLenum pname, GLdouble *data))
 #define glGetError() glatter_glGetError_ptr()
-GLATTER_UBLOCK(GLenum, APIENTRY, glGetError, ())
+GLATTER_UBLOCK(GLenum, APIENTRY, glGetError, (void))
 #define glGetFloatv(pname, data) glatter_glGetFloatv_ptr((pname), (data))
 GLATTER_UBLOCK(void, APIENTRY, glGetFloatv, (GLenum pname, GLfloat *data))
 #define glGetIntegerv(pname, data) glatter_glGetIntegerv_ptr((pname), (data))
@@ -3227,7 +3227,7 @@ GLATTER_UBLOCK(void, APIENTRY, glBlendEquationSeparate, (GLenum modeRGB, GLenum 
 #define glCompileShader(shader) glatter_glCompileShader_ptr((shader))
 GLATTER_UBLOCK(void, APIENTRY, glCompileShader, (GLuint shader))
 #define glCreateProgram() glatter_glCreateProgram_ptr()
-GLATTER_UBLOCK(GLuint, APIENTRY, glCreateProgram, ())
+GLATTER_UBLOCK(GLuint, APIENTRY, glCreateProgram, (void))
 #define glCreateShader(type) glatter_glCreateShader_ptr((type))
 GLATTER_UBLOCK(GLuint, APIENTRY, glCreateShader, (GLenum type))
 #define glDeleteProgram(program) glatter_glDeleteProgram_ptr((program))
@@ -3463,9 +3463,9 @@ GLATTER_UBLOCK(void, APIENTRY, glDisablei, (GLenum target, GLuint index))
 #define glEnablei(target, index) glatter_glEnablei_ptr((target), (index))
 GLATTER_UBLOCK(void, APIENTRY, glEnablei, (GLenum target, GLuint index))
 #define glEndConditionalRender() glatter_glEndConditionalRender_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRender, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRender, (void))
 #define glEndTransformFeedback() glatter_glEndTransformFeedback_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndTransformFeedback, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndTransformFeedback, (void))
 #define glFlushMappedBufferRange(target, offset, length) glatter_glFlushMappedBufferRange_ptr((target), (offset), (length))
 GLATTER_UBLOCK(void, APIENTRY, glFlushMappedBufferRange, (GLenum target, GLintptr offset, GLsizeiptr length))
 #define glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) glatter_glFramebufferRenderbuffer_ptr((target), (attachment), (renderbuffertarget), (renderbuffer))
@@ -3727,9 +3727,9 @@ GLATTER_UBLOCK(void, APIENTRY, glPatchParameterfv, (GLenum pname, const GLfloat 
 #define glPatchParameteri(pname, value) glatter_glPatchParameteri_ptr((pname), (value))
 GLATTER_UBLOCK(void, APIENTRY, glPatchParameteri, (GLenum pname, GLint value))
 #define glPauseTransformFeedback() glatter_glPauseTransformFeedback_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPauseTransformFeedback, ())
+GLATTER_UBLOCK(void, APIENTRY, glPauseTransformFeedback, (void))
 #define glResumeTransformFeedback() glatter_glResumeTransformFeedback_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glResumeTransformFeedback, ())
+GLATTER_UBLOCK(void, APIENTRY, glResumeTransformFeedback, (void))
 #define glUniform1d(location, x) glatter_glUniform1d_ptr((location), (x))
 GLATTER_UBLOCK(void, APIENTRY, glUniform1d, (GLint location, GLdouble x))
 #define glUniform1dv(location, count, value) glatter_glUniform1dv_ptr((location), (count), (value))
@@ -3907,7 +3907,7 @@ GLATTER_UBLOCK(void, APIENTRY, glProgramUniformMatrix4x3dv, (GLuint program, GLi
 #define glProgramUniformMatrix4x3fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x3fv_ptr((program), (location), (count), (transpose), (value))
 GLATTER_UBLOCK(void, APIENTRY, glProgramUniformMatrix4x3fv, (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glReleaseShaderCompiler() glatter_glReleaseShaderCompiler_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glReleaseShaderCompiler, ())
+GLATTER_UBLOCK(void, APIENTRY, glReleaseShaderCompiler, (void))
 #define glScissorArrayv(first, count, v) glatter_glScissorArrayv_ptr((first), (count), (v))
 GLATTER_UBLOCK(void, APIENTRY, glScissorArrayv, (GLuint first, GLsizei count, const GLint *v))
 #define glScissorIndexed(index, left, bottom, width, height) glatter_glScissorIndexed_ptr((index), (left), (bottom), (width), (height))
@@ -4035,7 +4035,7 @@ GLATTER_UBLOCK(void, APIENTRY, glObjectLabel, (GLenum identifier, GLuint name, G
 #define glObjectPtrLabel(ptr, length, label) glatter_glObjectPtrLabel_ptr((ptr), (length), (label))
 GLATTER_UBLOCK(void, APIENTRY, glObjectPtrLabel, (const void *ptr, GLsizei length, const GLchar *label))
 #define glPopDebugGroup() glatter_glPopDebugGroup_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPopDebugGroup, ())
+GLATTER_UBLOCK(void, APIENTRY, glPopDebugGroup, (void))
 #define glPushDebugGroup(source, id, length, message) glatter_glPushDebugGroup_ptr((source), (id), (length), (message))
 GLATTER_UBLOCK(void, APIENTRY, glPushDebugGroup, (GLenum source, GLuint id, GLsizei length, const GLchar *message))
 #define glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding) glatter_glShaderStorageBlockBinding_ptr((program), (storageBlockIndex), (storageBlockBinding))
@@ -4145,7 +4145,7 @@ GLATTER_UBLOCK(void, APIENTRY, glGetCompressedTextureImage, (GLuint texture, GLi
 #define glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels) glatter_glGetCompressedTextureSubImage_ptr((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (bufSize), (pixels))
 GLATTER_UBLOCK(void, APIENTRY, glGetCompressedTextureSubImage, (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels))
 #define glGetGraphicsResetStatus() glatter_glGetGraphicsResetStatus_ptr()
-GLATTER_UBLOCK(GLenum, APIENTRY, glGetGraphicsResetStatus, ())
+GLATTER_UBLOCK(GLenum, APIENTRY, glGetGraphicsResetStatus, (void))
 #define glGetNamedBufferParameteri64v(buffer, pname, params) glatter_glGetNamedBufferParameteri64v_ptr((buffer), (pname), (params))
 GLATTER_UBLOCK(void, APIENTRY, glGetNamedBufferParameteri64v, (GLuint buffer, GLenum pname, GLint64 *params))
 #define glGetNamedBufferParameteriv(buffer, pname, params) glatter_glGetNamedBufferParameteriv_ptr((buffer), (pname), (params))
@@ -4245,7 +4245,7 @@ GLATTER_UBLOCK(void, APIENTRY, glNamedRenderbufferStorageMultisample, (GLuint re
 #define glReadnPixels(x, y, width, height, format, type, bufSize, data) glatter_glReadnPixels_ptr((x), (y), (width), (height), (format), (type), (bufSize), (data))
 GLATTER_UBLOCK(void, APIENTRY, glReadnPixels, (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data))
 #define glTextureBarrier() glatter_glTextureBarrier_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glTextureBarrier, ())
+GLATTER_UBLOCK(void, APIENTRY, glTextureBarrier, (void))
 #define glTextureBuffer(texture, internalformat, buffer) glatter_glTextureBuffer_ptr((texture), (internalformat), (buffer))
 GLATTER_UBLOCK(void, APIENTRY, glTextureBuffer, (GLuint texture, GLenum internalformat, GLuint buffer))
 #define glTextureBufferRange(texture, internalformat, buffer, offset, size) glatter_glTextureBufferRange_ptr((texture), (internalformat), (buffer), (offset), (size))
@@ -4311,7 +4311,7 @@ GLATTER_UBLOCK(GLenum, APIENTRY, glClientWaitSync, (GLsync sync, GLbitfield flag
 #define glCompileShaderARB(shaderObj) glatter_glCompileShaderARB_ptr((shaderObj))
 GLATTER_UBLOCK(void, APIENTRY, glCompileShaderARB, (GLhandleARB shaderObj))
 #define glCreateProgramObjectARB() glatter_glCreateProgramObjectARB_ptr()
-GLATTER_UBLOCK(GLhandleARB, APIENTRY, glCreateProgramObjectARB, ())
+GLATTER_UBLOCK(GLhandleARB, APIENTRY, glCreateProgramObjectARB, (void))
 #define glCreateShaderObjectARB(shaderType) glatter_glCreateShaderObjectARB_ptr((shaderType))
 GLATTER_UBLOCK(GLhandleARB, APIENTRY, glCreateShaderObjectARB, (GLenum shaderType))
 #define glDeleteObjectARB(obj) glatter_glDeleteObjectARB_ptr((obj))
@@ -5070,7 +5070,7 @@ GLATTER_UBLOCK(void, APIENTRY, glPointParameterfvARB, (GLenum pname, const GLflo
 #endif // GL_ARB_point_parameters
 #ifdef GL_ARB_robustness
 #define glGetGraphicsResetStatusARB() glatter_glGetGraphicsResetStatusARB_ptr()
-GLATTER_UBLOCK(GLenum, APIENTRY, glGetGraphicsResetStatusARB, ())
+GLATTER_UBLOCK(GLenum, APIENTRY, glGetGraphicsResetStatusARB, (void))
 #define glGetnColorTableARB(target, format, type, bufSize, table) glatter_glGetnColorTableARB_ptr((target), (format), (type), (bufSize), (table))
 GLATTER_UBLOCK(void, APIENTRY, glGetnColorTableARB, (GLenum target, GLenum format, GLenum type, GLsizei bufSize, void *table))
 #define glGetnCompressedTexImageARB(target, lod, bufSize, img) glatter_glGetnCompressedTexImageARB_ptr((target), (lod), (bufSize), (img))
@@ -5112,7 +5112,7 @@ GLATTER_UBLOCK(void, APIENTRY, glReadnPixelsARB, (GLint x, GLint y, GLsizei widt
 #endif // GL_ARB_robustness
 #ifdef GL_ARB_sample_locations
 #define glEvaluateDepthValuesARB() glatter_glEvaluateDepthValuesARB_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEvaluateDepthValuesARB, ())
+GLATTER_UBLOCK(void, APIENTRY, glEvaluateDepthValuesARB, (void))
 #define glFramebufferSampleLocationsfvARB(target, start, count, v) glatter_glFramebufferSampleLocationsfvARB_ptr((target), (start), (count), (v))
 GLATTER_UBLOCK(void, APIENTRY, glFramebufferSampleLocationsfvARB, (GLenum target, GLuint start, GLsizei count, const GLfloat *v))
 #define glNamedFramebufferSampleLocationsfvARB(framebuffer, start, count, v) glatter_glNamedFramebufferSampleLocationsfvARB_ptr((framebuffer), (start), (count), (v))
@@ -5384,7 +5384,7 @@ GLATTER_UBLOCK(void, APIENTRY, glAlphaFragmentOp2ATI, (GLenum op, GLuint dst, GL
 #define glAlphaFragmentOp3ATI(op, dst, dstMod, arg1, arg1Rep, arg1Mod, arg2, arg2Rep, arg2Mod, arg3, arg3Rep, arg3Mod) glatter_glAlphaFragmentOp3ATI_ptr((op), (dst), (dstMod), (arg1), (arg1Rep), (arg1Mod), (arg2), (arg2Rep), (arg2Mod), (arg3), (arg3Rep), (arg3Mod))
 GLATTER_UBLOCK(void, APIENTRY, glAlphaFragmentOp3ATI, (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod))
 #define glBeginFragmentShaderATI() glatter_glBeginFragmentShaderATI_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glBeginFragmentShaderATI, ())
+GLATTER_UBLOCK(void, APIENTRY, glBeginFragmentShaderATI, (void))
 #define glBindFragmentShaderATI(id) glatter_glBindFragmentShaderATI_ptr((id))
 GLATTER_UBLOCK(void, APIENTRY, glBindFragmentShaderATI, (GLuint id))
 #define glColorFragmentOp1ATI(op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod) glatter_glColorFragmentOp1ATI_ptr((op), (dst), (dstMask), (dstMod), (arg1), (arg1Rep), (arg1Mod))
@@ -5396,7 +5396,7 @@ GLATTER_UBLOCK(void, APIENTRY, glColorFragmentOp3ATI, (GLenum op, GLuint dst, GL
 #define glDeleteFragmentShaderATI(id) glatter_glDeleteFragmentShaderATI_ptr((id))
 GLATTER_UBLOCK(void, APIENTRY, glDeleteFragmentShaderATI, (GLuint id))
 #define glEndFragmentShaderATI() glatter_glEndFragmentShaderATI_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndFragmentShaderATI, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndFragmentShaderATI, (void))
 #define glGenFragmentShadersATI(range) glatter_glGenFragmentShadersATI_ptr((range))
 GLATTER_UBLOCK(GLuint, APIENTRY, glGenFragmentShadersATI, (GLuint range))
 #define glPassTexCoordATI(dst, coord, swizzle) glatter_glPassTexCoordATI_ptr((dst), (coord), (swizzle))
@@ -5584,7 +5584,7 @@ GLATTER_UBLOCK(void, APIENTRY, glCopyColorSubTableEXT, (GLenum target, GLsizei s
 #define glLockArraysEXT(first, count) glatter_glLockArraysEXT_ptr((first), (count))
 GLATTER_UBLOCK(void, APIENTRY, glLockArraysEXT, (GLint first, GLsizei count))
 #define glUnlockArraysEXT() glatter_glUnlockArraysEXT_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glUnlockArraysEXT, ())
+GLATTER_UBLOCK(void, APIENTRY, glUnlockArraysEXT, (void))
 #endif // GL_EXT_compiled_vertex_array
 #ifdef GL_EXT_convolution
 #define glConvolutionFilter1DEXT(target, internalformat, width, format, type, image) glatter_glConvolutionFilter1DEXT_ptr((target), (internalformat), (width), (format), (type), (image))
@@ -5688,7 +5688,7 @@ GLATTER_UBLOCK(void, APIENTRY, glLabelObjectEXT, (GLenum type, GLuint object, GL
 #define glInsertEventMarkerEXT(length, marker) glatter_glInsertEventMarkerEXT_ptr((length), (marker))
 GLATTER_UBLOCK(void, APIENTRY, glInsertEventMarkerEXT, (GLsizei length, const GLchar *marker))
 #define glPopGroupMarkerEXT() glatter_glPopGroupMarkerEXT_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPopGroupMarkerEXT, ())
+GLATTER_UBLOCK(void, APIENTRY, glPopGroupMarkerEXT, (void))
 #define glPushGroupMarkerEXT(length, marker) glatter_glPushGroupMarkerEXT_ptr((length), (marker))
 GLATTER_UBLOCK(void, APIENTRY, glPushGroupMarkerEXT, (GLsizei length, const GLchar *marker))
 #endif // GL_EXT_debug_marker
@@ -6534,7 +6534,7 @@ GLATTER_UBLOCK(void, APIENTRY, glBindBufferOffsetEXT, (GLenum target, GLuint ind
 #define glBindBufferRangeEXT(target, index, buffer, offset, size) glatter_glBindBufferRangeEXT_ptr((target), (index), (buffer), (offset), (size))
 GLATTER_UBLOCK(void, APIENTRY, glBindBufferRangeEXT, (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size))
 #define glEndTransformFeedbackEXT() glatter_glEndTransformFeedbackEXT_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndTransformFeedbackEXT, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndTransformFeedbackEXT, (void))
 #define glGetTransformFeedbackVaryingEXT(program, index, bufSize, length, size, type, name) glatter_glGetTransformFeedbackVaryingEXT_ptr((program), (index), (bufSize), (length), (size), (type), (name))
 GLATTER_UBLOCK(void, APIENTRY, glGetTransformFeedbackVaryingEXT, (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name))
 #define glTransformFeedbackVaryingsEXT(program, count, varyings, bufferMode) glatter_glTransformFeedbackVaryingsEXT_ptr((program), (count), (varyings), (bufferMode))
@@ -6584,7 +6584,7 @@ GLATTER_UBLOCK(void, APIENTRY, glVertexAttribLPointerEXT, (GLuint index, GLint s
 #endif // GL_EXT_vertex_attrib_64bit
 #ifdef GL_EXT_vertex_shader
 #define glBeginVertexShaderEXT() glatter_glBeginVertexShaderEXT_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glBeginVertexShaderEXT, ())
+GLATTER_UBLOCK(void, APIENTRY, glBeginVertexShaderEXT, (void))
 #define glBindLightParameterEXT(light, value) glatter_glBindLightParameterEXT_ptr((light), (value))
 GLATTER_UBLOCK(GLuint, APIENTRY, glBindLightParameterEXT, (GLenum light, GLenum value))
 #define glBindMaterialParameterEXT(face, value) glatter_glBindMaterialParameterEXT_ptr((face), (value))
@@ -6604,7 +6604,7 @@ GLATTER_UBLOCK(void, APIENTRY, glDisableVariantClientStateEXT, (GLuint id))
 #define glEnableVariantClientStateEXT(id) glatter_glEnableVariantClientStateEXT_ptr((id))
 GLATTER_UBLOCK(void, APIENTRY, glEnableVariantClientStateEXT, (GLuint id))
 #define glEndVertexShaderEXT() glatter_glEndVertexShaderEXT_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndVertexShaderEXT, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndVertexShaderEXT, (void))
 #define glExtractComponentEXT(res, src, num) glatter_glExtractComponentEXT_ptr((res), (src), (num))
 GLATTER_UBLOCK(void, APIENTRY, glExtractComponentEXT, (GLuint res, GLuint src, GLuint num))
 #define glGenSymbolsEXT(datatype, storagetype, range, components) glatter_glGenSymbolsEXT_ptr((datatype), (storagetype), (range), (components))
@@ -6686,7 +6686,7 @@ GLATTER_UBLOCK(GLsync, APIENTRY, glImportSyncEXT, (GLenum external_sync_type, GL
 #endif // GL_EXT_x11_sync_object
 #ifdef GL_GREMEDY_frame_terminator
 #define glFrameTerminatorGREMEDY() glatter_glFrameTerminatorGREMEDY_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glFrameTerminatorGREMEDY, ())
+GLATTER_UBLOCK(void, APIENTRY, glFrameTerminatorGREMEDY, (void))
 #endif // GL_GREMEDY_frame_terminator
 #ifdef GL_GREMEDY_string_marker
 #define glStringMarkerGREMEDY(len, string) glatter_glStringMarkerGREMEDY_ptr((len), (string))
@@ -6740,7 +6740,7 @@ GLATTER_UBLOCK(void, APIENTRY, glBlendFuncSeparateINGR, (GLenum sfactorRGB, GLen
 #endif // GL_INGR_blend_func_separate
 #ifdef GL_INTEL_framebuffer_CMAA
 #define glApplyFramebufferAttachmentCMAAINTEL() glatter_glApplyFramebufferAttachmentCMAAINTEL_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glApplyFramebufferAttachmentCMAAINTEL, ())
+GLATTER_UBLOCK(void, APIENTRY, glApplyFramebufferAttachmentCMAAINTEL, (void))
 #endif // GL_INTEL_framebuffer_CMAA
 #ifdef GL_INTEL_map_texture
 #define glMapTexture2DINTEL(texture, level, access, stride, layout) glatter_glMapTexture2DINTEL_ptr((texture), (level), (access), (stride), (layout))
@@ -6784,11 +6784,11 @@ GLATTER_UBLOCK(void, APIENTRY, glGetPerfQueryInfoINTEL, (GLuint queryId, GLuint 
 #endif // GL_INTEL_performance_query
 #ifdef GL_KHR_blend_equation_advanced
 #define glBlendBarrierKHR() glatter_glBlendBarrierKHR_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glBlendBarrierKHR, ())
+GLATTER_UBLOCK(void, APIENTRY, glBlendBarrierKHR, (void))
 #endif // GL_KHR_blend_equation_advanced
 #ifdef GL_MESA_resize_buffers
 #define glResizeBuffersMESA() glatter_glResizeBuffersMESA_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glResizeBuffersMESA, ())
+GLATTER_UBLOCK(void, APIENTRY, glResizeBuffersMESA, (void))
 #endif // GL_MESA_resize_buffers
 #ifdef GL_MESA_window_pos
 #define glWindowPos2dMESA(x, y) glatter_glWindowPos2dMESA_ptr((x), (y))
@@ -6844,7 +6844,7 @@ GLATTER_UBLOCK(void, APIENTRY, glWindowPos4svMESA, (const GLshort *v))
 #define glBeginConditionalRenderNVX(id) glatter_glBeginConditionalRenderNVX_ptr((id))
 GLATTER_UBLOCK(void, APIENTRY, glBeginConditionalRenderNVX, (GLuint id))
 #define glEndConditionalRenderNVX() glatter_glEndConditionalRenderNVX_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRenderNVX, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRenderNVX, (void))
 #endif // GL_NVX_conditional_render
 #ifdef GL_NV_bindless_multi_draw_indirect
 #define glMultiDrawArraysIndirectBindlessNV(mode, indirect, drawCount, stride, vertexBufferCount) glatter_glMultiDrawArraysIndirectBindlessNV_ptr((mode), (indirect), (drawCount), (stride), (vertexBufferCount))
@@ -6888,7 +6888,7 @@ GLATTER_UBLOCK(void, APIENTRY, glUniformHandleui64vNV, (GLint location, GLsizei 
 #endif // GL_NV_bindless_texture
 #ifdef GL_NV_blend_equation_advanced
 #define glBlendBarrierNV() glatter_glBlendBarrierNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glBlendBarrierNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glBlendBarrierNV, (void))
 #define glBlendParameteriNV(pname, value) glatter_glBlendParameteriNV_ptr((pname), (value))
 GLATTER_UBLOCK(void, APIENTRY, glBlendParameteriNV, (GLenum pname, GLint value))
 #endif // GL_NV_blend_equation_advanced
@@ -6936,7 +6936,7 @@ GLATTER_UBLOCK(void, APIENTRY, glStateCaptureNV, (GLuint state, GLenum mode))
 #define glBeginConditionalRenderNV(id, mode) glatter_glBeginConditionalRenderNV_ptr((id), (mode))
 GLATTER_UBLOCK(void, APIENTRY, glBeginConditionalRenderNV, (GLuint id, GLenum mode))
 #define glEndConditionalRenderNV() glatter_glEndConditionalRenderNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRenderNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRenderNV, (void))
 #endif // GL_NV_conditional_render
 #ifdef GL_NV_conservative_raster
 #define glSubpixelPrecisionBiasNV(xbits, ybits) glatter_glSubpixelPrecisionBiasNV_ptr((xbits), (ybits))
@@ -7192,7 +7192,7 @@ GLATTER_UBLOCK(void, APIENTRY, glBeginOcclusionQueryNV, (GLuint id))
 #define glDeleteOcclusionQueriesNV(n, ids) glatter_glDeleteOcclusionQueriesNV_ptr((n), (ids))
 GLATTER_UBLOCK(void, APIENTRY, glDeleteOcclusionQueriesNV, (GLsizei n, const GLuint *ids))
 #define glEndOcclusionQueryNV() glatter_glEndOcclusionQueryNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndOcclusionQueryNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndOcclusionQueryNV, (void))
 #define glGenOcclusionQueriesNV(n, ids) glatter_glGenOcclusionQueriesNV_ptr((n), (ids))
 GLATTER_UBLOCK(void, APIENTRY, glGenOcclusionQueriesNV, (GLsizei n, GLuint *ids))
 #define glGetOcclusionQueryivNV(id, pname, params) glatter_glGetOcclusionQueryivNV_ptr((id), (pname), (params))
@@ -7370,7 +7370,7 @@ GLATTER_UBLOCK(void, APIENTRY, glPresentFrameKeyedNV, (GLuint video_slot, GLuint
 #define glPrimitiveRestartIndexNV(index) glatter_glPrimitiveRestartIndexNV_ptr((index))
 GLATTER_UBLOCK(void, APIENTRY, glPrimitiveRestartIndexNV, (GLuint index))
 #define glPrimitiveRestartNV() glatter_glPrimitiveRestartNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPrimitiveRestartNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glPrimitiveRestartNV, (void))
 #endif // GL_NV_primitive_restart
 #ifdef GL_NV_register_combiners
 #define glCombinerInputNV(stage, portion, variable, input, mapping, componentUsage) glatter_glCombinerInputNV_ptr((stage), (portion), (variable), (input), (mapping), (componentUsage))
@@ -7412,7 +7412,7 @@ GLATTER_UBLOCK(void, APIENTRY, glFramebufferSampleLocationsfvNV, (GLenum target,
 #define glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v) glatter_glNamedFramebufferSampleLocationsfvNV_ptr((framebuffer), (start), (count), (v))
 GLATTER_UBLOCK(void, APIENTRY, glNamedFramebufferSampleLocationsfvNV, (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v))
 #define glResolveDepthValuesNV() glatter_glResolveDepthValuesNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glResolveDepthValuesNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glResolveDepthValuesNV, (void))
 #endif // GL_NV_sample_locations
 #ifdef GL_NV_shader_buffer_load
 #define glGetBufferParameterui64vNV(target, pname, params) glatter_glGetBufferParameterui64vNV_ptr((target), (pname), (params))
@@ -7444,7 +7444,7 @@ GLATTER_UBLOCK(void, APIENTRY, glUniformui64vNV, (GLint location, GLsizei count,
 #endif // GL_NV_shader_buffer_load
 #ifdef GL_NV_texture_barrier
 #define glTextureBarrierNV() glatter_glTextureBarrierNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glTextureBarrierNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glTextureBarrierNV, (void))
 #endif // GL_NV_texture_barrier
 #ifdef GL_NV_texture_multisample
 #define glTexImage2DMultisampleCoverageNV(target, coverageSamples, colorSamples, internalFormat, width, height, fixedSampleLocations) glatter_glTexImage2DMultisampleCoverageNV_ptr((target), (coverageSamples), (colorSamples), (internalFormat), (width), (height), (fixedSampleLocations))
@@ -7472,7 +7472,7 @@ GLATTER_UBLOCK(void, APIENTRY, glBindBufferOffsetNV, (GLenum target, GLuint inde
 #define glBindBufferRangeNV(target, index, buffer, offset, size) glatter_glBindBufferRangeNV_ptr((target), (index), (buffer), (offset), (size))
 GLATTER_UBLOCK(void, APIENTRY, glBindBufferRangeNV, (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size))
 #define glEndTransformFeedbackNV() glatter_glEndTransformFeedbackNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndTransformFeedbackNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndTransformFeedbackNV, (void))
 #define glGetActiveVaryingNV(program, index, bufSize, length, size, type, name) glatter_glGetActiveVaryingNV_ptr((program), (index), (bufSize), (length), (size), (type), (name))
 GLATTER_UBLOCK(void, APIENTRY, glGetActiveVaryingNV, (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name))
 #define glGetTransformFeedbackVaryingNV(program, index, location) glatter_glGetTransformFeedbackVaryingNV_ptr((program), (index), (location))
@@ -7498,13 +7498,13 @@ GLATTER_UBLOCK(void, APIENTRY, glGenTransformFeedbacksNV, (GLsizei n, GLuint *id
 #define glIsTransformFeedbackNV(id) glatter_glIsTransformFeedbackNV_ptr((id))
 GLATTER_UBLOCK(GLboolean, APIENTRY, glIsTransformFeedbackNV, (GLuint id))
 #define glPauseTransformFeedbackNV() glatter_glPauseTransformFeedbackNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPauseTransformFeedbackNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glPauseTransformFeedbackNV, (void))
 #define glResumeTransformFeedbackNV() glatter_glResumeTransformFeedbackNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glResumeTransformFeedbackNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glResumeTransformFeedbackNV, (void))
 #endif // GL_NV_transform_feedback2
 #ifdef GL_NV_vdpau_interop
 #define glVDPAUFiniNV() glatter_glVDPAUFiniNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glVDPAUFiniNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glVDPAUFiniNV, (void))
 #define glVDPAUGetSurfaceivNV(surface, pname, bufSize, length, values) glatter_glVDPAUGetSurfaceivNV_ptr((surface), (pname), (bufSize), (length), (values))
 GLATTER_UBLOCK(void, APIENTRY, glVDPAUGetSurfaceivNV, (GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values))
 #define glVDPAUInitNV(vdpDevice, getProcAddress) glatter_glVDPAUInitNV_ptr((vdpDevice), (getProcAddress))
@@ -7526,7 +7526,7 @@ GLATTER_UBLOCK(void, APIENTRY, glVDPAUUnregisterSurfaceNV, (GLvdpauSurfaceNV sur
 #endif // GL_NV_vdpau_interop
 #ifdef GL_NV_vertex_array_range
 #define glFlushVertexArrayRangeNV() glatter_glFlushVertexArrayRangeNV_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glFlushVertexArrayRangeNV, ())
+GLATTER_UBLOCK(void, APIENTRY, glFlushVertexArrayRangeNV, (void))
 #define glVertexArrayRangeNV(length, pointer) glatter_glVertexArrayRangeNV_ptr((length), (pointer))
 GLATTER_UBLOCK(void, APIENTRY, glVertexArrayRangeNV, (GLsizei length, const void *pointer))
 #endif // GL_NV_vertex_array_range
@@ -8160,7 +8160,7 @@ GLATTER_UBLOCK(GLint, APIENTRY, glPollAsyncSGIX, (GLuint *markerp))
 #endif // GL_SGIX_async
 #ifdef GL_SGIX_flush_raster
 #define glFlushRasterSGIX() glatter_glFlushRasterSGIX_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glFlushRasterSGIX, ())
+GLATTER_UBLOCK(void, APIENTRY, glFlushRasterSGIX, (void))
 #endif // GL_SGIX_flush_raster
 #ifdef GL_SGIX_fragment_lighting
 #define glFragmentColorMaterialSGIX(face, mode) glatter_glFragmentColorMaterialSGIX_ptr((face), (mode))
@@ -8210,7 +8210,7 @@ GLATTER_UBLOCK(void, APIENTRY, glIglooInterfaceSGIX, (GLenum pname, const void *
 #endif // GL_SGIX_igloo_interface
 #ifdef GL_SGIX_instruments
 #define glGetInstrumentsSGIX() glatter_glGetInstrumentsSGIX_ptr()
-GLATTER_UBLOCK(GLint, APIENTRY, glGetInstrumentsSGIX, ())
+GLATTER_UBLOCK(GLint, APIENTRY, glGetInstrumentsSGIX, (void))
 #define glInstrumentsBufferSGIX(size, buffer) glatter_glInstrumentsBufferSGIX_ptr((size), (buffer))
 GLATTER_UBLOCK(void, APIENTRY, glInstrumentsBufferSGIX, (GLsizei size, GLint *buffer))
 #define glPollInstrumentsSGIX(marker_p) glatter_glPollInstrumentsSGIX_ptr((marker_p))
@@ -8218,7 +8218,7 @@ GLATTER_UBLOCK(GLint, APIENTRY, glPollInstrumentsSGIX, (GLint *marker_p))
 #define glReadInstrumentsSGIX(marker) glatter_glReadInstrumentsSGIX_ptr((marker))
 GLATTER_UBLOCK(void, APIENTRY, glReadInstrumentsSGIX, (GLint marker))
 #define glStartInstrumentsSGIX() glatter_glStartInstrumentsSGIX_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glStartInstrumentsSGIX, ())
+GLATTER_UBLOCK(void, APIENTRY, glStartInstrumentsSGIX, (void))
 #define glStopInstrumentsSGIX(marker) glatter_glStopInstrumentsSGIX_ptr((marker))
 GLATTER_UBLOCK(void, APIENTRY, glStopInstrumentsSGIX, (GLint marker))
 #endif // GL_SGIX_instruments
@@ -8266,7 +8266,7 @@ GLATTER_UBLOCK(void, APIENTRY, glSpriteParameterivSGIX, (GLenum pname, const GLi
 #endif // GL_SGIX_sprite
 #ifdef GL_SGIX_tag_sample_buffer
 #define glTagSampleBufferSGIX() glatter_glTagSampleBufferSGIX_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glTagSampleBufferSGIX, ())
+GLATTER_UBLOCK(void, APIENTRY, glTagSampleBufferSGIX, (void))
 #endif // GL_SGIX_tag_sample_buffer
 #ifdef GL_SGI_color_table
 #define glColorTableParameterfvSGI(target, pname, params) glatter_glColorTableParameterfvSGI_ptr((target), (pname), (params))
@@ -8286,7 +8286,7 @@ GLATTER_UBLOCK(void, APIENTRY, glGetColorTableSGI, (GLenum target, GLenum format
 #endif // GL_SGI_color_table
 #ifdef GL_SUNX_constant_data
 #define glFinishTextureSUNX() glatter_glFinishTextureSUNX_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glFinishTextureSUNX, ())
+GLATTER_UBLOCK(void, APIENTRY, glFinishTextureSUNX, (void))
 #endif // GL_SUNX_constant_data
 #ifdef GL_SUN_global_alpha
 #define glGlobalAlphaFactorbSUN(factor) glatter_glGlobalAlphaFactorbSUN_ptr((factor))
@@ -8658,7 +8658,7 @@ GLATTER_UBLOCK(void, APIENTRY, glBlendEquationSeparate, (GLenum modeRGB, GLenum 
 #define glCompileShader(shader) glatter_glCompileShader_ptr((shader))
 GLATTER_UBLOCK(void, APIENTRY, glCompileShader, (GLuint shader))
 #define glCreateProgram() glatter_glCreateProgram_ptr()
-GLATTER_UBLOCK(GLuint, APIENTRY, glCreateProgram, ())
+GLATTER_UBLOCK(GLuint, APIENTRY, glCreateProgram, (void))
 #define glCreateShader(type) glatter_glCreateShader_ptr((type))
 GLATTER_UBLOCK(GLuint, APIENTRY, glCreateShader, (GLenum type))
 #define glDeleteProgram(program) glatter_glDeleteProgram_ptr((program))
@@ -8894,9 +8894,9 @@ GLATTER_UBLOCK(void, APIENTRY, glDisablei, (GLenum target, GLuint index))
 #define glEnablei(target, index) glatter_glEnablei_ptr((target), (index))
 GLATTER_UBLOCK(void, APIENTRY, glEnablei, (GLenum target, GLuint index))
 #define glEndConditionalRender() glatter_glEndConditionalRender_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRender, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndConditionalRender, (void))
 #define glEndTransformFeedback() glatter_glEndTransformFeedback_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glEndTransformFeedback, ())
+GLATTER_UBLOCK(void, APIENTRY, glEndTransformFeedback, (void))
 #define glFlushMappedBufferRange(target, offset, length) glatter_glFlushMappedBufferRange_ptr((target), (offset), (length))
 GLATTER_UBLOCK(void, APIENTRY, glFlushMappedBufferRange, (GLenum target, GLintptr offset, GLsizeiptr length))
 #define glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) glatter_glFramebufferRenderbuffer_ptr((target), (attachment), (renderbuffertarget), (renderbuffer))
@@ -9218,9 +9218,9 @@ GLATTER_UBLOCK(void, APIENTRY, glPatchParameterfv, (GLenum pname, const GLfloat 
 #define glPatchParameteri(pname, value) glatter_glPatchParameteri_ptr((pname), (value))
 GLATTER_UBLOCK(void, APIENTRY, glPatchParameteri, (GLenum pname, GLint value))
 #define glPauseTransformFeedback() glatter_glPauseTransformFeedback_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPauseTransformFeedback, ())
+GLATTER_UBLOCK(void, APIENTRY, glPauseTransformFeedback, (void))
 #define glResumeTransformFeedback() glatter_glResumeTransformFeedback_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glResumeTransformFeedback, ())
+GLATTER_UBLOCK(void, APIENTRY, glResumeTransformFeedback, (void))
 #define glUniform1d(location, x) glatter_glUniform1d_ptr((location), (x))
 GLATTER_UBLOCK(void, APIENTRY, glUniform1d, (GLint location, GLdouble x))
 #define glUniform1dv(location, count, value) glatter_glUniform1dv_ptr((location), (count), (value))
@@ -9398,7 +9398,7 @@ GLATTER_UBLOCK(void, APIENTRY, glProgramUniformMatrix4x3dv, (GLuint program, GLi
 #define glProgramUniformMatrix4x3fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x3fv_ptr((program), (location), (count), (transpose), (value))
 GLATTER_UBLOCK(void, APIENTRY, glProgramUniformMatrix4x3fv, (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glReleaseShaderCompiler() glatter_glReleaseShaderCompiler_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glReleaseShaderCompiler, ())
+GLATTER_UBLOCK(void, APIENTRY, glReleaseShaderCompiler, (void))
 #define glScissorArrayv(first, count, v) glatter_glScissorArrayv_ptr((first), (count), (v))
 GLATTER_UBLOCK(void, APIENTRY, glScissorArrayv, (GLuint first, GLsizei count, const GLint *v))
 #define glScissorIndexed(index, left, bottom, width, height) glatter_glScissorIndexed_ptr((index), (left), (bottom), (width), (height))
@@ -9526,7 +9526,7 @@ GLATTER_UBLOCK(void, APIENTRY, glObjectLabel, (GLenum identifier, GLuint name, G
 #define glObjectPtrLabel(ptr, length, label) glatter_glObjectPtrLabel_ptr((ptr), (length), (label))
 GLATTER_UBLOCK(void, APIENTRY, glObjectPtrLabel, (const void *ptr, GLsizei length, const GLchar *label))
 #define glPopDebugGroup() glatter_glPopDebugGroup_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glPopDebugGroup, ())
+GLATTER_UBLOCK(void, APIENTRY, glPopDebugGroup, (void))
 #define glPushDebugGroup(source, id, length, message) glatter_glPushDebugGroup_ptr((source), (id), (length), (message))
 GLATTER_UBLOCK(void, APIENTRY, glPushDebugGroup, (GLenum source, GLuint id, GLsizei length, const GLchar *message))
 #define glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding) glatter_glShaderStorageBlockBinding_ptr((program), (storageBlockIndex), (storageBlockBinding))
@@ -9636,7 +9636,7 @@ GLATTER_UBLOCK(void, APIENTRY, glGetCompressedTextureImage, (GLuint texture, GLi
 #define glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels) glatter_glGetCompressedTextureSubImage_ptr((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (bufSize), (pixels))
 GLATTER_UBLOCK(void, APIENTRY, glGetCompressedTextureSubImage, (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels))
 #define glGetGraphicsResetStatus() glatter_glGetGraphicsResetStatus_ptr()
-GLATTER_UBLOCK(GLenum, APIENTRY, glGetGraphicsResetStatus, ())
+GLATTER_UBLOCK(GLenum, APIENTRY, glGetGraphicsResetStatus, (void))
 #define glGetNamedBufferParameteri64v(buffer, pname, params) glatter_glGetNamedBufferParameteri64v_ptr((buffer), (pname), (params))
 GLATTER_UBLOCK(void, APIENTRY, glGetNamedBufferParameteri64v, (GLuint buffer, GLenum pname, GLint64 *params))
 #define glGetNamedBufferParameteriv(buffer, pname, params) glatter_glGetNamedBufferParameteriv_ptr((buffer), (pname), (params))
@@ -9760,7 +9760,7 @@ GLATTER_UBLOCK(void, APIENTRY, glNamedRenderbufferStorageMultisample, (GLuint re
 #define glReadnPixels(x, y, width, height, format, type, bufSize, data) glatter_glReadnPixels_ptr((x), (y), (width), (height), (format), (type), (bufSize), (data))
 GLATTER_UBLOCK(void, APIENTRY, glReadnPixels, (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data))
 #define glTextureBarrier() glatter_glTextureBarrier_ptr()
-GLATTER_UBLOCK(void, APIENTRY, glTextureBarrier, ())
+GLATTER_UBLOCK(void, APIENTRY, glTextureBarrier, (void))
 #define glTextureBuffer(texture, internalformat, buffer) glatter_glTextureBuffer_ptr((texture), (internalformat), (buffer))
 GLATTER_UBLOCK(void, APIENTRY, glTextureBuffer, (GLuint texture, GLenum internalformat, GLuint buffer))
 #define glTextureBufferRange(texture, internalformat, buffer, offset, size) glatter_glTextureBufferRange_ptr((texture), (internalformat), (buffer), (offset), (size))
@@ -9817,6 +9817,275 @@ GLATTER_UBLOCK(void, APIENTRY, glVertexArrayVertexBuffer, (GLuint vaobj, GLuint 
 GLATTER_UBLOCK(void, APIENTRY, glVertexArrayVertexBuffers, (GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides))
 #endif // GL_VERSION_4_5
 #endif // __glext_h_
+
+#ifdef __glxext_h_
+#define glXGetMscRateOML(dpy, drawable, numerator, denominator) glatter_glXGetMscRateOML_ptr((dpy), (drawable), (numerator), (denominator))
+GLATTER_UBLOCK(Bool, , glXGetMscRateOML, (Display *dpy, GLXDrawable drawable, int32_t *numerator, int32_t *denominator))
+#define glXGetSyncValuesOML(dpy, drawable, ust, msc, sbc) glatter_glXGetSyncValuesOML_ptr((dpy), (drawable), (ust), (msc), (sbc))
+GLATTER_UBLOCK(Bool, , glXGetSyncValuesOML, (Display *dpy, GLXDrawable drawable, int64_t *ust, int64_t *msc, int64_t *sbc))
+#define glXSwapBuffersMscOML(dpy, drawable, target_msc, divisor, remainder) glatter_glXSwapBuffersMscOML_ptr((dpy), (drawable), (target_msc), (divisor), (remainder))
+GLATTER_UBLOCK(int64_t, , glXSwapBuffersMscOML, (Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder))
+#define glXWaitForMscOML(dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc) glatter_glXWaitForMscOML_ptr((dpy), (drawable), (target_msc), (divisor), (remainder), (ust), (msc), (sbc))
+GLATTER_UBLOCK(Bool, , glXWaitForMscOML, (Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder, int64_t *ust, int64_t *msc, int64_t *sbc))
+#define glXWaitForSbcOML(dpy, drawable, target_sbc, ust, msc, sbc) glatter_glXWaitForSbcOML_ptr((dpy), (drawable), (target_sbc), (ust), (msc), (sbc))
+GLATTER_UBLOCK(Bool, , glXWaitForSbcOML, (Display *dpy, GLXDrawable drawable, int64_t target_sbc, int64_t *ust, int64_t *msc, int64_t *sbc))
+#ifdef GLX_AMD_gpu_association
+#define glXBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) glatter_glXBlitContextFramebufferAMD_ptr((dstCtx), (srcX0), (srcY0), (srcX1), (srcY1), (dstX0), (dstY0), (dstX1), (dstY1), (mask), (filter))
+GLATTER_UBLOCK(void, , glXBlitContextFramebufferAMD, (GLXContext dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
+#define glXCreateAssociatedContextAMD(id, share_list) glatter_glXCreateAssociatedContextAMD_ptr((id), (share_list))
+GLATTER_UBLOCK(GLXContext, , glXCreateAssociatedContextAMD, (unsigned int id, GLXContext share_list))
+#define glXCreateAssociatedContextAttribsAMD(id, share_context, attribList) glatter_glXCreateAssociatedContextAttribsAMD_ptr((id), (share_context), (attribList))
+GLATTER_UBLOCK(GLXContext, , glXCreateAssociatedContextAttribsAMD, (unsigned int id, GLXContext share_context, const int *attribList))
+#define glXDeleteAssociatedContextAMD(ctx) glatter_glXDeleteAssociatedContextAMD_ptr((ctx))
+GLATTER_UBLOCK(Bool, , glXDeleteAssociatedContextAMD, (GLXContext ctx))
+#define glXGetContextGPUIDAMD(ctx) glatter_glXGetContextGPUIDAMD_ptr((ctx))
+GLATTER_UBLOCK(unsigned int, , glXGetContextGPUIDAMD, (GLXContext ctx))
+#define glXGetCurrentAssociatedContextAMD() glatter_glXGetCurrentAssociatedContextAMD_ptr()
+GLATTER_UBLOCK(GLXContext, , glXGetCurrentAssociatedContextAMD, (void))
+#define glXGetGPUIDsAMD(maxCount, ids) glatter_glXGetGPUIDsAMD_ptr((maxCount), (ids))
+GLATTER_UBLOCK(unsigned int, , glXGetGPUIDsAMD, (unsigned int maxCount, unsigned int *ids))
+#define glXGetGPUInfoAMD(id, property, dataType, size, data) glatter_glXGetGPUInfoAMD_ptr((id), (property), (dataType), (size), (data))
+GLATTER_UBLOCK(int, , glXGetGPUInfoAMD, (unsigned int id, int property, GLenum dataType, unsigned int size, void *data))
+#define glXMakeAssociatedContextCurrentAMD(ctx) glatter_glXMakeAssociatedContextCurrentAMD_ptr((ctx))
+GLATTER_UBLOCK(Bool, , glXMakeAssociatedContextCurrentAMD, (GLXContext ctx))
+#endif // GLX_AMD_gpu_association
+#ifdef GLX_ARB_create_context
+#define glXCreateContextAttribsARB(dpy, config, share_context, direct, attrib_list) glatter_glXCreateContextAttribsARB_ptr((dpy), (config), (share_context), (direct), (attrib_list))
+GLATTER_UBLOCK(GLXContext, , glXCreateContextAttribsARB, (Display *dpy, GLXFBConfig config, GLXContext share_context, Bool direct, const int *attrib_list))
+#endif // GLX_ARB_create_context
+#ifdef GLX_ARB_get_proc_address
+#define glXGetProcAddressARB(procName) glatter_glXGetProcAddressARB_ptr((procName))
+GLATTER_UBLOCK(__GLXextFuncPtr, , glXGetProcAddressARB, (const GLubyte *procName))
+#endif // GLX_ARB_get_proc_address
+#ifdef GLX_EXT_import_context
+#define glXFreeContextEXT(dpy, context) glatter_glXFreeContextEXT_ptr((dpy), (context))
+GLATTER_UBLOCK(void, , glXFreeContextEXT, (Display *dpy, GLXContext context))
+#define glXGetContextIDEXT(context) glatter_glXGetContextIDEXT_ptr((context))
+GLATTER_UBLOCK(GLXContextID, , glXGetContextIDEXT, (const GLXContext context))
+#define glXImportContextEXT(dpy, contextID) glatter_glXImportContextEXT_ptr((dpy), (contextID))
+GLATTER_UBLOCK(GLXContext, , glXImportContextEXT, (Display *dpy, GLXContextID contextID))
+#define glXQueryContextInfoEXT(dpy, context, attribute, value) glatter_glXQueryContextInfoEXT_ptr((dpy), (context), (attribute), (value))
+GLATTER_UBLOCK(int, , glXQueryContextInfoEXT, (Display *dpy, GLXContext context, int attribute, int *value))
+#endif // GLX_EXT_import_context
+#ifdef GLX_EXT_swap_control
+#define glXSwapIntervalEXT(dpy, drawable, interval) glatter_glXSwapIntervalEXT_ptr((dpy), (drawable), (interval))
+GLATTER_UBLOCK(void, , glXSwapIntervalEXT, (Display *dpy, GLXDrawable drawable, int interval))
+#endif // GLX_EXT_swap_control
+#ifdef GLX_EXT_texture_from_pixmap
+#define glXBindTexImageEXT(dpy, drawable, buffer, attrib_list) glatter_glXBindTexImageEXT_ptr((dpy), (drawable), (buffer), (attrib_list))
+GLATTER_UBLOCK(void, , glXBindTexImageEXT, (Display *dpy, GLXDrawable drawable, int buffer, const int *attrib_list))
+#define glXReleaseTexImageEXT(dpy, drawable, buffer) glatter_glXReleaseTexImageEXT_ptr((dpy), (drawable), (buffer))
+GLATTER_UBLOCK(void, , glXReleaseTexImageEXT, (Display *dpy, GLXDrawable drawable, int buffer))
+#endif // GLX_EXT_texture_from_pixmap
+#ifdef GLX_MESA_agp_offset
+#define glXGetAGPOffsetMESA(pointer) glatter_glXGetAGPOffsetMESA_ptr((pointer))
+GLATTER_UBLOCK(unsigned int, , glXGetAGPOffsetMESA, (const void *pointer))
+#endif // GLX_MESA_agp_offset
+#ifdef GLX_MESA_copy_sub_buffer
+#define glXCopySubBufferMESA(dpy, drawable, x, y, width, height) glatter_glXCopySubBufferMESA_ptr((dpy), (drawable), (x), (y), (width), (height))
+GLATTER_UBLOCK(void, , glXCopySubBufferMESA, (Display *dpy, GLXDrawable drawable, int x, int y, int width, int height))
+#endif // GLX_MESA_copy_sub_buffer
+#ifdef GLX_MESA_pixmap_colormap
+#define glXCreateGLXPixmapMESA(dpy, visual, pixmap, cmap) glatter_glXCreateGLXPixmapMESA_ptr((dpy), (visual), (pixmap), (cmap))
+GLATTER_UBLOCK(GLXPixmap, , glXCreateGLXPixmapMESA, (Display *dpy, XVisualInfo *visual, Pixmap pixmap, Colormap cmap))
+#endif // GLX_MESA_pixmap_colormap
+#ifdef GLX_MESA_query_renderer
+#define glXQueryCurrentRendererIntegerMESA(attribute, value) glatter_glXQueryCurrentRendererIntegerMESA_ptr((attribute), (value))
+GLATTER_UBLOCK(Bool, , glXQueryCurrentRendererIntegerMESA, (int attribute, unsigned int *value))
+#define glXQueryRendererIntegerMESA(dpy, screen, renderer, attribute, value) glatter_glXQueryRendererIntegerMESA_ptr((dpy), (screen), (renderer), (attribute), (value))
+GLATTER_UBLOCK(Bool, , glXQueryRendererIntegerMESA, (Display *dpy, int screen, int renderer, int attribute, unsigned int *value))
+#endif // GLX_MESA_query_renderer
+#ifdef GLX_MESA_release_buffers
+#define glXReleaseBuffersMESA(dpy, drawable) glatter_glXReleaseBuffersMESA_ptr((dpy), (drawable))
+GLATTER_UBLOCK(Bool, , glXReleaseBuffersMESA, (Display *dpy, GLXDrawable drawable))
+#endif // GLX_MESA_release_buffers
+#ifdef GLX_MESA_set_3dfx_mode
+#define glXSet3DfxModeMESA(mode) glatter_glXSet3DfxModeMESA_ptr((mode))
+GLATTER_UBLOCK(Bool, , glXSet3DfxModeMESA, (int mode))
+#endif // GLX_MESA_set_3dfx_mode
+#ifdef GLX_NV_copy_buffer
+#define glXCopyBufferSubDataNV(dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size) glatter_glXCopyBufferSubDataNV_ptr((dpy), (readCtx), (writeCtx), (readTarget), (writeTarget), (readOffset), (writeOffset), (size))
+GLATTER_UBLOCK(void, , glXCopyBufferSubDataNV, (Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
+#define glXNamedCopyBufferSubDataNV(dpy, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size) glatter_glXNamedCopyBufferSubDataNV_ptr((dpy), (readCtx), (writeCtx), (readBuffer), (writeBuffer), (readOffset), (writeOffset), (size))
+GLATTER_UBLOCK(void, , glXNamedCopyBufferSubDataNV, (Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
+#endif // GLX_NV_copy_buffer
+#ifdef GLX_NV_copy_image
+#define glXCopyImageSubDataNV(dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) glatter_glXCopyImageSubDataNV_ptr((dpy), (srcCtx), (srcName), (srcTarget), (srcLevel), (srcX), (srcY), (srcZ), (dstCtx), (dstName), (dstTarget), (dstLevel), (dstX), (dstY), (dstZ), (width), (height), (depth))
+GLATTER_UBLOCK(void, , glXCopyImageSubDataNV, (Display *dpy, GLXContext srcCtx, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLXContext dstCtx, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth))
+#endif // GLX_NV_copy_image
+#ifdef GLX_NV_delay_before_swap
+#define glXDelayBeforeSwapNV(dpy, drawable, seconds) glatter_glXDelayBeforeSwapNV_ptr((dpy), (drawable), (seconds))
+GLATTER_UBLOCK(Bool, , glXDelayBeforeSwapNV, (Display *dpy, GLXDrawable drawable, GLfloat seconds))
+#endif // GLX_NV_delay_before_swap
+#ifdef GLX_NV_present_video
+#define glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list) glatter_glXBindVideoDeviceNV_ptr((dpy), (video_slot), (video_device), (attrib_list))
+GLATTER_UBLOCK(int, , glXBindVideoDeviceNV, (Display *dpy, unsigned int video_slot, unsigned int video_device, const int *attrib_list))
+#endif // GLX_NV_present_video
+#ifdef GLX_NV_swap_group
+#define glXBindSwapBarrierNV(dpy, group, barrier) glatter_glXBindSwapBarrierNV_ptr((dpy), (group), (barrier))
+GLATTER_UBLOCK(Bool, , glXBindSwapBarrierNV, (Display *dpy, GLuint group, GLuint barrier))
+#define glXJoinSwapGroupNV(dpy, drawable, group) glatter_glXJoinSwapGroupNV_ptr((dpy), (drawable), (group))
+GLATTER_UBLOCK(Bool, , glXJoinSwapGroupNV, (Display *dpy, GLXDrawable drawable, GLuint group))
+#define glXQueryFrameCountNV(dpy, screen, count) glatter_glXQueryFrameCountNV_ptr((dpy), (screen), (count))
+GLATTER_UBLOCK(Bool, , glXQueryFrameCountNV, (Display *dpy, int screen, GLuint *count))
+#define glXQueryMaxSwapGroupsNV(dpy, screen, maxGroups, maxBarriers) glatter_glXQueryMaxSwapGroupsNV_ptr((dpy), (screen), (maxGroups), (maxBarriers))
+GLATTER_UBLOCK(Bool, , glXQueryMaxSwapGroupsNV, (Display *dpy, int screen, GLuint *maxGroups, GLuint *maxBarriers))
+#define glXQuerySwapGroupNV(dpy, drawable, group, barrier) glatter_glXQuerySwapGroupNV_ptr((dpy), (drawable), (group), (barrier))
+GLATTER_UBLOCK(Bool, , glXQuerySwapGroupNV, (Display *dpy, GLXDrawable drawable, GLuint *group, GLuint *barrier))
+#define glXResetFrameCountNV(dpy, screen) glatter_glXResetFrameCountNV_ptr((dpy), (screen))
+GLATTER_UBLOCK(Bool, , glXResetFrameCountNV, (Display *dpy, int screen))
+#endif // GLX_NV_swap_group
+#ifdef GLX_NV_video_capture
+#define glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device) glatter_glXBindVideoCaptureDeviceNV_ptr((dpy), (video_capture_slot), (device))
+GLATTER_UBLOCK(int, , glXBindVideoCaptureDeviceNV, (Display *dpy, unsigned int video_capture_slot, GLXVideoCaptureDeviceNV device))
+#define glXLockVideoCaptureDeviceNV(dpy, device) glatter_glXLockVideoCaptureDeviceNV_ptr((dpy), (device))
+GLATTER_UBLOCK(void, , glXLockVideoCaptureDeviceNV, (Display *dpy, GLXVideoCaptureDeviceNV device))
+#define glXQueryVideoCaptureDeviceNV(dpy, device, attribute, value) glatter_glXQueryVideoCaptureDeviceNV_ptr((dpy), (device), (attribute), (value))
+GLATTER_UBLOCK(int, , glXQueryVideoCaptureDeviceNV, (Display *dpy, GLXVideoCaptureDeviceNV device, int attribute, int *value))
+#define glXReleaseVideoCaptureDeviceNV(dpy, device) glatter_glXReleaseVideoCaptureDeviceNV_ptr((dpy), (device))
+GLATTER_UBLOCK(void, , glXReleaseVideoCaptureDeviceNV, (Display *dpy, GLXVideoCaptureDeviceNV device))
+#endif // GLX_NV_video_capture
+#ifdef GLX_NV_video_out
+#define glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer) glatter_glXBindVideoImageNV_ptr((dpy), (VideoDevice), (pbuf), (iVideoBuffer))
+GLATTER_UBLOCK(int, , glXBindVideoImageNV, (Display *dpy, GLXVideoDeviceNV VideoDevice, GLXPbuffer pbuf, int iVideoBuffer))
+#define glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice) glatter_glXGetVideoDeviceNV_ptr((dpy), (screen), (numVideoDevices), (pVideoDevice))
+GLATTER_UBLOCK(int, , glXGetVideoDeviceNV, (Display *dpy, int screen, int numVideoDevices, GLXVideoDeviceNV *pVideoDevice))
+#define glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) glatter_glXGetVideoInfoNV_ptr((dpy), (screen), (VideoDevice), (pulCounterOutputPbuffer), (pulCounterOutputVideo))
+GLATTER_UBLOCK(int, , glXGetVideoInfoNV, (Display *dpy, int screen, GLXVideoDeviceNV VideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo))
+#define glXReleaseVideoDeviceNV(dpy, screen, VideoDevice) glatter_glXReleaseVideoDeviceNV_ptr((dpy), (screen), (VideoDevice))
+GLATTER_UBLOCK(int, , glXReleaseVideoDeviceNV, (Display *dpy, int screen, GLXVideoDeviceNV VideoDevice))
+#define glXReleaseVideoImageNV(dpy, pbuf) glatter_glXReleaseVideoImageNV_ptr((dpy), (pbuf))
+GLATTER_UBLOCK(int, , glXReleaseVideoImageNV, (Display *dpy, GLXPbuffer pbuf))
+#define glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock) glatter_glXSendPbufferToVideoNV_ptr((dpy), (pbuf), (iBufferType), (pulCounterPbuffer), (bBlock))
+GLATTER_UBLOCK(int, , glXSendPbufferToVideoNV, (Display *dpy, GLXPbuffer pbuf, int iBufferType, unsigned long *pulCounterPbuffer, GLboolean bBlock))
+#endif // GLX_NV_video_out
+#ifdef GLX_SGIX_dmbuffer
+#define glXAssociateDMPbufferSGIX(dpy, pbuffer, params, dmbuffer) glatter_glXAssociateDMPbufferSGIX_ptr((dpy), (pbuffer), (params), (dmbuffer))
+GLATTER_UBLOCK(Bool, , glXAssociateDMPbufferSGIX, (Display *dpy, GLXPbufferSGIX pbuffer, DMparams *params, DMbuffer dmbuffer))
+#endif // GLX_SGIX_dmbuffer
+#ifdef GLX_SGIX_fbconfig
+#define glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct) glatter_glXCreateContextWithConfigSGIX_ptr((dpy), (config), (render_type), (share_list), (direct))
+GLATTER_UBLOCK(GLXContext, , glXCreateContextWithConfigSGIX, (Display *dpy, GLXFBConfigSGIX config, int render_type, GLXContext share_list, Bool direct))
+#define glXCreateGLXPixmapWithConfigSGIX(dpy, config, pixmap) glatter_glXCreateGLXPixmapWithConfigSGIX_ptr((dpy), (config), (pixmap))
+GLATTER_UBLOCK(GLXPixmap, , glXCreateGLXPixmapWithConfigSGIX, (Display *dpy, GLXFBConfigSGIX config, Pixmap pixmap))
+#define glXGetFBConfigAttribSGIX(dpy, config, attribute, value) glatter_glXGetFBConfigAttribSGIX_ptr((dpy), (config), (attribute), (value))
+GLATTER_UBLOCK(int, , glXGetFBConfigAttribSGIX, (Display *dpy, GLXFBConfigSGIX config, int attribute, int *value))
+#define glXGetFBConfigFromVisualSGIX(dpy, vis) glatter_glXGetFBConfigFromVisualSGIX_ptr((dpy), (vis))
+GLATTER_UBLOCK(GLXFBConfigSGIX, , glXGetFBConfigFromVisualSGIX, (Display *dpy, XVisualInfo *vis))
+#endif // GLX_SGIX_fbconfig
+#ifdef GLX_SGIX_hyperpipe
+#define glXBindHyperpipeSGIX(dpy, hpId) glatter_glXBindHyperpipeSGIX_ptr((dpy), (hpId))
+GLATTER_UBLOCK(int, , glXBindHyperpipeSGIX, (Display *dpy, int hpId))
+#define glXDestroyHyperpipeConfigSGIX(dpy, hpId) glatter_glXDestroyHyperpipeConfigSGIX_ptr((dpy), (hpId))
+GLATTER_UBLOCK(int, , glXDestroyHyperpipeConfigSGIX, (Display *dpy, int hpId))
+#define glXHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, attribList) glatter_glXHyperpipeAttribSGIX_ptr((dpy), (timeSlice), (attrib), (size), (attribList))
+GLATTER_UBLOCK(int, , glXHyperpipeAttribSGIX, (Display *dpy, int timeSlice, int attrib, int size, void *attribList))
+#define glXHyperpipeConfigSGIX(dpy, networkId, npipes, cfg, hpId) glatter_glXHyperpipeConfigSGIX_ptr((dpy), (networkId), (npipes), (cfg), (hpId))
+GLATTER_UBLOCK(int, , glXHyperpipeConfigSGIX, (Display *dpy, int networkId, int npipes, GLXHyperpipeConfigSGIX *cfg, int *hpId))
+#define glXQueryHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, returnAttribList) glatter_glXQueryHyperpipeAttribSGIX_ptr((dpy), (timeSlice), (attrib), (size), (returnAttribList))
+GLATTER_UBLOCK(int, , glXQueryHyperpipeAttribSGIX, (Display *dpy, int timeSlice, int attrib, int size, void *returnAttribList))
+#define glXQueryHyperpipeBestAttribSGIX(dpy, timeSlice, attrib, size, attribList, returnAttribList) glatter_glXQueryHyperpipeBestAttribSGIX_ptr((dpy), (timeSlice), (attrib), (size), (attribList), (returnAttribList))
+GLATTER_UBLOCK(int, , glXQueryHyperpipeBestAttribSGIX, (Display *dpy, int timeSlice, int attrib, int size, void *attribList, void *returnAttribList))
+#endif // GLX_SGIX_hyperpipe
+#ifdef GLX_SGIX_pbuffer
+#define glXCreateGLXPbufferSGIX(dpy, config, width, height, attrib_list) glatter_glXCreateGLXPbufferSGIX_ptr((dpy), (config), (width), (height), (attrib_list))
+GLATTER_UBLOCK(GLXPbufferSGIX, , glXCreateGLXPbufferSGIX, (Display *dpy, GLXFBConfigSGIX config, unsigned int width, unsigned int height, int *attrib_list))
+#define glXDestroyGLXPbufferSGIX(dpy, pbuf) glatter_glXDestroyGLXPbufferSGIX_ptr((dpy), (pbuf))
+GLATTER_UBLOCK(void, , glXDestroyGLXPbufferSGIX, (Display *dpy, GLXPbufferSGIX pbuf))
+#define glXGetSelectedEventSGIX(dpy, drawable, mask) glatter_glXGetSelectedEventSGIX_ptr((dpy), (drawable), (mask))
+GLATTER_UBLOCK(void, , glXGetSelectedEventSGIX, (Display *dpy, GLXDrawable drawable, unsigned long *mask))
+#define glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value) glatter_glXQueryGLXPbufferSGIX_ptr((dpy), (pbuf), (attribute), (value))
+GLATTER_UBLOCK(int, , glXQueryGLXPbufferSGIX, (Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value))
+#define glXSelectEventSGIX(dpy, drawable, mask) glatter_glXSelectEventSGIX_ptr((dpy), (drawable), (mask))
+GLATTER_UBLOCK(void, , glXSelectEventSGIX, (Display *dpy, GLXDrawable drawable, unsigned long mask))
+#endif // GLX_SGIX_pbuffer
+#ifdef GLX_SGIX_swap_barrier
+#define glXBindSwapBarrierSGIX(dpy, drawable, barrier) glatter_glXBindSwapBarrierSGIX_ptr((dpy), (drawable), (barrier))
+GLATTER_UBLOCK(void, , glXBindSwapBarrierSGIX, (Display *dpy, GLXDrawable drawable, int barrier))
+#define glXQueryMaxSwapBarriersSGIX(dpy, screen, max) glatter_glXQueryMaxSwapBarriersSGIX_ptr((dpy), (screen), (max))
+GLATTER_UBLOCK(Bool, , glXQueryMaxSwapBarriersSGIX, (Display *dpy, int screen, int *max))
+#endif // GLX_SGIX_swap_barrier
+#ifdef GLX_SGIX_swap_group
+#define glXJoinSwapGroupSGIX(dpy, drawable, member) glatter_glXJoinSwapGroupSGIX_ptr((dpy), (drawable), (member))
+GLATTER_UBLOCK(void, , glXJoinSwapGroupSGIX, (Display *dpy, GLXDrawable drawable, GLXDrawable member))
+#endif // GLX_SGIX_swap_group
+#ifdef GLX_SGIX_video_resize
+#define glXBindChannelToWindowSGIX(display, screen, channel, window) glatter_glXBindChannelToWindowSGIX_ptr((display), (screen), (channel), (window))
+GLATTER_UBLOCK(int, , glXBindChannelToWindowSGIX, (Display *display, int screen, int channel, Window window))
+#define glXChannelRectSGIX(display, screen, channel, x, y, w, h) glatter_glXChannelRectSGIX_ptr((display), (screen), (channel), (x), (y), (w), (h))
+GLATTER_UBLOCK(int, , glXChannelRectSGIX, (Display *display, int screen, int channel, int x, int y, int w, int h))
+#define glXChannelRectSyncSGIX(display, screen, channel, synctype) glatter_glXChannelRectSyncSGIX_ptr((display), (screen), (channel), (synctype))
+GLATTER_UBLOCK(int, , glXChannelRectSyncSGIX, (Display *display, int screen, int channel, GLenum synctype))
+#define glXQueryChannelDeltasSGIX(display, screen, channel, x, y, w, h) glatter_glXQueryChannelDeltasSGIX_ptr((display), (screen), (channel), (x), (y), (w), (h))
+GLATTER_UBLOCK(int, , glXQueryChannelDeltasSGIX, (Display *display, int screen, int channel, int *x, int *y, int *w, int *h))
+#define glXQueryChannelRectSGIX(display, screen, channel, dx, dy, dw, dh) glatter_glXQueryChannelRectSGIX_ptr((display), (screen), (channel), (dx), (dy), (dw), (dh))
+GLATTER_UBLOCK(int, , glXQueryChannelRectSGIX, (Display *display, int screen, int channel, int *dx, int *dy, int *dw, int *dh))
+#endif // GLX_SGIX_video_resize
+#ifdef GLX_SGIX_video_source
+#define glXCreateGLXVideoSourceSGIX(display, screen, server, path, nodeClass, drainNode) glatter_glXCreateGLXVideoSourceSGIX_ptr((display), (screen), (server), (path), (nodeClass), (drainNode))
+GLATTER_UBLOCK(GLXVideoSourceSGIX, , glXCreateGLXVideoSourceSGIX, (Display *display, int screen, VLServer server, VLPath path, int nodeClass, VLNode drainNode))
+#define glXDestroyGLXVideoSourceSGIX(dpy, glxvideosource) glatter_glXDestroyGLXVideoSourceSGIX_ptr((dpy), (glxvideosource))
+GLATTER_UBLOCK(void, , glXDestroyGLXVideoSourceSGIX, (Display *dpy, GLXVideoSourceSGIX glxvideosource))
+#endif // GLX_SGIX_video_source
+#ifdef GLX_SGI_cushion
+#define glXCushionSGI(dpy, window, cushion) glatter_glXCushionSGI_ptr((dpy), (window), (cushion))
+GLATTER_UBLOCK(void, , glXCushionSGI, (Display *dpy, Window window, float cushion))
+#endif // GLX_SGI_cushion
+#ifdef GLX_SGI_make_current_read
+#define glXGetCurrentReadDrawableSGI() glatter_glXGetCurrentReadDrawableSGI_ptr()
+GLATTER_UBLOCK(GLXDrawable, , glXGetCurrentReadDrawableSGI, (void))
+#define glXMakeCurrentReadSGI(dpy, draw, read, ctx) glatter_glXMakeCurrentReadSGI_ptr((dpy), (draw), (read), (ctx))
+GLATTER_UBLOCK(Bool, , glXMakeCurrentReadSGI, (Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx))
+#endif // GLX_SGI_make_current_read
+#ifdef GLX_SGI_swap_control
+#define glXSwapIntervalSGI(interval) glatter_glXSwapIntervalSGI_ptr((interval))
+GLATTER_UBLOCK(int, , glXSwapIntervalSGI, (int interval))
+#endif // GLX_SGI_swap_control
+#ifdef GLX_SGI_video_sync
+#define glXGetVideoSyncSGI(count) glatter_glXGetVideoSyncSGI_ptr((count))
+GLATTER_UBLOCK(int, , glXGetVideoSyncSGI, (unsigned int *count))
+#define glXWaitVideoSyncSGI(divisor, remainder, count) glatter_glXWaitVideoSyncSGI_ptr((divisor), (remainder), (count))
+GLATTER_UBLOCK(int, , glXWaitVideoSyncSGI, (int divisor, int remainder, unsigned int *count))
+#endif // GLX_SGI_video_sync
+#ifdef GLX_SUN_get_transparent_index
+#define glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex) glatter_glXGetTransparentIndexSUN_ptr((dpy), (overlay), (underlay), (pTransparentIndex))
+GLATTER_UBLOCK(Status, , glXGetTransparentIndexSUN, (Display *dpy, Window overlay, Window underlay, long *pTransparentIndex))
+#endif // GLX_SUN_get_transparent_index
+#ifdef GLX_VERSION_1_3
+#define glXCreateNewContext(dpy, config, render_type, share_list, direct) glatter_glXCreateNewContext_ptr((dpy), (config), (render_type), (share_list), (direct))
+GLATTER_UBLOCK(GLXContext, , glXCreateNewContext, (Display *dpy, GLXFBConfig config, int render_type, GLXContext share_list, Bool direct))
+#define glXCreatePbuffer(dpy, config, attrib_list) glatter_glXCreatePbuffer_ptr((dpy), (config), (attrib_list))
+GLATTER_UBLOCK(GLXPbuffer, , glXCreatePbuffer, (Display *dpy, GLXFBConfig config, const int *attrib_list))
+#define glXCreatePixmap(dpy, config, pixmap, attrib_list) glatter_glXCreatePixmap_ptr((dpy), (config), (pixmap), (attrib_list))
+GLATTER_UBLOCK(GLXPixmap, , glXCreatePixmap, (Display *dpy, GLXFBConfig config, Pixmap pixmap, const int *attrib_list))
+#define glXCreateWindow(dpy, config, win, attrib_list) glatter_glXCreateWindow_ptr((dpy), (config), (win), (attrib_list))
+GLATTER_UBLOCK(GLXWindow, , glXCreateWindow, (Display *dpy, GLXFBConfig config, Window win, const int *attrib_list))
+#define glXDestroyPbuffer(dpy, pbuf) glatter_glXDestroyPbuffer_ptr((dpy), (pbuf))
+GLATTER_UBLOCK(void, , glXDestroyPbuffer, (Display *dpy, GLXPbuffer pbuf))
+#define glXDestroyPixmap(dpy, pixmap) glatter_glXDestroyPixmap_ptr((dpy), (pixmap))
+GLATTER_UBLOCK(void, , glXDestroyPixmap, (Display *dpy, GLXPixmap pixmap))
+#define glXDestroyWindow(dpy, win) glatter_glXDestroyWindow_ptr((dpy), (win))
+GLATTER_UBLOCK(void, , glXDestroyWindow, (Display *dpy, GLXWindow win))
+#define glXGetCurrentReadDrawable() glatter_glXGetCurrentReadDrawable_ptr()
+GLATTER_UBLOCK(GLXDrawable, , glXGetCurrentReadDrawable, (void))
+#define glXGetFBConfigAttrib(dpy, config, attribute, value) glatter_glXGetFBConfigAttrib_ptr((dpy), (config), (attribute), (value))
+GLATTER_UBLOCK(int, , glXGetFBConfigAttrib, (Display *dpy, GLXFBConfig config, int attribute, int *value))
+#define glXGetSelectedEvent(dpy, draw, event_mask) glatter_glXGetSelectedEvent_ptr((dpy), (draw), (event_mask))
+GLATTER_UBLOCK(void, , glXGetSelectedEvent, (Display *dpy, GLXDrawable draw, unsigned long *event_mask))
+#define glXMakeContextCurrent(dpy, draw, read, ctx) glatter_glXMakeContextCurrent_ptr((dpy), (draw), (read), (ctx))
+GLATTER_UBLOCK(Bool, , glXMakeContextCurrent, (Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx))
+#define glXQueryContext(dpy, ctx, attribute, value) glatter_glXQueryContext_ptr((dpy), (ctx), (attribute), (value))
+GLATTER_UBLOCK(int, , glXQueryContext, (Display *dpy, GLXContext ctx, int attribute, int *value))
+#define glXQueryDrawable(dpy, draw, attribute, value) glatter_glXQueryDrawable_ptr((dpy), (draw), (attribute), (value))
+GLATTER_UBLOCK(void, , glXQueryDrawable, (Display *dpy, GLXDrawable draw, int attribute, unsigned int *value))
+#define glXSelectEvent(dpy, draw, event_mask) glatter_glXSelectEvent_ptr((dpy), (draw), (event_mask))
+GLATTER_UBLOCK(void, , glXSelectEvent, (Display *dpy, GLXDrawable draw, unsigned long event_mask))
+#endif // GLX_VERSION_1_3
+#ifdef GLX_VERSION_1_4
+#define glXGetProcAddress(procName) glatter_glXGetProcAddress_ptr((procName))
+GLATTER_UBLOCK(__GLXextFuncPtr, , glXGetProcAddress, (const GLubyte *procName))
+#endif // GLX_VERSION_1_4
+#endif // __glxext_h_
 #endif // GLATTER_GL
 
 #else // NDEBUG
@@ -19609,495 +19878,6 @@ void glatter_glVertexArrayVertexBuffer_debug(GLuint vaobj, GLuint bindingindex, 
 void glatter_glVertexArrayVertexBuffers_debug(GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides, const char* file, int line);
 #endif // GL_VERSION_4_5
 #endif // __glext_h_
-#endif // GLATTER_GL
-
-#endif // NDEBUG
-
-
-#ifdef NDEBUG
-
-#ifdef GLATTER_GLU
-
-#ifdef __glu_h__
-#define gluBeginCurve(nobj) glatter_gluBeginCurve_ptr((nobj))
-GLATTER_UBLOCK(void, APIENTRY, gluBeginCurve, (GLUnurbs *nobj))
-#define gluBeginPolygon(tess) glatter_gluBeginPolygon_ptr((tess))
-GLATTER_UBLOCK(void, APIENTRY, gluBeginPolygon, (GLUtesselator *tess))
-#define gluBeginSurface(nobj) glatter_gluBeginSurface_ptr((nobj))
-GLATTER_UBLOCK(void, APIENTRY, gluBeginSurface, (GLUnurbs *nobj))
-#define gluBeginTrim(nobj) glatter_gluBeginTrim_ptr((nobj))
-GLATTER_UBLOCK(void, APIENTRY, gluBeginTrim, (GLUnurbs *nobj))
-#define gluBuild1DMipmaps(target, components, width, format, type, data) glatter_gluBuild1DMipmaps_ptr((target), (components), (width), (format), (type), (data))
-GLATTER_UBLOCK(int, APIENTRY, gluBuild1DMipmaps, (GLenum target, GLint components, GLint width, GLenum format, GLenum type, const void *data))
-#define gluBuild2DMipmaps(target, components, width, height, format, type, data) glatter_gluBuild2DMipmaps_ptr((target), (components), (width), (height), (format), (type), (data))
-GLATTER_UBLOCK(int, APIENTRY, gluBuild2DMipmaps, (GLenum target, GLint components, GLint width, GLint height, GLenum format, GLenum type, const void *data))
-#define gluCylinder(qobj, baseRadius, topRadius, height, slices, stacks) glatter_gluCylinder_ptr((qobj), (baseRadius), (topRadius), (height), (slices), (stacks))
-GLATTER_UBLOCK(void, APIENTRY, gluCylinder, (GLUquadric *qobj, GLdouble baseRadius, GLdouble topRadius, GLdouble height, GLint slices, GLint stacks))
-#define gluDeleteNurbsRenderer(nobj) glatter_gluDeleteNurbsRenderer_ptr((nobj))
-GLATTER_UBLOCK(void, APIENTRY, gluDeleteNurbsRenderer, (GLUnurbs *nobj))
-#define gluDeleteQuadric(state) glatter_gluDeleteQuadric_ptr((state))
-GLATTER_UBLOCK(void, APIENTRY, gluDeleteQuadric, (GLUquadric *state))
-#define gluDeleteTess(tess) glatter_gluDeleteTess_ptr((tess))
-GLATTER_UBLOCK(void, APIENTRY, gluDeleteTess, (GLUtesselator *tess))
-#define gluDisk(qobj, innerRadius, outerRadius, slices, loops) glatter_gluDisk_ptr((qobj), (innerRadius), (outerRadius), (slices), (loops))
-GLATTER_UBLOCK(void, APIENTRY, gluDisk, (GLUquadric *qobj, GLdouble innerRadius, GLdouble outerRadius, GLint slices, GLint loops))
-#define gluEndCurve(nobj) glatter_gluEndCurve_ptr((nobj))
-GLATTER_UBLOCK(void, APIENTRY, gluEndCurve, (GLUnurbs *nobj))
-#define gluEndPolygon(tess) glatter_gluEndPolygon_ptr((tess))
-GLATTER_UBLOCK(void, APIENTRY, gluEndPolygon, (GLUtesselator *tess))
-#define gluEndSurface(nobj) glatter_gluEndSurface_ptr((nobj))
-GLATTER_UBLOCK(void, APIENTRY, gluEndSurface, (GLUnurbs *nobj))
-#define gluEndTrim(nobj) glatter_gluEndTrim_ptr((nobj))
-GLATTER_UBLOCK(void, APIENTRY, gluEndTrim, (GLUnurbs *nobj))
-#define gluErrorString(errCode) glatter_gluErrorString_ptr((errCode))
-GLATTER_UBLOCK(const GLubyte*, APIENTRY, gluErrorString, (GLenum errCode))
-#define gluErrorUnicodeStringEXT(errCode) glatter_gluErrorUnicodeStringEXT_ptr((errCode))
-GLATTER_UBLOCK(const wchar_t*, APIENTRY, gluErrorUnicodeStringEXT, (GLenum errCode))
-#define gluGetString(name) glatter_gluGetString_ptr((name))
-GLATTER_UBLOCK(const GLubyte*, APIENTRY, gluGetString, (GLenum name))
-#define gluGetTessProperty(tess, which, value) glatter_gluGetTessProperty_ptr((tess), (which), (value))
-GLATTER_UBLOCK(void, APIENTRY, gluGetTessProperty, (GLUtesselator *tess, GLenum which, GLdouble *value))
-#define gluLookAt(eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz) glatter_gluLookAt_ptr((eyex), (eyey), (eyez), (centerx), (centery), (centerz), (upx), (upy), (upz))
-GLATTER_UBLOCK(void, APIENTRY, gluLookAt, (GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble centerx, GLdouble centery, GLdouble centerz, GLdouble upx, GLdouble upy, GLdouble upz))
-#define gluNewNurbsRenderer() glatter_gluNewNurbsRenderer_ptr()
-GLATTER_UBLOCK(GLUnurbs*, APIENTRY, gluNewNurbsRenderer, ())
-#define gluNewQuadric() glatter_gluNewQuadric_ptr()
-GLATTER_UBLOCK(GLUquadric*, APIENTRY, gluNewQuadric, ())
-#define gluNewTess() glatter_gluNewTess_ptr()
-GLATTER_UBLOCK(GLUtesselator*, APIENTRY, gluNewTess, ())
-#define gluNextContour(tess, type) glatter_gluNextContour_ptr((tess), (type))
-GLATTER_UBLOCK(void, APIENTRY, gluNextContour, (GLUtesselator *tess, GLenum type))
-#define gluNurbsCurve(nobj, nknots, knot, stride, ctlarray, order, type) glatter_gluNurbsCurve_ptr((nobj), (nknots), (knot), (stride), (ctlarray), (order), (type))
-GLATTER_UBLOCK(void, APIENTRY, gluNurbsCurve, (GLUnurbs *nobj, GLint nknots, GLfloat *knot, GLint stride, GLfloat *ctlarray, GLint order, GLenum type))
-#define gluOrtho2D(left, right, bottom, top) glatter_gluOrtho2D_ptr((left), (right), (bottom), (top))
-GLATTER_UBLOCK(void, APIENTRY, gluOrtho2D, (GLdouble left, GLdouble right, GLdouble bottom, GLdouble top))
-#define gluPartialDisk(qobj, innerRadius, outerRadius, slices, loops, startAngle, sweepAngle) glatter_gluPartialDisk_ptr((qobj), (innerRadius), (outerRadius), (slices), (loops), (startAngle), (sweepAngle))
-GLATTER_UBLOCK(void, APIENTRY, gluPartialDisk, (GLUquadric *qobj, GLdouble innerRadius, GLdouble outerRadius, GLint slices, GLint loops, GLdouble startAngle, GLdouble sweepAngle))
-#define gluPerspective(fovy, aspect, zNear, zFar) glatter_gluPerspective_ptr((fovy), (aspect), (zNear), (zFar))
-GLATTER_UBLOCK(void, APIENTRY, gluPerspective, (GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar))
-#define gluPickMatrix(x, y, width, height, viewport) glatter_gluPickMatrix_ptr((x), (y), (width), (height), (viewport))
-GLATTER_UBLOCK(void, APIENTRY, gluPickMatrix, (GLdouble x, GLdouble y, GLdouble width, GLdouble height, GLint viewport[4]))
-#define gluProject(objx, objy, objz, modelMatrix, projMatrix, viewport, winx, winy, winz) glatter_gluProject_ptr((objx), (objy), (objz), (modelMatrix), (projMatrix), (viewport), (winx), (winy), (winz))
-GLATTER_UBLOCK(int, APIENTRY, gluProject, (GLdouble objx, GLdouble objy, GLdouble objz, const GLdouble modelMatrix[16], const GLdouble projMatrix[16], const GLint viewport[4], GLdouble *winx, GLdouble *winy, GLdouble *winz))
-#define gluPwlCurve(nobj, count, array, stride, type) glatter_gluPwlCurve_ptr((nobj), (count), (array), (stride), (type))
-GLATTER_UBLOCK(void, APIENTRY, gluPwlCurve, (GLUnurbs *nobj, GLint count, GLfloat *array, GLint stride, GLenum type))
-#define gluQuadricCallback(qobj, which, fn) glatter_gluQuadricCallback_ptr((qobj), (which), (fn))
-GLATTER_UBLOCK(void, APIENTRY, gluQuadricCallback, (GLUquadric *qobj, GLenum which, void (CALLBACK* fn)()))
-#define gluQuadricDrawStyle(quadObject, drawStyle) glatter_gluQuadricDrawStyle_ptr((quadObject), (drawStyle))
-GLATTER_UBLOCK(void, APIENTRY, gluQuadricDrawStyle, (GLUquadric *quadObject, GLenum drawStyle))
-#define gluQuadricNormals(quadObject, normals) glatter_gluQuadricNormals_ptr((quadObject), (normals))
-GLATTER_UBLOCK(void, APIENTRY, gluQuadricNormals, (GLUquadric *quadObject, GLenum normals))
-#define gluQuadricOrientation(quadObject, orientation) glatter_gluQuadricOrientation_ptr((quadObject), (orientation))
-GLATTER_UBLOCK(void, APIENTRY, gluQuadricOrientation, (GLUquadric *quadObject, GLenum orientation))
-#define gluQuadricTexture(quadObject, textureCoords) glatter_gluQuadricTexture_ptr((quadObject), (textureCoords))
-GLATTER_UBLOCK(void, APIENTRY, gluQuadricTexture, (GLUquadric *quadObject, GLboolean textureCoords))
-#define gluScaleImage(format, widthin, heightin, typein, datain, widthout, heightout, typeout, dataout) glatter_gluScaleImage_ptr((format), (widthin), (heightin), (typein), (datain), (widthout), (heightout), (typeout), (dataout))
-GLATTER_UBLOCK(int, APIENTRY, gluScaleImage, (GLenum format, GLint widthin, GLint heightin, GLenum typein, const void *datain, GLint widthout, GLint heightout, GLenum typeout, void *dataout))
-#define gluSphere(qobj, radius, slices, stacks) glatter_gluSphere_ptr((qobj), (radius), (slices), (stacks))
-GLATTER_UBLOCK(void, APIENTRY, gluSphere, (GLUquadric *qobj, GLdouble radius, GLint slices, GLint stacks))
-#define gluTessBeginContour(tess) glatter_gluTessBeginContour_ptr((tess))
-GLATTER_UBLOCK(void, APIENTRY, gluTessBeginContour, (GLUtesselator *tess))
-#define gluTessBeginPolygon(tess, polygon_data) glatter_gluTessBeginPolygon_ptr((tess), (polygon_data))
-GLATTER_UBLOCK(void, APIENTRY, gluTessBeginPolygon, (GLUtesselator *tess, void *polygon_data))
-#define gluTessCallback(tess, which, fn) glatter_gluTessCallback_ptr((tess), (which), (fn))
-GLATTER_UBLOCK(void, APIENTRY, gluTessCallback, (GLUtesselator *tess, GLenum which, void (CALLBACK *fn)()))
-#define gluTessEndContour(tess) glatter_gluTessEndContour_ptr((tess))
-GLATTER_UBLOCK(void, APIENTRY, gluTessEndContour, (GLUtesselator *tess))
-#define gluTessEndPolygon(tess) glatter_gluTessEndPolygon_ptr((tess))
-GLATTER_UBLOCK(void, APIENTRY, gluTessEndPolygon, (GLUtesselator *tess))
-#define gluTessNormal(tess, x, y, z) glatter_gluTessNormal_ptr((tess), (x), (y), (z))
-GLATTER_UBLOCK(void, APIENTRY, gluTessNormal, (GLUtesselator *tess, GLdouble x, GLdouble y, GLdouble z))
-#define gluTessProperty(tess, which, value) glatter_gluTessProperty_ptr((tess), (which), (value))
-GLATTER_UBLOCK(void, APIENTRY, gluTessProperty, (GLUtesselator *tess, GLenum which, GLdouble value))
-#define gluTessVertex(tess, coords, data) glatter_gluTessVertex_ptr((tess), (coords), (data))
-GLATTER_UBLOCK(void, APIENTRY, gluTessVertex, (GLUtesselator *tess, GLdouble coords[3], void *data))
-#define gluUnProject(winx, winy, winz, modelMatrix, projMatrix, viewport, objx, objy, objz) glatter_gluUnProject_ptr((winx), (winy), (winz), (modelMatrix), (projMatrix), (viewport), (objx), (objy), (objz))
-GLATTER_UBLOCK(int, APIENTRY, gluUnProject, (GLdouble winx, GLdouble winy, GLdouble winz, const GLdouble modelMatrix[16], const GLdouble projMatrix[16], const GLint viewport[4], GLdouble *objx, GLdouble *objy, GLdouble *objz))
-#endif // __glu_h__
-#endif // GLATTER_GLU
-
-#else // NDEBUG
-
-#ifdef GLATTER_GLU
-
-#ifdef __glu_h__
-#define gluBeginCurve(nobj) glatter_gluBeginCurve_debug((nobj), __FILE__, __LINE__)
-void glatter_gluBeginCurve_debug(GLUnurbs *nobj, const char* file, int line);
-#define gluBeginPolygon(tess) glatter_gluBeginPolygon_debug((tess), __FILE__, __LINE__)
-void glatter_gluBeginPolygon_debug(GLUtesselator *tess, const char* file, int line);
-#define gluBeginSurface(nobj) glatter_gluBeginSurface_debug((nobj), __FILE__, __LINE__)
-void glatter_gluBeginSurface_debug(GLUnurbs *nobj, const char* file, int line);
-#define gluBeginTrim(nobj) glatter_gluBeginTrim_debug((nobj), __FILE__, __LINE__)
-void glatter_gluBeginTrim_debug(GLUnurbs *nobj, const char* file, int line);
-#define gluBuild1DMipmaps(target, components, width, format, type, data) glatter_gluBuild1DMipmaps_debug((target), (components), (width), (format), (type), (data), __FILE__, __LINE__)
-int glatter_gluBuild1DMipmaps_debug(GLenum target, GLint components, GLint width, GLenum format, GLenum type, const void *data, const char* file, int line);
-#define gluBuild2DMipmaps(target, components, width, height, format, type, data) glatter_gluBuild2DMipmaps_debug((target), (components), (width), (height), (format), (type), (data), __FILE__, __LINE__)
-int glatter_gluBuild2DMipmaps_debug(GLenum target, GLint components, GLint width, GLint height, GLenum format, GLenum type, const void *data, const char* file, int line);
-#define gluCylinder(qobj, baseRadius, topRadius, height, slices, stacks) glatter_gluCylinder_debug((qobj), (baseRadius), (topRadius), (height), (slices), (stacks), __FILE__, __LINE__)
-void glatter_gluCylinder_debug(GLUquadric *qobj, GLdouble baseRadius, GLdouble topRadius, GLdouble height, GLint slices, GLint stacks, const char* file, int line);
-#define gluDeleteNurbsRenderer(nobj) glatter_gluDeleteNurbsRenderer_debug((nobj), __FILE__, __LINE__)
-void glatter_gluDeleteNurbsRenderer_debug(GLUnurbs *nobj, const char* file, int line);
-#define gluDeleteQuadric(state) glatter_gluDeleteQuadric_debug((state), __FILE__, __LINE__)
-void glatter_gluDeleteQuadric_debug(GLUquadric *state, const char* file, int line);
-#define gluDeleteTess(tess) glatter_gluDeleteTess_debug((tess), __FILE__, __LINE__)
-void glatter_gluDeleteTess_debug(GLUtesselator *tess, const char* file, int line);
-#define gluDisk(qobj, innerRadius, outerRadius, slices, loops) glatter_gluDisk_debug((qobj), (innerRadius), (outerRadius), (slices), (loops), __FILE__, __LINE__)
-void glatter_gluDisk_debug(GLUquadric *qobj, GLdouble innerRadius, GLdouble outerRadius, GLint slices, GLint loops, const char* file, int line);
-#define gluEndCurve(nobj) glatter_gluEndCurve_debug((nobj), __FILE__, __LINE__)
-void glatter_gluEndCurve_debug(GLUnurbs *nobj, const char* file, int line);
-#define gluEndPolygon(tess) glatter_gluEndPolygon_debug((tess), __FILE__, __LINE__)
-void glatter_gluEndPolygon_debug(GLUtesselator *tess, const char* file, int line);
-#define gluEndSurface(nobj) glatter_gluEndSurface_debug((nobj), __FILE__, __LINE__)
-void glatter_gluEndSurface_debug(GLUnurbs *nobj, const char* file, int line);
-#define gluEndTrim(nobj) glatter_gluEndTrim_debug((nobj), __FILE__, __LINE__)
-void glatter_gluEndTrim_debug(GLUnurbs *nobj, const char* file, int line);
-#define gluErrorString(errCode) glatter_gluErrorString_debug((errCode), __FILE__, __LINE__)
-const GLubyte* glatter_gluErrorString_debug(GLenum errCode, const char* file, int line);
-#define gluErrorUnicodeStringEXT(errCode) glatter_gluErrorUnicodeStringEXT_debug((errCode), __FILE__, __LINE__)
-const wchar_t* glatter_gluErrorUnicodeStringEXT_debug(GLenum errCode, const char* file, int line);
-#define gluGetString(name) glatter_gluGetString_debug((name), __FILE__, __LINE__)
-const GLubyte* glatter_gluGetString_debug(GLenum name, const char* file, int line);
-#define gluGetTessProperty(tess, which, value) glatter_gluGetTessProperty_debug((tess), (which), (value), __FILE__, __LINE__)
-void glatter_gluGetTessProperty_debug(GLUtesselator *tess, GLenum which, GLdouble *value, const char* file, int line);
-#define gluLookAt(eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz) glatter_gluLookAt_debug((eyex), (eyey), (eyez), (centerx), (centery), (centerz), (upx), (upy), (upz), __FILE__, __LINE__)
-void glatter_gluLookAt_debug(GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble centerx, GLdouble centery, GLdouble centerz, GLdouble upx, GLdouble upy, GLdouble upz, const char* file, int line);
-#define gluNewNurbsRenderer() glatter_gluNewNurbsRenderer_debug(__FILE__, __LINE__)
-GLUnurbs* glatter_gluNewNurbsRenderer_debug(const char* file, int line);
-#define gluNewQuadric() glatter_gluNewQuadric_debug(__FILE__, __LINE__)
-GLUquadric* glatter_gluNewQuadric_debug(const char* file, int line);
-#define gluNewTess() glatter_gluNewTess_debug(__FILE__, __LINE__)
-GLUtesselator* glatter_gluNewTess_debug(const char* file, int line);
-#define gluNextContour(tess, type) glatter_gluNextContour_debug((tess), (type), __FILE__, __LINE__)
-void glatter_gluNextContour_debug(GLUtesselator *tess, GLenum type, const char* file, int line);
-#define gluNurbsCurve(nobj, nknots, knot, stride, ctlarray, order, type) glatter_gluNurbsCurve_debug((nobj), (nknots), (knot), (stride), (ctlarray), (order), (type), __FILE__, __LINE__)
-void glatter_gluNurbsCurve_debug(GLUnurbs *nobj, GLint nknots, GLfloat *knot, GLint stride, GLfloat *ctlarray, GLint order, GLenum type, const char* file, int line);
-#define gluOrtho2D(left, right, bottom, top) glatter_gluOrtho2D_debug((left), (right), (bottom), (top), __FILE__, __LINE__)
-void glatter_gluOrtho2D_debug(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, const char* file, int line);
-#define gluPartialDisk(qobj, innerRadius, outerRadius, slices, loops, startAngle, sweepAngle) glatter_gluPartialDisk_debug((qobj), (innerRadius), (outerRadius), (slices), (loops), (startAngle), (sweepAngle), __FILE__, __LINE__)
-void glatter_gluPartialDisk_debug(GLUquadric *qobj, GLdouble innerRadius, GLdouble outerRadius, GLint slices, GLint loops, GLdouble startAngle, GLdouble sweepAngle, const char* file, int line);
-#define gluPerspective(fovy, aspect, zNear, zFar) glatter_gluPerspective_debug((fovy), (aspect), (zNear), (zFar), __FILE__, __LINE__)
-void glatter_gluPerspective_debug(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar, const char* file, int line);
-#define gluPickMatrix(x, y, width, height, viewport) glatter_gluPickMatrix_debug((x), (y), (width), (height), (viewport), __FILE__, __LINE__)
-void glatter_gluPickMatrix_debug(GLdouble x, GLdouble y, GLdouble width, GLdouble height, GLint viewport[4], const char* file, int line);
-#define gluProject(objx, objy, objz, modelMatrix, projMatrix, viewport, winx, winy, winz) glatter_gluProject_debug((objx), (objy), (objz), (modelMatrix), (projMatrix), (viewport), (winx), (winy), (winz), __FILE__, __LINE__)
-int glatter_gluProject_debug(GLdouble objx, GLdouble objy, GLdouble objz, const GLdouble modelMatrix[16], const GLdouble projMatrix[16], const GLint viewport[4], GLdouble *winx, GLdouble *winy, GLdouble *winz, const char* file, int line);
-#define gluPwlCurve(nobj, count, array, stride, type) glatter_gluPwlCurve_debug((nobj), (count), (array), (stride), (type), __FILE__, __LINE__)
-void glatter_gluPwlCurve_debug(GLUnurbs *nobj, GLint count, GLfloat *array, GLint stride, GLenum type, const char* file, int line);
-#define gluQuadricCallback(qobj, which, fn) glatter_gluQuadricCallback_debug((qobj), (which), (fn), __FILE__, __LINE__)
-void glatter_gluQuadricCallback_debug(GLUquadric *qobj, GLenum which, void (CALLBACK* fn)(), const char* file, int line);
-#define gluQuadricDrawStyle(quadObject, drawStyle) glatter_gluQuadricDrawStyle_debug((quadObject), (drawStyle), __FILE__, __LINE__)
-void glatter_gluQuadricDrawStyle_debug(GLUquadric *quadObject, GLenum drawStyle, const char* file, int line);
-#define gluQuadricNormals(quadObject, normals) glatter_gluQuadricNormals_debug((quadObject), (normals), __FILE__, __LINE__)
-void glatter_gluQuadricNormals_debug(GLUquadric *quadObject, GLenum normals, const char* file, int line);
-#define gluQuadricOrientation(quadObject, orientation) glatter_gluQuadricOrientation_debug((quadObject), (orientation), __FILE__, __LINE__)
-void glatter_gluQuadricOrientation_debug(GLUquadric *quadObject, GLenum orientation, const char* file, int line);
-#define gluQuadricTexture(quadObject, textureCoords) glatter_gluQuadricTexture_debug((quadObject), (textureCoords), __FILE__, __LINE__)
-void glatter_gluQuadricTexture_debug(GLUquadric *quadObject, GLboolean textureCoords, const char* file, int line);
-#define gluScaleImage(format, widthin, heightin, typein, datain, widthout, heightout, typeout, dataout) glatter_gluScaleImage_debug((format), (widthin), (heightin), (typein), (datain), (widthout), (heightout), (typeout), (dataout), __FILE__, __LINE__)
-int glatter_gluScaleImage_debug(GLenum format, GLint widthin, GLint heightin, GLenum typein, const void *datain, GLint widthout, GLint heightout, GLenum typeout, void *dataout, const char* file, int line);
-#define gluSphere(qobj, radius, slices, stacks) glatter_gluSphere_debug((qobj), (radius), (slices), (stacks), __FILE__, __LINE__)
-void glatter_gluSphere_debug(GLUquadric *qobj, GLdouble radius, GLint slices, GLint stacks, const char* file, int line);
-#define gluTessBeginContour(tess) glatter_gluTessBeginContour_debug((tess), __FILE__, __LINE__)
-void glatter_gluTessBeginContour_debug(GLUtesselator *tess, const char* file, int line);
-#define gluTessBeginPolygon(tess, polygon_data) glatter_gluTessBeginPolygon_debug((tess), (polygon_data), __FILE__, __LINE__)
-void glatter_gluTessBeginPolygon_debug(GLUtesselator *tess, void *polygon_data, const char* file, int line);
-#define gluTessCallback(tess, which, fn) glatter_gluTessCallback_debug((tess), (which), (fn), __FILE__, __LINE__)
-void glatter_gluTessCallback_debug(GLUtesselator *tess, GLenum which, void (CALLBACK *fn)(), const char* file, int line);
-#define gluTessEndContour(tess) glatter_gluTessEndContour_debug((tess), __FILE__, __LINE__)
-void glatter_gluTessEndContour_debug(GLUtesselator *tess, const char* file, int line);
-#define gluTessEndPolygon(tess) glatter_gluTessEndPolygon_debug((tess), __FILE__, __LINE__)
-void glatter_gluTessEndPolygon_debug(GLUtesselator *tess, const char* file, int line);
-#define gluTessNormal(tess, x, y, z) glatter_gluTessNormal_debug((tess), (x), (y), (z), __FILE__, __LINE__)
-void glatter_gluTessNormal_debug(GLUtesselator *tess, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
-#define gluTessProperty(tess, which, value) glatter_gluTessProperty_debug((tess), (which), (value), __FILE__, __LINE__)
-void glatter_gluTessProperty_debug(GLUtesselator *tess, GLenum which, GLdouble value, const char* file, int line);
-#define gluTessVertex(tess, coords, data) glatter_gluTessVertex_debug((tess), (coords), (data), __FILE__, __LINE__)
-void glatter_gluTessVertex_debug(GLUtesselator *tess, GLdouble coords[3], void *data, const char* file, int line);
-#define gluUnProject(winx, winy, winz, modelMatrix, projMatrix, viewport, objx, objy, objz) glatter_gluUnProject_debug((winx), (winy), (winz), (modelMatrix), (projMatrix), (viewport), (objx), (objy), (objz), __FILE__, __LINE__)
-int glatter_gluUnProject_debug(GLdouble winx, GLdouble winy, GLdouble winz, const GLdouble modelMatrix[16], const GLdouble projMatrix[16], const GLint viewport[4], GLdouble *objx, GLdouble *objy, GLdouble *objz, const char* file, int line);
-#endif // __glu_h__
-#endif // GLATTER_GLU
-
-#endif // NDEBUG
-
-
-#ifdef NDEBUG
-
-#ifdef GLATTER_GLX
-
-#ifdef __glxext_h_
-#define glXGetMscRateOML(dpy, drawable, numerator, denominator) glatter_glXGetMscRateOML_ptr((dpy), (drawable), (numerator), (denominator))
-GLATTER_UBLOCK(Bool, , glXGetMscRateOML, (Display *dpy, GLXDrawable drawable, int32_t *numerator, int32_t *denominator))
-#define glXGetSyncValuesOML(dpy, drawable, ust, msc, sbc) glatter_glXGetSyncValuesOML_ptr((dpy), (drawable), (ust), (msc), (sbc))
-GLATTER_UBLOCK(Bool, , glXGetSyncValuesOML, (Display *dpy, GLXDrawable drawable, int64_t *ust, int64_t *msc, int64_t *sbc))
-#define glXSwapBuffersMscOML(dpy, drawable, target_msc, divisor, remainder) glatter_glXSwapBuffersMscOML_ptr((dpy), (drawable), (target_msc), (divisor), (remainder))
-GLATTER_UBLOCK(int64_t, , glXSwapBuffersMscOML, (Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder))
-#define glXWaitForMscOML(dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc) glatter_glXWaitForMscOML_ptr((dpy), (drawable), (target_msc), (divisor), (remainder), (ust), (msc), (sbc))
-GLATTER_UBLOCK(Bool, , glXWaitForMscOML, (Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder, int64_t *ust, int64_t *msc, int64_t *sbc))
-#define glXWaitForSbcOML(dpy, drawable, target_sbc, ust, msc, sbc) glatter_glXWaitForSbcOML_ptr((dpy), (drawable), (target_sbc), (ust), (msc), (sbc))
-GLATTER_UBLOCK(Bool, , glXWaitForSbcOML, (Display *dpy, GLXDrawable drawable, int64_t target_sbc, int64_t *ust, int64_t *msc, int64_t *sbc))
-#ifdef GLX_AMD_gpu_association
-#define glXBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) glatter_glXBlitContextFramebufferAMD_ptr((dstCtx), (srcX0), (srcY0), (srcX1), (srcY1), (dstX0), (dstY0), (dstX1), (dstY1), (mask), (filter))
-GLATTER_UBLOCK(void, , glXBlitContextFramebufferAMD, (GLXContext dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
-#define glXCreateAssociatedContextAMD(id, share_list) glatter_glXCreateAssociatedContextAMD_ptr((id), (share_list))
-GLATTER_UBLOCK(GLXContext, , glXCreateAssociatedContextAMD, (unsigned int id, GLXContext share_list))
-#define glXCreateAssociatedContextAttribsAMD(id, share_context, attribList) glatter_glXCreateAssociatedContextAttribsAMD_ptr((id), (share_context), (attribList))
-GLATTER_UBLOCK(GLXContext, , glXCreateAssociatedContextAttribsAMD, (unsigned int id, GLXContext share_context, const int *attribList))
-#define glXDeleteAssociatedContextAMD(ctx) glatter_glXDeleteAssociatedContextAMD_ptr((ctx))
-GLATTER_UBLOCK(Bool, , glXDeleteAssociatedContextAMD, (GLXContext ctx))
-#define glXGetContextGPUIDAMD(ctx) glatter_glXGetContextGPUIDAMD_ptr((ctx))
-GLATTER_UBLOCK(unsigned int, , glXGetContextGPUIDAMD, (GLXContext ctx))
-#define glXGetCurrentAssociatedContextAMD() glatter_glXGetCurrentAssociatedContextAMD_ptr()
-GLATTER_UBLOCK(GLXContext, , glXGetCurrentAssociatedContextAMD, ())
-#define glXGetGPUIDsAMD(maxCount, ids) glatter_glXGetGPUIDsAMD_ptr((maxCount), (ids))
-GLATTER_UBLOCK(unsigned int, , glXGetGPUIDsAMD, (unsigned int maxCount, unsigned int *ids))
-#define glXGetGPUInfoAMD(id, property, dataType, size, data) glatter_glXGetGPUInfoAMD_ptr((id), (property), (dataType), (size), (data))
-GLATTER_UBLOCK(int, , glXGetGPUInfoAMD, (unsigned int id, int property, GLenum dataType, unsigned int size, void *data))
-#define glXMakeAssociatedContextCurrentAMD(ctx) glatter_glXMakeAssociatedContextCurrentAMD_ptr((ctx))
-GLATTER_UBLOCK(Bool, , glXMakeAssociatedContextCurrentAMD, (GLXContext ctx))
-#endif // GLX_AMD_gpu_association
-#ifdef GLX_ARB_create_context
-#define glXCreateContextAttribsARB(dpy, config, share_context, direct, attrib_list) glatter_glXCreateContextAttribsARB_ptr((dpy), (config), (share_context), (direct), (attrib_list))
-GLATTER_UBLOCK(GLXContext, , glXCreateContextAttribsARB, (Display *dpy, GLXFBConfig config, GLXContext share_context, Bool direct, const int *attrib_list))
-#endif // GLX_ARB_create_context
-#ifdef GLX_ARB_get_proc_address
-#define glXGetProcAddressARB(procName) glatter_glXGetProcAddressARB_ptr((procName))
-GLATTER_UBLOCK(__GLXextFuncPtr, , glXGetProcAddressARB, (const GLubyte *procName))
-#endif // GLX_ARB_get_proc_address
-#ifdef GLX_EXT_import_context
-#define glXFreeContextEXT(dpy, context) glatter_glXFreeContextEXT_ptr((dpy), (context))
-GLATTER_UBLOCK(void, , glXFreeContextEXT, (Display *dpy, GLXContext context))
-#define glXGetContextIDEXT(context) glatter_glXGetContextIDEXT_ptr((context))
-GLATTER_UBLOCK(GLXContextID, , glXGetContextIDEXT, (const GLXContext context))
-#define glXImportContextEXT(dpy, contextID) glatter_glXImportContextEXT_ptr((dpy), (contextID))
-GLATTER_UBLOCK(GLXContext, , glXImportContextEXT, (Display *dpy, GLXContextID contextID))
-#define glXQueryContextInfoEXT(dpy, context, attribute, value) glatter_glXQueryContextInfoEXT_ptr((dpy), (context), (attribute), (value))
-GLATTER_UBLOCK(int, , glXQueryContextInfoEXT, (Display *dpy, GLXContext context, int attribute, int *value))
-#endif // GLX_EXT_import_context
-#ifdef GLX_EXT_swap_control
-#define glXSwapIntervalEXT(dpy, drawable, interval) glatter_glXSwapIntervalEXT_ptr((dpy), (drawable), (interval))
-GLATTER_UBLOCK(void, , glXSwapIntervalEXT, (Display *dpy, GLXDrawable drawable, int interval))
-#endif // GLX_EXT_swap_control
-#ifdef GLX_EXT_texture_from_pixmap
-#define glXBindTexImageEXT(dpy, drawable, buffer, attrib_list) glatter_glXBindTexImageEXT_ptr((dpy), (drawable), (buffer), (attrib_list))
-GLATTER_UBLOCK(void, , glXBindTexImageEXT, (Display *dpy, GLXDrawable drawable, int buffer, const int *attrib_list))
-#define glXReleaseTexImageEXT(dpy, drawable, buffer) glatter_glXReleaseTexImageEXT_ptr((dpy), (drawable), (buffer))
-GLATTER_UBLOCK(void, , glXReleaseTexImageEXT, (Display *dpy, GLXDrawable drawable, int buffer))
-#endif // GLX_EXT_texture_from_pixmap
-#ifdef GLX_MESA_agp_offset
-#define glXGetAGPOffsetMESA(pointer) glatter_glXGetAGPOffsetMESA_ptr((pointer))
-GLATTER_UBLOCK(unsigned int, , glXGetAGPOffsetMESA, (const void *pointer))
-#endif // GLX_MESA_agp_offset
-#ifdef GLX_MESA_copy_sub_buffer
-#define glXCopySubBufferMESA(dpy, drawable, x, y, width, height) glatter_glXCopySubBufferMESA_ptr((dpy), (drawable), (x), (y), (width), (height))
-GLATTER_UBLOCK(void, , glXCopySubBufferMESA, (Display *dpy, GLXDrawable drawable, int x, int y, int width, int height))
-#endif // GLX_MESA_copy_sub_buffer
-#ifdef GLX_MESA_pixmap_colormap
-#define glXCreateGLXPixmapMESA(dpy, visual, pixmap, cmap) glatter_glXCreateGLXPixmapMESA_ptr((dpy), (visual), (pixmap), (cmap))
-GLATTER_UBLOCK(GLXPixmap, , glXCreateGLXPixmapMESA, (Display *dpy, XVisualInfo *visual, Pixmap pixmap, Colormap cmap))
-#endif // GLX_MESA_pixmap_colormap
-#ifdef GLX_MESA_query_renderer
-#define glXQueryCurrentRendererIntegerMESA(attribute, value) glatter_glXQueryCurrentRendererIntegerMESA_ptr((attribute), (value))
-GLATTER_UBLOCK(Bool, , glXQueryCurrentRendererIntegerMESA, (int attribute, unsigned int *value))
-#define glXQueryRendererIntegerMESA(dpy, screen, renderer, attribute, value) glatter_glXQueryRendererIntegerMESA_ptr((dpy), (screen), (renderer), (attribute), (value))
-GLATTER_UBLOCK(Bool, , glXQueryRendererIntegerMESA, (Display *dpy, int screen, int renderer, int attribute, unsigned int *value))
-#endif // GLX_MESA_query_renderer
-#ifdef GLX_MESA_release_buffers
-#define glXReleaseBuffersMESA(dpy, drawable) glatter_glXReleaseBuffersMESA_ptr((dpy), (drawable))
-GLATTER_UBLOCK(Bool, , glXReleaseBuffersMESA, (Display *dpy, GLXDrawable drawable))
-#endif // GLX_MESA_release_buffers
-#ifdef GLX_MESA_set_3dfx_mode
-#define glXSet3DfxModeMESA(mode) glatter_glXSet3DfxModeMESA_ptr((mode))
-GLATTER_UBLOCK(Bool, , glXSet3DfxModeMESA, (int mode))
-#endif // GLX_MESA_set_3dfx_mode
-#ifdef GLX_NV_copy_buffer
-#define glXCopyBufferSubDataNV(dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size) glatter_glXCopyBufferSubDataNV_ptr((dpy), (readCtx), (writeCtx), (readTarget), (writeTarget), (readOffset), (writeOffset), (size))
-GLATTER_UBLOCK(void, , glXCopyBufferSubDataNV, (Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
-#define glXNamedCopyBufferSubDataNV(dpy, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size) glatter_glXNamedCopyBufferSubDataNV_ptr((dpy), (readCtx), (writeCtx), (readBuffer), (writeBuffer), (readOffset), (writeOffset), (size))
-GLATTER_UBLOCK(void, , glXNamedCopyBufferSubDataNV, (Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
-#endif // GLX_NV_copy_buffer
-#ifdef GLX_NV_copy_image
-#define glXCopyImageSubDataNV(dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) glatter_glXCopyImageSubDataNV_ptr((dpy), (srcCtx), (srcName), (srcTarget), (srcLevel), (srcX), (srcY), (srcZ), (dstCtx), (dstName), (dstTarget), (dstLevel), (dstX), (dstY), (dstZ), (width), (height), (depth))
-GLATTER_UBLOCK(void, , glXCopyImageSubDataNV, (Display *dpy, GLXContext srcCtx, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLXContext dstCtx, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth))
-#endif // GLX_NV_copy_image
-#ifdef GLX_NV_delay_before_swap
-#define glXDelayBeforeSwapNV(dpy, drawable, seconds) glatter_glXDelayBeforeSwapNV_ptr((dpy), (drawable), (seconds))
-GLATTER_UBLOCK(Bool, , glXDelayBeforeSwapNV, (Display *dpy, GLXDrawable drawable, GLfloat seconds))
-#endif // GLX_NV_delay_before_swap
-#ifdef GLX_NV_present_video
-#define glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list) glatter_glXBindVideoDeviceNV_ptr((dpy), (video_slot), (video_device), (attrib_list))
-GLATTER_UBLOCK(int, , glXBindVideoDeviceNV, (Display *dpy, unsigned int video_slot, unsigned int video_device, const int *attrib_list))
-#endif // GLX_NV_present_video
-#ifdef GLX_NV_swap_group
-#define glXBindSwapBarrierNV(dpy, group, barrier) glatter_glXBindSwapBarrierNV_ptr((dpy), (group), (barrier))
-GLATTER_UBLOCK(Bool, , glXBindSwapBarrierNV, (Display *dpy, GLuint group, GLuint barrier))
-#define glXJoinSwapGroupNV(dpy, drawable, group) glatter_glXJoinSwapGroupNV_ptr((dpy), (drawable), (group))
-GLATTER_UBLOCK(Bool, , glXJoinSwapGroupNV, (Display *dpy, GLXDrawable drawable, GLuint group))
-#define glXQueryFrameCountNV(dpy, screen, count) glatter_glXQueryFrameCountNV_ptr((dpy), (screen), (count))
-GLATTER_UBLOCK(Bool, , glXQueryFrameCountNV, (Display *dpy, int screen, GLuint *count))
-#define glXQueryMaxSwapGroupsNV(dpy, screen, maxGroups, maxBarriers) glatter_glXQueryMaxSwapGroupsNV_ptr((dpy), (screen), (maxGroups), (maxBarriers))
-GLATTER_UBLOCK(Bool, , glXQueryMaxSwapGroupsNV, (Display *dpy, int screen, GLuint *maxGroups, GLuint *maxBarriers))
-#define glXQuerySwapGroupNV(dpy, drawable, group, barrier) glatter_glXQuerySwapGroupNV_ptr((dpy), (drawable), (group), (barrier))
-GLATTER_UBLOCK(Bool, , glXQuerySwapGroupNV, (Display *dpy, GLXDrawable drawable, GLuint *group, GLuint *barrier))
-#define glXResetFrameCountNV(dpy, screen) glatter_glXResetFrameCountNV_ptr((dpy), (screen))
-GLATTER_UBLOCK(Bool, , glXResetFrameCountNV, (Display *dpy, int screen))
-#endif // GLX_NV_swap_group
-#ifdef GLX_NV_video_capture
-#define glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device) glatter_glXBindVideoCaptureDeviceNV_ptr((dpy), (video_capture_slot), (device))
-GLATTER_UBLOCK(int, , glXBindVideoCaptureDeviceNV, (Display *dpy, unsigned int video_capture_slot, GLXVideoCaptureDeviceNV device))
-#define glXLockVideoCaptureDeviceNV(dpy, device) glatter_glXLockVideoCaptureDeviceNV_ptr((dpy), (device))
-GLATTER_UBLOCK(void, , glXLockVideoCaptureDeviceNV, (Display *dpy, GLXVideoCaptureDeviceNV device))
-#define glXQueryVideoCaptureDeviceNV(dpy, device, attribute, value) glatter_glXQueryVideoCaptureDeviceNV_ptr((dpy), (device), (attribute), (value))
-GLATTER_UBLOCK(int, , glXQueryVideoCaptureDeviceNV, (Display *dpy, GLXVideoCaptureDeviceNV device, int attribute, int *value))
-#define glXReleaseVideoCaptureDeviceNV(dpy, device) glatter_glXReleaseVideoCaptureDeviceNV_ptr((dpy), (device))
-GLATTER_UBLOCK(void, , glXReleaseVideoCaptureDeviceNV, (Display *dpy, GLXVideoCaptureDeviceNV device))
-#endif // GLX_NV_video_capture
-#ifdef GLX_NV_video_out
-#define glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer) glatter_glXBindVideoImageNV_ptr((dpy), (VideoDevice), (pbuf), (iVideoBuffer))
-GLATTER_UBLOCK(int, , glXBindVideoImageNV, (Display *dpy, GLXVideoDeviceNV VideoDevice, GLXPbuffer pbuf, int iVideoBuffer))
-#define glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice) glatter_glXGetVideoDeviceNV_ptr((dpy), (screen), (numVideoDevices), (pVideoDevice))
-GLATTER_UBLOCK(int, , glXGetVideoDeviceNV, (Display *dpy, int screen, int numVideoDevices, GLXVideoDeviceNV *pVideoDevice))
-#define glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) glatter_glXGetVideoInfoNV_ptr((dpy), (screen), (VideoDevice), (pulCounterOutputPbuffer), (pulCounterOutputVideo))
-GLATTER_UBLOCK(int, , glXGetVideoInfoNV, (Display *dpy, int screen, GLXVideoDeviceNV VideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo))
-#define glXReleaseVideoDeviceNV(dpy, screen, VideoDevice) glatter_glXReleaseVideoDeviceNV_ptr((dpy), (screen), (VideoDevice))
-GLATTER_UBLOCK(int, , glXReleaseVideoDeviceNV, (Display *dpy, int screen, GLXVideoDeviceNV VideoDevice))
-#define glXReleaseVideoImageNV(dpy, pbuf) glatter_glXReleaseVideoImageNV_ptr((dpy), (pbuf))
-GLATTER_UBLOCK(int, , glXReleaseVideoImageNV, (Display *dpy, GLXPbuffer pbuf))
-#define glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock) glatter_glXSendPbufferToVideoNV_ptr((dpy), (pbuf), (iBufferType), (pulCounterPbuffer), (bBlock))
-GLATTER_UBLOCK(int, , glXSendPbufferToVideoNV, (Display *dpy, GLXPbuffer pbuf, int iBufferType, unsigned long *pulCounterPbuffer, GLboolean bBlock))
-#endif // GLX_NV_video_out
-#ifdef GLX_SGIX_dmbuffer
-#define glXAssociateDMPbufferSGIX(dpy, pbuffer, params, dmbuffer) glatter_glXAssociateDMPbufferSGIX_ptr((dpy), (pbuffer), (params), (dmbuffer))
-GLATTER_UBLOCK(Bool, , glXAssociateDMPbufferSGIX, (Display *dpy, GLXPbufferSGIX pbuffer, DMparams *params, DMbuffer dmbuffer))
-#endif // GLX_SGIX_dmbuffer
-#ifdef GLX_SGIX_fbconfig
-#define glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct) glatter_glXCreateContextWithConfigSGIX_ptr((dpy), (config), (render_type), (share_list), (direct))
-GLATTER_UBLOCK(GLXContext, , glXCreateContextWithConfigSGIX, (Display *dpy, GLXFBConfigSGIX config, int render_type, GLXContext share_list, Bool direct))
-#define glXCreateGLXPixmapWithConfigSGIX(dpy, config, pixmap) glatter_glXCreateGLXPixmapWithConfigSGIX_ptr((dpy), (config), (pixmap))
-GLATTER_UBLOCK(GLXPixmap, , glXCreateGLXPixmapWithConfigSGIX, (Display *dpy, GLXFBConfigSGIX config, Pixmap pixmap))
-#define glXGetFBConfigAttribSGIX(dpy, config, attribute, value) glatter_glXGetFBConfigAttribSGIX_ptr((dpy), (config), (attribute), (value))
-GLATTER_UBLOCK(int, , glXGetFBConfigAttribSGIX, (Display *dpy, GLXFBConfigSGIX config, int attribute, int *value))
-#define glXGetFBConfigFromVisualSGIX(dpy, vis) glatter_glXGetFBConfigFromVisualSGIX_ptr((dpy), (vis))
-GLATTER_UBLOCK(GLXFBConfigSGIX, , glXGetFBConfigFromVisualSGIX, (Display *dpy, XVisualInfo *vis))
-#endif // GLX_SGIX_fbconfig
-#ifdef GLX_SGIX_hyperpipe
-#define glXBindHyperpipeSGIX(dpy, hpId) glatter_glXBindHyperpipeSGIX_ptr((dpy), (hpId))
-GLATTER_UBLOCK(int, , glXBindHyperpipeSGIX, (Display *dpy, int hpId))
-#define glXDestroyHyperpipeConfigSGIX(dpy, hpId) glatter_glXDestroyHyperpipeConfigSGIX_ptr((dpy), (hpId))
-GLATTER_UBLOCK(int, , glXDestroyHyperpipeConfigSGIX, (Display *dpy, int hpId))
-#define glXHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, attribList) glatter_glXHyperpipeAttribSGIX_ptr((dpy), (timeSlice), (attrib), (size), (attribList))
-GLATTER_UBLOCK(int, , glXHyperpipeAttribSGIX, (Display *dpy, int timeSlice, int attrib, int size, void *attribList))
-#define glXHyperpipeConfigSGIX(dpy, networkId, npipes, cfg, hpId) glatter_glXHyperpipeConfigSGIX_ptr((dpy), (networkId), (npipes), (cfg), (hpId))
-GLATTER_UBLOCK(int, , glXHyperpipeConfigSGIX, (Display *dpy, int networkId, int npipes, GLXHyperpipeConfigSGIX *cfg, int *hpId))
-#define glXQueryHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, returnAttribList) glatter_glXQueryHyperpipeAttribSGIX_ptr((dpy), (timeSlice), (attrib), (size), (returnAttribList))
-GLATTER_UBLOCK(int, , glXQueryHyperpipeAttribSGIX, (Display *dpy, int timeSlice, int attrib, int size, void *returnAttribList))
-#define glXQueryHyperpipeBestAttribSGIX(dpy, timeSlice, attrib, size, attribList, returnAttribList) glatter_glXQueryHyperpipeBestAttribSGIX_ptr((dpy), (timeSlice), (attrib), (size), (attribList), (returnAttribList))
-GLATTER_UBLOCK(int, , glXQueryHyperpipeBestAttribSGIX, (Display *dpy, int timeSlice, int attrib, int size, void *attribList, void *returnAttribList))
-#endif // GLX_SGIX_hyperpipe
-#ifdef GLX_SGIX_pbuffer
-#define glXCreateGLXPbufferSGIX(dpy, config, width, height, attrib_list) glatter_glXCreateGLXPbufferSGIX_ptr((dpy), (config), (width), (height), (attrib_list))
-GLATTER_UBLOCK(GLXPbufferSGIX, , glXCreateGLXPbufferSGIX, (Display *dpy, GLXFBConfigSGIX config, unsigned int width, unsigned int height, int *attrib_list))
-#define glXDestroyGLXPbufferSGIX(dpy, pbuf) glatter_glXDestroyGLXPbufferSGIX_ptr((dpy), (pbuf))
-GLATTER_UBLOCK(void, , glXDestroyGLXPbufferSGIX, (Display *dpy, GLXPbufferSGIX pbuf))
-#define glXGetSelectedEventSGIX(dpy, drawable, mask) glatter_glXGetSelectedEventSGIX_ptr((dpy), (drawable), (mask))
-GLATTER_UBLOCK(void, , glXGetSelectedEventSGIX, (Display *dpy, GLXDrawable drawable, unsigned long *mask))
-#define glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value) glatter_glXQueryGLXPbufferSGIX_ptr((dpy), (pbuf), (attribute), (value))
-GLATTER_UBLOCK(int, , glXQueryGLXPbufferSGIX, (Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value))
-#define glXSelectEventSGIX(dpy, drawable, mask) glatter_glXSelectEventSGIX_ptr((dpy), (drawable), (mask))
-GLATTER_UBLOCK(void, , glXSelectEventSGIX, (Display *dpy, GLXDrawable drawable, unsigned long mask))
-#endif // GLX_SGIX_pbuffer
-#ifdef GLX_SGIX_swap_barrier
-#define glXBindSwapBarrierSGIX(dpy, drawable, barrier) glatter_glXBindSwapBarrierSGIX_ptr((dpy), (drawable), (barrier))
-GLATTER_UBLOCK(void, , glXBindSwapBarrierSGIX, (Display *dpy, GLXDrawable drawable, int barrier))
-#define glXQueryMaxSwapBarriersSGIX(dpy, screen, max) glatter_glXQueryMaxSwapBarriersSGIX_ptr((dpy), (screen), (max))
-GLATTER_UBLOCK(Bool, , glXQueryMaxSwapBarriersSGIX, (Display *dpy, int screen, int *max))
-#endif // GLX_SGIX_swap_barrier
-#ifdef GLX_SGIX_swap_group
-#define glXJoinSwapGroupSGIX(dpy, drawable, member) glatter_glXJoinSwapGroupSGIX_ptr((dpy), (drawable), (member))
-GLATTER_UBLOCK(void, , glXJoinSwapGroupSGIX, (Display *dpy, GLXDrawable drawable, GLXDrawable member))
-#endif // GLX_SGIX_swap_group
-#ifdef GLX_SGIX_video_resize
-#define glXBindChannelToWindowSGIX(display, screen, channel, window) glatter_glXBindChannelToWindowSGIX_ptr((display), (screen), (channel), (window))
-GLATTER_UBLOCK(int, , glXBindChannelToWindowSGIX, (Display *display, int screen, int channel, Window window))
-#define glXChannelRectSGIX(display, screen, channel, x, y, w, h) glatter_glXChannelRectSGIX_ptr((display), (screen), (channel), (x), (y), (w), (h))
-GLATTER_UBLOCK(int, , glXChannelRectSGIX, (Display *display, int screen, int channel, int x, int y, int w, int h))
-#define glXChannelRectSyncSGIX(display, screen, channel, synctype) glatter_glXChannelRectSyncSGIX_ptr((display), (screen), (channel), (synctype))
-GLATTER_UBLOCK(int, , glXChannelRectSyncSGIX, (Display *display, int screen, int channel, GLenum synctype))
-#define glXQueryChannelDeltasSGIX(display, screen, channel, x, y, w, h) glatter_glXQueryChannelDeltasSGIX_ptr((display), (screen), (channel), (x), (y), (w), (h))
-GLATTER_UBLOCK(int, , glXQueryChannelDeltasSGIX, (Display *display, int screen, int channel, int *x, int *y, int *w, int *h))
-#define glXQueryChannelRectSGIX(display, screen, channel, dx, dy, dw, dh) glatter_glXQueryChannelRectSGIX_ptr((display), (screen), (channel), (dx), (dy), (dw), (dh))
-GLATTER_UBLOCK(int, , glXQueryChannelRectSGIX, (Display *display, int screen, int channel, int *dx, int *dy, int *dw, int *dh))
-#endif // GLX_SGIX_video_resize
-#ifdef GLX_SGIX_video_source
-#define glXCreateGLXVideoSourceSGIX(display, screen, server, path, nodeClass, drainNode) glatter_glXCreateGLXVideoSourceSGIX_ptr((display), (screen), (server), (path), (nodeClass), (drainNode))
-GLATTER_UBLOCK(GLXVideoSourceSGIX, , glXCreateGLXVideoSourceSGIX, (Display *display, int screen, VLServer server, VLPath path, int nodeClass, VLNode drainNode))
-#define glXDestroyGLXVideoSourceSGIX(dpy, glxvideosource) glatter_glXDestroyGLXVideoSourceSGIX_ptr((dpy), (glxvideosource))
-GLATTER_UBLOCK(void, , glXDestroyGLXVideoSourceSGIX, (Display *dpy, GLXVideoSourceSGIX glxvideosource))
-#endif // GLX_SGIX_video_source
-#ifdef GLX_SGI_cushion
-#define glXCushionSGI(dpy, window, cushion) glatter_glXCushionSGI_ptr((dpy), (window), (cushion))
-GLATTER_UBLOCK(void, , glXCushionSGI, (Display *dpy, Window window, float cushion))
-#endif // GLX_SGI_cushion
-#ifdef GLX_SGI_make_current_read
-#define glXGetCurrentReadDrawableSGI() glatter_glXGetCurrentReadDrawableSGI_ptr()
-GLATTER_UBLOCK(GLXDrawable, , glXGetCurrentReadDrawableSGI, ())
-#define glXMakeCurrentReadSGI(dpy, draw, read, ctx) glatter_glXMakeCurrentReadSGI_ptr((dpy), (draw), (read), (ctx))
-GLATTER_UBLOCK(Bool, , glXMakeCurrentReadSGI, (Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx))
-#endif // GLX_SGI_make_current_read
-#ifdef GLX_SGI_swap_control
-#define glXSwapIntervalSGI(interval) glatter_glXSwapIntervalSGI_ptr((interval))
-GLATTER_UBLOCK(int, , glXSwapIntervalSGI, (int interval))
-#endif // GLX_SGI_swap_control
-#ifdef GLX_SGI_video_sync
-#define glXGetVideoSyncSGI(count) glatter_glXGetVideoSyncSGI_ptr((count))
-GLATTER_UBLOCK(int, , glXGetVideoSyncSGI, (unsigned int *count))
-#define glXWaitVideoSyncSGI(divisor, remainder, count) glatter_glXWaitVideoSyncSGI_ptr((divisor), (remainder), (count))
-GLATTER_UBLOCK(int, , glXWaitVideoSyncSGI, (int divisor, int remainder, unsigned int *count))
-#endif // GLX_SGI_video_sync
-#ifdef GLX_SUN_get_transparent_index
-#define glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex) glatter_glXGetTransparentIndexSUN_ptr((dpy), (overlay), (underlay), (pTransparentIndex))
-GLATTER_UBLOCK(Status, , glXGetTransparentIndexSUN, (Display *dpy, Window overlay, Window underlay, long *pTransparentIndex))
-#endif // GLX_SUN_get_transparent_index
-#ifdef GLX_VERSION_1_3
-#define glXCreateNewContext(dpy, config, render_type, share_list, direct) glatter_glXCreateNewContext_ptr((dpy), (config), (render_type), (share_list), (direct))
-GLATTER_UBLOCK(GLXContext, , glXCreateNewContext, (Display *dpy, GLXFBConfig config, int render_type, GLXContext share_list, Bool direct))
-#define glXCreatePbuffer(dpy, config, attrib_list) glatter_glXCreatePbuffer_ptr((dpy), (config), (attrib_list))
-GLATTER_UBLOCK(GLXPbuffer, , glXCreatePbuffer, (Display *dpy, GLXFBConfig config, const int *attrib_list))
-#define glXCreatePixmap(dpy, config, pixmap, attrib_list) glatter_glXCreatePixmap_ptr((dpy), (config), (pixmap), (attrib_list))
-GLATTER_UBLOCK(GLXPixmap, , glXCreatePixmap, (Display *dpy, GLXFBConfig config, Pixmap pixmap, const int *attrib_list))
-#define glXCreateWindow(dpy, config, win, attrib_list) glatter_glXCreateWindow_ptr((dpy), (config), (win), (attrib_list))
-GLATTER_UBLOCK(GLXWindow, , glXCreateWindow, (Display *dpy, GLXFBConfig config, Window win, const int *attrib_list))
-#define glXDestroyPbuffer(dpy, pbuf) glatter_glXDestroyPbuffer_ptr((dpy), (pbuf))
-GLATTER_UBLOCK(void, , glXDestroyPbuffer, (Display *dpy, GLXPbuffer pbuf))
-#define glXDestroyPixmap(dpy, pixmap) glatter_glXDestroyPixmap_ptr((dpy), (pixmap))
-GLATTER_UBLOCK(void, , glXDestroyPixmap, (Display *dpy, GLXPixmap pixmap))
-#define glXDestroyWindow(dpy, win) glatter_glXDestroyWindow_ptr((dpy), (win))
-GLATTER_UBLOCK(void, , glXDestroyWindow, (Display *dpy, GLXWindow win))
-#define glXGetCurrentReadDrawable() glatter_glXGetCurrentReadDrawable_ptr()
-GLATTER_UBLOCK(GLXDrawable, , glXGetCurrentReadDrawable, ())
-#define glXGetFBConfigAttrib(dpy, config, attribute, value) glatter_glXGetFBConfigAttrib_ptr((dpy), (config), (attribute), (value))
-GLATTER_UBLOCK(int, , glXGetFBConfigAttrib, (Display *dpy, GLXFBConfig config, int attribute, int *value))
-#define glXGetSelectedEvent(dpy, draw, event_mask) glatter_glXGetSelectedEvent_ptr((dpy), (draw), (event_mask))
-GLATTER_UBLOCK(void, , glXGetSelectedEvent, (Display *dpy, GLXDrawable draw, unsigned long *event_mask))
-#define glXMakeContextCurrent(dpy, draw, read, ctx) glatter_glXMakeContextCurrent_ptr((dpy), (draw), (read), (ctx))
-GLATTER_UBLOCK(Bool, , glXMakeContextCurrent, (Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx))
-#define glXQueryContext(dpy, ctx, attribute, value) glatter_glXQueryContext_ptr((dpy), (ctx), (attribute), (value))
-GLATTER_UBLOCK(int, , glXQueryContext, (Display *dpy, GLXContext ctx, int attribute, int *value))
-#define glXQueryDrawable(dpy, draw, attribute, value) glatter_glXQueryDrawable_ptr((dpy), (draw), (attribute), (value))
-GLATTER_UBLOCK(void, , glXQueryDrawable, (Display *dpy, GLXDrawable draw, int attribute, unsigned int *value))
-#define glXSelectEvent(dpy, draw, event_mask) glatter_glXSelectEvent_ptr((dpy), (draw), (event_mask))
-GLATTER_UBLOCK(void, , glXSelectEvent, (Display *dpy, GLXDrawable draw, unsigned long event_mask))
-#endif // GLX_VERSION_1_3
-#ifdef GLX_VERSION_1_4
-#define glXGetProcAddress(procName) glatter_glXGetProcAddress_ptr((procName))
-GLATTER_UBLOCK(__GLXextFuncPtr, , glXGetProcAddress, (const GLubyte *procName))
-#endif // GLX_VERSION_1_4
-#endif // __glxext_h_
-#endif // GLATTER_GLX
-
-#else // NDEBUG
-
-#ifdef GLATTER_GLX
 
 #ifdef __glxext_h_
 #define glXGetMscRateOML(dpy, drawable, numerator, denominator) glatter_glXGetMscRateOML_debug((dpy), (drawable), (numerator), (denominator), __FILE__, __LINE__)
@@ -20367,7 +20147,214 @@ void glatter_glXSelectEvent_debug(Display *dpy, GLXDrawable draw, unsigned long 
 __GLXextFuncPtr glatter_glXGetProcAddress_debug(const GLubyte *procName, const char* file, int line);
 #endif // GLX_VERSION_1_4
 #endif // __glxext_h_
-#endif // GLATTER_GLX
+#endif // GLATTER_GL
+
+#endif // NDEBUG
+
+
+#ifdef NDEBUG
+
+#ifdef GLATTER_GLU
+
+#ifdef __glu_h__
+#define gluBeginCurve(nobj) glatter_gluBeginCurve_ptr((nobj))
+GLATTER_UBLOCK(void, APIENTRY, gluBeginCurve, (GLUnurbs *nobj))
+#define gluBeginPolygon(tess) glatter_gluBeginPolygon_ptr((tess))
+GLATTER_UBLOCK(void, APIENTRY, gluBeginPolygon, (GLUtesselator *tess))
+#define gluBeginSurface(nobj) glatter_gluBeginSurface_ptr((nobj))
+GLATTER_UBLOCK(void, APIENTRY, gluBeginSurface, (GLUnurbs *nobj))
+#define gluBeginTrim(nobj) glatter_gluBeginTrim_ptr((nobj))
+GLATTER_UBLOCK(void, APIENTRY, gluBeginTrim, (GLUnurbs *nobj))
+#define gluBuild1DMipmaps(target, components, width, format, type, data) glatter_gluBuild1DMipmaps_ptr((target), (components), (width), (format), (type), (data))
+GLATTER_UBLOCK(int, APIENTRY, gluBuild1DMipmaps, (GLenum target, GLint components, GLint width, GLenum format, GLenum type, const void *data))
+#define gluBuild2DMipmaps(target, components, width, height, format, type, data) glatter_gluBuild2DMipmaps_ptr((target), (components), (width), (height), (format), (type), (data))
+GLATTER_UBLOCK(int, APIENTRY, gluBuild2DMipmaps, (GLenum target, GLint components, GLint width, GLint height, GLenum format, GLenum type, const void *data))
+#define gluCylinder(qobj, baseRadius, topRadius, height, slices, stacks) glatter_gluCylinder_ptr((qobj), (baseRadius), (topRadius), (height), (slices), (stacks))
+GLATTER_UBLOCK(void, APIENTRY, gluCylinder, (GLUquadric *qobj, GLdouble baseRadius, GLdouble topRadius, GLdouble height, GLint slices, GLint stacks))
+#define gluDeleteNurbsRenderer(nobj) glatter_gluDeleteNurbsRenderer_ptr((nobj))
+GLATTER_UBLOCK(void, APIENTRY, gluDeleteNurbsRenderer, (GLUnurbs *nobj))
+#define gluDeleteQuadric(state) glatter_gluDeleteQuadric_ptr((state))
+GLATTER_UBLOCK(void, APIENTRY, gluDeleteQuadric, (GLUquadric *state))
+#define gluDeleteTess(tess) glatter_gluDeleteTess_ptr((tess))
+GLATTER_UBLOCK(void, APIENTRY, gluDeleteTess, (GLUtesselator *tess))
+#define gluDisk(qobj, innerRadius, outerRadius, slices, loops) glatter_gluDisk_ptr((qobj), (innerRadius), (outerRadius), (slices), (loops))
+GLATTER_UBLOCK(void, APIENTRY, gluDisk, (GLUquadric *qobj, GLdouble innerRadius, GLdouble outerRadius, GLint slices, GLint loops))
+#define gluEndCurve(nobj) glatter_gluEndCurve_ptr((nobj))
+GLATTER_UBLOCK(void, APIENTRY, gluEndCurve, (GLUnurbs *nobj))
+#define gluEndPolygon(tess) glatter_gluEndPolygon_ptr((tess))
+GLATTER_UBLOCK(void, APIENTRY, gluEndPolygon, (GLUtesselator *tess))
+#define gluEndSurface(nobj) glatter_gluEndSurface_ptr((nobj))
+GLATTER_UBLOCK(void, APIENTRY, gluEndSurface, (GLUnurbs *nobj))
+#define gluEndTrim(nobj) glatter_gluEndTrim_ptr((nobj))
+GLATTER_UBLOCK(void, APIENTRY, gluEndTrim, (GLUnurbs *nobj))
+#define gluErrorString(errCode) glatter_gluErrorString_ptr((errCode))
+GLATTER_UBLOCK(const GLubyte*, APIENTRY, gluErrorString, (GLenum errCode))
+#define gluErrorUnicodeStringEXT(errCode) glatter_gluErrorUnicodeStringEXT_ptr((errCode))
+GLATTER_UBLOCK(const wchar_t*, APIENTRY, gluErrorUnicodeStringEXT, (GLenum errCode))
+#define gluGetString(name) glatter_gluGetString_ptr((name))
+GLATTER_UBLOCK(const GLubyte*, APIENTRY, gluGetString, (GLenum name))
+#define gluGetTessProperty(tess, which, value) glatter_gluGetTessProperty_ptr((tess), (which), (value))
+GLATTER_UBLOCK(void, APIENTRY, gluGetTessProperty, (GLUtesselator *tess, GLenum which, GLdouble *value))
+#define gluLookAt(eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz) glatter_gluLookAt_ptr((eyex), (eyey), (eyez), (centerx), (centery), (centerz), (upx), (upy), (upz))
+GLATTER_UBLOCK(void, APIENTRY, gluLookAt, (GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble centerx, GLdouble centery, GLdouble centerz, GLdouble upx, GLdouble upy, GLdouble upz))
+#define gluNewNurbsRenderer() glatter_gluNewNurbsRenderer_ptr()
+GLATTER_UBLOCK(GLUnurbs*, APIENTRY, gluNewNurbsRenderer, (void))
+#define gluNewQuadric() glatter_gluNewQuadric_ptr()
+GLATTER_UBLOCK(GLUquadric*, APIENTRY, gluNewQuadric, (void))
+#define gluNewTess() glatter_gluNewTess_ptr()
+GLATTER_UBLOCK(GLUtesselator*, APIENTRY, gluNewTess, (void))
+#define gluNextContour(tess, type) glatter_gluNextContour_ptr((tess), (type))
+GLATTER_UBLOCK(void, APIENTRY, gluNextContour, (GLUtesselator *tess, GLenum type))
+#define gluNurbsCurve(nobj, nknots, knot, stride, ctlarray, order, type) glatter_gluNurbsCurve_ptr((nobj), (nknots), (knot), (stride), (ctlarray), (order), (type))
+GLATTER_UBLOCK(void, APIENTRY, gluNurbsCurve, (GLUnurbs *nobj, GLint nknots, GLfloat *knot, GLint stride, GLfloat *ctlarray, GLint order, GLenum type))
+#define gluOrtho2D(left, right, bottom, top) glatter_gluOrtho2D_ptr((left), (right), (bottom), (top))
+GLATTER_UBLOCK(void, APIENTRY, gluOrtho2D, (GLdouble left, GLdouble right, GLdouble bottom, GLdouble top))
+#define gluPartialDisk(qobj, innerRadius, outerRadius, slices, loops, startAngle, sweepAngle) glatter_gluPartialDisk_ptr((qobj), (innerRadius), (outerRadius), (slices), (loops), (startAngle), (sweepAngle))
+GLATTER_UBLOCK(void, APIENTRY, gluPartialDisk, (GLUquadric *qobj, GLdouble innerRadius, GLdouble outerRadius, GLint slices, GLint loops, GLdouble startAngle, GLdouble sweepAngle))
+#define gluPerspective(fovy, aspect, zNear, zFar) glatter_gluPerspective_ptr((fovy), (aspect), (zNear), (zFar))
+GLATTER_UBLOCK(void, APIENTRY, gluPerspective, (GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar))
+#define gluPickMatrix(x, y, width, height, viewport) glatter_gluPickMatrix_ptr((x), (y), (width), (height), (viewport))
+GLATTER_UBLOCK(void, APIENTRY, gluPickMatrix, (GLdouble x, GLdouble y, GLdouble width, GLdouble height, GLint viewport[4]))
+#define gluProject(objx, objy, objz, modelMatrix, projMatrix, viewport, winx, winy, winz) glatter_gluProject_ptr((objx), (objy), (objz), (modelMatrix), (projMatrix), (viewport), (winx), (winy), (winz))
+GLATTER_UBLOCK(int, APIENTRY, gluProject, (GLdouble objx, GLdouble objy, GLdouble objz, const GLdouble modelMatrix[16], const GLdouble projMatrix[16], const GLint viewport[4], GLdouble *winx, GLdouble *winy, GLdouble *winz))
+#define gluPwlCurve(nobj, count, array, stride, type) glatter_gluPwlCurve_ptr((nobj), (count), (array), (stride), (type))
+GLATTER_UBLOCK(void, APIENTRY, gluPwlCurve, (GLUnurbs *nobj, GLint count, GLfloat *array, GLint stride, GLenum type))
+#define gluQuadricCallback(qobj, which, fn) glatter_gluQuadricCallback_ptr((qobj), (which), (fn))
+GLATTER_UBLOCK(void, APIENTRY, gluQuadricCallback, (GLUquadric *qobj, GLenum which, void (CALLBACK* fn)()))
+#define gluQuadricDrawStyle(quadObject, drawStyle) glatter_gluQuadricDrawStyle_ptr((quadObject), (drawStyle))
+GLATTER_UBLOCK(void, APIENTRY, gluQuadricDrawStyle, (GLUquadric *quadObject, GLenum drawStyle))
+#define gluQuadricNormals(quadObject, normals) glatter_gluQuadricNormals_ptr((quadObject), (normals))
+GLATTER_UBLOCK(void, APIENTRY, gluQuadricNormals, (GLUquadric *quadObject, GLenum normals))
+#define gluQuadricOrientation(quadObject, orientation) glatter_gluQuadricOrientation_ptr((quadObject), (orientation))
+GLATTER_UBLOCK(void, APIENTRY, gluQuadricOrientation, (GLUquadric *quadObject, GLenum orientation))
+#define gluQuadricTexture(quadObject, textureCoords) glatter_gluQuadricTexture_ptr((quadObject), (textureCoords))
+GLATTER_UBLOCK(void, APIENTRY, gluQuadricTexture, (GLUquadric *quadObject, GLboolean textureCoords))
+#define gluScaleImage(format, widthin, heightin, typein, datain, widthout, heightout, typeout, dataout) glatter_gluScaleImage_ptr((format), (widthin), (heightin), (typein), (datain), (widthout), (heightout), (typeout), (dataout))
+GLATTER_UBLOCK(int, APIENTRY, gluScaleImage, (GLenum format, GLint widthin, GLint heightin, GLenum typein, const void *datain, GLint widthout, GLint heightout, GLenum typeout, void *dataout))
+#define gluSphere(qobj, radius, slices, stacks) glatter_gluSphere_ptr((qobj), (radius), (slices), (stacks))
+GLATTER_UBLOCK(void, APIENTRY, gluSphere, (GLUquadric *qobj, GLdouble radius, GLint slices, GLint stacks))
+#define gluTessBeginContour(tess) glatter_gluTessBeginContour_ptr((tess))
+GLATTER_UBLOCK(void, APIENTRY, gluTessBeginContour, (GLUtesselator *tess))
+#define gluTessBeginPolygon(tess, polygon_data) glatter_gluTessBeginPolygon_ptr((tess), (polygon_data))
+GLATTER_UBLOCK(void, APIENTRY, gluTessBeginPolygon, (GLUtesselator *tess, void *polygon_data))
+#define gluTessCallback(tess, which, fn) glatter_gluTessCallback_ptr((tess), (which), (fn))
+GLATTER_UBLOCK(void, APIENTRY, gluTessCallback, (GLUtesselator *tess, GLenum which, void (CALLBACK *fn)()))
+#define gluTessEndContour(tess) glatter_gluTessEndContour_ptr((tess))
+GLATTER_UBLOCK(void, APIENTRY, gluTessEndContour, (GLUtesselator *tess))
+#define gluTessEndPolygon(tess) glatter_gluTessEndPolygon_ptr((tess))
+GLATTER_UBLOCK(void, APIENTRY, gluTessEndPolygon, (GLUtesselator *tess))
+#define gluTessNormal(tess, x, y, z) glatter_gluTessNormal_ptr((tess), (x), (y), (z))
+GLATTER_UBLOCK(void, APIENTRY, gluTessNormal, (GLUtesselator *tess, GLdouble x, GLdouble y, GLdouble z))
+#define gluTessProperty(tess, which, value) glatter_gluTessProperty_ptr((tess), (which), (value))
+GLATTER_UBLOCK(void, APIENTRY, gluTessProperty, (GLUtesselator *tess, GLenum which, GLdouble value))
+#define gluTessVertex(tess, coords, data) glatter_gluTessVertex_ptr((tess), (coords), (data))
+GLATTER_UBLOCK(void, APIENTRY, gluTessVertex, (GLUtesselator *tess, GLdouble coords[3], void *data))
+#define gluUnProject(winx, winy, winz, modelMatrix, projMatrix, viewport, objx, objy, objz) glatter_gluUnProject_ptr((winx), (winy), (winz), (modelMatrix), (projMatrix), (viewport), (objx), (objy), (objz))
+GLATTER_UBLOCK(int, APIENTRY, gluUnProject, (GLdouble winx, GLdouble winy, GLdouble winz, const GLdouble modelMatrix[16], const GLdouble projMatrix[16], const GLint viewport[4], GLdouble *objx, GLdouble *objy, GLdouble *objz))
+#endif // __glu_h__
+#endif // GLATTER_GLU
+
+#else // NDEBUG
+
+#ifdef GLATTER_GLU
+
+#ifdef __glu_h__
+#define gluBeginCurve(nobj) glatter_gluBeginCurve_debug((nobj), __FILE__, __LINE__)
+void glatter_gluBeginCurve_debug(GLUnurbs *nobj, const char* file, int line);
+#define gluBeginPolygon(tess) glatter_gluBeginPolygon_debug((tess), __FILE__, __LINE__)
+void glatter_gluBeginPolygon_debug(GLUtesselator *tess, const char* file, int line);
+#define gluBeginSurface(nobj) glatter_gluBeginSurface_debug((nobj), __FILE__, __LINE__)
+void glatter_gluBeginSurface_debug(GLUnurbs *nobj, const char* file, int line);
+#define gluBeginTrim(nobj) glatter_gluBeginTrim_debug((nobj), __FILE__, __LINE__)
+void glatter_gluBeginTrim_debug(GLUnurbs *nobj, const char* file, int line);
+#define gluBuild1DMipmaps(target, components, width, format, type, data) glatter_gluBuild1DMipmaps_debug((target), (components), (width), (format), (type), (data), __FILE__, __LINE__)
+int glatter_gluBuild1DMipmaps_debug(GLenum target, GLint components, GLint width, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define gluBuild2DMipmaps(target, components, width, height, format, type, data) glatter_gluBuild2DMipmaps_debug((target), (components), (width), (height), (format), (type), (data), __FILE__, __LINE__)
+int glatter_gluBuild2DMipmaps_debug(GLenum target, GLint components, GLint width, GLint height, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define gluCylinder(qobj, baseRadius, topRadius, height, slices, stacks) glatter_gluCylinder_debug((qobj), (baseRadius), (topRadius), (height), (slices), (stacks), __FILE__, __LINE__)
+void glatter_gluCylinder_debug(GLUquadric *qobj, GLdouble baseRadius, GLdouble topRadius, GLdouble height, GLint slices, GLint stacks, const char* file, int line);
+#define gluDeleteNurbsRenderer(nobj) glatter_gluDeleteNurbsRenderer_debug((nobj), __FILE__, __LINE__)
+void glatter_gluDeleteNurbsRenderer_debug(GLUnurbs *nobj, const char* file, int line);
+#define gluDeleteQuadric(state) glatter_gluDeleteQuadric_debug((state), __FILE__, __LINE__)
+void glatter_gluDeleteQuadric_debug(GLUquadric *state, const char* file, int line);
+#define gluDeleteTess(tess) glatter_gluDeleteTess_debug((tess), __FILE__, __LINE__)
+void glatter_gluDeleteTess_debug(GLUtesselator *tess, const char* file, int line);
+#define gluDisk(qobj, innerRadius, outerRadius, slices, loops) glatter_gluDisk_debug((qobj), (innerRadius), (outerRadius), (slices), (loops), __FILE__, __LINE__)
+void glatter_gluDisk_debug(GLUquadric *qobj, GLdouble innerRadius, GLdouble outerRadius, GLint slices, GLint loops, const char* file, int line);
+#define gluEndCurve(nobj) glatter_gluEndCurve_debug((nobj), __FILE__, __LINE__)
+void glatter_gluEndCurve_debug(GLUnurbs *nobj, const char* file, int line);
+#define gluEndPolygon(tess) glatter_gluEndPolygon_debug((tess), __FILE__, __LINE__)
+void glatter_gluEndPolygon_debug(GLUtesselator *tess, const char* file, int line);
+#define gluEndSurface(nobj) glatter_gluEndSurface_debug((nobj), __FILE__, __LINE__)
+void glatter_gluEndSurface_debug(GLUnurbs *nobj, const char* file, int line);
+#define gluEndTrim(nobj) glatter_gluEndTrim_debug((nobj), __FILE__, __LINE__)
+void glatter_gluEndTrim_debug(GLUnurbs *nobj, const char* file, int line);
+#define gluErrorString(errCode) glatter_gluErrorString_debug((errCode), __FILE__, __LINE__)
+const GLubyte* glatter_gluErrorString_debug(GLenum errCode, const char* file, int line);
+#define gluErrorUnicodeStringEXT(errCode) glatter_gluErrorUnicodeStringEXT_debug((errCode), __FILE__, __LINE__)
+const wchar_t* glatter_gluErrorUnicodeStringEXT_debug(GLenum errCode, const char* file, int line);
+#define gluGetString(name) glatter_gluGetString_debug((name), __FILE__, __LINE__)
+const GLubyte* glatter_gluGetString_debug(GLenum name, const char* file, int line);
+#define gluGetTessProperty(tess, which, value) glatter_gluGetTessProperty_debug((tess), (which), (value), __FILE__, __LINE__)
+void glatter_gluGetTessProperty_debug(GLUtesselator *tess, GLenum which, GLdouble *value, const char* file, int line);
+#define gluLookAt(eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz) glatter_gluLookAt_debug((eyex), (eyey), (eyez), (centerx), (centery), (centerz), (upx), (upy), (upz), __FILE__, __LINE__)
+void glatter_gluLookAt_debug(GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble centerx, GLdouble centery, GLdouble centerz, GLdouble upx, GLdouble upy, GLdouble upz, const char* file, int line);
+#define gluNewNurbsRenderer() glatter_gluNewNurbsRenderer_debug(__FILE__, __LINE__)
+GLUnurbs* glatter_gluNewNurbsRenderer_debug(const char* file, int line);
+#define gluNewQuadric() glatter_gluNewQuadric_debug(__FILE__, __LINE__)
+GLUquadric* glatter_gluNewQuadric_debug(const char* file, int line);
+#define gluNewTess() glatter_gluNewTess_debug(__FILE__, __LINE__)
+GLUtesselator* glatter_gluNewTess_debug(const char* file, int line);
+#define gluNextContour(tess, type) glatter_gluNextContour_debug((tess), (type), __FILE__, __LINE__)
+void glatter_gluNextContour_debug(GLUtesselator *tess, GLenum type, const char* file, int line);
+#define gluNurbsCurve(nobj, nknots, knot, stride, ctlarray, order, type) glatter_gluNurbsCurve_debug((nobj), (nknots), (knot), (stride), (ctlarray), (order), (type), __FILE__, __LINE__)
+void glatter_gluNurbsCurve_debug(GLUnurbs *nobj, GLint nknots, GLfloat *knot, GLint stride, GLfloat *ctlarray, GLint order, GLenum type, const char* file, int line);
+#define gluOrtho2D(left, right, bottom, top) glatter_gluOrtho2D_debug((left), (right), (bottom), (top), __FILE__, __LINE__)
+void glatter_gluOrtho2D_debug(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, const char* file, int line);
+#define gluPartialDisk(qobj, innerRadius, outerRadius, slices, loops, startAngle, sweepAngle) glatter_gluPartialDisk_debug((qobj), (innerRadius), (outerRadius), (slices), (loops), (startAngle), (sweepAngle), __FILE__, __LINE__)
+void glatter_gluPartialDisk_debug(GLUquadric *qobj, GLdouble innerRadius, GLdouble outerRadius, GLint slices, GLint loops, GLdouble startAngle, GLdouble sweepAngle, const char* file, int line);
+#define gluPerspective(fovy, aspect, zNear, zFar) glatter_gluPerspective_debug((fovy), (aspect), (zNear), (zFar), __FILE__, __LINE__)
+void glatter_gluPerspective_debug(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar, const char* file, int line);
+#define gluPickMatrix(x, y, width, height, viewport) glatter_gluPickMatrix_debug((x), (y), (width), (height), (viewport), __FILE__, __LINE__)
+void glatter_gluPickMatrix_debug(GLdouble x, GLdouble y, GLdouble width, GLdouble height, GLint viewport[4], const char* file, int line);
+#define gluProject(objx, objy, objz, modelMatrix, projMatrix, viewport, winx, winy, winz) glatter_gluProject_debug((objx), (objy), (objz), (modelMatrix), (projMatrix), (viewport), (winx), (winy), (winz), __FILE__, __LINE__)
+int glatter_gluProject_debug(GLdouble objx, GLdouble objy, GLdouble objz, const GLdouble modelMatrix[16], const GLdouble projMatrix[16], const GLint viewport[4], GLdouble *winx, GLdouble *winy, GLdouble *winz, const char* file, int line);
+#define gluPwlCurve(nobj, count, array, stride, type) glatter_gluPwlCurve_debug((nobj), (count), (array), (stride), (type), __FILE__, __LINE__)
+void glatter_gluPwlCurve_debug(GLUnurbs *nobj, GLint count, GLfloat *array, GLint stride, GLenum type, const char* file, int line);
+#define gluQuadricCallback(qobj, which, fn) glatter_gluQuadricCallback_debug((qobj), (which), (fn), __FILE__, __LINE__)
+void glatter_gluQuadricCallback_debug(GLUquadric *qobj, GLenum which, void (CALLBACK* fn)(), const char* file, int line);
+#define gluQuadricDrawStyle(quadObject, drawStyle) glatter_gluQuadricDrawStyle_debug((quadObject), (drawStyle), __FILE__, __LINE__)
+void glatter_gluQuadricDrawStyle_debug(GLUquadric *quadObject, GLenum drawStyle, const char* file, int line);
+#define gluQuadricNormals(quadObject, normals) glatter_gluQuadricNormals_debug((quadObject), (normals), __FILE__, __LINE__)
+void glatter_gluQuadricNormals_debug(GLUquadric *quadObject, GLenum normals, const char* file, int line);
+#define gluQuadricOrientation(quadObject, orientation) glatter_gluQuadricOrientation_debug((quadObject), (orientation), __FILE__, __LINE__)
+void glatter_gluQuadricOrientation_debug(GLUquadric *quadObject, GLenum orientation, const char* file, int line);
+#define gluQuadricTexture(quadObject, textureCoords) glatter_gluQuadricTexture_debug((quadObject), (textureCoords), __FILE__, __LINE__)
+void glatter_gluQuadricTexture_debug(GLUquadric *quadObject, GLboolean textureCoords, const char* file, int line);
+#define gluScaleImage(format, widthin, heightin, typein, datain, widthout, heightout, typeout, dataout) glatter_gluScaleImage_debug((format), (widthin), (heightin), (typein), (datain), (widthout), (heightout), (typeout), (dataout), __FILE__, __LINE__)
+int glatter_gluScaleImage_debug(GLenum format, GLint widthin, GLint heightin, GLenum typein, const void *datain, GLint widthout, GLint heightout, GLenum typeout, void *dataout, const char* file, int line);
+#define gluSphere(qobj, radius, slices, stacks) glatter_gluSphere_debug((qobj), (radius), (slices), (stacks), __FILE__, __LINE__)
+void glatter_gluSphere_debug(GLUquadric *qobj, GLdouble radius, GLint slices, GLint stacks, const char* file, int line);
+#define gluTessBeginContour(tess) glatter_gluTessBeginContour_debug((tess), __FILE__, __LINE__)
+void glatter_gluTessBeginContour_debug(GLUtesselator *tess, const char* file, int line);
+#define gluTessBeginPolygon(tess, polygon_data) glatter_gluTessBeginPolygon_debug((tess), (polygon_data), __FILE__, __LINE__)
+void glatter_gluTessBeginPolygon_debug(GLUtesselator *tess, void *polygon_data, const char* file, int line);
+#define gluTessCallback(tess, which, fn) glatter_gluTessCallback_debug((tess), (which), (fn), __FILE__, __LINE__)
+void glatter_gluTessCallback_debug(GLUtesselator *tess, GLenum which, void (CALLBACK *fn)(), const char* file, int line);
+#define gluTessEndContour(tess) glatter_gluTessEndContour_debug((tess), __FILE__, __LINE__)
+void glatter_gluTessEndContour_debug(GLUtesselator *tess, const char* file, int line);
+#define gluTessEndPolygon(tess) glatter_gluTessEndPolygon_debug((tess), __FILE__, __LINE__)
+void glatter_gluTessEndPolygon_debug(GLUtesselator *tess, const char* file, int line);
+#define gluTessNormal(tess, x, y, z) glatter_gluTessNormal_debug((tess), (x), (y), (z), __FILE__, __LINE__)
+void glatter_gluTessNormal_debug(GLUtesselator *tess, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#define gluTessProperty(tess, which, value) glatter_gluTessProperty_debug((tess), (which), (value), __FILE__, __LINE__)
+void glatter_gluTessProperty_debug(GLUtesselator *tess, GLenum which, GLdouble value, const char* file, int line);
+#define gluTessVertex(tess, coords, data) glatter_gluTessVertex_debug((tess), (coords), (data), __FILE__, __LINE__)
+void glatter_gluTessVertex_debug(GLUtesselator *tess, GLdouble coords[3], void *data, const char* file, int line);
+#define gluUnProject(winx, winy, winz, modelMatrix, projMatrix, viewport, objx, objy, objz) glatter_gluUnProject_debug((winx), (winy), (winz), (modelMatrix), (projMatrix), (viewport), (objx), (objy), (objz), __FILE__, __LINE__)
+int glatter_gluUnProject_debug(GLdouble winx, GLdouble winy, GLdouble winz, const GLdouble modelMatrix[16], const GLdouble projMatrix[16], const GLint viewport[4], GLdouble *objx, GLdouble *objy, GLdouble *objz, const char* file, int line);
+#endif // __glu_h__
+#endif // GLATTER_GLU
 
 #endif // NDEBUG
 
@@ -20393,7 +20380,7 @@ GLATTER_UBLOCK(WINAPI, , wglDeleteAssociatedContextAMD, (HGLRC hglrc))
 #define wglGetContextGPUIDAMD(hglrc) glatter_wglGetContextGPUIDAMD_ptr((hglrc))
 GLATTER_UBLOCK(WINAPI, , wglGetContextGPUIDAMD, (HGLRC hglrc))
 #define wglGetCurrentAssociatedContextAMD() glatter_wglGetCurrentAssociatedContextAMD_ptr()
-GLATTER_UBLOCK(WINAPI, , wglGetCurrentAssociatedContextAMD, ())
+GLATTER_UBLOCK(WINAPI, , wglGetCurrentAssociatedContextAMD, (void))
 #define wglGetGPUIDsAMD(maxCount, ids) glatter_wglGetGPUIDsAMD_ptr((maxCount), (ids))
 GLATTER_UBLOCK(WINAPI, , wglGetGPUIDsAMD, (UINT maxCount, UINT *ids))
 #define wglGetGPUInfoAMD(id, property, dataType, size, data) glatter_wglGetGPUInfoAMD_ptr((id), (property), (dataType), (size), (data))
@@ -20421,7 +20408,7 @@ GLATTER_UBLOCK(const char *WINAPI, , wglGetExtensionsStringARB, (HDC hdc))
 #endif // WGL_ARB_extensions_string
 #ifdef WGL_ARB_make_current_read
 #define wglGetCurrentReadDCARB() glatter_wglGetCurrentReadDCARB_ptr()
-GLATTER_UBLOCK(WINAPI, , wglGetCurrentReadDCARB, ())
+GLATTER_UBLOCK(WINAPI, , wglGetCurrentReadDCARB, (void))
 #define wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc) glatter_wglMakeContextCurrentARB_ptr((hDrawDC), (hReadDC), (hglrc))
 GLATTER_UBLOCK(WINAPI, , wglMakeContextCurrentARB, (HDC hDrawDC, HDC hReadDC, HGLRC hglrc))
 #endif // WGL_ARB_make_current_read
@@ -20465,11 +20452,11 @@ GLATTER_UBLOCK(GLboolean WINAPI, , wglLoadDisplayColorTableEXT, (const GLushort 
 #endif // WGL_EXT_display_color_table
 #ifdef WGL_EXT_extensions_string
 #define wglGetExtensionsStringEXT() glatter_wglGetExtensionsStringEXT_ptr()
-GLATTER_UBLOCK(const char *WINAPI, , wglGetExtensionsStringEXT, ())
+GLATTER_UBLOCK(const char *WINAPI, , wglGetExtensionsStringEXT, (void))
 #endif // WGL_EXT_extensions_string
 #ifdef WGL_EXT_make_current_read
 #define wglGetCurrentReadDCEXT() glatter_wglGetCurrentReadDCEXT_ptr()
-GLATTER_UBLOCK(WINAPI, , wglGetCurrentReadDCEXT, ())
+GLATTER_UBLOCK(WINAPI, , wglGetCurrentReadDCEXT, (void))
 #define wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc) glatter_wglMakeContextCurrentEXT_ptr((hDrawDC), (hReadDC), (hglrc))
 GLATTER_UBLOCK(WINAPI, , wglMakeContextCurrentEXT, (HDC hDrawDC, HDC hReadDC, HGLRC hglrc))
 #endif // WGL_EXT_make_current_read
@@ -20495,7 +20482,7 @@ GLATTER_UBLOCK(WINAPI, , wglGetPixelFormatAttribivEXT, (HDC hdc, int iPixelForma
 #endif // WGL_EXT_pixel_format
 #ifdef WGL_EXT_swap_control
 #define wglGetSwapIntervalEXT() glatter_wglGetSwapIntervalEXT_ptr()
-GLATTER_UBLOCK(int WINAPI, , wglGetSwapIntervalEXT, ())
+GLATTER_UBLOCK(int WINAPI, , wglGetSwapIntervalEXT, (void))
 #define wglSwapIntervalEXT(interval) glatter_wglSwapIntervalEXT_ptr((interval))
 GLATTER_UBLOCK(WINAPI, , wglSwapIntervalEXT, (int interval))
 #endif // WGL_EXT_swap_control
@@ -20553,9 +20540,9 @@ GLATTER_UBLOCK(WINAPI, , wglReleaseImageBufferEventsI3D, (HDC hDC, const LPVOID 
 #endif // WGL_I3D_image_buffer
 #ifdef WGL_I3D_swap_frame_lock
 #define wglDisableFrameLockI3D() glatter_wglDisableFrameLockI3D_ptr()
-GLATTER_UBLOCK(WINAPI, , wglDisableFrameLockI3D, ())
+GLATTER_UBLOCK(WINAPI, , wglDisableFrameLockI3D, (void))
 #define wglEnableFrameLockI3D() glatter_wglEnableFrameLockI3D_ptr()
-GLATTER_UBLOCK(WINAPI, , wglEnableFrameLockI3D, ())
+GLATTER_UBLOCK(WINAPI, , wglEnableFrameLockI3D, (void))
 #define wglIsEnabledFrameLockI3D(pFlag) glatter_wglIsEnabledFrameLockI3D_ptr((pFlag))
 GLATTER_UBLOCK(WINAPI, , wglIsEnabledFrameLockI3D, (BOOL *pFlag))
 #define wglQueryFrameLockMasterI3D(pFlag) glatter_wglQueryFrameLockMasterI3D_ptr((pFlag))
@@ -20563,9 +20550,9 @@ GLATTER_UBLOCK(WINAPI, , wglQueryFrameLockMasterI3D, (BOOL *pFlag))
 #endif // WGL_I3D_swap_frame_lock
 #ifdef WGL_I3D_swap_frame_usage
 #define wglBeginFrameTrackingI3D() glatter_wglBeginFrameTrackingI3D_ptr()
-GLATTER_UBLOCK(WINAPI, , wglBeginFrameTrackingI3D, ())
+GLATTER_UBLOCK(WINAPI, , wglBeginFrameTrackingI3D, (void))
 #define wglEndFrameTrackingI3D() glatter_wglEndFrameTrackingI3D_ptr()
-GLATTER_UBLOCK(WINAPI, , wglEndFrameTrackingI3D, ())
+GLATTER_UBLOCK(WINAPI, , wglEndFrameTrackingI3D, (void))
 #define wglGetFrameUsageI3D(pUsage) glatter_wglGetFrameUsageI3D_ptr((pUsage))
 GLATTER_UBLOCK(WINAPI, , wglGetFrameUsageI3D, (float *pUsage))
 #define wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage) glatter_wglQueryFrameTrackingI3D_ptr((pFrameCount), (pMissedFrames), (pLastMissedUsage))
@@ -21018,13 +21005,13 @@ GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglGetConfigAttrib, (EGLDisplay dpy, EGL
 #define eglGetConfigs(dpy, configs, config_size, num_config) glatter_eglGetConfigs_ptr((dpy), (configs), (config_size), (num_config))
 GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglGetConfigs, (EGLDisplay dpy, EGLConfig *configs, EGLint config_size, EGLint *num_config))
 #define eglGetCurrentDisplay() glatter_eglGetCurrentDisplay_ptr()
-GLATTER_UBLOCK(EGLDisplay, EGLAPIENTRY, eglGetCurrentDisplay, ())
+GLATTER_UBLOCK(EGLDisplay, EGLAPIENTRY, eglGetCurrentDisplay, (void))
 #define eglGetCurrentSurface(readdraw) glatter_eglGetCurrentSurface_ptr((readdraw))
 GLATTER_UBLOCK(EGLSurface, EGLAPIENTRY, eglGetCurrentSurface, (EGLint readdraw))
 #define eglGetDisplay(display_id) glatter_eglGetDisplay_ptr((display_id))
 GLATTER_UBLOCK(EGLDisplay, EGLAPIENTRY, eglGetDisplay, (EGLNativeDisplayType display_id))
 #define eglGetError() glatter_eglGetError_ptr()
-GLATTER_UBLOCK(EGLint, EGLAPIENTRY, eglGetError, ())
+GLATTER_UBLOCK(EGLint, EGLAPIENTRY, eglGetError, (void))
 #define eglGetProcAddress(procname) glatter_eglGetProcAddress_ptr((procname))
 GLATTER_UBLOCK(__eglMustCastToProperFunctionPointerType, EGLAPIENTRY, eglGetProcAddress, (const char *procname))
 #define eglInitialize(dpy, major, minor) glatter_eglInitialize_ptr((dpy), (major), (minor))
@@ -21042,7 +21029,7 @@ GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglSwapBuffers, (EGLDisplay dpy, EGLSurf
 #define eglTerminate(dpy) glatter_eglTerminate_ptr((dpy))
 GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglTerminate, (EGLDisplay dpy))
 #define eglWaitGL() glatter_eglWaitGL_ptr()
-GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglWaitGL, ())
+GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglWaitGL, (void))
 #define eglWaitNative(engine) glatter_eglWaitNative_ptr((engine))
 GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglWaitNative, (EGLint engine))
 #endif // EGL_VERSION_1_0
@@ -21062,15 +21049,15 @@ GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglBindAPI, (EGLenum api))
 #define eglCreatePbufferFromClientBuffer(dpy, buftype, buffer, config, attrib_list) glatter_eglCreatePbufferFromClientBuffer_ptr((dpy), (buftype), (buffer), (config), (attrib_list))
 GLATTER_UBLOCK(EGLSurface, EGLAPIENTRY, eglCreatePbufferFromClientBuffer, (EGLDisplay dpy, EGLenum buftype, EGLClientBuffer buffer, EGLConfig config, const EGLint *attrib_list))
 #define eglQueryAPI() glatter_eglQueryAPI_ptr()
-GLATTER_UBLOCK(EGLenum, EGLAPIENTRY, eglQueryAPI, ())
+GLATTER_UBLOCK(EGLenum, EGLAPIENTRY, eglQueryAPI, (void))
 #define eglReleaseThread() glatter_eglReleaseThread_ptr()
-GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglReleaseThread, ())
+GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglReleaseThread, (void))
 #define eglWaitClient() glatter_eglWaitClient_ptr()
-GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglWaitClient, ())
+GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglWaitClient, (void))
 #endif // EGL_VERSION_1_2
 #ifdef EGL_VERSION_1_4
 #define eglGetCurrentContext() glatter_eglGetCurrentContext_ptr()
-GLATTER_UBLOCK(EGLContext, EGLAPIENTRY, eglGetCurrentContext, ())
+GLATTER_UBLOCK(EGLContext, EGLAPIENTRY, eglGetCurrentContext, (void))
 #endif // EGL_VERSION_1_4
 #ifdef EGL_VERSION_1_5
 #define eglClientWaitSync(dpy, sync, flags, timeout) glatter_eglClientWaitSync_ptr((dpy), (sync), (flags), (timeout))
@@ -21355,9 +21342,9 @@ GLATTER_UBLOCK(EGLBoolean, EGLAPIENTRY, eglSignalSyncNV, (EGLSyncNV sync, EGLenu
 #endif // EGL_NV_sync
 #ifdef EGL_NV_system_time
 #define eglGetSystemTimeFrequencyNV() glatter_eglGetSystemTimeFrequencyNV_ptr()
-GLATTER_UBLOCK(EGLuint64NV, EGLAPIENTRY, eglGetSystemTimeFrequencyNV, ())
+GLATTER_UBLOCK(EGLuint64NV, EGLAPIENTRY, eglGetSystemTimeFrequencyNV, (void))
 #define eglGetSystemTimeNV() glatter_eglGetSystemTimeNV_ptr()
-GLATTER_UBLOCK(EGLuint64NV, EGLAPIENTRY, eglGetSystemTimeNV, ())
+GLATTER_UBLOCK(EGLuint64NV, EGLAPIENTRY, eglGetSystemTimeNV, (void))
 #endif // EGL_NV_system_time
 #endif // __eglext_h_
 #endif // GLATTER_EGL

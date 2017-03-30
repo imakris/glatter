@@ -39,7 +39,7 @@ const char* enum_to_string_EGL(GLenum e);
 
 
 #define GLATTER_UBLOCK(rtype, cconv, name, dargs)\
-    typedef rtype (##cconv *glatter_##name##_t)##dargs;\
+    typedef rtype (cconv *glatter_##name##_t) dargs;\
     extern glatter_##name##_t glatter_##name##_ptr;
 
 

@@ -29,6 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "glatter_config.h"
 
 #include <stdio.h>
+#include <inttypes.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -106,13 +107,14 @@ Printable get_prs(size_t sz, void* obj)
 
 
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
-    cder rtype cconv name##dargs;\
-    typedef rtype (cconv *glatter_##name##_t)##dargs;\
+    cder rtype cconv name dargs;\
+    typedef rtype (cconv *glatter_##name##_t) dargs;\
     extern glatter_##name##_t glatter_##name##_ptr;\
-	rtype cconv glatter_##name##_init##dargs\
+	extern rtype cconv glatter_##name##_init dargs;\
+	rtype cconv glatter_##name##_init dargs\
 	{\
 		glatter_##name##_ptr = (glatter_##name##_t) glatter_get_proc_address_##family(#name);\
-		return_or_not glatter_##name##_ptr##cargs;\
+		return_or_not glatter_##name##_ptr cargs;\
 	}\
 	glatter_##name##_t glatter_##name##_ptr = glatter_##name##_init;
 
@@ -120,14 +122,23 @@ Printable get_prs(size_t sz, void* obj)
 #define GLATTER_DBLOCK(file, line, name, printf_fmt, ...) \
     glatter_pre_callback(file, line);\
 	printf("GLATTER: calling in '%s'(%d):\n", file, line);\
-	printf("GLATTER: " #name #printf_fmt "\n", __VA_ARGS__);
+	printf("GLATTER: " #name #printf_fmt "%s", __VA_ARGS__);
 
 
 #define GET_PRS(v)\
     (get_prs(sizeof(v), (void*)(&(v))).data)
 
 
+#if defined(__llvm__) || defined (__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-value"
+#endif
+
 #include "glatter.c_gen"
+
+#if defined(__llvm__) || defined (__clang__)
+#pragma clang diagnostic pop
+#endif
 
 
 #ifdef __cplusplus
