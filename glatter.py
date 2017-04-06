@@ -45,20 +45,16 @@ extension_groups['EGL'] = {
     'NV':0, 'TIZEN':0, '':0
 }
 
-
 all_extgroups = {}
 for i in families:
     all_extgroups.update(extension_groups[i])
 
-
 # containers populated during parsing phase
-
-# dictionary of dictionaries, e.g. enum_to_string[0x505]['GL'] could be ['GL_OUT_OF_MEMORY']
 enum_to_string = {}
-
-#string_to_enum = {}
 function_definitions = {key: set() for key in families}
 typedefs = {}
+
+known_fnames = {}
 
 import os
 import sys
@@ -66,6 +62,7 @@ import re
 import operator
 import string
 import copy
+import itertools
 
 ckwords = ['auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do', 'double', 'else',
     'enum', 'extern', 'float', 'for', 'goto', 'if', 'inline', 'int', 'long', 'register', 'restrict',
@@ -158,7 +155,7 @@ condblock_any_ifndef = re.compile('^# ?ifndef (?P<dname>\w+)')
 
 enum_pattern = re.compile('^# ?define ('+fm_sbp+'_\w*) ?(\w*)$')
 function_coarse_pattern = re.compile(r'(.*?) +('+fm_sbl+'[A-Z]\w+?) ?\( ?(.*?) ?\) ?;')
-function_fine_pattern = re.compile(r'^((?P<expkw>[A-Z0-9_]*?(API(CALL)?)?) +)? ?(?P<rt>[\w* ]*?) ?(?P<cconv>\w*APIENTRY)?$')
+function_fine_pattern = re.compile(r'^((?P<expkw>extern|[A-Z0-9_]*?(API(CALL)?)?) +)? ?(?P<rt>[\w* ]*?) ?(?P<cconv>\w*APIENTRY)?$')
 function_group_pattern = re.compile(r'\w*[a-z]+(?P<group>[A-Z0-9]{2,10})$')
 typedef_pattern = re.compile(r'^typedef(?P<type>.+?)(?P<name>'+fm_sbp+'\w+);$');
 
@@ -191,7 +188,7 @@ class Function_argument:
         #self.name_range = None
         self.is_pointer = False
     def __eq__(self, other): 
-        return self.__dict__ == other.__dict__
+        return self.type == other.type
 
     def get_printf_faa(self): ## faa = format and args
         mm = re.match(familyenum, self.type)
@@ -225,11 +222,11 @@ class Function_declaration:
         self.args = None
         self.family = None
         self.proto = None
-        self.header = None        
-        self.block = ''
+        self.block = []
+        self.occurence = None
 
     def __hash__(self):
-        return hash((self.name, self.header))
+        return hash((self.name, self.block[0]))
 
     def __repr__(self):
         return "Function_declaration()"
@@ -238,7 +235,6 @@ class Function_declaration:
     def __eq__(self, other): 
         return\
         self.name == other.name and\
-        self.header == other.header and\
         self.rtype == other.rtype and\
         self.expkw == other.expkw and\
         self.cconv == other.cconv and\
@@ -253,29 +249,6 @@ class Function_declaration:
         # True at the same time
         return not(self == other)
 
-#class Enum_declaration:
-
-#    def __init__(self):
-#        self.name = None
-#        self.block = None
-#        self.header = None
-#        self.alternatives = [self]
-
-#    def __eq__(self, other): 
-#        return\
-#        self.name == other.name and\
-#        self.header == other.header and\
-#        self.block == other.block
-
-#class Parsed_file:
-
-#    def __init__(self):
-#        self.enums = None
-#        self.functions = None
-#        self.header_guard = None
-#        self.family = None
-
-
 def validate_extension(ext_str):
     if ext_str in all_extgroups:
         return ext_str
@@ -289,6 +262,59 @@ def validate_extension(ext_str):
 
 def validate_enum(enum_str):
     return enum_str if not bool(re.match(validenum_pattern, enum_str)) else ''
+
+
+#def hcr(h):
+#    return h if h not in header_conflict_resolution else header_conflict_resolution[h]
+
+def analyze_condition(ppline, former_condition = None):
+    #if
+    m = re.match('^# ?if (?P<condition>.+)', ppline)
+    if (bool(m)):
+        return '('+m.group('condition')+')'
+    #ifdef
+    m = re.match('^# ?ifdef (?P<dname>\w+)$', ppline)
+    if (bool(m)):
+        return 'defined('+m.group('dname')+')'
+    m = re.match('^# ?ifndef (?P<dname>\w+)$', ppline)
+    if (bool(m)):
+        return '!defined('+m.group('dname')+')'
+    #else
+    m = re.match('^# ?else', ppline)
+    if (bool(m)):
+        return '!('+former_condition+')'
+    #elif
+    m = re.match('^# ?elif (?P<condition>.+)', ppline)
+    if (bool(m)):
+        return '(('+m.group('condition')+') && !('+former_condition+'))'
+    
+
+def copystack(st):
+    st = copy.deepcopy(st)
+    removers = []
+
+    #flatten
+    f_st = []
+    for x in st:
+        for y in x:
+            if (y[0] != '-'):
+                if '_PROTOTYPES' not in y and 'WINAPI_FAMILY' not in y:
+                    f_st.append(y)
+            else:
+                removers.append(y)
+
+    for x in removers:
+        for i, y in enumerate(f_st):
+            if y == '!'+x[1:]:
+                f_st[i] = x[1:]
+
+    #remove multiples and _PROTOTYPES
+    r_st = []
+    for x in f_st:
+      if x not in r_st:
+        r_st.append(x)
+
+    return r_st
 
 
 def parse(filename):
@@ -309,21 +335,6 @@ def parse(filename):
     c3 = []
     tmp = ''
     mode = 0
-    ## merge multiline prototypes
-    #for v in c2:
-    #    lp = v.count('(')
-    #    rp = v.count(')')
-    #    if (lp > rp):
-    #        mode = 1
-    #    elif (lp < rp):
-    #        mode = 0
-    #        c3.append(tmp+v)
-    #        tmp = ''
-    #        continue
-    #    if (mode == 0):
-    #        c3.append(v)
-    #    elif (mode == 1):
-    #        tmp += v
 
     # merge multiline statements
     st_buffer = ''
@@ -337,20 +348,6 @@ def parse(filename):
                     c3.append(st_buffer)
                     st_buffer = ''
 
-        #lp = v.count('(')
-        #rp = v.count(')')
-        #if (lp > rp):
-        #    mode = 1
-        #elif (lp < rp):
-        #    mode = 0
-        #    c3.append(tmp+v)
-        #    tmp = ''
-        #    continue
-        #if (mode == 0):
-        #    c3.append(v)
-        #elif (mode == 1):
-        #    tmp += v
-
     c4 = []
 
     #========================#
@@ -358,54 +355,27 @@ def parse(filename):
     #========================#
 
     indstack = []
-    header_versions_encountered = set()
-    pending_block = None
-    block_depth = 0
-    header_guard = None
     for i, v in enumerate(c3):
-        tmp = [i, indstack[-1] if bool(indstack) else None, v]
-        c4.append(tmp)
-        m = re.match(condblock_define_pattern, v)
-        if (bool(m)):
-            dname = m.group('dname')
-            if (dname == pending_block):
-                tmp[1] = dname
-                indstack.append(dname)
-            else:
-                mm = re.match(headerversion_pattern, dname)
-                if (bool(mm)):
-                    header_versions_encountered.add(dname)
-            continue
 
-        m = re.match(condblock_ifndef_pattern, v)
-        if (bool(m)):
-            block_depth += 1
-            pending_block = m.group('dname')
-            continue
-
-        m = re.match(endif_pattern, v)
-        if (bool(m)):
-            if (len(indstack) != 0 and pending_block):
-                pending_block = None
+        c4.append([i, copystack(indstack), v])
+        
+        if (bool(re.match(endif_pattern, v))):
+            if (len(indstack) != 0):
                 indstack = indstack[:-1]
-            block_depth -= 1
-            continue
 
-        m = re.match(condblock_any_ifstar, v)
-        if (bool(m)):
-            if (header_guard == None):
-                mm = re.match(condblock_any_ifndef, v)
-                if (bool(mm)):
-                    header_guard = mm.group('dname')
-            block_depth += 1
+        elif (bool(re.match(condblock_any_ifstar, v))):
+            indstack.append([analyze_condition(v)])
 
-    if block_depth != 0:
-        print('Unbalanced conditional preprocessor blocks')
-        raise
+        elif (bool(re.match('^(# ?else)|(# ?elif)', v))):
+            indstack[-1] = [analyze_condition(v, indstack[-1][0])]
 
-    if header_guard == None:
-        print('The header guard was not recognised')
-        raise
+        elif (bool(re.match('^# ?define ', v))):
+            m = re.match('^# ?define (?P<what>\w+)( (?P<as>\w+)$)?', v)
+            for k in indstack:
+                if k[0] == '!defined('+m.group('what')+')':
+                    indstack[-1].append('-defined('+m.group('what')+')')
+                    if (m.group('as') != None and m.group('as') != '1'):
+                        indstack[-1].append('('+m.group('what')+'=='+m.group('as')+')')
 
     #===========#
     #   ENUMS   #
@@ -420,7 +390,7 @@ def parse(filename):
                 if (value >= 0x100 and value < 0x20000):
                     name = m.group(1)
                     family = m.group(2)
-                    eblock = d[1] if d[1] != None else header_guard
+                    eblock = d[1][-1] #if d[1] != None else hcr(header_guard)
                     
                     if (family not in enum_to_string):
                         enum_to_string[family] = {}
@@ -479,8 +449,7 @@ def parse(filename):
             name_upper = tmp.name.upper()
             tmp.family = m.group('fprefix').upper()
             family_upper = tmp.family
-            tmp.header = header_guard
-            tmp.block = d[1] if d[1] != None else ''
+            tmp.block = d[1] # if d[1] != None else ''
 
             group_match = re.match(function_group_pattern, tmp.name)
             group = group_match.group('group') if group_match != None else ''
@@ -521,8 +490,6 @@ def parse(filename):
                     pass
                 lindex += mm.start()
 
-                if lindex >= rindex:
-                    raise
                 arg.name = arg.declaration[lindex:rindex]
                 
                 arg.type = 'UNKNOWN TYPE'
@@ -533,15 +500,21 @@ def parse(filename):
                 if rindex - lindex < 1:
                     arg.name = 'a'+str(i)
                     dfinal = arg.declaration[:lindex] + arg.name + arg.declaration[rindex:]
-                    rindex += length(arg.name)
+                    rindex += len(arg.name)
                     arg.declaration = dfinal
 
                 #arg.name_range = (lindex, rindex)
                 arglist_fine.append(arg)
 
             tmp.args = arglist_fine
+            
+            if tmp.name in known_fnames:
+                known_fnames[tmp.name] += 1
+            else:
+                known_fnames[tmp.name] = 1
+            tmp.occurence = known_fnames[tmp.name]
 
-            function_definitions[family_upper].add(copy.deepcopy(tmp))            
+            function_definitions[family_upper].add(copy.deepcopy(tmp))
 
 
 #================================================#
@@ -625,59 +598,91 @@ print('/*' + license + r'''*/
 
 def get_function_mdnd(family): #macros, declarations and definitions
     #file buffers
-    header_part = source_part = ''
-    header_d = header_r = source_c = source_d = ''
+    header_part = source_part = notes = ''
+    header_d = header_r = source_c = ''
 
-    tmp = '''
-#ifdef GLATTER_''' + family + '\n'
+    if (len(function_definitions[family]) == 0):
+        return ['', '', '']
 
-    sfd = sorted(function_definitions[family], key=lambda x: (x.header, x.block, x.name) )
+    sfd0 = sorted(function_definitions[family], key=lambda x: tuple(x.block) + tuple([x.name]) )
+
+    # known headers with conflicts
+    for i, v in enumerate(sfd0):
+        vbs = set(v.block)
+        if ('defined(__gl_h_)' in vbs and 'defined(__GL_H__)' not in vbs):
+            sfd0[i].block = sfd0[i].block[:1] + ['!defined(__GL_H__)'] + sfd0[i].block[1:]
+        if ('defined(__glu_h_)' in vbs and 'defined(__GLU_H__)' not in vbs):
+            sfd0[i].block = sfd0[i].block[:1] + ['!defined(__GLU_H__)'] + sfd0[i].block[1:]
+ 
+    # an attempt for all the rest
+    all_fnames = {}
+    ambiguous_fnames = {}
+    indices_for_deletion = set()
+    for i, v in enumerate(sfd0):
+        test_name = v.name
+        # test_name = (v.name, v.block[0])
+        if test_name not in all_fnames:
+            all_fnames[test_name] = i
+        else:
+            if (test_name not in ambiguous_fnames):
+                ambiguous_fnames[test_name] = [all_fnames[test_name]]
+            ambiguous_fnames[test_name].append(i)
+
+    for v in ambiguous_fnames:
+        perms = itertools.permutations(ambiguous_fnames[v], 2)
+        for w in perms:
+            s0 = set(sfd0[w[0]].block)
+            s1 = set(sfd0[w[1]].block)
+            if s0 < s1:
+                ds = s1 - s0
+                for x in ds:
+                    sfd0[w[0]].block.append(('!'+x) if x[0]!='!' else x[1:])
+            elif s0==s1:
+                indices_for_deletion.add(min(w[0], w[1]))
+
+    sfd = []
+    for i, v in enumerate(sfd0):
+        if i in indices_for_deletion:
+            notes += '''
+// Note: a set of definitions for function ''' + v.name + ''' from file with
+// header guard ''' + v.block[0][8:-1] + ''' was found to be potentially conflicting,
+// thus was omitted.'''
+        else:
+            sfd.append(v)
 
 
-    if (len(sfd) == 0):
-        return
-
-    current_header = sfd[0].header
     current_block  = sfd[0].block
 
-    tmp += '''
-#ifdef ''' + current_header
-    if current_block != '':
-        tmp += '''
-#ifdef ''' + current_block
+    tmp = '''
+#ifdef GLATTER_''' + family + '''
+#if ''' + '\n#if '.join(sfd[0].block)
 
-    header_d, header_r, source_c, source_d = tmp, tmp, tmp, tmp
+    header_d, header_r, source_c = tmp, tmp, tmp
     tmp = ''
 
     for x in sfd:
+        #test_block = '\n#if '.join(x.block)
+        if current_block !=  x.block:
 
-        if current_header != x.header:
-            if current_block != '':
+            endifs = []
+            for i, v in enumerate(current_block):
+                if (len(x.block) <= i or x.block[i] != v):
+                    endifs.append(v)
+
+            for c in reversed(endifs):
                 tmp += '''
-#endif // ''' + current_block
-            tmp += '''
-#endif // ''' + current_header + '\n'
-            current_header = x.header
+#endif // ''' + c
+
+            for i, v in enumerate(x.block):
+                if (len(current_block) <= i or current_block[i] != v):
+                    tmp += '''
+#if ''' + v
             current_block = x.block
-            tmp += '''
-#ifdef ''' + current_header
-            if current_block != '':
-                tmp += '''
-#ifdef ''' + current_block
-        elif current_block != x.block:
-            if current_block != '':
-                tmp += '''
-#endif // ''' + current_block
-            current_block = x.block
-            if current_block != '':
-                tmp += '''
-#ifdef ''' + current_block
 
         if tmp != '':
             header_d += tmp
             header_r += tmp
             source_c += tmp
-            source_d += tmp
             tmp = ''
 
         #function block buffers
@@ -702,7 +707,6 @@ def get_function_mdnd(family): #macros, declarations and definitions
         a3e = '(' + get_args_string(x.args, 3) + '__FILE__, __LINE__)'
         a3s = '(' + get_args_string(x.args, 3, False) + ')'
         a6s = get_args_string(x.args, 6, False)
-
 
         #fix for clang
         if a1s == '()':
@@ -769,29 +773,32 @@ extern ''' + pt_typ + ' ' + pt_nam + ';'
         return_or_not = ''
         if x.rtype != 'void':
             return_or_not = 'return'
-        if_ifm = '\nGLATTER_FBLOCK(' +return_or_not+ ', '+ x.family + ', ' + x.expkw + ', ' + x.rtype + ', ' + x.cconv + ', ' + x.name + ', ' + a2s + ', '+ a1s + ')'
+
+        if known_fnames[x.name] > 1:
+            if_ifm += '''
+#ifndef ''' +  x.name + '_defined'
+        if_ifm += '\nGLATTER_FBLOCK(' +return_or_not+ ', '+ x.family + ', ' + x.expkw + ', ' + x.rtype + ', ' + x.cconv + ', ' + x.name + ', ' + a2s + ', '+ a1s + ')'
+        if_ifm += df_def
+        if_ifm += '''
+#define ''' +  x.name + '_defined'
+        if known_fnames[x.name] > 1:
+            if_ifm += '''
+#endif'''
         ublock = '\nGLATTER_UBLOCK(' + x.rtype + ', ' + x.cconv + ', ' + x.name + ', '+ a1s + ')'
 
         header_d += dn_mac + df_dec
         header_r += rn_mac + ublock
         source_c += if_ifm
-        source_d += df_def
 
-    if (len(sfd) != 0):
-        if current_block != '':
-            tmp += '''
-#endif // ''' + current_block
+    for v in current_block:
         tmp += '''
-#endif // ''' + current_header
-
+#endif // ''' + v
 
     tmp += '''
 #endif // GLATTER_''' + family + '\n'
     header_d += tmp
     header_r += tmp
     source_c += tmp
-    source_d += tmp
-
 
     header_part += '''
 #ifdef NDEBUG
@@ -803,19 +810,17 @@ extern ''' + pt_typ + ' ' + pt_nam + ';'
 
     source_part += '''
 ''' + source_c + '''
-#ifndef NDEBUG
-''' + source_d + '''
-#endif // NDEBUG
 '''
 
-    return [header_part, source_part]
+    return [header_part, source_part, notes]
 
-
-mndn_gl = get_function_mdnd('GL')
+mndn_gl  = get_function_mdnd('GL' )
 mndn_glu = get_function_mdnd('GLU')
 mndn_glx = get_function_mdnd('GLX')
 mndn_wgl = get_function_mdnd('WGL')
 mndn_egl = get_function_mdnd('EGL')
+
+print(mndn_gl[2] + mndn_glu[2] + mndn_glx[2] + mndn_wgl[2] + mndn_egl[2])
 
 if bool(mndn_gl ): print(mndn_gl [0])
 if bool(mndn_glu): print(mndn_glu[0])
@@ -829,7 +834,6 @@ h_file.close()
 #================================================#
 # SOURCE                                         #
 #================================================#
-
 
 def print_enum_to_string(family, fallback):
     print('''
@@ -854,7 +858,7 @@ const char* enum_to_string_''', family  ,'''(GLenum e)
                 inv_d[z].append(y)
         if len(inv_d) == 1:
             ifb = '''\
-#if defined(''' + ') || defined('.join(map(str, next(iter(inv_d.values())))) + ')'
+#if ''' + ' || '.join(map(str, next(iter(inv_d.values()))))
             if ifb != last_ifb:
                 if block_is_open:
                     print('#endif', sep='')
@@ -875,8 +879,8 @@ const char* enum_to_string_''', family  ,'''(GLenum e)
 
             for z in sorted(inv_d.items()):
                 print('''\
-#if defined(''' + ') || defined('.join(map(str, z[1])) + ''')
-                     return "''', z[0], '''";
+#if ''' + ' || '.join(map(str, z[1])) + '''
+                    return "''', z[0], '''";
 #endif''', sep = '')
 
             # in case there is nothing under the case, break, to go to fallback
@@ -913,4 +917,5 @@ if bool(mndn_glx): print(mndn_glx[1])
 if bool(mndn_egl): print(mndn_egl[1])
 
 c_file.close()
+
 sys.stdout = original_stdout

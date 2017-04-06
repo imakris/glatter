@@ -54,24 +54,39 @@ void glatter_check_error_GL(const char* file, int line)
 
 void* glatter_get_proc_address_GL(const char* function_name)
 {
-	void* ptr = (void*) wglGetProcAddress(function_name);
-	if (ptr == 0)
-		ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("opengl32.dll")), function_name);
+    void* ptr = 0;
+#if defined(_WIN32)
+    ptr = (void*) wglGetProcAddress(function_name);
+    if (ptr == 0)
+        ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("opengl32.dll")), function_name);
+#elif defined(__linux__)
+    
+#endif
     return ptr;
 }
 
 
 void glatter_pre_callback(const char* file, int line)
 {
-	static __declspec(thread) DWORD thread_id;
-	static int initialized = 0;
-	if (!initialized) {
-		thread_id = GetCurrentThreadId();
-		initialized = 1;
-	}
-	if (GetCurrentThreadId() != thread_id) {
-		printf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
-	}
+    static int initialized = 0;
+#if defined(_WIN32)
+    static __declspec(thread) DWORD thread_id;
+    if (!initialized) {
+        thread_id = GetCurrentThreadId();
+        initialized = 1;
+    }
+    DWORD current_thread = GetCurrentThreadId();
+#elif defined(__linux__)
+    static __thread pthread_t thread_id;
+    if (!initialized) {
+        thread_id = pthread_self();
+        initialized = 1;
+    }
+    pthread_t current_thread = pthread_self();
+#endif
+    if (current_thread != thread_id) {
+        printf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
+    }
 }
 
 
@@ -132,12 +147,17 @@ Printable get_prs(size_t sz, void* obj)
 #if defined(__llvm__) || defined (__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-value"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsizeof-array-argument"
 #endif
 
 #include "glatter.c_gen"
 
 #if defined(__llvm__) || defined (__clang__)
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
 #endif
 
 
