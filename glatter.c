@@ -36,11 +36,12 @@ extern "C" {
 #endif
 
 
-const char* enum_to_string_GL(GLenum e);
-const char* enum_to_string_GLX(GLenum e);
-const char* enum_to_string_WGL(GLenum e);
-const char* enum_to_string_EGL(GLenum e);
 
+///////////////////////////
+#if defined(GLATTER_GL)  //
+///////////////////////////
+
+const char* enum_to_string_GL(GLenum e);
 
 void glatter_check_error_GL(const char* file, int line)
 {
@@ -51,7 +52,6 @@ void glatter_check_error_GL(const char* file, int line)
 	}
 }
 
-
 void* glatter_get_proc_address_GL(const char* function_name)
 {
     void* ptr = 0;
@@ -60,11 +60,101 @@ void* glatter_get_proc_address_GL(const char* function_name)
     if (ptr == 0)
         ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("opengl32.dll")), function_name);
 #elif defined(__linux__)
+    //ptr = (void*) glXGetProcAddress(function_name);
+    if (ptr == 0)
+        ptr = (void*) dlsym(dlopen("libGL.so", RTLD_LAZY), function_name);
     
 #endif
     return ptr;
 }
 
+////////////////////////////////
+#endif //defined(GLATTER_GL)  //
+////////////////////////////////
+
+////////////////////////////
+#if defined(GLATTER_GLX)  //
+////////////////////////////
+
+const char* enum_to_string_GLX(GLenum e);
+
+#if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
+int x_error_handler(Display *dsp, XErrorEvent *error)
+{
+    char error_string[128];
+    XGetErrorText(dsp, error->error_code, error_string, 128);
+    printf("X Error: %s\n", error_string);
+}
+#endif //!defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
+
+
+void* glatter_get_proc_address_GLX_init(const char* function_name);
+void* (*glatter_get_proc_address_GLX)(const char*) = glatter_get_proc_address_GLX_init;
+
+
+void* glatter_get_proc_address_GLX_init(const char* function_name)
+{
+#if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
+    XSetErrorHandler(x_error_handler);
+#endif //!defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
+    glatter_get_proc_address_GLX = glatter_get_proc_address_GL;
+    return glatter_get_proc_address_GL(function_name);
+}
+
+void glatter_check_error_GLX(const char* file, int line)
+{
+    // TODO: decide if implementing further wrappers to be able
+	// to call XSync here, is within the scope of this library.
+}
+
+//////////////////////////////////
+#endif // defined(GLATTER_GLX)  //
+//////////////////////////////////
+
+
+////////////////////////////
+#if defined(GLATTER_WGL)  //
+////////////////////////////
+
+const char* enum_to_string_WGL(GLenum e);
+
+void glatter_check_error_WGL(const char* file, int line)
+{
+    DWORD eid = GetLastError();
+    if(eid == 0)
+        return;
+
+    LPSTR buffer = 0;
+    FormatMessageA(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		FORMAT_MESSAGE_FROM_SYSTEM |
+		FORMAT_MESSAGE_IGNORE_INSERTS, NULL,
+		eid, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&buffer, 0, NULL);
+
+	printf("GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, buffer);
+
+    LocalFree(buffer);
+}
+
+
+void* glatter_get_proc_address_WGL(const char* function_name)
+{
+    return glatter_get_proc_address_GL(function_name);
+}
+
+//////////////////////////////////
+#endif // defined(GLATTER_WGL)  //
+//////////////////////////////////
+
+////////////////////////////
+#if defined(GLATTER_EGL)  //
+////////////////////////////
+
+const char* enum_to_string_EGL(GLenum e);
+
+//////////////////////////////////
+#endif // defined(GLATTER_EGL)  //
+//////////////////////////////////
 
 void glatter_pre_callback(const char* file, int line)
 {

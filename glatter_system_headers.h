@@ -7,13 +7,17 @@
 
 #include <windows.h>
 #include <GL/gl.h>
+#include "input_headers/glext/wglext.h"
 
 #elif defined (__linux__)
 
 #include <GL/gl.h>
 #include <GL/glx.h>
+#include "input_headers/glext/glxext.h"
 
 #include <pthread.h>
+#include <dlfcn.h>
+
 
 #endif
 

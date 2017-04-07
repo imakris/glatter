@@ -155,7 +155,8 @@ condblock_any_ifndef = re.compile('^# ?ifndef (?P<dname>\w+)')
 
 enum_pattern = re.compile('^# ?define ('+fm_sbp+'_\w*) ?(\w*)$')
 function_coarse_pattern = re.compile(r'(.*?) +('+fm_sbl+'[A-Z]\w+?) ?\( ?(.*?) ?\) ?;')
-function_fine_pattern = re.compile(r'^((?P<expkw>extern|[A-Z0-9_]*?(API(CALL)?)?) +)? ?(?P<rt>[\w* ]*?) ?(?P<cconv>\w*APIENTRY)?$')
+cconv_p = 'CALLBACK|WINAPIV?|APIENTRY|APIPRIVATE|PASCAL|CDECL|_cdecl|__cdecl|__stdcall|__pascal'
+function_fine_pattern = re.compile(r'^((?P<expkw>extern|([A-Z0-9_]*API(CALL)?)?) +)? ?(?P<rt>[\w* ]*?) ?(?P<cconv>\w*('+cconv_p+'))?$')
 function_group_pattern = re.compile(r'\w*[a-z]+(?P<group>[A-Z0-9]{2,10})$')
 typedef_pattern = re.compile(r'^typedef(?P<type>.+?)(?P<name>'+fm_sbp+'\w+);$');
 
@@ -431,7 +432,7 @@ def parse(filename):
             rt_match = re.match(function_fine_pattern, m.group(1))
             
             if (not bool(rt_match)):
-                print('stop')
+                raise
 
             tmp = Function_declaration()
 
@@ -463,7 +464,7 @@ def parse(filename):
             for i, y in enumerate(arglist_coarse):
                 arg = Function_argument()
                 arg.declaration = y.strip()
-                if arg.declaration in ['void']:
+                if arg.declaration in ['void', 'VOID']:
                     continue
                 arg.is_pointer = '*' in arg.declaration
 
@@ -750,7 +751,7 @@ extern ''' + pt_typ + ' ' + pt_nam + ';'
         df_def = df_dec[:-1] + '''
 {
     GLATTER_DBLOCK(file, line, ''' + x.name + ', (' + a6s[0] + ')' + printf_va_args + ')'
-        if (x.rtype != 'void'):
+        if (x.rtype not in ['void', 'VOID']):
             rarg = Function_argument()
             rarg.name = 'rval'
             rarg.type = x.rtype
@@ -765,13 +766,13 @@ extern ''' + pt_typ + ' ' + pt_nam + ';'
     ''' + pt_nam + a2s + ''';'''
         df_def += '''
     glatter_check_error_'''+ x.family +'''(file, line);'''
-        if (x.rtype != 'void'):
+        if (x.rtype not in ['void', 'VOID']):
             df_def += '''
     return rval;'''
         df_def += '''
 }'''
         return_or_not = ''
-        if x.rtype != 'void':
+        if x.rtype not in ['void', 'VOID']:
             return_or_not = 'return'
 
         if known_fnames[x.name] > 1:
