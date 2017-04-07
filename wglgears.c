@@ -75,7 +75,7 @@ static GLfloat view_rotx = 20.0, view_roty = 30.0, view_rotz = 0.0;
 static GLint gear1, gear2, gear3;
 static GLfloat angle = 0.0;
 
-#if defined(_WIN32) && !defined(__MINGW32__) && !defined(__CYGWIN32__)
+#if defined(_WIN32) && !defined(__MINGW32__) && !defined(__CYGWIN__)
 #pragma warning( push )
 #pragma warning( disable : 4244)
 #pragma warning( disable : 4305)
@@ -505,6 +505,6 @@ main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
-#if defined(_WIN32) && !defined(__MINGW32__) && !defined(__CYGWIN32__)
+#if defined(_WIN32) && !defined(__MINGW32__) && !defined(__CYGWIN__)
 #pragma warning( pop ) 
 #endif
