@@ -3,6 +3,8 @@
 
 // This file should be modified, to get the desired system headers included.
 
+#if !defined(GLATTER_GLES)
+
 #if defined(_WIN32)
 
 #include <windows.h>
@@ -18,9 +20,17 @@
 #include <pthread.h>
 #include <dlfcn.h>
 
-
 #endif
 
 #include "input_headers/glext/glext.h"
+
+#else //defined(GLATTER_GLES)
+
+#include <GLES/gl.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
+#endif
+
 
 #endif

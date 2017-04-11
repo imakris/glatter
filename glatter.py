@@ -45,6 +45,11 @@ extension_groups['EGL'] = {
     'NV':0, 'TIZEN':0, '':0
 }
 
+# for headers whose guard is the key, differenciate according to whether values are defined
+conflict_differentiators = {
+    '__gl_h_': set(['__GL_H__', 'GL_VERSION_ES_CM_1_0']),
+    '__glu_h_': set(['__GLU_H__'])}
+
 all_extgroups = {}
 for i in families:
     all_extgroups.update(extension_groups[i])
@@ -70,63 +75,63 @@ ckwords = ['auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do'
     'unsigned', 'void', 'volatile', 'while']
 
 printable_c_types =  {
-	'char': '%d',             #
-	'signed char': '%d',      # printable character semantics are unlikely, thus printing as int
-	'unsigned char': '%u',    #
-	'short': '%hi',
-	'short int': '%hi',
-	'signed short': '%hi',
-	'signed short int': '%hi',
-	'unsigned short': '%hu',
-	'unsigned short int': '%hu',
-	'int': '%d',
-	'signed': '%d',
-	'signed int	': '%d',
-	'unsigned': '%u',
-	'unsigned int': '%u',
-	'long': '%li',
-	'long int': '%li',
-	'signed long': '%li',
-	'signed long int': '%li',
-	'unsigned long': '%lu',
-	'unsigned long int': '%lu',
-	'long long': '%lli',
-	'long long int': '%lli',
-	'signed long long': '%lli',
-	'signed long long int': '%lli',
-	'unsigned long long': '%llu',
-	'unsigned long long int': '%llu',
-	'float': '%f',
-	'double': '%f',
-	'int8_t': '%"PRId8"',
-	'int16_t': '%"PRId16"',
-	'int32_t': '%"PRId32"',
-	'int64_t': '%"PRId64"',
-	'int_fast8_t': '%"PRIdFAST8"',
-	'int_fast16_t': '%"PRIdFAST16"',
-	'int_fast32_t': '%"PRIdFAST32"',
-	'int_fast64_t': '%"PRIdFAST64"',
-	'int_least8_t': '%"PRIdLEAST8"',
-	'int_least16_t': '%"PRIdLEAST16"',
-	'int_least32_t': '%"PRIdLEAST32"',
-	'int_least64_t': '%"PRIdLEAST64"',
-	'uint8_t': '%"PRIu8"',
-	'uint16_t': '%"PRIu16"',
-	'uint32_t': '%"PRIu32"',
-	'uint64_t': '%"PRIu64"',
-	'uint_fast8_t': '%"PRIuFAST8"',
-	'uint_fast16_t': '%"PRIuFAST16"',
-	'uint_fast32_t': '%"PRIuFAST32"',
-	'uint_fast64_t': '%"PRIuFAST64"',
-	'uint_least8_t': '%"PRIuLEAST8"',
-	'uint_least16_t': '%"PRIuLEAST16"',
-	'uint_least32_t': '%"PRIuLEAST32"',
-	'uint_least64_t': '%"PRIuLEAST64"',
-	'intptr_t': '%"PRIxPTR"',
-	'uintptr_t': '%"PRIxPTR"',
-	'size_t': '%zu',
-	'wchar_t': '%lc',
-	'ptrdiff_t': '%td'
+    'char': '%d',             #
+    'signed char': '%d',      # printable character semantics are unlikely, thus printing as int
+    'unsigned char': '%u',    #
+    'short': '%hi',
+    'short int': '%hi',
+    'signed short': '%hi',
+    'signed short int': '%hi',
+    'unsigned short': '%hu',
+    'unsigned short int': '%hu',
+    'int': '%d',
+    'signed': '%d',
+    'signed int    ': '%d',
+    'unsigned': '%u',
+    'unsigned int': '%u',
+    'long': '%li',
+    'long int': '%li',
+    'signed long': '%li',
+    'signed long int': '%li',
+    'unsigned long': '%lu',
+    'unsigned long int': '%lu',
+    'long long': '%lli',
+    'long long int': '%lli',
+    'signed long long': '%lli',
+    'signed long long int': '%lli',
+    'unsigned long long': '%llu',
+    'unsigned long long int': '%llu',
+    'float': '%f',
+    'double': '%f',
+    'int8_t': '%"PRId8"',
+    'int16_t': '%"PRId16"',
+    'int32_t': '%"PRId32"',
+    'int64_t': '%"PRId64"',
+    'int_fast8_t': '%"PRIdFAST8"',
+    'int_fast16_t': '%"PRIdFAST16"',
+    'int_fast32_t': '%"PRIdFAST32"',
+    'int_fast64_t': '%"PRIdFAST64"',
+    'int_least8_t': '%"PRIdLEAST8"',
+    'int_least16_t': '%"PRIdLEAST16"',
+    'int_least32_t': '%"PRIdLEAST32"',
+    'int_least64_t': '%"PRIdLEAST64"',
+    'uint8_t': '%"PRIu8"',
+    'uint16_t': '%"PRIu16"',
+    'uint32_t': '%"PRIu32"',
+    'uint64_t': '%"PRIu64"',
+    'uint_fast8_t': '%"PRIuFAST8"',
+    'uint_fast16_t': '%"PRIuFAST16"',
+    'uint_fast32_t': '%"PRIuFAST32"',
+    'uint_fast64_t': '%"PRIuFAST64"',
+    'uint_least8_t': '%"PRIuLEAST8"',
+    'uint_least16_t': '%"PRIuLEAST16"',
+    'uint_least32_t': '%"PRIuLEAST32"',
+    'uint_least64_t': '%"PRIuLEAST64"',
+    'intptr_t': '%"PRIxPTR"',
+    'uintptr_t': '%"PRIxPTR"',
+    'size_t': '%zu',
+    'wchar_t': '%lc',
+    'ptrdiff_t': '%td'
 }
 
 def get_input_files():
@@ -265,30 +270,30 @@ def validate_enum(enum_str):
     return enum_str if not bool(re.match(validenum_pattern, enum_str)) else ''
 
 
-#def hcr(h):
-#    return h if h not in header_conflict_resolution else header_conflict_resolution[h]
-
 def analyze_condition(ppline, former_condition = None):
     #if
     m = re.match('^# ?if (?P<condition>.+)', ppline)
     if (bool(m)):
-        return '('+m.group('condition')+')'
-    #ifdef
-    m = re.match('^# ?ifdef (?P<dname>\w+)$', ppline)
+        return ['('+m.group('condition')+')']
+    #ifdef / #ifndef
+    m = re.match('^# ?if(?P<n>n)?def (?P<dname>\w+)$', ppline)
     if (bool(m)):
-        return 'defined('+m.group('dname')+')'
-    m = re.match('^# ?ifndef (?P<dname>\w+)$', ppline)
-    if (bool(m)):
-        return '!defined('+m.group('dname')+')'
+        rlist = []
+        mgd = m.group('dname')
+        ns = '!' if m.group('n') else ''
+        if mgd in conflict_differentiators:
+            for v in conflict_differentiators[mgd]:
+                rlist.append(ns+'defined('+v+')')
+        return rlist + [ns+'defined('+mgd+')']
     #else
     m = re.match('^# ?else', ppline)
     if (bool(m)):
-        return '!('+former_condition+')'
+        return ['!('+former_condition+')']
     #elif
     m = re.match('^# ?elif (?P<condition>.+)', ppline)
     if (bool(m)):
-        return '(('+m.group('condition')+') && !('+former_condition+'))'
-    
+        return ['(('+m.group('condition')+') && !('+former_condition+'))']
+
 
 def copystack(st):
     st = copy.deepcopy(st)
@@ -365,17 +370,20 @@ def parse(filename):
                 indstack = indstack[:-1]
 
         elif (bool(re.match(condblock_any_ifstar, v))):
-            indstack.append([analyze_condition(v)])
+            for v in analyze_condition(v):
+                indstack.append([v])
 
         elif (bool(re.match('^(# ?else)|(# ?elif)', v))):
-            indstack[-1] = [analyze_condition(v, indstack[-1][0])]
+            indstack[-1] = analyze_condition(v, indstack[-1][0])
 
         elif (bool(re.match('^# ?define ', v))):
             m = re.match('^# ?define (?P<what>\w+)( (?P<as>\w+)$)?', v)
+            mg_what = m.group('what')
+            mg_as = m.group('as')
             for k in indstack:
-                if k[0] == '!defined('+m.group('what')+')':
-                    indstack[-1].append('-defined('+m.group('what')+')')
-                    if (m.group('as') != None and m.group('as') != '1'):
+                if k[0] == '!defined('+mg_what+')':
+                    indstack[-1].append('-defined('+mg_what+')')
+                    if mg_as != None and mg_as != '1':
                         indstack[-1].append('('+m.group('what')+'=='+m.group('as')+')')
 
     #===========#
@@ -607,15 +615,7 @@ def get_function_mdnd(family): #macros, declarations and definitions
 
     sfd0 = sorted(function_definitions[family], key=lambda x: tuple(x.block) + tuple([x.name]) )
 
-    # known headers with conflicts
-    for i, v in enumerate(sfd0):
-        vbs = set(v.block)
-        if ('defined(__gl_h_)' in vbs and 'defined(__GL_H__)' not in vbs):
-            sfd0[i].block = sfd0[i].block[:1] + ['!defined(__GL_H__)'] + sfd0[i].block[1:]
-        if ('defined(__glu_h_)' in vbs and 'defined(__GLU_H__)' not in vbs):
-            sfd0[i].block = sfd0[i].block[:1] + ['!defined(__GLU_H__)'] + sfd0[i].block[1:]
- 
-    # an attempt for all the rest
+    # an attempt to resolve unforseen conflicts
     all_fnames = {}
     ambiguous_fnames = {}
     indices_for_deletion = set()

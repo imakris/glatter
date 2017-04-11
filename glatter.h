@@ -25,8 +25,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifndef __GLATTER_HEADER__
 
-#include "glatter_system_headers.h"
 #include "glatter_config.h"
+#include "glatter_system_headers.h"
 
 #ifdef __cplusplus
 extern "C" {

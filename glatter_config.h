@@ -1,9 +1,11 @@
 #ifndef __GLATTER_CONFIG_H__
 #define __GLATTER_CONFIG_H__
 
-#define GLATTER_GL
+#define GLATTER_GLES
 
-#if defined(_WIN32)
+#if defined(GLATTER_GLES)
+    #define GLATTER_EGL
+#elif defined(_WIN32)
 	#define GLATTER_WGL
 #elif defined(__linux__)
 	#define GLATTER_GLX

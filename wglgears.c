@@ -157,7 +157,7 @@ gear(GLfloat inner_radius, GLfloat outer_radius, GLfloat width,
 	}
 	glEnd();
 
-   glNormal3f(0.0, 0.0, -1.0);
+    glNormal3f(0.0, 0.0, -1.0);
 
 	/* draw back face */
 	glBegin(GL_QUAD_STRIP);

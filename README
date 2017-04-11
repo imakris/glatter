@@ -2,7 +2,6 @@ glatter
 
 An OpenGL loading library, with support for GL, GLES, EGL, GLX, WGL.
 
-The project is currently in an early stage of development.
-It has only been tested on Windows, and needs to be ported to other systems.
+The project is fairly young, so there might be bugs.
 
 The source code is licensed under the Simplified BSD License.
