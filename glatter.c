@@ -43,10 +43,10 @@ const char* enum_to_string_GL(GLenum e);
 void glatter_check_error_GL(const char* file, int line)
 {
     GLenum err = glGetError();
-	if (err != GL_NO_ERROR) {
-		printf("GLATTER: OpenGL call produced %s error in %s(%d)\n",
-			enum_to_string_GL(err), file, line);
-	}
+    if (err != GL_NO_ERROR) {
+        printf("GLATTER: OpenGL call produced %s error in %s(%d)\n",
+            enum_to_string_GL(err), file, line);
+    }
 }
 
 void* glatter_get_proc_address_GL(const char* function_name)
@@ -111,7 +111,7 @@ void* glatter_get_proc_address_GLX_init(const char* function_name)
 void glatter_check_error_GLX(const char* file, int line)
 {
     // TODO: decide if implementing further wrappers to be able
-	// to call XSync here, is within the scope of this library.
+    // to call XSync here, is within the scope of this library.
 }
 
 //////////////////////////////////
@@ -133,12 +133,12 @@ void glatter_check_error_WGL(const char* file, int line)
 
     LPSTR buffer = 0;
     FormatMessageA(
-		FORMAT_MESSAGE_ALLOCATE_BUFFER |
-		FORMAT_MESSAGE_FROM_SYSTEM |
-		FORMAT_MESSAGE_IGNORE_INSERTS, NULL,
-		eid, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&buffer, 0, NULL);
+        FORMAT_MESSAGE_ALLOCATE_BUFFER |
+        FORMAT_MESSAGE_FROM_SYSTEM |
+        FORMAT_MESSAGE_IGNORE_INSERTS, NULL,
+        eid, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&buffer, 0, NULL);
 
-	printf("GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, buffer);
+    printf("GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, buffer);
 
     LocalFree(buffer);
 }
@@ -163,10 +163,10 @@ const char* enum_to_string_EGL(GLenum e);
 void glatter_check_error_EGL(const char* file, int line)
 {
     EGLint err = eglGetError();
-	if (err != EGL_SUCCESS) {
-		printf("GLATTER: EGL call produced %s error in %s(%d)\n",
-			enum_to_string_EGL(err), file, line);
-	}
+    if (err != EGL_SUCCESS) {
+        printf("GLATTER: EGL call produced %s error in %s(%d)\n",
+            enum_to_string_EGL(err), file, line);
+    }
 }
 
 
@@ -205,27 +205,27 @@ void glatter_pre_callback(const char* file, int line)
 
 typedef struct
 {
-	char data[3*16+2];
+    char data[3*16+2];
 }
 Printable;
 
 
 Printable get_prs(size_t sz, void* obj)
 {
-	Printable ret;
-	ret.data[3*16+1] = 0;
-	
-	if (sz > 16)
+    Printable ret;
+    ret.data[3*16+1] = 0;
+    
+    if (sz > 16)
         sz = 16;
 
-	for (size_t i=0; i<sz; i++) {
-		snprintf(&ret.data[i*3], sizeof(ret)-3*i-1," %02x", (unsigned char) *(((char*)obj)+i) );
-	}
-	
-	ret.data[0] = '[';
-	ret.data[3*sz] = ']';
+    for (size_t i=0; i<sz; i++) {
+        snprintf(&ret.data[i*3], sizeof(ret)-3*i-1," %02x", (unsigned char) *(((char*)obj)+i) );
+    }
+    
+    ret.data[0] = '[';
+    ret.data[3*sz] = ']';
 
-	return ret;
+    return ret;
 }
 
 
@@ -238,19 +238,19 @@ Printable get_prs(size_t sz, void* obj)
     cder rtype cconv name dargs;\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
     extern glatter_##name##_t glatter_##name##_ptr;\
-	extern rtype cconv glatter_##name##_init dargs;\
-	rtype cconv glatter_##name##_init dargs\
-	{\
-		glatter_##name##_ptr = (glatter_##name##_t) glatter_get_proc_address_##family(#name);\
-		return_or_not glatter_##name##_ptr cargs;\
-	}\
-	glatter_##name##_t glatter_##name##_ptr = glatter_##name##_init;
+    extern rtype cconv glatter_##name##_init dargs;\
+    rtype cconv glatter_##name##_init dargs\
+    {\
+        glatter_##name##_ptr = (glatter_##name##_t) glatter_get_proc_address_##family(#name);\
+        return_or_not glatter_##name##_ptr cargs;\
+    }\
+    glatter_##name##_t glatter_##name##_ptr = glatter_##name##_init;
 
 
 #define GLATTER_DBLOCK(file, line, name, printf_fmt, ...) \
     glatter_pre_callback(file, line);\
-	printf("GLATTER: calling in '%s'(%d):\n", file, line);\
-	printf("GLATTER: " #name #printf_fmt "%s", __VA_ARGS__);
+    printf("GLATTER: calling in '%s'(%d):\n", file, line);\
+    printf("GLATTER: " #name #printf_fmt "%s", __VA_ARGS__);
 
 
 #define GET_PRS(v)\

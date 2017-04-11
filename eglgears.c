@@ -394,19 +394,19 @@ static void init(int argc, char *argv[])
 
 LRESULT CALLBACK wndproc(HWND window, UINT message, WPARAM wparam, LPARAM lwparam)
 {
-	switch (message) {
-	    case WM_SYSCOMMAND:
-		    switch (wparam)
-		        case SC_SCREENSAVE:
-		        case SC_MONITORPOWER:
-			        return 0;
-		    break;
-	    case WM_CLOSE:
-		    has_quit = 1;
-		    PostQuitMessage(0);
-		    return 1;
-	}
-	return DefWindowProc(window, message, wparam, lwparam);
+    switch (message) {
+        case WM_SYSCOMMAND:
+            switch (wparam)
+                case SC_SCREENSAVE:
+                case SC_MONITORPOWER:
+                    return 0;
+            break;
+        case WM_CLOSE:
+            has_quit = 1;
+            PostQuitMessage(0);
+            return 1;
+    }
+    return DefWindowProc(window, message, wparam, lwparam);
 }
 
 
@@ -427,7 +427,7 @@ HWND createNativeWindow(int w, int h)
 
     ATOM rclass = RegisterClass(&wd);
     if (!rclass)
-	    return 0;
+        return 0;
 
     RECT rect;
     SetRect(&rect, 0, 0, w, h);
@@ -435,19 +435,19 @@ HWND createNativeWindow(int w, int h)
 
     return CreateWindow(
         "eglgears", "eglgears", WS_VISIBLE | WS_SYSMENU, CW_USEDEFAULT, CW_USEDEFAULT,
-	    rect.right - rect.left, rect.bottom - rect.top, NULL, NULL, GetModuleHandle(NULL), NULL);
+        rect.right - rect.left, rect.bottom - rect.top, NULL, NULL, GetModuleHandle(NULL), NULL);
 }
 
 
 void handle_system_messages()
 {
     MSG msg;
-	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-		if (msg.message == WM_QUIT)
+    if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+        if (msg.message == WM_QUIT)
             has_quit = 1;
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
 }
 
 #else
@@ -500,13 +500,13 @@ int main(int argc, char *argv[])
     EGLint num_config;
     display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     eglInitialize(display, NULL, NULL);
-	const EGLint attribute_list[] =
-	{
-		EGL_SURFACE_TYPE,		EGL_WINDOW_BIT,
-		EGL_RENDERABLE_TYPE,	EGL_OPENGL_ES_BIT,
+    const EGLint attribute_list[] =
+    {
+        EGL_SURFACE_TYPE,        EGL_WINDOW_BIT,
+        EGL_RENDERABLE_TYPE,    EGL_OPENGL_ES_BIT,
         EGL_DEPTH_SIZE,         8,
-		EGL_NONE
-	};
+        EGL_NONE
+    };
     eglChooseConfig(display, attribute_list, &config, 1, &num_config);
     context = eglCreateContext(display, config, EGL_NO_CONTEXT, NULL);
     native_window = createNativeWindow(width, height);
