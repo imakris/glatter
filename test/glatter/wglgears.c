@@ -36,7 +36,7 @@
 /* Modified further by Ioannis Makris, 7.4.2017
  */
 
-#include "glatter.h"
+#include <glatter/glatter.h>
 
 #include <math.h>
 #include <stdlib.h>

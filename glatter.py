@@ -550,11 +550,13 @@ for s in input_files:
     parse(s)
 
 # GENERATE OUTPUT FILES
-if not os.path.exists(output_root):
-    os.makedirs(output_root)
+if not os.path.exists(output_root + '/include/glatter'):
+    os.makedirs(output_root + '/include/glatter')
+if not os.path.exists(output_root + '/src/glatter'):
+    os.makedirs(output_root + '/src/glatter')
 
-h_file = open(output_root + '/glatter.h_gen', 'w')
-c_file = open(output_root + '/glatter.c_gen', 'w')
+h_file = open(output_root + '/include/glatter/glatter.h_gen', 'w')
+c_file = open(output_root + '/src/glatter/glatter.c_gen', 'w')
 original_stdout = sys.stdout
 
 

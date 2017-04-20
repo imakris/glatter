@@ -36,7 +36,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "glatter.h"
+#include <glatter/glatter.h>
 
 
 #define BENCHMARK
