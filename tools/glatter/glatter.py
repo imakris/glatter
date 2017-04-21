@@ -25,8 +25,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 from unittest import case
-input_root = r'.\input_headers'
-output_root = r'.'
+input_root = r'./input_headers'
+output_src_dir = r'../../src/glatter'
+output_include_dir = r'../../include/glatter'
 
 families = {'GL':'gl', 'GLX':'glX', 'EGL':'egl', 'GLU':'glu', 'WGL':'wgl', 'khronos_':'khronos_'}
 
@@ -550,13 +551,13 @@ for s in input_files:
     parse(s)
 
 # GENERATE OUTPUT FILES
-if not os.path.exists(output_root + '/include/glatter'):
-    os.makedirs(output_root + '/include/glatter')
-if not os.path.exists(output_root + '/src/glatter'):
-    os.makedirs(output_root + '/src/glatter')
+if not os.path.exists(output_include_dir):
+    os.makedirs(output_include_dir)
+if not os.path.exists(output_src_dir):
+    os.makedirs(output_src_dir)
 
-h_file = open(output_root + '/include/glatter/glatter.h_gen', 'w')
-c_file = open(output_root + '/src/glatter/glatter.c_gen', 'w')
+h_file = open(output_include_dir + '/glatter.h_gen', 'w')
+c_file = open(output_src_dir     + '/glatter.c_gen', 'w')
 original_stdout = sys.stdout
 
 
