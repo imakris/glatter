@@ -1,7 +1,0 @@
-glatter
-
-An OpenGL loading library, with support for GL, GLES, EGL, GLX, WGL.
-
-The project is fairly young, so there might be bugs.
-
-The source code of the library is licensed under the Simplified BSD License.
