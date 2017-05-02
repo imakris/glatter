@@ -29,13 +29,27 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "glatter_system_headers.h"
 
 #ifdef __cplusplus
+
 extern "C" {
+
+#ifdef GLATTER_HEADER_ONLY
+    #define GLATTER_INCLUDED_FROM_HEADER
+    #include "glatter_def.h"
 #endif
 
-const char* enum_to_string_GL(GLenum e);
-const char* enum_to_string_GLX(GLenum e);
-const char* enum_to_string_WGL(GLenum e);
-const char* enum_to_string_EGL(GLenum e);
+#else
+
+#ifdef GLATTER_HEADER_ONLY
+    #error GLATTER_HEADER_ONLY can only be used in C++
+#endif
+
+#endif
+
+
+GLATTER_INLINE_OR_NOT const char* enum_to_string_GL(GLenum e);
+GLATTER_INLINE_OR_NOT const char* enum_to_string_GLX(GLenum e);
+GLATTER_INLINE_OR_NOT const char* enum_to_string_WGL(GLenum e);
+GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLenum e);
 
 
 #define GLATTER_UBLOCK(rtype, cconv, name, dargs)\
@@ -43,7 +57,52 @@ const char* enum_to_string_EGL(GLenum e);
     extern glatter_##name##_t glatter_##name##_ptr;
 
 
-#include "glatter.h_gen"
+#if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_EVERYTHING)
+
+    #if defined(GLATTER_GL)
+    #include "generated/glatter_GL_d.h"
+    #endif
+
+    #if defined(GLATTER_GLX)
+    #include "generated/glatter_GLX_d.h"
+    #endif
+
+    #if defined(GLATTER_EGL)
+    #include "generated/glatter_EGL_d.h"
+    #endif
+
+    #if defined(GLATTER_WGL)
+    #include "generated/glatter_WGL_d.h"
+    #endif
+
+    #if defined(GLATTER_GLU)
+    #include "generated/glatter_GLU_d.h"
+    #endif
+
+#else
+
+    #if defined(GLATTER_GL)
+    #include "generated/glatter_GL_r.h"
+    #endif
+
+    #if defined(GLATTER_GLX)
+    #include "generated/glatter_GLX_r.h"
+    #endif
+
+    #if defined(GLATTER_EGL)
+    #include "generated/glatter_EGL_r.h"
+    #endif
+
+    #if defined(GLATTER_WGL)
+    #include "generated/glatter_WGL_r.h"
+    #endif
+
+    #if defined(GLATTER_GLU)
+    #include "generated/glatter_GLU_r.h"
+    #endif
+
+#endif
+
 
 #ifdef __cplusplus
 }

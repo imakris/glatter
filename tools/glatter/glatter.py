@@ -26,8 +26,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from unittest import case
 input_root = r'./input_headers'
-output_src_dir = r'../../src/glatter'
-output_include_dir = r'../../include/glatter'
+output_dir = r'../../include/glatter/generated'
 
 families = {'GL':'gl', 'GLX':'glX', 'EGL':'egl', 'GLU':'glu', 'WGL':'wgl', 'khronos_':'khronos_'}
 
@@ -51,6 +50,9 @@ conflict_differentiators = {
     '__gl_h_': set(['__GL_H__', 'GL_VERSION_ES_CM_1_0']),
     '__glu_h_': set(['__GLU_H__'])}
 
+out_of_range_enums = set(['GL_POINTS', 'GL_LINES', 'GL_LINE_LOOP', 'GL_LINE_STRIP', 'GL_TRIANGLES',
+    'GL_TRIANGLE_STRIP', 'GL_TRIANGLE_FAN', 'GL_QUADS', 'GL_QUAD_STRIP', 'GL_POLYGON'])
+
 all_extgroups = {}
 for i in families:
     all_extgroups.update(extension_groups[i])
@@ -58,7 +60,23 @@ for i in families:
 # containers populated during parsing phase
 enum_to_string = {}
 function_definitions = {key: set() for key in families}
-typedefs = {}
+
+windows_typedefs = {
+    'BOOL': 'long',
+    'BYTE': 'unsigned char',
+    'INT': 'int',
+    'UINT': 'unsigned int',
+    'WORD': 'unsigned short',
+    'DWORD': 'unsigned long',
+    'CHAR': 'char',
+    'WCHAR': 'wchar_t',
+    'TCHAR': 'WCHAR',
+    'FLOAT': 'float',
+    'DOUBLE': 'double',
+    'COLORREF': 'DWORD'
+}
+
+typedefs = windows_typedefs
 
 known_fnames = {}
 
@@ -104,32 +122,32 @@ printable_c_types =  {
     'unsigned long long int': '%llu',
     'float': '%f',
     'double': '%f',
-    'int8_t': '%"PRId8"',
-    'int16_t': '%"PRId16"',
-    'int32_t': '%"PRId32"',
-    'int64_t': '%"PRId64"',
-    'int_fast8_t': '%"PRIdFAST8"',
-    'int_fast16_t': '%"PRIdFAST16"',
-    'int_fast32_t': '%"PRIdFAST32"',
-    'int_fast64_t': '%"PRIdFAST64"',
-    'int_least8_t': '%"PRIdLEAST8"',
-    'int_least16_t': '%"PRIdLEAST16"',
-    'int_least32_t': '%"PRIdLEAST32"',
-    'int_least64_t': '%"PRIdLEAST64"',
-    'uint8_t': '%"PRIu8"',
-    'uint16_t': '%"PRIu16"',
-    'uint32_t': '%"PRIu32"',
-    'uint64_t': '%"PRIu64"',
-    'uint_fast8_t': '%"PRIuFAST8"',
-    'uint_fast16_t': '%"PRIuFAST16"',
-    'uint_fast32_t': '%"PRIuFAST32"',
-    'uint_fast64_t': '%"PRIuFAST64"',
-    'uint_least8_t': '%"PRIuLEAST8"',
-    'uint_least16_t': '%"PRIuLEAST16"',
-    'uint_least32_t': '%"PRIuLEAST32"',
-    'uint_least64_t': '%"PRIuLEAST64"',
-    'intptr_t': '%"PRIxPTR"',
-    'uintptr_t': '%"PRIxPTR"',
+    'int8_t': '%" PRId8 "',
+    'int16_t': '%" PRId16 "',
+    'int32_t': '%" PRId32 "',
+    'int64_t': '%" PRId64 "',
+    'int_fast8_t': '%" PRIdFAST8 "',
+    'int_fast16_t': '%" PRIdFAST16 "',
+    'int_fast32_t': '%" PRIdFAST32 "',
+    'int_fast64_t': '%" PRIdFAST64 "',
+    'int_least8_t': '%" PRIdLEAST8 "',
+    'int_least16_t': '%" PRIdLEAST16 "',
+    'int_least32_t': '%" PRIdLEAST32 "',
+    'int_least64_t': '%" PRIdLEAST64 "',
+    'uint8_t': '%" PRIu8 "',
+    'uint16_t': '%" PRIu16 "',
+    'uint32_t': '%" PRIu32 "',
+    'uint64_t': '%" PRIu64 "',
+    'uint_fast8_t': '%" PRIuFAST8 "',
+    'uint_fast16_t': '%" PRIuFAST16 "',
+    'uint_fast32_t': '%" PRIuFAST32 "',
+    'uint_fast64_t': '%" PRIuFAST64 "',
+    'uint_least8_t': '%" PRIuLEAST8 "',
+    'uint_least16_t': '%" PRIuLEAST16 "',
+    'uint_least32_t': '%" PRIuLEAST32 "',
+    'uint_least64_t': '%" PRIuLEAST64 "',
+    'intptr_t': '%" PRIxPTR "',
+    'uintptr_t': '%" PRIxPTR "',
     'size_t': '%zu',
     'wchar_t': '%lc',
     'ptrdiff_t': '%td'
@@ -149,7 +167,7 @@ comment_pattern = re.compile(
 )
 
 fm_sbp = '(?P<family>'+ '|'.join(families) + ')'
-fm_sbl = '(?P<fprefix>'+ '|'.join(families.values()) + ')'
+fm_sbl = '(?P<fprefix>'+ '|'.join(list(reversed(sorted(families.values())))) + ')'
 familyenum = re.compile(fm_sbp + 'enum$')
 validenum_pattern = re.compile('\w*_BIT[0-9S]?(_[0-9A-Z]+)?$')
 condblock_define_pattern = re.compile('^# ?define (?P<dname>'+fm_sbp+'_\w*) 1')
@@ -397,7 +415,7 @@ def parse(filename):
             try:
                 value = int(m.group(3), 0)
                 
-                if (value >= 0x100 and value < 0x20000):
+                if ((value >= 0x100 and value < 0x20000) or m.group(1) in out_of_range_enums):
                     name = m.group(1)
                     family = m.group(2)
                     eblock = d[1][-1] #if d[1] != None else hcr(header_guard)
@@ -550,16 +568,6 @@ print("\n")
 for s in input_files:
     parse(s)
 
-# GENERATE OUTPUT FILES
-if not os.path.exists(output_include_dir):
-    os.makedirs(output_include_dir)
-if not os.path.exists(output_src_dir):
-    os.makedirs(output_src_dir)
-
-h_file = open(output_include_dir + '/glatter.h_gen', 'w')
-c_file = open(output_src_dir     + '/glatter.c_gen', 'w')
-original_stdout = sys.stdout
-
 
 def get_args_string(a, mode, trailing_comma=True):
     rv = ''
@@ -597,24 +605,39 @@ def get_args_string(a, mode, trailing_comma=True):
         raise
 
 
-#================================================#
-# HEADER                                         #
-#================================================#
 
-sys.stdout = h_file
-print('/*' + license + r'''*/
+# GENERATE OUTPUT FILES
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+
+def write_to_file(filename_with_path, content):
+    if (bool(content)):
+        output_file = open(filename_with_path, 'w')
+        original_stdout = sys.stdout
+        sys.stdout = output_file
+        print('/*' + license + r'''*/
 
 // This file was generated by glatter.py script.
 
 ''')
+        print(content)
+        sys.stdout = original_stdout
+        output_file.close()
+
+
+
+#================================================#
+# HEADER                                         #
+#================================================#
 
 def get_function_mdnd(family): #macros, declarations and definitions
     #file buffers
-    header_part = source_part = notes = ''
-    header_d = header_r = source_c = ''
+    notes = ''
+    header_d = header_r = source_d = source_r = ''
 
     if (len(function_definitions[family]) == 0):
-        return ['', '', '']
+        return ['', '', '', '', '']
 
     sfd0 = sorted(function_definitions[family], key=lambda x: tuple(x.block) + tuple([x.name]) )
 
@@ -661,7 +684,7 @@ def get_function_mdnd(family): #macros, declarations and definitions
 #ifdef GLATTER_''' + family + '''
 #if ''' + '\n#if '.join(sfd[0].block)
 
-    header_d, header_r, source_c = tmp, tmp, tmp
+    header_d, header_r, source_d, source_r = tmp, tmp, tmp, tmp
     tmp = ''
 
     for x in sfd:
@@ -669,16 +692,20 @@ def get_function_mdnd(family): #macros, declarations and definitions
         if current_block !=  x.block:
 
             endifs = []
+            broken = False
             for i, v in enumerate(current_block):
-                if (len(x.block) <= i or x.block[i] != v):
+                if (len(x.block) <= i or x.block[i] != v or broken):
+                    broken = True
                     endifs.append(v)
 
             for c in reversed(endifs):
                 tmp += '''
 #endif // ''' + c
 
+            broken = False
             for i, v in enumerate(x.block):
-                if (len(current_block) <= i or current_block[i] != v):
+                if (len(current_block) <= i or current_block[i] != v or broken):
+                    broken = True
                     tmp += '''
 #if ''' + v
             current_block = x.block
@@ -686,21 +713,17 @@ def get_function_mdnd(family): #macros, declarations and definitions
         if tmp != '':
             header_d += tmp
             header_r += tmp
-            source_c += tmp
+            source_d += tmp
+            source_r += tmp
             tmp = ''
 
         #function block buffers
         dn_mac = '' #debug name macro
         df_dec = '' #debug function declaration
         rn_mac = '' #release name macro
-        pt_tdc = '' #pointer type declaration
         pt_typ = '' #pointer type
-        pt_nam = '' #pointer name
-        ep_dec = '' #extern pointer declaration
+        ic_nam = '' #internal callable name
 
-        if_dec = '' #init function declaration
-        pt_def = '' #pointer definition and initialization
-        if_def = '' #init function definition
         df_def = '' #debug function definition
         if_ifm = '' #init function macro call
 
@@ -721,39 +744,23 @@ def get_function_mdnd(family): #macros, declarations and definitions
 
         df_dec = '\n' + x.rtype + ' glatter_' + x.name + '_debug' + a1e + ';'
 
-        pt_nam = 'glatter_' + x.name + '_ptr'
+        ic_nam = 'glatter_' + x.name
 
         rn_mac = '''
-#define ''' + x.name + a2s + ' ' + pt_nam + a3s
+#define ''' + x.name + a2s + ' ' + ic_nam + a3s
 
         pt_typ = 'glatter_' + x.name + '_t'
-
-        pt_tdc = '''
-typedef ''' + x.rtype + ' (' + x.cconv + ' *' + pt_typ + ')' + a1s + ';'
-
-        ep_dec = '''
-extern ''' + pt_typ + ' ' + pt_nam + ';'
 
         cconv_text = ''
         if (x.cconv != ''):
             cconv_text = ' ' + x.cconv
-        if_dec = '\n' + x.rtype + cconv_text + ' glatter_' + x.name + '_init' + a1s + ';'
 
-        pt_def = '''
-''' + pt_typ + ' ' + pt_nam + ' = glatter_' + x.name + '_init' + ';'
-
-        if_def = if_dec[:-1] + '''
-{
-    ''' + pt_nam + ' = (' + pt_typ +') glatter_get_proc_address_' + x.family + '("' + x.name + '''");
-    return ''' + pt_nam + a2s + ''';
-}'''
-
-        printf_va_args = ', "\\n"'
+        printf_va_args = ''
         if len(x.args) != 0:
             printf_va_args += ', ' + a6s[1]
         df_def = df_dec[:-1] + '''
 {
-    GLATTER_DBLOCK(file, line, ''' + x.name + ', (' + a6s[0] + ')' + printf_va_args + ')'
+    GLATTER_DBLOCK(file, line, ''' + x.name + ', "(' + a6s[0] + ')"' + printf_va_args + ')'
         if (x.rtype not in ['void', 'VOID']):
             rarg = Function_argument()
             rarg.name = 'rval'
@@ -761,14 +768,14 @@ extern ''' + pt_typ + ' ' + pt_nam + ';'
             rarg.is_pointer = '*' in x.rtype
             pf = rarg.get_printf_faa()
             df_def += '''
-    ''' + x.rtype + ''' rval = ''' + pt_nam + a2s + ''';
-    printf("GLATTER: returned ''' + pf[0] + '", ' + pf[1] + ');'
+    ''' + x.rtype + ''' rval = ''' + ic_nam + a2s + ''';
+    GLATTER_RBLOCK("''' + pf[0] + '\\n", ' + pf[1] + ');'
 
         else:
             df_def += '''
-    ''' + pt_nam + a2s + ''';'''
+    ''' + ic_nam + a2s + ''';'''
         df_def += '''
-    glatter_check_error_'''+ x.family +'''(file, line);'''
+    GLATTER_CHECK_ERROR('''+ x.family +''', file, line)'''
         if (x.rtype not in ['void', 'VOID']):
             df_def += '''
     return rval;'''
@@ -782,17 +789,23 @@ extern ''' + pt_typ + ' ' + pt_nam + ';'
             if_ifm += '''
 #ifndef ''' +  x.name + '_defined'
         if_ifm += '\nGLATTER_FBLOCK(' +return_or_not+ ', '+ x.family + ', ' + x.expkw + ', ' + x.rtype + ', ' + x.cconv + ', ' + x.name + ', ' + a2s + ', '+ a1s + ')'
-        if_ifm += df_def
-        if_ifm += '''
+        fb_d, fb_r = if_ifm, if_ifm
+        fb_d += df_def
+        tmp2 = '''
 #define ''' +  x.name + '_defined'
+        fb_d += tmp2
+        fb_r += tmp2
         if known_fnames[x.name] > 1:
-            if_ifm += '''
+            tmp2 = '''
 #endif'''
+            fb_d += tmp2
+            fb_r += tmp2
         ublock = '\nGLATTER_UBLOCK(' + x.rtype + ', ' + x.cconv + ', ' + x.name + ', '+ a1s + ')'
 
         header_d += dn_mac + df_dec
         header_r += rn_mac + ublock
-        source_c += if_ifm
+        source_d += fb_d
+        source_r += fb_r
 
     for v in current_block:
         tmp += '''
@@ -802,48 +815,30 @@ extern ''' + pt_typ + ' ' + pt_nam + ';'
 #endif // GLATTER_''' + family + '\n'
     header_d += tmp
     header_r += tmp
-    source_c += tmp
+    source_d += tmp
+    source_r += tmp
 
-    header_part += '''
-#ifdef NDEBUG
-''' + header_r + '''
-#else // NDEBUG
-''' + header_d + '''
-#endif // NDEBUG
-'''
+    return [header_d, header_r, source_d, source_r, notes]
 
-    source_part += '''
-''' + source_c + '''
-'''
-
-    return [header_part, source_part, notes]
-
-mndn_gl  = get_function_mdnd('GL' )
-mndn_glu = get_function_mdnd('GLU')
-mndn_glx = get_function_mdnd('GLX')
-mndn_wgl = get_function_mdnd('WGL')
-mndn_egl = get_function_mdnd('EGL')
-
-print(mndn_gl[2] + mndn_glu[2] + mndn_glx[2] + mndn_wgl[2] + mndn_egl[2])
-
-if bool(mndn_gl ): print(mndn_gl [0])
-if bool(mndn_glu): print(mndn_glu[0])
-if bool(mndn_glx): print(mndn_glx[0])
-if bool(mndn_wgl): print(mndn_wgl[0])
-if bool(mndn_egl): print(mndn_egl[0])
-
-h_file.close()
+mndn = {}
+for v in families:
+    mndn[v] = get_function_mdnd(v)
+    write_to_file(output_dir + '/glatter_' + v + '_d.h', mndn[v][0])
+    write_to_file(output_dir + '/glatter_' + v + '_r.h', mndn[v][1])
 
 
 #================================================#
 # SOURCE                                         #
 #================================================#
 
-def print_enum_to_string(family, fallback):
-    print('''
-const char* enum_to_string_''', family  ,'''(GLenum e)
+def get_enum_to_string(family):
+    if family not in enum_to_string:
+        return
+    rv = '''
+GLATTER_INLINE_OR_NOT
+const char* enum_to_string_''' + family  + '''(GLenum e)
 {
-    switch (e) {''', sep='')
+    switch (e) {\n'''
     sorted_ets = sorted(enum_to_string[family].items(), key=lambda x: x[0] )
 
     last_ifb = ''
@@ -853,8 +848,6 @@ const char* enum_to_string_''', family  ,'''(GLenum e)
         inv_d = {}
         for y in x[1]:
             if y == '':
-                # TODO: print a warning message, that the enum was not classified, thus omitted
-                print('this is a test - remove this print')
                 continue
             for z in x[1][y]:
                 if (not z in inv_d):
@@ -865,61 +858,43 @@ const char* enum_to_string_''', family  ,'''(GLenum e)
 #if ''' + ' || '.join(map(str, next(iter(inv_d.values()))))
             if ifb != last_ifb:
                 if block_is_open:
-                    print('#endif', sep='')
-                print(ifb, sep='')
+                    rv += '#endif\n'
+                rv += ifb + '\n'
                 last_ifb = ifb
             block_is_open = True
-            print('''\
-        case ''', hex(x[0]),''': return "''', next(iter(inv_d)), '''";''', sep='')
+            rv += '''\
+        case ''' + hex(x[0]) + ''': return "''' + next(iter(inv_d)) + '''";\n'''
 
         else:
             last_ifb = ''
             if block_is_open:
-                print('''\
-#endif''')
+                rv += '''\
+#endif\n'''
                 block_is_open = False
-            print('''\
-        case ''', hex(x[0]),':', sep='')
+            rv += '''\
+        case ''' + hex(x[0]) + ':\n'
 
             for z in sorted(inv_d.items()):
-                print('''\
+                rv += '''\
 #if ''' + ' || '.join(map(str, z[1])) + '''
-                    return "''', z[0], '''";
-#endif''', sep = '')
+                    return "''' + z[0] + '''";
+#endif\n'''
 
             # in case there is nothing under the case, break, to go to fallback
-            print('''\
-            break;''', sep='')
+            rv += '''\
+            break;\n'''
     if block_is_open:
-        print('''\
-#endif''')
+       rv += '''\
+#endif\n'''
 
-    print('''\
+    rv += '''\
     }
-    return ''', fallback, ''';
+    return "<UNKNOWN ENUM>";
 }
-''', sep='')
+\n'''
+    return rv
 
-
-sys.stdout = c_file
-print('/*' + license + r'''*/
-
-// This file was generated by glatter.py script.
-
-''')
-
-print_enum_to_string('GL',  '"<UNKNOWN ENUM>"')
-print_enum_to_string('GLU', 'enum_to_string_GL(e)')
-print_enum_to_string('WGL', 'enum_to_string_GL(e)')
-print_enum_to_string('GLX', 'enum_to_string_GL(e)')
-print_enum_to_string('EGL', 'enum_to_string_GL(e)')
-
-if bool(mndn_gl ): print(mndn_gl [1])
-if bool(mndn_glu): print(mndn_glu[1])
-if bool(mndn_wgl): print(mndn_wgl[1])
-if bool(mndn_glx): print(mndn_glx[1])
-if bool(mndn_egl): print(mndn_egl[1])
-
-c_file.close()
-
-sys.stdout = original_stdout
+for v in families:
+    write_to_file(output_dir + '/glatter_' + v + '_e2s_def.h', get_enum_to_string(v))
+    write_to_file(output_dir + '/glatter_' + v + '_d_def.h', mndn[v][2])
+    write_to_file(output_dir + '/glatter_' + v + '_r_def.h', mndn[v][3])

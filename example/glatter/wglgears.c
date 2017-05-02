@@ -113,24 +113,23 @@ static void
 gear(GLfloat inner_radius, GLfloat outer_radius, GLfloat width,
      GLint teeth, GLfloat tooth_depth)
 {
-   GLint i;
-   GLfloat r0, r1, r2;
-   GLfloat angle, da;
-   GLfloat u, v, len;
+    GLint i;
+    GLfloat r0, r1, r2;
+    GLfloat angle, da;
+    GLfloat u, v, len;
 
-   r0 = inner_radius;
-   r1 = outer_radius - tooth_depth / 2.0f;
-   r2 = outer_radius + tooth_depth / 2.0f;
+    r0 = inner_radius;
+    r1 = outer_radius - tooth_depth / 2.0f;
+    r2 = outer_radius + tooth_depth / 2.0f;
 
-   da = 2.0 * M_PI / teeth / 4.0;
+    da = 2.0 * M_PI / teeth / 4.0;
 
-   glShadeModel(GL_FLAT);
+    glShadeModel(GL_FLAT);
 
-   glNormal3f(0.0, 0.0, 1.0);
+    glNormal3f(0.0, 0.0, 1.0);
 
-   /* draw front face */
-   glBegin(GL_QUAD_STRIP);
-   for (i = 0; i <= teeth; i++) {
+    glBegin(GL_QUAD_STRIP);
+    for (i = 0; i <= teeth; i++) {
         angle = i * 2.0 * M_PI / teeth;
         glVertex3f(r0 * cos(angle), r0 * sin(angle), width * 0.5f);
         glVertex3f(r1 * cos(angle), r1 * sin(angle), width * 0.5f);
@@ -288,10 +287,10 @@ reshape(int width, int height)
 static void
 init(void)
 {
-    static GLfloat pos[4] = { 5.0, 5.0, 10.0, 0.0 };
-    static GLfloat red[4] = { 0.8, 0.1, 0.0, 1.0 };
-    static GLfloat green[4] = { 0.0, 0.8, 0.2, 1.0 };
-    static GLfloat blue[4] = { 0.2, 0.2, 1.0, 1.0 };
+    static GLfloat pos[4]   = { 5.0f, 5.0f, 10.0f, 0.0f };
+    static GLfloat red[4]   = { 0.8f, 0.1f, 0.0f,  1.0f };
+    static GLfloat green[4] = { 0.0f, 0.8f, 0.2f,  1.0f };
+    static GLfloat blue[4]  = { 0.2f, 0.2f, 1.0f,  1.0f };
 
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
     glEnable(GL_CULL_FACE);
@@ -454,14 +453,14 @@ static void event_loop() {
 int
 main(int argc, char *argv[])
 {
-    int            i;
-    Bool    printInfo = False;
+    int i;
+    Bool printInfo = False;
 
     ProgramName = argv[0];
 
     for (i = 1; i < argc; i++) {
         const char *arg = argv[i];
-        int         len = strlen(arg);
+        int len = strlen(arg);
 
         if (strcmp(argv[i], "-info") == 0) {
             printInfo = GL_TRUE;

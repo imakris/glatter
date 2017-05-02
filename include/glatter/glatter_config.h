@@ -13,6 +13,13 @@
     //#define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER
 #endif
 
-//#define GLATTER_LOG
+//#define GLATTER_GLU
+
+#ifndef NDEBUG
+#define GLATTER_LOG_ERRORS
+#define GLATTER_LOG_CALLS
+#endif
+
+#define GLATTER_HEADER_ONLY
 
 #endif
