@@ -74,7 +74,7 @@ Let's now introduce an error, by passing an invalid enumerator in the glIsEnable
 
   .. code-block:: c
 
-	GLboolean r = glIsEnabled(GL_COLOR_MATERIAL);
+	GLboolean r = glIsEnabled(GL_FRAMEBUFFER_RENDERABLE);
 
 
 In this case, Glatter could produce:
