@@ -19,6 +19,7 @@ The library can be built in one of two ways:
 The latter will affect compilation time.
 
 There are two Glatter headers that might need to be configured/modified, according to the needs of the user:
+
 - ``glatter_system_headers.h``: 
   This is where the set of OpenGL headers is being included. 
 - ``glatter_config.h``:
