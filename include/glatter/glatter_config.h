@@ -20,6 +20,6 @@
 #define GLATTER_LOG_CALLS
 #endif
 
-#define GLATTER_HEADER_ONLY
+//#define GLATTER_HEADER_ONLY
 
 #endif
