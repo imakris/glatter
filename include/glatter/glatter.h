@@ -35,15 +35,19 @@ extern "C" {
 #ifdef GLATTER_HEADER_ONLY
     #define GLATTER_INCLUDED_FROM_HEADER
     #include "glatter_def.h"
+#else
+    #define GLATTER_INLINE_OR_NOT
 #endif
 
 #else
 
 #ifdef GLATTER_HEADER_ONLY
     #error GLATTER_HEADER_ONLY can only be used in C++
+#else
+    #define GLATTER_INLINE_OR_NOT
 #endif
 
-#endif
+#endif //__cplusplus
 
 
 GLATTER_INLINE_OR_NOT const char* enum_to_string_GL(GLenum e);
