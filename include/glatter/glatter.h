@@ -58,10 +58,10 @@ GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLenum e);
 
 #define GLATTER_UBLOCK(rtype, cconv, name, dargs)\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
-    extern glatter_##name##_t glatter_##name##_ptr;
+    extern glatter_##name##_t glatter_##name;
 
 
-#if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_EVERYTHING)
+#if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_CALLS)
 
     #if defined(GLATTER_GL)
     #include "generated/glatter_GL_d.h"
