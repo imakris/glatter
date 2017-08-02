@@ -39,7 +39,7 @@ It only requires that the header is included, wherever its functionality is mean
 Tracing calls, checking errors
 ------------------------------
 
-Although there are the extensions ``ARB_debug_output`` and ``KHR_debug``, which serve a similar purpose, at least with regards to error checking, the asynchronous nature of OpenGL, makes their usage less convenient. The main issue with these extensions is that the errors only shows when the OpenGL server reaches the erroneous calls in the command buffer, without providing a clear indication of where the problem in the source code really is.
+Although there are the extensions ``ARB_debug_output`` and ``KHR_debug``, which serve a similar purpose, at least with regards to error checking, the asynchronous nature of OpenGL, makes their usage less convenient. The main issue with these extensions is that, depending on the implementation, the errors may only show when the OpenGL server reaches the erroneous calls in the command buffer, without providing a clear indication of where the problem in the source code really is.
 
 Glatter performs this task by wrapping all library calls inside debug versions of each call.
 There are two modes of debug operation, which can be switched on and off independently:
