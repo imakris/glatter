@@ -17,7 +17,7 @@
 
 #ifndef NDEBUG
 #define GLATTER_LOG_ERRORS
-#define GLATTER_LOG_CALLS
+//#define GLATTER_LOG_CALLS
 #endif
 
 //#define GLATTER_HEADER_ONLY
