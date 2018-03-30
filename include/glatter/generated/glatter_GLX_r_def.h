@@ -44,10 +44,14 @@ GLATTER_FBLOCK(return, GLX, extern, Bool, , glXReleaseTexImageARB, (dpy, pbuffer
 #define glXReleaseTexImageARB_defined
 #endif // defined(GLX_ARB_render_texture)
 #if defined(GLX_MESA_swap_control)
+#ifndef glXGetSwapIntervalMESA_defined
 GLATTER_FBLOCK(return, GLX, extern, int, , glXGetSwapIntervalMESA, (), (void))
 #define glXGetSwapIntervalMESA_defined
+#endif
+#ifndef glXSwapIntervalMESA_defined
 GLATTER_FBLOCK(return, GLX, extern, int, , glXSwapIntervalMESA, (interval), (unsigned int interval))
 #define glXSwapIntervalMESA_defined
+#endif
 #endif // defined(GLX_MESA_swap_control)
 #if defined(GLX_MESA_swap_frame_usage)
 GLATTER_FBLOCK(return, GLX, extern, int, , glXBeginFrameTrackingMESA, (dpy, drawable), (Display *dpy, GLXDrawable drawable))
@@ -154,7 +158,7 @@ GLATTER_FBLOCK(, GLX, extern, void, , glXWaitGL, (), (void))
 GLATTER_FBLOCK(, GLX, extern, void, , glXWaitX, (), (void))
 #define glXWaitX_defined
 #endif // defined(GLX_H)
-#if defined(__glxext_h_)
+#if defined(__glx_glxext_h_)
 #if defined(GLX_AMD_gpu_association)
 GLATTER_FBLOCK(, GLX, , void, , glXBlitContextFramebufferAMD, (dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLXContext dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
 #define glXBlitContextFramebufferAMD_defined
@@ -231,6 +235,16 @@ GLATTER_FBLOCK(return, GLX, , Bool, , glXReleaseBuffersMESA, (dpy, drawable), (D
 GLATTER_FBLOCK(return, GLX, , Bool, , glXSet3DfxModeMESA, (mode), (int mode))
 #define glXSet3DfxModeMESA_defined
 #endif // defined(GLX_MESA_set_3dfx_mode)
+#if defined(GLX_MESA_swap_control)
+#ifndef glXGetSwapIntervalMESA_defined
+GLATTER_FBLOCK(return, GLX, , int, , glXGetSwapIntervalMESA, (), (void))
+#define glXGetSwapIntervalMESA_defined
+#endif
+#ifndef glXSwapIntervalMESA_defined
+GLATTER_FBLOCK(return, GLX, , int, , glXSwapIntervalMESA, (interval), (unsigned int interval))
+#define glXSwapIntervalMESA_defined
+#endif
+#endif // defined(GLX_MESA_swap_control)
 #if defined(GLX_NV_copy_buffer)
 GLATTER_FBLOCK(, GLX, , void, , glXCopyBufferSubDataNV, (dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size), (Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
 #define glXCopyBufferSubDataNV_defined
@@ -456,7 +470,7 @@ GLATTER_FBLOCK(, GLX, , void, , glXSelectEvent, (dpy, draw, event_mask), (Displa
 #if defined(GLX_VERSION_1_4)
 GLATTER_FBLOCK(return, GLX, , __GLXextFuncPtr, , glXGetProcAddress, (procName), (const GLubyte *procName))
 #define glXGetProcAddress_defined
-#endif // defined(__glxext_h_)
+#endif // defined(__glx_glxext_h_)
 #endif // defined(GLX_VERSION_1_4)
 #endif // GLATTER_GLX
 

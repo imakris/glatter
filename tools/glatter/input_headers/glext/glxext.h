@@ -1,5 +1,5 @@
-#ifndef __glxext_h_
-#define __glxext_h_ 1
+#ifndef __glx_glxext_h_
+#define __glx_glxext_h_ 1
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,7 +34,7 @@ extern "C" {
 **   https://github.com/KhronosGroup/OpenGL-Registry
 */
 
-#define GLX_GLXEXT_VERSION 20170209
+#define GLX_GLXEXT_VERSION 20180316
 
 /* Generated C header for:
  * API: glx
@@ -175,6 +175,11 @@ typedef GLXContext ( *PFNGLXCREATECONTEXTATTRIBSARBPROC) (Display *dpy, GLXFBCon
 GLXContext glXCreateContextAttribsARB (Display *dpy, GLXFBConfig config, GLXContext share_context, Bool direct, const int *attrib_list);
 #endif
 #endif /* GLX_ARB_create_context */
+
+#ifndef GLX_ARB_create_context_no_error
+#define GLX_ARB_create_context_no_error 1
+#define GLX_CONTEXT_OPENGL_NO_ERROR_ARB   0x31B3
+#endif /* GLX_ARB_create_context_no_error */
 
 #ifndef GLX_ARB_create_context_profile
 #define GLX_ARB_create_context_profile 1
@@ -319,6 +324,10 @@ void glXFreeContextEXT (Display *dpy, GLXContext context);
 #define GLX_EXT_libglvnd 1
 #define GLX_VENDOR_NAMES_EXT              0x20F6
 #endif /* GLX_EXT_libglvnd */
+
+#ifndef GLX_EXT_no_config_context
+#define GLX_EXT_no_config_context 1
+#endif /* GLX_EXT_no_config_context */
 
 #ifndef GLX_EXT_stereo_tree
 #define GLX_EXT_stereo_tree 1
@@ -497,6 +506,16 @@ typedef Bool ( *PFNGLXSET3DFXMODEMESAPROC) (int mode);
 Bool glXSet3DfxModeMESA (int mode);
 #endif
 #endif /* GLX_MESA_set_3dfx_mode */
+
+#ifndef GLX_MESA_swap_control
+#define GLX_MESA_swap_control 1
+typedef int ( *PFNGLXGETSWAPINTERVALMESAPROC) (void);
+typedef int ( *PFNGLXSWAPINTERVALMESAPROC) (unsigned int interval);
+#ifdef GLX_GLXEXT_PROTOTYPES
+int glXGetSwapIntervalMESA (void);
+int glXSwapIntervalMESA (unsigned int interval);
+#endif
+#endif /* GLX_MESA_swap_control */
 
 #ifndef GLX_NV_copy_buffer
 #define GLX_NV_copy_buffer 1

@@ -9836,7 +9836,7 @@ GLATTER_FBLOCK(, GL, GL_APICALL, void, GL_APIENTRY, glWaitSync, (sync, flags, ti
 #endif
 #endif // defined(GL_ES_VERSION_3_0)
 #endif // defined(__gl3_h_)
-#if defined(__glcorearb_h_)
+#if defined(__gl_glcorearb_h_)
 #if defined(GL_AMD_performance_monitor)
 #ifndef glBeginPerfMonitorAMD_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginPerfMonitorAMD, (monitor), (GLuint monitor))
@@ -9883,6 +9883,12 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSelectPerfMonitorCountersAMD, (mon
 #define glSelectPerfMonitorCountersAMD_defined
 #endif
 #endif // defined(GL_AMD_performance_monitor)
+#if defined(GL_ARB_ES3_2_compatibility)
+#ifndef glPrimitiveBoundingBoxARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPrimitiveBoundingBoxARB, (minX, minY, minZ, minW, maxX, maxY, maxZ, maxW), (GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW))
+#define glPrimitiveBoundingBoxARB_defined
+#endif
+#endif // defined(GL_ARB_ES3_2_compatibility)
 #if defined(GL_ARB_bindless_texture)
 #ifndef glGetImageHandleARB_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetImageHandleARB, (texture, level, layered, layer, format), (GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format))
@@ -9997,16 +10003,208 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFunciARB, (buf, src, dst), (G
 #define glBlendFunciARB_defined
 #endif
 #endif // defined(GL_ARB_draw_buffers_blend)
+#if defined(GL_ARB_draw_instanced)
+#ifndef glDrawArraysInstancedARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstancedARB, (mode, first, count, primcount), (GLenum mode, GLint first, GLsizei count, GLsizei primcount))
+#define glDrawArraysInstancedARB_defined
+#endif
+#ifndef glDrawElementsInstancedARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedARB, (mode, count, type, indices, primcount), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount))
+#define glDrawElementsInstancedARB_defined
+#endif
+#endif // defined(GL_ARB_draw_instanced)
+#if defined(GL_ARB_geometry_shader4)
+#ifndef glFramebufferTextureARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureARB, (target, attachment, texture, level), (GLenum target, GLenum attachment, GLuint texture, GLint level))
+#define glFramebufferTextureARB_defined
+#endif
+#ifndef glFramebufferTextureFaceARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureFaceARB, (target, attachment, texture, level, face), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face))
+#define glFramebufferTextureFaceARB_defined
+#endif
+#ifndef glFramebufferTextureLayerARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureLayerARB, (target, attachment, texture, level, layer), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer))
+#define glFramebufferTextureLayerARB_defined
+#endif
+#ifndef glProgramParameteriARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramParameteriARB, (program, pname, value), (GLuint program, GLenum pname, GLint value))
+#define glProgramParameteriARB_defined
+#endif
+#endif // defined(GL_ARB_geometry_shader4)
+#if defined(GL_ARB_gl_spirv)
+#ifndef glSpecializeShaderARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSpecializeShaderARB, (shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue), (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue))
+#define glSpecializeShaderARB_defined
+#endif
+#endif // defined(GL_ARB_gl_spirv)
+#if defined(GL_ARB_gpu_shader_int64)
+#ifndef glGetUniformi64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformi64vARB, (program, location, params), (GLuint program, GLint location, GLint64 *params))
+#define glGetUniformi64vARB_defined
+#endif
+#ifndef glGetUniformui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformui64vARB, (program, location, params), (GLuint program, GLint location, GLuint64 *params))
+#define glGetUniformui64vARB_defined
+#endif
+#ifndef glGetnUniformi64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformi64vARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLint64 *params))
+#define glGetnUniformi64vARB_defined
+#endif
+#ifndef glGetnUniformui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformui64vARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLuint64 *params))
+#define glGetnUniformui64vARB_defined
+#endif
+#ifndef glProgramUniform1i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64ARB, (program, location, x), (GLuint program, GLint location, GLint64 x))
+#define glProgramUniform1i64ARB_defined
+#endif
+#ifndef glProgramUniform1i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
+#define glProgramUniform1i64vARB_defined
+#endif
+#ifndef glProgramUniform1ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui64ARB, (program, location, x), (GLuint program, GLint location, GLuint64 x))
+#define glProgramUniform1ui64ARB_defined
+#endif
+#ifndef glProgramUniform1ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
+#define glProgramUniform1ui64vARB_defined
+#endif
+#ifndef glProgramUniform2i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i64ARB, (program, location, x, y), (GLuint program, GLint location, GLint64 x, GLint64 y))
+#define glProgramUniform2i64ARB_defined
+#endif
+#ifndef glProgramUniform2i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
+#define glProgramUniform2i64vARB_defined
+#endif
+#ifndef glProgramUniform2ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui64ARB, (program, location, x, y), (GLuint program, GLint location, GLuint64 x, GLuint64 y))
+#define glProgramUniform2ui64ARB_defined
+#endif
+#ifndef glProgramUniform2ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
+#define glProgramUniform2ui64vARB_defined
+#endif
+#ifndef glProgramUniform3i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i64ARB, (program, location, x, y, z), (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z))
+#define glProgramUniform3i64ARB_defined
+#endif
+#ifndef glProgramUniform3i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
+#define glProgramUniform3i64vARB_defined
+#endif
+#ifndef glProgramUniform3ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui64ARB, (program, location, x, y, z), (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z))
+#define glProgramUniform3ui64ARB_defined
+#endif
+#ifndef glProgramUniform3ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
+#define glProgramUniform3ui64vARB_defined
+#endif
+#ifndef glProgramUniform4i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i64ARB, (program, location, x, y, z, w), (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w))
+#define glProgramUniform4i64ARB_defined
+#endif
+#ifndef glProgramUniform4i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
+#define glProgramUniform4i64vARB_defined
+#endif
+#ifndef glProgramUniform4ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui64ARB, (program, location, x, y, z, w), (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w))
+#define glProgramUniform4ui64ARB_defined
+#endif
+#ifndef glProgramUniform4ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
+#define glProgramUniform4ui64vARB_defined
+#endif
+#ifndef glUniform1i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i64ARB, (location, x), (GLint location, GLint64 x))
+#define glUniform1i64ARB_defined
+#endif
+#ifndef glUniform1i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
+#define glUniform1i64vARB_defined
+#endif
+#ifndef glUniform1ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui64ARB, (location, x), (GLint location, GLuint64 x))
+#define glUniform1ui64ARB_defined
+#endif
+#ifndef glUniform1ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+#define glUniform1ui64vARB_defined
+#endif
+#ifndef glUniform2i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i64ARB, (location, x, y), (GLint location, GLint64 x, GLint64 y))
+#define glUniform2i64ARB_defined
+#endif
+#ifndef glUniform2i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
+#define glUniform2i64vARB_defined
+#endif
+#ifndef glUniform2ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui64ARB, (location, x, y), (GLint location, GLuint64 x, GLuint64 y))
+#define glUniform2ui64ARB_defined
+#endif
+#ifndef glUniform2ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+#define glUniform2ui64vARB_defined
+#endif
+#ifndef glUniform3i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i64ARB, (location, x, y, z), (GLint location, GLint64 x, GLint64 y, GLint64 z))
+#define glUniform3i64ARB_defined
+#endif
+#ifndef glUniform3i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
+#define glUniform3i64vARB_defined
+#endif
+#ifndef glUniform3ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui64ARB, (location, x, y, z), (GLint location, GLuint64 x, GLuint64 y, GLuint64 z))
+#define glUniform3ui64ARB_defined
+#endif
+#ifndef glUniform3ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+#define glUniform3ui64vARB_defined
+#endif
+#ifndef glUniform4i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i64ARB, (location, x, y, z, w), (GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w))
+#define glUniform4i64ARB_defined
+#endif
+#ifndef glUniform4i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
+#define glUniform4i64vARB_defined
+#endif
+#ifndef glUniform4ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui64ARB, (location, x, y, z, w), (GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w))
+#define glUniform4ui64ARB_defined
+#endif
+#ifndef glUniform4ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+#define glUniform4ui64vARB_defined
+#endif
+#endif // defined(GL_ARB_gpu_shader_int64)
 #if defined(GL_ARB_indirect_parameters)
 #ifndef glMultiDrawArraysIndirectCountARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
 #define glMultiDrawArraysIndirectCountARB_defined
 #endif
 #ifndef glMultiDrawElementsIndirectCountARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
 #define glMultiDrawElementsIndirectCountARB_defined
 #endif
 #endif // defined(GL_ARB_indirect_parameters)
+#if defined(GL_ARB_instanced_arrays)
+#ifndef glVertexAttribDivisorARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribDivisorARB, (index, divisor), (GLuint index, GLuint divisor))
+#define glVertexAttribDivisorARB_defined
+#endif
+#endif // defined(GL_ARB_instanced_arrays)
+#if defined(GL_ARB_parallel_shader_compile)
+#ifndef glMaxShaderCompilerThreadsARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMaxShaderCompilerThreadsARB, (count), (GLuint count))
+#define glMaxShaderCompilerThreadsARB_defined
+#endif
+#endif // defined(GL_ARB_parallel_shader_compile)
 #if defined(GL_ARB_robustness)
 #ifndef glGetGraphicsResetStatusARB_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glGetGraphicsResetStatusARB, (), (void))
@@ -10041,6 +10239,20 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadnPixelsARB, (x, y, width, heig
 #define glReadnPixelsARB_defined
 #endif
 #endif // defined(GL_ARB_robustness)
+#if defined(GL_ARB_sample_locations)
+#ifndef glEvaluateDepthValuesARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEvaluateDepthValuesARB, (), (void))
+#define glEvaluateDepthValuesARB_defined
+#endif
+#ifndef glFramebufferSampleLocationsfvARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferSampleLocationsfvARB, (target, start, count, v), (GLenum target, GLuint start, GLsizei count, const GLfloat *v))
+#define glFramebufferSampleLocationsfvARB_defined
+#endif
+#ifndef glNamedFramebufferSampleLocationsfvARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferSampleLocationsfvARB, (framebuffer, start, count, v), (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v))
+#define glNamedFramebufferSampleLocationsfvARB_defined
+#endif
+#endif // defined(GL_ARB_sample_locations)
 #if defined(GL_ARB_sample_shading)
 #ifndef glMinSampleShadingARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMinSampleShadingARB, (value), (GLfloat value))
@@ -10075,24 +10287,40 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedStringARB, (type, namelen, na
 #endif // defined(GL_ARB_shading_language_include)
 #if defined(GL_ARB_sparse_buffer)
 #ifndef glBufferPageCommitmentARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferPageCommitmentARB, (target, offset, size, commit), (GLenum target, GLintptr offset, GLsizei size, GLboolean commit))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferPageCommitmentARB, (target, offset, size, commit), (GLenum target, GLintptr offset, GLsizeiptr size, GLboolean commit))
 #define glBufferPageCommitmentARB_defined
 #endif
 #ifndef glNamedBufferPageCommitmentARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentARB, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentARB, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit))
 #define glNamedBufferPageCommitmentARB_defined
 #endif
 #ifndef glNamedBufferPageCommitmentEXT_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentEXT, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentEXT, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit))
 #define glNamedBufferPageCommitmentEXT_defined
 #endif
 #endif // defined(GL_ARB_sparse_buffer)
 #if defined(GL_ARB_sparse_texture)
 #ifndef glTexPageCommitmentARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexPageCommitmentARB, (target, level, xoffset, yoffset, zoffset, width, height, depth, resident), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexPageCommitmentARB, (target, level, xoffset, yoffset, zoffset, width, height, depth, commit), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit))
 #define glTexPageCommitmentARB_defined
 #endif
 #endif // defined(GL_ARB_sparse_texture)
+#if defined(GL_ARB_texture_buffer_object)
+#ifndef glTexBufferARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexBufferARB, (target, internalformat, buffer), (GLenum target, GLenum internalformat, GLuint buffer))
+#define glTexBufferARB_defined
+#endif
+#endif // defined(GL_ARB_texture_buffer_object)
+#if defined(GL_EXT_EGL_image_storage)
+#ifndef glEGLImageTargetTexStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTexStorageEXT, (target, image, attrib_list), (GLenum target, GLeglImageOES image, const GLint* attrib_list))
+#define glEGLImageTargetTexStorageEXT_defined
+#endif
+#ifndef glEGLImageTargetTextureStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTextureStorageEXT, (texture, image, attrib_list), (GLuint texture, GLeglImageOES image, const GLint* attrib_list))
+#define glEGLImageTargetTextureStorageEXT_defined
+#endif
+#endif // defined(GL_EXT_EGL_image_storage)
 #if defined(GL_EXT_debug_label)
 #ifndef glGetObjectLabelEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetObjectLabelEXT, (type, object, bufSize, length, label), (GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label))
@@ -10117,6 +10345,1028 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPushGroupMarkerEXT, (length, marke
 #define glPushGroupMarkerEXT_defined
 #endif
 #endif // defined(GL_EXT_debug_marker)
+#if defined(GL_EXT_direct_state_access)
+#ifndef glBindMultiTextureEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindMultiTextureEXT, (texunit, target, texture), (GLenum texunit, GLenum target, GLuint texture))
+#define glBindMultiTextureEXT_defined
+#endif
+#ifndef glCheckNamedFramebufferStatusEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glCheckNamedFramebufferStatusEXT, (framebuffer, target), (GLuint framebuffer, GLenum target))
+#define glCheckNamedFramebufferStatusEXT_defined
+#endif
+#ifndef glClearNamedBufferDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferDataEXT, (buffer, internalformat, format, type, data), (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data))
+#define glClearNamedBufferDataEXT_defined
+#endif
+#ifndef glClearNamedBufferSubDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubDataEXT, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data))
+#define glClearNamedBufferSubDataEXT_defined
+#endif
+#ifndef glClientAttribDefaultEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClientAttribDefaultEXT, (mask), (GLbitfield mask))
+#define glClientAttribDefaultEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage1DEXT, (texunit, target, level, internalformat, width, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits))
+#define glCompressedMultiTexImage1DEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage2DEXT, (texunit, target, level, internalformat, width, height, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits))
+#define glCompressedMultiTexImage2DEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage3DEXT, (texunit, target, level, internalformat, width, height, depth, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits))
+#define glCompressedMultiTexImage3DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage1DEXT, (texunit, target, level, xoffset, width, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits))
+#define glCompressedMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, width, height, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits))
+#define glCompressedMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits))
+#define glCompressedMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glCompressedTextureImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage1DEXT, (texture, target, level, internalformat, width, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits))
+#define glCompressedTextureImage1DEXT_defined
+#endif
+#ifndef glCompressedTextureImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage2DEXT, (texture, target, level, internalformat, width, height, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits))
+#define glCompressedTextureImage2DEXT_defined
+#endif
+#ifndef glCompressedTextureImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage3DEXT, (texture, target, level, internalformat, width, height, depth, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits))
+#define glCompressedTextureImage3DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage1DEXT, (texture, target, level, xoffset, width, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits))
+#define glCompressedTextureSubImage1DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, width, height, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits))
+#define glCompressedTextureSubImage2DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits))
+#define glCompressedTextureSubImage3DEXT_defined
+#endif
+#ifndef glCopyMultiTexImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexImage1DEXT, (texunit, target, level, internalformat, x, y, width, border), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
+#define glCopyMultiTexImage1DEXT_defined
+#endif
+#ifndef glCopyMultiTexImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexImage2DEXT, (texunit, target, level, internalformat, x, y, width, height, border), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
+#define glCopyMultiTexImage2DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage1DEXT, (texunit, target, level, xoffset, x, y, width), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
+#define glCopyMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, x, y, width, height), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glCopyMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glCopyMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glCopyTextureImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureImage1DEXT, (texture, target, level, internalformat, x, y, width, border), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
+#define glCopyTextureImage1DEXT_defined
+#endif
+#ifndef glCopyTextureImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureImage2DEXT, (texture, target, level, internalformat, x, y, width, height, border), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
+#define glCopyTextureImage2DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage1DEXT, (texture, target, level, xoffset, x, y, width), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
+#define glCopyTextureSubImage1DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, x, y, width, height), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glCopyTextureSubImage2DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glCopyTextureSubImage3DEXT_defined
+#endif
+#ifndef glDisableClientStateIndexedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableClientStateIndexedEXT, (array, index), (GLenum array, GLuint index))
+#define glDisableClientStateIndexedEXT_defined
+#endif
+#ifndef glDisableClientStateiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableClientStateiEXT, (array, index), (GLenum array, GLuint index))
+#define glDisableClientStateiEXT_defined
+#endif
+#ifndef glDisableIndexedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableIndexedEXT, (target, index), (GLenum target, GLuint index))
+#define glDisableIndexedEXT_defined
+#endif
+#ifndef glDisableVertexArrayAttribEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayAttribEXT, (vaobj, index), (GLuint vaobj, GLuint index))
+#define glDisableVertexArrayAttribEXT_defined
+#endif
+#ifndef glDisableVertexArrayEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayEXT, (vaobj, array), (GLuint vaobj, GLenum array))
+#define glDisableVertexArrayEXT_defined
+#endif
+#ifndef glEnableClientStateIndexedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableClientStateIndexedEXT, (array, index), (GLenum array, GLuint index))
+#define glEnableClientStateIndexedEXT_defined
+#endif
+#ifndef glEnableClientStateiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableClientStateiEXT, (array, index), (GLenum array, GLuint index))
+#define glEnableClientStateiEXT_defined
+#endif
+#ifndef glEnableIndexedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableIndexedEXT, (target, index), (GLenum target, GLuint index))
+#define glEnableIndexedEXT_defined
+#endif
+#ifndef glEnableVertexArrayAttribEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayAttribEXT, (vaobj, index), (GLuint vaobj, GLuint index))
+#define glEnableVertexArrayAttribEXT_defined
+#endif
+#ifndef glEnableVertexArrayEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayEXT, (vaobj, array), (GLuint vaobj, GLenum array))
+#define glEnableVertexArrayEXT_defined
+#endif
+#ifndef glFlushMappedNamedBufferRangeEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRangeEXT, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizeiptr length))
+#define glFlushMappedNamedBufferRangeEXT_defined
+#endif
+#ifndef glFramebufferDrawBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferDrawBufferEXT, (framebuffer, mode), (GLuint framebuffer, GLenum mode))
+#define glFramebufferDrawBufferEXT_defined
+#endif
+#ifndef glFramebufferDrawBuffersEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferDrawBuffersEXT, (framebuffer, n, bufs), (GLuint framebuffer, GLsizei n, const GLenum *bufs))
+#define glFramebufferDrawBuffersEXT_defined
+#endif
+#ifndef glFramebufferReadBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferReadBufferEXT, (framebuffer, mode), (GLuint framebuffer, GLenum mode))
+#define glFramebufferReadBufferEXT_defined
+#endif
+#ifndef glGenerateMultiTexMipmapEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateMultiTexMipmapEXT, (texunit, target), (GLenum texunit, GLenum target))
+#define glGenerateMultiTexMipmapEXT_defined
+#endif
+#ifndef glGenerateTextureMipmapEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateTextureMipmapEXT, (texture, target), (GLuint texture, GLenum target))
+#define glGenerateTextureMipmapEXT_defined
+#endif
+#ifndef glGetBooleanIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBooleanIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLboolean *data))
+#define glGetBooleanIndexedvEXT_defined
+#endif
+#ifndef glGetCompressedMultiTexImageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedMultiTexImageEXT, (texunit, target, lod, img), (GLenum texunit, GLenum target, GLint lod, void *img))
+#define glGetCompressedMultiTexImageEXT_defined
+#endif
+#ifndef glGetCompressedTextureImageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTextureImageEXT, (texture, target, lod, img), (GLuint texture, GLenum target, GLint lod, void *img))
+#define glGetCompressedTextureImageEXT_defined
+#endif
+#ifndef glGetDoubleIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoubleIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLdouble *data))
+#define glGetDoubleIndexedvEXT_defined
+#endif
+#ifndef glGetDoublei_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoublei_vEXT, (pname, index, params), (GLenum pname, GLuint index, GLdouble *params))
+#define glGetDoublei_vEXT_defined
+#endif
+#ifndef glGetFloatIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloatIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLfloat *data))
+#define glGetFloatIndexedvEXT_defined
+#endif
+#ifndef glGetFloati_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloati_vEXT, (pname, index, params), (GLenum pname, GLuint index, GLfloat *params))
+#define glGetFloati_vEXT_defined
+#endif
+#ifndef glGetFramebufferParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFramebufferParameterivEXT, (framebuffer, pname, params), (GLuint framebuffer, GLenum pname, GLint *params))
+#define glGetFramebufferParameterivEXT_defined
+#endif
+#ifndef glGetIntegerIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLint *data))
+#define glGetIntegerIndexedvEXT_defined
+#endif
+#ifndef glGetMultiTexEnvfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexEnvfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLfloat *params))
+#define glGetMultiTexEnvfvEXT_defined
+#endif
+#ifndef glGetMultiTexEnvivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexEnvivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
+#define glGetMultiTexEnvivEXT_defined
+#endif
+#ifndef glGetMultiTexGendvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGendvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLdouble *params))
+#define glGetMultiTexGendvEXT_defined
+#endif
+#ifndef glGetMultiTexGenfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGenfvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLfloat *params))
+#define glGetMultiTexGenfvEXT_defined
+#endif
+#ifndef glGetMultiTexGenivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGenivEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLint *params))
+#define glGetMultiTexGenivEXT_defined
+#endif
+#ifndef glGetMultiTexImageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexImageEXT, (texunit, target, level, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
+#define glGetMultiTexImageEXT_defined
+#endif
+#ifndef glGetMultiTexLevelParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexLevelParameterfvEXT, (texunit, target, level, pname, params), (GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat *params))
+#define glGetMultiTexLevelParameterfvEXT_defined
+#endif
+#ifndef glGetMultiTexLevelParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexLevelParameterivEXT, (texunit, target, level, pname, params), (GLenum texunit, GLenum target, GLint level, GLenum pname, GLint *params))
+#define glGetMultiTexLevelParameterivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterIivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
+#define glGetMultiTexParameterIivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterIuivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLuint *params))
+#define glGetMultiTexParameterIuivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLfloat *params))
+#define glGetMultiTexParameterfvEXT_defined
+#endif
+#ifndef glGetMultiTexParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
+#define glGetMultiTexParameterivEXT_defined
+#endif
+#ifndef glGetNamedBufferParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameterivEXT, (buffer, pname, params), (GLuint buffer, GLenum pname, GLint *params))
+#define glGetNamedBufferParameterivEXT_defined
+#endif
+#ifndef glGetNamedBufferPointervEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferPointervEXT, (buffer, pname, params), (GLuint buffer, GLenum pname, void **params))
+#define glGetNamedBufferPointervEXT_defined
+#endif
+#ifndef glGetNamedBufferSubDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubDataEXT, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data))
+#define glGetNamedBufferSubDataEXT_defined
+#endif
+#ifndef glGetNamedFramebufferAttachmentParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferAttachmentParameterivEXT, (framebuffer, attachment, pname, params), (GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params))
+#define glGetNamedFramebufferAttachmentParameterivEXT_defined
+#endif
+#ifndef glGetNamedFramebufferParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferParameterivEXT, (framebuffer, pname, params), (GLuint framebuffer, GLenum pname, GLint *params))
+#define glGetNamedFramebufferParameterivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterIivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLint *params))
+#define glGetNamedProgramLocalParameterIivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterIuivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLuint *params))
+#define glGetNamedProgramLocalParameterIuivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterdvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterdvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLdouble *params))
+#define glGetNamedProgramLocalParameterdvEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterfvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLfloat *params))
+#define glGetNamedProgramLocalParameterfvEXT_defined
+#endif
+#ifndef glGetNamedProgramStringEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramStringEXT, (program, target, pname, string), (GLuint program, GLenum target, GLenum pname, void *string))
+#define glGetNamedProgramStringEXT_defined
+#endif
+#ifndef glGetNamedProgramivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramivEXT, (program, target, pname, params), (GLuint program, GLenum target, GLenum pname, GLint *params))
+#define glGetNamedProgramivEXT_defined
+#endif
+#ifndef glGetNamedRenderbufferParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedRenderbufferParameterivEXT, (renderbuffer, pname, params), (GLuint renderbuffer, GLenum pname, GLint *params))
+#define glGetNamedRenderbufferParameterivEXT_defined
+#endif
+#ifndef glGetPointerIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointerIndexedvEXT, (target, index, data), (GLenum target, GLuint index, void **data))
+#define glGetPointerIndexedvEXT_defined
+#endif
+#ifndef glGetPointeri_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointeri_vEXT, (pname, index, params), (GLenum pname, GLuint index, void **params))
+#define glGetPointeri_vEXT_defined
+#endif
+#ifndef glGetTextureImageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureImageEXT, (texture, target, level, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
+#define glGetTextureImageEXT_defined
+#endif
+#ifndef glGetTextureLevelParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterfvEXT, (texture, target, level, pname, params), (GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params))
+#define glGetTextureLevelParameterfvEXT_defined
+#endif
+#ifndef glGetTextureLevelParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterivEXT, (texture, target, level, pname, params), (GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params))
+#define glGetTextureLevelParameterivEXT_defined
+#endif
+#ifndef glGetTextureParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLint *params))
+#define glGetTextureParameterIivEXT_defined
+#endif
+#ifndef glGetTextureParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIuivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLuint *params))
+#define glGetTextureParameterIuivEXT_defined
+#endif
+#ifndef glGetTextureParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterfvEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLfloat *params))
+#define glGetTextureParameterfvEXT_defined
+#endif
+#ifndef glGetTextureParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLint *params))
+#define glGetTextureParameterivEXT_defined
+#endif
+#ifndef glGetVertexArrayIntegeri_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIntegeri_vEXT, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, GLint *param))
+#define glGetVertexArrayIntegeri_vEXT_defined
+#endif
+#ifndef glGetVertexArrayIntegervEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIntegervEXT, (vaobj, pname, param), (GLuint vaobj, GLenum pname, GLint *param))
+#define glGetVertexArrayIntegervEXT_defined
+#endif
+#ifndef glGetVertexArrayPointeri_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayPointeri_vEXT, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, void **param))
+#define glGetVertexArrayPointeri_vEXT_defined
+#endif
+#ifndef glGetVertexArrayPointervEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayPointervEXT, (vaobj, pname, param), (GLuint vaobj, GLenum pname, void **param))
+#define glGetVertexArrayPointervEXT_defined
+#endif
+#ifndef glIsEnabledIndexedEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsEnabledIndexedEXT, (target, index), (GLenum target, GLuint index))
+#define glIsEnabledIndexedEXT_defined
+#endif
+#ifndef glMapNamedBufferEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferEXT, (buffer, access), (GLuint buffer, GLenum access))
+#define glMapNamedBufferEXT_defined
+#endif
+#ifndef glMapNamedBufferRangeEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRangeEXT, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access))
+#define glMapNamedBufferRangeEXT_defined
+#endif
+#ifndef glMatrixFrustumEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixFrustumEXT, (mode, left, right, bottom, top, zNear, zFar), (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar))
+#define glMatrixFrustumEXT_defined
+#endif
+#ifndef glMatrixLoadIdentityEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadIdentityEXT, (mode), (GLenum mode))
+#define glMatrixLoadIdentityEXT_defined
+#endif
+#ifndef glMatrixLoadTransposedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadTransposedEXT, (mode, m), (GLenum mode, const GLdouble *m))
+#define glMatrixLoadTransposedEXT_defined
+#endif
+#ifndef glMatrixLoadTransposefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadTransposefEXT, (mode, m), (GLenum mode, const GLfloat *m))
+#define glMatrixLoadTransposefEXT_defined
+#endif
+#ifndef glMatrixLoaddEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoaddEXT, (mode, m), (GLenum mode, const GLdouble *m))
+#define glMatrixLoaddEXT_defined
+#endif
+#ifndef glMatrixLoadfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadfEXT, (mode, m), (GLenum mode, const GLfloat *m))
+#define glMatrixLoadfEXT_defined
+#endif
+#ifndef glMatrixMultTransposedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultTransposedEXT, (mode, m), (GLenum mode, const GLdouble *m))
+#define glMatrixMultTransposedEXT_defined
+#endif
+#ifndef glMatrixMultTransposefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultTransposefEXT, (mode, m), (GLenum mode, const GLfloat *m))
+#define glMatrixMultTransposefEXT_defined
+#endif
+#ifndef glMatrixMultdEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultdEXT, (mode, m), (GLenum mode, const GLdouble *m))
+#define glMatrixMultdEXT_defined
+#endif
+#ifndef glMatrixMultfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultfEXT, (mode, m), (GLenum mode, const GLfloat *m))
+#define glMatrixMultfEXT_defined
+#endif
+#ifndef glMatrixOrthoEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixOrthoEXT, (mode, left, right, bottom, top, zNear, zFar), (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar))
+#define glMatrixOrthoEXT_defined
+#endif
+#ifndef glMatrixPopEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixPopEXT, (mode), (GLenum mode))
+#define glMatrixPopEXT_defined
+#endif
+#ifndef glMatrixPushEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixPushEXT, (mode), (GLenum mode))
+#define glMatrixPushEXT_defined
+#endif
+#ifndef glMatrixRotatedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixRotatedEXT, (mode, angle, x, y, z), (GLenum mode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z))
+#define glMatrixRotatedEXT_defined
+#endif
+#ifndef glMatrixRotatefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixRotatefEXT, (mode, angle, x, y, z), (GLenum mode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z))
+#define glMatrixRotatefEXT_defined
+#endif
+#ifndef glMatrixScaledEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixScaledEXT, (mode, x, y, z), (GLenum mode, GLdouble x, GLdouble y, GLdouble z))
+#define glMatrixScaledEXT_defined
+#endif
+#ifndef glMatrixScalefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixScalefEXT, (mode, x, y, z), (GLenum mode, GLfloat x, GLfloat y, GLfloat z))
+#define glMatrixScalefEXT_defined
+#endif
+#ifndef glMatrixTranslatedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixTranslatedEXT, (mode, x, y, z), (GLenum mode, GLdouble x, GLdouble y, GLdouble z))
+#define glMatrixTranslatedEXT_defined
+#endif
+#ifndef glMatrixTranslatefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixTranslatefEXT, (mode, x, y, z), (GLenum mode, GLfloat x, GLfloat y, GLfloat z))
+#define glMatrixTranslatefEXT_defined
+#endif
+#ifndef glMultiTexBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexBufferEXT, (texunit, target, internalformat, buffer), (GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer))
+#define glMultiTexBufferEXT_defined
+#endif
+#ifndef glMultiTexCoordPointerEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexCoordPointerEXT, (texunit, size, type, stride, pointer), (GLenum texunit, GLint size, GLenum type, GLsizei stride, const void *pointer))
+#define glMultiTexCoordPointerEXT_defined
+#endif
+#ifndef glMultiTexEnvfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvfEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLfloat param))
+#define glMultiTexEnvfEXT_defined
+#endif
+#ifndef glMultiTexEnvfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLfloat *params))
+#define glMultiTexEnvfvEXT_defined
+#endif
+#ifndef glMultiTexEnviEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnviEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLint param))
+#define glMultiTexEnviEXT_defined
+#endif
+#ifndef glMultiTexEnvivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
+#define glMultiTexEnvivEXT_defined
+#endif
+#ifndef glMultiTexGendEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGendEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLdouble param))
+#define glMultiTexGendEXT_defined
+#endif
+#ifndef glMultiTexGendvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGendvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params))
+#define glMultiTexGendvEXT_defined
+#endif
+#ifndef glMultiTexGenfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenfEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLfloat param))
+#define glMultiTexGenfEXT_defined
+#endif
+#ifndef glMultiTexGenfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenfvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params))
+#define glMultiTexGenfvEXT_defined
+#endif
+#ifndef glMultiTexGeniEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGeniEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLint param))
+#define glMultiTexGeniEXT_defined
+#endif
+#ifndef glMultiTexGenivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenivEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLint *params))
+#define glMultiTexGenivEXT_defined
+#endif
+#ifndef glMultiTexImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage1DEXT, (texunit, target, level, internalformat, width, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
+#define glMultiTexImage1DEXT_defined
+#endif
+#ifndef glMultiTexImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage2DEXT, (texunit, target, level, internalformat, width, height, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
+#define glMultiTexImage2DEXT_defined
+#endif
+#ifndef glMultiTexImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage3DEXT, (texunit, target, level, internalformat, width, height, depth, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
+#define glMultiTexImage3DEXT_defined
+#endif
+#ifndef glMultiTexParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterIivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
+#define glMultiTexParameterIivEXT_defined
+#endif
+#ifndef glMultiTexParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterIuivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLuint *params))
+#define glMultiTexParameterIuivEXT_defined
+#endif
+#ifndef glMultiTexParameterfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterfEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLfloat param))
+#define glMultiTexParameterfEXT_defined
+#endif
+#ifndef glMultiTexParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLfloat *params))
+#define glMultiTexParameterfvEXT_defined
+#endif
+#ifndef glMultiTexParameteriEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameteriEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLint param))
+#define glMultiTexParameteriEXT_defined
+#endif
+#ifndef glMultiTexParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
+#define glMultiTexParameterivEXT_defined
+#endif
+#ifndef glMultiTexRenderbufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexRenderbufferEXT, (texunit, target, renderbuffer), (GLenum texunit, GLenum target, GLuint renderbuffer))
+#define glMultiTexRenderbufferEXT_defined
+#endif
+#ifndef glMultiTexSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage1DEXT, (texunit, target, level, xoffset, width, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
+#define glMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glMultiTexSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, width, height, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
+#define glMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glMultiTexSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
+#define glMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glNamedBufferDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferDataEXT, (buffer, size, data, usage), (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage))
+#define glNamedBufferDataEXT_defined
+#endif
+#ifndef glNamedBufferStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorageEXT, (buffer, size, data, flags), (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags))
+#define glNamedBufferStorageEXT_defined
+#endif
+#ifndef glNamedBufferSubDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubDataEXT, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
+#define glNamedBufferSubDataEXT_defined
+#endif
+#ifndef glNamedCopyBufferSubDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedCopyBufferSubDataEXT, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
+#define glNamedCopyBufferSubDataEXT_defined
+#endif
+#ifndef glNamedFramebufferParameteriEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferParameteriEXT, (framebuffer, pname, param), (GLuint framebuffer, GLenum pname, GLint param))
+#define glNamedFramebufferParameteriEXT_defined
+#endif
+#ifndef glNamedFramebufferRenderbufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferRenderbufferEXT, (framebuffer, attachment, renderbuffertarget, renderbuffer), (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer))
+#define glNamedFramebufferRenderbufferEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture1DEXT, (framebuffer, attachment, textarget, texture, level), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
+#define glNamedFramebufferTexture1DEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture2DEXT, (framebuffer, attachment, textarget, texture, level), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
+#define glNamedFramebufferTexture2DEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture3DEXT, (framebuffer, attachment, textarget, texture, level, zoffset), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset))
+#define glNamedFramebufferTexture3DEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureEXT, (framebuffer, attachment, texture, level), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level))
+#define glNamedFramebufferTextureEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureFaceEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureFaceEXT, (framebuffer, attachment, texture, level, face), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face))
+#define glNamedFramebufferTextureFaceEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureLayerEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureLayerEXT, (framebuffer, attachment, texture, level, layer), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer))
+#define glNamedFramebufferTextureLayerEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4dEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+#define glNamedProgramLocalParameter4dEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4dvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLdouble *params))
+#define glNamedProgramLocalParameter4dvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4fEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w))
+#define glNamedProgramLocalParameter4fEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4fvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLfloat *params))
+#define glNamedProgramLocalParameter4fvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4iEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w))
+#define glNamedProgramLocalParameterI4iEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4ivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLint *params))
+#define glNamedProgramLocalParameterI4ivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4uiEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w))
+#define glNamedProgramLocalParameterI4uiEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4uivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLuint *params))
+#define glNamedProgramLocalParameterI4uivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameters4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameters4fvEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat *params))
+#define glNamedProgramLocalParameters4fvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParametersI4ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParametersI4ivEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLint *params))
+#define glNamedProgramLocalParametersI4ivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParametersI4uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParametersI4uivEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint *params))
+#define glNamedProgramLocalParametersI4uivEXT_defined
+#endif
+#ifndef glNamedProgramStringEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramStringEXT, (program, target, format, len, string), (GLuint program, GLenum target, GLenum format, GLsizei len, const void *string))
+#define glNamedProgramStringEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageEXT, (renderbuffer, internalformat, width, height), (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height))
+#define glNamedRenderbufferStorageEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisampleCoverageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisampleCoverageEXT, (renderbuffer, coverageSamples, colorSamples, internalformat, width, height), (GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height))
+#define glNamedRenderbufferStorageMultisampleCoverageEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisampleEXT, (renderbuffer, samples, internalformat, width, height), (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
+#define glNamedRenderbufferStorageMultisampleEXT_defined
+#endif
+#ifndef glProgramUniform1dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dEXT, (program, location, x), (GLuint program, GLint location, GLdouble x))
+#define glProgramUniform1dEXT_defined
+#endif
+#ifndef glProgramUniform1dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+#define glProgramUniform1dvEXT_defined
+#endif
+#ifndef glProgramUniform1fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1fEXT, (program, location, v0), (GLuint program, GLint location, GLfloat v0))
+#define glProgramUniform1fEXT_defined
+#endif
+#ifndef glProgramUniform1fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1fvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+#define glProgramUniform1fvEXT_defined
+#endif
+#ifndef glProgramUniform1iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1iEXT, (program, location, v0), (GLuint program, GLint location, GLint v0))
+#define glProgramUniform1iEXT_defined
+#endif
+#ifndef glProgramUniform1ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+#define glProgramUniform1ivEXT_defined
+#endif
+#ifndef glProgramUniform1uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1uiEXT, (program, location, v0), (GLuint program, GLint location, GLuint v0))
+#define glProgramUniform1uiEXT_defined
+#endif
+#ifndef glProgramUniform1uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+#define glProgramUniform1uivEXT_defined
+#endif
+#ifndef glProgramUniform2dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dEXT, (program, location, x, y), (GLuint program, GLint location, GLdouble x, GLdouble y))
+#define glProgramUniform2dEXT_defined
+#endif
+#ifndef glProgramUniform2dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+#define glProgramUniform2dvEXT_defined
+#endif
+#ifndef glProgramUniform2fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2fEXT, (program, location, v0, v1), (GLuint program, GLint location, GLfloat v0, GLfloat v1))
+#define glProgramUniform2fEXT_defined
+#endif
+#ifndef glProgramUniform2fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2fvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+#define glProgramUniform2fvEXT_defined
+#endif
+#ifndef glProgramUniform2iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2iEXT, (program, location, v0, v1), (GLuint program, GLint location, GLint v0, GLint v1))
+#define glProgramUniform2iEXT_defined
+#endif
+#ifndef glProgramUniform2ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+#define glProgramUniform2ivEXT_defined
+#endif
+#ifndef glProgramUniform2uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2uiEXT, (program, location, v0, v1), (GLuint program, GLint location, GLuint v0, GLuint v1))
+#define glProgramUniform2uiEXT_defined
+#endif
+#ifndef glProgramUniform2uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+#define glProgramUniform2uivEXT_defined
+#endif
+#ifndef glProgramUniform3dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dEXT, (program, location, x, y, z), (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z))
+#define glProgramUniform3dEXT_defined
+#endif
+#ifndef glProgramUniform3dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+#define glProgramUniform3dvEXT_defined
+#endif
+#ifndef glProgramUniform3fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3fEXT, (program, location, v0, v1, v2), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2))
+#define glProgramUniform3fEXT_defined
+#endif
+#ifndef glProgramUniform3fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3fvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+#define glProgramUniform3fvEXT_defined
+#endif
+#ifndef glProgramUniform3iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3iEXT, (program, location, v0, v1, v2), (GLuint program, GLint location, GLint v0, GLint v1, GLint v2))
+#define glProgramUniform3iEXT_defined
+#endif
+#ifndef glProgramUniform3ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+#define glProgramUniform3ivEXT_defined
+#endif
+#ifndef glProgramUniform3uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3uiEXT, (program, location, v0, v1, v2), (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2))
+#define glProgramUniform3uiEXT_defined
+#endif
+#ifndef glProgramUniform3uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+#define glProgramUniform3uivEXT_defined
+#endif
+#ifndef glProgramUniform4dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dEXT, (program, location, x, y, z, w), (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+#define glProgramUniform4dEXT_defined
+#endif
+#ifndef glProgramUniform4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+#define glProgramUniform4dvEXT_defined
+#endif
+#ifndef glProgramUniform4fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4fEXT, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3))
+#define glProgramUniform4fEXT_defined
+#endif
+#ifndef glProgramUniform4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4fvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+#define glProgramUniform4fvEXT_defined
+#endif
+#ifndef glProgramUniform4iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4iEXT, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3))
+#define glProgramUniform4iEXT_defined
+#endif
+#ifndef glProgramUniform4ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+#define glProgramUniform4ivEXT_defined
+#endif
+#ifndef glProgramUniform4uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4uiEXT, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3))
+#define glProgramUniform4uiEXT_defined
+#endif
+#ifndef glProgramUniform4uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+#define glProgramUniform4uivEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix2dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix2fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2x3dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix2x3dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2x3fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix2x3fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2x4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix2x4dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2x4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix2x4fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix3dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix3fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3x2dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix3x2dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3x2fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix3x2fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3x4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix3x4dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3x4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix3x4fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix4dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix4fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4x2dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix4x2dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4x2fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix4x2fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4x3dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix4x3dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4x3fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix4x3fvEXT_defined
+#endif
+#ifndef glPushClientAttribDefaultEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPushClientAttribDefaultEXT, (mask), (GLbitfield mask))
+#define glPushClientAttribDefaultEXT_defined
+#endif
+#ifndef glTextureBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferEXT, (texture, target, internalformat, buffer), (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer))
+#define glTextureBufferEXT_defined
+#endif
+#ifndef glTextureBufferRangeEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRangeEXT, (texture, target, internalformat, buffer, offset, size), (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size))
+#define glTextureBufferRangeEXT_defined
+#endif
+#ifndef glTextureImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage1DEXT, (texture, target, level, internalformat, width, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
+#define glTextureImage1DEXT_defined
+#endif
+#ifndef glTextureImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage2DEXT, (texture, target, level, internalformat, width, height, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
+#define glTextureImage2DEXT_defined
+#endif
+#ifndef glTextureImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage3DEXT, (texture, target, level, internalformat, width, height, depth, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
+#define glTextureImage3DEXT_defined
+#endif
+#ifndef glTexturePageCommitmentEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexturePageCommitmentEXT, (texture, level, xoffset, yoffset, zoffset, width, height, depth, commit), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit))
+#define glTexturePageCommitmentEXT_defined
+#endif
+#ifndef glTextureParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLint *params))
+#define glTextureParameterIivEXT_defined
+#endif
+#ifndef glTextureParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIuivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLuint *params))
+#define glTextureParameterIuivEXT_defined
+#endif
+#ifndef glTextureParameterfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfEXT, (texture, target, pname, param), (GLuint texture, GLenum target, GLenum pname, GLfloat param))
+#define glTextureParameterfEXT_defined
+#endif
+#ifndef glTextureParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfvEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLfloat *params))
+#define glTextureParameterfvEXT_defined
+#endif
+#ifndef glTextureParameteriEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameteriEXT, (texture, target, pname, param), (GLuint texture, GLenum target, GLenum pname, GLint param))
+#define glTextureParameteriEXT_defined
+#endif
+#ifndef glTextureParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLint *params))
+#define glTextureParameterivEXT_defined
+#endif
+#ifndef glTextureRenderbufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureRenderbufferEXT, (texture, target, renderbuffer), (GLuint texture, GLenum target, GLuint renderbuffer))
+#define glTextureRenderbufferEXT_defined
+#endif
+#ifndef glTextureStorage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage1DEXT, (texture, target, levels, internalformat, width), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
+#define glTextureStorage1DEXT_defined
+#endif
+#ifndef glTextureStorage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2DEXT, (texture, target, levels, internalformat, width, height), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height))
+#define glTextureStorage2DEXT_defined
+#endif
+#ifndef glTextureStorage2DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2DMultisampleEXT, (texture, target, samples, internalformat, width, height, fixedsamplelocations), (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
+#define glTextureStorage2DMultisampleEXT_defined
+#endif
+#ifndef glTextureStorage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DEXT, (texture, target, levels, internalformat, width, height, depth), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
+#define glTextureStorage3DEXT_defined
+#endif
+#ifndef glTextureStorage3DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DMultisampleEXT, (texture, target, samples, internalformat, width, height, depth, fixedsamplelocations), (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
+#define glTextureStorage3DMultisampleEXT_defined
+#endif
+#ifndef glTextureSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage1DEXT, (texture, target, level, xoffset, width, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
+#define glTextureSubImage1DEXT_defined
+#endif
+#ifndef glTextureSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, width, height, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
+#define glTextureSubImage2DEXT_defined
+#endif
+#ifndef glTextureSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
+#define glTextureSubImage3DEXT_defined
+#endif
+#ifndef glUnmapNamedBufferEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glUnmapNamedBufferEXT, (buffer), (GLuint buffer))
+#define glUnmapNamedBufferEXT_defined
+#endif
+#ifndef glVertexArrayBindVertexBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayBindVertexBufferEXT, (vaobj, bindingindex, buffer, offset, stride), (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride))
+#define glVertexArrayBindVertexBufferEXT_defined
+#endif
+#ifndef glVertexArrayColorOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayColorOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArrayColorOffsetEXT_defined
+#endif
+#ifndef glVertexArrayEdgeFlagOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayEdgeFlagOffsetEXT, (vaobj, buffer, stride, offset), (GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset))
+#define glVertexArrayEdgeFlagOffsetEXT_defined
+#endif
+#ifndef glVertexArrayFogCoordOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayFogCoordOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArrayFogCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayIndexOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayIndexOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArrayIndexOffsetEXT_defined
+#endif
+#ifndef glVertexArrayMultiTexCoordOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayMultiTexCoordOffsetEXT, (vaobj, buffer, texunit, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArrayMultiTexCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayNormalOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayNormalOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArrayNormalOffsetEXT_defined
+#endif
+#ifndef glVertexArraySecondaryColorOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArraySecondaryColorOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArraySecondaryColorOffsetEXT_defined
+#endif
+#ifndef glVertexArrayTexCoordOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayTexCoordOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArrayTexCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribBindingEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribBindingEXT, (vaobj, attribindex, bindingindex), (GLuint vaobj, GLuint attribindex, GLuint bindingindex))
+#define glVertexArrayVertexAttribBindingEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribDivisorEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribDivisorEXT, (vaobj, index, divisor), (GLuint vaobj, GLuint index, GLuint divisor))
+#define glVertexArrayVertexAttribDivisorEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribFormatEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribFormatEXT, (vaobj, attribindex, size, type, normalized, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset))
+#define glVertexArrayVertexAttribFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribIFormatEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribIFormatEXT, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+#define glVertexArrayVertexAttribIFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribIOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribIOffsetEXT, (vaobj, buffer, index, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArrayVertexAttribIOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribLFormatEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribLFormatEXT, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+#define glVertexArrayVertexAttribLFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribLOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribLOffsetEXT, (vaobj, buffer, index, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArrayVertexAttribLOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribOffsetEXT, (vaobj, buffer, index, size, type, normalized, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset))
+#define glVertexArrayVertexAttribOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexBindingDivisorEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBindingDivisorEXT, (vaobj, bindingindex, divisor), (GLuint vaobj, GLuint bindingindex, GLuint divisor))
+#define glVertexArrayVertexBindingDivisorEXT_defined
+#endif
+#ifndef glVertexArrayVertexOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+#define glVertexArrayVertexOffsetEXT_defined
+#endif
+#endif // defined(GL_EXT_direct_state_access)
 #if defined(GL_EXT_draw_instanced)
 #ifndef glDrawArraysInstancedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstancedEXT, (mode, start, count, primcount), (GLenum mode, GLint start, GLsizei count, GLsizei primcount))
@@ -10153,6 +11403,12 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUseShaderProgramEXT, (type, progra
 #define glUseShaderProgramEXT_defined
 #endif
 #endif // defined(GL_EXT_separate_shader_objects)
+#if defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
+#ifndef glFramebufferFetchBarrierEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferFetchBarrierEXT, (), (void))
+#define glFramebufferFetchBarrierEXT_defined
+#endif
+#endif // defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
 #if defined(GL_EXT_window_rectangles)
 #ifndef glWindowRectanglesEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWindowRectanglesEXT, (mode, count, box), (GLenum mode, GLsizei count, const GLint *box))
@@ -10195,7 +11451,7 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfCounterInfoINTEL, (queryId,
 #define glGetPerfCounterInfoINTEL_defined
 #endif
 #ifndef glGetPerfQueryDataINTEL_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfQueryDataINTEL, (queryHandle, flags, dataSize, data, bytesWritten), (GLuint queryHandle, GLuint flags, GLsizei dataSize, GLvoid *data, GLuint *bytesWritten))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfQueryDataINTEL, (queryHandle, flags, dataSize, data, bytesWritten), (GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten))
 #define glGetPerfQueryDataINTEL_defined
 #endif
 #ifndef glGetPerfQueryIdByNameINTEL_defined
@@ -10213,6 +11469,32 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendBarrierKHR, (), (void))
 #define glBlendBarrierKHR_defined
 #endif
 #endif // defined(GL_KHR_blend_equation_advanced)
+#if defined(GL_KHR_parallel_shader_compile)
+#ifndef glMaxShaderCompilerThreadsKHR_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMaxShaderCompilerThreadsKHR, (count), (GLuint count))
+#define glMaxShaderCompilerThreadsKHR_defined
+#endif
+#endif // defined(GL_KHR_parallel_shader_compile)
+#if defined(GL_NV_bindless_multi_draw_indirect)
+#ifndef glMultiDrawArraysIndirectBindlessNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectBindlessNV, (mode, indirect, drawCount, stride, vertexBufferCount), (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount))
+#define glMultiDrawArraysIndirectBindlessNV_defined
+#endif
+#ifndef glMultiDrawElementsIndirectBindlessNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectBindlessNV, (mode, type, indirect, drawCount, stride, vertexBufferCount), (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount))
+#define glMultiDrawElementsIndirectBindlessNV_defined
+#endif
+#endif // defined(GL_NV_bindless_multi_draw_indirect)
+#if defined(GL_NV_bindless_multi_draw_indirect_count)
+#ifndef glMultiDrawArraysIndirectBindlessCountNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectBindlessCountNV, (mode, indirect, drawCount, maxDrawCount, stride, vertexBufferCount), (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount))
+#define glMultiDrawArraysIndirectBindlessCountNV_defined
+#endif
+#ifndef glMultiDrawElementsIndirectBindlessCountNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectBindlessCountNV, (mode, type, indirect, drawCount, maxDrawCount, stride, vertexBufferCount), (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount))
+#define glMultiDrawElementsIndirectBindlessCountNV_defined
+#endif
+#endif // defined(GL_NV_bindless_multi_draw_indirect_count)
 #if defined(GL_NV_bindless_texture)
 #ifndef glGetImageHandleNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetImageHandleNV, (texture, level, layered, layer, format), (GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format))
@@ -10277,6 +11559,82 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendParameteriNV, (pname, value),
 #define glBlendParameteriNV_defined
 #endif
 #endif // defined(GL_NV_blend_equation_advanced)
+#if defined(GL_NV_clip_space_w_scaling)
+#ifndef glViewportPositionWScaleNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportPositionWScaleNV, (index, xcoeff, ycoeff), (GLuint index, GLfloat xcoeff, GLfloat ycoeff))
+#define glViewportPositionWScaleNV_defined
+#endif
+#endif // defined(GL_NV_clip_space_w_scaling)
+#if defined(GL_NV_command_list)
+#ifndef glCallCommandListNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCallCommandListNV, (list), (GLuint list))
+#define glCallCommandListNV_defined
+#endif
+#ifndef glCommandListSegmentsNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCommandListSegmentsNV, (list, segments), (GLuint list, GLuint segments))
+#define glCommandListSegmentsNV_defined
+#endif
+#ifndef glCompileCommandListNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompileCommandListNV, (list), (GLuint list))
+#define glCompileCommandListNV_defined
+#endif
+#ifndef glCreateCommandListsNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateCommandListsNV, (n, lists), (GLsizei n, GLuint *lists))
+#define glCreateCommandListsNV_defined
+#endif
+#ifndef glCreateStatesNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateStatesNV, (n, states), (GLsizei n, GLuint *states))
+#define glCreateStatesNV_defined
+#endif
+#ifndef glDeleteCommandListsNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteCommandListsNV, (n, lists), (GLsizei n, const GLuint *lists))
+#define glDeleteCommandListsNV_defined
+#endif
+#ifndef glDeleteStatesNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteStatesNV, (n, states), (GLsizei n, const GLuint *states))
+#define glDeleteStatesNV_defined
+#endif
+#ifndef glDrawCommandsAddressNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsAddressNV, (primitiveMode, indirects, sizes, count), (GLenum primitiveMode, const GLuint64 *indirects, const GLsizei *sizes, GLuint count))
+#define glDrawCommandsAddressNV_defined
+#endif
+#ifndef glDrawCommandsNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsNV, (primitiveMode, buffer, indirects, sizes, count), (GLenum primitiveMode, GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, GLuint count))
+#define glDrawCommandsNV_defined
+#endif
+#ifndef glDrawCommandsStatesAddressNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsStatesAddressNV, (indirects, sizes, states, fbos, count), (const GLuint64 *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
+#define glDrawCommandsStatesAddressNV_defined
+#endif
+#ifndef glDrawCommandsStatesNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsStatesNV, (buffer, indirects, sizes, states, fbos, count), (GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
+#define glDrawCommandsStatesNV_defined
+#endif
+#ifndef glGetCommandHeaderNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetCommandHeaderNV, (tokenID, size), (GLenum tokenID, GLuint size))
+#define glGetCommandHeaderNV_defined
+#endif
+#ifndef glGetStageIndexNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLushort, APIENTRY, glGetStageIndexNV, (shadertype), (GLenum shadertype))
+#define glGetStageIndexNV_defined
+#endif
+#ifndef glIsCommandListNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsCommandListNV, (list), (GLuint list))
+#define glIsCommandListNV_defined
+#endif
+#ifndef glIsStateNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsStateNV, (state), (GLuint state))
+#define glIsStateNV_defined
+#endif
+#ifndef glListDrawCommandsStatesClientNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glListDrawCommandsStatesClientNV, (list, segment, indirects, sizes, states, fbos, count), (GLuint list, GLuint segment, const void **indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
+#define glListDrawCommandsStatesClientNV_defined
+#endif
+#ifndef glStateCaptureNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStateCaptureNV, (state, mode), (GLuint state, GLenum mode))
+#define glStateCaptureNV_defined
+#endif
+#endif // defined(GL_NV_command_list)
 #if defined(GL_NV_conditional_render)
 #ifndef glBeginConditionalRenderNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginConditionalRenderNV, (id, mode), (GLuint id, GLenum mode))
@@ -10293,12 +11651,40 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSubpixelPrecisionBiasNV, (xbits, y
 #define glSubpixelPrecisionBiasNV_defined
 #endif
 #endif // defined(GL_NV_conservative_raster)
+#if defined(GL_NV_conservative_raster_dilate)
+#ifndef glConservativeRasterParameterfNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glConservativeRasterParameterfNV, (pname, value), (GLenum pname, GLfloat value))
+#define glConservativeRasterParameterfNV_defined
+#endif
+#endif // defined(GL_NV_conservative_raster_dilate)
 #if defined(GL_NV_conservative_raster_pre_snap_triangles)
 #ifndef glConservativeRasterParameteriNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glConservativeRasterParameteriNV, (pname, param), (GLenum pname, GLint param))
 #define glConservativeRasterParameteriNV_defined
 #endif
 #endif // defined(GL_NV_conservative_raster_pre_snap_triangles)
+#if defined(GL_NV_draw_vulkan_image)
+#ifndef glDrawVkImageNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawVkImageNV, (vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1), (GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1))
+#define glDrawVkImageNV_defined
+#endif
+#ifndef glGetVkProcAddrNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLVULKANPROCNV, APIENTRY, glGetVkProcAddrNV, (name), (const GLchar *name))
+#define glGetVkProcAddrNV_defined
+#endif
+#ifndef glSignalVkFenceNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalVkFenceNV, (vkFence), (GLuint64 vkFence))
+#define glSignalVkFenceNV_defined
+#endif
+#ifndef glSignalVkSemaphoreNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalVkSemaphoreNV, (vkSemaphore), (GLuint64 vkSemaphore))
+#define glSignalVkSemaphoreNV_defined
+#endif
+#ifndef glWaitVkSemaphoreNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWaitVkSemaphoreNV, (vkSemaphore), (GLuint64 vkSemaphore))
+#define glWaitVkSemaphoreNV_defined
+#endif
+#endif // defined(GL_NV_draw_vulkan_image)
 #if defined(GL_NV_fragment_coverage_to_color)
 #ifndef glFragmentCoverageColorNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFragmentCoverageColorNV, (color), (GLuint color))
@@ -10319,6 +11705,12 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCoverageModulationTableNV, (buf
 #define glGetCoverageModulationTableNV_defined
 #endif
 #endif // defined(GL_NV_framebuffer_mixed_samples)
+#if defined(GL_NV_framebuffer_multisample_coverage)
+#ifndef glRenderbufferStorageMultisampleCoverageNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderbufferStorageMultisampleCoverageNV, (target, coverageSamples, colorSamples, internalformat, width, height), (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height))
+#define glRenderbufferStorageMultisampleCoverageNV_defined
+#endif
+#endif // defined(GL_NV_framebuffer_multisample_coverage)
 #if defined(GL_NV_gpu_shader5)
 #ifndef glGetUniformi64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformi64vNV, (program, location, params), (GLuint program, GLint location, GLint64EXT *params))
@@ -10703,6 +12095,198 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glResolveDepthValuesNV, (), (void))
 #define glResolveDepthValuesNV_defined
 #endif
 #endif // defined(GL_NV_sample_locations)
+#if defined(GL_NV_shader_buffer_load)
+#ifndef glGetBufferParameterui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferParameterui64vNV, (target, pname, params), (GLenum target, GLenum pname, GLuint64EXT *params))
+#define glGetBufferParameterui64vNV_defined
+#endif
+#ifndef glGetIntegerui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerui64vNV, (value, result), (GLenum value, GLuint64EXT *result))
+#define glGetIntegerui64vNV_defined
+#endif
+#ifndef glGetNamedBufferParameterui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameterui64vNV, (buffer, pname, params), (GLuint buffer, GLenum pname, GLuint64EXT *params))
+#define glGetNamedBufferParameterui64vNV_defined
+#endif
+#ifndef glGetUniformui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformui64vNV, (program, location, params), (GLuint program, GLint location, GLuint64EXT *params))
+#define glGetUniformui64vNV_defined
+#endif
+#ifndef glIsBufferResidentNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsBufferResidentNV, (target), (GLenum target))
+#define glIsBufferResidentNV_defined
+#endif
+#ifndef glIsNamedBufferResidentNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsNamedBufferResidentNV, (buffer), (GLuint buffer))
+#define glIsNamedBufferResidentNV_defined
+#endif
+#ifndef glMakeBufferNonResidentNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeBufferNonResidentNV, (target), (GLenum target))
+#define glMakeBufferNonResidentNV_defined
+#endif
+#ifndef glMakeBufferResidentNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeBufferResidentNV, (target, access), (GLenum target, GLenum access))
+#define glMakeBufferResidentNV_defined
+#endif
+#ifndef glMakeNamedBufferNonResidentNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeNamedBufferNonResidentNV, (buffer), (GLuint buffer))
+#define glMakeNamedBufferNonResidentNV_defined
+#endif
+#ifndef glMakeNamedBufferResidentNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeNamedBufferResidentNV, (buffer, access), (GLuint buffer, GLenum access))
+#define glMakeNamedBufferResidentNV_defined
+#endif
+#ifndef glProgramUniformui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformui64NV, (program, location, value), (GLuint program, GLint location, GLuint64EXT value))
+#define glProgramUniformui64NV_defined
+#endif
+#ifndef glProgramUniformui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformui64vNV, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value))
+#define glProgramUniformui64vNV_defined
+#endif
+#ifndef glUniformui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformui64NV, (location, value), (GLint location, GLuint64EXT value))
+#define glUniformui64NV_defined
+#endif
+#ifndef glUniformui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformui64vNV, (location, count, value), (GLint location, GLsizei count, const GLuint64EXT *value))
+#define glUniformui64vNV_defined
+#endif
+#endif // defined(GL_NV_shader_buffer_load)
+#if defined(GL_NV_texture_barrier)
+#ifndef glTextureBarrierNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBarrierNV, (), (void))
+#define glTextureBarrierNV_defined
+#endif
+#endif // defined(GL_NV_texture_barrier)
+#if defined(GL_NV_vertex_attrib_integer_64bit)
+#ifndef glGetVertexAttribLi64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLi64vNV, (index, pname, params), (GLuint index, GLenum pname, GLint64EXT *params))
+#define glGetVertexAttribLi64vNV_defined
+#endif
+#ifndef glGetVertexAttribLui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLui64vNV, (index, pname, params), (GLuint index, GLenum pname, GLuint64EXT *params))
+#define glGetVertexAttribLui64vNV_defined
+#endif
+#ifndef glVertexAttribL1i64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1i64NV, (index, x), (GLuint index, GLint64EXT x))
+#define glVertexAttribL1i64NV_defined
+#endif
+#ifndef glVertexAttribL1i64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
+#define glVertexAttribL1i64vNV_defined
+#endif
+#ifndef glVertexAttribL1ui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64NV, (index, x), (GLuint index, GLuint64EXT x))
+#define glVertexAttribL1ui64NV_defined
+#endif
+#ifndef glVertexAttribL1ui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
+#define glVertexAttribL1ui64vNV_defined
+#endif
+#ifndef glVertexAttribL2i64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2i64NV, (index, x, y), (GLuint index, GLint64EXT x, GLint64EXT y))
+#define glVertexAttribL2i64NV_defined
+#endif
+#ifndef glVertexAttribL2i64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
+#define glVertexAttribL2i64vNV_defined
+#endif
+#ifndef glVertexAttribL2ui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2ui64NV, (index, x, y), (GLuint index, GLuint64EXT x, GLuint64EXT y))
+#define glVertexAttribL2ui64NV_defined
+#endif
+#ifndef glVertexAttribL2ui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
+#define glVertexAttribL2ui64vNV_defined
+#endif
+#ifndef glVertexAttribL3i64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3i64NV, (index, x, y, z), (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z))
+#define glVertexAttribL3i64NV_defined
+#endif
+#ifndef glVertexAttribL3i64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
+#define glVertexAttribL3i64vNV_defined
+#endif
+#ifndef glVertexAttribL3ui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3ui64NV, (index, x, y, z), (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z))
+#define glVertexAttribL3ui64NV_defined
+#endif
+#ifndef glVertexAttribL3ui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
+#define glVertexAttribL3ui64vNV_defined
+#endif
+#ifndef glVertexAttribL4i64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4i64NV, (index, x, y, z, w), (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w))
+#define glVertexAttribL4i64NV_defined
+#endif
+#ifndef glVertexAttribL4i64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
+#define glVertexAttribL4i64vNV_defined
+#endif
+#ifndef glVertexAttribL4ui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4ui64NV, (index, x, y, z, w), (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w))
+#define glVertexAttribL4ui64NV_defined
+#endif
+#ifndef glVertexAttribL4ui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
+#define glVertexAttribL4ui64vNV_defined
+#endif
+#ifndef glVertexAttribLFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribLFormatNV, (index, size, type, stride), (GLuint index, GLint size, GLenum type, GLsizei stride))
+#define glVertexAttribLFormatNV_defined
+#endif
+#endif // defined(GL_NV_vertex_attrib_integer_64bit)
+#if defined(GL_NV_vertex_buffer_unified_memory)
+#ifndef glBufferAddressRangeNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferAddressRangeNV, (pname, index, address, length), (GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length))
+#define glBufferAddressRangeNV_defined
+#endif
+#ifndef glColorFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
+#define glColorFormatNV_defined
+#endif
+#ifndef glEdgeFlagFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEdgeFlagFormatNV, (stride), (GLsizei stride))
+#define glEdgeFlagFormatNV_defined
+#endif
+#ifndef glFogCoordFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFogCoordFormatNV, (type, stride), (GLenum type, GLsizei stride))
+#define glFogCoordFormatNV_defined
+#endif
+#ifndef glGetIntegerui64i_vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerui64i_vNV, (value, index, result), (GLenum value, GLuint index, GLuint64EXT *result))
+#define glGetIntegerui64i_vNV_defined
+#endif
+#ifndef glIndexFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glIndexFormatNV, (type, stride), (GLenum type, GLsizei stride))
+#define glIndexFormatNV_defined
+#endif
+#ifndef glNormalFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNormalFormatNV, (type, stride), (GLenum type, GLsizei stride))
+#define glNormalFormatNV_defined
+#endif
+#ifndef glSecondaryColorFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSecondaryColorFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
+#define glSecondaryColorFormatNV_defined
+#endif
+#ifndef glTexCoordFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexCoordFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
+#define glTexCoordFormatNV_defined
+#endif
+#ifndef glVertexAttribFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribFormatNV, (index, size, type, normalized, stride), (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride))
+#define glVertexAttribFormatNV_defined
+#endif
+#ifndef glVertexAttribIFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribIFormatNV, (index, size, type, stride), (GLuint index, GLint size, GLenum type, GLsizei stride))
+#define glVertexAttribIFormatNV_defined
+#endif
+#ifndef glVertexFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
+#define glVertexFormatNV_defined
+#endif
+#endif // defined(GL_NV_vertex_buffer_unified_memory)
 #if defined(GL_NV_viewport_swizzle)
 #ifndef glViewportSwizzleNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportSwizzleNV, (index, swizzlex, swizzley, swizzlez, swizzlew), (GLuint index, GLenum swizzlex, GLenum swizzley, GLenum swizzlez, GLenum swizzlew))
@@ -10753,7 +12337,7 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthMask, (flag), (GLboolean flag
 #define glDepthMask_defined
 #endif
 #ifndef glDepthRange_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRange, (near, far), (GLdouble near, GLdouble far))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRange, (n, f), (GLdouble n, GLdouble f))
 #define glDepthRange_defined
 #endif
 #ifndef glDisable_defined
@@ -12939,11 +14523,11 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferData, (buffer, int
 #define glClearNamedBufferData_defined
 #endif
 #ifndef glClearNamedBufferSubData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubData, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizei size, GLenum format, GLenum type, const void *data))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubData, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data))
 #define glClearNamedBufferSubData_defined
 #endif
 #ifndef glClearNamedFramebufferfi_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferfi, (framebuffer, buffer, depth, stencil), (GLuint framebuffer, GLenum buffer, const GLfloat depth, GLint stencil))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferfi, (framebuffer, buffer, drawbuffer, depth, stencil), (GLuint framebuffer, GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil))
 #define glClearNamedFramebufferfi_defined
 #endif
 #ifndef glClearNamedFramebufferfv_defined
@@ -12975,7 +14559,7 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage3D, (text
 #define glCompressedTextureSubImage3D_defined
 #endif
 #ifndef glCopyNamedBufferSubData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyNamedBufferSubData, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizei size))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyNamedBufferSubData, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
 #define glCopyNamedBufferSubData_defined
 #endif
 #ifndef glCopyTextureSubImage1D_defined
@@ -13035,7 +14619,7 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayAttrib, (vaobj, i
 #define glEnableVertexArrayAttrib_defined
 #endif
 #ifndef glFlushMappedNamedBufferRange_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRange, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizei length))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRange, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizeiptr length))
 #define glFlushMappedNamedBufferRange_defined
 #endif
 #ifndef glGenerateTextureMipmap_defined
@@ -13067,7 +14651,7 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferPointerv, (buffer, p
 #define glGetNamedBufferPointerv_defined
 #endif
 #ifndef glGetNamedBufferSubData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizei size, void *data))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data))
 #define glGetNamedBufferSubData_defined
 #endif
 #ifndef glGetNamedFramebufferAttachmentParameteriv_defined
@@ -13191,7 +14775,7 @@ GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBuffer, (buffer, a
 #define glMapNamedBuffer_defined
 #endif
 #ifndef glMapNamedBufferRange_defined
-GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRange, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizei length, GLbitfield access))
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRange, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access))
 #define glMapNamedBufferRange_defined
 #endif
 #ifndef glMemoryBarrierByRegion_defined
@@ -13199,15 +14783,15 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMemoryBarrierByRegion, (barriers),
 #define glMemoryBarrierByRegion_defined
 #endif
 #ifndef glNamedBufferData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferData, (buffer, size, data, usage), (GLuint buffer, GLsizei size, const void *data, GLenum usage))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferData, (buffer, size, data, usage), (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage))
 #define glNamedBufferData_defined
 #endif
 #ifndef glNamedBufferStorage_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorage, (buffer, size, data, flags), (GLuint buffer, GLsizei size, const void *data, GLbitfield flags))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorage, (buffer, size, data, flags), (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags))
 #define glNamedBufferStorage_defined
 #endif
 #ifndef glNamedBufferSubData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizei size, const void *data))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
 #define glNamedBufferSubData_defined
 #endif
 #ifndef glNamedFramebufferDrawBuffer_defined
@@ -13259,7 +14843,7 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBuffer, (texture, internalf
 #define glTextureBuffer_defined
 #endif
 #ifndef glTextureBufferRange_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRange, (texture, internalformat, buffer, offset, size), (GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizei size))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRange, (texture, internalformat, buffer, offset, size), (GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size))
 #define glTextureBufferRange_defined
 #endif
 #ifndef glTextureParameterIiv_defined
@@ -13323,7 +14907,7 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackBufferBase, (xfb,
 #define glTransformFeedbackBufferBase_defined
 #endif
 #ifndef glTransformFeedbackBufferRange_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackBufferRange, (xfb, index, buffer, offset, size), (GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizei size))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackBufferRange, (xfb, index, buffer, offset, size), (GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size))
 #define glTransformFeedbackBufferRange_defined
 #endif
 #ifndef glUnmapNamedBuffer_defined
@@ -13363,8 +14947,26 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBuffers, (vaobj, 
 #define glVertexArrayVertexBuffers_defined
 #endif
 #endif // defined(GL_VERSION_4_5)
-#endif // defined(__glcorearb_h_)
-#if defined(__glext_h_)
+#if defined(GL_VERSION_4_6)
+#ifndef glMultiDrawArraysIndirectCount_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCount, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+#define glMultiDrawArraysIndirectCount_defined
+#endif
+#ifndef glMultiDrawElementsIndirectCount_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCount, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+#define glMultiDrawElementsIndirectCount_defined
+#endif
+#ifndef glPolygonOffsetClamp_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPolygonOffsetClamp, (factor, units, clamp), (GLfloat factor, GLfloat units, GLfloat clamp))
+#define glPolygonOffsetClamp_defined
+#endif
+#ifndef glSpecializeShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSpecializeShader, (shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue), (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue))
+#define glSpecializeShader_defined
+#endif
+#endif // defined(GL_VERSION_4_6)
+#endif // defined(__gl_glcorearb_h_)
+#if defined(__gl_glext_h_)
 #if defined(GL_3DFX_tbuffer)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTbufferMask3DFX, (mask), (GLuint mask))
 #define glTbufferMask3DFX_defined
@@ -13404,8 +15006,10 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferSamplePositionsfvA
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformi64vNV, (program, location, params), (GLuint program, GLint location, GLint64EXT *params))
 #define glGetUniformi64vNV_defined
 #endif
+#ifndef glGetUniformui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformui64vNV, (program, location, params), (GLuint program, GLint location, GLuint64EXT *params))
 #define glGetUniformui64vNV_defined
+#endif
 #ifndef glProgramUniform1i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64NV, (program, location, x), (GLuint program, GLint location, GLint64EXT x))
 #define glProgramUniform1i64NV_defined
@@ -13708,8 +15312,10 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMapVertexAttrib2fAPPLE, (index, si
 #define glMapVertexAttrib2fAPPLE_defined
 #endif // defined(GL_APPLE_vertex_program_evaluators)
 #if defined(GL_ARB_ES3_2_compatibility)
+#ifndef glPrimitiveBoundingBoxARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPrimitiveBoundingBoxARB, (minX, minY, minZ, minW, maxX, maxY, maxZ, maxW), (GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW))
 #define glPrimitiveBoundingBoxARB_defined
+#endif
 #endif // defined(GL_ARB_ES3_2_compatibility)
 #if defined(GL_ARB_bindless_texture)
 #ifndef glGetImageHandleARB_defined
@@ -13834,10 +15440,14 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFunciARB, (buf, src, dst), (G
 #endif
 #endif // defined(GL_ARB_draw_buffers_blend)
 #if defined(GL_ARB_draw_instanced)
+#ifndef glDrawArraysInstancedARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstancedARB, (mode, first, count, primcount), (GLenum mode, GLint first, GLsizei count, GLsizei primcount))
 #define glDrawArraysInstancedARB_defined
+#endif
+#ifndef glDrawElementsInstancedARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedARB, (mode, count, type, indices, primcount), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount))
 #define glDrawElementsInstancedARB_defined
+#endif
 #endif // defined(GL_ARB_draw_instanced)
 #if defined(GL_ARB_fragment_program)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindProgramARB, (target, program), (GLenum target, GLuint program))
@@ -13880,88 +15490,174 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramStringARB, (target, format,
 #define glProgramStringARB_defined
 #endif // defined(GL_ARB_fragment_program)
 #if defined(GL_ARB_geometry_shader4)
+#ifndef glFramebufferTextureARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureARB, (target, attachment, texture, level), (GLenum target, GLenum attachment, GLuint texture, GLint level))
 #define glFramebufferTextureARB_defined
+#endif
+#ifndef glFramebufferTextureFaceARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureFaceARB, (target, attachment, texture, level, face), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face))
 #define glFramebufferTextureFaceARB_defined
+#endif
+#ifndef glFramebufferTextureLayerARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureLayerARB, (target, attachment, texture, level, layer), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer))
 #define glFramebufferTextureLayerARB_defined
+#endif
+#ifndef glProgramParameteriARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramParameteriARB, (program, pname, value), (GLuint program, GLenum pname, GLint value))
 #define glProgramParameteriARB_defined
+#endif
 #endif // defined(GL_ARB_geometry_shader4)
+#if defined(GL_ARB_gl_spirv)
+#ifndef glSpecializeShaderARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSpecializeShaderARB, (shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue), (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue))
+#define glSpecializeShaderARB_defined
+#endif
+#endif // defined(GL_ARB_gl_spirv)
 #if defined(GL_ARB_gpu_shader_int64)
+#ifndef glGetUniformi64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformi64vARB, (program, location, params), (GLuint program, GLint location, GLint64 *params))
 #define glGetUniformi64vARB_defined
+#endif
+#ifndef glGetUniformui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformui64vARB, (program, location, params), (GLuint program, GLint location, GLuint64 *params))
 #define glGetUniformui64vARB_defined
+#endif
+#ifndef glGetnUniformi64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformi64vARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLint64 *params))
 #define glGetnUniformi64vARB_defined
+#endif
+#ifndef glGetnUniformui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformui64vARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLuint64 *params))
 #define glGetnUniformui64vARB_defined
+#endif
+#ifndef glProgramUniform1i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64ARB, (program, location, x), (GLuint program, GLint location, GLint64 x))
 #define glProgramUniform1i64ARB_defined
+#endif
+#ifndef glProgramUniform1i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
 #define glProgramUniform1i64vARB_defined
+#endif
+#ifndef glProgramUniform1ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui64ARB, (program, location, x), (GLuint program, GLint location, GLuint64 x))
 #define glProgramUniform1ui64ARB_defined
+#endif
+#ifndef glProgramUniform1ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
 #define glProgramUniform1ui64vARB_defined
+#endif
+#ifndef glProgramUniform2i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i64ARB, (program, location, x, y), (GLuint program, GLint location, GLint64 x, GLint64 y))
 #define glProgramUniform2i64ARB_defined
+#endif
+#ifndef glProgramUniform2i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
 #define glProgramUniform2i64vARB_defined
+#endif
+#ifndef glProgramUniform2ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui64ARB, (program, location, x, y), (GLuint program, GLint location, GLuint64 x, GLuint64 y))
 #define glProgramUniform2ui64ARB_defined
+#endif
+#ifndef glProgramUniform2ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
 #define glProgramUniform2ui64vARB_defined
+#endif
+#ifndef glProgramUniform3i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i64ARB, (program, location, x, y, z), (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z))
 #define glProgramUniform3i64ARB_defined
+#endif
+#ifndef glProgramUniform3i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
 #define glProgramUniform3i64vARB_defined
+#endif
+#ifndef glProgramUniform3ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui64ARB, (program, location, x, y, z), (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z))
 #define glProgramUniform3ui64ARB_defined
+#endif
+#ifndef glProgramUniform3ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
 #define glProgramUniform3ui64vARB_defined
+#endif
+#ifndef glProgramUniform4i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i64ARB, (program, location, x, y, z, w), (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w))
 #define glProgramUniform4i64ARB_defined
+#endif
+#ifndef glProgramUniform4i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
 #define glProgramUniform4i64vARB_defined
+#endif
+#ifndef glProgramUniform4ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui64ARB, (program, location, x, y, z, w), (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w))
 #define glProgramUniform4ui64ARB_defined
+#endif
+#ifndef glProgramUniform4ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
 #define glProgramUniform4ui64vARB_defined
+#endif
+#ifndef glUniform1i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i64ARB, (location, x), (GLint location, GLint64 x))
 #define glUniform1i64ARB_defined
+#endif
+#ifndef glUniform1i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
 #define glUniform1i64vARB_defined
+#endif
+#ifndef glUniform1ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui64ARB, (location, x), (GLint location, GLuint64 x))
 #define glUniform1ui64ARB_defined
+#endif
+#ifndef glUniform1ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
 #define glUniform1ui64vARB_defined
+#endif
+#ifndef glUniform2i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i64ARB, (location, x, y), (GLint location, GLint64 x, GLint64 y))
 #define glUniform2i64ARB_defined
+#endif
+#ifndef glUniform2i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
 #define glUniform2i64vARB_defined
+#endif
+#ifndef glUniform2ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui64ARB, (location, x, y), (GLint location, GLuint64 x, GLuint64 y))
 #define glUniform2ui64ARB_defined
+#endif
+#ifndef glUniform2ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
 #define glUniform2ui64vARB_defined
+#endif
+#ifndef glUniform3i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i64ARB, (location, x, y, z), (GLint location, GLint64 x, GLint64 y, GLint64 z))
 #define glUniform3i64ARB_defined
+#endif
+#ifndef glUniform3i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
 #define glUniform3i64vARB_defined
+#endif
+#ifndef glUniform3ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui64ARB, (location, x, y, z), (GLint location, GLuint64 x, GLuint64 y, GLuint64 z))
 #define glUniform3ui64ARB_defined
+#endif
+#ifndef glUniform3ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
 #define glUniform3ui64vARB_defined
+#endif
+#ifndef glUniform4i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i64ARB, (location, x, y, z, w), (GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w))
 #define glUniform4i64ARB_defined
+#endif
+#ifndef glUniform4i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
 #define glUniform4i64vARB_defined
+#endif
+#ifndef glUniform4ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui64ARB, (location, x, y, z, w), (GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w))
 #define glUniform4ui64ARB_defined
+#endif
+#ifndef glUniform4ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
 #define glUniform4ui64vARB_defined
+#endif
 #endif // defined(GL_ARB_gpu_shader_int64)
 #if defined(GL_ARB_imaging)
 #ifndef glColorSubTable_defined
@@ -14095,17 +15791,19 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSeparableFilter2D, (target, intern
 #endif // defined(GL_ARB_imaging)
 #if defined(GL_ARB_indirect_parameters)
 #ifndef glMultiDrawArraysIndirectCountARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
 #define glMultiDrawArraysIndirectCountARB_defined
 #endif
 #ifndef glMultiDrawElementsIndirectCountARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
 #define glMultiDrawElementsIndirectCountARB_defined
 #endif
 #endif // defined(GL_ARB_indirect_parameters)
 #if defined(GL_ARB_instanced_arrays)
+#ifndef glVertexAttribDivisorARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribDivisorARB, (index, divisor), (GLuint index, GLuint divisor))
 #define glVertexAttribDivisorARB_defined
+#endif
 #endif // defined(GL_ARB_instanced_arrays)
 #if defined(GL_ARB_matrix_palette)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCurrentPaletteMatrixARB, (index), (GLint index))
@@ -14280,8 +15978,10 @@ GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsQueryARB, (id), (GLui
 #define glIsQueryARB_defined
 #endif // defined(GL_ARB_occlusion_query)
 #if defined(GL_ARB_parallel_shader_compile)
+#ifndef glMaxShaderCompilerThreadsARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMaxShaderCompilerThreadsARB, (count), (GLuint count))
 #define glMaxShaderCompilerThreadsARB_defined
+#endif
 #endif // defined(GL_ARB_parallel_shader_compile)
 #if defined(GL_ARB_point_parameters)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameterfARB, (pname, param), (GLenum pname, GLfloat param))
@@ -14348,12 +16048,18 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadnPixelsARB, (x, y, width, heig
 #endif
 #endif // defined(GL_ARB_robustness)
 #if defined(GL_ARB_sample_locations)
+#ifndef glEvaluateDepthValuesARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEvaluateDepthValuesARB, (), (void))
 #define glEvaluateDepthValuesARB_defined
+#endif
+#ifndef glFramebufferSampleLocationsfvARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferSampleLocationsfvARB, (target, start, count, v), (GLenum target, GLuint start, GLsizei count, const GLfloat *v))
 #define glFramebufferSampleLocationsfvARB_defined
+#endif
+#ifndef glNamedFramebufferSampleLocationsfvARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferSampleLocationsfvARB, (framebuffer, start, count, v), (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v))
 #define glNamedFramebufferSampleLocationsfvARB_defined
+#endif
 #endif // defined(GL_ARB_sample_locations)
 #if defined(GL_ARB_sample_shading)
 #ifndef glMinSampleShadingARB_defined
@@ -14488,8 +16194,10 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexPageCommitmentARB, (target, lev
 #endif
 #endif // defined(GL_ARB_sparse_texture)
 #if defined(GL_ARB_texture_buffer_object)
+#ifndef glTexBufferARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexBufferARB, (target, internalformat, buffer), (GLenum target, GLenum internalformat, GLuint buffer))
 #define glTexBufferARB_defined
+#endif
 #endif // defined(GL_ARB_texture_buffer_object)
 #if defined(GL_ARB_texture_compression)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexImage1DARB, (target, level, internalformat, width, border, imageSize, data), (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data))
@@ -14889,6 +16597,16 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexStream4sATI, (stream, x, y, 
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexStream4svATI, (stream, coords), (GLenum stream, const GLshort *coords))
 #define glVertexStream4svATI_defined
 #endif // defined(GL_ATI_vertex_streams)
+#if defined(GL_EXT_EGL_image_storage)
+#ifndef glEGLImageTargetTexStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTexStorageEXT, (target, image, attrib_list), (GLenum target, GLeglImageOES image, const GLint* attrib_list))
+#define glEGLImageTargetTexStorageEXT_defined
+#endif
+#ifndef glEGLImageTargetTextureStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTextureStorageEXT, (texture, image, attrib_list), (GLuint texture, GLeglImageOES image, const GLint* attrib_list))
+#define glEGLImageTargetTextureStorageEXT_defined
+#endif
+#endif // defined(GL_EXT_EGL_image_storage)
 #if defined(GL_EXT_bindable_uniform)
 GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetUniformBufferSizeEXT, (program, location), (GLuint program, GLint location))
 #define glGetUniformBufferSizeEXT_defined
@@ -15046,336 +16764,666 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthBoundsEXT, (zmin, zmax), (GLc
 #define glDepthBoundsEXT_defined
 #endif // defined(GL_EXT_depth_bounds_test)
 #if defined(GL_EXT_direct_state_access)
+#ifndef glBindMultiTextureEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindMultiTextureEXT, (texunit, target, texture), (GLenum texunit, GLenum target, GLuint texture))
 #define glBindMultiTextureEXT_defined
+#endif
+#ifndef glCheckNamedFramebufferStatusEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glCheckNamedFramebufferStatusEXT, (framebuffer, target), (GLuint framebuffer, GLenum target))
 #define glCheckNamedFramebufferStatusEXT_defined
+#endif
+#ifndef glClearNamedBufferDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferDataEXT, (buffer, internalformat, format, type, data), (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data))
 #define glClearNamedBufferDataEXT_defined
+#endif
+#ifndef glClearNamedBufferSubDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubDataEXT, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data))
 #define glClearNamedBufferSubDataEXT_defined
+#endif
+#ifndef glClientAttribDefaultEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClientAttribDefaultEXT, (mask), (GLbitfield mask))
 #define glClientAttribDefaultEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage1DEXT, (texunit, target, level, internalformat, width, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits))
 #define glCompressedMultiTexImage1DEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage2DEXT, (texunit, target, level, internalformat, width, height, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits))
 #define glCompressedMultiTexImage2DEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage3DEXT, (texunit, target, level, internalformat, width, height, depth, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits))
 #define glCompressedMultiTexImage3DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage1DEXT, (texunit, target, level, xoffset, width, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits))
 #define glCompressedMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, width, height, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits))
 #define glCompressedMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits))
 #define glCompressedMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glCompressedTextureImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage1DEXT, (texture, target, level, internalformat, width, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits))
 #define glCompressedTextureImage1DEXT_defined
+#endif
+#ifndef glCompressedTextureImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage2DEXT, (texture, target, level, internalformat, width, height, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits))
 #define glCompressedTextureImage2DEXT_defined
+#endif
+#ifndef glCompressedTextureImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage3DEXT, (texture, target, level, internalformat, width, height, depth, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits))
 #define glCompressedTextureImage3DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage1DEXT, (texture, target, level, xoffset, width, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits))
 #define glCompressedTextureSubImage1DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, width, height, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits))
 #define glCompressedTextureSubImage2DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits))
 #define glCompressedTextureSubImage3DEXT_defined
+#endif
+#ifndef glCopyMultiTexImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexImage1DEXT, (texunit, target, level, internalformat, x, y, width, border), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
 #define glCopyMultiTexImage1DEXT_defined
+#endif
+#ifndef glCopyMultiTexImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexImage2DEXT, (texunit, target, level, internalformat, x, y, width, height, border), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
 #define glCopyMultiTexImage2DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage1DEXT, (texunit, target, level, xoffset, x, y, width), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
 #define glCopyMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, x, y, width, height), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
 #define glCopyMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
 #define glCopyMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glCopyTextureImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureImage1DEXT, (texture, target, level, internalformat, x, y, width, border), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
 #define glCopyTextureImage1DEXT_defined
+#endif
+#ifndef glCopyTextureImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureImage2DEXT, (texture, target, level, internalformat, x, y, width, height, border), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
 #define glCopyTextureImage2DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage1DEXT, (texture, target, level, xoffset, x, y, width), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
 #define glCopyTextureSubImage1DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, x, y, width, height), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
 #define glCopyTextureSubImage2DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
 #define glCopyTextureSubImage3DEXT_defined
+#endif
+#ifndef glDisableClientStateIndexedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableClientStateIndexedEXT, (array, index), (GLenum array, GLuint index))
 #define glDisableClientStateIndexedEXT_defined
+#endif
+#ifndef glDisableClientStateiEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableClientStateiEXT, (array, index), (GLenum array, GLuint index))
 #define glDisableClientStateiEXT_defined
+#endif
+#ifndef glDisableIndexedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableIndexedEXT, (target, index), (GLenum target, GLuint index))
 #define glDisableIndexedEXT_defined
+#endif
+#ifndef glDisableVertexArrayAttribEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayAttribEXT, (vaobj, index), (GLuint vaobj, GLuint index))
 #define glDisableVertexArrayAttribEXT_defined
+#endif
+#ifndef glDisableVertexArrayEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayEXT, (vaobj, array), (GLuint vaobj, GLenum array))
 #define glDisableVertexArrayEXT_defined
+#endif
+#ifndef glEnableClientStateIndexedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableClientStateIndexedEXT, (array, index), (GLenum array, GLuint index))
 #define glEnableClientStateIndexedEXT_defined
+#endif
+#ifndef glEnableClientStateiEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableClientStateiEXT, (array, index), (GLenum array, GLuint index))
 #define glEnableClientStateiEXT_defined
+#endif
+#ifndef glEnableIndexedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableIndexedEXT, (target, index), (GLenum target, GLuint index))
 #define glEnableIndexedEXT_defined
+#endif
+#ifndef glEnableVertexArrayAttribEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayAttribEXT, (vaobj, index), (GLuint vaobj, GLuint index))
 #define glEnableVertexArrayAttribEXT_defined
+#endif
+#ifndef glEnableVertexArrayEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayEXT, (vaobj, array), (GLuint vaobj, GLenum array))
 #define glEnableVertexArrayEXT_defined
+#endif
+#ifndef glFlushMappedNamedBufferRangeEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRangeEXT, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizeiptr length))
 #define glFlushMappedNamedBufferRangeEXT_defined
+#endif
+#ifndef glFramebufferDrawBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferDrawBufferEXT, (framebuffer, mode), (GLuint framebuffer, GLenum mode))
 #define glFramebufferDrawBufferEXT_defined
+#endif
+#ifndef glFramebufferDrawBuffersEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferDrawBuffersEXT, (framebuffer, n, bufs), (GLuint framebuffer, GLsizei n, const GLenum *bufs))
 #define glFramebufferDrawBuffersEXT_defined
+#endif
+#ifndef glFramebufferReadBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferReadBufferEXT, (framebuffer, mode), (GLuint framebuffer, GLenum mode))
 #define glFramebufferReadBufferEXT_defined
+#endif
+#ifndef glGenerateMultiTexMipmapEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateMultiTexMipmapEXT, (texunit, target), (GLenum texunit, GLenum target))
 #define glGenerateMultiTexMipmapEXT_defined
+#endif
+#ifndef glGenerateTextureMipmapEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateTextureMipmapEXT, (texture, target), (GLuint texture, GLenum target))
 #define glGenerateTextureMipmapEXT_defined
+#endif
+#ifndef glGetBooleanIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBooleanIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLboolean *data))
 #define glGetBooleanIndexedvEXT_defined
+#endif
+#ifndef glGetCompressedMultiTexImageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedMultiTexImageEXT, (texunit, target, lod, img), (GLenum texunit, GLenum target, GLint lod, void *img))
 #define glGetCompressedMultiTexImageEXT_defined
+#endif
+#ifndef glGetCompressedTextureImageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTextureImageEXT, (texture, target, lod, img), (GLuint texture, GLenum target, GLint lod, void *img))
 #define glGetCompressedTextureImageEXT_defined
+#endif
+#ifndef glGetDoubleIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoubleIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLdouble *data))
 #define glGetDoubleIndexedvEXT_defined
+#endif
+#ifndef glGetDoublei_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoublei_vEXT, (pname, index, params), (GLenum pname, GLuint index, GLdouble *params))
 #define glGetDoublei_vEXT_defined
+#endif
+#ifndef glGetFloatIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloatIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLfloat *data))
 #define glGetFloatIndexedvEXT_defined
+#endif
+#ifndef glGetFloati_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloati_vEXT, (pname, index, params), (GLenum pname, GLuint index, GLfloat *params))
 #define glGetFloati_vEXT_defined
+#endif
+#ifndef glGetFramebufferParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFramebufferParameterivEXT, (framebuffer, pname, params), (GLuint framebuffer, GLenum pname, GLint *params))
 #define glGetFramebufferParameterivEXT_defined
+#endif
+#ifndef glGetIntegerIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLint *data))
 #define glGetIntegerIndexedvEXT_defined
+#endif
+#ifndef glGetMultiTexEnvfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexEnvfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLfloat *params))
 #define glGetMultiTexEnvfvEXT_defined
+#endif
+#ifndef glGetMultiTexEnvivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexEnvivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
 #define glGetMultiTexEnvivEXT_defined
+#endif
+#ifndef glGetMultiTexGendvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGendvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLdouble *params))
 #define glGetMultiTexGendvEXT_defined
+#endif
+#ifndef glGetMultiTexGenfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGenfvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLfloat *params))
 #define glGetMultiTexGenfvEXT_defined
+#endif
+#ifndef glGetMultiTexGenivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGenivEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLint *params))
 #define glGetMultiTexGenivEXT_defined
+#endif
+#ifndef glGetMultiTexImageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexImageEXT, (texunit, target, level, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
 #define glGetMultiTexImageEXT_defined
+#endif
+#ifndef glGetMultiTexLevelParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexLevelParameterfvEXT, (texunit, target, level, pname, params), (GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat *params))
 #define glGetMultiTexLevelParameterfvEXT_defined
+#endif
+#ifndef glGetMultiTexLevelParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexLevelParameterivEXT, (texunit, target, level, pname, params), (GLenum texunit, GLenum target, GLint level, GLenum pname, GLint *params))
 #define glGetMultiTexLevelParameterivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterIivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
 #define glGetMultiTexParameterIivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterIuivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLuint *params))
 #define glGetMultiTexParameterIuivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLfloat *params))
 #define glGetMultiTexParameterfvEXT_defined
+#endif
+#ifndef glGetMultiTexParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
 #define glGetMultiTexParameterivEXT_defined
+#endif
+#ifndef glGetNamedBufferParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameterivEXT, (buffer, pname, params), (GLuint buffer, GLenum pname, GLint *params))
 #define glGetNamedBufferParameterivEXT_defined
+#endif
+#ifndef glGetNamedBufferPointervEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferPointervEXT, (buffer, pname, params), (GLuint buffer, GLenum pname, void **params))
 #define glGetNamedBufferPointervEXT_defined
+#endif
+#ifndef glGetNamedBufferSubDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubDataEXT, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data))
 #define glGetNamedBufferSubDataEXT_defined
+#endif
+#ifndef glGetNamedFramebufferAttachmentParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferAttachmentParameterivEXT, (framebuffer, attachment, pname, params), (GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params))
 #define glGetNamedFramebufferAttachmentParameterivEXT_defined
+#endif
+#ifndef glGetNamedFramebufferParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferParameterivEXT, (framebuffer, pname, params), (GLuint framebuffer, GLenum pname, GLint *params))
 #define glGetNamedFramebufferParameterivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterIivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLint *params))
 #define glGetNamedProgramLocalParameterIivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterIuivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLuint *params))
 #define glGetNamedProgramLocalParameterIuivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterdvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterdvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLdouble *params))
 #define glGetNamedProgramLocalParameterdvEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterfvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLfloat *params))
 #define glGetNamedProgramLocalParameterfvEXT_defined
+#endif
+#ifndef glGetNamedProgramStringEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramStringEXT, (program, target, pname, string), (GLuint program, GLenum target, GLenum pname, void *string))
 #define glGetNamedProgramStringEXT_defined
+#endif
+#ifndef glGetNamedProgramivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramivEXT, (program, target, pname, params), (GLuint program, GLenum target, GLenum pname, GLint *params))
 #define glGetNamedProgramivEXT_defined
+#endif
+#ifndef glGetNamedRenderbufferParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedRenderbufferParameterivEXT, (renderbuffer, pname, params), (GLuint renderbuffer, GLenum pname, GLint *params))
 #define glGetNamedRenderbufferParameterivEXT_defined
+#endif
+#ifndef glGetPointerIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointerIndexedvEXT, (target, index, data), (GLenum target, GLuint index, void **data))
 #define glGetPointerIndexedvEXT_defined
+#endif
+#ifndef glGetPointeri_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointeri_vEXT, (pname, index, params), (GLenum pname, GLuint index, void **params))
 #define glGetPointeri_vEXT_defined
+#endif
+#ifndef glGetTextureImageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureImageEXT, (texture, target, level, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
 #define glGetTextureImageEXT_defined
+#endif
+#ifndef glGetTextureLevelParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterfvEXT, (texture, target, level, pname, params), (GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params))
 #define glGetTextureLevelParameterfvEXT_defined
+#endif
+#ifndef glGetTextureLevelParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterivEXT, (texture, target, level, pname, params), (GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params))
 #define glGetTextureLevelParameterivEXT_defined
+#endif
+#ifndef glGetTextureParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLint *params))
 #define glGetTextureParameterIivEXT_defined
+#endif
+#ifndef glGetTextureParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIuivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLuint *params))
 #define glGetTextureParameterIuivEXT_defined
+#endif
+#ifndef glGetTextureParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterfvEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLfloat *params))
 #define glGetTextureParameterfvEXT_defined
+#endif
+#ifndef glGetTextureParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLint *params))
 #define glGetTextureParameterivEXT_defined
+#endif
+#ifndef glGetVertexArrayIntegeri_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIntegeri_vEXT, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, GLint *param))
 #define glGetVertexArrayIntegeri_vEXT_defined
+#endif
+#ifndef glGetVertexArrayIntegervEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIntegervEXT, (vaobj, pname, param), (GLuint vaobj, GLenum pname, GLint *param))
 #define glGetVertexArrayIntegervEXT_defined
+#endif
+#ifndef glGetVertexArrayPointeri_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayPointeri_vEXT, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, void **param))
 #define glGetVertexArrayPointeri_vEXT_defined
+#endif
+#ifndef glGetVertexArrayPointervEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayPointervEXT, (vaobj, pname, param), (GLuint vaobj, GLenum pname, void **param))
 #define glGetVertexArrayPointervEXT_defined
+#endif
+#ifndef glIsEnabledIndexedEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsEnabledIndexedEXT, (target, index), (GLenum target, GLuint index))
 #define glIsEnabledIndexedEXT_defined
+#endif
+#ifndef glMapNamedBufferEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferEXT, (buffer, access), (GLuint buffer, GLenum access))
 #define glMapNamedBufferEXT_defined
+#endif
+#ifndef glMapNamedBufferRangeEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRangeEXT, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access))
 #define glMapNamedBufferRangeEXT_defined
+#endif
+#ifndef glMatrixFrustumEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixFrustumEXT, (mode, left, right, bottom, top, zNear, zFar), (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar))
 #define glMatrixFrustumEXT_defined
+#endif
+#ifndef glMatrixLoadIdentityEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadIdentityEXT, (mode), (GLenum mode))
 #define glMatrixLoadIdentityEXT_defined
+#endif
+#ifndef glMatrixLoadTransposedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadTransposedEXT, (mode, m), (GLenum mode, const GLdouble *m))
 #define glMatrixLoadTransposedEXT_defined
+#endif
+#ifndef glMatrixLoadTransposefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadTransposefEXT, (mode, m), (GLenum mode, const GLfloat *m))
 #define glMatrixLoadTransposefEXT_defined
+#endif
+#ifndef glMatrixLoaddEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoaddEXT, (mode, m), (GLenum mode, const GLdouble *m))
 #define glMatrixLoaddEXT_defined
+#endif
+#ifndef glMatrixLoadfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadfEXT, (mode, m), (GLenum mode, const GLfloat *m))
 #define glMatrixLoadfEXT_defined
+#endif
+#ifndef glMatrixMultTransposedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultTransposedEXT, (mode, m), (GLenum mode, const GLdouble *m))
 #define glMatrixMultTransposedEXT_defined
+#endif
+#ifndef glMatrixMultTransposefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultTransposefEXT, (mode, m), (GLenum mode, const GLfloat *m))
 #define glMatrixMultTransposefEXT_defined
+#endif
+#ifndef glMatrixMultdEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultdEXT, (mode, m), (GLenum mode, const GLdouble *m))
 #define glMatrixMultdEXT_defined
+#endif
+#ifndef glMatrixMultfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultfEXT, (mode, m), (GLenum mode, const GLfloat *m))
 #define glMatrixMultfEXT_defined
+#endif
+#ifndef glMatrixOrthoEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixOrthoEXT, (mode, left, right, bottom, top, zNear, zFar), (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar))
 #define glMatrixOrthoEXT_defined
+#endif
+#ifndef glMatrixPopEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixPopEXT, (mode), (GLenum mode))
 #define glMatrixPopEXT_defined
+#endif
+#ifndef glMatrixPushEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixPushEXT, (mode), (GLenum mode))
 #define glMatrixPushEXT_defined
+#endif
+#ifndef glMatrixRotatedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixRotatedEXT, (mode, angle, x, y, z), (GLenum mode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z))
 #define glMatrixRotatedEXT_defined
+#endif
+#ifndef glMatrixRotatefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixRotatefEXT, (mode, angle, x, y, z), (GLenum mode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z))
 #define glMatrixRotatefEXT_defined
+#endif
+#ifndef glMatrixScaledEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixScaledEXT, (mode, x, y, z), (GLenum mode, GLdouble x, GLdouble y, GLdouble z))
 #define glMatrixScaledEXT_defined
+#endif
+#ifndef glMatrixScalefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixScalefEXT, (mode, x, y, z), (GLenum mode, GLfloat x, GLfloat y, GLfloat z))
 #define glMatrixScalefEXT_defined
+#endif
+#ifndef glMatrixTranslatedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixTranslatedEXT, (mode, x, y, z), (GLenum mode, GLdouble x, GLdouble y, GLdouble z))
 #define glMatrixTranslatedEXT_defined
+#endif
+#ifndef glMatrixTranslatefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixTranslatefEXT, (mode, x, y, z), (GLenum mode, GLfloat x, GLfloat y, GLfloat z))
 #define glMatrixTranslatefEXT_defined
+#endif
+#ifndef glMultiTexBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexBufferEXT, (texunit, target, internalformat, buffer), (GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer))
 #define glMultiTexBufferEXT_defined
+#endif
+#ifndef glMultiTexCoordPointerEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexCoordPointerEXT, (texunit, size, type, stride, pointer), (GLenum texunit, GLint size, GLenum type, GLsizei stride, const void *pointer))
 #define glMultiTexCoordPointerEXT_defined
+#endif
+#ifndef glMultiTexEnvfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvfEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLfloat param))
 #define glMultiTexEnvfEXT_defined
+#endif
+#ifndef glMultiTexEnvfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLfloat *params))
 #define glMultiTexEnvfvEXT_defined
+#endif
+#ifndef glMultiTexEnviEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnviEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLint param))
 #define glMultiTexEnviEXT_defined
+#endif
+#ifndef glMultiTexEnvivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
 #define glMultiTexEnvivEXT_defined
+#endif
+#ifndef glMultiTexGendEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGendEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLdouble param))
 #define glMultiTexGendEXT_defined
+#endif
+#ifndef glMultiTexGendvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGendvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params))
 #define glMultiTexGendvEXT_defined
+#endif
+#ifndef glMultiTexGenfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenfEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLfloat param))
 #define glMultiTexGenfEXT_defined
+#endif
+#ifndef glMultiTexGenfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenfvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params))
 #define glMultiTexGenfvEXT_defined
+#endif
+#ifndef glMultiTexGeniEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGeniEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLint param))
 #define glMultiTexGeniEXT_defined
+#endif
+#ifndef glMultiTexGenivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenivEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLint *params))
 #define glMultiTexGenivEXT_defined
+#endif
+#ifndef glMultiTexImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage1DEXT, (texunit, target, level, internalformat, width, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
 #define glMultiTexImage1DEXT_defined
+#endif
+#ifndef glMultiTexImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage2DEXT, (texunit, target, level, internalformat, width, height, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
 #define glMultiTexImage2DEXT_defined
+#endif
+#ifndef glMultiTexImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage3DEXT, (texunit, target, level, internalformat, width, height, depth, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
 #define glMultiTexImage3DEXT_defined
+#endif
+#ifndef glMultiTexParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterIivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
 #define glMultiTexParameterIivEXT_defined
+#endif
+#ifndef glMultiTexParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterIuivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLuint *params))
 #define glMultiTexParameterIuivEXT_defined
+#endif
+#ifndef glMultiTexParameterfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterfEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLfloat param))
 #define glMultiTexParameterfEXT_defined
+#endif
+#ifndef glMultiTexParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLfloat *params))
 #define glMultiTexParameterfvEXT_defined
+#endif
+#ifndef glMultiTexParameteriEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameteriEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLint param))
 #define glMultiTexParameteriEXT_defined
+#endif
+#ifndef glMultiTexParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
 #define glMultiTexParameterivEXT_defined
+#endif
+#ifndef glMultiTexRenderbufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexRenderbufferEXT, (texunit, target, renderbuffer), (GLenum texunit, GLenum target, GLuint renderbuffer))
 #define glMultiTexRenderbufferEXT_defined
+#endif
+#ifndef glMultiTexSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage1DEXT, (texunit, target, level, xoffset, width, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
 #define glMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glMultiTexSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, width, height, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
 #define glMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glMultiTexSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
 #define glMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glNamedBufferDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferDataEXT, (buffer, size, data, usage), (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage))
 #define glNamedBufferDataEXT_defined
+#endif
+#ifndef glNamedBufferStorageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorageEXT, (buffer, size, data, flags), (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags))
 #define glNamedBufferStorageEXT_defined
+#endif
+#ifndef glNamedBufferSubDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubDataEXT, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
 #define glNamedBufferSubDataEXT_defined
+#endif
+#ifndef glNamedCopyBufferSubDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedCopyBufferSubDataEXT, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
 #define glNamedCopyBufferSubDataEXT_defined
+#endif
+#ifndef glNamedFramebufferParameteriEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferParameteriEXT, (framebuffer, pname, param), (GLuint framebuffer, GLenum pname, GLint param))
 #define glNamedFramebufferParameteriEXT_defined
+#endif
+#ifndef glNamedFramebufferRenderbufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferRenderbufferEXT, (framebuffer, attachment, renderbuffertarget, renderbuffer), (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer))
 #define glNamedFramebufferRenderbufferEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture1DEXT, (framebuffer, attachment, textarget, texture, level), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
 #define glNamedFramebufferTexture1DEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture2DEXT, (framebuffer, attachment, textarget, texture, level), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
 #define glNamedFramebufferTexture2DEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture3DEXT, (framebuffer, attachment, textarget, texture, level, zoffset), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset))
 #define glNamedFramebufferTexture3DEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureEXT, (framebuffer, attachment, texture, level), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level))
 #define glNamedFramebufferTextureEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureFaceEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureFaceEXT, (framebuffer, attachment, texture, level, face), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face))
 #define glNamedFramebufferTextureFaceEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureLayerEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureLayerEXT, (framebuffer, attachment, texture, level, layer), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer))
 #define glNamedFramebufferTextureLayerEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4dEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
 #define glNamedProgramLocalParameter4dEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4dvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLdouble *params))
 #define glNamedProgramLocalParameter4dvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4fEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w))
 #define glNamedProgramLocalParameter4fEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4fvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLfloat *params))
 #define glNamedProgramLocalParameter4fvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4iEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4iEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w))
 #define glNamedProgramLocalParameterI4iEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4ivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4ivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLint *params))
 #define glNamedProgramLocalParameterI4ivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4uiEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4uiEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w))
 #define glNamedProgramLocalParameterI4uiEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4uivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4uivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLuint *params))
 #define glNamedProgramLocalParameterI4uivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameters4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameters4fvEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat *params))
 #define glNamedProgramLocalParameters4fvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParametersI4ivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParametersI4ivEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLint *params))
 #define glNamedProgramLocalParametersI4ivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParametersI4uivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParametersI4uivEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint *params))
 #define glNamedProgramLocalParametersI4uivEXT_defined
+#endif
+#ifndef glNamedProgramStringEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramStringEXT, (program, target, format, len, string), (GLuint program, GLenum target, GLenum format, GLsizei len, const void *string))
 #define glNamedProgramStringEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageEXT, (renderbuffer, internalformat, width, height), (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height))
 #define glNamedRenderbufferStorageEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisampleCoverageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisampleCoverageEXT, (renderbuffer, coverageSamples, colorSamples, internalformat, width, height), (GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height))
 #define glNamedRenderbufferStorageMultisampleCoverageEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisampleEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisampleEXT, (renderbuffer, samples, internalformat, width, height), (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
 #define glNamedRenderbufferStorageMultisampleEXT_defined
+#endif
+#ifndef glProgramUniform1dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dEXT, (program, location, x), (GLuint program, GLint location, GLdouble x))
 #define glProgramUniform1dEXT_defined
+#endif
+#ifndef glProgramUniform1dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
 #define glProgramUniform1dvEXT_defined
+#endif
 #ifndef glProgramUniform1fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1fEXT, (program, location, v0), (GLuint program, GLint location, GLfloat v0))
 #define glProgramUniform1fEXT_defined
@@ -15400,10 +17448,14 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1uiEXT, (program, lo
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
 #define glProgramUniform1uivEXT_defined
 #endif
+#ifndef glProgramUniform2dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dEXT, (program, location, x, y), (GLuint program, GLint location, GLdouble x, GLdouble y))
 #define glProgramUniform2dEXT_defined
+#endif
+#ifndef glProgramUniform2dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
 #define glProgramUniform2dvEXT_defined
+#endif
 #ifndef glProgramUniform2fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2fEXT, (program, location, v0, v1), (GLuint program, GLint location, GLfloat v0, GLfloat v1))
 #define glProgramUniform2fEXT_defined
@@ -15428,10 +17480,14 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2uiEXT, (program, lo
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
 #define glProgramUniform2uivEXT_defined
 #endif
+#ifndef glProgramUniform3dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dEXT, (program, location, x, y, z), (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z))
 #define glProgramUniform3dEXT_defined
+#endif
+#ifndef glProgramUniform3dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
 #define glProgramUniform3dvEXT_defined
+#endif
 #ifndef glProgramUniform3fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3fEXT, (program, location, v0, v1, v2), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2))
 #define glProgramUniform3fEXT_defined
@@ -15456,10 +17512,14 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3uiEXT, (program, lo
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
 #define glProgramUniform3uivEXT_defined
 #endif
+#ifndef glProgramUniform4dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dEXT, (program, location, x, y, z, w), (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
 #define glProgramUniform4dEXT_defined
+#endif
+#ifndef glProgramUniform4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
 #define glProgramUniform4dvEXT_defined
+#endif
 #ifndef glProgramUniform4fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4fEXT, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3))
 #define glProgramUniform4fEXT_defined
@@ -15484,88 +17544,134 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4uiEXT, (program, lo
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
 #define glProgramUniform4uivEXT_defined
 #endif
+#ifndef glProgramUniformMatrix2dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 #define glProgramUniformMatrix2dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix2fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glProgramUniformMatrix2fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix2x3dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 #define glProgramUniformMatrix2x3dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix2x3fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glProgramUniformMatrix2x3fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix2x4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 #define glProgramUniformMatrix2x4dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix2x4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glProgramUniformMatrix2x4fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix3dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 #define glProgramUniformMatrix3dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix3fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glProgramUniformMatrix3fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix3x2dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 #define glProgramUniformMatrix3x2dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix3x2fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glProgramUniformMatrix3x2fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix3x4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 #define glProgramUniformMatrix3x4dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix3x4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glProgramUniformMatrix3x4fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 #define glProgramUniformMatrix4dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glProgramUniformMatrix4fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix4x2dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 #define glProgramUniformMatrix4x2dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix4x2fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glProgramUniformMatrix4x2fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix4x3dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 #define glProgramUniformMatrix4x3dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix4x3fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 #define glProgramUniformMatrix4x3fvEXT_defined
 #endif
+#ifndef glPushClientAttribDefaultEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPushClientAttribDefaultEXT, (mask), (GLbitfield mask))
 #define glPushClientAttribDefaultEXT_defined
+#endif
+#ifndef glTextureBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferEXT, (texture, target, internalformat, buffer), (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer))
 #define glTextureBufferEXT_defined
+#endif
+#ifndef glTextureBufferRangeEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRangeEXT, (texture, target, internalformat, buffer, offset, size), (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size))
 #define glTextureBufferRangeEXT_defined
+#endif
+#ifndef glTextureImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage1DEXT, (texture, target, level, internalformat, width, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
 #define glTextureImage1DEXT_defined
+#endif
+#ifndef glTextureImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage2DEXT, (texture, target, level, internalformat, width, height, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
 #define glTextureImage2DEXT_defined
+#endif
+#ifndef glTextureImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage3DEXT, (texture, target, level, internalformat, width, height, depth, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
 #define glTextureImage3DEXT_defined
+#endif
+#ifndef glTexturePageCommitmentEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexturePageCommitmentEXT, (texture, level, xoffset, yoffset, zoffset, width, height, depth, commit), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit))
 #define glTexturePageCommitmentEXT_defined
+#endif
+#ifndef glTextureParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLint *params))
 #define glTextureParameterIivEXT_defined
+#endif
+#ifndef glTextureParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIuivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLuint *params))
 #define glTextureParameterIuivEXT_defined
+#endif
+#ifndef glTextureParameterfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfEXT, (texture, target, pname, param), (GLuint texture, GLenum target, GLenum pname, GLfloat param))
 #define glTextureParameterfEXT_defined
+#endif
+#ifndef glTextureParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfvEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLfloat *params))
 #define glTextureParameterfvEXT_defined
+#endif
+#ifndef glTextureParameteriEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameteriEXT, (texture, target, pname, param), (GLuint texture, GLenum target, GLenum pname, GLint param))
 #define glTextureParameteriEXT_defined
+#endif
+#ifndef glTextureParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLint *params))
 #define glTextureParameterivEXT_defined
+#endif
+#ifndef glTextureRenderbufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureRenderbufferEXT, (texture, target, renderbuffer), (GLuint texture, GLenum target, GLuint renderbuffer))
 #define glTextureRenderbufferEXT_defined
+#endif
 #ifndef glTextureStorage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage1DEXT, (texture, target, levels, internalformat, width), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
 #define glTextureStorage1DEXT_defined
@@ -15574,60 +17680,110 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage1DEXT, (texture, tar
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2DEXT, (texture, target, levels, internalformat, width, height), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height))
 #define glTextureStorage2DEXT_defined
 #endif
+#ifndef glTextureStorage2DMultisampleEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2DMultisampleEXT, (texture, target, samples, internalformat, width, height, fixedsamplelocations), (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
 #define glTextureStorage2DMultisampleEXT_defined
+#endif
 #ifndef glTextureStorage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DEXT, (texture, target, levels, internalformat, width, height, depth), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
 #define glTextureStorage3DEXT_defined
 #endif
+#ifndef glTextureStorage3DMultisampleEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DMultisampleEXT, (texture, target, samples, internalformat, width, height, depth, fixedsamplelocations), (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
 #define glTextureStorage3DMultisampleEXT_defined
+#endif
+#ifndef glTextureSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage1DEXT, (texture, target, level, xoffset, width, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
 #define glTextureSubImage1DEXT_defined
+#endif
+#ifndef glTextureSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, width, height, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
 #define glTextureSubImage2DEXT_defined
+#endif
+#ifndef glTextureSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
 #define glTextureSubImage3DEXT_defined
+#endif
+#ifndef glUnmapNamedBufferEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glUnmapNamedBufferEXT, (buffer), (GLuint buffer))
 #define glUnmapNamedBufferEXT_defined
+#endif
+#ifndef glVertexArrayBindVertexBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayBindVertexBufferEXT, (vaobj, bindingindex, buffer, offset, stride), (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride))
 #define glVertexArrayBindVertexBufferEXT_defined
+#endif
+#ifndef glVertexArrayColorOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayColorOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArrayColorOffsetEXT_defined
+#endif
+#ifndef glVertexArrayEdgeFlagOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayEdgeFlagOffsetEXT, (vaobj, buffer, stride, offset), (GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset))
 #define glVertexArrayEdgeFlagOffsetEXT_defined
+#endif
+#ifndef glVertexArrayFogCoordOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayFogCoordOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArrayFogCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayIndexOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayIndexOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArrayIndexOffsetEXT_defined
+#endif
+#ifndef glVertexArrayMultiTexCoordOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayMultiTexCoordOffsetEXT, (vaobj, buffer, texunit, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArrayMultiTexCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayNormalOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayNormalOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArrayNormalOffsetEXT_defined
+#endif
+#ifndef glVertexArraySecondaryColorOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArraySecondaryColorOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArraySecondaryColorOffsetEXT_defined
+#endif
+#ifndef glVertexArrayTexCoordOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayTexCoordOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArrayTexCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribBindingEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribBindingEXT, (vaobj, attribindex, bindingindex), (GLuint vaobj, GLuint attribindex, GLuint bindingindex))
 #define glVertexArrayVertexAttribBindingEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribDivisorEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribDivisorEXT, (vaobj, index, divisor), (GLuint vaobj, GLuint index, GLuint divisor))
 #define glVertexArrayVertexAttribDivisorEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribFormatEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribFormatEXT, (vaobj, attribindex, size, type, normalized, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset))
 #define glVertexArrayVertexAttribFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribIFormatEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribIFormatEXT, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
 #define glVertexArrayVertexAttribIFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribIOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribIOffsetEXT, (vaobj, buffer, index, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArrayVertexAttribIOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribLFormatEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribLFormatEXT, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
 #define glVertexArrayVertexAttribLFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribLOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribLOffsetEXT, (vaobj, buffer, index, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArrayVertexAttribLOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribOffsetEXT, (vaobj, buffer, index, size, type, normalized, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset))
 #define glVertexArrayVertexAttribOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexBindingDivisorEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBindingDivisorEXT, (vaobj, bindingindex, divisor), (GLuint vaobj, GLuint bindingindex, GLuint divisor))
 #define glVertexArrayVertexBindingDivisorEXT_defined
+#endif
+#ifndef glVertexArrayVertexOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 #define glVertexArrayVertexOffsetEXT_defined
+#endif
 #endif // defined(GL_EXT_direct_state_access)
 #if defined(GL_EXT_draw_buffers2)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorMaskIndexedEXT, (index, r, g, b, a), (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a))
@@ -15647,6 +17803,12 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedEXT, (mode, c
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawRangeElementsEXT, (mode, start, end, count, type, indices), (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices))
 #define glDrawRangeElementsEXT_defined
 #endif // defined(GL_EXT_draw_range_elements)
+#if defined(GL_EXT_external_buffer)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferStorageExternalEXT, (target, offset, size, clientBuffer, flags), (GLenum target, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags))
+#define glBufferStorageExternalEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorageExternalEXT, (buffer, offset, size, clientBuffer, flags), (GLuint buffer, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags))
+#define glNamedBufferStorageExternalEXT_defined
+#endif // defined(GL_EXT_external_buffer)
 #if defined(GL_EXT_fog_coord)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFogCoordPointerEXT, (type, stride, pointer), (GLenum type, GLsizei stride, const void *pointer))
 #define glFogCoordPointerEXT_defined
@@ -15781,6 +17943,56 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureLightEXT, (pname), (GLenum 
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureMaterialEXT, (face, mode), (GLenum face, GLenum mode))
 #define glTextureMaterialEXT_defined
 #endif // defined(GL_EXT_light_texture)
+#if defined(GL_EXT_memory_object)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferStorageMemEXT, (target, size, memory, offset), (GLenum target, GLsizeiptr size, GLuint memory, GLuint64 offset))
+#define glBufferStorageMemEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateMemoryObjectsEXT, (n, memoryObjects), (GLsizei n, GLuint *memoryObjects))
+#define glCreateMemoryObjectsEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteMemoryObjectsEXT, (n, memoryObjects), (GLsizei n, const GLuint *memoryObjects))
+#define glDeleteMemoryObjectsEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMemoryObjectParameterivEXT, (memoryObject, pname, params), (GLuint memoryObject, GLenum pname, GLint *params))
+#define glGetMemoryObjectParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUnsignedBytei_vEXT, (target, index, data), (GLenum target, GLuint index, GLubyte *data))
+#define glGetUnsignedBytei_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUnsignedBytevEXT, (pname, data), (GLenum pname, GLubyte *data))
+#define glGetUnsignedBytevEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsMemoryObjectEXT, (memoryObject), (GLuint memoryObject))
+#define glIsMemoryObjectEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMemoryObjectParameterivEXT, (memoryObject, pname, params), (GLuint memoryObject, GLenum pname, const GLint *params))
+#define glMemoryObjectParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorageMemEXT, (buffer, size, memory, offset), (GLuint buffer, GLsizeiptr size, GLuint memory, GLuint64 offset))
+#define glNamedBufferStorageMemEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem1DEXT, (target, levels, internalFormat, width, memory, offset), (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset))
+#define glTexStorageMem1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem2DEXT, (target, levels, internalFormat, width, height, memory, offset), (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset))
+#define glTexStorageMem2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem2DMultisampleEXT, (target, samples, internalFormat, width, height, fixedSampleLocations, memory, offset), (GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset))
+#define glTexStorageMem2DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem3DEXT, (target, levels, internalFormat, width, height, depth, memory, offset), (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset))
+#define glTexStorageMem3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem3DMultisampleEXT, (target, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset), (GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset))
+#define glTexStorageMem3DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem1DEXT, (texture, levels, internalFormat, width, memory, offset), (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset))
+#define glTextureStorageMem1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem2DEXT, (texture, levels, internalFormat, width, height, memory, offset), (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset))
+#define glTextureStorageMem2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem2DMultisampleEXT, (texture, samples, internalFormat, width, height, fixedSampleLocations, memory, offset), (GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset))
+#define glTextureStorageMem2DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem3DEXT, (texture, levels, internalFormat, width, height, depth, memory, offset), (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset))
+#define glTextureStorageMem3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem3DMultisampleEXT, (texture, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset), (GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset))
+#define glTextureStorageMem3DMultisampleEXT_defined
+#endif // defined(GL_EXT_memory_object)
+#if defined(GL_EXT_memory_object_fd)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportMemoryFdEXT, (memory, size, handleType, fd), (GLuint memory, GLuint64 size, GLenum handleType, GLint fd))
+#define glImportMemoryFdEXT_defined
+#endif // defined(GL_EXT_memory_object_fd)
+#if defined(GL_EXT_memory_object_win32)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportMemoryWin32HandleEXT, (memory, size, handleType, handle), (GLuint memory, GLuint64 size, GLenum handleType, void *handle))
+#define glImportMemoryWin32HandleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportMemoryWin32NameEXT, (memory, size, handleType, name), (GLuint memory, GLuint64 size, GLenum handleType, const void *name))
+#define glImportMemoryWin32NameEXT_defined
+#endif // defined(GL_EXT_memory_object_win32)
 #if defined(GL_EXT_multi_draw_arrays)
 #ifndef glMultiDrawArraysEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysEXT, (mode, first, count, primcount), (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount))
@@ -15883,6 +18095,32 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSecondaryColor3usvEXT, (v), (const
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSecondaryColorPointerEXT, (size, type, stride, pointer), (GLint size, GLenum type, GLsizei stride, const void *pointer))
 #define glSecondaryColorPointerEXT_defined
 #endif // defined(GL_EXT_secondary_color)
+#if defined(GL_EXT_semaphore)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteSemaphoresEXT, (n, semaphores), (GLsizei n, const GLuint *semaphores))
+#define glDeleteSemaphoresEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenSemaphoresEXT, (n, semaphores), (GLsizei n, GLuint *semaphores))
+#define glGenSemaphoresEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSemaphoreParameterui64vEXT, (semaphore, pname, params), (GLuint semaphore, GLenum pname, GLuint64 *params))
+#define glGetSemaphoreParameterui64vEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsSemaphoreEXT, (semaphore), (GLuint semaphore))
+#define glIsSemaphoreEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSemaphoreParameterui64vEXT, (semaphore, pname, params), (GLuint semaphore, GLenum pname, const GLuint64 *params))
+#define glSemaphoreParameterui64vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalSemaphoreEXT, (semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, dstLayouts), (GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *dstLayouts))
+#define glSignalSemaphoreEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWaitSemaphoreEXT, (semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, srcLayouts), (GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *srcLayouts))
+#define glWaitSemaphoreEXT_defined
+#endif // defined(GL_EXT_semaphore)
+#if defined(GL_EXT_semaphore_fd)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportSemaphoreFdEXT, (semaphore, handleType, fd), (GLuint semaphore, GLenum handleType, GLint fd))
+#define glImportSemaphoreFdEXT_defined
+#endif // defined(GL_EXT_semaphore_fd)
+#if defined(GL_EXT_semaphore_win32)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportSemaphoreWin32HandleEXT, (semaphore, handleType, handle), (GLuint semaphore, GLenum handleType, void *handle))
+#define glImportSemaphoreWin32HandleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportSemaphoreWin32NameEXT, (semaphore, handleType, name), (GLuint semaphore, GLenum handleType, const void *name))
+#define glImportSemaphoreWin32NameEXT_defined
+#endif // defined(GL_EXT_semaphore_win32)
 #if defined(GL_EXT_separate_shader_objects)
 #ifndef glActiveProgramEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glActiveProgramEXT, (program), (GLuint program))
@@ -15897,6 +18135,12 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUseShaderProgramEXT, (type, progra
 #define glUseShaderProgramEXT_defined
 #endif
 #endif // defined(GL_EXT_separate_shader_objects)
+#if defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
+#ifndef glFramebufferFetchBarrierEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferFetchBarrierEXT, (), (void))
+#define glFramebufferFetchBarrierEXT_defined
+#endif
+#endif // defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
 #if defined(GL_EXT_shader_image_load_store)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindImageTextureEXT, (index, texture, level, layered, layer, access, format), (GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format))
 #define glBindImageTextureEXT_defined
@@ -16135,6 +18379,12 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexWeightfEXT, (weight), (GLflo
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexWeightfvEXT, (weight), (const GLfloat *weight))
 #define glVertexWeightfvEXT_defined
 #endif // defined(GL_EXT_vertex_weighting)
+#if defined(GL_EXT_win32_keyed_mutex)
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glAcquireKeyedMutexWin32EXT, (memory, key, timeout), (GLuint memory, GLuint64 key, GLuint timeout))
+#define glAcquireKeyedMutexWin32EXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glReleaseKeyedMutexWin32EXT, (memory, key), (GLuint memory, GLuint64 key))
+#define glReleaseKeyedMutexWin32EXT_defined
+#endif // defined(GL_EXT_win32_keyed_mutex)
 #if defined(GL_EXT_window_rectangles)
 #ifndef glWindowRectanglesEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWindowRectanglesEXT, (mode, count, box), (GLenum mode, GLsizei count, const GLint *box))
@@ -16253,7 +18503,7 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfCounterInfoINTEL, (queryId,
 #define glGetPerfCounterInfoINTEL_defined
 #endif
 #ifndef glGetPerfQueryDataINTEL_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfQueryDataINTEL, (queryHandle, flags, dataSize, data, bytesWritten), (GLuint queryHandle, GLuint flags, GLsizei dataSize, GLvoid *data, GLuint *bytesWritten))
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfQueryDataINTEL, (queryHandle, flags, dataSize, data, bytesWritten), (GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten))
 #define glGetPerfQueryDataINTEL_defined
 #endif
 #ifndef glGetPerfQueryIdByNameINTEL_defined
@@ -16271,6 +18521,12 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendBarrierKHR, (), (void))
 #define glBlendBarrierKHR_defined
 #endif
 #endif // defined(GL_KHR_blend_equation_advanced)
+#if defined(GL_KHR_parallel_shader_compile)
+#ifndef glMaxShaderCompilerThreadsKHR_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMaxShaderCompilerThreadsKHR, (count), (GLuint count))
+#define glMaxShaderCompilerThreadsKHR_defined
+#endif
+#endif // defined(GL_KHR_parallel_shader_compile)
 #if defined(GL_MESA_resize_buffers)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glResizeBuffersMESA, (), (void))
 #define glResizeBuffersMESA_defined
@@ -16331,17 +18587,37 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginConditionalRenderNVX, (id), (
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEndConditionalRenderNVX, (), (void))
 #define glEndConditionalRenderNVX_defined
 #endif // defined(GL_NVX_conditional_render)
+#if defined(GL_NVX_linked_gpu_multicast)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLGPUCopyImageSubDataNVX, (sourceGpu, destinationGpuMask, srcName, srcTarget, srcLevel, srcX, srxY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth), (GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth))
+#define glLGPUCopyImageSubDataNVX_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLGPUInterlockNVX, (), (void))
+#define glLGPUInterlockNVX_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLGPUNamedBufferSubDataNVX, (gpuMask, buffer, offset, size, data), (GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
+#define glLGPUNamedBufferSubDataNVX_defined
+#endif // defined(GL_NVX_linked_gpu_multicast)
+#if defined(GL_NV_alpha_to_coverage_dither_control)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glAlphaToCoverageDitherControlNV, (mode), (GLenum mode))
+#define glAlphaToCoverageDitherControlNV_defined
+#endif // defined(GL_NV_alpha_to_coverage_dither_control)
 #if defined(GL_NV_bindless_multi_draw_indirect)
+#ifndef glMultiDrawArraysIndirectBindlessNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectBindlessNV, (mode, indirect, drawCount, stride, vertexBufferCount), (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount))
 #define glMultiDrawArraysIndirectBindlessNV_defined
+#endif
+#ifndef glMultiDrawElementsIndirectBindlessNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectBindlessNV, (mode, type, indirect, drawCount, stride, vertexBufferCount), (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount))
 #define glMultiDrawElementsIndirectBindlessNV_defined
+#endif
 #endif // defined(GL_NV_bindless_multi_draw_indirect)
 #if defined(GL_NV_bindless_multi_draw_indirect_count)
+#ifndef glMultiDrawArraysIndirectBindlessCountNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectBindlessCountNV, (mode, indirect, drawCount, maxDrawCount, stride, vertexBufferCount), (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount))
 #define glMultiDrawArraysIndirectBindlessCountNV_defined
+#endif
+#ifndef glMultiDrawElementsIndirectBindlessCountNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectBindlessCountNV, (mode, type, indirect, drawCount, maxDrawCount, stride, vertexBufferCount), (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount))
 #define glMultiDrawElementsIndirectBindlessCountNV_defined
+#endif
 #endif // defined(GL_NV_bindless_multi_draw_indirect_count)
 #if defined(GL_NV_bindless_texture)
 #ifndef glGetImageHandleNV_defined
@@ -16408,44 +18684,80 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendParameteriNV, (pname, value),
 #endif
 #endif // defined(GL_NV_blend_equation_advanced)
 #if defined(GL_NV_clip_space_w_scaling)
+#ifndef glViewportPositionWScaleNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportPositionWScaleNV, (index, xcoeff, ycoeff), (GLuint index, GLfloat xcoeff, GLfloat ycoeff))
 #define glViewportPositionWScaleNV_defined
+#endif
 #endif // defined(GL_NV_clip_space_w_scaling)
 #if defined(GL_NV_command_list)
+#ifndef glCallCommandListNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCallCommandListNV, (list), (GLuint list))
 #define glCallCommandListNV_defined
+#endif
+#ifndef glCommandListSegmentsNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCommandListSegmentsNV, (list, segments), (GLuint list, GLuint segments))
 #define glCommandListSegmentsNV_defined
+#endif
+#ifndef glCompileCommandListNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompileCommandListNV, (list), (GLuint list))
 #define glCompileCommandListNV_defined
+#endif
+#ifndef glCreateCommandListsNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateCommandListsNV, (n, lists), (GLsizei n, GLuint *lists))
 #define glCreateCommandListsNV_defined
+#endif
+#ifndef glCreateStatesNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateStatesNV, (n, states), (GLsizei n, GLuint *states))
 #define glCreateStatesNV_defined
+#endif
+#ifndef glDeleteCommandListsNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteCommandListsNV, (n, lists), (GLsizei n, const GLuint *lists))
 #define glDeleteCommandListsNV_defined
+#endif
+#ifndef glDeleteStatesNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteStatesNV, (n, states), (GLsizei n, const GLuint *states))
 #define glDeleteStatesNV_defined
+#endif
+#ifndef glDrawCommandsAddressNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsAddressNV, (primitiveMode, indirects, sizes, count), (GLenum primitiveMode, const GLuint64 *indirects, const GLsizei *sizes, GLuint count))
 #define glDrawCommandsAddressNV_defined
+#endif
+#ifndef glDrawCommandsNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsNV, (primitiveMode, buffer, indirects, sizes, count), (GLenum primitiveMode, GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, GLuint count))
 #define glDrawCommandsNV_defined
+#endif
+#ifndef glDrawCommandsStatesAddressNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsStatesAddressNV, (indirects, sizes, states, fbos, count), (const GLuint64 *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
 #define glDrawCommandsStatesAddressNV_defined
+#endif
+#ifndef glDrawCommandsStatesNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsStatesNV, (buffer, indirects, sizes, states, fbos, count), (GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
 #define glDrawCommandsStatesNV_defined
+#endif
+#ifndef glGetCommandHeaderNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetCommandHeaderNV, (tokenID, size), (GLenum tokenID, GLuint size))
 #define glGetCommandHeaderNV_defined
+#endif
+#ifndef glGetStageIndexNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLushort, APIENTRY, glGetStageIndexNV, (shadertype), (GLenum shadertype))
 #define glGetStageIndexNV_defined
+#endif
+#ifndef glIsCommandListNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsCommandListNV, (list), (GLuint list))
 #define glIsCommandListNV_defined
+#endif
+#ifndef glIsStateNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsStateNV, (state), (GLuint state))
 #define glIsStateNV_defined
+#endif
+#ifndef glListDrawCommandsStatesClientNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glListDrawCommandsStatesClientNV, (list, segment, indirects, sizes, states, fbos, count), (GLuint list, GLuint segment, const void **indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
 #define glListDrawCommandsStatesClientNV_defined
+#endif
+#ifndef glStateCaptureNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStateCaptureNV, (state, mode), (GLuint state, GLenum mode))
 #define glStateCaptureNV_defined
+#endif
 #endif // defined(GL_NV_command_list)
 #if defined(GL_NV_conditional_render)
 #ifndef glBeginConditionalRenderNV_defined
@@ -16464,8 +18776,10 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSubpixelPrecisionBiasNV, (xbits, y
 #endif
 #endif // defined(GL_NV_conservative_raster)
 #if defined(GL_NV_conservative_raster_dilate)
+#ifndef glConservativeRasterParameterfNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glConservativeRasterParameterfNV, (pname, value), (GLenum pname, GLfloat value))
 #define glConservativeRasterParameterfNV_defined
+#endif
 #endif // defined(GL_NV_conservative_raster_dilate)
 #if defined(GL_NV_conservative_raster_pre_snap_triangles)
 #ifndef glConservativeRasterParameteriNV_defined
@@ -16489,6 +18803,28 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRangedNV, (zNear, zFar), (GLd
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawTextureNV, (texture, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1), (GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1))
 #define glDrawTextureNV_defined
 #endif // defined(GL_NV_draw_texture)
+#if defined(GL_NV_draw_vulkan_image)
+#ifndef glDrawVkImageNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawVkImageNV, (vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1), (GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1))
+#define glDrawVkImageNV_defined
+#endif
+#ifndef glGetVkProcAddrNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLVULKANPROCNV, APIENTRY, glGetVkProcAddrNV, (name), (const GLchar *name))
+#define glGetVkProcAddrNV_defined
+#endif
+#ifndef glSignalVkFenceNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalVkFenceNV, (vkFence), (GLuint64 vkFence))
+#define glSignalVkFenceNV_defined
+#endif
+#ifndef glSignalVkSemaphoreNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalVkSemaphoreNV, (vkSemaphore), (GLuint64 vkSemaphore))
+#define glSignalVkSemaphoreNV_defined
+#endif
+#ifndef glWaitVkSemaphoreNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWaitVkSemaphoreNV, (vkSemaphore), (GLuint64 vkSemaphore))
+#define glWaitVkSemaphoreNV_defined
+#endif
+#endif // defined(GL_NV_draw_vulkan_image)
 #if defined(GL_NV_evaluators)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEvalMapsNV, (target, mode), (GLenum target, GLenum mode))
 #define glEvalMapsNV_defined
@@ -16582,8 +18918,10 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCoverageModulationTableNV, (buf
 #endif
 #endif // defined(GL_NV_framebuffer_mixed_samples)
 #if defined(GL_NV_framebuffer_multisample_coverage)
+#ifndef glRenderbufferStorageMultisampleCoverageNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderbufferStorageMultisampleCoverageNV, (target, coverageSamples, colorSamples, internalformat, width, height), (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height))
 #define glRenderbufferStorageMultisampleCoverageNV_defined
+#endif
 #endif // defined(GL_NV_framebuffer_multisample_coverage)
 #if defined(GL_NV_geometry_program4)
 #ifndef glFramebufferTextureEXT_defined
@@ -16595,6 +18933,32 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureFaceEXT, (target
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramVertexLimitNV, (target, limit), (GLenum target, GLint limit))
 #define glProgramVertexLimitNV_defined
 #endif // defined(GL_NV_geometry_program4)
+#if defined(GL_NV_gpu_multicast)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastBarrierNV, (), (void))
+#define glMulticastBarrierNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastBlitFramebufferNV, (srcGpu, dstGpu, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLuint srcGpu, GLuint dstGpu, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
+#define glMulticastBlitFramebufferNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastBufferSubDataNV, (gpuMask, buffer, offset, size, data), (GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
+#define glMulticastBufferSubDataNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastCopyBufferSubDataNV, (readGpu, writeGpuMask, readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
+#define glMulticastCopyBufferSubDataNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastCopyImageSubDataNV, (srcGpu, dstGpuMask, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth), (GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth))
+#define glMulticastCopyImageSubDataNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastFramebufferSampleLocationsfvNV, (gpu, framebuffer, start, count, v), (GLuint gpu, GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v))
+#define glMulticastFramebufferSampleLocationsfvNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastGetQueryObjecti64vNV, (gpu, id, pname, params), (GLuint gpu, GLuint id, GLenum pname, GLint64 *params))
+#define glMulticastGetQueryObjecti64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastGetQueryObjectivNV, (gpu, id, pname, params), (GLuint gpu, GLuint id, GLenum pname, GLint *params))
+#define glMulticastGetQueryObjectivNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastGetQueryObjectui64vNV, (gpu, id, pname, params), (GLuint gpu, GLuint id, GLenum pname, GLuint64 *params))
+#define glMulticastGetQueryObjectui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastGetQueryObjectuivNV, (gpu, id, pname, params), (GLuint gpu, GLuint id, GLenum pname, GLuint *params))
+#define glMulticastGetQueryObjectuivNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastWaitSyncNV, (signalGpu, waitGpuMask), (GLuint signalGpu, GLbitfield waitGpuMask))
+#define glMulticastWaitSyncNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderGpuMaskNV, (mask), (GLbitfield mask))
+#define glRenderGpuMaskNV_defined
+#endif // defined(GL_NV_gpu_multicast)
 #if defined(GL_NV_gpu_program4)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramEnvParameterIivNV, (target, index, params), (GLenum target, GLuint index, GLint *params))
 #define glGetProgramEnvParameterIivNV_defined
@@ -17035,6 +19399,18 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPrimitiveRestartIndexNV, (index), 
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPrimitiveRestartNV, (), (void))
 #define glPrimitiveRestartNV_defined
 #endif // defined(GL_NV_primitive_restart)
+#if defined(GL_NV_query_resource)
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glQueryResourceNV, (queryType, tagId, bufSize, buffer), (GLenum queryType, GLint tagId, GLuint bufSize, GLint *buffer))
+#define glQueryResourceNV_defined
+#endif // defined(GL_NV_query_resource)
+#if defined(GL_NV_query_resource_tag)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteQueryResourceTagNV, (n, tagIds), (GLsizei n, const GLint *tagIds))
+#define glDeleteQueryResourceTagNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenQueryResourceTagNV, (n, tagIds), (GLsizei n, GLint *tagIds))
+#define glGenQueryResourceTagNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glQueryResourceTagNV, (tagId, tagString), (GLint tagId, const GLchar *tagString))
+#define glQueryResourceTagNV_defined
+#endif // defined(GL_NV_query_resource_tag)
 #if defined(GL_NV_register_combiners)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCombinerInputNV, (stage, portion, variable, input, mapping, componentUsage), (GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage))
 #define glCombinerInputNV_defined
@@ -17084,36 +19460,64 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glResolveDepthValuesNV, (), (void))
 #endif
 #endif // defined(GL_NV_sample_locations)
 #if defined(GL_NV_shader_buffer_load)
+#ifndef glGetBufferParameterui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferParameterui64vNV, (target, pname, params), (GLenum target, GLenum pname, GLuint64EXT *params))
 #define glGetBufferParameterui64vNV_defined
+#endif
+#ifndef glGetIntegerui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerui64vNV, (value, result), (GLenum value, GLuint64EXT *result))
 #define glGetIntegerui64vNV_defined
+#endif
+#ifndef glGetNamedBufferParameterui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameterui64vNV, (buffer, pname, params), (GLuint buffer, GLenum pname, GLuint64EXT *params))
 #define glGetNamedBufferParameterui64vNV_defined
+#endif
+#ifndef glIsBufferResidentNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsBufferResidentNV, (target), (GLenum target))
 #define glIsBufferResidentNV_defined
+#endif
+#ifndef glIsNamedBufferResidentNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsNamedBufferResidentNV, (buffer), (GLuint buffer))
 #define glIsNamedBufferResidentNV_defined
+#endif
+#ifndef glMakeBufferNonResidentNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeBufferNonResidentNV, (target), (GLenum target))
 #define glMakeBufferNonResidentNV_defined
+#endif
+#ifndef glMakeBufferResidentNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeBufferResidentNV, (target, access), (GLenum target, GLenum access))
 #define glMakeBufferResidentNV_defined
+#endif
+#ifndef glMakeNamedBufferNonResidentNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeNamedBufferNonResidentNV, (buffer), (GLuint buffer))
 #define glMakeNamedBufferNonResidentNV_defined
+#endif
+#ifndef glMakeNamedBufferResidentNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeNamedBufferResidentNV, (buffer, access), (GLuint buffer, GLenum access))
 #define glMakeNamedBufferResidentNV_defined
+#endif
+#ifndef glProgramUniformui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformui64NV, (program, location, value), (GLuint program, GLint location, GLuint64EXT value))
 #define glProgramUniformui64NV_defined
+#endif
+#ifndef glProgramUniformui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformui64vNV, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value))
 #define glProgramUniformui64vNV_defined
+#endif
+#ifndef glUniformui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformui64NV, (location, value), (GLint location, GLuint64EXT value))
 #define glUniformui64NV_defined
+#endif
+#ifndef glUniformui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformui64vNV, (location, count, value), (GLint location, GLsizei count, const GLuint64EXT *value))
 #define glUniformui64vNV_defined
+#endif
 #endif // defined(GL_NV_shader_buffer_load)
 #if defined(GL_NV_texture_barrier)
+#ifndef glTextureBarrierNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBarrierNV, (), (void))
 #define glTextureBarrierNV_defined
+#endif
 #endif // defined(GL_NV_texture_barrier)
 #if defined(GL_NV_texture_multisample)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage2DMultisampleCoverageNV, (target, coverageSamples, colorSamples, internalFormat, width, height, fixedSampleLocations), (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations))
@@ -17200,70 +19604,132 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayRangeNV, (length, point
 #define glVertexArrayRangeNV_defined
 #endif // defined(GL_NV_vertex_array_range)
 #if defined(GL_NV_vertex_attrib_integer_64bit)
+#ifndef glGetVertexAttribLi64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLi64vNV, (index, pname, params), (GLuint index, GLenum pname, GLint64EXT *params))
 #define glGetVertexAttribLi64vNV_defined
+#endif
+#ifndef glGetVertexAttribLui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLui64vNV, (index, pname, params), (GLuint index, GLenum pname, GLuint64EXT *params))
 #define glGetVertexAttribLui64vNV_defined
+#endif
+#ifndef glVertexAttribL1i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1i64NV, (index, x), (GLuint index, GLint64EXT x))
 #define glVertexAttribL1i64NV_defined
+#endif
+#ifndef glVertexAttribL1i64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
 #define glVertexAttribL1i64vNV_defined
+#endif
+#ifndef glVertexAttribL1ui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64NV, (index, x), (GLuint index, GLuint64EXT x))
 #define glVertexAttribL1ui64NV_defined
+#endif
+#ifndef glVertexAttribL1ui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
 #define glVertexAttribL1ui64vNV_defined
+#endif
+#ifndef glVertexAttribL2i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2i64NV, (index, x, y), (GLuint index, GLint64EXT x, GLint64EXT y))
 #define glVertexAttribL2i64NV_defined
+#endif
+#ifndef glVertexAttribL2i64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
 #define glVertexAttribL2i64vNV_defined
+#endif
+#ifndef glVertexAttribL2ui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2ui64NV, (index, x, y), (GLuint index, GLuint64EXT x, GLuint64EXT y))
 #define glVertexAttribL2ui64NV_defined
+#endif
+#ifndef glVertexAttribL2ui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
 #define glVertexAttribL2ui64vNV_defined
+#endif
+#ifndef glVertexAttribL3i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3i64NV, (index, x, y, z), (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z))
 #define glVertexAttribL3i64NV_defined
+#endif
+#ifndef glVertexAttribL3i64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
 #define glVertexAttribL3i64vNV_defined
+#endif
+#ifndef glVertexAttribL3ui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3ui64NV, (index, x, y, z), (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z))
 #define glVertexAttribL3ui64NV_defined
+#endif
+#ifndef glVertexAttribL3ui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
 #define glVertexAttribL3ui64vNV_defined
+#endif
+#ifndef glVertexAttribL4i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4i64NV, (index, x, y, z, w), (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w))
 #define glVertexAttribL4i64NV_defined
+#endif
+#ifndef glVertexAttribL4i64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
 #define glVertexAttribL4i64vNV_defined
+#endif
+#ifndef glVertexAttribL4ui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4ui64NV, (index, x, y, z, w), (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w))
 #define glVertexAttribL4ui64NV_defined
+#endif
+#ifndef glVertexAttribL4ui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
 #define glVertexAttribL4ui64vNV_defined
+#endif
+#ifndef glVertexAttribLFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribLFormatNV, (index, size, type, stride), (GLuint index, GLint size, GLenum type, GLsizei stride))
 #define glVertexAttribLFormatNV_defined
+#endif
 #endif // defined(GL_NV_vertex_attrib_integer_64bit)
 #if defined(GL_NV_vertex_buffer_unified_memory)
+#ifndef glBufferAddressRangeNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferAddressRangeNV, (pname, index, address, length), (GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length))
 #define glBufferAddressRangeNV_defined
+#endif
+#ifndef glColorFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
 #define glColorFormatNV_defined
+#endif
+#ifndef glEdgeFlagFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEdgeFlagFormatNV, (stride), (GLsizei stride))
 #define glEdgeFlagFormatNV_defined
+#endif
+#ifndef glFogCoordFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFogCoordFormatNV, (type, stride), (GLenum type, GLsizei stride))
 #define glFogCoordFormatNV_defined
+#endif
+#ifndef glGetIntegerui64i_vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerui64i_vNV, (value, index, result), (GLenum value, GLuint index, GLuint64EXT *result))
 #define glGetIntegerui64i_vNV_defined
+#endif
+#ifndef glIndexFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glIndexFormatNV, (type, stride), (GLenum type, GLsizei stride))
 #define glIndexFormatNV_defined
+#endif
+#ifndef glNormalFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNormalFormatNV, (type, stride), (GLenum type, GLsizei stride))
 #define glNormalFormatNV_defined
+#endif
+#ifndef glSecondaryColorFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSecondaryColorFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
 #define glSecondaryColorFormatNV_defined
+#endif
+#ifndef glTexCoordFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexCoordFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
 #define glTexCoordFormatNV_defined
+#endif
+#ifndef glVertexAttribFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribFormatNV, (index, size, type, normalized, stride), (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride))
 #define glVertexAttribFormatNV_defined
+#endif
+#ifndef glVertexAttribIFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribIFormatNV, (index, size, type, stride), (GLuint index, GLint size, GLenum type, GLsizei stride))
 #define glVertexAttribIFormatNV_defined
+#endif
+#ifndef glVertexFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
 #define glVertexFormatNV_defined
+#endif
 #endif // defined(GL_NV_vertex_buffer_unified_memory)
 #if defined(GL_NV_vertex_program)
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glAreProgramsResidentNV, (n, programs, residences), (GLsizei n, const GLuint *programs, GLboolean *residences))
@@ -20784,7 +23250,2869 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBuffer, (vaobj, b
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBuffers, (vaobj, first, count, buffers, offsets, strides), (GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides))
 #define glVertexArrayVertexBuffers_defined
 #endif
-#endif // defined(__glext_h_)
+#endif // defined(GL_VERSION_4_5)
+#if defined(GL_VERSION_4_6)
+#ifndef glMultiDrawArraysIndirectCount_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCount, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+#define glMultiDrawArraysIndirectCount_defined
+#endif
+#ifndef glMultiDrawElementsIndirectCount_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCount, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+#define glMultiDrawElementsIndirectCount_defined
+#endif
+#ifndef glPolygonOffsetClamp_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPolygonOffsetClamp, (factor, units, clamp), (GLfloat factor, GLfloat units, GLfloat clamp))
+#define glPolygonOffsetClamp_defined
+#endif
+#ifndef glSpecializeShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSpecializeShader, (shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue), (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue))
+#define glSpecializeShader_defined
+#endif
+#endif // defined(GL_VERSION_4_6)
+#endif // defined(__gl_glext_h_)
+#if defined(__glcorearb_h_)
+#if defined(GL_ARB_bindless_texture)
+#ifndef glGetImageHandleARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetImageHandleARB, (texture, level, layered, layer, format), (GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format))
+#define glGetImageHandleARB_defined
+#endif
+#ifndef glGetTextureHandleARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetTextureHandleARB, (texture), (GLuint texture))
+#define glGetTextureHandleARB_defined
+#endif
+#ifndef glGetTextureSamplerHandleARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetTextureSamplerHandleARB, (texture, sampler), (GLuint texture, GLuint sampler))
+#define glGetTextureSamplerHandleARB_defined
+#endif
+#ifndef glGetVertexAttribLui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLui64vARB, (index, pname, params), (GLuint index, GLenum pname, GLuint64EXT *params))
+#define glGetVertexAttribLui64vARB_defined
+#endif
+#ifndef glIsImageHandleResidentARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsImageHandleResidentARB, (handle), (GLuint64 handle))
+#define glIsImageHandleResidentARB_defined
+#endif
+#ifndef glIsTextureHandleResidentARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsTextureHandleResidentARB, (handle), (GLuint64 handle))
+#define glIsTextureHandleResidentARB_defined
+#endif
+#ifndef glMakeImageHandleNonResidentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeImageHandleNonResidentARB, (handle), (GLuint64 handle))
+#define glMakeImageHandleNonResidentARB_defined
+#endif
+#ifndef glMakeImageHandleResidentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeImageHandleResidentARB, (handle, access), (GLuint64 handle, GLenum access))
+#define glMakeImageHandleResidentARB_defined
+#endif
+#ifndef glMakeTextureHandleNonResidentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeTextureHandleNonResidentARB, (handle), (GLuint64 handle))
+#define glMakeTextureHandleNonResidentARB_defined
+#endif
+#ifndef glMakeTextureHandleResidentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeTextureHandleResidentARB, (handle), (GLuint64 handle))
+#define glMakeTextureHandleResidentARB_defined
+#endif
+#ifndef glProgramUniformHandleui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformHandleui64ARB, (program, location, value), (GLuint program, GLint location, GLuint64 value))
+#define glProgramUniformHandleui64ARB_defined
+#endif
+#ifndef glProgramUniformHandleui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformHandleui64vARB, (program, location, count, values), (GLuint program, GLint location, GLsizei count, const GLuint64 *values))
+#define glProgramUniformHandleui64vARB_defined
+#endif
+#ifndef glUniformHandleui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformHandleui64ARB, (location, value), (GLint location, GLuint64 value))
+#define glUniformHandleui64ARB_defined
+#endif
+#ifndef glUniformHandleui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformHandleui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+#define glUniformHandleui64vARB_defined
+#endif
+#ifndef glVertexAttribL1ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64ARB, (index, x), (GLuint index, GLuint64EXT x))
+#define glVertexAttribL1ui64ARB_defined
+#endif
+#ifndef glVertexAttribL1ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64vARB, (index, v), (GLuint index, const GLuint64EXT *v))
+#define glVertexAttribL1ui64vARB_defined
+#endif
+#endif // defined(GL_ARB_bindless_texture)
+#if defined(GL_ARB_cl_event)
+#ifndef glCreateSyncFromCLeventARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLsync, APIENTRY, glCreateSyncFromCLeventARB, (context, event, flags), (struct _cl_context *context, struct _cl_event *event, GLbitfield flags))
+#define glCreateSyncFromCLeventARB_defined
+#endif
+#endif // defined(GL_ARB_cl_event)
+#if defined(GL_ARB_compute_variable_group_size)
+#ifndef glDispatchComputeGroupSizeARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDispatchComputeGroupSizeARB, (num_groups_x, num_groups_y, num_groups_z, group_size_x, group_size_y, group_size_z), (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z))
+#define glDispatchComputeGroupSizeARB_defined
+#endif
+#endif // defined(GL_ARB_compute_variable_group_size)
+#if defined(GL_ARB_debug_output)
+#ifndef glDebugMessageCallbackARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageCallbackARB, (callback, userParam), (GLDEBUGPROCARB callback, const void *userParam))
+#define glDebugMessageCallbackARB_defined
+#endif
+#ifndef glDebugMessageControlARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageControlARB, (source, type, severity, count, ids, enabled), (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled))
+#define glDebugMessageControlARB_defined
+#endif
+#ifndef glDebugMessageInsertARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageInsertARB, (source, type, id, severity, length, buf), (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf))
+#define glDebugMessageInsertARB_defined
+#endif
+#ifndef glGetDebugMessageLogARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetDebugMessageLogARB, (count, bufSize, sources, types, ids, severities, lengths, messageLog), (GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog))
+#define glGetDebugMessageLogARB_defined
+#endif
+#endif // defined(GL_ARB_debug_output)
+#if defined(GL_ARB_draw_buffers_blend)
+#ifndef glBlendEquationSeparateiARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationSeparateiARB, (buf, modeRGB, modeAlpha), (GLuint buf, GLenum modeRGB, GLenum modeAlpha))
+#define glBlendEquationSeparateiARB_defined
+#endif
+#ifndef glBlendEquationiARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationiARB, (buf, mode), (GLuint buf, GLenum mode))
+#define glBlendEquationiARB_defined
+#endif
+#ifndef glBlendFuncSeparateiARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFuncSeparateiARB, (buf, srcRGB, dstRGB, srcAlpha, dstAlpha), (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha))
+#define glBlendFuncSeparateiARB_defined
+#endif
+#ifndef glBlendFunciARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFunciARB, (buf, src, dst), (GLuint buf, GLenum src, GLenum dst))
+#define glBlendFunciARB_defined
+#endif
+#endif // defined(GL_ARB_draw_buffers_blend)
+#if defined(GL_ARB_indirect_parameters)
+#ifndef glMultiDrawArraysIndirectCountARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+#define glMultiDrawArraysIndirectCountARB_defined
+#endif
+#ifndef glMultiDrawElementsIndirectCountARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+#define glMultiDrawElementsIndirectCountARB_defined
+#endif
+#endif // defined(GL_ARB_indirect_parameters)
+#if defined(GL_ARB_robustness)
+#ifndef glGetGraphicsResetStatusARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glGetGraphicsResetStatusARB, (), (void))
+#define glGetGraphicsResetStatusARB_defined
+#endif
+#ifndef glGetnCompressedTexImageARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnCompressedTexImageARB, (target, lod, bufSize, img), (GLenum target, GLint lod, GLsizei bufSize, void *img))
+#define glGetnCompressedTexImageARB_defined
+#endif
+#ifndef glGetnTexImageARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnTexImageARB, (target, level, format, type, bufSize, img), (GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *img))
+#define glGetnTexImageARB_defined
+#endif
+#ifndef glGetnUniformdvARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformdvARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLdouble *params))
+#define glGetnUniformdvARB_defined
+#endif
+#ifndef glGetnUniformfvARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformfvARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLfloat *params))
+#define glGetnUniformfvARB_defined
+#endif
+#ifndef glGetnUniformivARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformivARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLint *params))
+#define glGetnUniformivARB_defined
+#endif
+#ifndef glGetnUniformuivARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformuivARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLuint *params))
+#define glGetnUniformuivARB_defined
+#endif
+#ifndef glReadnPixelsARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadnPixelsARB, (x, y, width, height, format, type, bufSize, data), (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data))
+#define glReadnPixelsARB_defined
+#endif
+#endif // defined(GL_ARB_robustness)
+#if defined(GL_ARB_sample_shading)
+#ifndef glMinSampleShadingARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMinSampleShadingARB, (value), (GLfloat value))
+#define glMinSampleShadingARB_defined
+#endif
+#endif // defined(GL_ARB_sample_shading)
+#if defined(GL_ARB_shading_language_include)
+#ifndef glCompileShaderIncludeARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompileShaderIncludeARB, (shader, count, path, length), (GLuint shader, GLsizei count, const GLchar *const*path, const GLint *length))
+#define glCompileShaderIncludeARB_defined
+#endif
+#ifndef glDeleteNamedStringARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteNamedStringARB, (namelen, name), (GLint namelen, const GLchar *name))
+#define glDeleteNamedStringARB_defined
+#endif
+#ifndef glGetNamedStringARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedStringARB, (namelen, name, bufSize, stringlen, string), (GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string))
+#define glGetNamedStringARB_defined
+#endif
+#ifndef glGetNamedStringivARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedStringivARB, (namelen, name, pname, params), (GLint namelen, const GLchar *name, GLenum pname, GLint *params))
+#define glGetNamedStringivARB_defined
+#endif
+#ifndef glIsNamedStringARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsNamedStringARB, (namelen, name), (GLint namelen, const GLchar *name))
+#define glIsNamedStringARB_defined
+#endif
+#ifndef glNamedStringARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedStringARB, (type, namelen, name, stringlen, string), (GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string))
+#define glNamedStringARB_defined
+#endif
+#endif // defined(GL_ARB_shading_language_include)
+#if defined(GL_ARB_sparse_buffer)
+#ifndef glBufferPageCommitmentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferPageCommitmentARB, (target, offset, size, commit), (GLenum target, GLintptr offset, GLsizei size, GLboolean commit))
+#define glBufferPageCommitmentARB_defined
+#endif
+#ifndef glNamedBufferPageCommitmentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentARB, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit))
+#define glNamedBufferPageCommitmentARB_defined
+#endif
+#ifndef glNamedBufferPageCommitmentEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentEXT, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit))
+#define glNamedBufferPageCommitmentEXT_defined
+#endif
+#endif // defined(GL_ARB_sparse_buffer)
+#if defined(GL_ARB_sparse_texture)
+#ifndef glTexPageCommitmentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexPageCommitmentARB, (target, level, xoffset, yoffset, zoffset, width, height, depth, resident), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident))
+#define glTexPageCommitmentARB_defined
+#endif
+#endif // defined(GL_ARB_sparse_texture)
+#if defined(GL_VERSION_1_0)
+#ifndef glBlendFunc_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFunc, (sfactor, dfactor), (GLenum sfactor, GLenum dfactor))
+#define glBlendFunc_defined
+#endif
+#ifndef glClear_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClear, (mask), (GLbitfield mask))
+#define glClear_defined
+#endif
+#ifndef glClearColor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearColor, (red, green, blue, alpha), (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha))
+#define glClearColor_defined
+#endif
+#ifndef glClearDepth_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearDepth, (depth), (GLdouble depth))
+#define glClearDepth_defined
+#endif
+#ifndef glClearStencil_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearStencil, (s), (GLint s))
+#define glClearStencil_defined
+#endif
+#ifndef glColorMask_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorMask, (red, green, blue, alpha), (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha))
+#define glColorMask_defined
+#endif
+#ifndef glCullFace_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCullFace, (mode), (GLenum mode))
+#define glCullFace_defined
+#endif
+#ifndef glDepthFunc_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthFunc, (func), (GLenum func))
+#define glDepthFunc_defined
+#endif
+#ifndef glDepthMask_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthMask, (flag), (GLboolean flag))
+#define glDepthMask_defined
+#endif
+#ifndef glDepthRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRange, (near, far), (GLdouble near, GLdouble far))
+#define glDepthRange_defined
+#endif
+#ifndef glDisable_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisable, (cap), (GLenum cap))
+#define glDisable_defined
+#endif
+#ifndef glDrawBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawBuffer, (buf), (GLenum buf))
+#define glDrawBuffer_defined
+#endif
+#ifndef glEnable_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnable, (cap), (GLenum cap))
+#define glEnable_defined
+#endif
+#ifndef glFinish_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFinish, (), (void))
+#define glFinish_defined
+#endif
+#ifndef glFlush_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlush, (), (void))
+#define glFlush_defined
+#endif
+#ifndef glFrontFace_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFrontFace, (mode), (GLenum mode))
+#define glFrontFace_defined
+#endif
+#ifndef glGetBooleanv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBooleanv, (pname, data), (GLenum pname, GLboolean *data))
+#define glGetBooleanv_defined
+#endif
+#ifndef glGetDoublev_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoublev, (pname, data), (GLenum pname, GLdouble *data))
+#define glGetDoublev_defined
+#endif
+#ifndef glGetError_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glGetError, (), (void))
+#define glGetError_defined
+#endif
+#ifndef glGetFloatv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloatv, (pname, data), (GLenum pname, GLfloat *data))
+#define glGetFloatv_defined
+#endif
+#ifndef glGetIntegerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerv, (pname, data), (GLenum pname, GLint *data))
+#define glGetIntegerv_defined
+#endif
+#ifndef glGetString_defined
+GLATTER_FBLOCK(return, GL, GLAPI, const GLubyte *, APIENTRY, glGetString, (name), (GLenum name))
+#define glGetString_defined
+#endif
+#ifndef glGetTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexImage, (target, level, format, type, pixels), (GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
+#define glGetTexImage_defined
+#endif
+#ifndef glGetTexLevelParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexLevelParameterfv, (target, level, pname, params), (GLenum target, GLint level, GLenum pname, GLfloat *params))
+#define glGetTexLevelParameterfv_defined
+#endif
+#ifndef glGetTexLevelParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexLevelParameteriv, (target, level, pname, params), (GLenum target, GLint level, GLenum pname, GLint *params))
+#define glGetTexLevelParameteriv_defined
+#endif
+#ifndef glGetTexParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexParameterfv, (target, pname, params), (GLenum target, GLenum pname, GLfloat *params))
+#define glGetTexParameterfv_defined
+#endif
+#ifndef glGetTexParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexParameteriv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+#define glGetTexParameteriv_defined
+#endif
+#ifndef glHint_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glHint, (target, mode), (GLenum target, GLenum mode))
+#define glHint_defined
+#endif
+#ifndef glIsEnabled_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsEnabled, (cap), (GLenum cap))
+#define glIsEnabled_defined
+#endif
+#ifndef glLineWidth_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLineWidth, (width), (GLfloat width))
+#define glLineWidth_defined
+#endif
+#ifndef glLogicOp_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLogicOp, (opcode), (GLenum opcode))
+#define glLogicOp_defined
+#endif
+#ifndef glPixelStoref_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPixelStoref, (pname, param), (GLenum pname, GLfloat param))
+#define glPixelStoref_defined
+#endif
+#ifndef glPixelStorei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPixelStorei, (pname, param), (GLenum pname, GLint param))
+#define glPixelStorei_defined
+#endif
+#ifndef glPointSize_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointSize, (size), (GLfloat size))
+#define glPointSize_defined
+#endif
+#ifndef glPolygonMode_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPolygonMode, (face, mode), (GLenum face, GLenum mode))
+#define glPolygonMode_defined
+#endif
+#ifndef glReadBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadBuffer, (src), (GLenum src))
+#define glReadBuffer_defined
+#endif
+#ifndef glReadPixels_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadPixels, (x, y, width, height, format, type, pixels), (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void *pixels))
+#define glReadPixels_defined
+#endif
+#ifndef glScissor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glScissor, (x, y, width, height), (GLint x, GLint y, GLsizei width, GLsizei height))
+#define glScissor_defined
+#endif
+#ifndef glStencilFunc_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilFunc, (func, ref, mask), (GLenum func, GLint ref, GLuint mask))
+#define glStencilFunc_defined
+#endif
+#ifndef glStencilMask_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilMask, (mask), (GLuint mask))
+#define glStencilMask_defined
+#endif
+#ifndef glStencilOp_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilOp, (fail, zfail, zpass), (GLenum fail, GLenum zfail, GLenum zpass))
+#define glStencilOp_defined
+#endif
+#ifndef glTexImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage1D, (target, level, internalformat, width, border, format, type, pixels), (GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
+#define glTexImage1D_defined
+#endif
+#ifndef glTexImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage2D, (target, level, internalformat, width, height, border, format, type, pixels), (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
+#define glTexImage2D_defined
+#endif
+#ifndef glTexParameterf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameterf, (target, pname, param), (GLenum target, GLenum pname, GLfloat param))
+#define glTexParameterf_defined
+#endif
+#ifndef glTexParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameterfv, (target, pname, params), (GLenum target, GLenum pname, const GLfloat *params))
+#define glTexParameterfv_defined
+#endif
+#ifndef glTexParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameteri, (target, pname, param), (GLenum target, GLenum pname, GLint param))
+#define glTexParameteri_defined
+#endif
+#ifndef glTexParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameteriv, (target, pname, params), (GLenum target, GLenum pname, const GLint *params))
+#define glTexParameteriv_defined
+#endif
+#ifndef glViewport_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewport, (x, y, width, height), (GLint x, GLint y, GLsizei width, GLsizei height))
+#define glViewport_defined
+#endif
+#endif // defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_1)
+#ifndef glBindTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindTexture, (target, texture), (GLenum target, GLuint texture))
+#define glBindTexture_defined
+#endif
+#ifndef glCopyTexImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexImage1D, (target, level, internalformat, x, y, width, border), (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
+#define glCopyTexImage1D_defined
+#endif
+#ifndef glCopyTexImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexImage2D, (target, level, internalformat, x, y, width, height, border), (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
+#define glCopyTexImage2D_defined
+#endif
+#ifndef glCopyTexSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexSubImage1D, (target, level, xoffset, x, y, width), (GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
+#define glCopyTexSubImage1D_defined
+#endif
+#ifndef glCopyTexSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexSubImage2D, (target, level, xoffset, yoffset, x, y, width, height), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glCopyTexSubImage2D_defined
+#endif
+#ifndef glDeleteTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteTextures, (n, textures), (GLsizei n, const GLuint *textures))
+#define glDeleteTextures_defined
+#endif
+#ifndef glDrawArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArrays, (mode, first, count), (GLenum mode, GLint first, GLsizei count))
+#define glDrawArrays_defined
+#endif
+#ifndef glDrawElements_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElements, (mode, count, type, indices), (GLenum mode, GLsizei count, GLenum type, const void *indices))
+#define glDrawElements_defined
+#endif
+#ifndef glGenTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenTextures, (n, textures), (GLsizei n, GLuint *textures))
+#define glGenTextures_defined
+#endif
+#ifndef glGetPointerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointerv, (pname, params), (GLenum pname, void **params))
+#define glGetPointerv_defined
+#endif
+#ifndef glIsTexture_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsTexture, (texture), (GLuint texture))
+#define glIsTexture_defined
+#endif
+#ifndef glPolygonOffset_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPolygonOffset, (factor, units), (GLfloat factor, GLfloat units))
+#define glPolygonOffset_defined
+#endif
+#ifndef glTexSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexSubImage1D, (target, level, xoffset, width, format, type, pixels), (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
+#define glTexSubImage1D_defined
+#endif
+#ifndef glTexSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexSubImage2D, (target, level, xoffset, yoffset, width, height, format, type, pixels), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
+#define glTexSubImage2D_defined
+#endif
+#endif // defined(GL_VERSION_1_1)
+#if defined(GL_VERSION_1_2)
+#ifndef glCopyTexSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexSubImage3D, (target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glCopyTexSubImage3D_defined
+#endif
+#ifndef glDrawRangeElements_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawRangeElements, (mode, start, end, count, type, indices), (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices))
+#define glDrawRangeElements_defined
+#endif
+#ifndef glTexImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage3D, (target, level, internalformat, width, height, depth, border, format, type, pixels), (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
+#define glTexImage3D_defined
+#endif
+#ifndef glTexSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexSubImage3D, (target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
+#define glTexSubImage3D_defined
+#endif
+#endif // defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_3)
+#ifndef glActiveTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glActiveTexture, (texture), (GLenum texture))
+#define glActiveTexture_defined
+#endif
+#ifndef glCompressedTexImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexImage1D, (target, level, internalformat, width, border, imageSize, data), (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data))
+#define glCompressedTexImage1D_defined
+#endif
+#ifndef glCompressedTexImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexImage2D, (target, level, internalformat, width, height, border, imageSize, data), (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data))
+#define glCompressedTexImage2D_defined
+#endif
+#ifndef glCompressedTexImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexImage3D, (target, level, internalformat, width, height, depth, border, imageSize, data), (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *data))
+#define glCompressedTexImage3D_defined
+#endif
+#ifndef glCompressedTexSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexSubImage1D, (target, level, xoffset, width, format, imageSize, data), (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data))
+#define glCompressedTexSubImage1D_defined
+#endif
+#ifndef glCompressedTexSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexSubImage2D, (target, level, xoffset, yoffset, width, height, format, imageSize, data), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data))
+#define glCompressedTexSubImage2D_defined
+#endif
+#ifndef glCompressedTexSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexSubImage3D, (target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data))
+#define glCompressedTexSubImage3D_defined
+#endif
+#ifndef glGetCompressedTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTexImage, (target, level, img), (GLenum target, GLint level, void *img))
+#define glGetCompressedTexImage_defined
+#endif
+#ifndef glSampleCoverage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSampleCoverage, (value, invert), (GLfloat value, GLboolean invert))
+#define glSampleCoverage_defined
+#endif
+#endif // defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_4)
+#ifndef glBlendColor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendColor, (red, green, blue, alpha), (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha))
+#define glBlendColor_defined
+#endif
+#ifndef glBlendEquation_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquation, (mode), (GLenum mode))
+#define glBlendEquation_defined
+#endif
+#ifndef glBlendFuncSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFuncSeparate, (sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha), (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha))
+#define glBlendFuncSeparate_defined
+#endif
+#ifndef glMultiDrawArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArrays, (mode, first, count, drawcount), (GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount))
+#define glMultiDrawArrays_defined
+#endif
+#ifndef glMultiDrawElements_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElements, (mode, count, type, indices, drawcount), (GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei drawcount))
+#define glMultiDrawElements_defined
+#endif
+#ifndef glPointParameterf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameterf, (pname, param), (GLenum pname, GLfloat param))
+#define glPointParameterf_defined
+#endif
+#ifndef glPointParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameterfv, (pname, params), (GLenum pname, const GLfloat *params))
+#define glPointParameterfv_defined
+#endif
+#ifndef glPointParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameteri, (pname, param), (GLenum pname, GLint param))
+#define glPointParameteri_defined
+#endif
+#ifndef glPointParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameteriv, (pname, params), (GLenum pname, const GLint *params))
+#define glPointParameteriv_defined
+#endif
+#endif // defined(GL_VERSION_1_4)
+#if defined(GL_VERSION_1_5)
+#ifndef glBeginQuery_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginQuery, (target, id), (GLenum target, GLuint id))
+#define glBeginQuery_defined
+#endif
+#ifndef glBindBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBuffer, (target, buffer), (GLenum target, GLuint buffer))
+#define glBindBuffer_defined
+#endif
+#ifndef glBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferData, (target, size, data, usage), (GLenum target, GLsizeiptr size, const void *data, GLenum usage))
+#define glBufferData_defined
+#endif
+#ifndef glBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferSubData, (target, offset, size, data), (GLenum target, GLintptr offset, GLsizeiptr size, const void *data))
+#define glBufferSubData_defined
+#endif
+#ifndef glDeleteBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteBuffers, (n, buffers), (GLsizei n, const GLuint *buffers))
+#define glDeleteBuffers_defined
+#endif
+#ifndef glDeleteQueries_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteQueries, (n, ids), (GLsizei n, const GLuint *ids))
+#define glDeleteQueries_defined
+#endif
+#ifndef glEndQuery_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEndQuery, (target), (GLenum target))
+#define glEndQuery_defined
+#endif
+#ifndef glGenBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenBuffers, (n, buffers), (GLsizei n, GLuint *buffers))
+#define glGenBuffers_defined
+#endif
+#ifndef glGenQueries_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenQueries, (n, ids), (GLsizei n, GLuint *ids))
+#define glGenQueries_defined
+#endif
+#ifndef glGetBufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferParameteriv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+#define glGetBufferParameteriv_defined
+#endif
+#ifndef glGetBufferPointerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferPointerv, (target, pname, params), (GLenum target, GLenum pname, void **params))
+#define glGetBufferPointerv_defined
+#endif
+#ifndef glGetBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferSubData, (target, offset, size, data), (GLenum target, GLintptr offset, GLsizeiptr size, void *data))
+#define glGetBufferSubData_defined
+#endif
+#ifndef glGetQueryObjectiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryObjectiv, (id, pname, params), (GLuint id, GLenum pname, GLint *params))
+#define glGetQueryObjectiv_defined
+#endif
+#ifndef glGetQueryObjectuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryObjectuiv, (id, pname, params), (GLuint id, GLenum pname, GLuint *params))
+#define glGetQueryObjectuiv_defined
+#endif
+#ifndef glGetQueryiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryiv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+#define glGetQueryiv_defined
+#endif
+#ifndef glIsBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsBuffer, (buffer), (GLuint buffer))
+#define glIsBuffer_defined
+#endif
+#ifndef glIsQuery_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsQuery, (id), (GLuint id))
+#define glIsQuery_defined
+#endif
+#ifndef glMapBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapBuffer, (target, access), (GLenum target, GLenum access))
+#define glMapBuffer_defined
+#endif
+#ifndef glUnmapBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glUnmapBuffer, (target), (GLenum target))
+#define glUnmapBuffer_defined
+#endif
+#endif // defined(GL_VERSION_1_5)
+#if defined(GL_VERSION_2_0)
+#ifndef glAttachShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glAttachShader, (program, shader), (GLuint program, GLuint shader))
+#define glAttachShader_defined
+#endif
+#ifndef glBindAttribLocation_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindAttribLocation, (program, index, name), (GLuint program, GLuint index, const GLchar *name))
+#define glBindAttribLocation_defined
+#endif
+#ifndef glBlendEquationSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationSeparate, (modeRGB, modeAlpha), (GLenum modeRGB, GLenum modeAlpha))
+#define glBlendEquationSeparate_defined
+#endif
+#ifndef glCompileShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompileShader, (shader), (GLuint shader))
+#define glCompileShader_defined
+#endif
+#ifndef glCreateProgram_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glCreateProgram, (), (void))
+#define glCreateProgram_defined
+#endif
+#ifndef glCreateShader_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glCreateShader, (type), (GLenum type))
+#define glCreateShader_defined
+#endif
+#ifndef glDeleteProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteProgram, (program), (GLuint program))
+#define glDeleteProgram_defined
+#endif
+#ifndef glDeleteShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteShader, (shader), (GLuint shader))
+#define glDeleteShader_defined
+#endif
+#ifndef glDetachShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDetachShader, (program, shader), (GLuint program, GLuint shader))
+#define glDetachShader_defined
+#endif
+#ifndef glDisableVertexAttribArray_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexAttribArray, (index), (GLuint index))
+#define glDisableVertexAttribArray_defined
+#endif
+#ifndef glDrawBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawBuffers, (n, bufs), (GLsizei n, const GLenum *bufs))
+#define glDrawBuffers_defined
+#endif
+#ifndef glEnableVertexAttribArray_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexAttribArray, (index), (GLuint index))
+#define glEnableVertexAttribArray_defined
+#endif
+#ifndef glGetActiveAttrib_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveAttrib, (program, index, bufSize, length, size, type, name), (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name))
+#define glGetActiveAttrib_defined
+#endif
+#ifndef glGetActiveUniform_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniform, (program, index, bufSize, length, size, type, name), (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name))
+#define glGetActiveUniform_defined
+#endif
+#ifndef glGetAttachedShaders_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetAttachedShaders, (program, maxCount, count, shaders), (GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders))
+#define glGetAttachedShaders_defined
+#endif
+#ifndef glGetAttribLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetAttribLocation, (program, name), (GLuint program, const GLchar *name))
+#define glGetAttribLocation_defined
+#endif
+#ifndef glGetProgramInfoLog_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramInfoLog, (program, bufSize, length, infoLog), (GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog))
+#define glGetProgramInfoLog_defined
+#endif
+#ifndef glGetProgramiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramiv, (program, pname, params), (GLuint program, GLenum pname, GLint *params))
+#define glGetProgramiv_defined
+#endif
+#ifndef glGetShaderInfoLog_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetShaderInfoLog, (shader, bufSize, length, infoLog), (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog))
+#define glGetShaderInfoLog_defined
+#endif
+#ifndef glGetShaderSource_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetShaderSource, (shader, bufSize, length, source), (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source))
+#define glGetShaderSource_defined
+#endif
+#ifndef glGetShaderiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetShaderiv, (shader, pname, params), (GLuint shader, GLenum pname, GLint *params))
+#define glGetShaderiv_defined
+#endif
+#ifndef glGetUniformLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetUniformLocation, (program, name), (GLuint program, const GLchar *name))
+#define glGetUniformLocation_defined
+#endif
+#ifndef glGetUniformfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformfv, (program, location, params), (GLuint program, GLint location, GLfloat *params))
+#define glGetUniformfv_defined
+#endif
+#ifndef glGetUniformiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformiv, (program, location, params), (GLuint program, GLint location, GLint *params))
+#define glGetUniformiv_defined
+#endif
+#ifndef glGetVertexAttribPointerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribPointerv, (index, pname, pointer), (GLuint index, GLenum pname, void **pointer))
+#define glGetVertexAttribPointerv_defined
+#endif
+#ifndef glGetVertexAttribdv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribdv, (index, pname, params), (GLuint index, GLenum pname, GLdouble *params))
+#define glGetVertexAttribdv_defined
+#endif
+#ifndef glGetVertexAttribfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribfv, (index, pname, params), (GLuint index, GLenum pname, GLfloat *params))
+#define glGetVertexAttribfv_defined
+#endif
+#ifndef glGetVertexAttribiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribiv, (index, pname, params), (GLuint index, GLenum pname, GLint *params))
+#define glGetVertexAttribiv_defined
+#endif
+#ifndef glIsProgram_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsProgram, (program), (GLuint program))
+#define glIsProgram_defined
+#endif
+#ifndef glIsShader_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsShader, (shader), (GLuint shader))
+#define glIsShader_defined
+#endif
+#ifndef glLinkProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLinkProgram, (program), (GLuint program))
+#define glLinkProgram_defined
+#endif
+#ifndef glShaderSource_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShaderSource, (shader, count, string, length), (GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length))
+#define glShaderSource_defined
+#endif
+#ifndef glStencilFuncSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilFuncSeparate, (face, func, ref, mask), (GLenum face, GLenum func, GLint ref, GLuint mask))
+#define glStencilFuncSeparate_defined
+#endif
+#ifndef glStencilMaskSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilMaskSeparate, (face, mask), (GLenum face, GLuint mask))
+#define glStencilMaskSeparate_defined
+#endif
+#ifndef glStencilOpSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilOpSeparate, (face, sfail, dpfail, dppass), (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass))
+#define glStencilOpSeparate_defined
+#endif
+#ifndef glUniform1f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1f, (location, v0), (GLint location, GLfloat v0))
+#define glUniform1f_defined
+#endif
+#ifndef glUniform1fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1fv, (location, count, value), (GLint location, GLsizei count, const GLfloat *value))
+#define glUniform1fv_defined
+#endif
+#ifndef glUniform1i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i, (location, v0), (GLint location, GLint v0))
+#define glUniform1i_defined
+#endif
+#ifndef glUniform1iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1iv, (location, count, value), (GLint location, GLsizei count, const GLint *value))
+#define glUniform1iv_defined
+#endif
+#ifndef glUniform2f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2f, (location, v0, v1), (GLint location, GLfloat v0, GLfloat v1))
+#define glUniform2f_defined
+#endif
+#ifndef glUniform2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2fv, (location, count, value), (GLint location, GLsizei count, const GLfloat *value))
+#define glUniform2fv_defined
+#endif
+#ifndef glUniform2i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i, (location, v0, v1), (GLint location, GLint v0, GLint v1))
+#define glUniform2i_defined
+#endif
+#ifndef glUniform2iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2iv, (location, count, value), (GLint location, GLsizei count, const GLint *value))
+#define glUniform2iv_defined
+#endif
+#ifndef glUniform3f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3f, (location, v0, v1, v2), (GLint location, GLfloat v0, GLfloat v1, GLfloat v2))
+#define glUniform3f_defined
+#endif
+#ifndef glUniform3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3fv, (location, count, value), (GLint location, GLsizei count, const GLfloat *value))
+#define glUniform3fv_defined
+#endif
+#ifndef glUniform3i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i, (location, v0, v1, v2), (GLint location, GLint v0, GLint v1, GLint v2))
+#define glUniform3i_defined
+#endif
+#ifndef glUniform3iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3iv, (location, count, value), (GLint location, GLsizei count, const GLint *value))
+#define glUniform3iv_defined
+#endif
+#ifndef glUniform4f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4f, (location, v0, v1, v2, v3), (GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3))
+#define glUniform4f_defined
+#endif
+#ifndef glUniform4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4fv, (location, count, value), (GLint location, GLsizei count, const GLfloat *value))
+#define glUniform4fv_defined
+#endif
+#ifndef glUniform4i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i, (location, v0, v1, v2, v3), (GLint location, GLint v0, GLint v1, GLint v2, GLint v3))
+#define glUniform4i_defined
+#endif
+#ifndef glUniform4iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4iv, (location, count, value), (GLint location, GLsizei count, const GLint *value))
+#define glUniform4iv_defined
+#endif
+#ifndef glUniformMatrix2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glUniformMatrix2fv_defined
+#endif
+#ifndef glUniformMatrix3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glUniformMatrix3fv_defined
+#endif
+#ifndef glUniformMatrix4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glUniformMatrix4fv_defined
+#endif
+#ifndef glUseProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUseProgram, (program), (GLuint program))
+#define glUseProgram_defined
+#endif
+#ifndef glValidateProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glValidateProgram, (program), (GLuint program))
+#define glValidateProgram_defined
+#endif
+#ifndef glVertexAttrib1d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1d, (index, x), (GLuint index, GLdouble x))
+#define glVertexAttrib1d_defined
+#endif
+#ifndef glVertexAttrib1dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1dv, (index, v), (GLuint index, const GLdouble *v))
+#define glVertexAttrib1dv_defined
+#endif
+#ifndef glVertexAttrib1f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1f, (index, x), (GLuint index, GLfloat x))
+#define glVertexAttrib1f_defined
+#endif
+#ifndef glVertexAttrib1fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1fv, (index, v), (GLuint index, const GLfloat *v))
+#define glVertexAttrib1fv_defined
+#endif
+#ifndef glVertexAttrib1s_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1s, (index, x), (GLuint index, GLshort x))
+#define glVertexAttrib1s_defined
+#endif
+#ifndef glVertexAttrib1sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1sv, (index, v), (GLuint index, const GLshort *v))
+#define glVertexAttrib1sv_defined
+#endif
+#ifndef glVertexAttrib2d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2d, (index, x, y), (GLuint index, GLdouble x, GLdouble y))
+#define glVertexAttrib2d_defined
+#endif
+#ifndef glVertexAttrib2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2dv, (index, v), (GLuint index, const GLdouble *v))
+#define glVertexAttrib2dv_defined
+#endif
+#ifndef glVertexAttrib2f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2f, (index, x, y), (GLuint index, GLfloat x, GLfloat y))
+#define glVertexAttrib2f_defined
+#endif
+#ifndef glVertexAttrib2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2fv, (index, v), (GLuint index, const GLfloat *v))
+#define glVertexAttrib2fv_defined
+#endif
+#ifndef glVertexAttrib2s_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2s, (index, x, y), (GLuint index, GLshort x, GLshort y))
+#define glVertexAttrib2s_defined
+#endif
+#ifndef glVertexAttrib2sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2sv, (index, v), (GLuint index, const GLshort *v))
+#define glVertexAttrib2sv_defined
+#endif
+#ifndef glVertexAttrib3d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3d, (index, x, y, z), (GLuint index, GLdouble x, GLdouble y, GLdouble z))
+#define glVertexAttrib3d_defined
+#endif
+#ifndef glVertexAttrib3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3dv, (index, v), (GLuint index, const GLdouble *v))
+#define glVertexAttrib3dv_defined
+#endif
+#ifndef glVertexAttrib3f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3f, (index, x, y, z), (GLuint index, GLfloat x, GLfloat y, GLfloat z))
+#define glVertexAttrib3f_defined
+#endif
+#ifndef glVertexAttrib3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3fv, (index, v), (GLuint index, const GLfloat *v))
+#define glVertexAttrib3fv_defined
+#endif
+#ifndef glVertexAttrib3s_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3s, (index, x, y, z), (GLuint index, GLshort x, GLshort y, GLshort z))
+#define glVertexAttrib3s_defined
+#endif
+#ifndef glVertexAttrib3sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3sv, (index, v), (GLuint index, const GLshort *v))
+#define glVertexAttrib3sv_defined
+#endif
+#ifndef glVertexAttrib4Nbv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nbv, (index, v), (GLuint index, const GLbyte *v))
+#define glVertexAttrib4Nbv_defined
+#endif
+#ifndef glVertexAttrib4Niv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Niv, (index, v), (GLuint index, const GLint *v))
+#define glVertexAttrib4Niv_defined
+#endif
+#ifndef glVertexAttrib4Nsv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nsv, (index, v), (GLuint index, const GLshort *v))
+#define glVertexAttrib4Nsv_defined
+#endif
+#ifndef glVertexAttrib4Nub_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nub, (index, x, y, z, w), (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w))
+#define glVertexAttrib4Nub_defined
+#endif
+#ifndef glVertexAttrib4Nubv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nubv, (index, v), (GLuint index, const GLubyte *v))
+#define glVertexAttrib4Nubv_defined
+#endif
+#ifndef glVertexAttrib4Nuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nuiv, (index, v), (GLuint index, const GLuint *v))
+#define glVertexAttrib4Nuiv_defined
+#endif
+#ifndef glVertexAttrib4Nusv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nusv, (index, v), (GLuint index, const GLushort *v))
+#define glVertexAttrib4Nusv_defined
+#endif
+#ifndef glVertexAttrib4bv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4bv, (index, v), (GLuint index, const GLbyte *v))
+#define glVertexAttrib4bv_defined
+#endif
+#ifndef glVertexAttrib4d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4d, (index, x, y, z, w), (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+#define glVertexAttrib4d_defined
+#endif
+#ifndef glVertexAttrib4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4dv, (index, v), (GLuint index, const GLdouble *v))
+#define glVertexAttrib4dv_defined
+#endif
+#ifndef glVertexAttrib4f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4f, (index, x, y, z, w), (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w))
+#define glVertexAttrib4f_defined
+#endif
+#ifndef glVertexAttrib4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4fv, (index, v), (GLuint index, const GLfloat *v))
+#define glVertexAttrib4fv_defined
+#endif
+#ifndef glVertexAttrib4iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4iv, (index, v), (GLuint index, const GLint *v))
+#define glVertexAttrib4iv_defined
+#endif
+#ifndef glVertexAttrib4s_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4s, (index, x, y, z, w), (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w))
+#define glVertexAttrib4s_defined
+#endif
+#ifndef glVertexAttrib4sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4sv, (index, v), (GLuint index, const GLshort *v))
+#define glVertexAttrib4sv_defined
+#endif
+#ifndef glVertexAttrib4ubv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4ubv, (index, v), (GLuint index, const GLubyte *v))
+#define glVertexAttrib4ubv_defined
+#endif
+#ifndef glVertexAttrib4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4uiv, (index, v), (GLuint index, const GLuint *v))
+#define glVertexAttrib4uiv_defined
+#endif
+#ifndef glVertexAttrib4usv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4usv, (index, v), (GLuint index, const GLushort *v))
+#define glVertexAttrib4usv_defined
+#endif
+#ifndef glVertexAttribPointer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribPointer, (index, size, type, normalized, stride, pointer), (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer))
+#define glVertexAttribPointer_defined
+#endif
+#endif // defined(GL_VERSION_2_0)
+#if defined(GL_VERSION_2_1)
+#ifndef glUniformMatrix2x3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2x3fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glUniformMatrix2x3fv_defined
+#endif
+#ifndef glUniformMatrix2x4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2x4fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glUniformMatrix2x4fv_defined
+#endif
+#ifndef glUniformMatrix3x2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3x2fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glUniformMatrix3x2fv_defined
+#endif
+#ifndef glUniformMatrix3x4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3x4fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glUniformMatrix3x4fv_defined
+#endif
+#ifndef glUniformMatrix4x2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4x2fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glUniformMatrix4x2fv_defined
+#endif
+#ifndef glUniformMatrix4x3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4x3fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glUniformMatrix4x3fv_defined
+#endif
+#endif // defined(GL_VERSION_2_1)
+#if defined(GL_VERSION_3_0)
+#ifndef glBeginConditionalRender_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginConditionalRender, (id, mode), (GLuint id, GLenum mode))
+#define glBeginConditionalRender_defined
+#endif
+#ifndef glBeginTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginTransformFeedback, (primitiveMode), (GLenum primitiveMode))
+#define glBeginTransformFeedback_defined
+#endif
+#ifndef glBindBufferBase_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBufferBase, (target, index, buffer), (GLenum target, GLuint index, GLuint buffer))
+#define glBindBufferBase_defined
+#endif
+#ifndef glBindBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBufferRange, (target, index, buffer, offset, size), (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size))
+#define glBindBufferRange_defined
+#endif
+#ifndef glBindFragDataLocation_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindFragDataLocation, (program, color, name), (GLuint program, GLuint color, const GLchar *name))
+#define glBindFragDataLocation_defined
+#endif
+#ifndef glBindFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindFramebuffer, (target, framebuffer), (GLenum target, GLuint framebuffer))
+#define glBindFramebuffer_defined
+#endif
+#ifndef glBindRenderbuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindRenderbuffer, (target, renderbuffer), (GLenum target, GLuint renderbuffer))
+#define glBindRenderbuffer_defined
+#endif
+#ifndef glBindVertexArray_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindVertexArray, (array), (GLuint array))
+#define glBindVertexArray_defined
+#endif
+#ifndef glBlitFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlitFramebuffer, (srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
+#define glBlitFramebuffer_defined
+#endif
+#ifndef glCheckFramebufferStatus_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glCheckFramebufferStatus, (target), (GLenum target))
+#define glCheckFramebufferStatus_defined
+#endif
+#ifndef glClampColor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClampColor, (target, clamp), (GLenum target, GLenum clamp))
+#define glClampColor_defined
+#endif
+#ifndef glClearBufferfi_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferfi, (buffer, drawbuffer, depth, stencil), (GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil))
+#define glClearBufferfi_defined
+#endif
+#ifndef glClearBufferfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferfv, (buffer, drawbuffer, value), (GLenum buffer, GLint drawbuffer, const GLfloat *value))
+#define glClearBufferfv_defined
+#endif
+#ifndef glClearBufferiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferiv, (buffer, drawbuffer, value), (GLenum buffer, GLint drawbuffer, const GLint *value))
+#define glClearBufferiv_defined
+#endif
+#ifndef glClearBufferuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferuiv, (buffer, drawbuffer, value), (GLenum buffer, GLint drawbuffer, const GLuint *value))
+#define glClearBufferuiv_defined
+#endif
+#ifndef glColorMaski_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorMaski, (index, r, g, b, a), (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a))
+#define glColorMaski_defined
+#endif
+#ifndef glDeleteFramebuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteFramebuffers, (n, framebuffers), (GLsizei n, const GLuint *framebuffers))
+#define glDeleteFramebuffers_defined
+#endif
+#ifndef glDeleteRenderbuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteRenderbuffers, (n, renderbuffers), (GLsizei n, const GLuint *renderbuffers))
+#define glDeleteRenderbuffers_defined
+#endif
+#ifndef glDeleteVertexArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteVertexArrays, (n, arrays), (GLsizei n, const GLuint *arrays))
+#define glDeleteVertexArrays_defined
+#endif
+#ifndef glDisablei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisablei, (target, index), (GLenum target, GLuint index))
+#define glDisablei_defined
+#endif
+#ifndef glEnablei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnablei, (target, index), (GLenum target, GLuint index))
+#define glEnablei_defined
+#endif
+#ifndef glEndConditionalRender_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEndConditionalRender, (), (void))
+#define glEndConditionalRender_defined
+#endif
+#ifndef glEndTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEndTransformFeedback, (), (void))
+#define glEndTransformFeedback_defined
+#endif
+#ifndef glFlushMappedBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedBufferRange, (target, offset, length), (GLenum target, GLintptr offset, GLsizeiptr length))
+#define glFlushMappedBufferRange_defined
+#endif
+#ifndef glFramebufferRenderbuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferRenderbuffer, (target, attachment, renderbuffertarget, renderbuffer), (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer))
+#define glFramebufferRenderbuffer_defined
+#endif
+#ifndef glFramebufferTexture1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTexture1D, (target, attachment, textarget, texture, level), (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
+#define glFramebufferTexture1D_defined
+#endif
+#ifndef glFramebufferTexture2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTexture2D, (target, attachment, textarget, texture, level), (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
+#define glFramebufferTexture2D_defined
+#endif
+#ifndef glFramebufferTexture3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTexture3D, (target, attachment, textarget, texture, level, zoffset), (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset))
+#define glFramebufferTexture3D_defined
+#endif
+#ifndef glFramebufferTextureLayer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureLayer, (target, attachment, texture, level, layer), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer))
+#define glFramebufferTextureLayer_defined
+#endif
+#ifndef glGenFramebuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenFramebuffers, (n, framebuffers), (GLsizei n, GLuint *framebuffers))
+#define glGenFramebuffers_defined
+#endif
+#ifndef glGenRenderbuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenRenderbuffers, (n, renderbuffers), (GLsizei n, GLuint *renderbuffers))
+#define glGenRenderbuffers_defined
+#endif
+#ifndef glGenVertexArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenVertexArrays, (n, arrays), (GLsizei n, GLuint *arrays))
+#define glGenVertexArrays_defined
+#endif
+#ifndef glGenerateMipmap_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateMipmap, (target), (GLenum target))
+#define glGenerateMipmap_defined
+#endif
+#ifndef glGetBooleani_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBooleani_v, (target, index, data), (GLenum target, GLuint index, GLboolean *data))
+#define glGetBooleani_v_defined
+#endif
+#ifndef glGetFragDataLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetFragDataLocation, (program, name), (GLuint program, const GLchar *name))
+#define glGetFragDataLocation_defined
+#endif
+#ifndef glGetFramebufferAttachmentParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFramebufferAttachmentParameteriv, (target, attachment, pname, params), (GLenum target, GLenum attachment, GLenum pname, GLint *params))
+#define glGetFramebufferAttachmentParameteriv_defined
+#endif
+#ifndef glGetIntegeri_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegeri_v, (target, index, data), (GLenum target, GLuint index, GLint *data))
+#define glGetIntegeri_v_defined
+#endif
+#ifndef glGetRenderbufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetRenderbufferParameteriv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+#define glGetRenderbufferParameteriv_defined
+#endif
+#ifndef glGetStringi_defined
+GLATTER_FBLOCK(return, GL, GLAPI, const GLubyte *, APIENTRY, glGetStringi, (name, index), (GLenum name, GLuint index))
+#define glGetStringi_defined
+#endif
+#ifndef glGetTexParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexParameterIiv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+#define glGetTexParameterIiv_defined
+#endif
+#ifndef glGetTexParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexParameterIuiv, (target, pname, params), (GLenum target, GLenum pname, GLuint *params))
+#define glGetTexParameterIuiv_defined
+#endif
+#ifndef glGetTransformFeedbackVarying_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTransformFeedbackVarying, (program, index, bufSize, length, size, type, name), (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name))
+#define glGetTransformFeedbackVarying_defined
+#endif
+#ifndef glGetUniformuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformuiv, (program, location, params), (GLuint program, GLint location, GLuint *params))
+#define glGetUniformuiv_defined
+#endif
+#ifndef glGetVertexAttribIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribIiv, (index, pname, params), (GLuint index, GLenum pname, GLint *params))
+#define glGetVertexAttribIiv_defined
+#endif
+#ifndef glGetVertexAttribIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribIuiv, (index, pname, params), (GLuint index, GLenum pname, GLuint *params))
+#define glGetVertexAttribIuiv_defined
+#endif
+#ifndef glIsEnabledi_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsEnabledi, (target, index), (GLenum target, GLuint index))
+#define glIsEnabledi_defined
+#endif
+#ifndef glIsFramebuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsFramebuffer, (framebuffer), (GLuint framebuffer))
+#define glIsFramebuffer_defined
+#endif
+#ifndef glIsRenderbuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsRenderbuffer, (renderbuffer), (GLuint renderbuffer))
+#define glIsRenderbuffer_defined
+#endif
+#ifndef glIsVertexArray_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsVertexArray, (array), (GLuint array))
+#define glIsVertexArray_defined
+#endif
+#ifndef glMapBufferRange_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapBufferRange, (target, offset, length, access), (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access))
+#define glMapBufferRange_defined
+#endif
+#ifndef glRenderbufferStorage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderbufferStorage, (target, internalformat, width, height), (GLenum target, GLenum internalformat, GLsizei width, GLsizei height))
+#define glRenderbufferStorage_defined
+#endif
+#ifndef glRenderbufferStorageMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderbufferStorageMultisample, (target, samples, internalformat, width, height), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
+#define glRenderbufferStorageMultisample_defined
+#endif
+#ifndef glTexParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameterIiv, (target, pname, params), (GLenum target, GLenum pname, const GLint *params))
+#define glTexParameterIiv_defined
+#endif
+#ifndef glTexParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameterIuiv, (target, pname, params), (GLenum target, GLenum pname, const GLuint *params))
+#define glTexParameterIuiv_defined
+#endif
+#ifndef glTransformFeedbackVaryings_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackVaryings, (program, count, varyings, bufferMode), (GLuint program, GLsizei count, const GLchar *const*varyings, GLenum bufferMode))
+#define glTransformFeedbackVaryings_defined
+#endif
+#ifndef glUniform1ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui, (location, v0), (GLint location, GLuint v0))
+#define glUniform1ui_defined
+#endif
+#ifndef glUniform1uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1uiv, (location, count, value), (GLint location, GLsizei count, const GLuint *value))
+#define glUniform1uiv_defined
+#endif
+#ifndef glUniform2ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui, (location, v0, v1), (GLint location, GLuint v0, GLuint v1))
+#define glUniform2ui_defined
+#endif
+#ifndef glUniform2uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2uiv, (location, count, value), (GLint location, GLsizei count, const GLuint *value))
+#define glUniform2uiv_defined
+#endif
+#ifndef glUniform3ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui, (location, v0, v1, v2), (GLint location, GLuint v0, GLuint v1, GLuint v2))
+#define glUniform3ui_defined
+#endif
+#ifndef glUniform3uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3uiv, (location, count, value), (GLint location, GLsizei count, const GLuint *value))
+#define glUniform3uiv_defined
+#endif
+#ifndef glUniform4ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui, (location, v0, v1, v2, v3), (GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3))
+#define glUniform4ui_defined
+#endif
+#ifndef glUniform4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4uiv, (location, count, value), (GLint location, GLsizei count, const GLuint *value))
+#define glUniform4uiv_defined
+#endif
+#ifndef glVertexAttribI1i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI1i, (index, x), (GLuint index, GLint x))
+#define glVertexAttribI1i_defined
+#endif
+#ifndef glVertexAttribI1iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI1iv, (index, v), (GLuint index, const GLint *v))
+#define glVertexAttribI1iv_defined
+#endif
+#ifndef glVertexAttribI1ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI1ui, (index, x), (GLuint index, GLuint x))
+#define glVertexAttribI1ui_defined
+#endif
+#ifndef glVertexAttribI1uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI1uiv, (index, v), (GLuint index, const GLuint *v))
+#define glVertexAttribI1uiv_defined
+#endif
+#ifndef glVertexAttribI2i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI2i, (index, x, y), (GLuint index, GLint x, GLint y))
+#define glVertexAttribI2i_defined
+#endif
+#ifndef glVertexAttribI2iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI2iv, (index, v), (GLuint index, const GLint *v))
+#define glVertexAttribI2iv_defined
+#endif
+#ifndef glVertexAttribI2ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI2ui, (index, x, y), (GLuint index, GLuint x, GLuint y))
+#define glVertexAttribI2ui_defined
+#endif
+#ifndef glVertexAttribI2uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI2uiv, (index, v), (GLuint index, const GLuint *v))
+#define glVertexAttribI2uiv_defined
+#endif
+#ifndef glVertexAttribI3i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI3i, (index, x, y, z), (GLuint index, GLint x, GLint y, GLint z))
+#define glVertexAttribI3i_defined
+#endif
+#ifndef glVertexAttribI3iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI3iv, (index, v), (GLuint index, const GLint *v))
+#define glVertexAttribI3iv_defined
+#endif
+#ifndef glVertexAttribI3ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI3ui, (index, x, y, z), (GLuint index, GLuint x, GLuint y, GLuint z))
+#define glVertexAttribI3ui_defined
+#endif
+#ifndef glVertexAttribI3uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI3uiv, (index, v), (GLuint index, const GLuint *v))
+#define glVertexAttribI3uiv_defined
+#endif
+#ifndef glVertexAttribI4bv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4bv, (index, v), (GLuint index, const GLbyte *v))
+#define glVertexAttribI4bv_defined
+#endif
+#ifndef glVertexAttribI4i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4i, (index, x, y, z, w), (GLuint index, GLint x, GLint y, GLint z, GLint w))
+#define glVertexAttribI4i_defined
+#endif
+#ifndef glVertexAttribI4iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4iv, (index, v), (GLuint index, const GLint *v))
+#define glVertexAttribI4iv_defined
+#endif
+#ifndef glVertexAttribI4sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4sv, (index, v), (GLuint index, const GLshort *v))
+#define glVertexAttribI4sv_defined
+#endif
+#ifndef glVertexAttribI4ubv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4ubv, (index, v), (GLuint index, const GLubyte *v))
+#define glVertexAttribI4ubv_defined
+#endif
+#ifndef glVertexAttribI4ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4ui, (index, x, y, z, w), (GLuint index, GLuint x, GLuint y, GLuint z, GLuint w))
+#define glVertexAttribI4ui_defined
+#endif
+#ifndef glVertexAttribI4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4uiv, (index, v), (GLuint index, const GLuint *v))
+#define glVertexAttribI4uiv_defined
+#endif
+#ifndef glVertexAttribI4usv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4usv, (index, v), (GLuint index, const GLushort *v))
+#define glVertexAttribI4usv_defined
+#endif
+#ifndef glVertexAttribIPointer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribIPointer, (index, size, type, stride, pointer), (GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer))
+#define glVertexAttribIPointer_defined
+#endif
+#endif // defined(GL_VERSION_3_0)
+#if defined(GL_VERSION_3_1)
+#ifndef glCopyBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyBufferSubData, (readTarget, writeTarget, readOffset, writeOffset, size), (GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
+#define glCopyBufferSubData_defined
+#endif
+#ifndef glDrawArraysInstanced_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstanced, (mode, first, count, instancecount), (GLenum mode, GLint first, GLsizei count, GLsizei instancecount))
+#define glDrawArraysInstanced_defined
+#endif
+#ifndef glDrawElementsInstanced_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstanced, (mode, count, type, indices, instancecount), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount))
+#define glDrawElementsInstanced_defined
+#endif
+#ifndef glGetActiveUniformBlockName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniformBlockName, (program, uniformBlockIndex, bufSize, length, uniformBlockName), (GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformBlockName))
+#define glGetActiveUniformBlockName_defined
+#endif
+#ifndef glGetActiveUniformBlockiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniformBlockiv, (program, uniformBlockIndex, pname, params), (GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint *params))
+#define glGetActiveUniformBlockiv_defined
+#endif
+#ifndef glGetActiveUniformName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniformName, (program, uniformIndex, bufSize, length, uniformName), (GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName))
+#define glGetActiveUniformName_defined
+#endif
+#ifndef glGetActiveUniformsiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniformsiv, (program, uniformCount, uniformIndices, pname, params), (GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params))
+#define glGetActiveUniformsiv_defined
+#endif
+#ifndef glGetUniformBlockIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetUniformBlockIndex, (program, uniformBlockName), (GLuint program, const GLchar *uniformBlockName))
+#define glGetUniformBlockIndex_defined
+#endif
+#ifndef glGetUniformIndices_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformIndices, (program, uniformCount, uniformNames, uniformIndices), (GLuint program, GLsizei uniformCount, const GLchar *const*uniformNames, GLuint *uniformIndices))
+#define glGetUniformIndices_defined
+#endif
+#ifndef glPrimitiveRestartIndex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPrimitiveRestartIndex, (index), (GLuint index))
+#define glPrimitiveRestartIndex_defined
+#endif
+#ifndef glTexBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexBuffer, (target, internalformat, buffer), (GLenum target, GLenum internalformat, GLuint buffer))
+#define glTexBuffer_defined
+#endif
+#ifndef glUniformBlockBinding_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformBlockBinding, (program, uniformBlockIndex, uniformBlockBinding), (GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding))
+#define glUniformBlockBinding_defined
+#endif
+#endif // defined(GL_VERSION_3_1)
+#if defined(GL_VERSION_3_2)
+#ifndef glClientWaitSync_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glClientWaitSync, (sync, flags, timeout), (GLsync sync, GLbitfield flags, GLuint64 timeout))
+#define glClientWaitSync_defined
+#endif
+#ifndef glDeleteSync_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteSync, (sync), (GLsync sync))
+#define glDeleteSync_defined
+#endif
+#ifndef glDrawElementsBaseVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsBaseVertex, (mode, count, type, indices, basevertex), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLint basevertex))
+#define glDrawElementsBaseVertex_defined
+#endif
+#ifndef glDrawElementsInstancedBaseVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedBaseVertex, (mode, count, type, indices, instancecount, basevertex), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex))
+#define glDrawElementsInstancedBaseVertex_defined
+#endif
+#ifndef glDrawRangeElementsBaseVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawRangeElementsBaseVertex, (mode, start, end, count, type, indices, basevertex), (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices, GLint basevertex))
+#define glDrawRangeElementsBaseVertex_defined
+#endif
+#ifndef glFenceSync_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLsync, APIENTRY, glFenceSync, (condition, flags), (GLenum condition, GLbitfield flags))
+#define glFenceSync_defined
+#endif
+#ifndef glFramebufferTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTexture, (target, attachment, texture, level), (GLenum target, GLenum attachment, GLuint texture, GLint level))
+#define glFramebufferTexture_defined
+#endif
+#ifndef glGetBufferParameteri64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferParameteri64v, (target, pname, params), (GLenum target, GLenum pname, GLint64 *params))
+#define glGetBufferParameteri64v_defined
+#endif
+#ifndef glGetInteger64i_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetInteger64i_v, (target, index, data), (GLenum target, GLuint index, GLint64 *data))
+#define glGetInteger64i_v_defined
+#endif
+#ifndef glGetInteger64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetInteger64v, (pname, data), (GLenum pname, GLint64 *data))
+#define glGetInteger64v_defined
+#endif
+#ifndef glGetMultisamplefv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultisamplefv, (pname, index, val), (GLenum pname, GLuint index, GLfloat *val))
+#define glGetMultisamplefv_defined
+#endif
+#ifndef glGetSynciv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSynciv, (sync, pname, bufSize, length, values), (GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values))
+#define glGetSynciv_defined
+#endif
+#ifndef glIsSync_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsSync, (sync), (GLsync sync))
+#define glIsSync_defined
+#endif
+#ifndef glMultiDrawElementsBaseVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsBaseVertex, (mode, count, type, indices, drawcount, basevertex), (GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei drawcount, const GLint *basevertex))
+#define glMultiDrawElementsBaseVertex_defined
+#endif
+#ifndef glProvokingVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProvokingVertex, (mode), (GLenum mode))
+#define glProvokingVertex_defined
+#endif
+#ifndef glSampleMaski_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSampleMaski, (maskNumber, mask), (GLuint maskNumber, GLbitfield mask))
+#define glSampleMaski_defined
+#endif
+#ifndef glTexImage2DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage2DMultisample, (target, samples, internalformat, width, height, fixedsamplelocations), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
+#define glTexImage2DMultisample_defined
+#endif
+#ifndef glTexImage3DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage3DMultisample, (target, samples, internalformat, width, height, depth, fixedsamplelocations), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
+#define glTexImage3DMultisample_defined
+#endif
+#ifndef glWaitSync_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWaitSync, (sync, flags, timeout), (GLsync sync, GLbitfield flags, GLuint64 timeout))
+#define glWaitSync_defined
+#endif
+#endif // defined(GL_VERSION_3_2)
+#if defined(GL_VERSION_3_3)
+#ifndef glBindFragDataLocationIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindFragDataLocationIndexed, (program, colorNumber, index, name), (GLuint program, GLuint colorNumber, GLuint index, const GLchar *name))
+#define glBindFragDataLocationIndexed_defined
+#endif
+#ifndef glBindSampler_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindSampler, (unit, sampler), (GLuint unit, GLuint sampler))
+#define glBindSampler_defined
+#endif
+#ifndef glDeleteSamplers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteSamplers, (count, samplers), (GLsizei count, const GLuint *samplers))
+#define glDeleteSamplers_defined
+#endif
+#ifndef glGenSamplers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenSamplers, (count, samplers), (GLsizei count, GLuint *samplers))
+#define glGenSamplers_defined
+#endif
+#ifndef glGetFragDataIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetFragDataIndex, (program, name), (GLuint program, const GLchar *name))
+#define glGetFragDataIndex_defined
+#endif
+#ifndef glGetQueryObjecti64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryObjecti64v, (id, pname, params), (GLuint id, GLenum pname, GLint64 *params))
+#define glGetQueryObjecti64v_defined
+#endif
+#ifndef glGetQueryObjectui64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryObjectui64v, (id, pname, params), (GLuint id, GLenum pname, GLuint64 *params))
+#define glGetQueryObjectui64v_defined
+#endif
+#ifndef glGetSamplerParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSamplerParameterIiv, (sampler, pname, params), (GLuint sampler, GLenum pname, GLint *params))
+#define glGetSamplerParameterIiv_defined
+#endif
+#ifndef glGetSamplerParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSamplerParameterIuiv, (sampler, pname, params), (GLuint sampler, GLenum pname, GLuint *params))
+#define glGetSamplerParameterIuiv_defined
+#endif
+#ifndef glGetSamplerParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSamplerParameterfv, (sampler, pname, params), (GLuint sampler, GLenum pname, GLfloat *params))
+#define glGetSamplerParameterfv_defined
+#endif
+#ifndef glGetSamplerParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSamplerParameteriv, (sampler, pname, params), (GLuint sampler, GLenum pname, GLint *params))
+#define glGetSamplerParameteriv_defined
+#endif
+#ifndef glIsSampler_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsSampler, (sampler), (GLuint sampler))
+#define glIsSampler_defined
+#endif
+#ifndef glQueryCounter_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glQueryCounter, (id, target), (GLuint id, GLenum target))
+#define glQueryCounter_defined
+#endif
+#ifndef glSamplerParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameterIiv, (sampler, pname, param), (GLuint sampler, GLenum pname, const GLint *param))
+#define glSamplerParameterIiv_defined
+#endif
+#ifndef glSamplerParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameterIuiv, (sampler, pname, param), (GLuint sampler, GLenum pname, const GLuint *param))
+#define glSamplerParameterIuiv_defined
+#endif
+#ifndef glSamplerParameterf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameterf, (sampler, pname, param), (GLuint sampler, GLenum pname, GLfloat param))
+#define glSamplerParameterf_defined
+#endif
+#ifndef glSamplerParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameterfv, (sampler, pname, param), (GLuint sampler, GLenum pname, const GLfloat *param))
+#define glSamplerParameterfv_defined
+#endif
+#ifndef glSamplerParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameteri, (sampler, pname, param), (GLuint sampler, GLenum pname, GLint param))
+#define glSamplerParameteri_defined
+#endif
+#ifndef glSamplerParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameteriv, (sampler, pname, param), (GLuint sampler, GLenum pname, const GLint *param))
+#define glSamplerParameteriv_defined
+#endif
+#ifndef glVertexAttribDivisor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribDivisor, (index, divisor), (GLuint index, GLuint divisor))
+#define glVertexAttribDivisor_defined
+#endif
+#ifndef glVertexAttribP1ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP1ui, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, GLuint value))
+#define glVertexAttribP1ui_defined
+#endif
+#ifndef glVertexAttribP1uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP1uiv, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, const GLuint *value))
+#define glVertexAttribP1uiv_defined
+#endif
+#ifndef glVertexAttribP2ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP2ui, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, GLuint value))
+#define glVertexAttribP2ui_defined
+#endif
+#ifndef glVertexAttribP2uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP2uiv, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, const GLuint *value))
+#define glVertexAttribP2uiv_defined
+#endif
+#ifndef glVertexAttribP3ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP3ui, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, GLuint value))
+#define glVertexAttribP3ui_defined
+#endif
+#ifndef glVertexAttribP3uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP3uiv, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, const GLuint *value))
+#define glVertexAttribP3uiv_defined
+#endif
+#ifndef glVertexAttribP4ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP4ui, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, GLuint value))
+#define glVertexAttribP4ui_defined
+#endif
+#ifndef glVertexAttribP4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP4uiv, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, const GLuint *value))
+#define glVertexAttribP4uiv_defined
+#endif
+#endif // defined(GL_VERSION_3_3)
+#if defined(GL_VERSION_4_0)
+#ifndef glBeginQueryIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginQueryIndexed, (target, index, id), (GLenum target, GLuint index, GLuint id))
+#define glBeginQueryIndexed_defined
+#endif
+#ifndef glBindTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindTransformFeedback, (target, id), (GLenum target, GLuint id))
+#define glBindTransformFeedback_defined
+#endif
+#ifndef glBlendEquationSeparatei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationSeparatei, (buf, modeRGB, modeAlpha), (GLuint buf, GLenum modeRGB, GLenum modeAlpha))
+#define glBlendEquationSeparatei_defined
+#endif
+#ifndef glBlendEquationi_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationi, (buf, mode), (GLuint buf, GLenum mode))
+#define glBlendEquationi_defined
+#endif
+#ifndef glBlendFuncSeparatei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFuncSeparatei, (buf, srcRGB, dstRGB, srcAlpha, dstAlpha), (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha))
+#define glBlendFuncSeparatei_defined
+#endif
+#ifndef glBlendFunci_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFunci, (buf, src, dst), (GLuint buf, GLenum src, GLenum dst))
+#define glBlendFunci_defined
+#endif
+#ifndef glDeleteTransformFeedbacks_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteTransformFeedbacks, (n, ids), (GLsizei n, const GLuint *ids))
+#define glDeleteTransformFeedbacks_defined
+#endif
+#ifndef glDrawArraysIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysIndirect, (mode, indirect), (GLenum mode, const void *indirect))
+#define glDrawArraysIndirect_defined
+#endif
+#ifndef glDrawElementsIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsIndirect, (mode, type, indirect), (GLenum mode, GLenum type, const void *indirect))
+#define glDrawElementsIndirect_defined
+#endif
+#ifndef glDrawTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawTransformFeedback, (mode, id), (GLenum mode, GLuint id))
+#define glDrawTransformFeedback_defined
+#endif
+#ifndef glDrawTransformFeedbackStream_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawTransformFeedbackStream, (mode, id, stream), (GLenum mode, GLuint id, GLuint stream))
+#define glDrawTransformFeedbackStream_defined
+#endif
+#ifndef glEndQueryIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEndQueryIndexed, (target, index), (GLenum target, GLuint index))
+#define glEndQueryIndexed_defined
+#endif
+#ifndef glGenTransformFeedbacks_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenTransformFeedbacks, (n, ids), (GLsizei n, GLuint *ids))
+#define glGenTransformFeedbacks_defined
+#endif
+#ifndef glGetActiveSubroutineName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveSubroutineName, (program, shadertype, index, bufsize, length, name), (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name))
+#define glGetActiveSubroutineName_defined
+#endif
+#ifndef glGetActiveSubroutineUniformName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveSubroutineUniformName, (program, shadertype, index, bufsize, length, name), (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name))
+#define glGetActiveSubroutineUniformName_defined
+#endif
+#ifndef glGetActiveSubroutineUniformiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveSubroutineUniformiv, (program, shadertype, index, pname, values), (GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint *values))
+#define glGetActiveSubroutineUniformiv_defined
+#endif
+#ifndef glGetProgramStageiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramStageiv, (program, shadertype, pname, values), (GLuint program, GLenum shadertype, GLenum pname, GLint *values))
+#define glGetProgramStageiv_defined
+#endif
+#ifndef glGetQueryIndexediv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryIndexediv, (target, index, pname, params), (GLenum target, GLuint index, GLenum pname, GLint *params))
+#define glGetQueryIndexediv_defined
+#endif
+#ifndef glGetSubroutineIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetSubroutineIndex, (program, shadertype, name), (GLuint program, GLenum shadertype, const GLchar *name))
+#define glGetSubroutineIndex_defined
+#endif
+#ifndef glGetSubroutineUniformLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetSubroutineUniformLocation, (program, shadertype, name), (GLuint program, GLenum shadertype, const GLchar *name))
+#define glGetSubroutineUniformLocation_defined
+#endif
+#ifndef glGetUniformSubroutineuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformSubroutineuiv, (shadertype, location, params), (GLenum shadertype, GLint location, GLuint *params))
+#define glGetUniformSubroutineuiv_defined
+#endif
+#ifndef glGetUniformdv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformdv, (program, location, params), (GLuint program, GLint location, GLdouble *params))
+#define glGetUniformdv_defined
+#endif
+#ifndef glIsTransformFeedback_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsTransformFeedback, (id), (GLuint id))
+#define glIsTransformFeedback_defined
+#endif
+#ifndef glMinSampleShading_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMinSampleShading, (value), (GLfloat value))
+#define glMinSampleShading_defined
+#endif
+#ifndef glPatchParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPatchParameterfv, (pname, values), (GLenum pname, const GLfloat *values))
+#define glPatchParameterfv_defined
+#endif
+#ifndef glPatchParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPatchParameteri, (pname, value), (GLenum pname, GLint value))
+#define glPatchParameteri_defined
+#endif
+#ifndef glPauseTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPauseTransformFeedback, (), (void))
+#define glPauseTransformFeedback_defined
+#endif
+#ifndef glResumeTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glResumeTransformFeedback, (), (void))
+#define glResumeTransformFeedback_defined
+#endif
+#ifndef glUniform1d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1d, (location, x), (GLint location, GLdouble x))
+#define glUniform1d_defined
+#endif
+#ifndef glUniform1dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1dv, (location, count, value), (GLint location, GLsizei count, const GLdouble *value))
+#define glUniform1dv_defined
+#endif
+#ifndef glUniform2d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2d, (location, x, y), (GLint location, GLdouble x, GLdouble y))
+#define glUniform2d_defined
+#endif
+#ifndef glUniform2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2dv, (location, count, value), (GLint location, GLsizei count, const GLdouble *value))
+#define glUniform2dv_defined
+#endif
+#ifndef glUniform3d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3d, (location, x, y, z), (GLint location, GLdouble x, GLdouble y, GLdouble z))
+#define glUniform3d_defined
+#endif
+#ifndef glUniform3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3dv, (location, count, value), (GLint location, GLsizei count, const GLdouble *value))
+#define glUniform3dv_defined
+#endif
+#ifndef glUniform4d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4d, (location, x, y, z, w), (GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+#define glUniform4d_defined
+#endif
+#ifndef glUniform4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4dv, (location, count, value), (GLint location, GLsizei count, const GLdouble *value))
+#define glUniform4dv_defined
+#endif
+#ifndef glUniformMatrix2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glUniformMatrix2dv_defined
+#endif
+#ifndef glUniformMatrix2x3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2x3dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glUniformMatrix2x3dv_defined
+#endif
+#ifndef glUniformMatrix2x4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2x4dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glUniformMatrix2x4dv_defined
+#endif
+#ifndef glUniformMatrix3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glUniformMatrix3dv_defined
+#endif
+#ifndef glUniformMatrix3x2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3x2dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glUniformMatrix3x2dv_defined
+#endif
+#ifndef glUniformMatrix3x4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3x4dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glUniformMatrix3x4dv_defined
+#endif
+#ifndef glUniformMatrix4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glUniformMatrix4dv_defined
+#endif
+#ifndef glUniformMatrix4x2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4x2dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glUniformMatrix4x2dv_defined
+#endif
+#ifndef glUniformMatrix4x3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4x3dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glUniformMatrix4x3dv_defined
+#endif
+#ifndef glUniformSubroutinesuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformSubroutinesuiv, (shadertype, count, indices), (GLenum shadertype, GLsizei count, const GLuint *indices))
+#define glUniformSubroutinesuiv_defined
+#endif
+#endif // defined(GL_VERSION_4_0)
+#if defined(GL_VERSION_4_1)
+#ifndef glActiveShaderProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glActiveShaderProgram, (pipeline, program), (GLuint pipeline, GLuint program))
+#define glActiveShaderProgram_defined
+#endif
+#ifndef glBindProgramPipeline_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindProgramPipeline, (pipeline), (GLuint pipeline))
+#define glBindProgramPipeline_defined
+#endif
+#ifndef glClearDepthf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearDepthf, (d), (GLfloat d))
+#define glClearDepthf_defined
+#endif
+#ifndef glCreateShaderProgramv_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glCreateShaderProgramv, (type, count, strings), (GLenum type, GLsizei count, const GLchar *const*strings))
+#define glCreateShaderProgramv_defined
+#endif
+#ifndef glDeleteProgramPipelines_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteProgramPipelines, (n, pipelines), (GLsizei n, const GLuint *pipelines))
+#define glDeleteProgramPipelines_defined
+#endif
+#ifndef glDepthRangeArrayv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRangeArrayv, (first, count, v), (GLuint first, GLsizei count, const GLdouble *v))
+#define glDepthRangeArrayv_defined
+#endif
+#ifndef glDepthRangeIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRangeIndexed, (index, n, f), (GLuint index, GLdouble n, GLdouble f))
+#define glDepthRangeIndexed_defined
+#endif
+#ifndef glDepthRangef_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRangef, (n, f), (GLfloat n, GLfloat f))
+#define glDepthRangef_defined
+#endif
+#ifndef glGenProgramPipelines_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenProgramPipelines, (n, pipelines), (GLsizei n, GLuint *pipelines))
+#define glGenProgramPipelines_defined
+#endif
+#ifndef glGetDoublei_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoublei_v, (target, index, data), (GLenum target, GLuint index, GLdouble *data))
+#define glGetDoublei_v_defined
+#endif
+#ifndef glGetFloati_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloati_v, (target, index, data), (GLenum target, GLuint index, GLfloat *data))
+#define glGetFloati_v_defined
+#endif
+#ifndef glGetProgramBinary_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramBinary, (program, bufSize, length, binaryFormat, binary), (GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, void *binary))
+#define glGetProgramBinary_defined
+#endif
+#ifndef glGetProgramPipelineInfoLog_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramPipelineInfoLog, (pipeline, bufSize, length, infoLog), (GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog))
+#define glGetProgramPipelineInfoLog_defined
+#endif
+#ifndef glGetProgramPipelineiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramPipelineiv, (pipeline, pname, params), (GLuint pipeline, GLenum pname, GLint *params))
+#define glGetProgramPipelineiv_defined
+#endif
+#ifndef glGetShaderPrecisionFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetShaderPrecisionFormat, (shadertype, precisiontype, range, precision), (GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision))
+#define glGetShaderPrecisionFormat_defined
+#endif
+#ifndef glGetVertexAttribLdv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLdv, (index, pname, params), (GLuint index, GLenum pname, GLdouble *params))
+#define glGetVertexAttribLdv_defined
+#endif
+#ifndef glIsProgramPipeline_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsProgramPipeline, (pipeline), (GLuint pipeline))
+#define glIsProgramPipeline_defined
+#endif
+#ifndef glProgramBinary_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramBinary, (program, binaryFormat, binary, length), (GLuint program, GLenum binaryFormat, const void *binary, GLsizei length))
+#define glProgramBinary_defined
+#endif
+#ifndef glProgramParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramParameteri, (program, pname, value), (GLuint program, GLenum pname, GLint value))
+#define glProgramParameteri_defined
+#endif
+#ifndef glProgramUniform1d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1d, (program, location, v0), (GLuint program, GLint location, GLdouble v0))
+#define glProgramUniform1d_defined
+#endif
+#ifndef glProgramUniform1dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+#define glProgramUniform1dv_defined
+#endif
+#ifndef glProgramUniform1f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1f, (program, location, v0), (GLuint program, GLint location, GLfloat v0))
+#define glProgramUniform1f_defined
+#endif
+#ifndef glProgramUniform1fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1fv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+#define glProgramUniform1fv_defined
+#endif
+#ifndef glProgramUniform1i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i, (program, location, v0), (GLuint program, GLint location, GLint v0))
+#define glProgramUniform1i_defined
+#endif
+#ifndef glProgramUniform1iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1iv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+#define glProgramUniform1iv_defined
+#endif
+#ifndef glProgramUniform1ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui, (program, location, v0), (GLuint program, GLint location, GLuint v0))
+#define glProgramUniform1ui_defined
+#endif
+#ifndef glProgramUniform1uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1uiv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+#define glProgramUniform1uiv_defined
+#endif
+#ifndef glProgramUniform2d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2d, (program, location, v0, v1), (GLuint program, GLint location, GLdouble v0, GLdouble v1))
+#define glProgramUniform2d_defined
+#endif
+#ifndef glProgramUniform2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+#define glProgramUniform2dv_defined
+#endif
+#ifndef glProgramUniform2f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2f, (program, location, v0, v1), (GLuint program, GLint location, GLfloat v0, GLfloat v1))
+#define glProgramUniform2f_defined
+#endif
+#ifndef glProgramUniform2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2fv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+#define glProgramUniform2fv_defined
+#endif
+#ifndef glProgramUniform2i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i, (program, location, v0, v1), (GLuint program, GLint location, GLint v0, GLint v1))
+#define glProgramUniform2i_defined
+#endif
+#ifndef glProgramUniform2iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2iv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+#define glProgramUniform2iv_defined
+#endif
+#ifndef glProgramUniform2ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui, (program, location, v0, v1), (GLuint program, GLint location, GLuint v0, GLuint v1))
+#define glProgramUniform2ui_defined
+#endif
+#ifndef glProgramUniform2uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2uiv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+#define glProgramUniform2uiv_defined
+#endif
+#ifndef glProgramUniform3d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3d, (program, location, v0, v1, v2), (GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2))
+#define glProgramUniform3d_defined
+#endif
+#ifndef glProgramUniform3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+#define glProgramUniform3dv_defined
+#endif
+#ifndef glProgramUniform3f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3f, (program, location, v0, v1, v2), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2))
+#define glProgramUniform3f_defined
+#endif
+#ifndef glProgramUniform3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3fv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+#define glProgramUniform3fv_defined
+#endif
+#ifndef glProgramUniform3i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i, (program, location, v0, v1, v2), (GLuint program, GLint location, GLint v0, GLint v1, GLint v2))
+#define glProgramUniform3i_defined
+#endif
+#ifndef glProgramUniform3iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3iv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+#define glProgramUniform3iv_defined
+#endif
+#ifndef glProgramUniform3ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui, (program, location, v0, v1, v2), (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2))
+#define glProgramUniform3ui_defined
+#endif
+#ifndef glProgramUniform3uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3uiv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+#define glProgramUniform3uiv_defined
+#endif
+#ifndef glProgramUniform4d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4d, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3))
+#define glProgramUniform4d_defined
+#endif
+#ifndef glProgramUniform4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+#define glProgramUniform4dv_defined
+#endif
+#ifndef glProgramUniform4f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4f, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3))
+#define glProgramUniform4f_defined
+#endif
+#ifndef glProgramUniform4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4fv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+#define glProgramUniform4fv_defined
+#endif
+#ifndef glProgramUniform4i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3))
+#define glProgramUniform4i_defined
+#endif
+#ifndef glProgramUniform4iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4iv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+#define glProgramUniform4iv_defined
+#endif
+#ifndef glProgramUniform4ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3))
+#define glProgramUniform4ui_defined
+#endif
+#ifndef glProgramUniform4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4uiv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+#define glProgramUniform4uiv_defined
+#endif
+#ifndef glProgramUniformMatrix2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix2dv_defined
+#endif
+#ifndef glProgramUniformMatrix2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix2fv_defined
+#endif
+#ifndef glProgramUniformMatrix2x3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix2x3dv_defined
+#endif
+#ifndef glProgramUniformMatrix2x3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix2x3fv_defined
+#endif
+#ifndef glProgramUniformMatrix2x4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix2x4dv_defined
+#endif
+#ifndef glProgramUniformMatrix2x4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix2x4fv_defined
+#endif
+#ifndef glProgramUniformMatrix3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix3dv_defined
+#endif
+#ifndef glProgramUniformMatrix3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix3fv_defined
+#endif
+#ifndef glProgramUniformMatrix3x2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix3x2dv_defined
+#endif
+#ifndef glProgramUniformMatrix3x2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix3x2fv_defined
+#endif
+#ifndef glProgramUniformMatrix3x4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix3x4dv_defined
+#endif
+#ifndef glProgramUniformMatrix3x4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix3x4fv_defined
+#endif
+#ifndef glProgramUniformMatrix4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix4dv_defined
+#endif
+#ifndef glProgramUniformMatrix4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix4fv_defined
+#endif
+#ifndef glProgramUniformMatrix4x2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix4x2dv_defined
+#endif
+#ifndef glProgramUniformMatrix4x2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix4x2fv_defined
+#endif
+#ifndef glProgramUniformMatrix4x3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+#define glProgramUniformMatrix4x3dv_defined
+#endif
+#ifndef glProgramUniformMatrix4x3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+#define glProgramUniformMatrix4x3fv_defined
+#endif
+#ifndef glReleaseShaderCompiler_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReleaseShaderCompiler, (), (void))
+#define glReleaseShaderCompiler_defined
+#endif
+#ifndef glScissorArrayv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glScissorArrayv, (first, count, v), (GLuint first, GLsizei count, const GLint *v))
+#define glScissorArrayv_defined
+#endif
+#ifndef glScissorIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glScissorIndexed, (index, left, bottom, width, height), (GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height))
+#define glScissorIndexed_defined
+#endif
+#ifndef glScissorIndexedv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glScissorIndexedv, (index, v), (GLuint index, const GLint *v))
+#define glScissorIndexedv_defined
+#endif
+#ifndef glShaderBinary_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShaderBinary, (count, shaders, binaryformat, binary, length), (GLsizei count, const GLuint *shaders, GLenum binaryformat, const void *binary, GLsizei length))
+#define glShaderBinary_defined
+#endif
+#ifndef glUseProgramStages_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUseProgramStages, (pipeline, stages, program), (GLuint pipeline, GLbitfield stages, GLuint program))
+#define glUseProgramStages_defined
+#endif
+#ifndef glValidateProgramPipeline_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glValidateProgramPipeline, (pipeline), (GLuint pipeline))
+#define glValidateProgramPipeline_defined
+#endif
+#ifndef glVertexAttribL1d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1d, (index, x), (GLuint index, GLdouble x))
+#define glVertexAttribL1d_defined
+#endif
+#ifndef glVertexAttribL1dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1dv, (index, v), (GLuint index, const GLdouble *v))
+#define glVertexAttribL1dv_defined
+#endif
+#ifndef glVertexAttribL2d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2d, (index, x, y), (GLuint index, GLdouble x, GLdouble y))
+#define glVertexAttribL2d_defined
+#endif
+#ifndef glVertexAttribL2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2dv, (index, v), (GLuint index, const GLdouble *v))
+#define glVertexAttribL2dv_defined
+#endif
+#ifndef glVertexAttribL3d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3d, (index, x, y, z), (GLuint index, GLdouble x, GLdouble y, GLdouble z))
+#define glVertexAttribL3d_defined
+#endif
+#ifndef glVertexAttribL3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3dv, (index, v), (GLuint index, const GLdouble *v))
+#define glVertexAttribL3dv_defined
+#endif
+#ifndef glVertexAttribL4d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4d, (index, x, y, z, w), (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+#define glVertexAttribL4d_defined
+#endif
+#ifndef glVertexAttribL4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4dv, (index, v), (GLuint index, const GLdouble *v))
+#define glVertexAttribL4dv_defined
+#endif
+#ifndef glVertexAttribLPointer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribLPointer, (index, size, type, stride, pointer), (GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer))
+#define glVertexAttribLPointer_defined
+#endif
+#ifndef glViewportArrayv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportArrayv, (first, count, v), (GLuint first, GLsizei count, const GLfloat *v))
+#define glViewportArrayv_defined
+#endif
+#ifndef glViewportIndexedf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportIndexedf, (index, x, y, w, h), (GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h))
+#define glViewportIndexedf_defined
+#endif
+#ifndef glViewportIndexedfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportIndexedfv, (index, v), (GLuint index, const GLfloat *v))
+#define glViewportIndexedfv_defined
+#endif
+#endif // defined(GL_VERSION_4_1)
+#if defined(GL_VERSION_4_2)
+#ifndef glBindImageTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindImageTexture, (unit, texture, level, layered, layer, access, format), (GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format))
+#define glBindImageTexture_defined
+#endif
+#ifndef glDrawArraysInstancedBaseInstance_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstancedBaseInstance, (mode, first, count, instancecount, baseinstance), (GLenum mode, GLint first, GLsizei count, GLsizei instancecount, GLuint baseinstance))
+#define glDrawArraysInstancedBaseInstance_defined
+#endif
+#ifndef glDrawElementsInstancedBaseInstance_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedBaseInstance, (mode, count, type, indices, instancecount, baseinstance), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLuint baseinstance))
+#define glDrawElementsInstancedBaseInstance_defined
+#endif
+#ifndef glDrawElementsInstancedBaseVertexBaseInstance_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedBaseVertexBaseInstance, (mode, count, type, indices, instancecount, basevertex, baseinstance), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex, GLuint baseinstance))
+#define glDrawElementsInstancedBaseVertexBaseInstance_defined
+#endif
+#ifndef glDrawTransformFeedbackInstanced_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawTransformFeedbackInstanced, (mode, id, instancecount), (GLenum mode, GLuint id, GLsizei instancecount))
+#define glDrawTransformFeedbackInstanced_defined
+#endif
+#ifndef glDrawTransformFeedbackStreamInstanced_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawTransformFeedbackStreamInstanced, (mode, id, stream, instancecount), (GLenum mode, GLuint id, GLuint stream, GLsizei instancecount))
+#define glDrawTransformFeedbackStreamInstanced_defined
+#endif
+#ifndef glGetActiveAtomicCounterBufferiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveAtomicCounterBufferiv, (program, bufferIndex, pname, params), (GLuint program, GLuint bufferIndex, GLenum pname, GLint *params))
+#define glGetActiveAtomicCounterBufferiv_defined
+#endif
+#ifndef glGetInternalformativ_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetInternalformativ, (target, internalformat, pname, bufSize, params), (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params))
+#define glGetInternalformativ_defined
+#endif
+#ifndef glMemoryBarrier_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMemoryBarrier, (barriers), (GLbitfield barriers))
+#define glMemoryBarrier_defined
+#endif
+#ifndef glTexStorage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage1D, (target, levels, internalformat, width), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
+#define glTexStorage1D_defined
+#endif
+#ifndef glTexStorage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage2D, (target, levels, internalformat, width, height), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height))
+#define glTexStorage2D_defined
+#endif
+#ifndef glTexStorage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage3D, (target, levels, internalformat, width, height, depth), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
+#define glTexStorage3D_defined
+#endif
+#endif // defined(GL_VERSION_4_2)
+#if defined(GL_VERSION_4_3)
+#ifndef glBindVertexBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindVertexBuffer, (bindingindex, buffer, offset, stride), (GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride))
+#define glBindVertexBuffer_defined
+#endif
+#ifndef glClearBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferData, (target, internalformat, format, type, data), (GLenum target, GLenum internalformat, GLenum format, GLenum type, const void *data))
+#define glClearBufferData_defined
+#endif
+#ifndef glClearBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferSubData, (target, internalformat, offset, size, format, type, data), (GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data))
+#define glClearBufferSubData_defined
+#endif
+#ifndef glCopyImageSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyImageSubData, (srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth), (GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth))
+#define glCopyImageSubData_defined
+#endif
+#ifndef glDebugMessageCallback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageCallback, (callback, userParam), (GLDEBUGPROC callback, const void *userParam))
+#define glDebugMessageCallback_defined
+#endif
+#ifndef glDebugMessageControl_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageControl, (source, type, severity, count, ids, enabled), (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled))
+#define glDebugMessageControl_defined
+#endif
+#ifndef glDebugMessageInsert_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageInsert, (source, type, id, severity, length, buf), (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf))
+#define glDebugMessageInsert_defined
+#endif
+#ifndef glDispatchCompute_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDispatchCompute, (num_groups_x, num_groups_y, num_groups_z), (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z))
+#define glDispatchCompute_defined
+#endif
+#ifndef glDispatchComputeIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDispatchComputeIndirect, (indirect), (GLintptr indirect))
+#define glDispatchComputeIndirect_defined
+#endif
+#ifndef glFramebufferParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferParameteri, (target, pname, param), (GLenum target, GLenum pname, GLint param))
+#define glFramebufferParameteri_defined
+#endif
+#ifndef glGetDebugMessageLog_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetDebugMessageLog, (count, bufSize, sources, types, ids, severities, lengths, messageLog), (GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog))
+#define glGetDebugMessageLog_defined
+#endif
+#ifndef glGetFramebufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFramebufferParameteriv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+#define glGetFramebufferParameteriv_defined
+#endif
+#ifndef glGetInternalformati64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetInternalformati64v, (target, internalformat, pname, bufSize, params), (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 *params))
+#define glGetInternalformati64v_defined
+#endif
+#ifndef glGetObjectLabel_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetObjectLabel, (identifier, name, bufSize, length, label), (GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label))
+#define glGetObjectLabel_defined
+#endif
+#ifndef glGetObjectPtrLabel_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetObjectPtrLabel, (ptr, bufSize, length, label), (const void *ptr, GLsizei bufSize, GLsizei *length, GLchar *label))
+#define glGetObjectPtrLabel_defined
+#endif
+#ifndef glGetProgramInterfaceiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramInterfaceiv, (program, programInterface, pname, params), (GLuint program, GLenum programInterface, GLenum pname, GLint *params))
+#define glGetProgramInterfaceiv_defined
+#endif
+#ifndef glGetProgramResourceIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetProgramResourceIndex, (program, programInterface, name), (GLuint program, GLenum programInterface, const GLchar *name))
+#define glGetProgramResourceIndex_defined
+#endif
+#ifndef glGetProgramResourceLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetProgramResourceLocation, (program, programInterface, name), (GLuint program, GLenum programInterface, const GLchar *name))
+#define glGetProgramResourceLocation_defined
+#endif
+#ifndef glGetProgramResourceLocationIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetProgramResourceLocationIndex, (program, programInterface, name), (GLuint program, GLenum programInterface, const GLchar *name))
+#define glGetProgramResourceLocationIndex_defined
+#endif
+#ifndef glGetProgramResourceName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramResourceName, (program, programInterface, index, bufSize, length, name), (GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name))
+#define glGetProgramResourceName_defined
+#endif
+#ifndef glGetProgramResourceiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramResourceiv, (program, programInterface, index, propCount, props, bufSize, length, params), (GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei bufSize, GLsizei *length, GLint *params))
+#define glGetProgramResourceiv_defined
+#endif
+#ifndef glInvalidateBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateBufferData, (buffer), (GLuint buffer))
+#define glInvalidateBufferData_defined
+#endif
+#ifndef glInvalidateBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateBufferSubData, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizeiptr length))
+#define glInvalidateBufferSubData_defined
+#endif
+#ifndef glInvalidateFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateFramebuffer, (target, numAttachments, attachments), (GLenum target, GLsizei numAttachments, const GLenum *attachments))
+#define glInvalidateFramebuffer_defined
+#endif
+#ifndef glInvalidateSubFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateSubFramebuffer, (target, numAttachments, attachments, x, y, width, height), (GLenum target, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glInvalidateSubFramebuffer_defined
+#endif
+#ifndef glInvalidateTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateTexImage, (texture, level), (GLuint texture, GLint level))
+#define glInvalidateTexImage_defined
+#endif
+#ifndef glInvalidateTexSubImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateTexSubImage, (texture, level, xoffset, yoffset, zoffset, width, height, depth), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth))
+#define glInvalidateTexSubImage_defined
+#endif
+#ifndef glMultiDrawArraysIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirect, (mode, indirect, drawcount, stride), (GLenum mode, const void *indirect, GLsizei drawcount, GLsizei stride))
+#define glMultiDrawArraysIndirect_defined
+#endif
+#ifndef glMultiDrawElementsIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirect, (mode, type, indirect, drawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLsizei drawcount, GLsizei stride))
+#define glMultiDrawElementsIndirect_defined
+#endif
+#ifndef glObjectLabel_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glObjectLabel, (identifier, name, length, label), (GLenum identifier, GLuint name, GLsizei length, const GLchar *label))
+#define glObjectLabel_defined
+#endif
+#ifndef glObjectPtrLabel_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glObjectPtrLabel, (ptr, length, label), (const void *ptr, GLsizei length, const GLchar *label))
+#define glObjectPtrLabel_defined
+#endif
+#ifndef glPopDebugGroup_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPopDebugGroup, (), (void))
+#define glPopDebugGroup_defined
+#endif
+#ifndef glPushDebugGroup_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPushDebugGroup, (source, id, length, message), (GLenum source, GLuint id, GLsizei length, const GLchar *message))
+#define glPushDebugGroup_defined
+#endif
+#ifndef glShaderStorageBlockBinding_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShaderStorageBlockBinding, (program, storageBlockIndex, storageBlockBinding), (GLuint program, GLuint storageBlockIndex, GLuint storageBlockBinding))
+#define glShaderStorageBlockBinding_defined
+#endif
+#ifndef glTexBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexBufferRange, (target, internalformat, buffer, offset, size), (GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size))
+#define glTexBufferRange_defined
+#endif
+#ifndef glTexStorage2DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage2DMultisample, (target, samples, internalformat, width, height, fixedsamplelocations), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
+#define glTexStorage2DMultisample_defined
+#endif
+#ifndef glTexStorage3DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage3DMultisample, (target, samples, internalformat, width, height, depth, fixedsamplelocations), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
+#define glTexStorage3DMultisample_defined
+#endif
+#ifndef glTextureView_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureView, (texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers), (GLuint texture, GLenum target, GLuint origtexture, GLenum internalformat, GLuint minlevel, GLuint numlevels, GLuint minlayer, GLuint numlayers))
+#define glTextureView_defined
+#endif
+#ifndef glVertexAttribBinding_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribBinding, (attribindex, bindingindex), (GLuint attribindex, GLuint bindingindex))
+#define glVertexAttribBinding_defined
+#endif
+#ifndef glVertexAttribFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribFormat, (attribindex, size, type, normalized, relativeoffset), (GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset))
+#define glVertexAttribFormat_defined
+#endif
+#ifndef glVertexAttribIFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribIFormat, (attribindex, size, type, relativeoffset), (GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+#define glVertexAttribIFormat_defined
+#endif
+#ifndef glVertexAttribLFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribLFormat, (attribindex, size, type, relativeoffset), (GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+#define glVertexAttribLFormat_defined
+#endif
+#ifndef glVertexBindingDivisor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexBindingDivisor, (bindingindex, divisor), (GLuint bindingindex, GLuint divisor))
+#define glVertexBindingDivisor_defined
+#endif
+#endif // defined(GL_VERSION_4_3)
+#if defined(GL_VERSION_4_4)
+#ifndef glBindBuffersBase_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBuffersBase, (target, first, count, buffers), (GLenum target, GLuint first, GLsizei count, const GLuint *buffers))
+#define glBindBuffersBase_defined
+#endif
+#ifndef glBindBuffersRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBuffersRange, (target, first, count, buffers, offsets, sizes), (GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes))
+#define glBindBuffersRange_defined
+#endif
+#ifndef glBindImageTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindImageTextures, (first, count, textures), (GLuint first, GLsizei count, const GLuint *textures))
+#define glBindImageTextures_defined
+#endif
+#ifndef glBindSamplers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindSamplers, (first, count, samplers), (GLuint first, GLsizei count, const GLuint *samplers))
+#define glBindSamplers_defined
+#endif
+#ifndef glBindTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindTextures, (first, count, textures), (GLuint first, GLsizei count, const GLuint *textures))
+#define glBindTextures_defined
+#endif
+#ifndef glBindVertexBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindVertexBuffers, (first, count, buffers, offsets, strides), (GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides))
+#define glBindVertexBuffers_defined
+#endif
+#ifndef glBufferStorage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferStorage, (target, size, data, flags), (GLenum target, GLsizeiptr size, const void *data, GLbitfield flags))
+#define glBufferStorage_defined
+#endif
+#ifndef glClearTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearTexImage, (texture, level, format, type, data), (GLuint texture, GLint level, GLenum format, GLenum type, const void *data))
+#define glClearTexImage_defined
+#endif
+#ifndef glClearTexSubImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearTexSubImage, (texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *data))
+#define glClearTexSubImage_defined
+#endif
+#endif // defined(GL_VERSION_4_4)
+#if defined(GL_VERSION_4_5)
+#ifndef glBindTextureUnit_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindTextureUnit, (unit, texture), (GLuint unit, GLuint texture))
+#define glBindTextureUnit_defined
+#endif
+#ifndef glBlitNamedFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlitNamedFramebuffer, (readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLuint readFramebuffer, GLuint drawFramebuffer, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
+#define glBlitNamedFramebuffer_defined
+#endif
+#ifndef glCheckNamedFramebufferStatus_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glCheckNamedFramebufferStatus, (framebuffer, target), (GLuint framebuffer, GLenum target))
+#define glCheckNamedFramebufferStatus_defined
+#endif
+#ifndef glClearNamedBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferData, (buffer, internalformat, format, type, data), (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data))
+#define glClearNamedBufferData_defined
+#endif
+#ifndef glClearNamedBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubData, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizei size, GLenum format, GLenum type, const void *data))
+#define glClearNamedBufferSubData_defined
+#endif
+#ifndef glClearNamedFramebufferfi_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferfi, (framebuffer, buffer, depth, stencil), (GLuint framebuffer, GLenum buffer, const GLfloat depth, GLint stencil))
+#define glClearNamedFramebufferfi_defined
+#endif
+#ifndef glClearNamedFramebufferfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferfv, (framebuffer, buffer, drawbuffer, value), (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLfloat *value))
+#define glClearNamedFramebufferfv_defined
+#endif
+#ifndef glClearNamedFramebufferiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferiv, (framebuffer, buffer, drawbuffer, value), (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLint *value))
+#define glClearNamedFramebufferiv_defined
+#endif
+#ifndef glClearNamedFramebufferuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferuiv, (framebuffer, buffer, drawbuffer, value), (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLuint *value))
+#define glClearNamedFramebufferuiv_defined
+#endif
+#ifndef glClipControl_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClipControl, (origin, depth), (GLenum origin, GLenum depth))
+#define glClipControl_defined
+#endif
+#ifndef glCompressedTextureSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage1D, (texture, level, xoffset, width, format, imageSize, data), (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data))
+#define glCompressedTextureSubImage1D_defined
+#endif
+#ifndef glCompressedTextureSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage2D, (texture, level, xoffset, yoffset, width, height, format, imageSize, data), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data))
+#define glCompressedTextureSubImage2D_defined
+#endif
+#ifndef glCompressedTextureSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage3D, (texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data))
+#define glCompressedTextureSubImage3D_defined
+#endif
+#ifndef glCopyNamedBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyNamedBufferSubData, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizei size))
+#define glCopyNamedBufferSubData_defined
+#endif
+#ifndef glCopyTextureSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage1D, (texture, level, xoffset, x, y, width), (GLuint texture, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
+#define glCopyTextureSubImage1D_defined
+#endif
+#ifndef glCopyTextureSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage2D, (texture, level, xoffset, yoffset, x, y, width, height), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glCopyTextureSubImage2D_defined
+#endif
+#ifndef glCopyTextureSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage3D, (texture, level, xoffset, yoffset, zoffset, x, y, width, height), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glCopyTextureSubImage3D_defined
+#endif
+#ifndef glCreateBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateBuffers, (n, buffers), (GLsizei n, GLuint *buffers))
+#define glCreateBuffers_defined
+#endif
+#ifndef glCreateFramebuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateFramebuffers, (n, framebuffers), (GLsizei n, GLuint *framebuffers))
+#define glCreateFramebuffers_defined
+#endif
+#ifndef glCreateProgramPipelines_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateProgramPipelines, (n, pipelines), (GLsizei n, GLuint *pipelines))
+#define glCreateProgramPipelines_defined
+#endif
+#ifndef glCreateQueries_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateQueries, (target, n, ids), (GLenum target, GLsizei n, GLuint *ids))
+#define glCreateQueries_defined
+#endif
+#ifndef glCreateRenderbuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateRenderbuffers, (n, renderbuffers), (GLsizei n, GLuint *renderbuffers))
+#define glCreateRenderbuffers_defined
+#endif
+#ifndef glCreateSamplers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateSamplers, (n, samplers), (GLsizei n, GLuint *samplers))
+#define glCreateSamplers_defined
+#endif
+#ifndef glCreateTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateTextures, (target, n, textures), (GLenum target, GLsizei n, GLuint *textures))
+#define glCreateTextures_defined
+#endif
+#ifndef glCreateTransformFeedbacks_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateTransformFeedbacks, (n, ids), (GLsizei n, GLuint *ids))
+#define glCreateTransformFeedbacks_defined
+#endif
+#ifndef glCreateVertexArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateVertexArrays, (n, arrays), (GLsizei n, GLuint *arrays))
+#define glCreateVertexArrays_defined
+#endif
+#ifndef glDisableVertexArrayAttrib_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayAttrib, (vaobj, index), (GLuint vaobj, GLuint index))
+#define glDisableVertexArrayAttrib_defined
+#endif
+#ifndef glEnableVertexArrayAttrib_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayAttrib, (vaobj, index), (GLuint vaobj, GLuint index))
+#define glEnableVertexArrayAttrib_defined
+#endif
+#ifndef glFlushMappedNamedBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRange, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizei length))
+#define glFlushMappedNamedBufferRange_defined
+#endif
+#ifndef glGenerateTextureMipmap_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateTextureMipmap, (texture), (GLuint texture))
+#define glGenerateTextureMipmap_defined
+#endif
+#ifndef glGetCompressedTextureImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTextureImage, (texture, level, bufSize, pixels), (GLuint texture, GLint level, GLsizei bufSize, void *pixels))
+#define glGetCompressedTextureImage_defined
+#endif
+#ifndef glGetCompressedTextureSubImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTextureSubImage, (texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels))
+#define glGetCompressedTextureSubImage_defined
+#endif
+#ifndef glGetGraphicsResetStatus_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glGetGraphicsResetStatus, (), (void))
+#define glGetGraphicsResetStatus_defined
+#endif
+#ifndef glGetNamedBufferParameteri64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameteri64v, (buffer, pname, params), (GLuint buffer, GLenum pname, GLint64 *params))
+#define glGetNamedBufferParameteri64v_defined
+#endif
+#ifndef glGetNamedBufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameteriv, (buffer, pname, params), (GLuint buffer, GLenum pname, GLint *params))
+#define glGetNamedBufferParameteriv_defined
+#endif
+#ifndef glGetNamedBufferPointerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferPointerv, (buffer, pname, params), (GLuint buffer, GLenum pname, void **params))
+#define glGetNamedBufferPointerv_defined
+#endif
+#ifndef glGetNamedBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizei size, void *data))
+#define glGetNamedBufferSubData_defined
+#endif
+#ifndef glGetNamedFramebufferAttachmentParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferAttachmentParameteriv, (framebuffer, attachment, pname, params), (GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params))
+#define glGetNamedFramebufferAttachmentParameteriv_defined
+#endif
+#ifndef glGetNamedFramebufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferParameteriv, (framebuffer, pname, param), (GLuint framebuffer, GLenum pname, GLint *param))
+#define glGetNamedFramebufferParameteriv_defined
+#endif
+#ifndef glGetNamedRenderbufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedRenderbufferParameteriv, (renderbuffer, pname, params), (GLuint renderbuffer, GLenum pname, GLint *params))
+#define glGetNamedRenderbufferParameteriv_defined
+#endif
+#ifndef glGetTextureImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureImage, (texture, level, format, type, bufSize, pixels), (GLuint texture, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels))
+#define glGetTextureImage_defined
+#endif
+#ifndef glGetTextureLevelParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterfv, (texture, level, pname, params), (GLuint texture, GLint level, GLenum pname, GLfloat *params))
+#define glGetTextureLevelParameterfv_defined
+#endif
+#ifndef glGetTextureLevelParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameteriv, (texture, level, pname, params), (GLuint texture, GLint level, GLenum pname, GLint *params))
+#define glGetTextureLevelParameteriv_defined
+#endif
+#ifndef glGetTextureParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIiv, (texture, pname, params), (GLuint texture, GLenum pname, GLint *params))
+#define glGetTextureParameterIiv_defined
+#endif
+#ifndef glGetTextureParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIuiv, (texture, pname, params), (GLuint texture, GLenum pname, GLuint *params))
+#define glGetTextureParameterIuiv_defined
+#endif
+#ifndef glGetTextureParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterfv, (texture, pname, params), (GLuint texture, GLenum pname, GLfloat *params))
+#define glGetTextureParameterfv_defined
+#endif
+#ifndef glGetTextureParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameteriv, (texture, pname, params), (GLuint texture, GLenum pname, GLint *params))
+#define glGetTextureParameteriv_defined
+#endif
+#ifndef glGetTextureSubImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureSubImage, (texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, bufSize, pixels), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLsizei bufSize, void *pixels))
+#define glGetTextureSubImage_defined
+#endif
+#ifndef glGetTransformFeedbacki64_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTransformFeedbacki64_v, (xfb, pname, index, param), (GLuint xfb, GLenum pname, GLuint index, GLint64 *param))
+#define glGetTransformFeedbacki64_v_defined
+#endif
+#ifndef glGetTransformFeedbacki_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTransformFeedbacki_v, (xfb, pname, index, param), (GLuint xfb, GLenum pname, GLuint index, GLint *param))
+#define glGetTransformFeedbacki_v_defined
+#endif
+#ifndef glGetTransformFeedbackiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTransformFeedbackiv, (xfb, pname, param), (GLuint xfb, GLenum pname, GLint *param))
+#define glGetTransformFeedbackiv_defined
+#endif
+#ifndef glGetVertexArrayIndexed64iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIndexed64iv, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, GLint64 *param))
+#define glGetVertexArrayIndexed64iv_defined
+#endif
+#ifndef glGetVertexArrayIndexediv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIndexediv, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, GLint *param))
+#define glGetVertexArrayIndexediv_defined
+#endif
+#ifndef glGetVertexArrayiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayiv, (vaobj, pname, param), (GLuint vaobj, GLenum pname, GLint *param))
+#define glGetVertexArrayiv_defined
+#endif
+#ifndef glGetnCompressedTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnCompressedTexImage, (target, lod, bufSize, pixels), (GLenum target, GLint lod, GLsizei bufSize, void *pixels))
+#define glGetnCompressedTexImage_defined
+#endif
+#ifndef glGetnTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnTexImage, (target, level, format, type, bufSize, pixels), (GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels))
+#define glGetnTexImage_defined
+#endif
+#ifndef glGetnUniformdv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformdv, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLdouble *params))
+#define glGetnUniformdv_defined
+#endif
+#ifndef glGetnUniformfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformfv, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLfloat *params))
+#define glGetnUniformfv_defined
+#endif
+#ifndef glGetnUniformiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformiv, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLint *params))
+#define glGetnUniformiv_defined
+#endif
+#ifndef glGetnUniformuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformuiv, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLuint *params))
+#define glGetnUniformuiv_defined
+#endif
+#ifndef glInvalidateNamedFramebufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateNamedFramebufferData, (framebuffer, numAttachments, attachments), (GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments))
+#define glInvalidateNamedFramebufferData_defined
+#endif
+#ifndef glInvalidateNamedFramebufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateNamedFramebufferSubData, (framebuffer, numAttachments, attachments, x, y, width, height), (GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height))
+#define glInvalidateNamedFramebufferSubData_defined
+#endif
+#ifndef glMapNamedBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBuffer, (buffer, access), (GLuint buffer, GLenum access))
+#define glMapNamedBuffer_defined
+#endif
+#ifndef glMapNamedBufferRange_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRange, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizei length, GLbitfield access))
+#define glMapNamedBufferRange_defined
+#endif
+#ifndef glMemoryBarrierByRegion_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMemoryBarrierByRegion, (barriers), (GLbitfield barriers))
+#define glMemoryBarrierByRegion_defined
+#endif
+#ifndef glNamedBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferData, (buffer, size, data, usage), (GLuint buffer, GLsizei size, const void *data, GLenum usage))
+#define glNamedBufferData_defined
+#endif
+#ifndef glNamedBufferStorage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorage, (buffer, size, data, flags), (GLuint buffer, GLsizei size, const void *data, GLbitfield flags))
+#define glNamedBufferStorage_defined
+#endif
+#ifndef glNamedBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizei size, const void *data))
+#define glNamedBufferSubData_defined
+#endif
+#ifndef glNamedFramebufferDrawBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferDrawBuffer, (framebuffer, buf), (GLuint framebuffer, GLenum buf))
+#define glNamedFramebufferDrawBuffer_defined
+#endif
+#ifndef glNamedFramebufferDrawBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferDrawBuffers, (framebuffer, n, bufs), (GLuint framebuffer, GLsizei n, const GLenum *bufs))
+#define glNamedFramebufferDrawBuffers_defined
+#endif
+#ifndef glNamedFramebufferParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferParameteri, (framebuffer, pname, param), (GLuint framebuffer, GLenum pname, GLint param))
+#define glNamedFramebufferParameteri_defined
+#endif
+#ifndef glNamedFramebufferReadBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferReadBuffer, (framebuffer, src), (GLuint framebuffer, GLenum src))
+#define glNamedFramebufferReadBuffer_defined
+#endif
+#ifndef glNamedFramebufferRenderbuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferRenderbuffer, (framebuffer, attachment, renderbuffertarget, renderbuffer), (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer))
+#define glNamedFramebufferRenderbuffer_defined
+#endif
+#ifndef glNamedFramebufferTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture, (framebuffer, attachment, texture, level), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level))
+#define glNamedFramebufferTexture_defined
+#endif
+#ifndef glNamedFramebufferTextureLayer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureLayer, (framebuffer, attachment, texture, level, layer), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer))
+#define glNamedFramebufferTextureLayer_defined
+#endif
+#ifndef glNamedRenderbufferStorage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorage, (renderbuffer, internalformat, width, height), (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height))
+#define glNamedRenderbufferStorage_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisample, (renderbuffer, samples, internalformat, width, height), (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
+#define glNamedRenderbufferStorageMultisample_defined
+#endif
+#ifndef glReadnPixels_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadnPixels, (x, y, width, height, format, type, bufSize, data), (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data))
+#define glReadnPixels_defined
+#endif
+#ifndef glTextureBarrier_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBarrier, (), (void))
+#define glTextureBarrier_defined
+#endif
+#ifndef glTextureBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBuffer, (texture, internalformat, buffer), (GLuint texture, GLenum internalformat, GLuint buffer))
+#define glTextureBuffer_defined
+#endif
+#ifndef glTextureBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRange, (texture, internalformat, buffer, offset, size), (GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizei size))
+#define glTextureBufferRange_defined
+#endif
+#ifndef glTextureParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIiv, (texture, pname, params), (GLuint texture, GLenum pname, const GLint *params))
+#define glTextureParameterIiv_defined
+#endif
+#ifndef glTextureParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIuiv, (texture, pname, params), (GLuint texture, GLenum pname, const GLuint *params))
+#define glTextureParameterIuiv_defined
+#endif
+#ifndef glTextureParameterf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterf, (texture, pname, param), (GLuint texture, GLenum pname, GLfloat param))
+#define glTextureParameterf_defined
+#endif
+#ifndef glTextureParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfv, (texture, pname, param), (GLuint texture, GLenum pname, const GLfloat *param))
+#define glTextureParameterfv_defined
+#endif
+#ifndef glTextureParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameteri, (texture, pname, param), (GLuint texture, GLenum pname, GLint param))
+#define glTextureParameteri_defined
+#endif
+#ifndef glTextureParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameteriv, (texture, pname, param), (GLuint texture, GLenum pname, const GLint *param))
+#define glTextureParameteriv_defined
+#endif
+#ifndef glTextureStorage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage1D, (texture, levels, internalformat, width), (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width))
+#define glTextureStorage1D_defined
+#endif
+#ifndef glTextureStorage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2D, (texture, levels, internalformat, width, height), (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height))
+#define glTextureStorage2D_defined
+#endif
+#ifndef glTextureStorage2DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2DMultisample, (texture, samples, internalformat, width, height, fixedsamplelocations), (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
+#define glTextureStorage2DMultisample_defined
+#endif
+#ifndef glTextureStorage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3D, (texture, levels, internalformat, width, height, depth), (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
+#define glTextureStorage3D_defined
+#endif
+#ifndef glTextureStorage3DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DMultisample, (texture, samples, internalformat, width, height, depth, fixedsamplelocations), (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
+#define glTextureStorage3DMultisample_defined
+#endif
+#ifndef glTextureSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage1D, (texture, level, xoffset, width, format, type, pixels), (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
+#define glTextureSubImage1D_defined
+#endif
+#ifndef glTextureSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage2D, (texture, level, xoffset, yoffset, width, height, format, type, pixels), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
+#define glTextureSubImage2D_defined
+#endif
+#ifndef glTextureSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage3D, (texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
+#define glTextureSubImage3D_defined
+#endif
+#ifndef glTransformFeedbackBufferBase_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackBufferBase, (xfb, index, buffer), (GLuint xfb, GLuint index, GLuint buffer))
+#define glTransformFeedbackBufferBase_defined
+#endif
+#ifndef glTransformFeedbackBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackBufferRange, (xfb, index, buffer, offset, size), (GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizei size))
+#define glTransformFeedbackBufferRange_defined
+#endif
+#ifndef glUnmapNamedBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glUnmapNamedBuffer, (buffer), (GLuint buffer))
+#define glUnmapNamedBuffer_defined
+#endif
+#ifndef glVertexArrayAttribBinding_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayAttribBinding, (vaobj, attribindex, bindingindex), (GLuint vaobj, GLuint attribindex, GLuint bindingindex))
+#define glVertexArrayAttribBinding_defined
+#endif
+#ifndef glVertexArrayAttribFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayAttribFormat, (vaobj, attribindex, size, type, normalized, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset))
+#define glVertexArrayAttribFormat_defined
+#endif
+#ifndef glVertexArrayAttribIFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayAttribIFormat, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+#define glVertexArrayAttribIFormat_defined
+#endif
+#ifndef glVertexArrayAttribLFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayAttribLFormat, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+#define glVertexArrayAttribLFormat_defined
+#endif
+#ifndef glVertexArrayBindingDivisor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayBindingDivisor, (vaobj, bindingindex, divisor), (GLuint vaobj, GLuint bindingindex, GLuint divisor))
+#define glVertexArrayBindingDivisor_defined
+#endif
+#ifndef glVertexArrayElementBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayElementBuffer, (vaobj, buffer), (GLuint vaobj, GLuint buffer))
+#define glVertexArrayElementBuffer_defined
+#endif
+#ifndef glVertexArrayVertexBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBuffer, (vaobj, bindingindex, buffer, offset, stride), (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride))
+#define glVertexArrayVertexBuffer_defined
+#endif
+#ifndef glVertexArrayVertexBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBuffers, (vaobj, first, count, buffers, offsets, strides), (GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides))
+#define glVertexArrayVertexBuffers_defined
+#endif
+#endif // defined(__glcorearb_h_)
 #endif // defined(GL_VERSION_4_5)
 #endif // GLATTER_GL
 

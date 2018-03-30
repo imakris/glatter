@@ -5128,7 +5128,7 @@ void glatter_glVertexAttribIPointer_debug(GLuint index, GLint size, GLenum type,
 void glatter_glWaitSync_debug(GLsync sync, GLbitfield flags, GLuint64 timeout, const char* file, int line);
 #endif // defined(GL_ES_VERSION_3_0)
 #endif // defined(__gl3_h_)
-#if defined(__glcorearb_h_)
+#if defined(__gl_glcorearb_h_)
 #if defined(GL_AMD_performance_monitor)
 #define glBeginPerfMonitorAMD(monitor) glatter_glBeginPerfMonitorAMD_debug((monitor), __FILE__, __LINE__)
 void glatter_glBeginPerfMonitorAMD_debug(GLuint monitor, const char* file, int line);
@@ -5153,6 +5153,10 @@ void glatter_glGetPerfMonitorGroupsAMD_debug(GLint *numGroups, GLsizei groupsSiz
 #define glSelectPerfMonitorCountersAMD(monitor, enable, group, numCounters, counterList) glatter_glSelectPerfMonitorCountersAMD_debug((monitor), (enable), (group), (numCounters), (counterList), __FILE__, __LINE__)
 void glatter_glSelectPerfMonitorCountersAMD_debug(GLuint monitor, GLboolean enable, GLuint group, GLint numCounters, GLuint *counterList, const char* file, int line);
 #endif // defined(GL_AMD_performance_monitor)
+#if defined(GL_ARB_ES3_2_compatibility)
+#define glPrimitiveBoundingBoxARB(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) glatter_glPrimitiveBoundingBoxARB_debug((minX), (minY), (minZ), (minW), (maxX), (maxY), (maxZ), (maxW), __FILE__, __LINE__)
+void glatter_glPrimitiveBoundingBoxARB_debug(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW, const char* file, int line);
+#endif // defined(GL_ARB_ES3_2_compatibility)
 #if defined(GL_ARB_bindless_texture)
 #define glGetImageHandleARB(texture, level, layered, layer, format) glatter_glGetImageHandleARB_debug((texture), (level), (layered), (layer), (format), __FILE__, __LINE__)
 GLuint64 glatter_glGetImageHandleARB_debug(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format, const char* file, int line);
@@ -5215,12 +5219,114 @@ void glatter_glBlendFuncSeparateiARB_debug(GLuint buf, GLenum srcRGB, GLenum dst
 #define glBlendFunciARB(buf, src, dst) glatter_glBlendFunciARB_debug((buf), (src), (dst), __FILE__, __LINE__)
 void glatter_glBlendFunciARB_debug(GLuint buf, GLenum src, GLenum dst, const char* file, int line);
 #endif // defined(GL_ARB_draw_buffers_blend)
+#if defined(GL_ARB_draw_instanced)
+#define glDrawArraysInstancedARB(mode, first, count, primcount) glatter_glDrawArraysInstancedARB_debug((mode), (first), (count), (primcount), __FILE__, __LINE__)
+void glatter_glDrawArraysInstancedARB_debug(GLenum mode, GLint first, GLsizei count, GLsizei primcount, const char* file, int line);
+#define glDrawElementsInstancedARB(mode, count, type, indices, primcount) glatter_glDrawElementsInstancedARB_debug((mode), (count), (type), (indices), (primcount), __FILE__, __LINE__)
+void glatter_glDrawElementsInstancedARB_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount, const char* file, int line);
+#endif // defined(GL_ARB_draw_instanced)
+#if defined(GL_ARB_geometry_shader4)
+#define glFramebufferTextureARB(target, attachment, texture, level) glatter_glFramebufferTextureARB_debug((target), (attachment), (texture), (level), __FILE__, __LINE__)
+void glatter_glFramebufferTextureARB_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, const char* file, int line);
+#define glFramebufferTextureFaceARB(target, attachment, texture, level, face) glatter_glFramebufferTextureFaceARB_debug((target), (attachment), (texture), (level), (face), __FILE__, __LINE__)
+void glatter_glFramebufferTextureFaceARB_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face, const char* file, int line);
+#define glFramebufferTextureLayerARB(target, attachment, texture, level, layer) glatter_glFramebufferTextureLayerARB_debug((target), (attachment), (texture), (level), (layer), __FILE__, __LINE__)
+void glatter_glFramebufferTextureLayerARB_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line);
+#define glProgramParameteriARB(program, pname, value) glatter_glProgramParameteriARB_debug((program), (pname), (value), __FILE__, __LINE__)
+void glatter_glProgramParameteriARB_debug(GLuint program, GLenum pname, GLint value, const char* file, int line);
+#endif // defined(GL_ARB_geometry_shader4)
+#if defined(GL_ARB_gl_spirv)
+#define glSpecializeShaderARB(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue) glatter_glSpecializeShaderARB_debug((shader), (pEntryPoint), (numSpecializationConstants), (pConstantIndex), (pConstantValue), __FILE__, __LINE__)
+void glatter_glSpecializeShaderARB_debug(GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue, const char* file, int line);
+#endif // defined(GL_ARB_gl_spirv)
+#if defined(GL_ARB_gpu_shader_int64)
+#define glGetUniformi64vARB(program, location, params) glatter_glGetUniformi64vARB_debug((program), (location), (params), __FILE__, __LINE__)
+void glatter_glGetUniformi64vARB_debug(GLuint program, GLint location, GLint64 *params, const char* file, int line);
+#define glGetUniformui64vARB(program, location, params) glatter_glGetUniformui64vARB_debug((program), (location), (params), __FILE__, __LINE__)
+void glatter_glGetUniformui64vARB_debug(GLuint program, GLint location, GLuint64 *params, const char* file, int line);
+#define glGetnUniformi64vARB(program, location, bufSize, params) glatter_glGetnUniformi64vARB_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformi64vARB_debug(GLuint program, GLint location, GLsizei bufSize, GLint64 *params, const char* file, int line);
+#define glGetnUniformui64vARB(program, location, bufSize, params) glatter_glGetnUniformui64vARB_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformui64vARB_debug(GLuint program, GLint location, GLsizei bufSize, GLuint64 *params, const char* file, int line);
+#define glProgramUniform1i64ARB(program, location, x) glatter_glProgramUniform1i64ARB_debug((program), (location), (x), __FILE__, __LINE__)
+void glatter_glProgramUniform1i64ARB_debug(GLuint program, GLint location, GLint64 x, const char* file, int line);
+#define glProgramUniform1i64vARB(program, location, count, value) glatter_glProgramUniform1i64vARB_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line);
+#define glProgramUniform1ui64ARB(program, location, x) glatter_glProgramUniform1ui64ARB_debug((program), (location), (x), __FILE__, __LINE__)
+void glatter_glProgramUniform1ui64ARB_debug(GLuint program, GLint location, GLuint64 x, const char* file, int line);
+#define glProgramUniform1ui64vARB(program, location, count, value) glatter_glProgramUniform1ui64vARB_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line);
+#define glProgramUniform2i64ARB(program, location, x, y) glatter_glProgramUniform2i64ARB_debug((program), (location), (x), (y), __FILE__, __LINE__)
+void glatter_glProgramUniform2i64ARB_debug(GLuint program, GLint location, GLint64 x, GLint64 y, const char* file, int line);
+#define glProgramUniform2i64vARB(program, location, count, value) glatter_glProgramUniform2i64vARB_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line);
+#define glProgramUniform2ui64ARB(program, location, x, y) glatter_glProgramUniform2ui64ARB_debug((program), (location), (x), (y), __FILE__, __LINE__)
+void glatter_glProgramUniform2ui64ARB_debug(GLuint program, GLint location, GLuint64 x, GLuint64 y, const char* file, int line);
+#define glProgramUniform2ui64vARB(program, location, count, value) glatter_glProgramUniform2ui64vARB_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line);
+#define glProgramUniform3i64ARB(program, location, x, y, z) glatter_glProgramUniform3i64ARB_debug((program), (location), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glProgramUniform3i64ARB_debug(GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, const char* file, int line);
+#define glProgramUniform3i64vARB(program, location, count, value) glatter_glProgramUniform3i64vARB_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line);
+#define glProgramUniform3ui64ARB(program, location, x, y, z) glatter_glProgramUniform3ui64ARB_debug((program), (location), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glProgramUniform3ui64ARB_debug(GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, const char* file, int line);
+#define glProgramUniform3ui64vARB(program, location, count, value) glatter_glProgramUniform3ui64vARB_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line);
+#define glProgramUniform4i64ARB(program, location, x, y, z, w) glatter_glProgramUniform4i64ARB_debug((program), (location), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glProgramUniform4i64ARB_debug(GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w, const char* file, int line);
+#define glProgramUniform4i64vARB(program, location, count, value) glatter_glProgramUniform4i64vARB_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line);
+#define glProgramUniform4ui64ARB(program, location, x, y, z, w) glatter_glProgramUniform4ui64ARB_debug((program), (location), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glProgramUniform4ui64ARB_debug(GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w, const char* file, int line);
+#define glProgramUniform4ui64vARB(program, location, count, value) glatter_glProgramUniform4ui64vARB_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line);
+#define glUniform1i64ARB(location, x) glatter_glUniform1i64ARB_debug((location), (x), __FILE__, __LINE__)
+void glatter_glUniform1i64ARB_debug(GLint location, GLint64 x, const char* file, int line);
+#define glUniform1i64vARB(location, count, value) glatter_glUniform1i64vARB_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform1i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line);
+#define glUniform1ui64ARB(location, x) glatter_glUniform1ui64ARB_debug((location), (x), __FILE__, __LINE__)
+void glatter_glUniform1ui64ARB_debug(GLint location, GLuint64 x, const char* file, int line);
+#define glUniform1ui64vARB(location, count, value) glatter_glUniform1ui64vARB_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform1ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line);
+#define glUniform2i64ARB(location, x, y) glatter_glUniform2i64ARB_debug((location), (x), (y), __FILE__, __LINE__)
+void glatter_glUniform2i64ARB_debug(GLint location, GLint64 x, GLint64 y, const char* file, int line);
+#define glUniform2i64vARB(location, count, value) glatter_glUniform2i64vARB_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform2i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line);
+#define glUniform2ui64ARB(location, x, y) glatter_glUniform2ui64ARB_debug((location), (x), (y), __FILE__, __LINE__)
+void glatter_glUniform2ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, const char* file, int line);
+#define glUniform2ui64vARB(location, count, value) glatter_glUniform2ui64vARB_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform2ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line);
+#define glUniform3i64ARB(location, x, y, z) glatter_glUniform3i64ARB_debug((location), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glUniform3i64ARB_debug(GLint location, GLint64 x, GLint64 y, GLint64 z, const char* file, int line);
+#define glUniform3i64vARB(location, count, value) glatter_glUniform3i64vARB_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform3i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line);
+#define glUniform3ui64ARB(location, x, y, z) glatter_glUniform3ui64ARB_debug((location), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glUniform3ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, GLuint64 z, const char* file, int line);
+#define glUniform3ui64vARB(location, count, value) glatter_glUniform3ui64vARB_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform3ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line);
+#define glUniform4i64ARB(location, x, y, z, w) glatter_glUniform4i64ARB_debug((location), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glUniform4i64ARB_debug(GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w, const char* file, int line);
+#define glUniform4i64vARB(location, count, value) glatter_glUniform4i64vARB_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform4i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line);
+#define glUniform4ui64ARB(location, x, y, z, w) glatter_glUniform4ui64ARB_debug((location), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glUniform4ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w, const char* file, int line);
+#define glUniform4ui64vARB(location, count, value) glatter_glUniform4ui64vARB_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform4ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line);
+#endif // defined(GL_ARB_gpu_shader_int64)
 #if defined(GL_ARB_indirect_parameters)
 #define glMultiDrawArraysIndirectCountARB(mode, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawArraysIndirectCountARB_debug((mode), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
-void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
 #define glMultiDrawElementsIndirectCountARB(mode, type, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawElementsIndirectCountARB_debug((mode), (type), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
-void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
 #endif // defined(GL_ARB_indirect_parameters)
+#if defined(GL_ARB_instanced_arrays)
+#define glVertexAttribDivisorARB(index, divisor) glatter_glVertexAttribDivisorARB_debug((index), (divisor), __FILE__, __LINE__)
+void glatter_glVertexAttribDivisorARB_debug(GLuint index, GLuint divisor, const char* file, int line);
+#endif // defined(GL_ARB_instanced_arrays)
+#if defined(GL_ARB_parallel_shader_compile)
+#define glMaxShaderCompilerThreadsARB(count) glatter_glMaxShaderCompilerThreadsARB_debug((count), __FILE__, __LINE__)
+void glatter_glMaxShaderCompilerThreadsARB_debug(GLuint count, const char* file, int line);
+#endif // defined(GL_ARB_parallel_shader_compile)
 #if defined(GL_ARB_robustness)
 #define glGetGraphicsResetStatusARB() glatter_glGetGraphicsResetStatusARB_debug(__FILE__, __LINE__)
 GLenum glatter_glGetGraphicsResetStatusARB_debug(const char* file, int line);
@@ -5239,6 +5345,14 @@ void glatter_glGetnUniformuivARB_debug(GLuint program, GLint location, GLsizei b
 #define glReadnPixelsARB(x, y, width, height, format, type, bufSize, data) glatter_glReadnPixelsARB_debug((x), (y), (width), (height), (format), (type), (bufSize), (data), __FILE__, __LINE__)
 void glatter_glReadnPixelsARB_debug(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data, const char* file, int line);
 #endif // defined(GL_ARB_robustness)
+#if defined(GL_ARB_sample_locations)
+#define glEvaluateDepthValuesARB() glatter_glEvaluateDepthValuesARB_debug(__FILE__, __LINE__)
+void glatter_glEvaluateDepthValuesARB_debug(const char* file, int line);
+#define glFramebufferSampleLocationsfvARB(target, start, count, v) glatter_glFramebufferSampleLocationsfvARB_debug((target), (start), (count), (v), __FILE__, __LINE__)
+void glatter_glFramebufferSampleLocationsfvARB_debug(GLenum target, GLuint start, GLsizei count, const GLfloat *v, const char* file, int line);
+#define glNamedFramebufferSampleLocationsfvARB(framebuffer, start, count, v) glatter_glNamedFramebufferSampleLocationsfvARB_debug((framebuffer), (start), (count), (v), __FILE__, __LINE__)
+void glatter_glNamedFramebufferSampleLocationsfvARB_debug(GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v, const char* file, int line);
+#endif // defined(GL_ARB_sample_locations)
 #if defined(GL_ARB_sample_shading)
 #define glMinSampleShadingARB(value) glatter_glMinSampleShadingARB_debug((value), __FILE__, __LINE__)
 void glatter_glMinSampleShadingARB_debug(GLfloat value, const char* file, int line);
@@ -5259,16 +5373,26 @@ void glatter_glNamedStringARB_debug(GLenum type, GLint namelen, const GLchar *na
 #endif // defined(GL_ARB_shading_language_include)
 #if defined(GL_ARB_sparse_buffer)
 #define glBufferPageCommitmentARB(target, offset, size, commit) glatter_glBufferPageCommitmentARB_debug((target), (offset), (size), (commit), __FILE__, __LINE__)
-void glatter_glBufferPageCommitmentARB_debug(GLenum target, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line);
+void glatter_glBufferPageCommitmentARB_debug(GLenum target, GLintptr offset, GLsizeiptr size, GLboolean commit, const char* file, int line);
 #define glNamedBufferPageCommitmentARB(buffer, offset, size, commit) glatter_glNamedBufferPageCommitmentARB_debug((buffer), (offset), (size), (commit), __FILE__, __LINE__)
-void glatter_glNamedBufferPageCommitmentARB_debug(GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line);
+void glatter_glNamedBufferPageCommitmentARB_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit, const char* file, int line);
 #define glNamedBufferPageCommitmentEXT(buffer, offset, size, commit) glatter_glNamedBufferPageCommitmentEXT_debug((buffer), (offset), (size), (commit), __FILE__, __LINE__)
-void glatter_glNamedBufferPageCommitmentEXT_debug(GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line);
+void glatter_glNamedBufferPageCommitmentEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit, const char* file, int line);
 #endif // defined(GL_ARB_sparse_buffer)
 #if defined(GL_ARB_sparse_texture)
-#define glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth, resident) glatter_glTexPageCommitmentARB_debug((target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (resident), __FILE__, __LINE__)
-void glatter_glTexPageCommitmentARB_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident, const char* file, int line);
+#define glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth, commit) glatter_glTexPageCommitmentARB_debug((target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (commit), __FILE__, __LINE__)
+void glatter_glTexPageCommitmentARB_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit, const char* file, int line);
 #endif // defined(GL_ARB_sparse_texture)
+#if defined(GL_ARB_texture_buffer_object)
+#define glTexBufferARB(target, internalformat, buffer) glatter_glTexBufferARB_debug((target), (internalformat), (buffer), __FILE__, __LINE__)
+void glatter_glTexBufferARB_debug(GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line);
+#endif // defined(GL_ARB_texture_buffer_object)
+#if defined(GL_EXT_EGL_image_storage)
+#define glEGLImageTargetTexStorageEXT(target, image, attrib_list) glatter_glEGLImageTargetTexStorageEXT_debug((target), (image), (attrib_list), __FILE__, __LINE__)
+void glatter_glEGLImageTargetTexStorageEXT_debug(GLenum target, GLeglImageOES image, const GLint* attrib_list, const char* file, int line);
+#define glEGLImageTargetTextureStorageEXT(texture, image, attrib_list) glatter_glEGLImageTargetTextureStorageEXT_debug((texture), (image), (attrib_list), __FILE__, __LINE__)
+void glatter_glEGLImageTargetTextureStorageEXT_debug(GLuint texture, GLeglImageOES image, const GLint* attrib_list, const char* file, int line);
+#endif // defined(GL_EXT_EGL_image_storage)
 #if defined(GL_EXT_debug_label)
 #define glGetObjectLabelEXT(type, object, bufSize, length, label) glatter_glGetObjectLabelEXT_debug((type), (object), (bufSize), (length), (label), __FILE__, __LINE__)
 void glatter_glGetObjectLabelEXT_debug(GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label, const char* file, int line);
@@ -5283,6 +5407,518 @@ void glatter_glPopGroupMarkerEXT_debug(const char* file, int line);
 #define glPushGroupMarkerEXT(length, marker) glatter_glPushGroupMarkerEXT_debug((length), (marker), __FILE__, __LINE__)
 void glatter_glPushGroupMarkerEXT_debug(GLsizei length, const GLchar *marker, const char* file, int line);
 #endif // defined(GL_EXT_debug_marker)
+#if defined(GL_EXT_direct_state_access)
+#define glBindMultiTextureEXT(texunit, target, texture) glatter_glBindMultiTextureEXT_debug((texunit), (target), (texture), __FILE__, __LINE__)
+void glatter_glBindMultiTextureEXT_debug(GLenum texunit, GLenum target, GLuint texture, const char* file, int line);
+#define glCheckNamedFramebufferStatusEXT(framebuffer, target) glatter_glCheckNamedFramebufferStatusEXT_debug((framebuffer), (target), __FILE__, __LINE__)
+GLenum glatter_glCheckNamedFramebufferStatusEXT_debug(GLuint framebuffer, GLenum target, const char* file, int line);
+#define glClearNamedBufferDataEXT(buffer, internalformat, format, type, data) glatter_glClearNamedBufferDataEXT_debug((buffer), (internalformat), (format), (type), (data), __FILE__, __LINE__)
+void glatter_glClearNamedBufferDataEXT_debug(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define glClearNamedBufferSubDataEXT(buffer, internalformat, offset, size, format, type, data) glatter_glClearNamedBufferSubDataEXT_debug((buffer), (internalformat), (offset), (size), (format), (type), (data), __FILE__, __LINE__)
+void glatter_glClearNamedBufferSubDataEXT_debug(GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define glClientAttribDefaultEXT(mask) glatter_glClientAttribDefaultEXT_debug((mask), __FILE__, __LINE__)
+void glatter_glClientAttribDefaultEXT_debug(GLbitfield mask, const char* file, int line);
+#define glCompressedMultiTexImage1DEXT(texunit, target, level, internalformat, width, border, imageSize, bits) glatter_glCompressedMultiTexImage1DEXT_debug((texunit), (target), (level), (internalformat), (width), (border), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedMultiTexImage2DEXT(texunit, target, level, internalformat, width, height, border, imageSize, bits) glatter_glCompressedMultiTexImage2DEXT_debug((texunit), (target), (level), (internalformat), (width), (height), (border), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedMultiTexImage3DEXT(texunit, target, level, internalformat, width, height, depth, border, imageSize, bits) glatter_glCompressedMultiTexImage3DEXT_debug((texunit), (target), (level), (internalformat), (width), (height), (depth), (border), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedMultiTexImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedMultiTexSubImage1DEXT(texunit, target, level, xoffset, width, format, imageSize, bits) glatter_glCompressedMultiTexSubImage1DEXT_debug((texunit), (target), (level), (xoffset), (width), (format), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedMultiTexSubImage2DEXT(texunit, target, level, xoffset, yoffset, width, height, format, imageSize, bits) glatter_glCompressedMultiTexSubImage2DEXT_debug((texunit), (target), (level), (xoffset), (yoffset), (width), (height), (format), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedMultiTexSubImage3DEXT(texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits) glatter_glCompressedMultiTexSubImage3DEXT_debug((texunit), (target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedTextureImage1DEXT(texture, target, level, internalformat, width, border, imageSize, bits) glatter_glCompressedTextureImage1DEXT_debug((texture), (target), (level), (internalformat), (width), (border), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedTextureImage2DEXT(texture, target, level, internalformat, width, height, border, imageSize, bits) glatter_glCompressedTextureImage2DEXT_debug((texture), (target), (level), (internalformat), (width), (height), (border), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedTextureImage3DEXT(texture, target, level, internalformat, width, height, depth, border, imageSize, bits) glatter_glCompressedTextureImage3DEXT_debug((texture), (target), (level), (internalformat), (width), (height), (depth), (border), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedTextureImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedTextureSubImage1DEXT(texture, target, level, xoffset, width, format, imageSize, bits) glatter_glCompressedTextureSubImage1DEXT_debug((texture), (target), (level), (xoffset), (width), (format), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedTextureSubImage2DEXT(texture, target, level, xoffset, yoffset, width, height, format, imageSize, bits) glatter_glCompressedTextureSubImage2DEXT_debug((texture), (target), (level), (xoffset), (yoffset), (width), (height), (format), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCompressedTextureSubImage3DEXT(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits) glatter_glCompressedTextureSubImage3DEXT_debug((texture), (target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (imageSize), (bits), __FILE__, __LINE__)
+void glatter_glCompressedTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line);
+#define glCopyMultiTexImage1DEXT(texunit, target, level, internalformat, x, y, width, border) glatter_glCopyMultiTexImage1DEXT_debug((texunit), (target), (level), (internalformat), (x), (y), (width), (border), __FILE__, __LINE__)
+void glatter_glCopyMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border, const char* file, int line);
+#define glCopyMultiTexImage2DEXT(texunit, target, level, internalformat, x, y, width, height, border) glatter_glCopyMultiTexImage2DEXT_debug((texunit), (target), (level), (internalformat), (x), (y), (width), (height), (border), __FILE__, __LINE__)
+void glatter_glCopyMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border, const char* file, int line);
+#define glCopyMultiTexSubImage1DEXT(texunit, target, level, xoffset, x, y, width) glatter_glCopyMultiTexSubImage1DEXT_debug((texunit), (target), (level), (xoffset), (x), (y), (width), __FILE__, __LINE__)
+void glatter_glCopyMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line);
+#define glCopyMultiTexSubImage2DEXT(texunit, target, level, xoffset, yoffset, x, y, width, height) glatter_glCopyMultiTexSubImage2DEXT_debug((texunit), (target), (level), (xoffset), (yoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glCopyMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glCopyMultiTexSubImage3DEXT(texunit, target, level, xoffset, yoffset, zoffset, x, y, width, height) glatter_glCopyMultiTexSubImage3DEXT_debug((texunit), (target), (level), (xoffset), (yoffset), (zoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glCopyMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glCopyTextureImage1DEXT(texture, target, level, internalformat, x, y, width, border) glatter_glCopyTextureImage1DEXT_debug((texture), (target), (level), (internalformat), (x), (y), (width), (border), __FILE__, __LINE__)
+void glatter_glCopyTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border, const char* file, int line);
+#define glCopyTextureImage2DEXT(texture, target, level, internalformat, x, y, width, height, border) glatter_glCopyTextureImage2DEXT_debug((texture), (target), (level), (internalformat), (x), (y), (width), (height), (border), __FILE__, __LINE__)
+void glatter_glCopyTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border, const char* file, int line);
+#define glCopyTextureSubImage1DEXT(texture, target, level, xoffset, x, y, width) glatter_glCopyTextureSubImage1DEXT_debug((texture), (target), (level), (xoffset), (x), (y), (width), __FILE__, __LINE__)
+void glatter_glCopyTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line);
+#define glCopyTextureSubImage2DEXT(texture, target, level, xoffset, yoffset, x, y, width, height) glatter_glCopyTextureSubImage2DEXT_debug((texture), (target), (level), (xoffset), (yoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glCopyTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glCopyTextureSubImage3DEXT(texture, target, level, xoffset, yoffset, zoffset, x, y, width, height) glatter_glCopyTextureSubImage3DEXT_debug((texture), (target), (level), (xoffset), (yoffset), (zoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glCopyTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glDisableClientStateIndexedEXT(array, index) glatter_glDisableClientStateIndexedEXT_debug((array), (index), __FILE__, __LINE__)
+void glatter_glDisableClientStateIndexedEXT_debug(GLenum array, GLuint index, const char* file, int line);
+#define glDisableClientStateiEXT(array, index) glatter_glDisableClientStateiEXT_debug((array), (index), __FILE__, __LINE__)
+void glatter_glDisableClientStateiEXT_debug(GLenum array, GLuint index, const char* file, int line);
+#define glDisableIndexedEXT(target, index) glatter_glDisableIndexedEXT_debug((target), (index), __FILE__, __LINE__)
+void glatter_glDisableIndexedEXT_debug(GLenum target, GLuint index, const char* file, int line);
+#define glDisableVertexArrayAttribEXT(vaobj, index) glatter_glDisableVertexArrayAttribEXT_debug((vaobj), (index), __FILE__, __LINE__)
+void glatter_glDisableVertexArrayAttribEXT_debug(GLuint vaobj, GLuint index, const char* file, int line);
+#define glDisableVertexArrayEXT(vaobj, array) glatter_glDisableVertexArrayEXT_debug((vaobj), (array), __FILE__, __LINE__)
+void glatter_glDisableVertexArrayEXT_debug(GLuint vaobj, GLenum array, const char* file, int line);
+#define glEnableClientStateIndexedEXT(array, index) glatter_glEnableClientStateIndexedEXT_debug((array), (index), __FILE__, __LINE__)
+void glatter_glEnableClientStateIndexedEXT_debug(GLenum array, GLuint index, const char* file, int line);
+#define glEnableClientStateiEXT(array, index) glatter_glEnableClientStateiEXT_debug((array), (index), __FILE__, __LINE__)
+void glatter_glEnableClientStateiEXT_debug(GLenum array, GLuint index, const char* file, int line);
+#define glEnableIndexedEXT(target, index) glatter_glEnableIndexedEXT_debug((target), (index), __FILE__, __LINE__)
+void glatter_glEnableIndexedEXT_debug(GLenum target, GLuint index, const char* file, int line);
+#define glEnableVertexArrayAttribEXT(vaobj, index) glatter_glEnableVertexArrayAttribEXT_debug((vaobj), (index), __FILE__, __LINE__)
+void glatter_glEnableVertexArrayAttribEXT_debug(GLuint vaobj, GLuint index, const char* file, int line);
+#define glEnableVertexArrayEXT(vaobj, array) glatter_glEnableVertexArrayEXT_debug((vaobj), (array), __FILE__, __LINE__)
+void glatter_glEnableVertexArrayEXT_debug(GLuint vaobj, GLenum array, const char* file, int line);
+#define glFlushMappedNamedBufferRangeEXT(buffer, offset, length) glatter_glFlushMappedNamedBufferRangeEXT_debug((buffer), (offset), (length), __FILE__, __LINE__)
+void glatter_glFlushMappedNamedBufferRangeEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, const char* file, int line);
+#define glFramebufferDrawBufferEXT(framebuffer, mode) glatter_glFramebufferDrawBufferEXT_debug((framebuffer), (mode), __FILE__, __LINE__)
+void glatter_glFramebufferDrawBufferEXT_debug(GLuint framebuffer, GLenum mode, const char* file, int line);
+#define glFramebufferDrawBuffersEXT(framebuffer, n, bufs) glatter_glFramebufferDrawBuffersEXT_debug((framebuffer), (n), (bufs), __FILE__, __LINE__)
+void glatter_glFramebufferDrawBuffersEXT_debug(GLuint framebuffer, GLsizei n, const GLenum *bufs, const char* file, int line);
+#define glFramebufferReadBufferEXT(framebuffer, mode) glatter_glFramebufferReadBufferEXT_debug((framebuffer), (mode), __FILE__, __LINE__)
+void glatter_glFramebufferReadBufferEXT_debug(GLuint framebuffer, GLenum mode, const char* file, int line);
+#define glGenerateMultiTexMipmapEXT(texunit, target) glatter_glGenerateMultiTexMipmapEXT_debug((texunit), (target), __FILE__, __LINE__)
+void glatter_glGenerateMultiTexMipmapEXT_debug(GLenum texunit, GLenum target, const char* file, int line);
+#define glGenerateTextureMipmapEXT(texture, target) glatter_glGenerateTextureMipmapEXT_debug((texture), (target), __FILE__, __LINE__)
+void glatter_glGenerateTextureMipmapEXT_debug(GLuint texture, GLenum target, const char* file, int line);
+#define glGetBooleanIndexedvEXT(target, index, data) glatter_glGetBooleanIndexedvEXT_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetBooleanIndexedvEXT_debug(GLenum target, GLuint index, GLboolean *data, const char* file, int line);
+#define glGetCompressedMultiTexImageEXT(texunit, target, lod, img) glatter_glGetCompressedMultiTexImageEXT_debug((texunit), (target), (lod), (img), __FILE__, __LINE__)
+void glatter_glGetCompressedMultiTexImageEXT_debug(GLenum texunit, GLenum target, GLint lod, void *img, const char* file, int line);
+#define glGetCompressedTextureImageEXT(texture, target, lod, img) glatter_glGetCompressedTextureImageEXT_debug((texture), (target), (lod), (img), __FILE__, __LINE__)
+void glatter_glGetCompressedTextureImageEXT_debug(GLuint texture, GLenum target, GLint lod, void *img, const char* file, int line);
+#define glGetDoubleIndexedvEXT(target, index, data) glatter_glGetDoubleIndexedvEXT_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetDoubleIndexedvEXT_debug(GLenum target, GLuint index, GLdouble *data, const char* file, int line);
+#define glGetDoublei_vEXT(pname, index, params) glatter_glGetDoublei_vEXT_debug((pname), (index), (params), __FILE__, __LINE__)
+void glatter_glGetDoublei_vEXT_debug(GLenum pname, GLuint index, GLdouble *params, const char* file, int line);
+#define glGetFloatIndexedvEXT(target, index, data) glatter_glGetFloatIndexedvEXT_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetFloatIndexedvEXT_debug(GLenum target, GLuint index, GLfloat *data, const char* file, int line);
+#define glGetFloati_vEXT(pname, index, params) glatter_glGetFloati_vEXT_debug((pname), (index), (params), __FILE__, __LINE__)
+void glatter_glGetFloati_vEXT_debug(GLenum pname, GLuint index, GLfloat *params, const char* file, int line);
+#define glGetFramebufferParameterivEXT(framebuffer, pname, params) glatter_glGetFramebufferParameterivEXT_debug((framebuffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetFramebufferParameterivEXT_debug(GLuint framebuffer, GLenum pname, GLint *params, const char* file, int line);
+#define glGetIntegerIndexedvEXT(target, index, data) glatter_glGetIntegerIndexedvEXT_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetIntegerIndexedvEXT_debug(GLenum target, GLuint index, GLint *data, const char* file, int line);
+#define glGetMultiTexEnvfvEXT(texunit, target, pname, params) glatter_glGetMultiTexEnvfvEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexEnvfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetMultiTexEnvivEXT(texunit, target, pname, params) glatter_glGetMultiTexEnvivEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexEnvivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetMultiTexGendvEXT(texunit, coord, pname, params) glatter_glGetMultiTexGendvEXT_debug((texunit), (coord), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexGendvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLdouble *params, const char* file, int line);
+#define glGetMultiTexGenfvEXT(texunit, coord, pname, params) glatter_glGetMultiTexGenfvEXT_debug((texunit), (coord), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexGenfvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetMultiTexGenivEXT(texunit, coord, pname, params) glatter_glGetMultiTexGenivEXT_debug((texunit), (coord), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexGenivEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLint *params, const char* file, int line);
+#define glGetMultiTexImageEXT(texunit, target, level, format, type, pixels) glatter_glGetMultiTexImageEXT_debug((texunit), (target), (level), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glGetMultiTexImageEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void *pixels, const char* file, int line);
+#define glGetMultiTexLevelParameterfvEXT(texunit, target, level, pname, params) glatter_glGetMultiTexLevelParameterfvEXT_debug((texunit), (target), (level), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexLevelParameterfvEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetMultiTexLevelParameterivEXT(texunit, target, level, pname, params) glatter_glGetMultiTexLevelParameterivEXT_debug((texunit), (target), (level), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexLevelParameterivEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum pname, GLint *params, const char* file, int line);
+#define glGetMultiTexParameterIivEXT(texunit, target, pname, params) glatter_glGetMultiTexParameterIivEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexParameterIivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetMultiTexParameterIuivEXT(texunit, target, pname, params) glatter_glGetMultiTexParameterIuivEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexParameterIuivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLuint *params, const char* file, int line);
+#define glGetMultiTexParameterfvEXT(texunit, target, pname, params) glatter_glGetMultiTexParameterfvEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexParameterfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetMultiTexParameterivEXT(texunit, target, pname, params) glatter_glGetMultiTexParameterivEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMultiTexParameterivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetNamedBufferParameterivEXT(buffer, pname, params) glatter_glGetNamedBufferParameterivEXT_debug((buffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedBufferParameterivEXT_debug(GLuint buffer, GLenum pname, GLint *params, const char* file, int line);
+#define glGetNamedBufferPointervEXT(buffer, pname, params) glatter_glGetNamedBufferPointervEXT_debug((buffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedBufferPointervEXT_debug(GLuint buffer, GLenum pname, void **params, const char* file, int line);
+#define glGetNamedBufferSubDataEXT(buffer, offset, size, data) glatter_glGetNamedBufferSubDataEXT_debug((buffer), (offset), (size), (data), __FILE__, __LINE__)
+void glatter_glGetNamedBufferSubDataEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, void *data, const char* file, int line);
+#define glGetNamedFramebufferAttachmentParameterivEXT(framebuffer, attachment, pname, params) glatter_glGetNamedFramebufferAttachmentParameterivEXT_debug((framebuffer), (attachment), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedFramebufferAttachmentParameterivEXT_debug(GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params, const char* file, int line);
+#define glGetNamedFramebufferParameterivEXT(framebuffer, pname, params) glatter_glGetNamedFramebufferParameterivEXT_debug((framebuffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedFramebufferParameterivEXT_debug(GLuint framebuffer, GLenum pname, GLint *params, const char* file, int line);
+#define glGetNamedProgramLocalParameterIivEXT(program, target, index, params) glatter_glGetNamedProgramLocalParameterIivEXT_debug((program), (target), (index), (params), __FILE__, __LINE__)
+void glatter_glGetNamedProgramLocalParameterIivEXT_debug(GLuint program, GLenum target, GLuint index, GLint *params, const char* file, int line);
+#define glGetNamedProgramLocalParameterIuivEXT(program, target, index, params) glatter_glGetNamedProgramLocalParameterIuivEXT_debug((program), (target), (index), (params), __FILE__, __LINE__)
+void glatter_glGetNamedProgramLocalParameterIuivEXT_debug(GLuint program, GLenum target, GLuint index, GLuint *params, const char* file, int line);
+#define glGetNamedProgramLocalParameterdvEXT(program, target, index, params) glatter_glGetNamedProgramLocalParameterdvEXT_debug((program), (target), (index), (params), __FILE__, __LINE__)
+void glatter_glGetNamedProgramLocalParameterdvEXT_debug(GLuint program, GLenum target, GLuint index, GLdouble *params, const char* file, int line);
+#define glGetNamedProgramLocalParameterfvEXT(program, target, index, params) glatter_glGetNamedProgramLocalParameterfvEXT_debug((program), (target), (index), (params), __FILE__, __LINE__)
+void glatter_glGetNamedProgramLocalParameterfvEXT_debug(GLuint program, GLenum target, GLuint index, GLfloat *params, const char* file, int line);
+#define glGetNamedProgramStringEXT(program, target, pname, string) glatter_glGetNamedProgramStringEXT_debug((program), (target), (pname), (string), __FILE__, __LINE__)
+void glatter_glGetNamedProgramStringEXT_debug(GLuint program, GLenum target, GLenum pname, void *string, const char* file, int line);
+#define glGetNamedProgramivEXT(program, target, pname, params) glatter_glGetNamedProgramivEXT_debug((program), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedProgramivEXT_debug(GLuint program, GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetNamedRenderbufferParameterivEXT(renderbuffer, pname, params) glatter_glGetNamedRenderbufferParameterivEXT_debug((renderbuffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedRenderbufferParameterivEXT_debug(GLuint renderbuffer, GLenum pname, GLint *params, const char* file, int line);
+#define glGetPointerIndexedvEXT(target, index, data) glatter_glGetPointerIndexedvEXT_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetPointerIndexedvEXT_debug(GLenum target, GLuint index, void **data, const char* file, int line);
+#define glGetPointeri_vEXT(pname, index, params) glatter_glGetPointeri_vEXT_debug((pname), (index), (params), __FILE__, __LINE__)
+void glatter_glGetPointeri_vEXT_debug(GLenum pname, GLuint index, void **params, const char* file, int line);
+#define glGetTextureImageEXT(texture, target, level, format, type, pixels) glatter_glGetTextureImageEXT_debug((texture), (target), (level), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glGetTextureImageEXT_debug(GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void *pixels, const char* file, int line);
+#define glGetTextureLevelParameterfvEXT(texture, target, level, pname, params) glatter_glGetTextureLevelParameterfvEXT_debug((texture), (target), (level), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureLevelParameterfvEXT_debug(GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetTextureLevelParameterivEXT(texture, target, level, pname, params) glatter_glGetTextureLevelParameterivEXT_debug((texture), (target), (level), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureLevelParameterivEXT_debug(GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params, const char* file, int line);
+#define glGetTextureParameterIivEXT(texture, target, pname, params) glatter_glGetTextureParameterIivEXT_debug((texture), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureParameterIivEXT_debug(GLuint texture, GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetTextureParameterIuivEXT(texture, target, pname, params) glatter_glGetTextureParameterIuivEXT_debug((texture), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureParameterIuivEXT_debug(GLuint texture, GLenum target, GLenum pname, GLuint *params, const char* file, int line);
+#define glGetTextureParameterfvEXT(texture, target, pname, params) glatter_glGetTextureParameterfvEXT_debug((texture), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureParameterfvEXT_debug(GLuint texture, GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetTextureParameterivEXT(texture, target, pname, params) glatter_glGetTextureParameterivEXT_debug((texture), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureParameterivEXT_debug(GLuint texture, GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetVertexArrayIntegeri_vEXT(vaobj, index, pname, param) glatter_glGetVertexArrayIntegeri_vEXT_debug((vaobj), (index), (pname), (param), __FILE__, __LINE__)
+void glatter_glGetVertexArrayIntegeri_vEXT_debug(GLuint vaobj, GLuint index, GLenum pname, GLint *param, const char* file, int line);
+#define glGetVertexArrayIntegervEXT(vaobj, pname, param) glatter_glGetVertexArrayIntegervEXT_debug((vaobj), (pname), (param), __FILE__, __LINE__)
+void glatter_glGetVertexArrayIntegervEXT_debug(GLuint vaobj, GLenum pname, GLint *param, const char* file, int line);
+#define glGetVertexArrayPointeri_vEXT(vaobj, index, pname, param) glatter_glGetVertexArrayPointeri_vEXT_debug((vaobj), (index), (pname), (param), __FILE__, __LINE__)
+void glatter_glGetVertexArrayPointeri_vEXT_debug(GLuint vaobj, GLuint index, GLenum pname, void **param, const char* file, int line);
+#define glGetVertexArrayPointervEXT(vaobj, pname, param) glatter_glGetVertexArrayPointervEXT_debug((vaobj), (pname), (param), __FILE__, __LINE__)
+void glatter_glGetVertexArrayPointervEXT_debug(GLuint vaobj, GLenum pname, void **param, const char* file, int line);
+#define glIsEnabledIndexedEXT(target, index) glatter_glIsEnabledIndexedEXT_debug((target), (index), __FILE__, __LINE__)
+GLboolean glatter_glIsEnabledIndexedEXT_debug(GLenum target, GLuint index, const char* file, int line);
+#define glMapNamedBufferEXT(buffer, access) glatter_glMapNamedBufferEXT_debug((buffer), (access), __FILE__, __LINE__)
+void * glatter_glMapNamedBufferEXT_debug(GLuint buffer, GLenum access, const char* file, int line);
+#define glMapNamedBufferRangeEXT(buffer, offset, length, access) glatter_glMapNamedBufferRangeEXT_debug((buffer), (offset), (length), (access), __FILE__, __LINE__)
+void * glatter_glMapNamedBufferRangeEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access, const char* file, int line);
+#define glMatrixFrustumEXT(mode, left, right, bottom, top, zNear, zFar) glatter_glMatrixFrustumEXT_debug((mode), (left), (right), (bottom), (top), (zNear), (zFar), __FILE__, __LINE__)
+void glatter_glMatrixFrustumEXT_debug(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar, const char* file, int line);
+#define glMatrixLoadIdentityEXT(mode) glatter_glMatrixLoadIdentityEXT_debug((mode), __FILE__, __LINE__)
+void glatter_glMatrixLoadIdentityEXT_debug(GLenum mode, const char* file, int line);
+#define glMatrixLoadTransposedEXT(mode, m) glatter_glMatrixLoadTransposedEXT_debug((mode), (m), __FILE__, __LINE__)
+void glatter_glMatrixLoadTransposedEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line);
+#define glMatrixLoadTransposefEXT(mode, m) glatter_glMatrixLoadTransposefEXT_debug((mode), (m), __FILE__, __LINE__)
+void glatter_glMatrixLoadTransposefEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line);
+#define glMatrixLoaddEXT(mode, m) glatter_glMatrixLoaddEXT_debug((mode), (m), __FILE__, __LINE__)
+void glatter_glMatrixLoaddEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line);
+#define glMatrixLoadfEXT(mode, m) glatter_glMatrixLoadfEXT_debug((mode), (m), __FILE__, __LINE__)
+void glatter_glMatrixLoadfEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line);
+#define glMatrixMultTransposedEXT(mode, m) glatter_glMatrixMultTransposedEXT_debug((mode), (m), __FILE__, __LINE__)
+void glatter_glMatrixMultTransposedEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line);
+#define glMatrixMultTransposefEXT(mode, m) glatter_glMatrixMultTransposefEXT_debug((mode), (m), __FILE__, __LINE__)
+void glatter_glMatrixMultTransposefEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line);
+#define glMatrixMultdEXT(mode, m) glatter_glMatrixMultdEXT_debug((mode), (m), __FILE__, __LINE__)
+void glatter_glMatrixMultdEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line);
+#define glMatrixMultfEXT(mode, m) glatter_glMatrixMultfEXT_debug((mode), (m), __FILE__, __LINE__)
+void glatter_glMatrixMultfEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line);
+#define glMatrixOrthoEXT(mode, left, right, bottom, top, zNear, zFar) glatter_glMatrixOrthoEXT_debug((mode), (left), (right), (bottom), (top), (zNear), (zFar), __FILE__, __LINE__)
+void glatter_glMatrixOrthoEXT_debug(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar, const char* file, int line);
+#define glMatrixPopEXT(mode) glatter_glMatrixPopEXT_debug((mode), __FILE__, __LINE__)
+void glatter_glMatrixPopEXT_debug(GLenum mode, const char* file, int line);
+#define glMatrixPushEXT(mode) glatter_glMatrixPushEXT_debug((mode), __FILE__, __LINE__)
+void glatter_glMatrixPushEXT_debug(GLenum mode, const char* file, int line);
+#define glMatrixRotatedEXT(mode, angle, x, y, z) glatter_glMatrixRotatedEXT_debug((mode), (angle), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glMatrixRotatedEXT_debug(GLenum mode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#define glMatrixRotatefEXT(mode, angle, x, y, z) glatter_glMatrixRotatefEXT_debug((mode), (angle), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glMatrixRotatefEXT_debug(GLenum mode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z, const char* file, int line);
+#define glMatrixScaledEXT(mode, x, y, z) glatter_glMatrixScaledEXT_debug((mode), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glMatrixScaledEXT_debug(GLenum mode, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#define glMatrixScalefEXT(mode, x, y, z) glatter_glMatrixScalefEXT_debug((mode), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glMatrixScalefEXT_debug(GLenum mode, GLfloat x, GLfloat y, GLfloat z, const char* file, int line);
+#define glMatrixTranslatedEXT(mode, x, y, z) glatter_glMatrixTranslatedEXT_debug((mode), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glMatrixTranslatedEXT_debug(GLenum mode, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#define glMatrixTranslatefEXT(mode, x, y, z) glatter_glMatrixTranslatefEXT_debug((mode), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glMatrixTranslatefEXT_debug(GLenum mode, GLfloat x, GLfloat y, GLfloat z, const char* file, int line);
+#define glMultiTexBufferEXT(texunit, target, internalformat, buffer) glatter_glMultiTexBufferEXT_debug((texunit), (target), (internalformat), (buffer), __FILE__, __LINE__)
+void glatter_glMultiTexBufferEXT_debug(GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line);
+#define glMultiTexCoordPointerEXT(texunit, size, type, stride, pointer) glatter_glMultiTexCoordPointerEXT_debug((texunit), (size), (type), (stride), (pointer), __FILE__, __LINE__)
+void glatter_glMultiTexCoordPointerEXT_debug(GLenum texunit, GLint size, GLenum type, GLsizei stride, const void *pointer, const char* file, int line);
+#define glMultiTexEnvfEXT(texunit, target, pname, param) glatter_glMultiTexEnvfEXT_debug((texunit), (target), (pname), (param), __FILE__, __LINE__)
+void glatter_glMultiTexEnvfEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat param, const char* file, int line);
+#define glMultiTexEnvfvEXT(texunit, target, pname, params) glatter_glMultiTexEnvfvEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glMultiTexEnvfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLfloat *params, const char* file, int line);
+#define glMultiTexEnviEXT(texunit, target, pname, param) glatter_glMultiTexEnviEXT_debug((texunit), (target), (pname), (param), __FILE__, __LINE__)
+void glatter_glMultiTexEnviEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint param, const char* file, int line);
+#define glMultiTexEnvivEXT(texunit, target, pname, params) glatter_glMultiTexEnvivEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glMultiTexEnvivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#define glMultiTexGendEXT(texunit, coord, pname, param) glatter_glMultiTexGendEXT_debug((texunit), (coord), (pname), (param), __FILE__, __LINE__)
+void glatter_glMultiTexGendEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLdouble param, const char* file, int line);
+#define glMultiTexGendvEXT(texunit, coord, pname, params) glatter_glMultiTexGendvEXT_debug((texunit), (coord), (pname), (params), __FILE__, __LINE__)
+void glatter_glMultiTexGendvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params, const char* file, int line);
+#define glMultiTexGenfEXT(texunit, coord, pname, param) glatter_glMultiTexGenfEXT_debug((texunit), (coord), (pname), (param), __FILE__, __LINE__)
+void glatter_glMultiTexGenfEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLfloat param, const char* file, int line);
+#define glMultiTexGenfvEXT(texunit, coord, pname, params) glatter_glMultiTexGenfvEXT_debug((texunit), (coord), (pname), (params), __FILE__, __LINE__)
+void glatter_glMultiTexGenfvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params, const char* file, int line);
+#define glMultiTexGeniEXT(texunit, coord, pname, param) glatter_glMultiTexGeniEXT_debug((texunit), (coord), (pname), (param), __FILE__, __LINE__)
+void glatter_glMultiTexGeniEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLint param, const char* file, int line);
+#define glMultiTexGenivEXT(texunit, coord, pname, params) glatter_glMultiTexGenivEXT_debug((texunit), (coord), (pname), (params), __FILE__, __LINE__)
+void glatter_glMultiTexGenivEXT_debug(GLenum texunit, GLenum coord, GLenum pname, const GLint *params, const char* file, int line);
+#define glMultiTexImage1DEXT(texunit, target, level, internalformat, width, border, format, type, pixels) glatter_glMultiTexImage1DEXT_debug((texunit), (target), (level), (internalformat), (width), (border), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glMultiTexImage2DEXT(texunit, target, level, internalformat, width, height, border, format, type, pixels) glatter_glMultiTexImage2DEXT_debug((texunit), (target), (level), (internalformat), (width), (height), (border), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glMultiTexImage3DEXT(texunit, target, level, internalformat, width, height, depth, border, format, type, pixels) glatter_glMultiTexImage3DEXT_debug((texunit), (target), (level), (internalformat), (width), (height), (depth), (border), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glMultiTexImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glMultiTexParameterIivEXT(texunit, target, pname, params) glatter_glMultiTexParameterIivEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glMultiTexParameterIivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#define glMultiTexParameterIuivEXT(texunit, target, pname, params) glatter_glMultiTexParameterIuivEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glMultiTexParameterIuivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLuint *params, const char* file, int line);
+#define glMultiTexParameterfEXT(texunit, target, pname, param) glatter_glMultiTexParameterfEXT_debug((texunit), (target), (pname), (param), __FILE__, __LINE__)
+void glatter_glMultiTexParameterfEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat param, const char* file, int line);
+#define glMultiTexParameterfvEXT(texunit, target, pname, params) glatter_glMultiTexParameterfvEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glMultiTexParameterfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLfloat *params, const char* file, int line);
+#define glMultiTexParameteriEXT(texunit, target, pname, param) glatter_glMultiTexParameteriEXT_debug((texunit), (target), (pname), (param), __FILE__, __LINE__)
+void glatter_glMultiTexParameteriEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint param, const char* file, int line);
+#define glMultiTexParameterivEXT(texunit, target, pname, params) glatter_glMultiTexParameterivEXT_debug((texunit), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glMultiTexParameterivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#define glMultiTexRenderbufferEXT(texunit, target, renderbuffer) glatter_glMultiTexRenderbufferEXT_debug((texunit), (target), (renderbuffer), __FILE__, __LINE__)
+void glatter_glMultiTexRenderbufferEXT_debug(GLenum texunit, GLenum target, GLuint renderbuffer, const char* file, int line);
+#define glMultiTexSubImage1DEXT(texunit, target, level, xoffset, width, format, type, pixels) glatter_glMultiTexSubImage1DEXT_debug((texunit), (target), (level), (xoffset), (width), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glMultiTexSubImage2DEXT(texunit, target, level, xoffset, yoffset, width, height, format, type, pixels) glatter_glMultiTexSubImage2DEXT_debug((texunit), (target), (level), (xoffset), (yoffset), (width), (height), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glMultiTexSubImage3DEXT(texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) glatter_glMultiTexSubImage3DEXT_debug((texunit), (target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glNamedBufferDataEXT(buffer, size, data, usage) glatter_glNamedBufferDataEXT_debug((buffer), (size), (data), (usage), __FILE__, __LINE__)
+void glatter_glNamedBufferDataEXT_debug(GLuint buffer, GLsizeiptr size, const void *data, GLenum usage, const char* file, int line);
+#define glNamedBufferStorageEXT(buffer, size, data, flags) glatter_glNamedBufferStorageEXT_debug((buffer), (size), (data), (flags), __FILE__, __LINE__)
+void glatter_glNamedBufferStorageEXT_debug(GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags, const char* file, int line);
+#define glNamedBufferSubDataEXT(buffer, offset, size, data) glatter_glNamedBufferSubDataEXT_debug((buffer), (offset), (size), (data), __FILE__, __LINE__)
+void glatter_glNamedBufferSubDataEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line);
+#define glNamedCopyBufferSubDataEXT(readBuffer, writeBuffer, readOffset, writeOffset, size) glatter_glNamedCopyBufferSubDataEXT_debug((readBuffer), (writeBuffer), (readOffset), (writeOffset), (size), __FILE__, __LINE__)
+void glatter_glNamedCopyBufferSubDataEXT_debug(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line);
+#define glNamedFramebufferParameteriEXT(framebuffer, pname, param) glatter_glNamedFramebufferParameteriEXT_debug((framebuffer), (pname), (param), __FILE__, __LINE__)
+void glatter_glNamedFramebufferParameteriEXT_debug(GLuint framebuffer, GLenum pname, GLint param, const char* file, int line);
+#define glNamedFramebufferRenderbufferEXT(framebuffer, attachment, renderbuffertarget, renderbuffer) glatter_glNamedFramebufferRenderbufferEXT_debug((framebuffer), (attachment), (renderbuffertarget), (renderbuffer), __FILE__, __LINE__)
+void glatter_glNamedFramebufferRenderbufferEXT_debug(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer, const char* file, int line);
+#define glNamedFramebufferTexture1DEXT(framebuffer, attachment, textarget, texture, level) glatter_glNamedFramebufferTexture1DEXT_debug((framebuffer), (attachment), (textarget), (texture), (level), __FILE__, __LINE__)
+void glatter_glNamedFramebufferTexture1DEXT_debug(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line);
+#define glNamedFramebufferTexture2DEXT(framebuffer, attachment, textarget, texture, level) glatter_glNamedFramebufferTexture2DEXT_debug((framebuffer), (attachment), (textarget), (texture), (level), __FILE__, __LINE__)
+void glatter_glNamedFramebufferTexture2DEXT_debug(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line);
+#define glNamedFramebufferTexture3DEXT(framebuffer, attachment, textarget, texture, level, zoffset) glatter_glNamedFramebufferTexture3DEXT_debug((framebuffer), (attachment), (textarget), (texture), (level), (zoffset), __FILE__, __LINE__)
+void glatter_glNamedFramebufferTexture3DEXT_debug(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset, const char* file, int line);
+#define glNamedFramebufferTextureEXT(framebuffer, attachment, texture, level) glatter_glNamedFramebufferTextureEXT_debug((framebuffer), (attachment), (texture), (level), __FILE__, __LINE__)
+void glatter_glNamedFramebufferTextureEXT_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, const char* file, int line);
+#define glNamedFramebufferTextureFaceEXT(framebuffer, attachment, texture, level, face) glatter_glNamedFramebufferTextureFaceEXT_debug((framebuffer), (attachment), (texture), (level), (face), __FILE__, __LINE__)
+void glatter_glNamedFramebufferTextureFaceEXT_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face, const char* file, int line);
+#define glNamedFramebufferTextureLayerEXT(framebuffer, attachment, texture, level, layer) glatter_glNamedFramebufferTextureLayerEXT_debug((framebuffer), (attachment), (texture), (level), (layer), __FILE__, __LINE__)
+void glatter_glNamedFramebufferTextureLayerEXT_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line);
+#define glNamedProgramLocalParameter4dEXT(program, target, index, x, y, z, w) glatter_glNamedProgramLocalParameter4dEXT_debug((program), (target), (index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParameter4dEXT_debug(GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line);
+#define glNamedProgramLocalParameter4dvEXT(program, target, index, params) glatter_glNamedProgramLocalParameter4dvEXT_debug((program), (target), (index), (params), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParameter4dvEXT_debug(GLuint program, GLenum target, GLuint index, const GLdouble *params, const char* file, int line);
+#define glNamedProgramLocalParameter4fEXT(program, target, index, x, y, z, w) glatter_glNamedProgramLocalParameter4fEXT_debug((program), (target), (index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParameter4fEXT_debug(GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w, const char* file, int line);
+#define glNamedProgramLocalParameter4fvEXT(program, target, index, params) glatter_glNamedProgramLocalParameter4fvEXT_debug((program), (target), (index), (params), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParameter4fvEXT_debug(GLuint program, GLenum target, GLuint index, const GLfloat *params, const char* file, int line);
+#define glNamedProgramLocalParameterI4iEXT(program, target, index, x, y, z, w) glatter_glNamedProgramLocalParameterI4iEXT_debug((program), (target), (index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParameterI4iEXT_debug(GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w, const char* file, int line);
+#define glNamedProgramLocalParameterI4ivEXT(program, target, index, params) glatter_glNamedProgramLocalParameterI4ivEXT_debug((program), (target), (index), (params), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParameterI4ivEXT_debug(GLuint program, GLenum target, GLuint index, const GLint *params, const char* file, int line);
+#define glNamedProgramLocalParameterI4uiEXT(program, target, index, x, y, z, w) glatter_glNamedProgramLocalParameterI4uiEXT_debug((program), (target), (index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParameterI4uiEXT_debug(GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w, const char* file, int line);
+#define glNamedProgramLocalParameterI4uivEXT(program, target, index, params) glatter_glNamedProgramLocalParameterI4uivEXT_debug((program), (target), (index), (params), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParameterI4uivEXT_debug(GLuint program, GLenum target, GLuint index, const GLuint *params, const char* file, int line);
+#define glNamedProgramLocalParameters4fvEXT(program, target, index, count, params) glatter_glNamedProgramLocalParameters4fvEXT_debug((program), (target), (index), (count), (params), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParameters4fvEXT_debug(GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat *params, const char* file, int line);
+#define glNamedProgramLocalParametersI4ivEXT(program, target, index, count, params) glatter_glNamedProgramLocalParametersI4ivEXT_debug((program), (target), (index), (count), (params), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParametersI4ivEXT_debug(GLuint program, GLenum target, GLuint index, GLsizei count, const GLint *params, const char* file, int line);
+#define glNamedProgramLocalParametersI4uivEXT(program, target, index, count, params) glatter_glNamedProgramLocalParametersI4uivEXT_debug((program), (target), (index), (count), (params), __FILE__, __LINE__)
+void glatter_glNamedProgramLocalParametersI4uivEXT_debug(GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint *params, const char* file, int line);
+#define glNamedProgramStringEXT(program, target, format, len, string) glatter_glNamedProgramStringEXT_debug((program), (target), (format), (len), (string), __FILE__, __LINE__)
+void glatter_glNamedProgramStringEXT_debug(GLuint program, GLenum target, GLenum format, GLsizei len, const void *string, const char* file, int line);
+#define glNamedRenderbufferStorageEXT(renderbuffer, internalformat, width, height) glatter_glNamedRenderbufferStorageEXT_debug((renderbuffer), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glNamedRenderbufferStorageEXT_debug(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glNamedRenderbufferStorageMultisampleCoverageEXT(renderbuffer, coverageSamples, colorSamples, internalformat, width, height) glatter_glNamedRenderbufferStorageMultisampleCoverageEXT_debug((renderbuffer), (coverageSamples), (colorSamples), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glNamedRenderbufferStorageMultisampleCoverageEXT_debug(GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glNamedRenderbufferStorageMultisampleEXT(renderbuffer, samples, internalformat, width, height) glatter_glNamedRenderbufferStorageMultisampleEXT_debug((renderbuffer), (samples), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glNamedRenderbufferStorageMultisampleEXT_debug(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glProgramUniform1dEXT(program, location, x) glatter_glProgramUniform1dEXT_debug((program), (location), (x), __FILE__, __LINE__)
+void glatter_glProgramUniform1dEXT_debug(GLuint program, GLint location, GLdouble x, const char* file, int line);
+#define glProgramUniform1dvEXT(program, location, count, value) glatter_glProgramUniform1dvEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glProgramUniform1fEXT(program, location, v0) glatter_glProgramUniform1fEXT_debug((program), (location), (v0), __FILE__, __LINE__)
+void glatter_glProgramUniform1fEXT_debug(GLuint program, GLint location, GLfloat v0, const char* file, int line);
+#define glProgramUniform1fvEXT(program, location, count, value) glatter_glProgramUniform1fvEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1fvEXT_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glProgramUniform1iEXT(program, location, v0) glatter_glProgramUniform1iEXT_debug((program), (location), (v0), __FILE__, __LINE__)
+void glatter_glProgramUniform1iEXT_debug(GLuint program, GLint location, GLint v0, const char* file, int line);
+#define glProgramUniform1ivEXT(program, location, count, value) glatter_glProgramUniform1ivEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1ivEXT_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glProgramUniform1uiEXT(program, location, v0) glatter_glProgramUniform1uiEXT_debug((program), (location), (v0), __FILE__, __LINE__)
+void glatter_glProgramUniform1uiEXT_debug(GLuint program, GLint location, GLuint v0, const char* file, int line);
+#define glProgramUniform1uivEXT(program, location, count, value) glatter_glProgramUniform1uivEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1uivEXT_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glProgramUniform2dEXT(program, location, x, y) glatter_glProgramUniform2dEXT_debug((program), (location), (x), (y), __FILE__, __LINE__)
+void glatter_glProgramUniform2dEXT_debug(GLuint program, GLint location, GLdouble x, GLdouble y, const char* file, int line);
+#define glProgramUniform2dvEXT(program, location, count, value) glatter_glProgramUniform2dvEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glProgramUniform2fEXT(program, location, v0, v1) glatter_glProgramUniform2fEXT_debug((program), (location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glProgramUniform2fEXT_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, const char* file, int line);
+#define glProgramUniform2fvEXT(program, location, count, value) glatter_glProgramUniform2fvEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2fvEXT_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glProgramUniform2iEXT(program, location, v0, v1) glatter_glProgramUniform2iEXT_debug((program), (location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glProgramUniform2iEXT_debug(GLuint program, GLint location, GLint v0, GLint v1, const char* file, int line);
+#define glProgramUniform2ivEXT(program, location, count, value) glatter_glProgramUniform2ivEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2ivEXT_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glProgramUniform2uiEXT(program, location, v0, v1) glatter_glProgramUniform2uiEXT_debug((program), (location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glProgramUniform2uiEXT_debug(GLuint program, GLint location, GLuint v0, GLuint v1, const char* file, int line);
+#define glProgramUniform2uivEXT(program, location, count, value) glatter_glProgramUniform2uivEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2uivEXT_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glProgramUniform3dEXT(program, location, x, y, z) glatter_glProgramUniform3dEXT_debug((program), (location), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glProgramUniform3dEXT_debug(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#define glProgramUniform3dvEXT(program, location, count, value) glatter_glProgramUniform3dvEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glProgramUniform3fEXT(program, location, v0, v1, v2) glatter_glProgramUniform3fEXT_debug((program), (location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glProgramUniform3fEXT_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, const char* file, int line);
+#define glProgramUniform3fvEXT(program, location, count, value) glatter_glProgramUniform3fvEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3fvEXT_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glProgramUniform3iEXT(program, location, v0, v1, v2) glatter_glProgramUniform3iEXT_debug((program), (location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glProgramUniform3iEXT_debug(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, const char* file, int line);
+#define glProgramUniform3ivEXT(program, location, count, value) glatter_glProgramUniform3ivEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3ivEXT_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glProgramUniform3uiEXT(program, location, v0, v1, v2) glatter_glProgramUniform3uiEXT_debug((program), (location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glProgramUniform3uiEXT_debug(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, const char* file, int line);
+#define glProgramUniform3uivEXT(program, location, count, value) glatter_glProgramUniform3uivEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3uivEXT_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glProgramUniform4dEXT(program, location, x, y, z, w) glatter_glProgramUniform4dEXT_debug((program), (location), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glProgramUniform4dEXT_debug(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line);
+#define glProgramUniform4dvEXT(program, location, count, value) glatter_glProgramUniform4dvEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glProgramUniform4fEXT(program, location, v0, v1, v2, v3) glatter_glProgramUniform4fEXT_debug((program), (location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glProgramUniform4fEXT_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3, const char* file, int line);
+#define glProgramUniform4fvEXT(program, location, count, value) glatter_glProgramUniform4fvEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4fvEXT_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glProgramUniform4iEXT(program, location, v0, v1, v2, v3) glatter_glProgramUniform4iEXT_debug((program), (location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glProgramUniform4iEXT_debug(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3, const char* file, int line);
+#define glProgramUniform4ivEXT(program, location, count, value) glatter_glProgramUniform4ivEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4ivEXT_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glProgramUniform4uiEXT(program, location, v0, v1, v2, v3) glatter_glProgramUniform4uiEXT_debug((program), (location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glProgramUniform4uiEXT_debug(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3, const char* file, int line);
+#define glProgramUniform4uivEXT(program, location, count, value) glatter_glProgramUniform4uivEXT_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4uivEXT_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glProgramUniformMatrix2dvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix2dvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix2fvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix2fvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix2x3dvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix2x3dvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2x3dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix2x3fvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix2x3fvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2x3fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix2x4dvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix2x4dvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2x4dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix2x4fvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix2x4fvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2x4fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix3dvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix3dvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix3fvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix3fvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix3x2dvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix3x2dvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3x2dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix3x2fvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix3x2fvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3x2fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix3x4dvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix3x4dvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3x4dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix3x4fvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix3x4fvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3x4fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix4dvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix4dvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix4fvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix4fvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix4x2dvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x2dvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4x2dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix4x2fvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x2fvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4x2fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix4x3dvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x3dvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4x3dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix4x3fvEXT(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x3fvEXT_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4x3fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glPushClientAttribDefaultEXT(mask) glatter_glPushClientAttribDefaultEXT_debug((mask), __FILE__, __LINE__)
+void glatter_glPushClientAttribDefaultEXT_debug(GLbitfield mask, const char* file, int line);
+#define glTextureBufferEXT(texture, target, internalformat, buffer) glatter_glTextureBufferEXT_debug((texture), (target), (internalformat), (buffer), __FILE__, __LINE__)
+void glatter_glTextureBufferEXT_debug(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line);
+#define glTextureBufferRangeEXT(texture, target, internalformat, buffer, offset, size) glatter_glTextureBufferRangeEXT_debug((texture), (target), (internalformat), (buffer), (offset), (size), __FILE__, __LINE__)
+void glatter_glTextureBufferRangeEXT_debug(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line);
+#define glTextureImage1DEXT(texture, target, level, internalformat, width, border, format, type, pixels) glatter_glTextureImage1DEXT_debug((texture), (target), (level), (internalformat), (width), (border), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTextureImage2DEXT(texture, target, level, internalformat, width, height, border, format, type, pixels) glatter_glTextureImage2DEXT_debug((texture), (target), (level), (internalformat), (width), (height), (border), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTextureImage3DEXT(texture, target, level, internalformat, width, height, depth, border, format, type, pixels) glatter_glTextureImage3DEXT_debug((texture), (target), (level), (internalformat), (width), (height), (depth), (border), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTextureImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTexturePageCommitmentEXT(texture, level, xoffset, yoffset, zoffset, width, height, depth, commit) glatter_glTexturePageCommitmentEXT_debug((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (commit), __FILE__, __LINE__)
+void glatter_glTexturePageCommitmentEXT_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit, const char* file, int line);
+#define glTextureParameterIivEXT(texture, target, pname, params) glatter_glTextureParameterIivEXT_debug((texture), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glTextureParameterIivEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#define glTextureParameterIuivEXT(texture, target, pname, params) glatter_glTextureParameterIuivEXT_debug((texture), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glTextureParameterIuivEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLuint *params, const char* file, int line);
+#define glTextureParameterfEXT(texture, target, pname, param) glatter_glTextureParameterfEXT_debug((texture), (target), (pname), (param), __FILE__, __LINE__)
+void glatter_glTextureParameterfEXT_debug(GLuint texture, GLenum target, GLenum pname, GLfloat param, const char* file, int line);
+#define glTextureParameterfvEXT(texture, target, pname, params) glatter_glTextureParameterfvEXT_debug((texture), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glTextureParameterfvEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLfloat *params, const char* file, int line);
+#define glTextureParameteriEXT(texture, target, pname, param) glatter_glTextureParameteriEXT_debug((texture), (target), (pname), (param), __FILE__, __LINE__)
+void glatter_glTextureParameteriEXT_debug(GLuint texture, GLenum target, GLenum pname, GLint param, const char* file, int line);
+#define glTextureParameterivEXT(texture, target, pname, params) glatter_glTextureParameterivEXT_debug((texture), (target), (pname), (params), __FILE__, __LINE__)
+void glatter_glTextureParameterivEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#define glTextureRenderbufferEXT(texture, target, renderbuffer) glatter_glTextureRenderbufferEXT_debug((texture), (target), (renderbuffer), __FILE__, __LINE__)
+void glatter_glTextureRenderbufferEXT_debug(GLuint texture, GLenum target, GLuint renderbuffer, const char* file, int line);
+#define glTextureStorage1DEXT(texture, target, levels, internalformat, width) glatter_glTextureStorage1DEXT_debug((texture), (target), (levels), (internalformat), (width), __FILE__, __LINE__)
+void glatter_glTextureStorage1DEXT_debug(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, const char* file, int line);
+#define glTextureStorage2DEXT(texture, target, levels, internalformat, width, height) glatter_glTextureStorage2DEXT_debug((texture), (target), (levels), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glTextureStorage2DEXT_debug(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glTextureStorage2DMultisampleEXT(texture, target, samples, internalformat, width, height, fixedsamplelocations) glatter_glTextureStorage2DMultisampleEXT_debug((texture), (target), (samples), (internalformat), (width), (height), (fixedsamplelocations), __FILE__, __LINE__)
+void glatter_glTextureStorage2DMultisampleEXT_debug(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations, const char* file, int line);
+#define glTextureStorage3DEXT(texture, target, levels, internalformat, width, height, depth) glatter_glTextureStorage3DEXT_debug((texture), (target), (levels), (internalformat), (width), (height), (depth), __FILE__, __LINE__)
+void glatter_glTextureStorage3DEXT_debug(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line);
+#define glTextureStorage3DMultisampleEXT(texture, target, samples, internalformat, width, height, depth, fixedsamplelocations) glatter_glTextureStorage3DMultisampleEXT_debug((texture), (target), (samples), (internalformat), (width), (height), (depth), (fixedsamplelocations), __FILE__, __LINE__)
+void glatter_glTextureStorage3DMultisampleEXT_debug(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations, const char* file, int line);
+#define glTextureSubImage1DEXT(texture, target, level, xoffset, width, format, type, pixels) glatter_glTextureSubImage1DEXT_debug((texture), (target), (level), (xoffset), (width), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTextureSubImage2DEXT(texture, target, level, xoffset, yoffset, width, height, format, type, pixels) glatter_glTextureSubImage2DEXT_debug((texture), (target), (level), (xoffset), (yoffset), (width), (height), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTextureSubImage3DEXT(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) glatter_glTextureSubImage3DEXT_debug((texture), (target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glUnmapNamedBufferEXT(buffer) glatter_glUnmapNamedBufferEXT_debug((buffer), __FILE__, __LINE__)
+GLboolean glatter_glUnmapNamedBufferEXT_debug(GLuint buffer, const char* file, int line);
+#define glVertexArrayBindVertexBufferEXT(vaobj, bindingindex, buffer, offset, stride) glatter_glVertexArrayBindVertexBufferEXT_debug((vaobj), (bindingindex), (buffer), (offset), (stride), __FILE__, __LINE__)
+void glatter_glVertexArrayBindVertexBufferEXT_debug(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride, const char* file, int line);
+#define glVertexArrayColorOffsetEXT(vaobj, buffer, size, type, stride, offset) glatter_glVertexArrayColorOffsetEXT_debug((vaobj), (buffer), (size), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayColorOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayEdgeFlagOffsetEXT(vaobj, buffer, stride, offset) glatter_glVertexArrayEdgeFlagOffsetEXT_debug((vaobj), (buffer), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayEdgeFlagOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayFogCoordOffsetEXT(vaobj, buffer, type, stride, offset) glatter_glVertexArrayFogCoordOffsetEXT_debug((vaobj), (buffer), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayFogCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayIndexOffsetEXT(vaobj, buffer, type, stride, offset) glatter_glVertexArrayIndexOffsetEXT_debug((vaobj), (buffer), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayIndexOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayMultiTexCoordOffsetEXT(vaobj, buffer, texunit, size, type, stride, offset) glatter_glVertexArrayMultiTexCoordOffsetEXT_debug((vaobj), (buffer), (texunit), (size), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayMultiTexCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayNormalOffsetEXT(vaobj, buffer, type, stride, offset) glatter_glVertexArrayNormalOffsetEXT_debug((vaobj), (buffer), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayNormalOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArraySecondaryColorOffsetEXT(vaobj, buffer, size, type, stride, offset) glatter_glVertexArraySecondaryColorOffsetEXT_debug((vaobj), (buffer), (size), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArraySecondaryColorOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayTexCoordOffsetEXT(vaobj, buffer, size, type, stride, offset) glatter_glVertexArrayTexCoordOffsetEXT_debug((vaobj), (buffer), (size), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayTexCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayVertexAttribBindingEXT(vaobj, attribindex, bindingindex) glatter_glVertexArrayVertexAttribBindingEXT_debug((vaobj), (attribindex), (bindingindex), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexAttribBindingEXT_debug(GLuint vaobj, GLuint attribindex, GLuint bindingindex, const char* file, int line);
+#define glVertexArrayVertexAttribDivisorEXT(vaobj, index, divisor) glatter_glVertexArrayVertexAttribDivisorEXT_debug((vaobj), (index), (divisor), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexAttribDivisorEXT_debug(GLuint vaobj, GLuint index, GLuint divisor, const char* file, int line);
+#define glVertexArrayVertexAttribFormatEXT(vaobj, attribindex, size, type, normalized, relativeoffset) glatter_glVertexArrayVertexAttribFormatEXT_debug((vaobj), (attribindex), (size), (type), (normalized), (relativeoffset), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexAttribFormatEXT_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset, const char* file, int line);
+#define glVertexArrayVertexAttribIFormatEXT(vaobj, attribindex, size, type, relativeoffset) glatter_glVertexArrayVertexAttribIFormatEXT_debug((vaobj), (attribindex), (size), (type), (relativeoffset), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexAttribIFormatEXT_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line);
+#define glVertexArrayVertexAttribIOffsetEXT(vaobj, buffer, index, size, type, stride, offset) glatter_glVertexArrayVertexAttribIOffsetEXT_debug((vaobj), (buffer), (index), (size), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexAttribIOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayVertexAttribLFormatEXT(vaobj, attribindex, size, type, relativeoffset) glatter_glVertexArrayVertexAttribLFormatEXT_debug((vaobj), (attribindex), (size), (type), (relativeoffset), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexAttribLFormatEXT_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line);
+#define glVertexArrayVertexAttribLOffsetEXT(vaobj, buffer, index, size, type, stride, offset) glatter_glVertexArrayVertexAttribLOffsetEXT_debug((vaobj), (buffer), (index), (size), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexAttribLOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayVertexAttribOffsetEXT(vaobj, buffer, index, size, type, normalized, stride, offset) glatter_glVertexArrayVertexAttribOffsetEXT_debug((vaobj), (buffer), (index), (size), (type), (normalized), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexAttribOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset, const char* file, int line);
+#define glVertexArrayVertexBindingDivisorEXT(vaobj, bindingindex, divisor) glatter_glVertexArrayVertexBindingDivisorEXT_debug((vaobj), (bindingindex), (divisor), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexBindingDivisorEXT_debug(GLuint vaobj, GLuint bindingindex, GLuint divisor, const char* file, int line);
+#define glVertexArrayVertexOffsetEXT(vaobj, buffer, size, type, stride, offset) glatter_glVertexArrayVertexOffsetEXT_debug((vaobj), (buffer), (size), (type), (stride), (offset), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line);
+#endif // defined(GL_EXT_direct_state_access)
 #if defined(GL_EXT_draw_instanced)
 #define glDrawArraysInstancedEXT(mode, start, count, primcount) glatter_glDrawArraysInstancedEXT_debug((mode), (start), (count), (primcount), __FILE__, __LINE__)
 void glatter_glDrawArraysInstancedEXT_debug(GLenum mode, GLint start, GLsizei count, GLsizei primcount, const char* file, int line);
@@ -5305,6 +5941,10 @@ GLuint glatter_glCreateShaderProgramEXT_debug(GLenum type, const GLchar *string,
 #define glUseShaderProgramEXT(type, program) glatter_glUseShaderProgramEXT_debug((type), (program), __FILE__, __LINE__)
 void glatter_glUseShaderProgramEXT_debug(GLenum type, GLuint program, const char* file, int line);
 #endif // defined(GL_EXT_separate_shader_objects)
+#if defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
+#define glFramebufferFetchBarrierEXT() glatter_glFramebufferFetchBarrierEXT_debug(__FILE__, __LINE__)
+void glatter_glFramebufferFetchBarrierEXT_debug(const char* file, int line);
+#endif // defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
 #if defined(GL_EXT_window_rectangles)
 #define glWindowRectanglesEXT(mode, count, box) glatter_glWindowRectanglesEXT_debug((mode), (count), (box), __FILE__, __LINE__)
 void glatter_glWindowRectanglesEXT_debug(GLenum mode, GLsizei count, const GLint *box, const char* file, int line);
@@ -5329,7 +5969,7 @@ void glatter_glGetNextPerfQueryIdINTEL_debug(GLuint queryId, GLuint *nextQueryId
 #define glGetPerfCounterInfoINTEL(queryId, counterId, counterNameLength, counterName, counterDescLength, counterDesc, counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum, rawCounterMaxValue) glatter_glGetPerfCounterInfoINTEL_debug((queryId), (counterId), (counterNameLength), (counterName), (counterDescLength), (counterDesc), (counterOffset), (counterDataSize), (counterTypeEnum), (counterDataTypeEnum), (rawCounterMaxValue), __FILE__, __LINE__)
 void glatter_glGetPerfCounterInfoINTEL_debug(GLuint queryId, GLuint counterId, GLuint counterNameLength, GLchar *counterName, GLuint counterDescLength, GLchar *counterDesc, GLuint *counterOffset, GLuint *counterDataSize, GLuint *counterTypeEnum, GLuint *counterDataTypeEnum, GLuint64 *rawCounterMaxValue, const char* file, int line);
 #define glGetPerfQueryDataINTEL(queryHandle, flags, dataSize, data, bytesWritten) glatter_glGetPerfQueryDataINTEL_debug((queryHandle), (flags), (dataSize), (data), (bytesWritten), __FILE__, __LINE__)
-void glatter_glGetPerfQueryDataINTEL_debug(GLuint queryHandle, GLuint flags, GLsizei dataSize, GLvoid *data, GLuint *bytesWritten, const char* file, int line);
+void glatter_glGetPerfQueryDataINTEL_debug(GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten, const char* file, int line);
 #define glGetPerfQueryIdByNameINTEL(queryName, queryId) glatter_glGetPerfQueryIdByNameINTEL_debug((queryName), (queryId), __FILE__, __LINE__)
 void glatter_glGetPerfQueryIdByNameINTEL_debug(GLchar *queryName, GLuint *queryId, const char* file, int line);
 #define glGetPerfQueryInfoINTEL(queryId, queryNameLength, queryName, dataSize, noCounters, noInstances, capsMask) glatter_glGetPerfQueryInfoINTEL_debug((queryId), (queryNameLength), (queryName), (dataSize), (noCounters), (noInstances), (capsMask), __FILE__, __LINE__)
@@ -5339,6 +5979,22 @@ void glatter_glGetPerfQueryInfoINTEL_debug(GLuint queryId, GLuint queryNameLengt
 #define glBlendBarrierKHR() glatter_glBlendBarrierKHR_debug(__FILE__, __LINE__)
 void glatter_glBlendBarrierKHR_debug(const char* file, int line);
 #endif // defined(GL_KHR_blend_equation_advanced)
+#if defined(GL_KHR_parallel_shader_compile)
+#define glMaxShaderCompilerThreadsKHR(count) glatter_glMaxShaderCompilerThreadsKHR_debug((count), __FILE__, __LINE__)
+void glatter_glMaxShaderCompilerThreadsKHR_debug(GLuint count, const char* file, int line);
+#endif // defined(GL_KHR_parallel_shader_compile)
+#if defined(GL_NV_bindless_multi_draw_indirect)
+#define glMultiDrawArraysIndirectBindlessNV(mode, indirect, drawCount, stride, vertexBufferCount) glatter_glMultiDrawArraysIndirectBindlessNV_debug((mode), (indirect), (drawCount), (stride), (vertexBufferCount), __FILE__, __LINE__)
+void glatter_glMultiDrawArraysIndirectBindlessNV_debug(GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line);
+#define glMultiDrawElementsIndirectBindlessNV(mode, type, indirect, drawCount, stride, vertexBufferCount) glatter_glMultiDrawElementsIndirectBindlessNV_debug((mode), (type), (indirect), (drawCount), (stride), (vertexBufferCount), __FILE__, __LINE__)
+void glatter_glMultiDrawElementsIndirectBindlessNV_debug(GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line);
+#endif // defined(GL_NV_bindless_multi_draw_indirect)
+#if defined(GL_NV_bindless_multi_draw_indirect_count)
+#define glMultiDrawArraysIndirectBindlessCountNV(mode, indirect, drawCount, maxDrawCount, stride, vertexBufferCount) glatter_glMultiDrawArraysIndirectBindlessCountNV_debug((mode), (indirect), (drawCount), (maxDrawCount), (stride), (vertexBufferCount), __FILE__, __LINE__)
+void glatter_glMultiDrawArraysIndirectBindlessCountNV_debug(GLenum mode, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line);
+#define glMultiDrawElementsIndirectBindlessCountNV(mode, type, indirect, drawCount, maxDrawCount, stride, vertexBufferCount) glatter_glMultiDrawElementsIndirectBindlessCountNV_debug((mode), (type), (indirect), (drawCount), (maxDrawCount), (stride), (vertexBufferCount), __FILE__, __LINE__)
+void glatter_glMultiDrawElementsIndirectBindlessCountNV_debug(GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line);
+#endif // defined(GL_NV_bindless_multi_draw_indirect_count)
 #if defined(GL_NV_bindless_texture)
 #define glGetImageHandleNV(texture, level, layered, layer, format) glatter_glGetImageHandleNV_debug((texture), (level), (layered), (layer), (format), __FILE__, __LINE__)
 GLuint64 glatter_glGetImageHandleNV_debug(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format, const char* file, int line);
@@ -5373,6 +6029,46 @@ void glatter_glBlendBarrierNV_debug(const char* file, int line);
 #define glBlendParameteriNV(pname, value) glatter_glBlendParameteriNV_debug((pname), (value), __FILE__, __LINE__)
 void glatter_glBlendParameteriNV_debug(GLenum pname, GLint value, const char* file, int line);
 #endif // defined(GL_NV_blend_equation_advanced)
+#if defined(GL_NV_clip_space_w_scaling)
+#define glViewportPositionWScaleNV(index, xcoeff, ycoeff) glatter_glViewportPositionWScaleNV_debug((index), (xcoeff), (ycoeff), __FILE__, __LINE__)
+void glatter_glViewportPositionWScaleNV_debug(GLuint index, GLfloat xcoeff, GLfloat ycoeff, const char* file, int line);
+#endif // defined(GL_NV_clip_space_w_scaling)
+#if defined(GL_NV_command_list)
+#define glCallCommandListNV(list) glatter_glCallCommandListNV_debug((list), __FILE__, __LINE__)
+void glatter_glCallCommandListNV_debug(GLuint list, const char* file, int line);
+#define glCommandListSegmentsNV(list, segments) glatter_glCommandListSegmentsNV_debug((list), (segments), __FILE__, __LINE__)
+void glatter_glCommandListSegmentsNV_debug(GLuint list, GLuint segments, const char* file, int line);
+#define glCompileCommandListNV(list) glatter_glCompileCommandListNV_debug((list), __FILE__, __LINE__)
+void glatter_glCompileCommandListNV_debug(GLuint list, const char* file, int line);
+#define glCreateCommandListsNV(n, lists) glatter_glCreateCommandListsNV_debug((n), (lists), __FILE__, __LINE__)
+void glatter_glCreateCommandListsNV_debug(GLsizei n, GLuint *lists, const char* file, int line);
+#define glCreateStatesNV(n, states) glatter_glCreateStatesNV_debug((n), (states), __FILE__, __LINE__)
+void glatter_glCreateStatesNV_debug(GLsizei n, GLuint *states, const char* file, int line);
+#define glDeleteCommandListsNV(n, lists) glatter_glDeleteCommandListsNV_debug((n), (lists), __FILE__, __LINE__)
+void glatter_glDeleteCommandListsNV_debug(GLsizei n, const GLuint *lists, const char* file, int line);
+#define glDeleteStatesNV(n, states) glatter_glDeleteStatesNV_debug((n), (states), __FILE__, __LINE__)
+void glatter_glDeleteStatesNV_debug(GLsizei n, const GLuint *states, const char* file, int line);
+#define glDrawCommandsAddressNV(primitiveMode, indirects, sizes, count) glatter_glDrawCommandsAddressNV_debug((primitiveMode), (indirects), (sizes), (count), __FILE__, __LINE__)
+void glatter_glDrawCommandsAddressNV_debug(GLenum primitiveMode, const GLuint64 *indirects, const GLsizei *sizes, GLuint count, const char* file, int line);
+#define glDrawCommandsNV(primitiveMode, buffer, indirects, sizes, count) glatter_glDrawCommandsNV_debug((primitiveMode), (buffer), (indirects), (sizes), (count), __FILE__, __LINE__)
+void glatter_glDrawCommandsNV_debug(GLenum primitiveMode, GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, GLuint count, const char* file, int line);
+#define glDrawCommandsStatesAddressNV(indirects, sizes, states, fbos, count) glatter_glDrawCommandsStatesAddressNV_debug((indirects), (sizes), (states), (fbos), (count), __FILE__, __LINE__)
+void glatter_glDrawCommandsStatesAddressNV_debug(const GLuint64 *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count, const char* file, int line);
+#define glDrawCommandsStatesNV(buffer, indirects, sizes, states, fbos, count) glatter_glDrawCommandsStatesNV_debug((buffer), (indirects), (sizes), (states), (fbos), (count), __FILE__, __LINE__)
+void glatter_glDrawCommandsStatesNV_debug(GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count, const char* file, int line);
+#define glGetCommandHeaderNV(tokenID, size) glatter_glGetCommandHeaderNV_debug((tokenID), (size), __FILE__, __LINE__)
+GLuint glatter_glGetCommandHeaderNV_debug(GLenum tokenID, GLuint size, const char* file, int line);
+#define glGetStageIndexNV(shadertype) glatter_glGetStageIndexNV_debug((shadertype), __FILE__, __LINE__)
+GLushort glatter_glGetStageIndexNV_debug(GLenum shadertype, const char* file, int line);
+#define glIsCommandListNV(list) glatter_glIsCommandListNV_debug((list), __FILE__, __LINE__)
+GLboolean glatter_glIsCommandListNV_debug(GLuint list, const char* file, int line);
+#define glIsStateNV(state) glatter_glIsStateNV_debug((state), __FILE__, __LINE__)
+GLboolean glatter_glIsStateNV_debug(GLuint state, const char* file, int line);
+#define glListDrawCommandsStatesClientNV(list, segment, indirects, sizes, states, fbos, count) glatter_glListDrawCommandsStatesClientNV_debug((list), (segment), (indirects), (sizes), (states), (fbos), (count), __FILE__, __LINE__)
+void glatter_glListDrawCommandsStatesClientNV_debug(GLuint list, GLuint segment, const void **indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count, const char* file, int line);
+#define glStateCaptureNV(state, mode) glatter_glStateCaptureNV_debug((state), (mode), __FILE__, __LINE__)
+void glatter_glStateCaptureNV_debug(GLuint state, GLenum mode, const char* file, int line);
+#endif // defined(GL_NV_command_list)
 #if defined(GL_NV_conditional_render)
 #define glBeginConditionalRenderNV(id, mode) glatter_glBeginConditionalRenderNV_debug((id), (mode), __FILE__, __LINE__)
 void glatter_glBeginConditionalRenderNV_debug(GLuint id, GLenum mode, const char* file, int line);
@@ -5383,10 +6079,26 @@ void glatter_glEndConditionalRenderNV_debug(const char* file, int line);
 #define glSubpixelPrecisionBiasNV(xbits, ybits) glatter_glSubpixelPrecisionBiasNV_debug((xbits), (ybits), __FILE__, __LINE__)
 void glatter_glSubpixelPrecisionBiasNV_debug(GLuint xbits, GLuint ybits, const char* file, int line);
 #endif // defined(GL_NV_conservative_raster)
+#if defined(GL_NV_conservative_raster_dilate)
+#define glConservativeRasterParameterfNV(pname, value) glatter_glConservativeRasterParameterfNV_debug((pname), (value), __FILE__, __LINE__)
+void glatter_glConservativeRasterParameterfNV_debug(GLenum pname, GLfloat value, const char* file, int line);
+#endif // defined(GL_NV_conservative_raster_dilate)
 #if defined(GL_NV_conservative_raster_pre_snap_triangles)
 #define glConservativeRasterParameteriNV(pname, param) glatter_glConservativeRasterParameteriNV_debug((pname), (param), __FILE__, __LINE__)
 void glatter_glConservativeRasterParameteriNV_debug(GLenum pname, GLint param, const char* file, int line);
 #endif // defined(GL_NV_conservative_raster_pre_snap_triangles)
+#if defined(GL_NV_draw_vulkan_image)
+#define glDrawVkImageNV(vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1) glatter_glDrawVkImageNV_debug((vkImage), (sampler), (x0), (y0), (x1), (y1), (z), (s0), (t0), (s1), (t1), __FILE__, __LINE__)
+void glatter_glDrawVkImageNV_debug(GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1, const char* file, int line);
+#define glGetVkProcAddrNV(name) glatter_glGetVkProcAddrNV_debug((name), __FILE__, __LINE__)
+GLVULKANPROCNV glatter_glGetVkProcAddrNV_debug(const GLchar *name, const char* file, int line);
+#define glSignalVkFenceNV(vkFence) glatter_glSignalVkFenceNV_debug((vkFence), __FILE__, __LINE__)
+void glatter_glSignalVkFenceNV_debug(GLuint64 vkFence, const char* file, int line);
+#define glSignalVkSemaphoreNV(vkSemaphore) glatter_glSignalVkSemaphoreNV_debug((vkSemaphore), __FILE__, __LINE__)
+void glatter_glSignalVkSemaphoreNV_debug(GLuint64 vkSemaphore, const char* file, int line);
+#define glWaitVkSemaphoreNV(vkSemaphore) glatter_glWaitVkSemaphoreNV_debug((vkSemaphore), __FILE__, __LINE__)
+void glatter_glWaitVkSemaphoreNV_debug(GLuint64 vkSemaphore, const char* file, int line);
+#endif // defined(GL_NV_draw_vulkan_image)
 #if defined(GL_NV_fragment_coverage_to_color)
 #define glFragmentCoverageColorNV(color) glatter_glFragmentCoverageColorNV_debug((color), __FILE__, __LINE__)
 void glatter_glFragmentCoverageColorNV_debug(GLuint color, const char* file, int line);
@@ -5399,6 +6111,10 @@ void glatter_glCoverageModulationTableNV_debug(GLsizei n, const GLfloat *v, cons
 #define glGetCoverageModulationTableNV(bufsize, v) glatter_glGetCoverageModulationTableNV_debug((bufsize), (v), __FILE__, __LINE__)
 void glatter_glGetCoverageModulationTableNV_debug(GLsizei bufsize, GLfloat *v, const char* file, int line);
 #endif // defined(GL_NV_framebuffer_mixed_samples)
+#if defined(GL_NV_framebuffer_multisample_coverage)
+#define glRenderbufferStorageMultisampleCoverageNV(target, coverageSamples, colorSamples, internalformat, width, height) glatter_glRenderbufferStorageMultisampleCoverageNV_debug((target), (coverageSamples), (colorSamples), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glRenderbufferStorageMultisampleCoverageNV_debug(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#endif // defined(GL_NV_framebuffer_multisample_coverage)
 #if defined(GL_NV_gpu_shader5)
 #define glGetUniformi64vNV(program, location, params) glatter_glGetUniformi64vNV_debug((program), (location), (params), __FILE__, __LINE__)
 void glatter_glGetUniformi64vNV_debug(GLuint program, GLint location, GLint64EXT *params, const char* file, int line);
@@ -5595,6 +6311,106 @@ void glatter_glNamedFramebufferSampleLocationsfvNV_debug(GLuint framebuffer, GLu
 #define glResolveDepthValuesNV() glatter_glResolveDepthValuesNV_debug(__FILE__, __LINE__)
 void glatter_glResolveDepthValuesNV_debug(const char* file, int line);
 #endif // defined(GL_NV_sample_locations)
+#if defined(GL_NV_shader_buffer_load)
+#define glGetBufferParameterui64vNV(target, pname, params) glatter_glGetBufferParameterui64vNV_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetBufferParameterui64vNV_debug(GLenum target, GLenum pname, GLuint64EXT *params, const char* file, int line);
+#define glGetIntegerui64vNV(value, result) glatter_glGetIntegerui64vNV_debug((value), (result), __FILE__, __LINE__)
+void glatter_glGetIntegerui64vNV_debug(GLenum value, GLuint64EXT *result, const char* file, int line);
+#define glGetNamedBufferParameterui64vNV(buffer, pname, params) glatter_glGetNamedBufferParameterui64vNV_debug((buffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedBufferParameterui64vNV_debug(GLuint buffer, GLenum pname, GLuint64EXT *params, const char* file, int line);
+#define glGetUniformui64vNV(program, location, params) glatter_glGetUniformui64vNV_debug((program), (location), (params), __FILE__, __LINE__)
+void glatter_glGetUniformui64vNV_debug(GLuint program, GLint location, GLuint64EXT *params, const char* file, int line);
+#define glIsBufferResidentNV(target) glatter_glIsBufferResidentNV_debug((target), __FILE__, __LINE__)
+GLboolean glatter_glIsBufferResidentNV_debug(GLenum target, const char* file, int line);
+#define glIsNamedBufferResidentNV(buffer) glatter_glIsNamedBufferResidentNV_debug((buffer), __FILE__, __LINE__)
+GLboolean glatter_glIsNamedBufferResidentNV_debug(GLuint buffer, const char* file, int line);
+#define glMakeBufferNonResidentNV(target) glatter_glMakeBufferNonResidentNV_debug((target), __FILE__, __LINE__)
+void glatter_glMakeBufferNonResidentNV_debug(GLenum target, const char* file, int line);
+#define glMakeBufferResidentNV(target, access) glatter_glMakeBufferResidentNV_debug((target), (access), __FILE__, __LINE__)
+void glatter_glMakeBufferResidentNV_debug(GLenum target, GLenum access, const char* file, int line);
+#define glMakeNamedBufferNonResidentNV(buffer) glatter_glMakeNamedBufferNonResidentNV_debug((buffer), __FILE__, __LINE__)
+void glatter_glMakeNamedBufferNonResidentNV_debug(GLuint buffer, const char* file, int line);
+#define glMakeNamedBufferResidentNV(buffer, access) glatter_glMakeNamedBufferResidentNV_debug((buffer), (access), __FILE__, __LINE__)
+void glatter_glMakeNamedBufferResidentNV_debug(GLuint buffer, GLenum access, const char* file, int line);
+#define glProgramUniformui64NV(program, location, value) glatter_glProgramUniformui64NV_debug((program), (location), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformui64NV_debug(GLuint program, GLint location, GLuint64EXT value, const char* file, int line);
+#define glProgramUniformui64vNV(program, location, count, value) glatter_glProgramUniformui64vNV_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformui64vNV_debug(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value, const char* file, int line);
+#define glUniformui64NV(location, value) glatter_glUniformui64NV_debug((location), (value), __FILE__, __LINE__)
+void glatter_glUniformui64NV_debug(GLint location, GLuint64EXT value, const char* file, int line);
+#define glUniformui64vNV(location, count, value) glatter_glUniformui64vNV_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniformui64vNV_debug(GLint location, GLsizei count, const GLuint64EXT *value, const char* file, int line);
+#endif // defined(GL_NV_shader_buffer_load)
+#if defined(GL_NV_texture_barrier)
+#define glTextureBarrierNV() glatter_glTextureBarrierNV_debug(__FILE__, __LINE__)
+void glatter_glTextureBarrierNV_debug(const char* file, int line);
+#endif // defined(GL_NV_texture_barrier)
+#if defined(GL_NV_vertex_attrib_integer_64bit)
+#define glGetVertexAttribLi64vNV(index, pname, params) glatter_glGetVertexAttribLi64vNV_debug((index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetVertexAttribLi64vNV_debug(GLuint index, GLenum pname, GLint64EXT *params, const char* file, int line);
+#define glGetVertexAttribLui64vNV(index, pname, params) glatter_glGetVertexAttribLui64vNV_debug((index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetVertexAttribLui64vNV_debug(GLuint index, GLenum pname, GLuint64EXT *params, const char* file, int line);
+#define glVertexAttribL1i64NV(index, x) glatter_glVertexAttribL1i64NV_debug((index), (x), __FILE__, __LINE__)
+void glatter_glVertexAttribL1i64NV_debug(GLuint index, GLint64EXT x, const char* file, int line);
+#define glVertexAttribL1i64vNV(index, v) glatter_glVertexAttribL1i64vNV_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL1i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line);
+#define glVertexAttribL1ui64NV(index, x) glatter_glVertexAttribL1ui64NV_debug((index), (x), __FILE__, __LINE__)
+void glatter_glVertexAttribL1ui64NV_debug(GLuint index, GLuint64EXT x, const char* file, int line);
+#define glVertexAttribL1ui64vNV(index, v) glatter_glVertexAttribL1ui64vNV_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL1ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line);
+#define glVertexAttribL2i64NV(index, x, y) glatter_glVertexAttribL2i64NV_debug((index), (x), (y), __FILE__, __LINE__)
+void glatter_glVertexAttribL2i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT y, const char* file, int line);
+#define glVertexAttribL2i64vNV(index, v) glatter_glVertexAttribL2i64vNV_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL2i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line);
+#define glVertexAttribL2ui64NV(index, x, y) glatter_glVertexAttribL2ui64NV_debug((index), (x), (y), __FILE__, __LINE__)
+void glatter_glVertexAttribL2ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64EXT y, const char* file, int line);
+#define glVertexAttribL2ui64vNV(index, v) glatter_glVertexAttribL2ui64vNV_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL2ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line);
+#define glVertexAttribL3i64NV(index, x, y, z) glatter_glVertexAttribL3i64NV_debug((index), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glVertexAttribL3i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, const char* file, int line);
+#define glVertexAttribL3i64vNV(index, v) glatter_glVertexAttribL3i64vNV_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL3i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line);
+#define glVertexAttribL3ui64NV(index, x, y, z) glatter_glVertexAttribL3ui64NV_debug((index), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glVertexAttribL3ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, const char* file, int line);
+#define glVertexAttribL3ui64vNV(index, v) glatter_glVertexAttribL3ui64vNV_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL3ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line);
+#define glVertexAttribL4i64NV(index, x, y, z, w) glatter_glVertexAttribL4i64NV_debug((index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glVertexAttribL4i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w, const char* file, int line);
+#define glVertexAttribL4i64vNV(index, v) glatter_glVertexAttribL4i64vNV_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL4i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line);
+#define glVertexAttribL4ui64NV(index, x, y, z, w) glatter_glVertexAttribL4ui64NV_debug((index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glVertexAttribL4ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w, const char* file, int line);
+#define glVertexAttribL4ui64vNV(index, v) glatter_glVertexAttribL4ui64vNV_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL4ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line);
+#define glVertexAttribLFormatNV(index, size, type, stride) glatter_glVertexAttribLFormatNV_debug((index), (size), (type), (stride), __FILE__, __LINE__)
+void glatter_glVertexAttribLFormatNV_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const char* file, int line);
+#endif // defined(GL_NV_vertex_attrib_integer_64bit)
+#if defined(GL_NV_vertex_buffer_unified_memory)
+#define glBufferAddressRangeNV(pname, index, address, length) glatter_glBufferAddressRangeNV_debug((pname), (index), (address), (length), __FILE__, __LINE__)
+void glatter_glBufferAddressRangeNV_debug(GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length, const char* file, int line);
+#define glColorFormatNV(size, type, stride) glatter_glColorFormatNV_debug((size), (type), (stride), __FILE__, __LINE__)
+void glatter_glColorFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line);
+#define glEdgeFlagFormatNV(stride) glatter_glEdgeFlagFormatNV_debug((stride), __FILE__, __LINE__)
+void glatter_glEdgeFlagFormatNV_debug(GLsizei stride, const char* file, int line);
+#define glFogCoordFormatNV(type, stride) glatter_glFogCoordFormatNV_debug((type), (stride), __FILE__, __LINE__)
+void glatter_glFogCoordFormatNV_debug(GLenum type, GLsizei stride, const char* file, int line);
+#define glGetIntegerui64i_vNV(value, index, result) glatter_glGetIntegerui64i_vNV_debug((value), (index), (result), __FILE__, __LINE__)
+void glatter_glGetIntegerui64i_vNV_debug(GLenum value, GLuint index, GLuint64EXT *result, const char* file, int line);
+#define glIndexFormatNV(type, stride) glatter_glIndexFormatNV_debug((type), (stride), __FILE__, __LINE__)
+void glatter_glIndexFormatNV_debug(GLenum type, GLsizei stride, const char* file, int line);
+#define glNormalFormatNV(type, stride) glatter_glNormalFormatNV_debug((type), (stride), __FILE__, __LINE__)
+void glatter_glNormalFormatNV_debug(GLenum type, GLsizei stride, const char* file, int line);
+#define glSecondaryColorFormatNV(size, type, stride) glatter_glSecondaryColorFormatNV_debug((size), (type), (stride), __FILE__, __LINE__)
+void glatter_glSecondaryColorFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line);
+#define glTexCoordFormatNV(size, type, stride) glatter_glTexCoordFormatNV_debug((size), (type), (stride), __FILE__, __LINE__)
+void glatter_glTexCoordFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line);
+#define glVertexAttribFormatNV(index, size, type, normalized, stride) glatter_glVertexAttribFormatNV_debug((index), (size), (type), (normalized), (stride), __FILE__, __LINE__)
+void glatter_glVertexAttribFormatNV_debug(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const char* file, int line);
+#define glVertexAttribIFormatNV(index, size, type, stride) glatter_glVertexAttribIFormatNV_debug((index), (size), (type), (stride), __FILE__, __LINE__)
+void glatter_glVertexAttribIFormatNV_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const char* file, int line);
+#define glVertexFormatNV(size, type, stride) glatter_glVertexFormatNV_debug((size), (type), (stride), __FILE__, __LINE__)
+void glatter_glVertexFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line);
+#endif // defined(GL_NV_vertex_buffer_unified_memory)
 #if defined(GL_NV_viewport_swizzle)
 #define glViewportSwizzleNV(index, swizzlex, swizzley, swizzlez, swizzlew) glatter_glViewportSwizzleNV_debug((index), (swizzlex), (swizzley), (swizzlez), (swizzlew), __FILE__, __LINE__)
 void glatter_glViewportSwizzleNV_debug(GLuint index, GLenum swizzlex, GLenum swizzley, GLenum swizzlez, GLenum swizzlew, const char* file, int line);
@@ -5622,8 +6438,8 @@ void glatter_glCullFace_debug(GLenum mode, const char* file, int line);
 void glatter_glDepthFunc_debug(GLenum func, const char* file, int line);
 #define glDepthMask(flag) glatter_glDepthMask_debug((flag), __FILE__, __LINE__)
 void glatter_glDepthMask_debug(GLboolean flag, const char* file, int line);
-#define glDepthRange(near, far) glatter_glDepthRange_debug((near), (far), __FILE__, __LINE__)
-void glatter_glDepthRange_debug(GLdouble near, GLdouble far, const char* file, int line);
+#define glDepthRange(n, f) glatter_glDepthRange_debug((n), (f), __FILE__, __LINE__)
+void glatter_glDepthRange_debug(GLdouble n, GLdouble f, const char* file, int line);
 #define glDisable(cap) glatter_glDisable_debug((cap), __FILE__, __LINE__)
 void glatter_glDisable_debug(GLenum cap, const char* file, int line);
 #define glDrawBuffer(buf) glatter_glDrawBuffer_debug((buf), __FILE__, __LINE__)
@@ -6733,9 +7549,9 @@ GLenum glatter_glCheckNamedFramebufferStatus_debug(GLuint framebuffer, GLenum ta
 #define glClearNamedBufferData(buffer, internalformat, format, type, data) glatter_glClearNamedBufferData_debug((buffer), (internalformat), (format), (type), (data), __FILE__, __LINE__)
 void glatter_glClearNamedBufferData_debug(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data, const char* file, int line);
 #define glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data) glatter_glClearNamedBufferSubData_debug((buffer), (internalformat), (offset), (size), (format), (type), (data), __FILE__, __LINE__)
-void glatter_glClearNamedBufferSubData_debug(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizei size, GLenum format, GLenum type, const void *data, const char* file, int line);
-#define glClearNamedFramebufferfi(framebuffer, buffer, depth, stencil) glatter_glClearNamedFramebufferfi_debug((framebuffer), (buffer), (depth), (stencil), __FILE__, __LINE__)
-void glatter_glClearNamedFramebufferfi_debug(GLuint framebuffer, GLenum buffer, const GLfloat depth, GLint stencil, const char* file, int line);
+void glatter_glClearNamedBufferSubData_debug(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define glClearNamedFramebufferfi(framebuffer, buffer, drawbuffer, depth, stencil) glatter_glClearNamedFramebufferfi_debug((framebuffer), (buffer), (drawbuffer), (depth), (stencil), __FILE__, __LINE__)
+void glatter_glClearNamedFramebufferfi_debug(GLuint framebuffer, GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil, const char* file, int line);
 #define glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value) glatter_glClearNamedFramebufferfv_debug((framebuffer), (buffer), (drawbuffer), (value), __FILE__, __LINE__)
 void glatter_glClearNamedFramebufferfv_debug(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLfloat *value, const char* file, int line);
 #define glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value) glatter_glClearNamedFramebufferiv_debug((framebuffer), (buffer), (drawbuffer), (value), __FILE__, __LINE__)
@@ -6751,7 +7567,7 @@ void glatter_glCompressedTextureSubImage2D_debug(GLuint texture, GLint level, GL
 #define glCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) glatter_glCompressedTextureSubImage3D_debug((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (imageSize), (data), __FILE__, __LINE__)
 void glatter_glCompressedTextureSubImage3D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data, const char* file, int line);
 #define glCopyNamedBufferSubData(readBuffer, writeBuffer, readOffset, writeOffset, size) glatter_glCopyNamedBufferSubData_debug((readBuffer), (writeBuffer), (readOffset), (writeOffset), (size), __FILE__, __LINE__)
-void glatter_glCopyNamedBufferSubData_debug(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizei size, const char* file, int line);
+void glatter_glCopyNamedBufferSubData_debug(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line);
 #define glCopyTextureSubImage1D(texture, level, xoffset, x, y, width) glatter_glCopyTextureSubImage1D_debug((texture), (level), (xoffset), (x), (y), (width), __FILE__, __LINE__)
 void glatter_glCopyTextureSubImage1D_debug(GLuint texture, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line);
 #define glCopyTextureSubImage2D(texture, level, xoffset, yoffset, x, y, width, height) glatter_glCopyTextureSubImage2D_debug((texture), (level), (xoffset), (yoffset), (x), (y), (width), (height), __FILE__, __LINE__)
@@ -6781,7 +7597,7 @@ void glatter_glDisableVertexArrayAttrib_debug(GLuint vaobj, GLuint index, const 
 #define glEnableVertexArrayAttrib(vaobj, index) glatter_glEnableVertexArrayAttrib_debug((vaobj), (index), __FILE__, __LINE__)
 void glatter_glEnableVertexArrayAttrib_debug(GLuint vaobj, GLuint index, const char* file, int line);
 #define glFlushMappedNamedBufferRange(buffer, offset, length) glatter_glFlushMappedNamedBufferRange_debug((buffer), (offset), (length), __FILE__, __LINE__)
-void glatter_glFlushMappedNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizei length, const char* file, int line);
+void glatter_glFlushMappedNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, const char* file, int line);
 #define glGenerateTextureMipmap(texture) glatter_glGenerateTextureMipmap_debug((texture), __FILE__, __LINE__)
 void glatter_glGenerateTextureMipmap_debug(GLuint texture, const char* file, int line);
 #define glGetCompressedTextureImage(texture, level, bufSize, pixels) glatter_glGetCompressedTextureImage_debug((texture), (level), (bufSize), (pixels), __FILE__, __LINE__)
@@ -6797,7 +7613,7 @@ void glatter_glGetNamedBufferParameteriv_debug(GLuint buffer, GLenum pname, GLin
 #define glGetNamedBufferPointerv(buffer, pname, params) glatter_glGetNamedBufferPointerv_debug((buffer), (pname), (params), __FILE__, __LINE__)
 void glatter_glGetNamedBufferPointerv_debug(GLuint buffer, GLenum pname, void **params, const char* file, int line);
 #define glGetNamedBufferSubData(buffer, offset, size, data) glatter_glGetNamedBufferSubData_debug((buffer), (offset), (size), (data), __FILE__, __LINE__)
-void glatter_glGetNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizei size, void *data, const char* file, int line);
+void glatter_glGetNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, void *data, const char* file, int line);
 #define glGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params) glatter_glGetNamedFramebufferAttachmentParameteriv_debug((framebuffer), (attachment), (pname), (params), __FILE__, __LINE__)
 void glatter_glGetNamedFramebufferAttachmentParameteriv_debug(GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params, const char* file, int line);
 #define glGetNamedFramebufferParameteriv(framebuffer, pname, param) glatter_glGetNamedFramebufferParameteriv_debug((framebuffer), (pname), (param), __FILE__, __LINE__)
@@ -6859,15 +7675,15 @@ void glatter_glInvalidateNamedFramebufferSubData_debug(GLuint framebuffer, GLsiz
 #define glMapNamedBuffer(buffer, access) glatter_glMapNamedBuffer_debug((buffer), (access), __FILE__, __LINE__)
 void * glatter_glMapNamedBuffer_debug(GLuint buffer, GLenum access, const char* file, int line);
 #define glMapNamedBufferRange(buffer, offset, length, access) glatter_glMapNamedBufferRange_debug((buffer), (offset), (length), (access), __FILE__, __LINE__)
-void * glatter_glMapNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizei length, GLbitfield access, const char* file, int line);
+void * glatter_glMapNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access, const char* file, int line);
 #define glMemoryBarrierByRegion(barriers) glatter_glMemoryBarrierByRegion_debug((barriers), __FILE__, __LINE__)
 void glatter_glMemoryBarrierByRegion_debug(GLbitfield barriers, const char* file, int line);
 #define glNamedBufferData(buffer, size, data, usage) glatter_glNamedBufferData_debug((buffer), (size), (data), (usage), __FILE__, __LINE__)
-void glatter_glNamedBufferData_debug(GLuint buffer, GLsizei size, const void *data, GLenum usage, const char* file, int line);
+void glatter_glNamedBufferData_debug(GLuint buffer, GLsizeiptr size, const void *data, GLenum usage, const char* file, int line);
 #define glNamedBufferStorage(buffer, size, data, flags) glatter_glNamedBufferStorage_debug((buffer), (size), (data), (flags), __FILE__, __LINE__)
-void glatter_glNamedBufferStorage_debug(GLuint buffer, GLsizei size, const void *data, GLbitfield flags, const char* file, int line);
+void glatter_glNamedBufferStorage_debug(GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags, const char* file, int line);
 #define glNamedBufferSubData(buffer, offset, size, data) glatter_glNamedBufferSubData_debug((buffer), (offset), (size), (data), __FILE__, __LINE__)
-void glatter_glNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizei size, const void *data, const char* file, int line);
+void glatter_glNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line);
 #define glNamedFramebufferDrawBuffer(framebuffer, buf) glatter_glNamedFramebufferDrawBuffer_debug((framebuffer), (buf), __FILE__, __LINE__)
 void glatter_glNamedFramebufferDrawBuffer_debug(GLuint framebuffer, GLenum buf, const char* file, int line);
 #define glNamedFramebufferDrawBuffers(framebuffer, n, bufs) glatter_glNamedFramebufferDrawBuffers_debug((framebuffer), (n), (bufs), __FILE__, __LINE__)
@@ -6893,7 +7709,7 @@ void glatter_glTextureBarrier_debug(const char* file, int line);
 #define glTextureBuffer(texture, internalformat, buffer) glatter_glTextureBuffer_debug((texture), (internalformat), (buffer), __FILE__, __LINE__)
 void glatter_glTextureBuffer_debug(GLuint texture, GLenum internalformat, GLuint buffer, const char* file, int line);
 #define glTextureBufferRange(texture, internalformat, buffer, offset, size) glatter_glTextureBufferRange_debug((texture), (internalformat), (buffer), (offset), (size), __FILE__, __LINE__)
-void glatter_glTextureBufferRange_debug(GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizei size, const char* file, int line);
+void glatter_glTextureBufferRange_debug(GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line);
 #define glTextureParameterIiv(texture, pname, params) glatter_glTextureParameterIiv_debug((texture), (pname), (params), __FILE__, __LINE__)
 void glatter_glTextureParameterIiv_debug(GLuint texture, GLenum pname, const GLint *params, const char* file, int line);
 #define glTextureParameterIuiv(texture, pname, params) glatter_glTextureParameterIuiv_debug((texture), (pname), (params), __FILE__, __LINE__)
@@ -6925,7 +7741,7 @@ void glatter_glTextureSubImage3D_debug(GLuint texture, GLint level, GLint xoffse
 #define glTransformFeedbackBufferBase(xfb, index, buffer) glatter_glTransformFeedbackBufferBase_debug((xfb), (index), (buffer), __FILE__, __LINE__)
 void glatter_glTransformFeedbackBufferBase_debug(GLuint xfb, GLuint index, GLuint buffer, const char* file, int line);
 #define glTransformFeedbackBufferRange(xfb, index, buffer, offset, size) glatter_glTransformFeedbackBufferRange_debug((xfb), (index), (buffer), (offset), (size), __FILE__, __LINE__)
-void glatter_glTransformFeedbackBufferRange_debug(GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizei size, const char* file, int line);
+void glatter_glTransformFeedbackBufferRange_debug(GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line);
 #define glUnmapNamedBuffer(buffer) glatter_glUnmapNamedBuffer_debug((buffer), __FILE__, __LINE__)
 GLboolean glatter_glUnmapNamedBuffer_debug(GLuint buffer, const char* file, int line);
 #define glVertexArrayAttribBinding(vaobj, attribindex, bindingindex) glatter_glVertexArrayAttribBinding_debug((vaobj), (attribindex), (bindingindex), __FILE__, __LINE__)
@@ -6945,8 +7761,18 @@ void glatter_glVertexArrayVertexBuffer_debug(GLuint vaobj, GLuint bindingindex, 
 #define glVertexArrayVertexBuffers(vaobj, first, count, buffers, offsets, strides) glatter_glVertexArrayVertexBuffers_debug((vaobj), (first), (count), (buffers), (offsets), (strides), __FILE__, __LINE__)
 void glatter_glVertexArrayVertexBuffers_debug(GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides, const char* file, int line);
 #endif // defined(GL_VERSION_4_5)
-#endif // defined(__glcorearb_h_)
-#if defined(__glext_h_)
+#if defined(GL_VERSION_4_6)
+#define glMultiDrawArraysIndirectCount(mode, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawArraysIndirectCount_debug((mode), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
+void glatter_glMultiDrawArraysIndirectCount_debug(GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+#define glMultiDrawElementsIndirectCount(mode, type, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawElementsIndirectCount_debug((mode), (type), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
+void glatter_glMultiDrawElementsIndirectCount_debug(GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+#define glPolygonOffsetClamp(factor, units, clamp) glatter_glPolygonOffsetClamp_debug((factor), (units), (clamp), __FILE__, __LINE__)
+void glatter_glPolygonOffsetClamp_debug(GLfloat factor, GLfloat units, GLfloat clamp, const char* file, int line);
+#define glSpecializeShader(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue) glatter_glSpecializeShader_debug((shader), (pEntryPoint), (numSpecializationConstants), (pConstantIndex), (pConstantValue), __FILE__, __LINE__)
+void glatter_glSpecializeShader_debug(GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue, const char* file, int line);
+#endif // defined(GL_VERSION_4_6)
+#endif // defined(__gl_glcorearb_h_)
+#if defined(__gl_glext_h_)
 #if defined(GL_3DFX_tbuffer)
 #define glTbufferMask3DFX(mask) glatter_glTbufferMask3DFX_debug((mask), __FILE__, __LINE__)
 void glatter_glTbufferMask3DFX_debug(GLuint mask, const char* file, int line);
@@ -7331,6 +8157,10 @@ void glatter_glFramebufferTextureLayerARB_debug(GLenum target, GLenum attachment
 #define glProgramParameteriARB(program, pname, value) glatter_glProgramParameteriARB_debug((program), (pname), (value), __FILE__, __LINE__)
 void glatter_glProgramParameteriARB_debug(GLuint program, GLenum pname, GLint value, const char* file, int line);
 #endif // defined(GL_ARB_geometry_shader4)
+#if defined(GL_ARB_gl_spirv)
+#define glSpecializeShaderARB(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue) glatter_glSpecializeShaderARB_debug((shader), (pEntryPoint), (numSpecializationConstants), (pConstantIndex), (pConstantValue), __FILE__, __LINE__)
+void glatter_glSpecializeShaderARB_debug(GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue, const char* file, int line);
+#endif // defined(GL_ARB_gl_spirv)
 #if defined(GL_ARB_gpu_shader_int64)
 #define glGetUniformi64vARB(program, location, params) glatter_glGetUniformi64vARB_debug((program), (location), (params), __FILE__, __LINE__)
 void glatter_glGetUniformi64vARB_debug(GLuint program, GLint location, GLint64 *params, const char* file, int line);
@@ -7473,9 +8303,9 @@ void glatter_glSeparableFilter2D_debug(GLenum target, GLenum internalformat, GLs
 #endif // defined(GL_ARB_imaging)
 #if defined(GL_ARB_indirect_parameters)
 #define glMultiDrawArraysIndirectCountARB(mode, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawArraysIndirectCountARB_debug((mode), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
-void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
 #define glMultiDrawElementsIndirectCountARB(mode, type, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawElementsIndirectCountARB_debug((mode), (type), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
-void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
 #endif // defined(GL_ARB_indirect_parameters)
 #if defined(GL_ARB_instanced_arrays)
 #define glVertexAttribDivisorARB(index, divisor) glatter_glVertexAttribDivisorARB_debug((index), (divisor), __FILE__, __LINE__)
@@ -8157,6 +8987,12 @@ void glatter_glVertexStream4sATI_debug(GLenum stream, GLshort x, GLshort y, GLsh
 #define glVertexStream4svATI(stream, coords) glatter_glVertexStream4svATI_debug((stream), (coords), __FILE__, __LINE__)
 void glatter_glVertexStream4svATI_debug(GLenum stream, const GLshort *coords, const char* file, int line);
 #endif // defined(GL_ATI_vertex_streams)
+#if defined(GL_EXT_EGL_image_storage)
+#define glEGLImageTargetTexStorageEXT(target, image, attrib_list) glatter_glEGLImageTargetTexStorageEXT_debug((target), (image), (attrib_list), __FILE__, __LINE__)
+void glatter_glEGLImageTargetTexStorageEXT_debug(GLenum target, GLeglImageOES image, const GLint* attrib_list, const char* file, int line);
+#define glEGLImageTargetTextureStorageEXT(texture, image, attrib_list) glatter_glEGLImageTargetTextureStorageEXT_debug((texture), (image), (attrib_list), __FILE__, __LINE__)
+void glatter_glEGLImageTargetTextureStorageEXT_debug(GLuint texture, GLeglImageOES image, const GLint* attrib_list, const char* file, int line);
+#endif // defined(GL_EXT_EGL_image_storage)
 #if defined(GL_EXT_bindable_uniform)
 #define glGetUniformBufferSizeEXT(program, location) glatter_glGetUniformBufferSizeEXT_debug((program), (location), __FILE__, __LINE__)
 GLint glatter_glGetUniformBufferSizeEXT_debug(GLuint program, GLint location, const char* file, int line);
@@ -8829,6 +9665,12 @@ void glatter_glDrawElementsInstancedEXT_debug(GLenum mode, GLsizei count, GLenum
 #define glDrawRangeElementsEXT(mode, start, end, count, type, indices) glatter_glDrawRangeElementsEXT_debug((mode), (start), (end), (count), (type), (indices), __FILE__, __LINE__)
 void glatter_glDrawRangeElementsEXT_debug(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices, const char* file, int line);
 #endif // defined(GL_EXT_draw_range_elements)
+#if defined(GL_EXT_external_buffer)
+#define glBufferStorageExternalEXT(target, offset, size, clientBuffer, flags) glatter_glBufferStorageExternalEXT_debug((target), (offset), (size), (clientBuffer), (flags), __FILE__, __LINE__)
+void glatter_glBufferStorageExternalEXT_debug(GLenum target, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags, const char* file, int line);
+#define glNamedBufferStorageExternalEXT(buffer, offset, size, clientBuffer, flags) glatter_glNamedBufferStorageExternalEXT_debug((buffer), (offset), (size), (clientBuffer), (flags), __FILE__, __LINE__)
+void glatter_glNamedBufferStorageExternalEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags, const char* file, int line);
+#endif // defined(GL_EXT_external_buffer)
 #if defined(GL_EXT_fog_coord)
 #define glFogCoordPointerEXT(type, stride, pointer) glatter_glFogCoordPointerEXT_debug((type), (stride), (pointer), __FILE__, __LINE__)
 void glatter_glFogCoordPointerEXT_debug(GLenum type, GLsizei stride, const void *pointer, const char* file, int line);
@@ -8957,6 +9799,56 @@ void glatter_glTextureLightEXT_debug(GLenum pname, const char* file, int line);
 #define glTextureMaterialEXT(face, mode) glatter_glTextureMaterialEXT_debug((face), (mode), __FILE__, __LINE__)
 void glatter_glTextureMaterialEXT_debug(GLenum face, GLenum mode, const char* file, int line);
 #endif // defined(GL_EXT_light_texture)
+#if defined(GL_EXT_memory_object)
+#define glBufferStorageMemEXT(target, size, memory, offset) glatter_glBufferStorageMemEXT_debug((target), (size), (memory), (offset), __FILE__, __LINE__)
+void glatter_glBufferStorageMemEXT_debug(GLenum target, GLsizeiptr size, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glCreateMemoryObjectsEXT(n, memoryObjects) glatter_glCreateMemoryObjectsEXT_debug((n), (memoryObjects), __FILE__, __LINE__)
+void glatter_glCreateMemoryObjectsEXT_debug(GLsizei n, GLuint *memoryObjects, const char* file, int line);
+#define glDeleteMemoryObjectsEXT(n, memoryObjects) glatter_glDeleteMemoryObjectsEXT_debug((n), (memoryObjects), __FILE__, __LINE__)
+void glatter_glDeleteMemoryObjectsEXT_debug(GLsizei n, const GLuint *memoryObjects, const char* file, int line);
+#define glGetMemoryObjectParameterivEXT(memoryObject, pname, params) glatter_glGetMemoryObjectParameterivEXT_debug((memoryObject), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetMemoryObjectParameterivEXT_debug(GLuint memoryObject, GLenum pname, GLint *params, const char* file, int line);
+#define glGetUnsignedBytei_vEXT(target, index, data) glatter_glGetUnsignedBytei_vEXT_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetUnsignedBytei_vEXT_debug(GLenum target, GLuint index, GLubyte *data, const char* file, int line);
+#define glGetUnsignedBytevEXT(pname, data) glatter_glGetUnsignedBytevEXT_debug((pname), (data), __FILE__, __LINE__)
+void glatter_glGetUnsignedBytevEXT_debug(GLenum pname, GLubyte *data, const char* file, int line);
+#define glIsMemoryObjectEXT(memoryObject) glatter_glIsMemoryObjectEXT_debug((memoryObject), __FILE__, __LINE__)
+GLboolean glatter_glIsMemoryObjectEXT_debug(GLuint memoryObject, const char* file, int line);
+#define glMemoryObjectParameterivEXT(memoryObject, pname, params) glatter_glMemoryObjectParameterivEXT_debug((memoryObject), (pname), (params), __FILE__, __LINE__)
+void glatter_glMemoryObjectParameterivEXT_debug(GLuint memoryObject, GLenum pname, const GLint *params, const char* file, int line);
+#define glNamedBufferStorageMemEXT(buffer, size, memory, offset) glatter_glNamedBufferStorageMemEXT_debug((buffer), (size), (memory), (offset), __FILE__, __LINE__)
+void glatter_glNamedBufferStorageMemEXT_debug(GLuint buffer, GLsizeiptr size, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTexStorageMem1DEXT(target, levels, internalFormat, width, memory, offset) glatter_glTexStorageMem1DEXT_debug((target), (levels), (internalFormat), (width), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTexStorageMem1DEXT_debug(GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTexStorageMem2DEXT(target, levels, internalFormat, width, height, memory, offset) glatter_glTexStorageMem2DEXT_debug((target), (levels), (internalFormat), (width), (height), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTexStorageMem2DEXT_debug(GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTexStorageMem2DMultisampleEXT(target, samples, internalFormat, width, height, fixedSampleLocations, memory, offset) glatter_glTexStorageMem2DMultisampleEXT_debug((target), (samples), (internalFormat), (width), (height), (fixedSampleLocations), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTexStorageMem2DMultisampleEXT_debug(GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTexStorageMem3DEXT(target, levels, internalFormat, width, height, depth, memory, offset) glatter_glTexStorageMem3DEXT_debug((target), (levels), (internalFormat), (width), (height), (depth), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTexStorageMem3DEXT_debug(GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTexStorageMem3DMultisampleEXT(target, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset) glatter_glTexStorageMem3DMultisampleEXT_debug((target), (samples), (internalFormat), (width), (height), (depth), (fixedSampleLocations), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTexStorageMem3DMultisampleEXT_debug(GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTextureStorageMem1DEXT(texture, levels, internalFormat, width, memory, offset) glatter_glTextureStorageMem1DEXT_debug((texture), (levels), (internalFormat), (width), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTextureStorageMem1DEXT_debug(GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTextureStorageMem2DEXT(texture, levels, internalFormat, width, height, memory, offset) glatter_glTextureStorageMem2DEXT_debug((texture), (levels), (internalFormat), (width), (height), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTextureStorageMem2DEXT_debug(GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTextureStorageMem2DMultisampleEXT(texture, samples, internalFormat, width, height, fixedSampleLocations, memory, offset) glatter_glTextureStorageMem2DMultisampleEXT_debug((texture), (samples), (internalFormat), (width), (height), (fixedSampleLocations), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTextureStorageMem2DMultisampleEXT_debug(GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTextureStorageMem3DEXT(texture, levels, internalFormat, width, height, depth, memory, offset) glatter_glTextureStorageMem3DEXT_debug((texture), (levels), (internalFormat), (width), (height), (depth), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTextureStorageMem3DEXT_debug(GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset, const char* file, int line);
+#define glTextureStorageMem3DMultisampleEXT(texture, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset) glatter_glTextureStorageMem3DMultisampleEXT_debug((texture), (samples), (internalFormat), (width), (height), (depth), (fixedSampleLocations), (memory), (offset), __FILE__, __LINE__)
+void glatter_glTextureStorageMem3DMultisampleEXT_debug(GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset, const char* file, int line);
+#endif // defined(GL_EXT_memory_object)
+#if defined(GL_EXT_memory_object_fd)
+#define glImportMemoryFdEXT(memory, size, handleType, fd) glatter_glImportMemoryFdEXT_debug((memory), (size), (handleType), (fd), __FILE__, __LINE__)
+void glatter_glImportMemoryFdEXT_debug(GLuint memory, GLuint64 size, GLenum handleType, GLint fd, const char* file, int line);
+#endif // defined(GL_EXT_memory_object_fd)
+#if defined(GL_EXT_memory_object_win32)
+#define glImportMemoryWin32HandleEXT(memory, size, handleType, handle) glatter_glImportMemoryWin32HandleEXT_debug((memory), (size), (handleType), (handle), __FILE__, __LINE__)
+void glatter_glImportMemoryWin32HandleEXT_debug(GLuint memory, GLuint64 size, GLenum handleType, void *handle, const char* file, int line);
+#define glImportMemoryWin32NameEXT(memory, size, handleType, name) glatter_glImportMemoryWin32NameEXT_debug((memory), (size), (handleType), (name), __FILE__, __LINE__)
+void glatter_glImportMemoryWin32NameEXT_debug(GLuint memory, GLuint64 size, GLenum handleType, const void *name, const char* file, int line);
+#endif // defined(GL_EXT_memory_object_win32)
 #if defined(GL_EXT_multi_draw_arrays)
 #define glMultiDrawArraysEXT(mode, first, count, primcount) glatter_glMultiDrawArraysEXT_debug((mode), (first), (count), (primcount), __FILE__, __LINE__)
 void glatter_glMultiDrawArraysEXT_debug(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount, const char* file, int line);
@@ -9051,6 +9943,32 @@ void glatter_glSecondaryColor3usvEXT_debug(const GLushort *v, const char* file, 
 #define glSecondaryColorPointerEXT(size, type, stride, pointer) glatter_glSecondaryColorPointerEXT_debug((size), (type), (stride), (pointer), __FILE__, __LINE__)
 void glatter_glSecondaryColorPointerEXT_debug(GLint size, GLenum type, GLsizei stride, const void *pointer, const char* file, int line);
 #endif // defined(GL_EXT_secondary_color)
+#if defined(GL_EXT_semaphore)
+#define glDeleteSemaphoresEXT(n, semaphores) glatter_glDeleteSemaphoresEXT_debug((n), (semaphores), __FILE__, __LINE__)
+void glatter_glDeleteSemaphoresEXT_debug(GLsizei n, const GLuint *semaphores, const char* file, int line);
+#define glGenSemaphoresEXT(n, semaphores) glatter_glGenSemaphoresEXT_debug((n), (semaphores), __FILE__, __LINE__)
+void glatter_glGenSemaphoresEXT_debug(GLsizei n, GLuint *semaphores, const char* file, int line);
+#define glGetSemaphoreParameterui64vEXT(semaphore, pname, params) glatter_glGetSemaphoreParameterui64vEXT_debug((semaphore), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetSemaphoreParameterui64vEXT_debug(GLuint semaphore, GLenum pname, GLuint64 *params, const char* file, int line);
+#define glIsSemaphoreEXT(semaphore) glatter_glIsSemaphoreEXT_debug((semaphore), __FILE__, __LINE__)
+GLboolean glatter_glIsSemaphoreEXT_debug(GLuint semaphore, const char* file, int line);
+#define glSemaphoreParameterui64vEXT(semaphore, pname, params) glatter_glSemaphoreParameterui64vEXT_debug((semaphore), (pname), (params), __FILE__, __LINE__)
+void glatter_glSemaphoreParameterui64vEXT_debug(GLuint semaphore, GLenum pname, const GLuint64 *params, const char* file, int line);
+#define glSignalSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, dstLayouts) glatter_glSignalSemaphoreEXT_debug((semaphore), (numBufferBarriers), (buffers), (numTextureBarriers), (textures), (dstLayouts), __FILE__, __LINE__)
+void glatter_glSignalSemaphoreEXT_debug(GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *dstLayouts, const char* file, int line);
+#define glWaitSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, srcLayouts) glatter_glWaitSemaphoreEXT_debug((semaphore), (numBufferBarriers), (buffers), (numTextureBarriers), (textures), (srcLayouts), __FILE__, __LINE__)
+void glatter_glWaitSemaphoreEXT_debug(GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *srcLayouts, const char* file, int line);
+#endif // defined(GL_EXT_semaphore)
+#if defined(GL_EXT_semaphore_fd)
+#define glImportSemaphoreFdEXT(semaphore, handleType, fd) glatter_glImportSemaphoreFdEXT_debug((semaphore), (handleType), (fd), __FILE__, __LINE__)
+void glatter_glImportSemaphoreFdEXT_debug(GLuint semaphore, GLenum handleType, GLint fd, const char* file, int line);
+#endif // defined(GL_EXT_semaphore_fd)
+#if defined(GL_EXT_semaphore_win32)
+#define glImportSemaphoreWin32HandleEXT(semaphore, handleType, handle) glatter_glImportSemaphoreWin32HandleEXT_debug((semaphore), (handleType), (handle), __FILE__, __LINE__)
+void glatter_glImportSemaphoreWin32HandleEXT_debug(GLuint semaphore, GLenum handleType, void *handle, const char* file, int line);
+#define glImportSemaphoreWin32NameEXT(semaphore, handleType, name) glatter_glImportSemaphoreWin32NameEXT_debug((semaphore), (handleType), (name), __FILE__, __LINE__)
+void glatter_glImportSemaphoreWin32NameEXT_debug(GLuint semaphore, GLenum handleType, const void *name, const char* file, int line);
+#endif // defined(GL_EXT_semaphore_win32)
 #if defined(GL_EXT_separate_shader_objects)
 #define glActiveProgramEXT(program) glatter_glActiveProgramEXT_debug((program), __FILE__, __LINE__)
 void glatter_glActiveProgramEXT_debug(GLuint program, const char* file, int line);
@@ -9059,6 +9977,10 @@ GLuint glatter_glCreateShaderProgramEXT_debug(GLenum type, const GLchar *string,
 #define glUseShaderProgramEXT(type, program) glatter_glUseShaderProgramEXT_debug((type), (program), __FILE__, __LINE__)
 void glatter_glUseShaderProgramEXT_debug(GLenum type, GLuint program, const char* file, int line);
 #endif // defined(GL_EXT_separate_shader_objects)
+#if defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
+#define glFramebufferFetchBarrierEXT() glatter_glFramebufferFetchBarrierEXT_debug(__FILE__, __LINE__)
+void glatter_glFramebufferFetchBarrierEXT_debug(const char* file, int line);
+#endif // defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
 #if defined(GL_EXT_shader_image_load_store)
 #define glBindImageTextureEXT(index, texture, level, layered, layer, access, format) glatter_glBindImageTextureEXT_debug((index), (texture), (level), (layered), (layer), (access), (format), __FILE__, __LINE__)
 void glatter_glBindImageTextureEXT_debug(GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format, const char* file, int line);
@@ -9283,6 +10205,12 @@ void glatter_glVertexWeightfEXT_debug(GLfloat weight, const char* file, int line
 #define glVertexWeightfvEXT(weight) glatter_glVertexWeightfvEXT_debug((weight), __FILE__, __LINE__)
 void glatter_glVertexWeightfvEXT_debug(const GLfloat *weight, const char* file, int line);
 #endif // defined(GL_EXT_vertex_weighting)
+#if defined(GL_EXT_win32_keyed_mutex)
+#define glAcquireKeyedMutexWin32EXT(memory, key, timeout) glatter_glAcquireKeyedMutexWin32EXT_debug((memory), (key), (timeout), __FILE__, __LINE__)
+GLboolean glatter_glAcquireKeyedMutexWin32EXT_debug(GLuint memory, GLuint64 key, GLuint timeout, const char* file, int line);
+#define glReleaseKeyedMutexWin32EXT(memory, key) glatter_glReleaseKeyedMutexWin32EXT_debug((memory), (key), __FILE__, __LINE__)
+GLboolean glatter_glReleaseKeyedMutexWin32EXT_debug(GLuint memory, GLuint64 key, const char* file, int line);
+#endif // defined(GL_EXT_win32_keyed_mutex)
 #if defined(GL_EXT_window_rectangles)
 #define glWindowRectanglesEXT(mode, count, box) glatter_glWindowRectanglesEXT_debug((mode), (count), (box), __FILE__, __LINE__)
 void glatter_glWindowRectanglesEXT_debug(GLenum mode, GLsizei count, const GLint *box, const char* file, int line);
@@ -9383,7 +10311,7 @@ void glatter_glGetNextPerfQueryIdINTEL_debug(GLuint queryId, GLuint *nextQueryId
 #define glGetPerfCounterInfoINTEL(queryId, counterId, counterNameLength, counterName, counterDescLength, counterDesc, counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum, rawCounterMaxValue) glatter_glGetPerfCounterInfoINTEL_debug((queryId), (counterId), (counterNameLength), (counterName), (counterDescLength), (counterDesc), (counterOffset), (counterDataSize), (counterTypeEnum), (counterDataTypeEnum), (rawCounterMaxValue), __FILE__, __LINE__)
 void glatter_glGetPerfCounterInfoINTEL_debug(GLuint queryId, GLuint counterId, GLuint counterNameLength, GLchar *counterName, GLuint counterDescLength, GLchar *counterDesc, GLuint *counterOffset, GLuint *counterDataSize, GLuint *counterTypeEnum, GLuint *counterDataTypeEnum, GLuint64 *rawCounterMaxValue, const char* file, int line);
 #define glGetPerfQueryDataINTEL(queryHandle, flags, dataSize, data, bytesWritten) glatter_glGetPerfQueryDataINTEL_debug((queryHandle), (flags), (dataSize), (data), (bytesWritten), __FILE__, __LINE__)
-void glatter_glGetPerfQueryDataINTEL_debug(GLuint queryHandle, GLuint flags, GLsizei dataSize, GLvoid *data, GLuint *bytesWritten, const char* file, int line);
+void glatter_glGetPerfQueryDataINTEL_debug(GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten, const char* file, int line);
 #define glGetPerfQueryIdByNameINTEL(queryName, queryId) glatter_glGetPerfQueryIdByNameINTEL_debug((queryName), (queryId), __FILE__, __LINE__)
 void glatter_glGetPerfQueryIdByNameINTEL_debug(GLchar *queryName, GLuint *queryId, const char* file, int line);
 #define glGetPerfQueryInfoINTEL(queryId, queryNameLength, queryName, dataSize, noCounters, noInstances, capsMask) glatter_glGetPerfQueryInfoINTEL_debug((queryId), (queryNameLength), (queryName), (dataSize), (noCounters), (noInstances), (capsMask), __FILE__, __LINE__)
@@ -9393,6 +10321,10 @@ void glatter_glGetPerfQueryInfoINTEL_debug(GLuint queryId, GLuint queryNameLengt
 #define glBlendBarrierKHR() glatter_glBlendBarrierKHR_debug(__FILE__, __LINE__)
 void glatter_glBlendBarrierKHR_debug(const char* file, int line);
 #endif // defined(GL_KHR_blend_equation_advanced)
+#if defined(GL_KHR_parallel_shader_compile)
+#define glMaxShaderCompilerThreadsKHR(count) glatter_glMaxShaderCompilerThreadsKHR_debug((count), __FILE__, __LINE__)
+void glatter_glMaxShaderCompilerThreadsKHR_debug(GLuint count, const char* file, int line);
+#endif // defined(GL_KHR_parallel_shader_compile)
 #if defined(GL_MESA_resize_buffers)
 #define glResizeBuffersMESA() glatter_glResizeBuffersMESA_debug(__FILE__, __LINE__)
 void glatter_glResizeBuffersMESA_debug(const char* file, int line);
@@ -9453,6 +10385,18 @@ void glatter_glBeginConditionalRenderNVX_debug(GLuint id, const char* file, int 
 #define glEndConditionalRenderNVX() glatter_glEndConditionalRenderNVX_debug(__FILE__, __LINE__)
 void glatter_glEndConditionalRenderNVX_debug(const char* file, int line);
 #endif // defined(GL_NVX_conditional_render)
+#if defined(GL_NVX_linked_gpu_multicast)
+#define glLGPUCopyImageSubDataNVX(sourceGpu, destinationGpuMask, srcName, srcTarget, srcLevel, srcX, srxY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) glatter_glLGPUCopyImageSubDataNVX_debug((sourceGpu), (destinationGpuMask), (srcName), (srcTarget), (srcLevel), (srcX), (srxY), (srcZ), (dstName), (dstTarget), (dstLevel), (dstX), (dstY), (dstZ), (width), (height), (depth), __FILE__, __LINE__)
+void glatter_glLGPUCopyImageSubDataNVX_debug(GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line);
+#define glLGPUInterlockNVX() glatter_glLGPUInterlockNVX_debug(__FILE__, __LINE__)
+void glatter_glLGPUInterlockNVX_debug(const char* file, int line);
+#define glLGPUNamedBufferSubDataNVX(gpuMask, buffer, offset, size, data) glatter_glLGPUNamedBufferSubDataNVX_debug((gpuMask), (buffer), (offset), (size), (data), __FILE__, __LINE__)
+void glatter_glLGPUNamedBufferSubDataNVX_debug(GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line);
+#endif // defined(GL_NVX_linked_gpu_multicast)
+#if defined(GL_NV_alpha_to_coverage_dither_control)
+#define glAlphaToCoverageDitherControlNV(mode) glatter_glAlphaToCoverageDitherControlNV_debug((mode), __FILE__, __LINE__)
+void glatter_glAlphaToCoverageDitherControlNV_debug(GLenum mode, const char* file, int line);
+#endif // defined(GL_NV_alpha_to_coverage_dither_control)
 #if defined(GL_NV_bindless_multi_draw_indirect)
 #define glMultiDrawArraysIndirectBindlessNV(mode, indirect, drawCount, stride, vertexBufferCount) glatter_glMultiDrawArraysIndirectBindlessNV_debug((mode), (indirect), (drawCount), (stride), (vertexBufferCount), __FILE__, __LINE__)
 void glatter_glMultiDrawArraysIndirectBindlessNV_debug(GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line);
@@ -9573,6 +10517,18 @@ void glatter_glDepthRangedNV_debug(GLdouble zNear, GLdouble zFar, const char* fi
 #define glDrawTextureNV(texture, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1) glatter_glDrawTextureNV_debug((texture), (sampler), (x0), (y0), (x1), (y1), (z), (s0), (t0), (s1), (t1), __FILE__, __LINE__)
 void glatter_glDrawTextureNV_debug(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1, const char* file, int line);
 #endif // defined(GL_NV_draw_texture)
+#if defined(GL_NV_draw_vulkan_image)
+#define glDrawVkImageNV(vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1) glatter_glDrawVkImageNV_debug((vkImage), (sampler), (x0), (y0), (x1), (y1), (z), (s0), (t0), (s1), (t1), __FILE__, __LINE__)
+void glatter_glDrawVkImageNV_debug(GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1, const char* file, int line);
+#define glGetVkProcAddrNV(name) glatter_glGetVkProcAddrNV_debug((name), __FILE__, __LINE__)
+GLVULKANPROCNV glatter_glGetVkProcAddrNV_debug(const GLchar *name, const char* file, int line);
+#define glSignalVkFenceNV(vkFence) glatter_glSignalVkFenceNV_debug((vkFence), __FILE__, __LINE__)
+void glatter_glSignalVkFenceNV_debug(GLuint64 vkFence, const char* file, int line);
+#define glSignalVkSemaphoreNV(vkSemaphore) glatter_glSignalVkSemaphoreNV_debug((vkSemaphore), __FILE__, __LINE__)
+void glatter_glSignalVkSemaphoreNV_debug(GLuint64 vkSemaphore, const char* file, int line);
+#define glWaitVkSemaphoreNV(vkSemaphore) glatter_glWaitVkSemaphoreNV_debug((vkSemaphore), __FILE__, __LINE__)
+void glatter_glWaitVkSemaphoreNV_debug(GLuint64 vkSemaphore, const char* file, int line);
+#endif // defined(GL_NV_draw_vulkan_image)
 #if defined(GL_NV_evaluators)
 #define glEvalMapsNV(target, mode) glatter_glEvalMapsNV_debug((target), (mode), __FILE__, __LINE__)
 void glatter_glEvalMapsNV_debug(GLenum target, GLenum mode, const char* file, int line);
@@ -9655,6 +10611,32 @@ void glatter_glFramebufferTextureFaceEXT_debug(GLenum target, GLenum attachment,
 #define glProgramVertexLimitNV(target, limit) glatter_glProgramVertexLimitNV_debug((target), (limit), __FILE__, __LINE__)
 void glatter_glProgramVertexLimitNV_debug(GLenum target, GLint limit, const char* file, int line);
 #endif // defined(GL_NV_geometry_program4)
+#if defined(GL_NV_gpu_multicast)
+#define glMulticastBarrierNV() glatter_glMulticastBarrierNV_debug(__FILE__, __LINE__)
+void glatter_glMulticastBarrierNV_debug(const char* file, int line);
+#define glMulticastBlitFramebufferNV(srcGpu, dstGpu, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) glatter_glMulticastBlitFramebufferNV_debug((srcGpu), (dstGpu), (srcX0), (srcY0), (srcX1), (srcY1), (dstX0), (dstY0), (dstX1), (dstY1), (mask), (filter), __FILE__, __LINE__)
+void glatter_glMulticastBlitFramebufferNV_debug(GLuint srcGpu, GLuint dstGpu, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line);
+#define glMulticastBufferSubDataNV(gpuMask, buffer, offset, size, data) glatter_glMulticastBufferSubDataNV_debug((gpuMask), (buffer), (offset), (size), (data), __FILE__, __LINE__)
+void glatter_glMulticastBufferSubDataNV_debug(GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line);
+#define glMulticastCopyBufferSubDataNV(readGpu, writeGpuMask, readBuffer, writeBuffer, readOffset, writeOffset, size) glatter_glMulticastCopyBufferSubDataNV_debug((readGpu), (writeGpuMask), (readBuffer), (writeBuffer), (readOffset), (writeOffset), (size), __FILE__, __LINE__)
+void glatter_glMulticastCopyBufferSubDataNV_debug(GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line);
+#define glMulticastCopyImageSubDataNV(srcGpu, dstGpuMask, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) glatter_glMulticastCopyImageSubDataNV_debug((srcGpu), (dstGpuMask), (srcName), (srcTarget), (srcLevel), (srcX), (srcY), (srcZ), (dstName), (dstTarget), (dstLevel), (dstX), (dstY), (dstZ), (srcWidth), (srcHeight), (srcDepth), __FILE__, __LINE__)
+void glatter_glMulticastCopyImageSubDataNV_debug(GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth, const char* file, int line);
+#define glMulticastFramebufferSampleLocationsfvNV(gpu, framebuffer, start, count, v) glatter_glMulticastFramebufferSampleLocationsfvNV_debug((gpu), (framebuffer), (start), (count), (v), __FILE__, __LINE__)
+void glatter_glMulticastFramebufferSampleLocationsfvNV_debug(GLuint gpu, GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v, const char* file, int line);
+#define glMulticastGetQueryObjecti64vNV(gpu, id, pname, params) glatter_glMulticastGetQueryObjecti64vNV_debug((gpu), (id), (pname), (params), __FILE__, __LINE__)
+void glatter_glMulticastGetQueryObjecti64vNV_debug(GLuint gpu, GLuint id, GLenum pname, GLint64 *params, const char* file, int line);
+#define glMulticastGetQueryObjectivNV(gpu, id, pname, params) glatter_glMulticastGetQueryObjectivNV_debug((gpu), (id), (pname), (params), __FILE__, __LINE__)
+void glatter_glMulticastGetQueryObjectivNV_debug(GLuint gpu, GLuint id, GLenum pname, GLint *params, const char* file, int line);
+#define glMulticastGetQueryObjectui64vNV(gpu, id, pname, params) glatter_glMulticastGetQueryObjectui64vNV_debug((gpu), (id), (pname), (params), __FILE__, __LINE__)
+void glatter_glMulticastGetQueryObjectui64vNV_debug(GLuint gpu, GLuint id, GLenum pname, GLuint64 *params, const char* file, int line);
+#define glMulticastGetQueryObjectuivNV(gpu, id, pname, params) glatter_glMulticastGetQueryObjectuivNV_debug((gpu), (id), (pname), (params), __FILE__, __LINE__)
+void glatter_glMulticastGetQueryObjectuivNV_debug(GLuint gpu, GLuint id, GLenum pname, GLuint *params, const char* file, int line);
+#define glMulticastWaitSyncNV(signalGpu, waitGpuMask) glatter_glMulticastWaitSyncNV_debug((signalGpu), (waitGpuMask), __FILE__, __LINE__)
+void glatter_glMulticastWaitSyncNV_debug(GLuint signalGpu, GLbitfield waitGpuMask, const char* file, int line);
+#define glRenderGpuMaskNV(mask) glatter_glRenderGpuMaskNV_debug((mask), __FILE__, __LINE__)
+void glatter_glRenderGpuMaskNV_debug(GLbitfield mask, const char* file, int line);
+#endif // defined(GL_NV_gpu_multicast)
 #if defined(GL_NV_gpu_program4)
 #define glGetProgramEnvParameterIivNV(target, index, params) glatter_glGetProgramEnvParameterIivNV_debug((target), (index), (params), __FILE__, __LINE__)
 void glatter_glGetProgramEnvParameterIivNV_debug(GLenum target, GLuint index, GLint *params, const char* file, int line);
@@ -9979,6 +10961,18 @@ void glatter_glPrimitiveRestartIndexNV_debug(GLuint index, const char* file, int
 #define glPrimitiveRestartNV() glatter_glPrimitiveRestartNV_debug(__FILE__, __LINE__)
 void glatter_glPrimitiveRestartNV_debug(const char* file, int line);
 #endif // defined(GL_NV_primitive_restart)
+#if defined(GL_NV_query_resource)
+#define glQueryResourceNV(queryType, tagId, bufSize, buffer) glatter_glQueryResourceNV_debug((queryType), (tagId), (bufSize), (buffer), __FILE__, __LINE__)
+GLint glatter_glQueryResourceNV_debug(GLenum queryType, GLint tagId, GLuint bufSize, GLint *buffer, const char* file, int line);
+#endif // defined(GL_NV_query_resource)
+#if defined(GL_NV_query_resource_tag)
+#define glDeleteQueryResourceTagNV(n, tagIds) glatter_glDeleteQueryResourceTagNV_debug((n), (tagIds), __FILE__, __LINE__)
+void glatter_glDeleteQueryResourceTagNV_debug(GLsizei n, const GLint *tagIds, const char* file, int line);
+#define glGenQueryResourceTagNV(n, tagIds) glatter_glGenQueryResourceTagNV_debug((n), (tagIds), __FILE__, __LINE__)
+void glatter_glGenQueryResourceTagNV_debug(GLsizei n, GLint *tagIds, const char* file, int line);
+#define glQueryResourceTagNV(tagId, tagString) glatter_glQueryResourceTagNV_debug((tagId), (tagString), __FILE__, __LINE__)
+void glatter_glQueryResourceTagNV_debug(GLint tagId, const GLchar *tagString, const char* file, int line);
+#endif // defined(GL_NV_query_resource_tag)
 #if defined(GL_NV_register_combiners)
 #define glCombinerInputNV(stage, portion, variable, input, mapping, componentUsage) glatter_glCombinerInputNV_debug((stage), (portion), (variable), (input), (mapping), (componentUsage), __FILE__, __LINE__)
 void glatter_glCombinerInputNV_debug(GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage, const char* file, int line);
@@ -12462,7 +13456,1469 @@ void glatter_glVertexArrayElementBuffer_debug(GLuint vaobj, GLuint buffer, const
 void glatter_glVertexArrayVertexBuffer_debug(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride, const char* file, int line);
 #define glVertexArrayVertexBuffers(vaobj, first, count, buffers, offsets, strides) glatter_glVertexArrayVertexBuffers_debug((vaobj), (first), (count), (buffers), (offsets), (strides), __FILE__, __LINE__)
 void glatter_glVertexArrayVertexBuffers_debug(GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides, const char* file, int line);
-#endif // defined(__glext_h_)
+#endif // defined(GL_VERSION_4_5)
+#if defined(GL_VERSION_4_6)
+#define glMultiDrawArraysIndirectCount(mode, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawArraysIndirectCount_debug((mode), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
+void glatter_glMultiDrawArraysIndirectCount_debug(GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+#define glMultiDrawElementsIndirectCount(mode, type, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawElementsIndirectCount_debug((mode), (type), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
+void glatter_glMultiDrawElementsIndirectCount_debug(GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+#define glPolygonOffsetClamp(factor, units, clamp) glatter_glPolygonOffsetClamp_debug((factor), (units), (clamp), __FILE__, __LINE__)
+void glatter_glPolygonOffsetClamp_debug(GLfloat factor, GLfloat units, GLfloat clamp, const char* file, int line);
+#define glSpecializeShader(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue) glatter_glSpecializeShader_debug((shader), (pEntryPoint), (numSpecializationConstants), (pConstantIndex), (pConstantValue), __FILE__, __LINE__)
+void glatter_glSpecializeShader_debug(GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue, const char* file, int line);
+#endif // defined(GL_VERSION_4_6)
+#endif // defined(__gl_glext_h_)
+#if defined(__glcorearb_h_)
+#if defined(GL_ARB_bindless_texture)
+#define glGetImageHandleARB(texture, level, layered, layer, format) glatter_glGetImageHandleARB_debug((texture), (level), (layered), (layer), (format), __FILE__, __LINE__)
+GLuint64 glatter_glGetImageHandleARB_debug(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format, const char* file, int line);
+#define glGetTextureHandleARB(texture) glatter_glGetTextureHandleARB_debug((texture), __FILE__, __LINE__)
+GLuint64 glatter_glGetTextureHandleARB_debug(GLuint texture, const char* file, int line);
+#define glGetTextureSamplerHandleARB(texture, sampler) glatter_glGetTextureSamplerHandleARB_debug((texture), (sampler), __FILE__, __LINE__)
+GLuint64 glatter_glGetTextureSamplerHandleARB_debug(GLuint texture, GLuint sampler, const char* file, int line);
+#define glGetVertexAttribLui64vARB(index, pname, params) glatter_glGetVertexAttribLui64vARB_debug((index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetVertexAttribLui64vARB_debug(GLuint index, GLenum pname, GLuint64EXT *params, const char* file, int line);
+#define glIsImageHandleResidentARB(handle) glatter_glIsImageHandleResidentARB_debug((handle), __FILE__, __LINE__)
+GLboolean glatter_glIsImageHandleResidentARB_debug(GLuint64 handle, const char* file, int line);
+#define glIsTextureHandleResidentARB(handle) glatter_glIsTextureHandleResidentARB_debug((handle), __FILE__, __LINE__)
+GLboolean glatter_glIsTextureHandleResidentARB_debug(GLuint64 handle, const char* file, int line);
+#define glMakeImageHandleNonResidentARB(handle) glatter_glMakeImageHandleNonResidentARB_debug((handle), __FILE__, __LINE__)
+void glatter_glMakeImageHandleNonResidentARB_debug(GLuint64 handle, const char* file, int line);
+#define glMakeImageHandleResidentARB(handle, access) glatter_glMakeImageHandleResidentARB_debug((handle), (access), __FILE__, __LINE__)
+void glatter_glMakeImageHandleResidentARB_debug(GLuint64 handle, GLenum access, const char* file, int line);
+#define glMakeTextureHandleNonResidentARB(handle) glatter_glMakeTextureHandleNonResidentARB_debug((handle), __FILE__, __LINE__)
+void glatter_glMakeTextureHandleNonResidentARB_debug(GLuint64 handle, const char* file, int line);
+#define glMakeTextureHandleResidentARB(handle) glatter_glMakeTextureHandleResidentARB_debug((handle), __FILE__, __LINE__)
+void glatter_glMakeTextureHandleResidentARB_debug(GLuint64 handle, const char* file, int line);
+#define glProgramUniformHandleui64ARB(program, location, value) glatter_glProgramUniformHandleui64ARB_debug((program), (location), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformHandleui64ARB_debug(GLuint program, GLint location, GLuint64 value, const char* file, int line);
+#define glProgramUniformHandleui64vARB(program, location, count, values) glatter_glProgramUniformHandleui64vARB_debug((program), (location), (count), (values), __FILE__, __LINE__)
+void glatter_glProgramUniformHandleui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *values, const char* file, int line);
+#define glUniformHandleui64ARB(location, value) glatter_glUniformHandleui64ARB_debug((location), (value), __FILE__, __LINE__)
+void glatter_glUniformHandleui64ARB_debug(GLint location, GLuint64 value, const char* file, int line);
+#define glUniformHandleui64vARB(location, count, value) glatter_glUniformHandleui64vARB_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniformHandleui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line);
+#define glVertexAttribL1ui64ARB(index, x) glatter_glVertexAttribL1ui64ARB_debug((index), (x), __FILE__, __LINE__)
+void glatter_glVertexAttribL1ui64ARB_debug(GLuint index, GLuint64EXT x, const char* file, int line);
+#define glVertexAttribL1ui64vARB(index, v) glatter_glVertexAttribL1ui64vARB_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL1ui64vARB_debug(GLuint index, const GLuint64EXT *v, const char* file, int line);
+#endif // defined(GL_ARB_bindless_texture)
+#if defined(GL_ARB_cl_event)
+#define glCreateSyncFromCLeventARB(context, event, flags) glatter_glCreateSyncFromCLeventARB_debug((context), (event), (flags), __FILE__, __LINE__)
+GLsync glatter_glCreateSyncFromCLeventARB_debug(struct _cl_context *context, struct _cl_event *event, GLbitfield flags, const char* file, int line);
+#endif // defined(GL_ARB_cl_event)
+#if defined(GL_ARB_compute_variable_group_size)
+#define glDispatchComputeGroupSizeARB(num_groups_x, num_groups_y, num_groups_z, group_size_x, group_size_y, group_size_z) glatter_glDispatchComputeGroupSizeARB_debug((num_groups_x), (num_groups_y), (num_groups_z), (group_size_x), (group_size_y), (group_size_z), __FILE__, __LINE__)
+void glatter_glDispatchComputeGroupSizeARB_debug(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z, const char* file, int line);
+#endif // defined(GL_ARB_compute_variable_group_size)
+#if defined(GL_ARB_debug_output)
+#define glDebugMessageCallbackARB(callback, userParam) glatter_glDebugMessageCallbackARB_debug((callback), (userParam), __FILE__, __LINE__)
+void glatter_glDebugMessageCallbackARB_debug(GLDEBUGPROCARB callback, const void *userParam, const char* file, int line);
+#define glDebugMessageControlARB(source, type, severity, count, ids, enabled) glatter_glDebugMessageControlARB_debug((source), (type), (severity), (count), (ids), (enabled), __FILE__, __LINE__)
+void glatter_glDebugMessageControlARB_debug(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled, const char* file, int line);
+#define glDebugMessageInsertARB(source, type, id, severity, length, buf) glatter_glDebugMessageInsertARB_debug((source), (type), (id), (severity), (length), (buf), __FILE__, __LINE__)
+void glatter_glDebugMessageInsertARB_debug(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf, const char* file, int line);
+#define glGetDebugMessageLogARB(count, bufSize, sources, types, ids, severities, lengths, messageLog) glatter_glGetDebugMessageLogARB_debug((count), (bufSize), (sources), (types), (ids), (severities), (lengths), (messageLog), __FILE__, __LINE__)
+GLuint glatter_glGetDebugMessageLogARB_debug(GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog, const char* file, int line);
+#endif // defined(GL_ARB_debug_output)
+#if defined(GL_ARB_draw_buffers_blend)
+#define glBlendEquationSeparateiARB(buf, modeRGB, modeAlpha) glatter_glBlendEquationSeparateiARB_debug((buf), (modeRGB), (modeAlpha), __FILE__, __LINE__)
+void glatter_glBlendEquationSeparateiARB_debug(GLuint buf, GLenum modeRGB, GLenum modeAlpha, const char* file, int line);
+#define glBlendEquationiARB(buf, mode) glatter_glBlendEquationiARB_debug((buf), (mode), __FILE__, __LINE__)
+void glatter_glBlendEquationiARB_debug(GLuint buf, GLenum mode, const char* file, int line);
+#define glBlendFuncSeparateiARB(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) glatter_glBlendFuncSeparateiARB_debug((buf), (srcRGB), (dstRGB), (srcAlpha), (dstAlpha), __FILE__, __LINE__)
+void glatter_glBlendFuncSeparateiARB_debug(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha, const char* file, int line);
+#define glBlendFunciARB(buf, src, dst) glatter_glBlendFunciARB_debug((buf), (src), (dst), __FILE__, __LINE__)
+void glatter_glBlendFunciARB_debug(GLuint buf, GLenum src, GLenum dst, const char* file, int line);
+#endif // defined(GL_ARB_draw_buffers_blend)
+#if defined(GL_ARB_indirect_parameters)
+#define glMultiDrawArraysIndirectCountARB(mode, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawArraysIndirectCountARB_debug((mode), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
+void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+#define glMultiDrawElementsIndirectCountARB(mode, type, indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawElementsIndirectCountARB_debug((mode), (type), (indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
+void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+#endif // defined(GL_ARB_indirect_parameters)
+#if defined(GL_ARB_robustness)
+#define glGetGraphicsResetStatusARB() glatter_glGetGraphicsResetStatusARB_debug(__FILE__, __LINE__)
+GLenum glatter_glGetGraphicsResetStatusARB_debug(const char* file, int line);
+#define glGetnCompressedTexImageARB(target, lod, bufSize, img) glatter_glGetnCompressedTexImageARB_debug((target), (lod), (bufSize), (img), __FILE__, __LINE__)
+void glatter_glGetnCompressedTexImageARB_debug(GLenum target, GLint lod, GLsizei bufSize, void *img, const char* file, int line);
+#define glGetnTexImageARB(target, level, format, type, bufSize, img) glatter_glGetnTexImageARB_debug((target), (level), (format), (type), (bufSize), (img), __FILE__, __LINE__)
+void glatter_glGetnTexImageARB_debug(GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *img, const char* file, int line);
+#define glGetnUniformdvARB(program, location, bufSize, params) glatter_glGetnUniformdvARB_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformdvARB_debug(GLuint program, GLint location, GLsizei bufSize, GLdouble *params, const char* file, int line);
+#define glGetnUniformfvARB(program, location, bufSize, params) glatter_glGetnUniformfvARB_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformfvARB_debug(GLuint program, GLint location, GLsizei bufSize, GLfloat *params, const char* file, int line);
+#define glGetnUniformivARB(program, location, bufSize, params) glatter_glGetnUniformivARB_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformivARB_debug(GLuint program, GLint location, GLsizei bufSize, GLint *params, const char* file, int line);
+#define glGetnUniformuivARB(program, location, bufSize, params) glatter_glGetnUniformuivARB_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformuivARB_debug(GLuint program, GLint location, GLsizei bufSize, GLuint *params, const char* file, int line);
+#define glReadnPixelsARB(x, y, width, height, format, type, bufSize, data) glatter_glReadnPixelsARB_debug((x), (y), (width), (height), (format), (type), (bufSize), (data), __FILE__, __LINE__)
+void glatter_glReadnPixelsARB_debug(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data, const char* file, int line);
+#endif // defined(GL_ARB_robustness)
+#if defined(GL_ARB_sample_shading)
+#define glMinSampleShadingARB(value) glatter_glMinSampleShadingARB_debug((value), __FILE__, __LINE__)
+void glatter_glMinSampleShadingARB_debug(GLfloat value, const char* file, int line);
+#endif // defined(GL_ARB_sample_shading)
+#if defined(GL_ARB_shading_language_include)
+#define glCompileShaderIncludeARB(shader, count, path, length) glatter_glCompileShaderIncludeARB_debug((shader), (count), (path), (length), __FILE__, __LINE__)
+void glatter_glCompileShaderIncludeARB_debug(GLuint shader, GLsizei count, const GLchar *const*path, const GLint *length, const char* file, int line);
+#define glDeleteNamedStringARB(namelen, name) glatter_glDeleteNamedStringARB_debug((namelen), (name), __FILE__, __LINE__)
+void glatter_glDeleteNamedStringARB_debug(GLint namelen, const GLchar *name, const char* file, int line);
+#define glGetNamedStringARB(namelen, name, bufSize, stringlen, string) glatter_glGetNamedStringARB_debug((namelen), (name), (bufSize), (stringlen), (string), __FILE__, __LINE__)
+void glatter_glGetNamedStringARB_debug(GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string, const char* file, int line);
+#define glGetNamedStringivARB(namelen, name, pname, params) glatter_glGetNamedStringivARB_debug((namelen), (name), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedStringivARB_debug(GLint namelen, const GLchar *name, GLenum pname, GLint *params, const char* file, int line);
+#define glIsNamedStringARB(namelen, name) glatter_glIsNamedStringARB_debug((namelen), (name), __FILE__, __LINE__)
+GLboolean glatter_glIsNamedStringARB_debug(GLint namelen, const GLchar *name, const char* file, int line);
+#define glNamedStringARB(type, namelen, name, stringlen, string) glatter_glNamedStringARB_debug((type), (namelen), (name), (stringlen), (string), __FILE__, __LINE__)
+void glatter_glNamedStringARB_debug(GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string, const char* file, int line);
+#endif // defined(GL_ARB_shading_language_include)
+#if defined(GL_ARB_sparse_buffer)
+#define glBufferPageCommitmentARB(target, offset, size, commit) glatter_glBufferPageCommitmentARB_debug((target), (offset), (size), (commit), __FILE__, __LINE__)
+void glatter_glBufferPageCommitmentARB_debug(GLenum target, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line);
+#define glNamedBufferPageCommitmentARB(buffer, offset, size, commit) glatter_glNamedBufferPageCommitmentARB_debug((buffer), (offset), (size), (commit), __FILE__, __LINE__)
+void glatter_glNamedBufferPageCommitmentARB_debug(GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line);
+#define glNamedBufferPageCommitmentEXT(buffer, offset, size, commit) glatter_glNamedBufferPageCommitmentEXT_debug((buffer), (offset), (size), (commit), __FILE__, __LINE__)
+void glatter_glNamedBufferPageCommitmentEXT_debug(GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line);
+#endif // defined(GL_ARB_sparse_buffer)
+#if defined(GL_ARB_sparse_texture)
+#define glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth, resident) glatter_glTexPageCommitmentARB_debug((target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (resident), __FILE__, __LINE__)
+void glatter_glTexPageCommitmentARB_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident, const char* file, int line);
+#endif // defined(GL_ARB_sparse_texture)
+#if defined(GL_VERSION_1_0)
+#define glBlendFunc(sfactor, dfactor) glatter_glBlendFunc_debug((sfactor), (dfactor), __FILE__, __LINE__)
+void glatter_glBlendFunc_debug(GLenum sfactor, GLenum dfactor, const char* file, int line);
+#define glClear(mask) glatter_glClear_debug((mask), __FILE__, __LINE__)
+void glatter_glClear_debug(GLbitfield mask, const char* file, int line);
+#define glClearColor(red, green, blue, alpha) glatter_glClearColor_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+void glatter_glClearColor_debug(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha, const char* file, int line);
+#define glClearDepth(depth) glatter_glClearDepth_debug((depth), __FILE__, __LINE__)
+void glatter_glClearDepth_debug(GLdouble depth, const char* file, int line);
+#define glClearStencil(s) glatter_glClearStencil_debug((s), __FILE__, __LINE__)
+void glatter_glClearStencil_debug(GLint s, const char* file, int line);
+#define glColorMask(red, green, blue, alpha) glatter_glColorMask_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+void glatter_glColorMask_debug(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha, const char* file, int line);
+#define glCullFace(mode) glatter_glCullFace_debug((mode), __FILE__, __LINE__)
+void glatter_glCullFace_debug(GLenum mode, const char* file, int line);
+#define glDepthFunc(func) glatter_glDepthFunc_debug((func), __FILE__, __LINE__)
+void glatter_glDepthFunc_debug(GLenum func, const char* file, int line);
+#define glDepthMask(flag) glatter_glDepthMask_debug((flag), __FILE__, __LINE__)
+void glatter_glDepthMask_debug(GLboolean flag, const char* file, int line);
+#define glDepthRange(near, far) glatter_glDepthRange_debug((near), (far), __FILE__, __LINE__)
+void glatter_glDepthRange_debug(GLdouble near, GLdouble far, const char* file, int line);
+#define glDisable(cap) glatter_glDisable_debug((cap), __FILE__, __LINE__)
+void glatter_glDisable_debug(GLenum cap, const char* file, int line);
+#define glDrawBuffer(buf) glatter_glDrawBuffer_debug((buf), __FILE__, __LINE__)
+void glatter_glDrawBuffer_debug(GLenum buf, const char* file, int line);
+#define glEnable(cap) glatter_glEnable_debug((cap), __FILE__, __LINE__)
+void glatter_glEnable_debug(GLenum cap, const char* file, int line);
+#define glFinish() glatter_glFinish_debug(__FILE__, __LINE__)
+void glatter_glFinish_debug(const char* file, int line);
+#define glFlush() glatter_glFlush_debug(__FILE__, __LINE__)
+void glatter_glFlush_debug(const char* file, int line);
+#define glFrontFace(mode) glatter_glFrontFace_debug((mode), __FILE__, __LINE__)
+void glatter_glFrontFace_debug(GLenum mode, const char* file, int line);
+#define glGetBooleanv(pname, data) glatter_glGetBooleanv_debug((pname), (data), __FILE__, __LINE__)
+void glatter_glGetBooleanv_debug(GLenum pname, GLboolean *data, const char* file, int line);
+#define glGetDoublev(pname, data) glatter_glGetDoublev_debug((pname), (data), __FILE__, __LINE__)
+void glatter_glGetDoublev_debug(GLenum pname, GLdouble *data, const char* file, int line);
+#define glGetError() glatter_glGetError_debug(__FILE__, __LINE__)
+GLenum glatter_glGetError_debug(const char* file, int line);
+#define glGetFloatv(pname, data) glatter_glGetFloatv_debug((pname), (data), __FILE__, __LINE__)
+void glatter_glGetFloatv_debug(GLenum pname, GLfloat *data, const char* file, int line);
+#define glGetIntegerv(pname, data) glatter_glGetIntegerv_debug((pname), (data), __FILE__, __LINE__)
+void glatter_glGetIntegerv_debug(GLenum pname, GLint *data, const char* file, int line);
+#define glGetString(name) glatter_glGetString_debug((name), __FILE__, __LINE__)
+const GLubyte * glatter_glGetString_debug(GLenum name, const char* file, int line);
+#define glGetTexImage(target, level, format, type, pixels) glatter_glGetTexImage_debug((target), (level), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glGetTexImage_debug(GLenum target, GLint level, GLenum format, GLenum type, void *pixels, const char* file, int line);
+#define glGetTexLevelParameterfv(target, level, pname, params) glatter_glGetTexLevelParameterfv_debug((target), (level), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTexLevelParameterfv_debug(GLenum target, GLint level, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetTexLevelParameteriv(target, level, pname, params) glatter_glGetTexLevelParameteriv_debug((target), (level), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTexLevelParameteriv_debug(GLenum target, GLint level, GLenum pname, GLint *params, const char* file, int line);
+#define glGetTexParameterfv(target, pname, params) glatter_glGetTexParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTexParameterfv_debug(GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetTexParameteriv(target, pname, params) glatter_glGetTexParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTexParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glHint(target, mode) glatter_glHint_debug((target), (mode), __FILE__, __LINE__)
+void glatter_glHint_debug(GLenum target, GLenum mode, const char* file, int line);
+#define glIsEnabled(cap) glatter_glIsEnabled_debug((cap), __FILE__, __LINE__)
+GLboolean glatter_glIsEnabled_debug(GLenum cap, const char* file, int line);
+#define glLineWidth(width) glatter_glLineWidth_debug((width), __FILE__, __LINE__)
+void glatter_glLineWidth_debug(GLfloat width, const char* file, int line);
+#define glLogicOp(opcode) glatter_glLogicOp_debug((opcode), __FILE__, __LINE__)
+void glatter_glLogicOp_debug(GLenum opcode, const char* file, int line);
+#define glPixelStoref(pname, param) glatter_glPixelStoref_debug((pname), (param), __FILE__, __LINE__)
+void glatter_glPixelStoref_debug(GLenum pname, GLfloat param, const char* file, int line);
+#define glPixelStorei(pname, param) glatter_glPixelStorei_debug((pname), (param), __FILE__, __LINE__)
+void glatter_glPixelStorei_debug(GLenum pname, GLint param, const char* file, int line);
+#define glPointSize(size) glatter_glPointSize_debug((size), __FILE__, __LINE__)
+void glatter_glPointSize_debug(GLfloat size, const char* file, int line);
+#define glPolygonMode(face, mode) glatter_glPolygonMode_debug((face), (mode), __FILE__, __LINE__)
+void glatter_glPolygonMode_debug(GLenum face, GLenum mode, const char* file, int line);
+#define glReadBuffer(src) glatter_glReadBuffer_debug((src), __FILE__, __LINE__)
+void glatter_glReadBuffer_debug(GLenum src, const char* file, int line);
+#define glReadPixels(x, y, width, height, format, type, pixels) glatter_glReadPixels_debug((x), (y), (width), (height), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glReadPixels_debug(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void *pixels, const char* file, int line);
+#define glScissor(x, y, width, height) glatter_glScissor_debug((x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glScissor_debug(GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glStencilFunc(func, ref, mask) glatter_glStencilFunc_debug((func), (ref), (mask), __FILE__, __LINE__)
+void glatter_glStencilFunc_debug(GLenum func, GLint ref, GLuint mask, const char* file, int line);
+#define glStencilMask(mask) glatter_glStencilMask_debug((mask), __FILE__, __LINE__)
+void glatter_glStencilMask_debug(GLuint mask, const char* file, int line);
+#define glStencilOp(fail, zfail, zpass) glatter_glStencilOp_debug((fail), (zfail), (zpass), __FILE__, __LINE__)
+void glatter_glStencilOp_debug(GLenum fail, GLenum zfail, GLenum zpass, const char* file, int line);
+#define glTexImage1D(target, level, internalformat, width, border, format, type, pixels) glatter_glTexImage1D_debug((target), (level), (internalformat), (width), (border), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTexImage1D_debug(GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels) glatter_glTexImage2D_debug((target), (level), (internalformat), (width), (height), (border), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTexImage2D_debug(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTexParameterf(target, pname, param) glatter_glTexParameterf_debug((target), (pname), (param), __FILE__, __LINE__)
+void glatter_glTexParameterf_debug(GLenum target, GLenum pname, GLfloat param, const char* file, int line);
+#define glTexParameterfv(target, pname, params) glatter_glTexParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glTexParameterfv_debug(GLenum target, GLenum pname, const GLfloat *params, const char* file, int line);
+#define glTexParameteri(target, pname, param) glatter_glTexParameteri_debug((target), (pname), (param), __FILE__, __LINE__)
+void glatter_glTexParameteri_debug(GLenum target, GLenum pname, GLint param, const char* file, int line);
+#define glTexParameteriv(target, pname, params) glatter_glTexParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glTexParameteriv_debug(GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#define glViewport(x, y, width, height) glatter_glViewport_debug((x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glViewport_debug(GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#endif // defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_1)
+#define glBindTexture(target, texture) glatter_glBindTexture_debug((target), (texture), __FILE__, __LINE__)
+void glatter_glBindTexture_debug(GLenum target, GLuint texture, const char* file, int line);
+#define glCopyTexImage1D(target, level, internalformat, x, y, width, border) glatter_glCopyTexImage1D_debug((target), (level), (internalformat), (x), (y), (width), (border), __FILE__, __LINE__)
+void glatter_glCopyTexImage1D_debug(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border, const char* file, int line);
+#define glCopyTexImage2D(target, level, internalformat, x, y, width, height, border) glatter_glCopyTexImage2D_debug((target), (level), (internalformat), (x), (y), (width), (height), (border), __FILE__, __LINE__)
+void glatter_glCopyTexImage2D_debug(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border, const char* file, int line);
+#define glCopyTexSubImage1D(target, level, xoffset, x, y, width) glatter_glCopyTexSubImage1D_debug((target), (level), (xoffset), (x), (y), (width), __FILE__, __LINE__)
+void glatter_glCopyTexSubImage1D_debug(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line);
+#define glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) glatter_glCopyTexSubImage2D_debug((target), (level), (xoffset), (yoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glCopyTexSubImage2D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glDeleteTextures(n, textures) glatter_glDeleteTextures_debug((n), (textures), __FILE__, __LINE__)
+void glatter_glDeleteTextures_debug(GLsizei n, const GLuint *textures, const char* file, int line);
+#define glDrawArrays(mode, first, count) glatter_glDrawArrays_debug((mode), (first), (count), __FILE__, __LINE__)
+void glatter_glDrawArrays_debug(GLenum mode, GLint first, GLsizei count, const char* file, int line);
+#define glDrawElements(mode, count, type, indices) glatter_glDrawElements_debug((mode), (count), (type), (indices), __FILE__, __LINE__)
+void glatter_glDrawElements_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, const char* file, int line);
+#define glGenTextures(n, textures) glatter_glGenTextures_debug((n), (textures), __FILE__, __LINE__)
+void glatter_glGenTextures_debug(GLsizei n, GLuint *textures, const char* file, int line);
+#define glGetPointerv(pname, params) glatter_glGetPointerv_debug((pname), (params), __FILE__, __LINE__)
+void glatter_glGetPointerv_debug(GLenum pname, void **params, const char* file, int line);
+#define glIsTexture(texture) glatter_glIsTexture_debug((texture), __FILE__, __LINE__)
+GLboolean glatter_glIsTexture_debug(GLuint texture, const char* file, int line);
+#define glPolygonOffset(factor, units) glatter_glPolygonOffset_debug((factor), (units), __FILE__, __LINE__)
+void glatter_glPolygonOffset_debug(GLfloat factor, GLfloat units, const char* file, int line);
+#define glTexSubImage1D(target, level, xoffset, width, format, type, pixels) glatter_glTexSubImage1D_debug((target), (level), (xoffset), (width), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTexSubImage1D_debug(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) glatter_glTexSubImage2D_debug((target), (level), (xoffset), (yoffset), (width), (height), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTexSubImage2D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#endif // defined(GL_VERSION_1_1)
+#if defined(GL_VERSION_1_2)
+#define glCopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height) glatter_glCopyTexSubImage3D_debug((target), (level), (xoffset), (yoffset), (zoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glCopyTexSubImage3D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glDrawRangeElements(mode, start, end, count, type, indices) glatter_glDrawRangeElements_debug((mode), (start), (end), (count), (type), (indices), __FILE__, __LINE__)
+void glatter_glDrawRangeElements_debug(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices, const char* file, int line);
+#define glTexImage3D(target, level, internalformat, width, height, depth, border, format, type, pixels) glatter_glTexImage3D_debug((target), (level), (internalformat), (width), (height), (depth), (border), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTexImage3D_debug(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) glatter_glTexSubImage3D_debug((target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTexSubImage3D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#endif // defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_3)
+#define glActiveTexture(texture) glatter_glActiveTexture_debug((texture), __FILE__, __LINE__)
+void glatter_glActiveTexture_debug(GLenum texture, const char* file, int line);
+#define glCompressedTexImage1D(target, level, internalformat, width, border, imageSize, data) glatter_glCompressedTexImage1D_debug((target), (level), (internalformat), (width), (border), (imageSize), (data), __FILE__, __LINE__)
+void glatter_glCompressedTexImage1D_debug(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data, const char* file, int line);
+#define glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data) glatter_glCompressedTexImage2D_debug((target), (level), (internalformat), (width), (height), (border), (imageSize), (data), __FILE__, __LINE__)
+void glatter_glCompressedTexImage2D_debug(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data, const char* file, int line);
+#define glCompressedTexImage3D(target, level, internalformat, width, height, depth, border, imageSize, data) glatter_glCompressedTexImage3D_debug((target), (level), (internalformat), (width), (height), (depth), (border), (imageSize), (data), __FILE__, __LINE__)
+void glatter_glCompressedTexImage3D_debug(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *data, const char* file, int line);
+#define glCompressedTexSubImage1D(target, level, xoffset, width, format, imageSize, data) glatter_glCompressedTexSubImage1D_debug((target), (level), (xoffset), (width), (format), (imageSize), (data), __FILE__, __LINE__)
+void glatter_glCompressedTexSubImage1D_debug(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data, const char* file, int line);
+#define glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) glatter_glCompressedTexSubImage2D_debug((target), (level), (xoffset), (yoffset), (width), (height), (format), (imageSize), (data), __FILE__, __LINE__)
+void glatter_glCompressedTexSubImage2D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data, const char* file, int line);
+#define glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) glatter_glCompressedTexSubImage3D_debug((target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (imageSize), (data), __FILE__, __LINE__)
+void glatter_glCompressedTexSubImage3D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data, const char* file, int line);
+#define glGetCompressedTexImage(target, level, img) glatter_glGetCompressedTexImage_debug((target), (level), (img), __FILE__, __LINE__)
+void glatter_glGetCompressedTexImage_debug(GLenum target, GLint level, void *img, const char* file, int line);
+#define glSampleCoverage(value, invert) glatter_glSampleCoverage_debug((value), (invert), __FILE__, __LINE__)
+void glatter_glSampleCoverage_debug(GLfloat value, GLboolean invert, const char* file, int line);
+#endif // defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_4)
+#define glBlendColor(red, green, blue, alpha) glatter_glBlendColor_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+void glatter_glBlendColor_debug(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha, const char* file, int line);
+#define glBlendEquation(mode) glatter_glBlendEquation_debug((mode), __FILE__, __LINE__)
+void glatter_glBlendEquation_debug(GLenum mode, const char* file, int line);
+#define glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) glatter_glBlendFuncSeparate_debug((sfactorRGB), (dfactorRGB), (sfactorAlpha), (dfactorAlpha), __FILE__, __LINE__)
+void glatter_glBlendFuncSeparate_debug(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha, const char* file, int line);
+#define glMultiDrawArrays(mode, first, count, drawcount) glatter_glMultiDrawArrays_debug((mode), (first), (count), (drawcount), __FILE__, __LINE__)
+void glatter_glMultiDrawArrays_debug(GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount, const char* file, int line);
+#define glMultiDrawElements(mode, count, type, indices, drawcount) glatter_glMultiDrawElements_debug((mode), (count), (type), (indices), (drawcount), __FILE__, __LINE__)
+void glatter_glMultiDrawElements_debug(GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei drawcount, const char* file, int line);
+#define glPointParameterf(pname, param) glatter_glPointParameterf_debug((pname), (param), __FILE__, __LINE__)
+void glatter_glPointParameterf_debug(GLenum pname, GLfloat param, const char* file, int line);
+#define glPointParameterfv(pname, params) glatter_glPointParameterfv_debug((pname), (params), __FILE__, __LINE__)
+void glatter_glPointParameterfv_debug(GLenum pname, const GLfloat *params, const char* file, int line);
+#define glPointParameteri(pname, param) glatter_glPointParameteri_debug((pname), (param), __FILE__, __LINE__)
+void glatter_glPointParameteri_debug(GLenum pname, GLint param, const char* file, int line);
+#define glPointParameteriv(pname, params) glatter_glPointParameteriv_debug((pname), (params), __FILE__, __LINE__)
+void glatter_glPointParameteriv_debug(GLenum pname, const GLint *params, const char* file, int line);
+#endif // defined(GL_VERSION_1_4)
+#if defined(GL_VERSION_1_5)
+#define glBeginQuery(target, id) glatter_glBeginQuery_debug((target), (id), __FILE__, __LINE__)
+void glatter_glBeginQuery_debug(GLenum target, GLuint id, const char* file, int line);
+#define glBindBuffer(target, buffer) glatter_glBindBuffer_debug((target), (buffer), __FILE__, __LINE__)
+void glatter_glBindBuffer_debug(GLenum target, GLuint buffer, const char* file, int line);
+#define glBufferData(target, size, data, usage) glatter_glBufferData_debug((target), (size), (data), (usage), __FILE__, __LINE__)
+void glatter_glBufferData_debug(GLenum target, GLsizeiptr size, const void *data, GLenum usage, const char* file, int line);
+#define glBufferSubData(target, offset, size, data) glatter_glBufferSubData_debug((target), (offset), (size), (data), __FILE__, __LINE__)
+void glatter_glBufferSubData_debug(GLenum target, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line);
+#define glDeleteBuffers(n, buffers) glatter_glDeleteBuffers_debug((n), (buffers), __FILE__, __LINE__)
+void glatter_glDeleteBuffers_debug(GLsizei n, const GLuint *buffers, const char* file, int line);
+#define glDeleteQueries(n, ids) glatter_glDeleteQueries_debug((n), (ids), __FILE__, __LINE__)
+void glatter_glDeleteQueries_debug(GLsizei n, const GLuint *ids, const char* file, int line);
+#define glEndQuery(target) glatter_glEndQuery_debug((target), __FILE__, __LINE__)
+void glatter_glEndQuery_debug(GLenum target, const char* file, int line);
+#define glGenBuffers(n, buffers) glatter_glGenBuffers_debug((n), (buffers), __FILE__, __LINE__)
+void glatter_glGenBuffers_debug(GLsizei n, GLuint *buffers, const char* file, int line);
+#define glGenQueries(n, ids) glatter_glGenQueries_debug((n), (ids), __FILE__, __LINE__)
+void glatter_glGenQueries_debug(GLsizei n, GLuint *ids, const char* file, int line);
+#define glGetBufferParameteriv(target, pname, params) glatter_glGetBufferParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetBufferParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetBufferPointerv(target, pname, params) glatter_glGetBufferPointerv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetBufferPointerv_debug(GLenum target, GLenum pname, void **params, const char* file, int line);
+#define glGetBufferSubData(target, offset, size, data) glatter_glGetBufferSubData_debug((target), (offset), (size), (data), __FILE__, __LINE__)
+void glatter_glGetBufferSubData_debug(GLenum target, GLintptr offset, GLsizeiptr size, void *data, const char* file, int line);
+#define glGetQueryObjectiv(id, pname, params) glatter_glGetQueryObjectiv_debug((id), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetQueryObjectiv_debug(GLuint id, GLenum pname, GLint *params, const char* file, int line);
+#define glGetQueryObjectuiv(id, pname, params) glatter_glGetQueryObjectuiv_debug((id), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetQueryObjectuiv_debug(GLuint id, GLenum pname, GLuint *params, const char* file, int line);
+#define glGetQueryiv(target, pname, params) glatter_glGetQueryiv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetQueryiv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glIsBuffer(buffer) glatter_glIsBuffer_debug((buffer), __FILE__, __LINE__)
+GLboolean glatter_glIsBuffer_debug(GLuint buffer, const char* file, int line);
+#define glIsQuery(id) glatter_glIsQuery_debug((id), __FILE__, __LINE__)
+GLboolean glatter_glIsQuery_debug(GLuint id, const char* file, int line);
+#define glMapBuffer(target, access) glatter_glMapBuffer_debug((target), (access), __FILE__, __LINE__)
+void * glatter_glMapBuffer_debug(GLenum target, GLenum access, const char* file, int line);
+#define glUnmapBuffer(target) glatter_glUnmapBuffer_debug((target), __FILE__, __LINE__)
+GLboolean glatter_glUnmapBuffer_debug(GLenum target, const char* file, int line);
+#endif // defined(GL_VERSION_1_5)
+#if defined(GL_VERSION_2_0)
+#define glAttachShader(program, shader) glatter_glAttachShader_debug((program), (shader), __FILE__, __LINE__)
+void glatter_glAttachShader_debug(GLuint program, GLuint shader, const char* file, int line);
+#define glBindAttribLocation(program, index, name) glatter_glBindAttribLocation_debug((program), (index), (name), __FILE__, __LINE__)
+void glatter_glBindAttribLocation_debug(GLuint program, GLuint index, const GLchar *name, const char* file, int line);
+#define glBlendEquationSeparate(modeRGB, modeAlpha) glatter_glBlendEquationSeparate_debug((modeRGB), (modeAlpha), __FILE__, __LINE__)
+void glatter_glBlendEquationSeparate_debug(GLenum modeRGB, GLenum modeAlpha, const char* file, int line);
+#define glCompileShader(shader) glatter_glCompileShader_debug((shader), __FILE__, __LINE__)
+void glatter_glCompileShader_debug(GLuint shader, const char* file, int line);
+#define glCreateProgram() glatter_glCreateProgram_debug(__FILE__, __LINE__)
+GLuint glatter_glCreateProgram_debug(const char* file, int line);
+#define glCreateShader(type) glatter_glCreateShader_debug((type), __FILE__, __LINE__)
+GLuint glatter_glCreateShader_debug(GLenum type, const char* file, int line);
+#define glDeleteProgram(program) glatter_glDeleteProgram_debug((program), __FILE__, __LINE__)
+void glatter_glDeleteProgram_debug(GLuint program, const char* file, int line);
+#define glDeleteShader(shader) glatter_glDeleteShader_debug((shader), __FILE__, __LINE__)
+void glatter_glDeleteShader_debug(GLuint shader, const char* file, int line);
+#define glDetachShader(program, shader) glatter_glDetachShader_debug((program), (shader), __FILE__, __LINE__)
+void glatter_glDetachShader_debug(GLuint program, GLuint shader, const char* file, int line);
+#define glDisableVertexAttribArray(index) glatter_glDisableVertexAttribArray_debug((index), __FILE__, __LINE__)
+void glatter_glDisableVertexAttribArray_debug(GLuint index, const char* file, int line);
+#define glDrawBuffers(n, bufs) glatter_glDrawBuffers_debug((n), (bufs), __FILE__, __LINE__)
+void glatter_glDrawBuffers_debug(GLsizei n, const GLenum *bufs, const char* file, int line);
+#define glEnableVertexAttribArray(index) glatter_glEnableVertexAttribArray_debug((index), __FILE__, __LINE__)
+void glatter_glEnableVertexAttribArray_debug(GLuint index, const char* file, int line);
+#define glGetActiveAttrib(program, index, bufSize, length, size, type, name) glatter_glGetActiveAttrib_debug((program), (index), (bufSize), (length), (size), (type), (name), __FILE__, __LINE__)
+void glatter_glGetActiveAttrib_debug(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name, const char* file, int line);
+#define glGetActiveUniform(program, index, bufSize, length, size, type, name) glatter_glGetActiveUniform_debug((program), (index), (bufSize), (length), (size), (type), (name), __FILE__, __LINE__)
+void glatter_glGetActiveUniform_debug(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name, const char* file, int line);
+#define glGetAttachedShaders(program, maxCount, count, shaders) glatter_glGetAttachedShaders_debug((program), (maxCount), (count), (shaders), __FILE__, __LINE__)
+void glatter_glGetAttachedShaders_debug(GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders, const char* file, int line);
+#define glGetAttribLocation(program, name) glatter_glGetAttribLocation_debug((program), (name), __FILE__, __LINE__)
+GLint glatter_glGetAttribLocation_debug(GLuint program, const GLchar *name, const char* file, int line);
+#define glGetProgramInfoLog(program, bufSize, length, infoLog) glatter_glGetProgramInfoLog_debug((program), (bufSize), (length), (infoLog), __FILE__, __LINE__)
+void glatter_glGetProgramInfoLog_debug(GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog, const char* file, int line);
+#define glGetProgramiv(program, pname, params) glatter_glGetProgramiv_debug((program), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetProgramiv_debug(GLuint program, GLenum pname, GLint *params, const char* file, int line);
+#define glGetShaderInfoLog(shader, bufSize, length, infoLog) glatter_glGetShaderInfoLog_debug((shader), (bufSize), (length), (infoLog), __FILE__, __LINE__)
+void glatter_glGetShaderInfoLog_debug(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog, const char* file, int line);
+#define glGetShaderSource(shader, bufSize, length, source) glatter_glGetShaderSource_debug((shader), (bufSize), (length), (source), __FILE__, __LINE__)
+void glatter_glGetShaderSource_debug(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source, const char* file, int line);
+#define glGetShaderiv(shader, pname, params) glatter_glGetShaderiv_debug((shader), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetShaderiv_debug(GLuint shader, GLenum pname, GLint *params, const char* file, int line);
+#define glGetUniformLocation(program, name) glatter_glGetUniformLocation_debug((program), (name), __FILE__, __LINE__)
+GLint glatter_glGetUniformLocation_debug(GLuint program, const GLchar *name, const char* file, int line);
+#define glGetUniformfv(program, location, params) glatter_glGetUniformfv_debug((program), (location), (params), __FILE__, __LINE__)
+void glatter_glGetUniformfv_debug(GLuint program, GLint location, GLfloat *params, const char* file, int line);
+#define glGetUniformiv(program, location, params) glatter_glGetUniformiv_debug((program), (location), (params), __FILE__, __LINE__)
+void glatter_glGetUniformiv_debug(GLuint program, GLint location, GLint *params, const char* file, int line);
+#define glGetVertexAttribPointerv(index, pname, pointer) glatter_glGetVertexAttribPointerv_debug((index), (pname), (pointer), __FILE__, __LINE__)
+void glatter_glGetVertexAttribPointerv_debug(GLuint index, GLenum pname, void **pointer, const char* file, int line);
+#define glGetVertexAttribdv(index, pname, params) glatter_glGetVertexAttribdv_debug((index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetVertexAttribdv_debug(GLuint index, GLenum pname, GLdouble *params, const char* file, int line);
+#define glGetVertexAttribfv(index, pname, params) glatter_glGetVertexAttribfv_debug((index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetVertexAttribfv_debug(GLuint index, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetVertexAttribiv(index, pname, params) glatter_glGetVertexAttribiv_debug((index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetVertexAttribiv_debug(GLuint index, GLenum pname, GLint *params, const char* file, int line);
+#define glIsProgram(program) glatter_glIsProgram_debug((program), __FILE__, __LINE__)
+GLboolean glatter_glIsProgram_debug(GLuint program, const char* file, int line);
+#define glIsShader(shader) glatter_glIsShader_debug((shader), __FILE__, __LINE__)
+GLboolean glatter_glIsShader_debug(GLuint shader, const char* file, int line);
+#define glLinkProgram(program) glatter_glLinkProgram_debug((program), __FILE__, __LINE__)
+void glatter_glLinkProgram_debug(GLuint program, const char* file, int line);
+#define glShaderSource(shader, count, string, length) glatter_glShaderSource_debug((shader), (count), (string), (length), __FILE__, __LINE__)
+void glatter_glShaderSource_debug(GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length, const char* file, int line);
+#define glStencilFuncSeparate(face, func, ref, mask) glatter_glStencilFuncSeparate_debug((face), (func), (ref), (mask), __FILE__, __LINE__)
+void glatter_glStencilFuncSeparate_debug(GLenum face, GLenum func, GLint ref, GLuint mask, const char* file, int line);
+#define glStencilMaskSeparate(face, mask) glatter_glStencilMaskSeparate_debug((face), (mask), __FILE__, __LINE__)
+void glatter_glStencilMaskSeparate_debug(GLenum face, GLuint mask, const char* file, int line);
+#define glStencilOpSeparate(face, sfail, dpfail, dppass) glatter_glStencilOpSeparate_debug((face), (sfail), (dpfail), (dppass), __FILE__, __LINE__)
+void glatter_glStencilOpSeparate_debug(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass, const char* file, int line);
+#define glUniform1f(location, v0) glatter_glUniform1f_debug((location), (v0), __FILE__, __LINE__)
+void glatter_glUniform1f_debug(GLint location, GLfloat v0, const char* file, int line);
+#define glUniform1fv(location, count, value) glatter_glUniform1fv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform1fv_debug(GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glUniform1i(location, v0) glatter_glUniform1i_debug((location), (v0), __FILE__, __LINE__)
+void glatter_glUniform1i_debug(GLint location, GLint v0, const char* file, int line);
+#define glUniform1iv(location, count, value) glatter_glUniform1iv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform1iv_debug(GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glUniform2f(location, v0, v1) glatter_glUniform2f_debug((location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glUniform2f_debug(GLint location, GLfloat v0, GLfloat v1, const char* file, int line);
+#define glUniform2fv(location, count, value) glatter_glUniform2fv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform2fv_debug(GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glUniform2i(location, v0, v1) glatter_glUniform2i_debug((location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glUniform2i_debug(GLint location, GLint v0, GLint v1, const char* file, int line);
+#define glUniform2iv(location, count, value) glatter_glUniform2iv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform2iv_debug(GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glUniform3f(location, v0, v1, v2) glatter_glUniform3f_debug((location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glUniform3f_debug(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, const char* file, int line);
+#define glUniform3fv(location, count, value) glatter_glUniform3fv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform3fv_debug(GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glUniform3i(location, v0, v1, v2) glatter_glUniform3i_debug((location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glUniform3i_debug(GLint location, GLint v0, GLint v1, GLint v2, const char* file, int line);
+#define glUniform3iv(location, count, value) glatter_glUniform3iv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform3iv_debug(GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glUniform4f(location, v0, v1, v2, v3) glatter_glUniform4f_debug((location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glUniform4f_debug(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3, const char* file, int line);
+#define glUniform4fv(location, count, value) glatter_glUniform4fv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform4fv_debug(GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glUniform4i(location, v0, v1, v2, v3) glatter_glUniform4i_debug((location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glUniform4i_debug(GLint location, GLint v0, GLint v1, GLint v2, GLint v3, const char* file, int line);
+#define glUniform4iv(location, count, value) glatter_glUniform4iv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform4iv_debug(GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glUniformMatrix2fv(location, count, transpose, value) glatter_glUniformMatrix2fv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix2fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glUniformMatrix3fv(location, count, transpose, value) glatter_glUniformMatrix3fv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix3fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glUniformMatrix4fv(location, count, transpose, value) glatter_glUniformMatrix4fv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix4fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glUseProgram(program) glatter_glUseProgram_debug((program), __FILE__, __LINE__)
+void glatter_glUseProgram_debug(GLuint program, const char* file, int line);
+#define glValidateProgram(program) glatter_glValidateProgram_debug((program), __FILE__, __LINE__)
+void glatter_glValidateProgram_debug(GLuint program, const char* file, int line);
+#define glVertexAttrib1d(index, x) glatter_glVertexAttrib1d_debug((index), (x), __FILE__, __LINE__)
+void glatter_glVertexAttrib1d_debug(GLuint index, GLdouble x, const char* file, int line);
+#define glVertexAttrib1dv(index, v) glatter_glVertexAttrib1dv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib1dv_debug(GLuint index, const GLdouble *v, const char* file, int line);
+#define glVertexAttrib1f(index, x) glatter_glVertexAttrib1f_debug((index), (x), __FILE__, __LINE__)
+void glatter_glVertexAttrib1f_debug(GLuint index, GLfloat x, const char* file, int line);
+#define glVertexAttrib1fv(index, v) glatter_glVertexAttrib1fv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib1fv_debug(GLuint index, const GLfloat *v, const char* file, int line);
+#define glVertexAttrib1s(index, x) glatter_glVertexAttrib1s_debug((index), (x), __FILE__, __LINE__)
+void glatter_glVertexAttrib1s_debug(GLuint index, GLshort x, const char* file, int line);
+#define glVertexAttrib1sv(index, v) glatter_glVertexAttrib1sv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib1sv_debug(GLuint index, const GLshort *v, const char* file, int line);
+#define glVertexAttrib2d(index, x, y) glatter_glVertexAttrib2d_debug((index), (x), (y), __FILE__, __LINE__)
+void glatter_glVertexAttrib2d_debug(GLuint index, GLdouble x, GLdouble y, const char* file, int line);
+#define glVertexAttrib2dv(index, v) glatter_glVertexAttrib2dv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib2dv_debug(GLuint index, const GLdouble *v, const char* file, int line);
+#define glVertexAttrib2f(index, x, y) glatter_glVertexAttrib2f_debug((index), (x), (y), __FILE__, __LINE__)
+void glatter_glVertexAttrib2f_debug(GLuint index, GLfloat x, GLfloat y, const char* file, int line);
+#define glVertexAttrib2fv(index, v) glatter_glVertexAttrib2fv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib2fv_debug(GLuint index, const GLfloat *v, const char* file, int line);
+#define glVertexAttrib2s(index, x, y) glatter_glVertexAttrib2s_debug((index), (x), (y), __FILE__, __LINE__)
+void glatter_glVertexAttrib2s_debug(GLuint index, GLshort x, GLshort y, const char* file, int line);
+#define glVertexAttrib2sv(index, v) glatter_glVertexAttrib2sv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib2sv_debug(GLuint index, const GLshort *v, const char* file, int line);
+#define glVertexAttrib3d(index, x, y, z) glatter_glVertexAttrib3d_debug((index), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glVertexAttrib3d_debug(GLuint index, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#define glVertexAttrib3dv(index, v) glatter_glVertexAttrib3dv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib3dv_debug(GLuint index, const GLdouble *v, const char* file, int line);
+#define glVertexAttrib3f(index, x, y, z) glatter_glVertexAttrib3f_debug((index), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glVertexAttrib3f_debug(GLuint index, GLfloat x, GLfloat y, GLfloat z, const char* file, int line);
+#define glVertexAttrib3fv(index, v) glatter_glVertexAttrib3fv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib3fv_debug(GLuint index, const GLfloat *v, const char* file, int line);
+#define glVertexAttrib3s(index, x, y, z) glatter_glVertexAttrib3s_debug((index), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glVertexAttrib3s_debug(GLuint index, GLshort x, GLshort y, GLshort z, const char* file, int line);
+#define glVertexAttrib3sv(index, v) glatter_glVertexAttrib3sv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib3sv_debug(GLuint index, const GLshort *v, const char* file, int line);
+#define glVertexAttrib4Nbv(index, v) glatter_glVertexAttrib4Nbv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4Nbv_debug(GLuint index, const GLbyte *v, const char* file, int line);
+#define glVertexAttrib4Niv(index, v) glatter_glVertexAttrib4Niv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4Niv_debug(GLuint index, const GLint *v, const char* file, int line);
+#define glVertexAttrib4Nsv(index, v) glatter_glVertexAttrib4Nsv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4Nsv_debug(GLuint index, const GLshort *v, const char* file, int line);
+#define glVertexAttrib4Nub(index, x, y, z, w) glatter_glVertexAttrib4Nub_debug((index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glVertexAttrib4Nub_debug(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w, const char* file, int line);
+#define glVertexAttrib4Nubv(index, v) glatter_glVertexAttrib4Nubv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4Nubv_debug(GLuint index, const GLubyte *v, const char* file, int line);
+#define glVertexAttrib4Nuiv(index, v) glatter_glVertexAttrib4Nuiv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4Nuiv_debug(GLuint index, const GLuint *v, const char* file, int line);
+#define glVertexAttrib4Nusv(index, v) glatter_glVertexAttrib4Nusv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4Nusv_debug(GLuint index, const GLushort *v, const char* file, int line);
+#define glVertexAttrib4bv(index, v) glatter_glVertexAttrib4bv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4bv_debug(GLuint index, const GLbyte *v, const char* file, int line);
+#define glVertexAttrib4d(index, x, y, z, w) glatter_glVertexAttrib4d_debug((index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glVertexAttrib4d_debug(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line);
+#define glVertexAttrib4dv(index, v) glatter_glVertexAttrib4dv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4dv_debug(GLuint index, const GLdouble *v, const char* file, int line);
+#define glVertexAttrib4f(index, x, y, z, w) glatter_glVertexAttrib4f_debug((index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glVertexAttrib4f_debug(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w, const char* file, int line);
+#define glVertexAttrib4fv(index, v) glatter_glVertexAttrib4fv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4fv_debug(GLuint index, const GLfloat *v, const char* file, int line);
+#define glVertexAttrib4iv(index, v) glatter_glVertexAttrib4iv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4iv_debug(GLuint index, const GLint *v, const char* file, int line);
+#define glVertexAttrib4s(index, x, y, z, w) glatter_glVertexAttrib4s_debug((index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glVertexAttrib4s_debug(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w, const char* file, int line);
+#define glVertexAttrib4sv(index, v) glatter_glVertexAttrib4sv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4sv_debug(GLuint index, const GLshort *v, const char* file, int line);
+#define glVertexAttrib4ubv(index, v) glatter_glVertexAttrib4ubv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4ubv_debug(GLuint index, const GLubyte *v, const char* file, int line);
+#define glVertexAttrib4uiv(index, v) glatter_glVertexAttrib4uiv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4uiv_debug(GLuint index, const GLuint *v, const char* file, int line);
+#define glVertexAttrib4usv(index, v) glatter_glVertexAttrib4usv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttrib4usv_debug(GLuint index, const GLushort *v, const char* file, int line);
+#define glVertexAttribPointer(index, size, type, normalized, stride, pointer) glatter_glVertexAttribPointer_debug((index), (size), (type), (normalized), (stride), (pointer), __FILE__, __LINE__)
+void glatter_glVertexAttribPointer_debug(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer, const char* file, int line);
+#endif // defined(GL_VERSION_2_0)
+#if defined(GL_VERSION_2_1)
+#define glUniformMatrix2x3fv(location, count, transpose, value) glatter_glUniformMatrix2x3fv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix2x3fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glUniformMatrix2x4fv(location, count, transpose, value) glatter_glUniformMatrix2x4fv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix2x4fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glUniformMatrix3x2fv(location, count, transpose, value) glatter_glUniformMatrix3x2fv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix3x2fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glUniformMatrix3x4fv(location, count, transpose, value) glatter_glUniformMatrix3x4fv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix3x4fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glUniformMatrix4x2fv(location, count, transpose, value) glatter_glUniformMatrix4x2fv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix4x2fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glUniformMatrix4x3fv(location, count, transpose, value) glatter_glUniformMatrix4x3fv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix4x3fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#endif // defined(GL_VERSION_2_1)
+#if defined(GL_VERSION_3_0)
+#define glBeginConditionalRender(id, mode) glatter_glBeginConditionalRender_debug((id), (mode), __FILE__, __LINE__)
+void glatter_glBeginConditionalRender_debug(GLuint id, GLenum mode, const char* file, int line);
+#define glBeginTransformFeedback(primitiveMode) glatter_glBeginTransformFeedback_debug((primitiveMode), __FILE__, __LINE__)
+void glatter_glBeginTransformFeedback_debug(GLenum primitiveMode, const char* file, int line);
+#define glBindBufferBase(target, index, buffer) glatter_glBindBufferBase_debug((target), (index), (buffer), __FILE__, __LINE__)
+void glatter_glBindBufferBase_debug(GLenum target, GLuint index, GLuint buffer, const char* file, int line);
+#define glBindBufferRange(target, index, buffer, offset, size) glatter_glBindBufferRange_debug((target), (index), (buffer), (offset), (size), __FILE__, __LINE__)
+void glatter_glBindBufferRange_debug(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line);
+#define glBindFragDataLocation(program, color, name) glatter_glBindFragDataLocation_debug((program), (color), (name), __FILE__, __LINE__)
+void glatter_glBindFragDataLocation_debug(GLuint program, GLuint color, const GLchar *name, const char* file, int line);
+#define glBindFramebuffer(target, framebuffer) glatter_glBindFramebuffer_debug((target), (framebuffer), __FILE__, __LINE__)
+void glatter_glBindFramebuffer_debug(GLenum target, GLuint framebuffer, const char* file, int line);
+#define glBindRenderbuffer(target, renderbuffer) glatter_glBindRenderbuffer_debug((target), (renderbuffer), __FILE__, __LINE__)
+void glatter_glBindRenderbuffer_debug(GLenum target, GLuint renderbuffer, const char* file, int line);
+#define glBindVertexArray(array) glatter_glBindVertexArray_debug((array), __FILE__, __LINE__)
+void glatter_glBindVertexArray_debug(GLuint array, const char* file, int line);
+#define glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) glatter_glBlitFramebuffer_debug((srcX0), (srcY0), (srcX1), (srcY1), (dstX0), (dstY0), (dstX1), (dstY1), (mask), (filter), __FILE__, __LINE__)
+void glatter_glBlitFramebuffer_debug(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line);
+#define glCheckFramebufferStatus(target) glatter_glCheckFramebufferStatus_debug((target), __FILE__, __LINE__)
+GLenum glatter_glCheckFramebufferStatus_debug(GLenum target, const char* file, int line);
+#define glClampColor(target, clamp) glatter_glClampColor_debug((target), (clamp), __FILE__, __LINE__)
+void glatter_glClampColor_debug(GLenum target, GLenum clamp, const char* file, int line);
+#define glClearBufferfi(buffer, drawbuffer, depth, stencil) glatter_glClearBufferfi_debug((buffer), (drawbuffer), (depth), (stencil), __FILE__, __LINE__)
+void glatter_glClearBufferfi_debug(GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil, const char* file, int line);
+#define glClearBufferfv(buffer, drawbuffer, value) glatter_glClearBufferfv_debug((buffer), (drawbuffer), (value), __FILE__, __LINE__)
+void glatter_glClearBufferfv_debug(GLenum buffer, GLint drawbuffer, const GLfloat *value, const char* file, int line);
+#define glClearBufferiv(buffer, drawbuffer, value) glatter_glClearBufferiv_debug((buffer), (drawbuffer), (value), __FILE__, __LINE__)
+void glatter_glClearBufferiv_debug(GLenum buffer, GLint drawbuffer, const GLint *value, const char* file, int line);
+#define glClearBufferuiv(buffer, drawbuffer, value) glatter_glClearBufferuiv_debug((buffer), (drawbuffer), (value), __FILE__, __LINE__)
+void glatter_glClearBufferuiv_debug(GLenum buffer, GLint drawbuffer, const GLuint *value, const char* file, int line);
+#define glColorMaski(index, r, g, b, a) glatter_glColorMaski_debug((index), (r), (g), (b), (a), __FILE__, __LINE__)
+void glatter_glColorMaski_debug(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a, const char* file, int line);
+#define glDeleteFramebuffers(n, framebuffers) glatter_glDeleteFramebuffers_debug((n), (framebuffers), __FILE__, __LINE__)
+void glatter_glDeleteFramebuffers_debug(GLsizei n, const GLuint *framebuffers, const char* file, int line);
+#define glDeleteRenderbuffers(n, renderbuffers) glatter_glDeleteRenderbuffers_debug((n), (renderbuffers), __FILE__, __LINE__)
+void glatter_glDeleteRenderbuffers_debug(GLsizei n, const GLuint *renderbuffers, const char* file, int line);
+#define glDeleteVertexArrays(n, arrays) glatter_glDeleteVertexArrays_debug((n), (arrays), __FILE__, __LINE__)
+void glatter_glDeleteVertexArrays_debug(GLsizei n, const GLuint *arrays, const char* file, int line);
+#define glDisablei(target, index) glatter_glDisablei_debug((target), (index), __FILE__, __LINE__)
+void glatter_glDisablei_debug(GLenum target, GLuint index, const char* file, int line);
+#define glEnablei(target, index) glatter_glEnablei_debug((target), (index), __FILE__, __LINE__)
+void glatter_glEnablei_debug(GLenum target, GLuint index, const char* file, int line);
+#define glEndConditionalRender() glatter_glEndConditionalRender_debug(__FILE__, __LINE__)
+void glatter_glEndConditionalRender_debug(const char* file, int line);
+#define glEndTransformFeedback() glatter_glEndTransformFeedback_debug(__FILE__, __LINE__)
+void glatter_glEndTransformFeedback_debug(const char* file, int line);
+#define glFlushMappedBufferRange(target, offset, length) glatter_glFlushMappedBufferRange_debug((target), (offset), (length), __FILE__, __LINE__)
+void glatter_glFlushMappedBufferRange_debug(GLenum target, GLintptr offset, GLsizeiptr length, const char* file, int line);
+#define glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) glatter_glFramebufferRenderbuffer_debug((target), (attachment), (renderbuffertarget), (renderbuffer), __FILE__, __LINE__)
+void glatter_glFramebufferRenderbuffer_debug(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer, const char* file, int line);
+#define glFramebufferTexture1D(target, attachment, textarget, texture, level) glatter_glFramebufferTexture1D_debug((target), (attachment), (textarget), (texture), (level), __FILE__, __LINE__)
+void glatter_glFramebufferTexture1D_debug(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line);
+#define glFramebufferTexture2D(target, attachment, textarget, texture, level) glatter_glFramebufferTexture2D_debug((target), (attachment), (textarget), (texture), (level), __FILE__, __LINE__)
+void glatter_glFramebufferTexture2D_debug(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line);
+#define glFramebufferTexture3D(target, attachment, textarget, texture, level, zoffset) glatter_glFramebufferTexture3D_debug((target), (attachment), (textarget), (texture), (level), (zoffset), __FILE__, __LINE__)
+void glatter_glFramebufferTexture3D_debug(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset, const char* file, int line);
+#define glFramebufferTextureLayer(target, attachment, texture, level, layer) glatter_glFramebufferTextureLayer_debug((target), (attachment), (texture), (level), (layer), __FILE__, __LINE__)
+void glatter_glFramebufferTextureLayer_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line);
+#define glGenFramebuffers(n, framebuffers) glatter_glGenFramebuffers_debug((n), (framebuffers), __FILE__, __LINE__)
+void glatter_glGenFramebuffers_debug(GLsizei n, GLuint *framebuffers, const char* file, int line);
+#define glGenRenderbuffers(n, renderbuffers) glatter_glGenRenderbuffers_debug((n), (renderbuffers), __FILE__, __LINE__)
+void glatter_glGenRenderbuffers_debug(GLsizei n, GLuint *renderbuffers, const char* file, int line);
+#define glGenVertexArrays(n, arrays) glatter_glGenVertexArrays_debug((n), (arrays), __FILE__, __LINE__)
+void glatter_glGenVertexArrays_debug(GLsizei n, GLuint *arrays, const char* file, int line);
+#define glGenerateMipmap(target) glatter_glGenerateMipmap_debug((target), __FILE__, __LINE__)
+void glatter_glGenerateMipmap_debug(GLenum target, const char* file, int line);
+#define glGetBooleani_v(target, index, data) glatter_glGetBooleani_v_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetBooleani_v_debug(GLenum target, GLuint index, GLboolean *data, const char* file, int line);
+#define glGetFragDataLocation(program, name) glatter_glGetFragDataLocation_debug((program), (name), __FILE__, __LINE__)
+GLint glatter_glGetFragDataLocation_debug(GLuint program, const GLchar *name, const char* file, int line);
+#define glGetFramebufferAttachmentParameteriv(target, attachment, pname, params) glatter_glGetFramebufferAttachmentParameteriv_debug((target), (attachment), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetFramebufferAttachmentParameteriv_debug(GLenum target, GLenum attachment, GLenum pname, GLint *params, const char* file, int line);
+#define glGetIntegeri_v(target, index, data) glatter_glGetIntegeri_v_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetIntegeri_v_debug(GLenum target, GLuint index, GLint *data, const char* file, int line);
+#define glGetRenderbufferParameteriv(target, pname, params) glatter_glGetRenderbufferParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetRenderbufferParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetStringi(name, index) glatter_glGetStringi_debug((name), (index), __FILE__, __LINE__)
+const GLubyte * glatter_glGetStringi_debug(GLenum name, GLuint index, const char* file, int line);
+#define glGetTexParameterIiv(target, pname, params) glatter_glGetTexParameterIiv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTexParameterIiv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetTexParameterIuiv(target, pname, params) glatter_glGetTexParameterIuiv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTexParameterIuiv_debug(GLenum target, GLenum pname, GLuint *params, const char* file, int line);
+#define glGetTransformFeedbackVarying(program, index, bufSize, length, size, type, name) glatter_glGetTransformFeedbackVarying_debug((program), (index), (bufSize), (length), (size), (type), (name), __FILE__, __LINE__)
+void glatter_glGetTransformFeedbackVarying_debug(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name, const char* file, int line);
+#define glGetUniformuiv(program, location, params) glatter_glGetUniformuiv_debug((program), (location), (params), __FILE__, __LINE__)
+void glatter_glGetUniformuiv_debug(GLuint program, GLint location, GLuint *params, const char* file, int line);
+#define glGetVertexAttribIiv(index, pname, params) glatter_glGetVertexAttribIiv_debug((index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetVertexAttribIiv_debug(GLuint index, GLenum pname, GLint *params, const char* file, int line);
+#define glGetVertexAttribIuiv(index, pname, params) glatter_glGetVertexAttribIuiv_debug((index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetVertexAttribIuiv_debug(GLuint index, GLenum pname, GLuint *params, const char* file, int line);
+#define glIsEnabledi(target, index) glatter_glIsEnabledi_debug((target), (index), __FILE__, __LINE__)
+GLboolean glatter_glIsEnabledi_debug(GLenum target, GLuint index, const char* file, int line);
+#define glIsFramebuffer(framebuffer) glatter_glIsFramebuffer_debug((framebuffer), __FILE__, __LINE__)
+GLboolean glatter_glIsFramebuffer_debug(GLuint framebuffer, const char* file, int line);
+#define glIsRenderbuffer(renderbuffer) glatter_glIsRenderbuffer_debug((renderbuffer), __FILE__, __LINE__)
+GLboolean glatter_glIsRenderbuffer_debug(GLuint renderbuffer, const char* file, int line);
+#define glIsVertexArray(array) glatter_glIsVertexArray_debug((array), __FILE__, __LINE__)
+GLboolean glatter_glIsVertexArray_debug(GLuint array, const char* file, int line);
+#define glMapBufferRange(target, offset, length, access) glatter_glMapBufferRange_debug((target), (offset), (length), (access), __FILE__, __LINE__)
+void * glatter_glMapBufferRange_debug(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access, const char* file, int line);
+#define glRenderbufferStorage(target, internalformat, width, height) glatter_glRenderbufferStorage_debug((target), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glRenderbufferStorage_debug(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glRenderbufferStorageMultisample(target, samples, internalformat, width, height) glatter_glRenderbufferStorageMultisample_debug((target), (samples), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glRenderbufferStorageMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glTexParameterIiv(target, pname, params) glatter_glTexParameterIiv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glTexParameterIiv_debug(GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#define glTexParameterIuiv(target, pname, params) glatter_glTexParameterIuiv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glTexParameterIuiv_debug(GLenum target, GLenum pname, const GLuint *params, const char* file, int line);
+#define glTransformFeedbackVaryings(program, count, varyings, bufferMode) glatter_glTransformFeedbackVaryings_debug((program), (count), (varyings), (bufferMode), __FILE__, __LINE__)
+void glatter_glTransformFeedbackVaryings_debug(GLuint program, GLsizei count, const GLchar *const*varyings, GLenum bufferMode, const char* file, int line);
+#define glUniform1ui(location, v0) glatter_glUniform1ui_debug((location), (v0), __FILE__, __LINE__)
+void glatter_glUniform1ui_debug(GLint location, GLuint v0, const char* file, int line);
+#define glUniform1uiv(location, count, value) glatter_glUniform1uiv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform1uiv_debug(GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glUniform2ui(location, v0, v1) glatter_glUniform2ui_debug((location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glUniform2ui_debug(GLint location, GLuint v0, GLuint v1, const char* file, int line);
+#define glUniform2uiv(location, count, value) glatter_glUniform2uiv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform2uiv_debug(GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glUniform3ui(location, v0, v1, v2) glatter_glUniform3ui_debug((location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glUniform3ui_debug(GLint location, GLuint v0, GLuint v1, GLuint v2, const char* file, int line);
+#define glUniform3uiv(location, count, value) glatter_glUniform3uiv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform3uiv_debug(GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glUniform4ui(location, v0, v1, v2, v3) glatter_glUniform4ui_debug((location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glUniform4ui_debug(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3, const char* file, int line);
+#define glUniform4uiv(location, count, value) glatter_glUniform4uiv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform4uiv_debug(GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glVertexAttribI1i(index, x) glatter_glVertexAttribI1i_debug((index), (x), __FILE__, __LINE__)
+void glatter_glVertexAttribI1i_debug(GLuint index, GLint x, const char* file, int line);
+#define glVertexAttribI1iv(index, v) glatter_glVertexAttribI1iv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI1iv_debug(GLuint index, const GLint *v, const char* file, int line);
+#define glVertexAttribI1ui(index, x) glatter_glVertexAttribI1ui_debug((index), (x), __FILE__, __LINE__)
+void glatter_glVertexAttribI1ui_debug(GLuint index, GLuint x, const char* file, int line);
+#define glVertexAttribI1uiv(index, v) glatter_glVertexAttribI1uiv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI1uiv_debug(GLuint index, const GLuint *v, const char* file, int line);
+#define glVertexAttribI2i(index, x, y) glatter_glVertexAttribI2i_debug((index), (x), (y), __FILE__, __LINE__)
+void glatter_glVertexAttribI2i_debug(GLuint index, GLint x, GLint y, const char* file, int line);
+#define glVertexAttribI2iv(index, v) glatter_glVertexAttribI2iv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI2iv_debug(GLuint index, const GLint *v, const char* file, int line);
+#define glVertexAttribI2ui(index, x, y) glatter_glVertexAttribI2ui_debug((index), (x), (y), __FILE__, __LINE__)
+void glatter_glVertexAttribI2ui_debug(GLuint index, GLuint x, GLuint y, const char* file, int line);
+#define glVertexAttribI2uiv(index, v) glatter_glVertexAttribI2uiv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI2uiv_debug(GLuint index, const GLuint *v, const char* file, int line);
+#define glVertexAttribI3i(index, x, y, z) glatter_glVertexAttribI3i_debug((index), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glVertexAttribI3i_debug(GLuint index, GLint x, GLint y, GLint z, const char* file, int line);
+#define glVertexAttribI3iv(index, v) glatter_glVertexAttribI3iv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI3iv_debug(GLuint index, const GLint *v, const char* file, int line);
+#define glVertexAttribI3ui(index, x, y, z) glatter_glVertexAttribI3ui_debug((index), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glVertexAttribI3ui_debug(GLuint index, GLuint x, GLuint y, GLuint z, const char* file, int line);
+#define glVertexAttribI3uiv(index, v) glatter_glVertexAttribI3uiv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI3uiv_debug(GLuint index, const GLuint *v, const char* file, int line);
+#define glVertexAttribI4bv(index, v) glatter_glVertexAttribI4bv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI4bv_debug(GLuint index, const GLbyte *v, const char* file, int line);
+#define glVertexAttribI4i(index, x, y, z, w) glatter_glVertexAttribI4i_debug((index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glVertexAttribI4i_debug(GLuint index, GLint x, GLint y, GLint z, GLint w, const char* file, int line);
+#define glVertexAttribI4iv(index, v) glatter_glVertexAttribI4iv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI4iv_debug(GLuint index, const GLint *v, const char* file, int line);
+#define glVertexAttribI4sv(index, v) glatter_glVertexAttribI4sv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI4sv_debug(GLuint index, const GLshort *v, const char* file, int line);
+#define glVertexAttribI4ubv(index, v) glatter_glVertexAttribI4ubv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI4ubv_debug(GLuint index, const GLubyte *v, const char* file, int line);
+#define glVertexAttribI4ui(index, x, y, z, w) glatter_glVertexAttribI4ui_debug((index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glVertexAttribI4ui_debug(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w, const char* file, int line);
+#define glVertexAttribI4uiv(index, v) glatter_glVertexAttribI4uiv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI4uiv_debug(GLuint index, const GLuint *v, const char* file, int line);
+#define glVertexAttribI4usv(index, v) glatter_glVertexAttribI4usv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribI4usv_debug(GLuint index, const GLushort *v, const char* file, int line);
+#define glVertexAttribIPointer(index, size, type, stride, pointer) glatter_glVertexAttribIPointer_debug((index), (size), (type), (stride), (pointer), __FILE__, __LINE__)
+void glatter_glVertexAttribIPointer_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer, const char* file, int line);
+#endif // defined(GL_VERSION_3_0)
+#if defined(GL_VERSION_3_1)
+#define glCopyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size) glatter_glCopyBufferSubData_debug((readTarget), (writeTarget), (readOffset), (writeOffset), (size), __FILE__, __LINE__)
+void glatter_glCopyBufferSubData_debug(GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line);
+#define glDrawArraysInstanced(mode, first, count, instancecount) glatter_glDrawArraysInstanced_debug((mode), (first), (count), (instancecount), __FILE__, __LINE__)
+void glatter_glDrawArraysInstanced_debug(GLenum mode, GLint first, GLsizei count, GLsizei instancecount, const char* file, int line);
+#define glDrawElementsInstanced(mode, count, type, indices, instancecount) glatter_glDrawElementsInstanced_debug((mode), (count), (type), (indices), (instancecount), __FILE__, __LINE__)
+void glatter_glDrawElementsInstanced_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, const char* file, int line);
+#define glGetActiveUniformBlockName(program, uniformBlockIndex, bufSize, length, uniformBlockName) glatter_glGetActiveUniformBlockName_debug((program), (uniformBlockIndex), (bufSize), (length), (uniformBlockName), __FILE__, __LINE__)
+void glatter_glGetActiveUniformBlockName_debug(GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformBlockName, const char* file, int line);
+#define glGetActiveUniformBlockiv(program, uniformBlockIndex, pname, params) glatter_glGetActiveUniformBlockiv_debug((program), (uniformBlockIndex), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetActiveUniformBlockiv_debug(GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint *params, const char* file, int line);
+#define glGetActiveUniformName(program, uniformIndex, bufSize, length, uniformName) glatter_glGetActiveUniformName_debug((program), (uniformIndex), (bufSize), (length), (uniformName), __FILE__, __LINE__)
+void glatter_glGetActiveUniformName_debug(GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName, const char* file, int line);
+#define glGetActiveUniformsiv(program, uniformCount, uniformIndices, pname, params) glatter_glGetActiveUniformsiv_debug((program), (uniformCount), (uniformIndices), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetActiveUniformsiv_debug(GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params, const char* file, int line);
+#define glGetUniformBlockIndex(program, uniformBlockName) glatter_glGetUniformBlockIndex_debug((program), (uniformBlockName), __FILE__, __LINE__)
+GLuint glatter_glGetUniformBlockIndex_debug(GLuint program, const GLchar *uniformBlockName, const char* file, int line);
+#define glGetUniformIndices(program, uniformCount, uniformNames, uniformIndices) glatter_glGetUniformIndices_debug((program), (uniformCount), (uniformNames), (uniformIndices), __FILE__, __LINE__)
+void glatter_glGetUniformIndices_debug(GLuint program, GLsizei uniformCount, const GLchar *const*uniformNames, GLuint *uniformIndices, const char* file, int line);
+#define glPrimitiveRestartIndex(index) glatter_glPrimitiveRestartIndex_debug((index), __FILE__, __LINE__)
+void glatter_glPrimitiveRestartIndex_debug(GLuint index, const char* file, int line);
+#define glTexBuffer(target, internalformat, buffer) glatter_glTexBuffer_debug((target), (internalformat), (buffer), __FILE__, __LINE__)
+void glatter_glTexBuffer_debug(GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line);
+#define glUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding) glatter_glUniformBlockBinding_debug((program), (uniformBlockIndex), (uniformBlockBinding), __FILE__, __LINE__)
+void glatter_glUniformBlockBinding_debug(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding, const char* file, int line);
+#endif // defined(GL_VERSION_3_1)
+#if defined(GL_VERSION_3_2)
+#define glClientWaitSync(sync, flags, timeout) glatter_glClientWaitSync_debug((sync), (flags), (timeout), __FILE__, __LINE__)
+GLenum glatter_glClientWaitSync_debug(GLsync sync, GLbitfield flags, GLuint64 timeout, const char* file, int line);
+#define glDeleteSync(sync) glatter_glDeleteSync_debug((sync), __FILE__, __LINE__)
+void glatter_glDeleteSync_debug(GLsync sync, const char* file, int line);
+#define glDrawElementsBaseVertex(mode, count, type, indices, basevertex) glatter_glDrawElementsBaseVertex_debug((mode), (count), (type), (indices), (basevertex), __FILE__, __LINE__)
+void glatter_glDrawElementsBaseVertex_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLint basevertex, const char* file, int line);
+#define glDrawElementsInstancedBaseVertex(mode, count, type, indices, instancecount, basevertex) glatter_glDrawElementsInstancedBaseVertex_debug((mode), (count), (type), (indices), (instancecount), (basevertex), __FILE__, __LINE__)
+void glatter_glDrawElementsInstancedBaseVertex_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex, const char* file, int line);
+#define glDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex) glatter_glDrawRangeElementsBaseVertex_debug((mode), (start), (end), (count), (type), (indices), (basevertex), __FILE__, __LINE__)
+void glatter_glDrawRangeElementsBaseVertex_debug(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices, GLint basevertex, const char* file, int line);
+#define glFenceSync(condition, flags) glatter_glFenceSync_debug((condition), (flags), __FILE__, __LINE__)
+GLsync glatter_glFenceSync_debug(GLenum condition, GLbitfield flags, const char* file, int line);
+#define glFramebufferTexture(target, attachment, texture, level) glatter_glFramebufferTexture_debug((target), (attachment), (texture), (level), __FILE__, __LINE__)
+void glatter_glFramebufferTexture_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, const char* file, int line);
+#define glGetBufferParameteri64v(target, pname, params) glatter_glGetBufferParameteri64v_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetBufferParameteri64v_debug(GLenum target, GLenum pname, GLint64 *params, const char* file, int line);
+#define glGetInteger64i_v(target, index, data) glatter_glGetInteger64i_v_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetInteger64i_v_debug(GLenum target, GLuint index, GLint64 *data, const char* file, int line);
+#define glGetInteger64v(pname, data) glatter_glGetInteger64v_debug((pname), (data), __FILE__, __LINE__)
+void glatter_glGetInteger64v_debug(GLenum pname, GLint64 *data, const char* file, int line);
+#define glGetMultisamplefv(pname, index, val) glatter_glGetMultisamplefv_debug((pname), (index), (val), __FILE__, __LINE__)
+void glatter_glGetMultisamplefv_debug(GLenum pname, GLuint index, GLfloat *val, const char* file, int line);
+#define glGetSynciv(sync, pname, bufSize, length, values) glatter_glGetSynciv_debug((sync), (pname), (bufSize), (length), (values), __FILE__, __LINE__)
+void glatter_glGetSynciv_debug(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values, const char* file, int line);
+#define glIsSync(sync) glatter_glIsSync_debug((sync), __FILE__, __LINE__)
+GLboolean glatter_glIsSync_debug(GLsync sync, const char* file, int line);
+#define glMultiDrawElementsBaseVertex(mode, count, type, indices, drawcount, basevertex) glatter_glMultiDrawElementsBaseVertex_debug((mode), (count), (type), (indices), (drawcount), (basevertex), __FILE__, __LINE__)
+void glatter_glMultiDrawElementsBaseVertex_debug(GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei drawcount, const GLint *basevertex, const char* file, int line);
+#define glProvokingVertex(mode) glatter_glProvokingVertex_debug((mode), __FILE__, __LINE__)
+void glatter_glProvokingVertex_debug(GLenum mode, const char* file, int line);
+#define glSampleMaski(maskNumber, mask) glatter_glSampleMaski_debug((maskNumber), (mask), __FILE__, __LINE__)
+void glatter_glSampleMaski_debug(GLuint maskNumber, GLbitfield mask, const char* file, int line);
+#define glTexImage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations) glatter_glTexImage2DMultisample_debug((target), (samples), (internalformat), (width), (height), (fixedsamplelocations), __FILE__, __LINE__)
+void glatter_glTexImage2DMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations, const char* file, int line);
+#define glTexImage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations) glatter_glTexImage3DMultisample_debug((target), (samples), (internalformat), (width), (height), (depth), (fixedsamplelocations), __FILE__, __LINE__)
+void glatter_glTexImage3DMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations, const char* file, int line);
+#define glWaitSync(sync, flags, timeout) glatter_glWaitSync_debug((sync), (flags), (timeout), __FILE__, __LINE__)
+void glatter_glWaitSync_debug(GLsync sync, GLbitfield flags, GLuint64 timeout, const char* file, int line);
+#endif // defined(GL_VERSION_3_2)
+#if defined(GL_VERSION_3_3)
+#define glBindFragDataLocationIndexed(program, colorNumber, index, name) glatter_glBindFragDataLocationIndexed_debug((program), (colorNumber), (index), (name), __FILE__, __LINE__)
+void glatter_glBindFragDataLocationIndexed_debug(GLuint program, GLuint colorNumber, GLuint index, const GLchar *name, const char* file, int line);
+#define glBindSampler(unit, sampler) glatter_glBindSampler_debug((unit), (sampler), __FILE__, __LINE__)
+void glatter_glBindSampler_debug(GLuint unit, GLuint sampler, const char* file, int line);
+#define glDeleteSamplers(count, samplers) glatter_glDeleteSamplers_debug((count), (samplers), __FILE__, __LINE__)
+void glatter_glDeleteSamplers_debug(GLsizei count, const GLuint *samplers, const char* file, int line);
+#define glGenSamplers(count, samplers) glatter_glGenSamplers_debug((count), (samplers), __FILE__, __LINE__)
+void glatter_glGenSamplers_debug(GLsizei count, GLuint *samplers, const char* file, int line);
+#define glGetFragDataIndex(program, name) glatter_glGetFragDataIndex_debug((program), (name), __FILE__, __LINE__)
+GLint glatter_glGetFragDataIndex_debug(GLuint program, const GLchar *name, const char* file, int line);
+#define glGetQueryObjecti64v(id, pname, params) glatter_glGetQueryObjecti64v_debug((id), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetQueryObjecti64v_debug(GLuint id, GLenum pname, GLint64 *params, const char* file, int line);
+#define glGetQueryObjectui64v(id, pname, params) glatter_glGetQueryObjectui64v_debug((id), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetQueryObjectui64v_debug(GLuint id, GLenum pname, GLuint64 *params, const char* file, int line);
+#define glGetSamplerParameterIiv(sampler, pname, params) glatter_glGetSamplerParameterIiv_debug((sampler), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetSamplerParameterIiv_debug(GLuint sampler, GLenum pname, GLint *params, const char* file, int line);
+#define glGetSamplerParameterIuiv(sampler, pname, params) glatter_glGetSamplerParameterIuiv_debug((sampler), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetSamplerParameterIuiv_debug(GLuint sampler, GLenum pname, GLuint *params, const char* file, int line);
+#define glGetSamplerParameterfv(sampler, pname, params) glatter_glGetSamplerParameterfv_debug((sampler), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetSamplerParameterfv_debug(GLuint sampler, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetSamplerParameteriv(sampler, pname, params) glatter_glGetSamplerParameteriv_debug((sampler), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetSamplerParameteriv_debug(GLuint sampler, GLenum pname, GLint *params, const char* file, int line);
+#define glIsSampler(sampler) glatter_glIsSampler_debug((sampler), __FILE__, __LINE__)
+GLboolean glatter_glIsSampler_debug(GLuint sampler, const char* file, int line);
+#define glQueryCounter(id, target) glatter_glQueryCounter_debug((id), (target), __FILE__, __LINE__)
+void glatter_glQueryCounter_debug(GLuint id, GLenum target, const char* file, int line);
+#define glSamplerParameterIiv(sampler, pname, param) glatter_glSamplerParameterIiv_debug((sampler), (pname), (param), __FILE__, __LINE__)
+void glatter_glSamplerParameterIiv_debug(GLuint sampler, GLenum pname, const GLint *param, const char* file, int line);
+#define glSamplerParameterIuiv(sampler, pname, param) glatter_glSamplerParameterIuiv_debug((sampler), (pname), (param), __FILE__, __LINE__)
+void glatter_glSamplerParameterIuiv_debug(GLuint sampler, GLenum pname, const GLuint *param, const char* file, int line);
+#define glSamplerParameterf(sampler, pname, param) glatter_glSamplerParameterf_debug((sampler), (pname), (param), __FILE__, __LINE__)
+void glatter_glSamplerParameterf_debug(GLuint sampler, GLenum pname, GLfloat param, const char* file, int line);
+#define glSamplerParameterfv(sampler, pname, param) glatter_glSamplerParameterfv_debug((sampler), (pname), (param), __FILE__, __LINE__)
+void glatter_glSamplerParameterfv_debug(GLuint sampler, GLenum pname, const GLfloat *param, const char* file, int line);
+#define glSamplerParameteri(sampler, pname, param) glatter_glSamplerParameteri_debug((sampler), (pname), (param), __FILE__, __LINE__)
+void glatter_glSamplerParameteri_debug(GLuint sampler, GLenum pname, GLint param, const char* file, int line);
+#define glSamplerParameteriv(sampler, pname, param) glatter_glSamplerParameteriv_debug((sampler), (pname), (param), __FILE__, __LINE__)
+void glatter_glSamplerParameteriv_debug(GLuint sampler, GLenum pname, const GLint *param, const char* file, int line);
+#define glVertexAttribDivisor(index, divisor) glatter_glVertexAttribDivisor_debug((index), (divisor), __FILE__, __LINE__)
+void glatter_glVertexAttribDivisor_debug(GLuint index, GLuint divisor, const char* file, int line);
+#define glVertexAttribP1ui(index, type, normalized, value) glatter_glVertexAttribP1ui_debug((index), (type), (normalized), (value), __FILE__, __LINE__)
+void glatter_glVertexAttribP1ui_debug(GLuint index, GLenum type, GLboolean normalized, GLuint value, const char* file, int line);
+#define glVertexAttribP1uiv(index, type, normalized, value) glatter_glVertexAttribP1uiv_debug((index), (type), (normalized), (value), __FILE__, __LINE__)
+void glatter_glVertexAttribP1uiv_debug(GLuint index, GLenum type, GLboolean normalized, const GLuint *value, const char* file, int line);
+#define glVertexAttribP2ui(index, type, normalized, value) glatter_glVertexAttribP2ui_debug((index), (type), (normalized), (value), __FILE__, __LINE__)
+void glatter_glVertexAttribP2ui_debug(GLuint index, GLenum type, GLboolean normalized, GLuint value, const char* file, int line);
+#define glVertexAttribP2uiv(index, type, normalized, value) glatter_glVertexAttribP2uiv_debug((index), (type), (normalized), (value), __FILE__, __LINE__)
+void glatter_glVertexAttribP2uiv_debug(GLuint index, GLenum type, GLboolean normalized, const GLuint *value, const char* file, int line);
+#define glVertexAttribP3ui(index, type, normalized, value) glatter_glVertexAttribP3ui_debug((index), (type), (normalized), (value), __FILE__, __LINE__)
+void glatter_glVertexAttribP3ui_debug(GLuint index, GLenum type, GLboolean normalized, GLuint value, const char* file, int line);
+#define glVertexAttribP3uiv(index, type, normalized, value) glatter_glVertexAttribP3uiv_debug((index), (type), (normalized), (value), __FILE__, __LINE__)
+void glatter_glVertexAttribP3uiv_debug(GLuint index, GLenum type, GLboolean normalized, const GLuint *value, const char* file, int line);
+#define glVertexAttribP4ui(index, type, normalized, value) glatter_glVertexAttribP4ui_debug((index), (type), (normalized), (value), __FILE__, __LINE__)
+void glatter_glVertexAttribP4ui_debug(GLuint index, GLenum type, GLboolean normalized, GLuint value, const char* file, int line);
+#define glVertexAttribP4uiv(index, type, normalized, value) glatter_glVertexAttribP4uiv_debug((index), (type), (normalized), (value), __FILE__, __LINE__)
+void glatter_glVertexAttribP4uiv_debug(GLuint index, GLenum type, GLboolean normalized, const GLuint *value, const char* file, int line);
+#endif // defined(GL_VERSION_3_3)
+#if defined(GL_VERSION_4_0)
+#define glBeginQueryIndexed(target, index, id) glatter_glBeginQueryIndexed_debug((target), (index), (id), __FILE__, __LINE__)
+void glatter_glBeginQueryIndexed_debug(GLenum target, GLuint index, GLuint id, const char* file, int line);
+#define glBindTransformFeedback(target, id) glatter_glBindTransformFeedback_debug((target), (id), __FILE__, __LINE__)
+void glatter_glBindTransformFeedback_debug(GLenum target, GLuint id, const char* file, int line);
+#define glBlendEquationSeparatei(buf, modeRGB, modeAlpha) glatter_glBlendEquationSeparatei_debug((buf), (modeRGB), (modeAlpha), __FILE__, __LINE__)
+void glatter_glBlendEquationSeparatei_debug(GLuint buf, GLenum modeRGB, GLenum modeAlpha, const char* file, int line);
+#define glBlendEquationi(buf, mode) glatter_glBlendEquationi_debug((buf), (mode), __FILE__, __LINE__)
+void glatter_glBlendEquationi_debug(GLuint buf, GLenum mode, const char* file, int line);
+#define glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) glatter_glBlendFuncSeparatei_debug((buf), (srcRGB), (dstRGB), (srcAlpha), (dstAlpha), __FILE__, __LINE__)
+void glatter_glBlendFuncSeparatei_debug(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha, const char* file, int line);
+#define glBlendFunci(buf, src, dst) glatter_glBlendFunci_debug((buf), (src), (dst), __FILE__, __LINE__)
+void glatter_glBlendFunci_debug(GLuint buf, GLenum src, GLenum dst, const char* file, int line);
+#define glDeleteTransformFeedbacks(n, ids) glatter_glDeleteTransformFeedbacks_debug((n), (ids), __FILE__, __LINE__)
+void glatter_glDeleteTransformFeedbacks_debug(GLsizei n, const GLuint *ids, const char* file, int line);
+#define glDrawArraysIndirect(mode, indirect) glatter_glDrawArraysIndirect_debug((mode), (indirect), __FILE__, __LINE__)
+void glatter_glDrawArraysIndirect_debug(GLenum mode, const void *indirect, const char* file, int line);
+#define glDrawElementsIndirect(mode, type, indirect) glatter_glDrawElementsIndirect_debug((mode), (type), (indirect), __FILE__, __LINE__)
+void glatter_glDrawElementsIndirect_debug(GLenum mode, GLenum type, const void *indirect, const char* file, int line);
+#define glDrawTransformFeedback(mode, id) glatter_glDrawTransformFeedback_debug((mode), (id), __FILE__, __LINE__)
+void glatter_glDrawTransformFeedback_debug(GLenum mode, GLuint id, const char* file, int line);
+#define glDrawTransformFeedbackStream(mode, id, stream) glatter_glDrawTransformFeedbackStream_debug((mode), (id), (stream), __FILE__, __LINE__)
+void glatter_glDrawTransformFeedbackStream_debug(GLenum mode, GLuint id, GLuint stream, const char* file, int line);
+#define glEndQueryIndexed(target, index) glatter_glEndQueryIndexed_debug((target), (index), __FILE__, __LINE__)
+void glatter_glEndQueryIndexed_debug(GLenum target, GLuint index, const char* file, int line);
+#define glGenTransformFeedbacks(n, ids) glatter_glGenTransformFeedbacks_debug((n), (ids), __FILE__, __LINE__)
+void glatter_glGenTransformFeedbacks_debug(GLsizei n, GLuint *ids, const char* file, int line);
+#define glGetActiveSubroutineName(program, shadertype, index, bufsize, length, name) glatter_glGetActiveSubroutineName_debug((program), (shadertype), (index), (bufsize), (length), (name), __FILE__, __LINE__)
+void glatter_glGetActiveSubroutineName_debug(GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name, const char* file, int line);
+#define glGetActiveSubroutineUniformName(program, shadertype, index, bufsize, length, name) glatter_glGetActiveSubroutineUniformName_debug((program), (shadertype), (index), (bufsize), (length), (name), __FILE__, __LINE__)
+void glatter_glGetActiveSubroutineUniformName_debug(GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name, const char* file, int line);
+#define glGetActiveSubroutineUniformiv(program, shadertype, index, pname, values) glatter_glGetActiveSubroutineUniformiv_debug((program), (shadertype), (index), (pname), (values), __FILE__, __LINE__)
+void glatter_glGetActiveSubroutineUniformiv_debug(GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint *values, const char* file, int line);
+#define glGetProgramStageiv(program, shadertype, pname, values) glatter_glGetProgramStageiv_debug((program), (shadertype), (pname), (values), __FILE__, __LINE__)
+void glatter_glGetProgramStageiv_debug(GLuint program, GLenum shadertype, GLenum pname, GLint *values, const char* file, int line);
+#define glGetQueryIndexediv(target, index, pname, params) glatter_glGetQueryIndexediv_debug((target), (index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetQueryIndexediv_debug(GLenum target, GLuint index, GLenum pname, GLint *params, const char* file, int line);
+#define glGetSubroutineIndex(program, shadertype, name) glatter_glGetSubroutineIndex_debug((program), (shadertype), (name), __FILE__, __LINE__)
+GLuint glatter_glGetSubroutineIndex_debug(GLuint program, GLenum shadertype, const GLchar *name, const char* file, int line);
+#define glGetSubroutineUniformLocation(program, shadertype, name) glatter_glGetSubroutineUniformLocation_debug((program), (shadertype), (name), __FILE__, __LINE__)
+GLint glatter_glGetSubroutineUniformLocation_debug(GLuint program, GLenum shadertype, const GLchar *name, const char* file, int line);
+#define glGetUniformSubroutineuiv(shadertype, location, params) glatter_glGetUniformSubroutineuiv_debug((shadertype), (location), (params), __FILE__, __LINE__)
+void glatter_glGetUniformSubroutineuiv_debug(GLenum shadertype, GLint location, GLuint *params, const char* file, int line);
+#define glGetUniformdv(program, location, params) glatter_glGetUniformdv_debug((program), (location), (params), __FILE__, __LINE__)
+void glatter_glGetUniformdv_debug(GLuint program, GLint location, GLdouble *params, const char* file, int line);
+#define glIsTransformFeedback(id) glatter_glIsTransformFeedback_debug((id), __FILE__, __LINE__)
+GLboolean glatter_glIsTransformFeedback_debug(GLuint id, const char* file, int line);
+#define glMinSampleShading(value) glatter_glMinSampleShading_debug((value), __FILE__, __LINE__)
+void glatter_glMinSampleShading_debug(GLfloat value, const char* file, int line);
+#define glPatchParameterfv(pname, values) glatter_glPatchParameterfv_debug((pname), (values), __FILE__, __LINE__)
+void glatter_glPatchParameterfv_debug(GLenum pname, const GLfloat *values, const char* file, int line);
+#define glPatchParameteri(pname, value) glatter_glPatchParameteri_debug((pname), (value), __FILE__, __LINE__)
+void glatter_glPatchParameteri_debug(GLenum pname, GLint value, const char* file, int line);
+#define glPauseTransformFeedback() glatter_glPauseTransformFeedback_debug(__FILE__, __LINE__)
+void glatter_glPauseTransformFeedback_debug(const char* file, int line);
+#define glResumeTransformFeedback() glatter_glResumeTransformFeedback_debug(__FILE__, __LINE__)
+void glatter_glResumeTransformFeedback_debug(const char* file, int line);
+#define glUniform1d(location, x) glatter_glUniform1d_debug((location), (x), __FILE__, __LINE__)
+void glatter_glUniform1d_debug(GLint location, GLdouble x, const char* file, int line);
+#define glUniform1dv(location, count, value) glatter_glUniform1dv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform1dv_debug(GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glUniform2d(location, x, y) glatter_glUniform2d_debug((location), (x), (y), __FILE__, __LINE__)
+void glatter_glUniform2d_debug(GLint location, GLdouble x, GLdouble y, const char* file, int line);
+#define glUniform2dv(location, count, value) glatter_glUniform2dv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform2dv_debug(GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glUniform3d(location, x, y, z) glatter_glUniform3d_debug((location), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glUniform3d_debug(GLint location, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#define glUniform3dv(location, count, value) glatter_glUniform3dv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform3dv_debug(GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glUniform4d(location, x, y, z, w) glatter_glUniform4d_debug((location), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glUniform4d_debug(GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line);
+#define glUniform4dv(location, count, value) glatter_glUniform4dv_debug((location), (count), (value), __FILE__, __LINE__)
+void glatter_glUniform4dv_debug(GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glUniformMatrix2dv(location, count, transpose, value) glatter_glUniformMatrix2dv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix2dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glUniformMatrix2x3dv(location, count, transpose, value) glatter_glUniformMatrix2x3dv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix2x3dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glUniformMatrix2x4dv(location, count, transpose, value) glatter_glUniformMatrix2x4dv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix2x4dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glUniformMatrix3dv(location, count, transpose, value) glatter_glUniformMatrix3dv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix3dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glUniformMatrix3x2dv(location, count, transpose, value) glatter_glUniformMatrix3x2dv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix3x2dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glUniformMatrix3x4dv(location, count, transpose, value) glatter_glUniformMatrix3x4dv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix3x4dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glUniformMatrix4dv(location, count, transpose, value) glatter_glUniformMatrix4dv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix4dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glUniformMatrix4x2dv(location, count, transpose, value) glatter_glUniformMatrix4x2dv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix4x2dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glUniformMatrix4x3dv(location, count, transpose, value) glatter_glUniformMatrix4x3dv_debug((location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glUniformMatrix4x3dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glUniformSubroutinesuiv(shadertype, count, indices) glatter_glUniformSubroutinesuiv_debug((shadertype), (count), (indices), __FILE__, __LINE__)
+void glatter_glUniformSubroutinesuiv_debug(GLenum shadertype, GLsizei count, const GLuint *indices, const char* file, int line);
+#endif // defined(GL_VERSION_4_0)
+#if defined(GL_VERSION_4_1)
+#define glActiveShaderProgram(pipeline, program) glatter_glActiveShaderProgram_debug((pipeline), (program), __FILE__, __LINE__)
+void glatter_glActiveShaderProgram_debug(GLuint pipeline, GLuint program, const char* file, int line);
+#define glBindProgramPipeline(pipeline) glatter_glBindProgramPipeline_debug((pipeline), __FILE__, __LINE__)
+void glatter_glBindProgramPipeline_debug(GLuint pipeline, const char* file, int line);
+#define glClearDepthf(d) glatter_glClearDepthf_debug((d), __FILE__, __LINE__)
+void glatter_glClearDepthf_debug(GLfloat d, const char* file, int line);
+#define glCreateShaderProgramv(type, count, strings) glatter_glCreateShaderProgramv_debug((type), (count), (strings), __FILE__, __LINE__)
+GLuint glatter_glCreateShaderProgramv_debug(GLenum type, GLsizei count, const GLchar *const*strings, const char* file, int line);
+#define glDeleteProgramPipelines(n, pipelines) glatter_glDeleteProgramPipelines_debug((n), (pipelines), __FILE__, __LINE__)
+void glatter_glDeleteProgramPipelines_debug(GLsizei n, const GLuint *pipelines, const char* file, int line);
+#define glDepthRangeArrayv(first, count, v) glatter_glDepthRangeArrayv_debug((first), (count), (v), __FILE__, __LINE__)
+void glatter_glDepthRangeArrayv_debug(GLuint first, GLsizei count, const GLdouble *v, const char* file, int line);
+#define glDepthRangeIndexed(index, n, f) glatter_glDepthRangeIndexed_debug((index), (n), (f), __FILE__, __LINE__)
+void glatter_glDepthRangeIndexed_debug(GLuint index, GLdouble n, GLdouble f, const char* file, int line);
+#define glDepthRangef(n, f) glatter_glDepthRangef_debug((n), (f), __FILE__, __LINE__)
+void glatter_glDepthRangef_debug(GLfloat n, GLfloat f, const char* file, int line);
+#define glGenProgramPipelines(n, pipelines) glatter_glGenProgramPipelines_debug((n), (pipelines), __FILE__, __LINE__)
+void glatter_glGenProgramPipelines_debug(GLsizei n, GLuint *pipelines, const char* file, int line);
+#define glGetDoublei_v(target, index, data) glatter_glGetDoublei_v_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetDoublei_v_debug(GLenum target, GLuint index, GLdouble *data, const char* file, int line);
+#define glGetFloati_v(target, index, data) glatter_glGetFloati_v_debug((target), (index), (data), __FILE__, __LINE__)
+void glatter_glGetFloati_v_debug(GLenum target, GLuint index, GLfloat *data, const char* file, int line);
+#define glGetProgramBinary(program, bufSize, length, binaryFormat, binary) glatter_glGetProgramBinary_debug((program), (bufSize), (length), (binaryFormat), (binary), __FILE__, __LINE__)
+void glatter_glGetProgramBinary_debug(GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, void *binary, const char* file, int line);
+#define glGetProgramPipelineInfoLog(pipeline, bufSize, length, infoLog) glatter_glGetProgramPipelineInfoLog_debug((pipeline), (bufSize), (length), (infoLog), __FILE__, __LINE__)
+void glatter_glGetProgramPipelineInfoLog_debug(GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog, const char* file, int line);
+#define glGetProgramPipelineiv(pipeline, pname, params) glatter_glGetProgramPipelineiv_debug((pipeline), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetProgramPipelineiv_debug(GLuint pipeline, GLenum pname, GLint *params, const char* file, int line);
+#define glGetShaderPrecisionFormat(shadertype, precisiontype, range, precision) glatter_glGetShaderPrecisionFormat_debug((shadertype), (precisiontype), (range), (precision), __FILE__, __LINE__)
+void glatter_glGetShaderPrecisionFormat_debug(GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision, const char* file, int line);
+#define glGetVertexAttribLdv(index, pname, params) glatter_glGetVertexAttribLdv_debug((index), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetVertexAttribLdv_debug(GLuint index, GLenum pname, GLdouble *params, const char* file, int line);
+#define glIsProgramPipeline(pipeline) glatter_glIsProgramPipeline_debug((pipeline), __FILE__, __LINE__)
+GLboolean glatter_glIsProgramPipeline_debug(GLuint pipeline, const char* file, int line);
+#define glProgramBinary(program, binaryFormat, binary, length) glatter_glProgramBinary_debug((program), (binaryFormat), (binary), (length), __FILE__, __LINE__)
+void glatter_glProgramBinary_debug(GLuint program, GLenum binaryFormat, const void *binary, GLsizei length, const char* file, int line);
+#define glProgramParameteri(program, pname, value) glatter_glProgramParameteri_debug((program), (pname), (value), __FILE__, __LINE__)
+void glatter_glProgramParameteri_debug(GLuint program, GLenum pname, GLint value, const char* file, int line);
+#define glProgramUniform1d(program, location, v0) glatter_glProgramUniform1d_debug((program), (location), (v0), __FILE__, __LINE__)
+void glatter_glProgramUniform1d_debug(GLuint program, GLint location, GLdouble v0, const char* file, int line);
+#define glProgramUniform1dv(program, location, count, value) glatter_glProgramUniform1dv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1dv_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glProgramUniform1f(program, location, v0) glatter_glProgramUniform1f_debug((program), (location), (v0), __FILE__, __LINE__)
+void glatter_glProgramUniform1f_debug(GLuint program, GLint location, GLfloat v0, const char* file, int line);
+#define glProgramUniform1fv(program, location, count, value) glatter_glProgramUniform1fv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1fv_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glProgramUniform1i(program, location, v0) glatter_glProgramUniform1i_debug((program), (location), (v0), __FILE__, __LINE__)
+void glatter_glProgramUniform1i_debug(GLuint program, GLint location, GLint v0, const char* file, int line);
+#define glProgramUniform1iv(program, location, count, value) glatter_glProgramUniform1iv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1iv_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glProgramUniform1ui(program, location, v0) glatter_glProgramUniform1ui_debug((program), (location), (v0), __FILE__, __LINE__)
+void glatter_glProgramUniform1ui_debug(GLuint program, GLint location, GLuint v0, const char* file, int line);
+#define glProgramUniform1uiv(program, location, count, value) glatter_glProgramUniform1uiv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform1uiv_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glProgramUniform2d(program, location, v0, v1) glatter_glProgramUniform2d_debug((program), (location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glProgramUniform2d_debug(GLuint program, GLint location, GLdouble v0, GLdouble v1, const char* file, int line);
+#define glProgramUniform2dv(program, location, count, value) glatter_glProgramUniform2dv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2dv_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glProgramUniform2f(program, location, v0, v1) glatter_glProgramUniform2f_debug((program), (location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glProgramUniform2f_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, const char* file, int line);
+#define glProgramUniform2fv(program, location, count, value) glatter_glProgramUniform2fv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2fv_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glProgramUniform2i(program, location, v0, v1) glatter_glProgramUniform2i_debug((program), (location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glProgramUniform2i_debug(GLuint program, GLint location, GLint v0, GLint v1, const char* file, int line);
+#define glProgramUniform2iv(program, location, count, value) glatter_glProgramUniform2iv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2iv_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glProgramUniform2ui(program, location, v0, v1) glatter_glProgramUniform2ui_debug((program), (location), (v0), (v1), __FILE__, __LINE__)
+void glatter_glProgramUniform2ui_debug(GLuint program, GLint location, GLuint v0, GLuint v1, const char* file, int line);
+#define glProgramUniform2uiv(program, location, count, value) glatter_glProgramUniform2uiv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform2uiv_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glProgramUniform3d(program, location, v0, v1, v2) glatter_glProgramUniform3d_debug((program), (location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glProgramUniform3d_debug(GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2, const char* file, int line);
+#define glProgramUniform3dv(program, location, count, value) glatter_glProgramUniform3dv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3dv_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glProgramUniform3f(program, location, v0, v1, v2) glatter_glProgramUniform3f_debug((program), (location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glProgramUniform3f_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, const char* file, int line);
+#define glProgramUniform3fv(program, location, count, value) glatter_glProgramUniform3fv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3fv_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glProgramUniform3i(program, location, v0, v1, v2) glatter_glProgramUniform3i_debug((program), (location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glProgramUniform3i_debug(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, const char* file, int line);
+#define glProgramUniform3iv(program, location, count, value) glatter_glProgramUniform3iv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3iv_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glProgramUniform3ui(program, location, v0, v1, v2) glatter_glProgramUniform3ui_debug((program), (location), (v0), (v1), (v2), __FILE__, __LINE__)
+void glatter_glProgramUniform3ui_debug(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, const char* file, int line);
+#define glProgramUniform3uiv(program, location, count, value) glatter_glProgramUniform3uiv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform3uiv_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glProgramUniform4d(program, location, v0, v1, v2, v3) glatter_glProgramUniform4d_debug((program), (location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glProgramUniform4d_debug(GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3, const char* file, int line);
+#define glProgramUniform4dv(program, location, count, value) glatter_glProgramUniform4dv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4dv_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line);
+#define glProgramUniform4f(program, location, v0, v1, v2, v3) glatter_glProgramUniform4f_debug((program), (location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glProgramUniform4f_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3, const char* file, int line);
+#define glProgramUniform4fv(program, location, count, value) glatter_glProgramUniform4fv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4fv_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line);
+#define glProgramUniform4i(program, location, v0, v1, v2, v3) glatter_glProgramUniform4i_debug((program), (location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glProgramUniform4i_debug(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3, const char* file, int line);
+#define glProgramUniform4iv(program, location, count, value) glatter_glProgramUniform4iv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4iv_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line);
+#define glProgramUniform4ui(program, location, v0, v1, v2, v3) glatter_glProgramUniform4ui_debug((program), (location), (v0), (v1), (v2), (v3), __FILE__, __LINE__)
+void glatter_glProgramUniform4ui_debug(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3, const char* file, int line);
+#define glProgramUniform4uiv(program, location, count, value) glatter_glProgramUniform4uiv_debug((program), (location), (count), (value), __FILE__, __LINE__)
+void glatter_glProgramUniform4uiv_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line);
+#define glProgramUniformMatrix2dv(program, location, count, transpose, value) glatter_glProgramUniformMatrix2dv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix2fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix2fv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix2x3dv(program, location, count, transpose, value) glatter_glProgramUniformMatrix2x3dv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2x3dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix2x3fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix2x3fv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2x3fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix2x4dv(program, location, count, transpose, value) glatter_glProgramUniformMatrix2x4dv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2x4dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix2x4fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix2x4fv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix2x4fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix3dv(program, location, count, transpose, value) glatter_glProgramUniformMatrix3dv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix3fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix3fv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix3x2dv(program, location, count, transpose, value) glatter_glProgramUniformMatrix3x2dv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3x2dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix3x2fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix3x2fv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3x2fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix3x4dv(program, location, count, transpose, value) glatter_glProgramUniformMatrix3x4dv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3x4dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix3x4fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix3x4fv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix3x4fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix4dv(program, location, count, transpose, value) glatter_glProgramUniformMatrix4dv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix4fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix4fv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix4x2dv(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x2dv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4x2dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix4x2fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x2fv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4x2fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glProgramUniformMatrix4x3dv(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x3dv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4x3dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line);
+#define glProgramUniformMatrix4x3fv(program, location, count, transpose, value) glatter_glProgramUniformMatrix4x3fv_debug((program), (location), (count), (transpose), (value), __FILE__, __LINE__)
+void glatter_glProgramUniformMatrix4x3fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line);
+#define glReleaseShaderCompiler() glatter_glReleaseShaderCompiler_debug(__FILE__, __LINE__)
+void glatter_glReleaseShaderCompiler_debug(const char* file, int line);
+#define glScissorArrayv(first, count, v) glatter_glScissorArrayv_debug((first), (count), (v), __FILE__, __LINE__)
+void glatter_glScissorArrayv_debug(GLuint first, GLsizei count, const GLint *v, const char* file, int line);
+#define glScissorIndexed(index, left, bottom, width, height) glatter_glScissorIndexed_debug((index), (left), (bottom), (width), (height), __FILE__, __LINE__)
+void glatter_glScissorIndexed_debug(GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height, const char* file, int line);
+#define glScissorIndexedv(index, v) glatter_glScissorIndexedv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glScissorIndexedv_debug(GLuint index, const GLint *v, const char* file, int line);
+#define glShaderBinary(count, shaders, binaryformat, binary, length) glatter_glShaderBinary_debug((count), (shaders), (binaryformat), (binary), (length), __FILE__, __LINE__)
+void glatter_glShaderBinary_debug(GLsizei count, const GLuint *shaders, GLenum binaryformat, const void *binary, GLsizei length, const char* file, int line);
+#define glUseProgramStages(pipeline, stages, program) glatter_glUseProgramStages_debug((pipeline), (stages), (program), __FILE__, __LINE__)
+void glatter_glUseProgramStages_debug(GLuint pipeline, GLbitfield stages, GLuint program, const char* file, int line);
+#define glValidateProgramPipeline(pipeline) glatter_glValidateProgramPipeline_debug((pipeline), __FILE__, __LINE__)
+void glatter_glValidateProgramPipeline_debug(GLuint pipeline, const char* file, int line);
+#define glVertexAttribL1d(index, x) glatter_glVertexAttribL1d_debug((index), (x), __FILE__, __LINE__)
+void glatter_glVertexAttribL1d_debug(GLuint index, GLdouble x, const char* file, int line);
+#define glVertexAttribL1dv(index, v) glatter_glVertexAttribL1dv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL1dv_debug(GLuint index, const GLdouble *v, const char* file, int line);
+#define glVertexAttribL2d(index, x, y) glatter_glVertexAttribL2d_debug((index), (x), (y), __FILE__, __LINE__)
+void glatter_glVertexAttribL2d_debug(GLuint index, GLdouble x, GLdouble y, const char* file, int line);
+#define glVertexAttribL2dv(index, v) glatter_glVertexAttribL2dv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL2dv_debug(GLuint index, const GLdouble *v, const char* file, int line);
+#define glVertexAttribL3d(index, x, y, z) glatter_glVertexAttribL3d_debug((index), (x), (y), (z), __FILE__, __LINE__)
+void glatter_glVertexAttribL3d_debug(GLuint index, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#define glVertexAttribL3dv(index, v) glatter_glVertexAttribL3dv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL3dv_debug(GLuint index, const GLdouble *v, const char* file, int line);
+#define glVertexAttribL4d(index, x, y, z, w) glatter_glVertexAttribL4d_debug((index), (x), (y), (z), (w), __FILE__, __LINE__)
+void glatter_glVertexAttribL4d_debug(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line);
+#define glVertexAttribL4dv(index, v) glatter_glVertexAttribL4dv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glVertexAttribL4dv_debug(GLuint index, const GLdouble *v, const char* file, int line);
+#define glVertexAttribLPointer(index, size, type, stride, pointer) glatter_glVertexAttribLPointer_debug((index), (size), (type), (stride), (pointer), __FILE__, __LINE__)
+void glatter_glVertexAttribLPointer_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer, const char* file, int line);
+#define glViewportArrayv(first, count, v) glatter_glViewportArrayv_debug((first), (count), (v), __FILE__, __LINE__)
+void glatter_glViewportArrayv_debug(GLuint first, GLsizei count, const GLfloat *v, const char* file, int line);
+#define glViewportIndexedf(index, x, y, w, h) glatter_glViewportIndexedf_debug((index), (x), (y), (w), (h), __FILE__, __LINE__)
+void glatter_glViewportIndexedf_debug(GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h, const char* file, int line);
+#define glViewportIndexedfv(index, v) glatter_glViewportIndexedfv_debug((index), (v), __FILE__, __LINE__)
+void glatter_glViewportIndexedfv_debug(GLuint index, const GLfloat *v, const char* file, int line);
+#endif // defined(GL_VERSION_4_1)
+#if defined(GL_VERSION_4_2)
+#define glBindImageTexture(unit, texture, level, layered, layer, access, format) glatter_glBindImageTexture_debug((unit), (texture), (level), (layered), (layer), (access), (format), __FILE__, __LINE__)
+void glatter_glBindImageTexture_debug(GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format, const char* file, int line);
+#define glDrawArraysInstancedBaseInstance(mode, first, count, instancecount, baseinstance) glatter_glDrawArraysInstancedBaseInstance_debug((mode), (first), (count), (instancecount), (baseinstance), __FILE__, __LINE__)
+void glatter_glDrawArraysInstancedBaseInstance_debug(GLenum mode, GLint first, GLsizei count, GLsizei instancecount, GLuint baseinstance, const char* file, int line);
+#define glDrawElementsInstancedBaseInstance(mode, count, type, indices, instancecount, baseinstance) glatter_glDrawElementsInstancedBaseInstance_debug((mode), (count), (type), (indices), (instancecount), (baseinstance), __FILE__, __LINE__)
+void glatter_glDrawElementsInstancedBaseInstance_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLuint baseinstance, const char* file, int line);
+#define glDrawElementsInstancedBaseVertexBaseInstance(mode, count, type, indices, instancecount, basevertex, baseinstance) glatter_glDrawElementsInstancedBaseVertexBaseInstance_debug((mode), (count), (type), (indices), (instancecount), (basevertex), (baseinstance), __FILE__, __LINE__)
+void glatter_glDrawElementsInstancedBaseVertexBaseInstance_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex, GLuint baseinstance, const char* file, int line);
+#define glDrawTransformFeedbackInstanced(mode, id, instancecount) glatter_glDrawTransformFeedbackInstanced_debug((mode), (id), (instancecount), __FILE__, __LINE__)
+void glatter_glDrawTransformFeedbackInstanced_debug(GLenum mode, GLuint id, GLsizei instancecount, const char* file, int line);
+#define glDrawTransformFeedbackStreamInstanced(mode, id, stream, instancecount) glatter_glDrawTransformFeedbackStreamInstanced_debug((mode), (id), (stream), (instancecount), __FILE__, __LINE__)
+void glatter_glDrawTransformFeedbackStreamInstanced_debug(GLenum mode, GLuint id, GLuint stream, GLsizei instancecount, const char* file, int line);
+#define glGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, params) glatter_glGetActiveAtomicCounterBufferiv_debug((program), (bufferIndex), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetActiveAtomicCounterBufferiv_debug(GLuint program, GLuint bufferIndex, GLenum pname, GLint *params, const char* file, int line);
+#define glGetInternalformativ(target, internalformat, pname, bufSize, params) glatter_glGetInternalformativ_debug((target), (internalformat), (pname), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetInternalformativ_debug(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params, const char* file, int line);
+#define glMemoryBarrier(barriers) glatter_glMemoryBarrier_debug((barriers), __FILE__, __LINE__)
+void glatter_glMemoryBarrier_debug(GLbitfield barriers, const char* file, int line);
+#define glTexStorage1D(target, levels, internalformat, width) glatter_glTexStorage1D_debug((target), (levels), (internalformat), (width), __FILE__, __LINE__)
+void glatter_glTexStorage1D_debug(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, const char* file, int line);
+#define glTexStorage2D(target, levels, internalformat, width, height) glatter_glTexStorage2D_debug((target), (levels), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glTexStorage2D_debug(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glTexStorage3D(target, levels, internalformat, width, height, depth) glatter_glTexStorage3D_debug((target), (levels), (internalformat), (width), (height), (depth), __FILE__, __LINE__)
+void glatter_glTexStorage3D_debug(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line);
+#endif // defined(GL_VERSION_4_2)
+#if defined(GL_VERSION_4_3)
+#define glBindVertexBuffer(bindingindex, buffer, offset, stride) glatter_glBindVertexBuffer_debug((bindingindex), (buffer), (offset), (stride), __FILE__, __LINE__)
+void glatter_glBindVertexBuffer_debug(GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride, const char* file, int line);
+#define glClearBufferData(target, internalformat, format, type, data) glatter_glClearBufferData_debug((target), (internalformat), (format), (type), (data), __FILE__, __LINE__)
+void glatter_glClearBufferData_debug(GLenum target, GLenum internalformat, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define glClearBufferSubData(target, internalformat, offset, size, format, type, data) glatter_glClearBufferSubData_debug((target), (internalformat), (offset), (size), (format), (type), (data), __FILE__, __LINE__)
+void glatter_glClearBufferSubData_debug(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) glatter_glCopyImageSubData_debug((srcName), (srcTarget), (srcLevel), (srcX), (srcY), (srcZ), (dstName), (dstTarget), (dstLevel), (dstX), (dstY), (dstZ), (srcWidth), (srcHeight), (srcDepth), __FILE__, __LINE__)
+void glatter_glCopyImageSubData_debug(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth, const char* file, int line);
+#define glDebugMessageCallback(callback, userParam) glatter_glDebugMessageCallback_debug((callback), (userParam), __FILE__, __LINE__)
+void glatter_glDebugMessageCallback_debug(GLDEBUGPROC callback, const void *userParam, const char* file, int line);
+#define glDebugMessageControl(source, type, severity, count, ids, enabled) glatter_glDebugMessageControl_debug((source), (type), (severity), (count), (ids), (enabled), __FILE__, __LINE__)
+void glatter_glDebugMessageControl_debug(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled, const char* file, int line);
+#define glDebugMessageInsert(source, type, id, severity, length, buf) glatter_glDebugMessageInsert_debug((source), (type), (id), (severity), (length), (buf), __FILE__, __LINE__)
+void glatter_glDebugMessageInsert_debug(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf, const char* file, int line);
+#define glDispatchCompute(num_groups_x, num_groups_y, num_groups_z) glatter_glDispatchCompute_debug((num_groups_x), (num_groups_y), (num_groups_z), __FILE__, __LINE__)
+void glatter_glDispatchCompute_debug(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, const char* file, int line);
+#define glDispatchComputeIndirect(indirect) glatter_glDispatchComputeIndirect_debug((indirect), __FILE__, __LINE__)
+void glatter_glDispatchComputeIndirect_debug(GLintptr indirect, const char* file, int line);
+#define glFramebufferParameteri(target, pname, param) glatter_glFramebufferParameteri_debug((target), (pname), (param), __FILE__, __LINE__)
+void glatter_glFramebufferParameteri_debug(GLenum target, GLenum pname, GLint param, const char* file, int line);
+#define glGetDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths, messageLog) glatter_glGetDebugMessageLog_debug((count), (bufSize), (sources), (types), (ids), (severities), (lengths), (messageLog), __FILE__, __LINE__)
+GLuint glatter_glGetDebugMessageLog_debug(GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog, const char* file, int line);
+#define glGetFramebufferParameteriv(target, pname, params) glatter_glGetFramebufferParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetFramebufferParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#define glGetInternalformati64v(target, internalformat, pname, bufSize, params) glatter_glGetInternalformati64v_debug((target), (internalformat), (pname), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetInternalformati64v_debug(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 *params, const char* file, int line);
+#define glGetObjectLabel(identifier, name, bufSize, length, label) glatter_glGetObjectLabel_debug((identifier), (name), (bufSize), (length), (label), __FILE__, __LINE__)
+void glatter_glGetObjectLabel_debug(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label, const char* file, int line);
+#define glGetObjectPtrLabel(ptr, bufSize, length, label) glatter_glGetObjectPtrLabel_debug((ptr), (bufSize), (length), (label), __FILE__, __LINE__)
+void glatter_glGetObjectPtrLabel_debug(const void *ptr, GLsizei bufSize, GLsizei *length, GLchar *label, const char* file, int line);
+#define glGetProgramInterfaceiv(program, programInterface, pname, params) glatter_glGetProgramInterfaceiv_debug((program), (programInterface), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetProgramInterfaceiv_debug(GLuint program, GLenum programInterface, GLenum pname, GLint *params, const char* file, int line);
+#define glGetProgramResourceIndex(program, programInterface, name) glatter_glGetProgramResourceIndex_debug((program), (programInterface), (name), __FILE__, __LINE__)
+GLuint glatter_glGetProgramResourceIndex_debug(GLuint program, GLenum programInterface, const GLchar *name, const char* file, int line);
+#define glGetProgramResourceLocation(program, programInterface, name) glatter_glGetProgramResourceLocation_debug((program), (programInterface), (name), __FILE__, __LINE__)
+GLint glatter_glGetProgramResourceLocation_debug(GLuint program, GLenum programInterface, const GLchar *name, const char* file, int line);
+#define glGetProgramResourceLocationIndex(program, programInterface, name) glatter_glGetProgramResourceLocationIndex_debug((program), (programInterface), (name), __FILE__, __LINE__)
+GLint glatter_glGetProgramResourceLocationIndex_debug(GLuint program, GLenum programInterface, const GLchar *name, const char* file, int line);
+#define glGetProgramResourceName(program, programInterface, index, bufSize, length, name) glatter_glGetProgramResourceName_debug((program), (programInterface), (index), (bufSize), (length), (name), __FILE__, __LINE__)
+void glatter_glGetProgramResourceName_debug(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name, const char* file, int line);
+#define glGetProgramResourceiv(program, programInterface, index, propCount, props, bufSize, length, params) glatter_glGetProgramResourceiv_debug((program), (programInterface), (index), (propCount), (props), (bufSize), (length), (params), __FILE__, __LINE__)
+void glatter_glGetProgramResourceiv_debug(GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei bufSize, GLsizei *length, GLint *params, const char* file, int line);
+#define glInvalidateBufferData(buffer) glatter_glInvalidateBufferData_debug((buffer), __FILE__, __LINE__)
+void glatter_glInvalidateBufferData_debug(GLuint buffer, const char* file, int line);
+#define glInvalidateBufferSubData(buffer, offset, length) glatter_glInvalidateBufferSubData_debug((buffer), (offset), (length), __FILE__, __LINE__)
+void glatter_glInvalidateBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, const char* file, int line);
+#define glInvalidateFramebuffer(target, numAttachments, attachments) glatter_glInvalidateFramebuffer_debug((target), (numAttachments), (attachments), __FILE__, __LINE__)
+void glatter_glInvalidateFramebuffer_debug(GLenum target, GLsizei numAttachments, const GLenum *attachments, const char* file, int line);
+#define glInvalidateSubFramebuffer(target, numAttachments, attachments, x, y, width, height) glatter_glInvalidateSubFramebuffer_debug((target), (numAttachments), (attachments), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glInvalidateSubFramebuffer_debug(GLenum target, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glInvalidateTexImage(texture, level) glatter_glInvalidateTexImage_debug((texture), (level), __FILE__, __LINE__)
+void glatter_glInvalidateTexImage_debug(GLuint texture, GLint level, const char* file, int line);
+#define glInvalidateTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth) glatter_glInvalidateTexSubImage_debug((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), __FILE__, __LINE__)
+void glatter_glInvalidateTexSubImage_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line);
+#define glMultiDrawArraysIndirect(mode, indirect, drawcount, stride) glatter_glMultiDrawArraysIndirect_debug((mode), (indirect), (drawcount), (stride), __FILE__, __LINE__)
+void glatter_glMultiDrawArraysIndirect_debug(GLenum mode, const void *indirect, GLsizei drawcount, GLsizei stride, const char* file, int line);
+#define glMultiDrawElementsIndirect(mode, type, indirect, drawcount, stride) glatter_glMultiDrawElementsIndirect_debug((mode), (type), (indirect), (drawcount), (stride), __FILE__, __LINE__)
+void glatter_glMultiDrawElementsIndirect_debug(GLenum mode, GLenum type, const void *indirect, GLsizei drawcount, GLsizei stride, const char* file, int line);
+#define glObjectLabel(identifier, name, length, label) glatter_glObjectLabel_debug((identifier), (name), (length), (label), __FILE__, __LINE__)
+void glatter_glObjectLabel_debug(GLenum identifier, GLuint name, GLsizei length, const GLchar *label, const char* file, int line);
+#define glObjectPtrLabel(ptr, length, label) glatter_glObjectPtrLabel_debug((ptr), (length), (label), __FILE__, __LINE__)
+void glatter_glObjectPtrLabel_debug(const void *ptr, GLsizei length, const GLchar *label, const char* file, int line);
+#define glPopDebugGroup() glatter_glPopDebugGroup_debug(__FILE__, __LINE__)
+void glatter_glPopDebugGroup_debug(const char* file, int line);
+#define glPushDebugGroup(source, id, length, message) glatter_glPushDebugGroup_debug((source), (id), (length), (message), __FILE__, __LINE__)
+void glatter_glPushDebugGroup_debug(GLenum source, GLuint id, GLsizei length, const GLchar *message, const char* file, int line);
+#define glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding) glatter_glShaderStorageBlockBinding_debug((program), (storageBlockIndex), (storageBlockBinding), __FILE__, __LINE__)
+void glatter_glShaderStorageBlockBinding_debug(GLuint program, GLuint storageBlockIndex, GLuint storageBlockBinding, const char* file, int line);
+#define glTexBufferRange(target, internalformat, buffer, offset, size) glatter_glTexBufferRange_debug((target), (internalformat), (buffer), (offset), (size), __FILE__, __LINE__)
+void glatter_glTexBufferRange_debug(GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line);
+#define glTexStorage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations) glatter_glTexStorage2DMultisample_debug((target), (samples), (internalformat), (width), (height), (fixedsamplelocations), __FILE__, __LINE__)
+void glatter_glTexStorage2DMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations, const char* file, int line);
+#define glTexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations) glatter_glTexStorage3DMultisample_debug((target), (samples), (internalformat), (width), (height), (depth), (fixedsamplelocations), __FILE__, __LINE__)
+void glatter_glTexStorage3DMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations, const char* file, int line);
+#define glTextureView(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers) glatter_glTextureView_debug((texture), (target), (origtexture), (internalformat), (minlevel), (numlevels), (minlayer), (numlayers), __FILE__, __LINE__)
+void glatter_glTextureView_debug(GLuint texture, GLenum target, GLuint origtexture, GLenum internalformat, GLuint minlevel, GLuint numlevels, GLuint minlayer, GLuint numlayers, const char* file, int line);
+#define glVertexAttribBinding(attribindex, bindingindex) glatter_glVertexAttribBinding_debug((attribindex), (bindingindex), __FILE__, __LINE__)
+void glatter_glVertexAttribBinding_debug(GLuint attribindex, GLuint bindingindex, const char* file, int line);
+#define glVertexAttribFormat(attribindex, size, type, normalized, relativeoffset) glatter_glVertexAttribFormat_debug((attribindex), (size), (type), (normalized), (relativeoffset), __FILE__, __LINE__)
+void glatter_glVertexAttribFormat_debug(GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset, const char* file, int line);
+#define glVertexAttribIFormat(attribindex, size, type, relativeoffset) glatter_glVertexAttribIFormat_debug((attribindex), (size), (type), (relativeoffset), __FILE__, __LINE__)
+void glatter_glVertexAttribIFormat_debug(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line);
+#define glVertexAttribLFormat(attribindex, size, type, relativeoffset) glatter_glVertexAttribLFormat_debug((attribindex), (size), (type), (relativeoffset), __FILE__, __LINE__)
+void glatter_glVertexAttribLFormat_debug(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line);
+#define glVertexBindingDivisor(bindingindex, divisor) glatter_glVertexBindingDivisor_debug((bindingindex), (divisor), __FILE__, __LINE__)
+void glatter_glVertexBindingDivisor_debug(GLuint bindingindex, GLuint divisor, const char* file, int line);
+#endif // defined(GL_VERSION_4_3)
+#if defined(GL_VERSION_4_4)
+#define glBindBuffersBase(target, first, count, buffers) glatter_glBindBuffersBase_debug((target), (first), (count), (buffers), __FILE__, __LINE__)
+void glatter_glBindBuffersBase_debug(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const char* file, int line);
+#define glBindBuffersRange(target, first, count, buffers, offsets, sizes) glatter_glBindBuffersRange_debug((target), (first), (count), (buffers), (offsets), (sizes), __FILE__, __LINE__)
+void glatter_glBindBuffersRange_debug(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes, const char* file, int line);
+#define glBindImageTextures(first, count, textures) glatter_glBindImageTextures_debug((first), (count), (textures), __FILE__, __LINE__)
+void glatter_glBindImageTextures_debug(GLuint first, GLsizei count, const GLuint *textures, const char* file, int line);
+#define glBindSamplers(first, count, samplers) glatter_glBindSamplers_debug((first), (count), (samplers), __FILE__, __LINE__)
+void glatter_glBindSamplers_debug(GLuint first, GLsizei count, const GLuint *samplers, const char* file, int line);
+#define glBindTextures(first, count, textures) glatter_glBindTextures_debug((first), (count), (textures), __FILE__, __LINE__)
+void glatter_glBindTextures_debug(GLuint first, GLsizei count, const GLuint *textures, const char* file, int line);
+#define glBindVertexBuffers(first, count, buffers, offsets, strides) glatter_glBindVertexBuffers_debug((first), (count), (buffers), (offsets), (strides), __FILE__, __LINE__)
+void glatter_glBindVertexBuffers_debug(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides, const char* file, int line);
+#define glBufferStorage(target, size, data, flags) glatter_glBufferStorage_debug((target), (size), (data), (flags), __FILE__, __LINE__)
+void glatter_glBufferStorage_debug(GLenum target, GLsizeiptr size, const void *data, GLbitfield flags, const char* file, int line);
+#define glClearTexImage(texture, level, format, type, data) glatter_glClearTexImage_debug((texture), (level), (format), (type), (data), __FILE__, __LINE__)
+void glatter_glClearTexImage_debug(GLuint texture, GLint level, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data) glatter_glClearTexSubImage_debug((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (type), (data), __FILE__, __LINE__)
+void glatter_glClearTexSubImage_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *data, const char* file, int line);
+#endif // defined(GL_VERSION_4_4)
+#if defined(GL_VERSION_4_5)
+#define glBindTextureUnit(unit, texture) glatter_glBindTextureUnit_debug((unit), (texture), __FILE__, __LINE__)
+void glatter_glBindTextureUnit_debug(GLuint unit, GLuint texture, const char* file, int line);
+#define glBlitNamedFramebuffer(readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) glatter_glBlitNamedFramebuffer_debug((readFramebuffer), (drawFramebuffer), (srcX0), (srcY0), (srcX1), (srcY1), (dstX0), (dstY0), (dstX1), (dstY1), (mask), (filter), __FILE__, __LINE__)
+void glatter_glBlitNamedFramebuffer_debug(GLuint readFramebuffer, GLuint drawFramebuffer, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line);
+#define glCheckNamedFramebufferStatus(framebuffer, target) glatter_glCheckNamedFramebufferStatus_debug((framebuffer), (target), __FILE__, __LINE__)
+GLenum glatter_glCheckNamedFramebufferStatus_debug(GLuint framebuffer, GLenum target, const char* file, int line);
+#define glClearNamedBufferData(buffer, internalformat, format, type, data) glatter_glClearNamedBufferData_debug((buffer), (internalformat), (format), (type), (data), __FILE__, __LINE__)
+void glatter_glClearNamedBufferData_debug(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data) glatter_glClearNamedBufferSubData_debug((buffer), (internalformat), (offset), (size), (format), (type), (data), __FILE__, __LINE__)
+void glatter_glClearNamedBufferSubData_debug(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizei size, GLenum format, GLenum type, const void *data, const char* file, int line);
+#define glClearNamedFramebufferfi(framebuffer, buffer, depth, stencil) glatter_glClearNamedFramebufferfi_debug((framebuffer), (buffer), (depth), (stencil), __FILE__, __LINE__)
+void glatter_glClearNamedFramebufferfi_debug(GLuint framebuffer, GLenum buffer, const GLfloat depth, GLint stencil, const char* file, int line);
+#define glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value) glatter_glClearNamedFramebufferfv_debug((framebuffer), (buffer), (drawbuffer), (value), __FILE__, __LINE__)
+void glatter_glClearNamedFramebufferfv_debug(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLfloat *value, const char* file, int line);
+#define glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value) glatter_glClearNamedFramebufferiv_debug((framebuffer), (buffer), (drawbuffer), (value), __FILE__, __LINE__)
+void glatter_glClearNamedFramebufferiv_debug(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLint *value, const char* file, int line);
+#define glClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value) glatter_glClearNamedFramebufferuiv_debug((framebuffer), (buffer), (drawbuffer), (value), __FILE__, __LINE__)
+void glatter_glClearNamedFramebufferuiv_debug(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLuint *value, const char* file, int line);
+#define glClipControl(origin, depth) glatter_glClipControl_debug((origin), (depth), __FILE__, __LINE__)
+void glatter_glClipControl_debug(GLenum origin, GLenum depth, const char* file, int line);
+#define glCompressedTextureSubImage1D(texture, level, xoffset, width, format, imageSize, data) glatter_glCompressedTextureSubImage1D_debug((texture), (level), (xoffset), (width), (format), (imageSize), (data), __FILE__, __LINE__)
+void glatter_glCompressedTextureSubImage1D_debug(GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data, const char* file, int line);
+#define glCompressedTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, imageSize, data) glatter_glCompressedTextureSubImage2D_debug((texture), (level), (xoffset), (yoffset), (width), (height), (format), (imageSize), (data), __FILE__, __LINE__)
+void glatter_glCompressedTextureSubImage2D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data, const char* file, int line);
+#define glCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) glatter_glCompressedTextureSubImage3D_debug((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (imageSize), (data), __FILE__, __LINE__)
+void glatter_glCompressedTextureSubImage3D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data, const char* file, int line);
+#define glCopyNamedBufferSubData(readBuffer, writeBuffer, readOffset, writeOffset, size) glatter_glCopyNamedBufferSubData_debug((readBuffer), (writeBuffer), (readOffset), (writeOffset), (size), __FILE__, __LINE__)
+void glatter_glCopyNamedBufferSubData_debug(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizei size, const char* file, int line);
+#define glCopyTextureSubImage1D(texture, level, xoffset, x, y, width) glatter_glCopyTextureSubImage1D_debug((texture), (level), (xoffset), (x), (y), (width), __FILE__, __LINE__)
+void glatter_glCopyTextureSubImage1D_debug(GLuint texture, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line);
+#define glCopyTextureSubImage2D(texture, level, xoffset, yoffset, x, y, width, height) glatter_glCopyTextureSubImage2D_debug((texture), (level), (xoffset), (yoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glCopyTextureSubImage2D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glCopyTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, x, y, width, height) glatter_glCopyTextureSubImage3D_debug((texture), (level), (xoffset), (yoffset), (zoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glCopyTextureSubImage3D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glCreateBuffers(n, buffers) glatter_glCreateBuffers_debug((n), (buffers), __FILE__, __LINE__)
+void glatter_glCreateBuffers_debug(GLsizei n, GLuint *buffers, const char* file, int line);
+#define glCreateFramebuffers(n, framebuffers) glatter_glCreateFramebuffers_debug((n), (framebuffers), __FILE__, __LINE__)
+void glatter_glCreateFramebuffers_debug(GLsizei n, GLuint *framebuffers, const char* file, int line);
+#define glCreateProgramPipelines(n, pipelines) glatter_glCreateProgramPipelines_debug((n), (pipelines), __FILE__, __LINE__)
+void glatter_glCreateProgramPipelines_debug(GLsizei n, GLuint *pipelines, const char* file, int line);
+#define glCreateQueries(target, n, ids) glatter_glCreateQueries_debug((target), (n), (ids), __FILE__, __LINE__)
+void glatter_glCreateQueries_debug(GLenum target, GLsizei n, GLuint *ids, const char* file, int line);
+#define glCreateRenderbuffers(n, renderbuffers) glatter_glCreateRenderbuffers_debug((n), (renderbuffers), __FILE__, __LINE__)
+void glatter_glCreateRenderbuffers_debug(GLsizei n, GLuint *renderbuffers, const char* file, int line);
+#define glCreateSamplers(n, samplers) glatter_glCreateSamplers_debug((n), (samplers), __FILE__, __LINE__)
+void glatter_glCreateSamplers_debug(GLsizei n, GLuint *samplers, const char* file, int line);
+#define glCreateTextures(target, n, textures) glatter_glCreateTextures_debug((target), (n), (textures), __FILE__, __LINE__)
+void glatter_glCreateTextures_debug(GLenum target, GLsizei n, GLuint *textures, const char* file, int line);
+#define glCreateTransformFeedbacks(n, ids) glatter_glCreateTransformFeedbacks_debug((n), (ids), __FILE__, __LINE__)
+void glatter_glCreateTransformFeedbacks_debug(GLsizei n, GLuint *ids, const char* file, int line);
+#define glCreateVertexArrays(n, arrays) glatter_glCreateVertexArrays_debug((n), (arrays), __FILE__, __LINE__)
+void glatter_glCreateVertexArrays_debug(GLsizei n, GLuint *arrays, const char* file, int line);
+#define glDisableVertexArrayAttrib(vaobj, index) glatter_glDisableVertexArrayAttrib_debug((vaobj), (index), __FILE__, __LINE__)
+void glatter_glDisableVertexArrayAttrib_debug(GLuint vaobj, GLuint index, const char* file, int line);
+#define glEnableVertexArrayAttrib(vaobj, index) glatter_glEnableVertexArrayAttrib_debug((vaobj), (index), __FILE__, __LINE__)
+void glatter_glEnableVertexArrayAttrib_debug(GLuint vaobj, GLuint index, const char* file, int line);
+#define glFlushMappedNamedBufferRange(buffer, offset, length) glatter_glFlushMappedNamedBufferRange_debug((buffer), (offset), (length), __FILE__, __LINE__)
+void glatter_glFlushMappedNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizei length, const char* file, int line);
+#define glGenerateTextureMipmap(texture) glatter_glGenerateTextureMipmap_debug((texture), __FILE__, __LINE__)
+void glatter_glGenerateTextureMipmap_debug(GLuint texture, const char* file, int line);
+#define glGetCompressedTextureImage(texture, level, bufSize, pixels) glatter_glGetCompressedTextureImage_debug((texture), (level), (bufSize), (pixels), __FILE__, __LINE__)
+void glatter_glGetCompressedTextureImage_debug(GLuint texture, GLint level, GLsizei bufSize, void *pixels, const char* file, int line);
+#define glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels) glatter_glGetCompressedTextureSubImage_debug((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (bufSize), (pixels), __FILE__, __LINE__)
+void glatter_glGetCompressedTextureSubImage_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels, const char* file, int line);
+#define glGetGraphicsResetStatus() glatter_glGetGraphicsResetStatus_debug(__FILE__, __LINE__)
+GLenum glatter_glGetGraphicsResetStatus_debug(const char* file, int line);
+#define glGetNamedBufferParameteri64v(buffer, pname, params) glatter_glGetNamedBufferParameteri64v_debug((buffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedBufferParameteri64v_debug(GLuint buffer, GLenum pname, GLint64 *params, const char* file, int line);
+#define glGetNamedBufferParameteriv(buffer, pname, params) glatter_glGetNamedBufferParameteriv_debug((buffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedBufferParameteriv_debug(GLuint buffer, GLenum pname, GLint *params, const char* file, int line);
+#define glGetNamedBufferPointerv(buffer, pname, params) glatter_glGetNamedBufferPointerv_debug((buffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedBufferPointerv_debug(GLuint buffer, GLenum pname, void **params, const char* file, int line);
+#define glGetNamedBufferSubData(buffer, offset, size, data) glatter_glGetNamedBufferSubData_debug((buffer), (offset), (size), (data), __FILE__, __LINE__)
+void glatter_glGetNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizei size, void *data, const char* file, int line);
+#define glGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params) glatter_glGetNamedFramebufferAttachmentParameteriv_debug((framebuffer), (attachment), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedFramebufferAttachmentParameteriv_debug(GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params, const char* file, int line);
+#define glGetNamedFramebufferParameteriv(framebuffer, pname, param) glatter_glGetNamedFramebufferParameteriv_debug((framebuffer), (pname), (param), __FILE__, __LINE__)
+void glatter_glGetNamedFramebufferParameteriv_debug(GLuint framebuffer, GLenum pname, GLint *param, const char* file, int line);
+#define glGetNamedRenderbufferParameteriv(renderbuffer, pname, params) glatter_glGetNamedRenderbufferParameteriv_debug((renderbuffer), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetNamedRenderbufferParameteriv_debug(GLuint renderbuffer, GLenum pname, GLint *params, const char* file, int line);
+#define glGetTextureImage(texture, level, format, type, bufSize, pixels) glatter_glGetTextureImage_debug((texture), (level), (format), (type), (bufSize), (pixels), __FILE__, __LINE__)
+void glatter_glGetTextureImage_debug(GLuint texture, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels, const char* file, int line);
+#define glGetTextureLevelParameterfv(texture, level, pname, params) glatter_glGetTextureLevelParameterfv_debug((texture), (level), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureLevelParameterfv_debug(GLuint texture, GLint level, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetTextureLevelParameteriv(texture, level, pname, params) glatter_glGetTextureLevelParameteriv_debug((texture), (level), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureLevelParameteriv_debug(GLuint texture, GLint level, GLenum pname, GLint *params, const char* file, int line);
+#define glGetTextureParameterIiv(texture, pname, params) glatter_glGetTextureParameterIiv_debug((texture), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureParameterIiv_debug(GLuint texture, GLenum pname, GLint *params, const char* file, int line);
+#define glGetTextureParameterIuiv(texture, pname, params) glatter_glGetTextureParameterIuiv_debug((texture), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureParameterIuiv_debug(GLuint texture, GLenum pname, GLuint *params, const char* file, int line);
+#define glGetTextureParameterfv(texture, pname, params) glatter_glGetTextureParameterfv_debug((texture), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureParameterfv_debug(GLuint texture, GLenum pname, GLfloat *params, const char* file, int line);
+#define glGetTextureParameteriv(texture, pname, params) glatter_glGetTextureParameteriv_debug((texture), (pname), (params), __FILE__, __LINE__)
+void glatter_glGetTextureParameteriv_debug(GLuint texture, GLenum pname, GLint *params, const char* file, int line);
+#define glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, bufSize, pixels) glatter_glGetTextureSubImage_debug((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (type), (bufSize), (pixels), __FILE__, __LINE__)
+void glatter_glGetTextureSubImage_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLsizei bufSize, void *pixels, const char* file, int line);
+#define glGetTransformFeedbacki64_v(xfb, pname, index, param) glatter_glGetTransformFeedbacki64_v_debug((xfb), (pname), (index), (param), __FILE__, __LINE__)
+void glatter_glGetTransformFeedbacki64_v_debug(GLuint xfb, GLenum pname, GLuint index, GLint64 *param, const char* file, int line);
+#define glGetTransformFeedbacki_v(xfb, pname, index, param) glatter_glGetTransformFeedbacki_v_debug((xfb), (pname), (index), (param), __FILE__, __LINE__)
+void glatter_glGetTransformFeedbacki_v_debug(GLuint xfb, GLenum pname, GLuint index, GLint *param, const char* file, int line);
+#define glGetTransformFeedbackiv(xfb, pname, param) glatter_glGetTransformFeedbackiv_debug((xfb), (pname), (param), __FILE__, __LINE__)
+void glatter_glGetTransformFeedbackiv_debug(GLuint xfb, GLenum pname, GLint *param, const char* file, int line);
+#define glGetVertexArrayIndexed64iv(vaobj, index, pname, param) glatter_glGetVertexArrayIndexed64iv_debug((vaobj), (index), (pname), (param), __FILE__, __LINE__)
+void glatter_glGetVertexArrayIndexed64iv_debug(GLuint vaobj, GLuint index, GLenum pname, GLint64 *param, const char* file, int line);
+#define glGetVertexArrayIndexediv(vaobj, index, pname, param) glatter_glGetVertexArrayIndexediv_debug((vaobj), (index), (pname), (param), __FILE__, __LINE__)
+void glatter_glGetVertexArrayIndexediv_debug(GLuint vaobj, GLuint index, GLenum pname, GLint *param, const char* file, int line);
+#define glGetVertexArrayiv(vaobj, pname, param) glatter_glGetVertexArrayiv_debug((vaobj), (pname), (param), __FILE__, __LINE__)
+void glatter_glGetVertexArrayiv_debug(GLuint vaobj, GLenum pname, GLint *param, const char* file, int line);
+#define glGetnCompressedTexImage(target, lod, bufSize, pixels) glatter_glGetnCompressedTexImage_debug((target), (lod), (bufSize), (pixels), __FILE__, __LINE__)
+void glatter_glGetnCompressedTexImage_debug(GLenum target, GLint lod, GLsizei bufSize, void *pixels, const char* file, int line);
+#define glGetnTexImage(target, level, format, type, bufSize, pixels) glatter_glGetnTexImage_debug((target), (level), (format), (type), (bufSize), (pixels), __FILE__, __LINE__)
+void glatter_glGetnTexImage_debug(GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels, const char* file, int line);
+#define glGetnUniformdv(program, location, bufSize, params) glatter_glGetnUniformdv_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformdv_debug(GLuint program, GLint location, GLsizei bufSize, GLdouble *params, const char* file, int line);
+#define glGetnUniformfv(program, location, bufSize, params) glatter_glGetnUniformfv_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformfv_debug(GLuint program, GLint location, GLsizei bufSize, GLfloat *params, const char* file, int line);
+#define glGetnUniformiv(program, location, bufSize, params) glatter_glGetnUniformiv_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformiv_debug(GLuint program, GLint location, GLsizei bufSize, GLint *params, const char* file, int line);
+#define glGetnUniformuiv(program, location, bufSize, params) glatter_glGetnUniformuiv_debug((program), (location), (bufSize), (params), __FILE__, __LINE__)
+void glatter_glGetnUniformuiv_debug(GLuint program, GLint location, GLsizei bufSize, GLuint *params, const char* file, int line);
+#define glInvalidateNamedFramebufferData(framebuffer, numAttachments, attachments) glatter_glInvalidateNamedFramebufferData_debug((framebuffer), (numAttachments), (attachments), __FILE__, __LINE__)
+void glatter_glInvalidateNamedFramebufferData_debug(GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments, const char* file, int line);
+#define glInvalidateNamedFramebufferSubData(framebuffer, numAttachments, attachments, x, y, width, height) glatter_glInvalidateNamedFramebufferSubData_debug((framebuffer), (numAttachments), (attachments), (x), (y), (width), (height), __FILE__, __LINE__)
+void glatter_glInvalidateNamedFramebufferSubData_debug(GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#define glMapNamedBuffer(buffer, access) glatter_glMapNamedBuffer_debug((buffer), (access), __FILE__, __LINE__)
+void * glatter_glMapNamedBuffer_debug(GLuint buffer, GLenum access, const char* file, int line);
+#define glMapNamedBufferRange(buffer, offset, length, access) glatter_glMapNamedBufferRange_debug((buffer), (offset), (length), (access), __FILE__, __LINE__)
+void * glatter_glMapNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizei length, GLbitfield access, const char* file, int line);
+#define glMemoryBarrierByRegion(barriers) glatter_glMemoryBarrierByRegion_debug((barriers), __FILE__, __LINE__)
+void glatter_glMemoryBarrierByRegion_debug(GLbitfield barriers, const char* file, int line);
+#define glNamedBufferData(buffer, size, data, usage) glatter_glNamedBufferData_debug((buffer), (size), (data), (usage), __FILE__, __LINE__)
+void glatter_glNamedBufferData_debug(GLuint buffer, GLsizei size, const void *data, GLenum usage, const char* file, int line);
+#define glNamedBufferStorage(buffer, size, data, flags) glatter_glNamedBufferStorage_debug((buffer), (size), (data), (flags), __FILE__, __LINE__)
+void glatter_glNamedBufferStorage_debug(GLuint buffer, GLsizei size, const void *data, GLbitfield flags, const char* file, int line);
+#define glNamedBufferSubData(buffer, offset, size, data) glatter_glNamedBufferSubData_debug((buffer), (offset), (size), (data), __FILE__, __LINE__)
+void glatter_glNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizei size, const void *data, const char* file, int line);
+#define glNamedFramebufferDrawBuffer(framebuffer, buf) glatter_glNamedFramebufferDrawBuffer_debug((framebuffer), (buf), __FILE__, __LINE__)
+void glatter_glNamedFramebufferDrawBuffer_debug(GLuint framebuffer, GLenum buf, const char* file, int line);
+#define glNamedFramebufferDrawBuffers(framebuffer, n, bufs) glatter_glNamedFramebufferDrawBuffers_debug((framebuffer), (n), (bufs), __FILE__, __LINE__)
+void glatter_glNamedFramebufferDrawBuffers_debug(GLuint framebuffer, GLsizei n, const GLenum *bufs, const char* file, int line);
+#define glNamedFramebufferParameteri(framebuffer, pname, param) glatter_glNamedFramebufferParameteri_debug((framebuffer), (pname), (param), __FILE__, __LINE__)
+void glatter_glNamedFramebufferParameteri_debug(GLuint framebuffer, GLenum pname, GLint param, const char* file, int line);
+#define glNamedFramebufferReadBuffer(framebuffer, src) glatter_glNamedFramebufferReadBuffer_debug((framebuffer), (src), __FILE__, __LINE__)
+void glatter_glNamedFramebufferReadBuffer_debug(GLuint framebuffer, GLenum src, const char* file, int line);
+#define glNamedFramebufferRenderbuffer(framebuffer, attachment, renderbuffertarget, renderbuffer) glatter_glNamedFramebufferRenderbuffer_debug((framebuffer), (attachment), (renderbuffertarget), (renderbuffer), __FILE__, __LINE__)
+void glatter_glNamedFramebufferRenderbuffer_debug(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer, const char* file, int line);
+#define glNamedFramebufferTexture(framebuffer, attachment, texture, level) glatter_glNamedFramebufferTexture_debug((framebuffer), (attachment), (texture), (level), __FILE__, __LINE__)
+void glatter_glNamedFramebufferTexture_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, const char* file, int line);
+#define glNamedFramebufferTextureLayer(framebuffer, attachment, texture, level, layer) glatter_glNamedFramebufferTextureLayer_debug((framebuffer), (attachment), (texture), (level), (layer), __FILE__, __LINE__)
+void glatter_glNamedFramebufferTextureLayer_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line);
+#define glNamedRenderbufferStorage(renderbuffer, internalformat, width, height) glatter_glNamedRenderbufferStorage_debug((renderbuffer), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glNamedRenderbufferStorage_debug(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glNamedRenderbufferStorageMultisample(renderbuffer, samples, internalformat, width, height) glatter_glNamedRenderbufferStorageMultisample_debug((renderbuffer), (samples), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glNamedRenderbufferStorageMultisample_debug(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glReadnPixels(x, y, width, height, format, type, bufSize, data) glatter_glReadnPixels_debug((x), (y), (width), (height), (format), (type), (bufSize), (data), __FILE__, __LINE__)
+void glatter_glReadnPixels_debug(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data, const char* file, int line);
+#define glTextureBarrier() glatter_glTextureBarrier_debug(__FILE__, __LINE__)
+void glatter_glTextureBarrier_debug(const char* file, int line);
+#define glTextureBuffer(texture, internalformat, buffer) glatter_glTextureBuffer_debug((texture), (internalformat), (buffer), __FILE__, __LINE__)
+void glatter_glTextureBuffer_debug(GLuint texture, GLenum internalformat, GLuint buffer, const char* file, int line);
+#define glTextureBufferRange(texture, internalformat, buffer, offset, size) glatter_glTextureBufferRange_debug((texture), (internalformat), (buffer), (offset), (size), __FILE__, __LINE__)
+void glatter_glTextureBufferRange_debug(GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizei size, const char* file, int line);
+#define glTextureParameterIiv(texture, pname, params) glatter_glTextureParameterIiv_debug((texture), (pname), (params), __FILE__, __LINE__)
+void glatter_glTextureParameterIiv_debug(GLuint texture, GLenum pname, const GLint *params, const char* file, int line);
+#define glTextureParameterIuiv(texture, pname, params) glatter_glTextureParameterIuiv_debug((texture), (pname), (params), __FILE__, __LINE__)
+void glatter_glTextureParameterIuiv_debug(GLuint texture, GLenum pname, const GLuint *params, const char* file, int line);
+#define glTextureParameterf(texture, pname, param) glatter_glTextureParameterf_debug((texture), (pname), (param), __FILE__, __LINE__)
+void glatter_glTextureParameterf_debug(GLuint texture, GLenum pname, GLfloat param, const char* file, int line);
+#define glTextureParameterfv(texture, pname, param) glatter_glTextureParameterfv_debug((texture), (pname), (param), __FILE__, __LINE__)
+void glatter_glTextureParameterfv_debug(GLuint texture, GLenum pname, const GLfloat *param, const char* file, int line);
+#define glTextureParameteri(texture, pname, param) glatter_glTextureParameteri_debug((texture), (pname), (param), __FILE__, __LINE__)
+void glatter_glTextureParameteri_debug(GLuint texture, GLenum pname, GLint param, const char* file, int line);
+#define glTextureParameteriv(texture, pname, param) glatter_glTextureParameteriv_debug((texture), (pname), (param), __FILE__, __LINE__)
+void glatter_glTextureParameteriv_debug(GLuint texture, GLenum pname, const GLint *param, const char* file, int line);
+#define glTextureStorage1D(texture, levels, internalformat, width) glatter_glTextureStorage1D_debug((texture), (levels), (internalformat), (width), __FILE__, __LINE__)
+void glatter_glTextureStorage1D_debug(GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, const char* file, int line);
+#define glTextureStorage2D(texture, levels, internalformat, width, height) glatter_glTextureStorage2D_debug((texture), (levels), (internalformat), (width), (height), __FILE__, __LINE__)
+void glatter_glTextureStorage2D_debug(GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line);
+#define glTextureStorage2DMultisample(texture, samples, internalformat, width, height, fixedsamplelocations) glatter_glTextureStorage2DMultisample_debug((texture), (samples), (internalformat), (width), (height), (fixedsamplelocations), __FILE__, __LINE__)
+void glatter_glTextureStorage2DMultisample_debug(GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations, const char* file, int line);
+#define glTextureStorage3D(texture, levels, internalformat, width, height, depth) glatter_glTextureStorage3D_debug((texture), (levels), (internalformat), (width), (height), (depth), __FILE__, __LINE__)
+void glatter_glTextureStorage3D_debug(GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line);
+#define glTextureStorage3DMultisample(texture, samples, internalformat, width, height, depth, fixedsamplelocations) glatter_glTextureStorage3DMultisample_debug((texture), (samples), (internalformat), (width), (height), (depth), (fixedsamplelocations), __FILE__, __LINE__)
+void glatter_glTextureStorage3DMultisample_debug(GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations, const char* file, int line);
+#define glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels) glatter_glTextureSubImage1D_debug((texture), (level), (xoffset), (width), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTextureSubImage1D_debug(GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels) glatter_glTextureSubImage2D_debug((texture), (level), (xoffset), (yoffset), (width), (height), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTextureSubImage2D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) glatter_glTextureSubImage3D_debug((texture), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (type), (pixels), __FILE__, __LINE__)
+void glatter_glTextureSubImage3D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line);
+#define glTransformFeedbackBufferBase(xfb, index, buffer) glatter_glTransformFeedbackBufferBase_debug((xfb), (index), (buffer), __FILE__, __LINE__)
+void glatter_glTransformFeedbackBufferBase_debug(GLuint xfb, GLuint index, GLuint buffer, const char* file, int line);
+#define glTransformFeedbackBufferRange(xfb, index, buffer, offset, size) glatter_glTransformFeedbackBufferRange_debug((xfb), (index), (buffer), (offset), (size), __FILE__, __LINE__)
+void glatter_glTransformFeedbackBufferRange_debug(GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizei size, const char* file, int line);
+#define glUnmapNamedBuffer(buffer) glatter_glUnmapNamedBuffer_debug((buffer), __FILE__, __LINE__)
+GLboolean glatter_glUnmapNamedBuffer_debug(GLuint buffer, const char* file, int line);
+#define glVertexArrayAttribBinding(vaobj, attribindex, bindingindex) glatter_glVertexArrayAttribBinding_debug((vaobj), (attribindex), (bindingindex), __FILE__, __LINE__)
+void glatter_glVertexArrayAttribBinding_debug(GLuint vaobj, GLuint attribindex, GLuint bindingindex, const char* file, int line);
+#define glVertexArrayAttribFormat(vaobj, attribindex, size, type, normalized, relativeoffset) glatter_glVertexArrayAttribFormat_debug((vaobj), (attribindex), (size), (type), (normalized), (relativeoffset), __FILE__, __LINE__)
+void glatter_glVertexArrayAttribFormat_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset, const char* file, int line);
+#define glVertexArrayAttribIFormat(vaobj, attribindex, size, type, relativeoffset) glatter_glVertexArrayAttribIFormat_debug((vaobj), (attribindex), (size), (type), (relativeoffset), __FILE__, __LINE__)
+void glatter_glVertexArrayAttribIFormat_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line);
+#define glVertexArrayAttribLFormat(vaobj, attribindex, size, type, relativeoffset) glatter_glVertexArrayAttribLFormat_debug((vaobj), (attribindex), (size), (type), (relativeoffset), __FILE__, __LINE__)
+void glatter_glVertexArrayAttribLFormat_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line);
+#define glVertexArrayBindingDivisor(vaobj, bindingindex, divisor) glatter_glVertexArrayBindingDivisor_debug((vaobj), (bindingindex), (divisor), __FILE__, __LINE__)
+void glatter_glVertexArrayBindingDivisor_debug(GLuint vaobj, GLuint bindingindex, GLuint divisor, const char* file, int line);
+#define glVertexArrayElementBuffer(vaobj, buffer) glatter_glVertexArrayElementBuffer_debug((vaobj), (buffer), __FILE__, __LINE__)
+void glatter_glVertexArrayElementBuffer_debug(GLuint vaobj, GLuint buffer, const char* file, int line);
+#define glVertexArrayVertexBuffer(vaobj, bindingindex, buffer, offset, stride) glatter_glVertexArrayVertexBuffer_debug((vaobj), (bindingindex), (buffer), (offset), (stride), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexBuffer_debug(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride, const char* file, int line);
+#define glVertexArrayVertexBuffers(vaobj, first, count, buffers, offsets, strides) glatter_glVertexArrayVertexBuffers_debug((vaobj), (first), (count), (buffers), (offsets), (strides), __FILE__, __LINE__)
+void glatter_glVertexArrayVertexBuffers_debug(GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides, const char* file, int line);
+#endif // defined(__glcorearb_h_)
 #endif // defined(GL_VERSION_4_5)
 #endif // GLATTER_GL
 

@@ -124,7 +124,7 @@ void glatter_glXWaitGL_debug(const char* file, int line);
 #define glXWaitX() glatter_glXWaitX_debug(__FILE__, __LINE__)
 void glatter_glXWaitX_debug(const char* file, int line);
 #endif // defined(GLX_H)
-#if defined(__glxext_h_)
+#if defined(__glx_glxext_h_)
 #if defined(GLX_AMD_gpu_association)
 #define glXBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) glatter_glXBlitContextFramebufferAMD_debug((dstCtx), (srcX0), (srcY0), (srcX1), (srcY1), (dstX0), (dstY0), (dstX1), (dstY1), (mask), (filter), __FILE__, __LINE__)
 void glatter_glXBlitContextFramebufferAMD_debug(GLXContext dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line);
@@ -199,6 +199,12 @@ Bool glatter_glXReleaseBuffersMESA_debug(Display *dpy, GLXDrawable drawable, con
 #define glXSet3DfxModeMESA(mode) glatter_glXSet3DfxModeMESA_debug((mode), __FILE__, __LINE__)
 Bool glatter_glXSet3DfxModeMESA_debug(int mode, const char* file, int line);
 #endif // defined(GLX_MESA_set_3dfx_mode)
+#if defined(GLX_MESA_swap_control)
+#define glXGetSwapIntervalMESA() glatter_glXGetSwapIntervalMESA_debug(__FILE__, __LINE__)
+int glatter_glXGetSwapIntervalMESA_debug(const char* file, int line);
+#define glXSwapIntervalMESA(interval) glatter_glXSwapIntervalMESA_debug((interval), __FILE__, __LINE__)
+int glatter_glXSwapIntervalMESA_debug(unsigned int interval, const char* file, int line);
+#endif // defined(GLX_MESA_swap_control)
 #if defined(GLX_NV_copy_buffer)
 #define glXCopyBufferSubDataNV(dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size) glatter_glXCopyBufferSubDataNV_debug((dpy), (readCtx), (writeCtx), (readTarget), (writeTarget), (readOffset), (writeOffset), (size), __FILE__, __LINE__)
 void glatter_glXCopyBufferSubDataNV_debug(Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line);
@@ -396,7 +402,7 @@ void glatter_glXSelectEvent_debug(Display *dpy, GLXDrawable draw, unsigned long 
 #if defined(GLX_VERSION_1_4)
 #define glXGetProcAddress(procName) glatter_glXGetProcAddress_debug((procName), __FILE__, __LINE__)
 __GLXextFuncPtr glatter_glXGetProcAddress_debug(const GLubyte *procName, const char* file, int line);
-#endif // defined(__glxext_h_)
+#endif // defined(__glx_glxext_h_)
 #endif // defined(GLX_VERSION_1_4)
 #endif // GLATTER_GLX
 

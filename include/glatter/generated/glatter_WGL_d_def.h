@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #ifdef GLATTER_WGL
-#if defined(__wglext_h_)
+#if defined(__wgl_wglext_h_)
 #if defined(WGL_3DL_stereo_control)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglSetStereoEmitterState3DL, (hDC, uState), (HDC hDC, UINT uState))
 BOOL glatter_wglSetStereoEmitterState3DL_debug(HDC hDC, UINT uState, const char* file, int line)
@@ -1272,7 +1272,7 @@ BOOL glatter_wglWaitForSbcOML_debug(HDC hdc, INT64 target_sbc, INT64 *ust, INT64
     return rval;
 }
 #define wglWaitForSbcOML_defined
-#endif // defined(__wglext_h_)
+#endif // defined(__wgl_wglext_h_)
 #endif // defined(WGL_OML_sync_control)
 #endif // GLATTER_WGL
 

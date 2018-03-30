@@ -76,6 +76,7 @@ Bool glatter_glXReleaseTexImageARB_debug(Display *dpy, GLXPbuffer pbuffer, int b
 #define glXReleaseTexImageARB_defined
 #endif // defined(GLX_ARB_render_texture)
 #if defined(GLX_MESA_swap_control)
+#ifndef glXGetSwapIntervalMESA_defined
 GLATTER_FBLOCK(return, GLX, extern, int, , glXGetSwapIntervalMESA, (), (void))
 int glatter_glXGetSwapIntervalMESA_debug(const char* file, int line)
 {
@@ -86,6 +87,8 @@ int glatter_glXGetSwapIntervalMESA_debug(const char* file, int line)
     return rval;
 }
 #define glXGetSwapIntervalMESA_defined
+#endif
+#ifndef glXSwapIntervalMESA_defined
 GLATTER_FBLOCK(return, GLX, extern, int, , glXSwapIntervalMESA, (interval), (unsigned int interval))
 int glatter_glXSwapIntervalMESA_debug(unsigned int interval, const char* file, int line)
 {
@@ -96,6 +99,7 @@ int glatter_glXSwapIntervalMESA_debug(unsigned int interval, const char* file, i
     return rval;
 }
 #define glXSwapIntervalMESA_defined
+#endif
 #endif // defined(GLX_MESA_swap_control)
 #if defined(GLX_MESA_swap_frame_usage)
 GLATTER_FBLOCK(return, GLX, extern, int, , glXBeginFrameTrackingMESA, (dpy, drawable), (Display *dpy, GLXDrawable drawable))
@@ -462,7 +466,7 @@ void glatter_glXWaitX_debug(const char* file, int line)
 }
 #define glXWaitX_defined
 #endif // defined(GLX_H)
-#if defined(__glxext_h_)
+#if defined(__glx_glxext_h_)
 #if defined(GLX_AMD_gpu_association)
 GLATTER_FBLOCK(, GLX, , void, , glXBlitContextFramebufferAMD, (dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLXContext dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
 void glatter_glXBlitContextFramebufferAMD_debug(GLXContext dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line)
@@ -727,6 +731,32 @@ Bool glatter_glXSet3DfxModeMESA_debug(int mode, const char* file, int line)
 }
 #define glXSet3DfxModeMESA_defined
 #endif // defined(GLX_MESA_set_3dfx_mode)
+#if defined(GLX_MESA_swap_control)
+#ifndef glXGetSwapIntervalMESA_defined
+GLATTER_FBLOCK(return, GLX, , int, , glXGetSwapIntervalMESA, (), (void))
+int glatter_glXGetSwapIntervalMESA_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXGetSwapIntervalMESA, "()")
+    int rval = glatter_glXGetSwapIntervalMESA();
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXGetSwapIntervalMESA_defined
+#endif
+#ifndef glXSwapIntervalMESA_defined
+GLATTER_FBLOCK(return, GLX, , int, , glXSwapIntervalMESA, (interval), (unsigned int interval))
+int glatter_glXSwapIntervalMESA_debug(unsigned int interval, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXSwapIntervalMESA, "(%u)", (unsigned int)interval)
+    int rval = glatter_glXSwapIntervalMESA(interval);
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXSwapIntervalMESA_defined
+#endif
+#endif // defined(GLX_MESA_swap_control)
 #if defined(GLX_NV_copy_buffer)
 GLATTER_FBLOCK(, GLX, , void, , glXCopyBufferSubDataNV, (dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size), (Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
 void glatter_glXCopyBufferSubDataNV_debug(Display *dpy, GLXContext readCtx, GLXContext writeCtx, GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line)
@@ -1508,7 +1538,7 @@ __GLXextFuncPtr glatter_glXGetProcAddress_debug(const GLubyte *procName, const c
     return rval;
 }
 #define glXGetProcAddress_defined
-#endif // defined(__glxext_h_)
+#endif // defined(__glx_glxext_h_)
 #endif // defined(GLX_VERSION_1_4)
 #endif // GLATTER_GLX
 

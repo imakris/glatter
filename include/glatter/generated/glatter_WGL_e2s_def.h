@@ -544,6 +544,9 @@ const char* enum_to_string_WGL(GLenum e)
         case 0x3089: return "WGL_COLORSPACE_SRGB_EXT";
         case 0x308a: return "WGL_COLORSPACE_LINEAR_EXT";
 #endif
+#if defined(WGL_ARB_create_context_no_error)
+        case 0x31b3: return "WGL_CONTEXT_OPENGL_NO_ERROR_ARB";
+#endif
 #if defined(WGL_ARB_create_context_robustness)
         case 0x8252: return "WGL_LOSE_CONTEXT_ON_RESET_ARB";
         case 0x8256: return "WGL_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB";

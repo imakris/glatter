@@ -24710,7 +24710,7 @@ void glatter_glWaitSync_debug(GLsync sync, GLbitfield flags, GLuint64 timeout, c
 #endif
 #endif // defined(GL_ES_VERSION_3_0)
 #endif // defined(__gl3_h_)
-#if defined(__glcorearb_h_)
+#if defined(__gl_glcorearb_h_)
 #if defined(GL_AMD_performance_monitor)
 #ifndef glBeginPerfMonitorAMD_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginPerfMonitorAMD, (monitor), (GLuint monitor))
@@ -24823,6 +24823,18 @@ void glatter_glSelectPerfMonitorCountersAMD_debug(GLuint monitor, GLboolean enab
 #define glSelectPerfMonitorCountersAMD_defined
 #endif
 #endif // defined(GL_AMD_performance_monitor)
+#if defined(GL_ARB_ES3_2_compatibility)
+#ifndef glPrimitiveBoundingBoxARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPrimitiveBoundingBoxARB, (minX, minY, minZ, minW, maxX, maxY, maxZ, maxW), (GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW))
+void glatter_glPrimitiveBoundingBoxARB_debug(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPrimitiveBoundingBoxARB, "(%f, %f, %f, %f, %f, %f, %f, %f)", (float)minX, (float)minY, (float)minZ, (float)minW, (float)maxX, (float)maxY, (float)maxZ, (float)maxW)
+    glatter_glPrimitiveBoundingBoxARB(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPrimitiveBoundingBoxARB_defined
+#endif
+#endif // defined(GL_ARB_ES3_2_compatibility)
 #if defined(GL_ARB_bindless_texture)
 #ifndef glGetImageHandleARB_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetImageHandleARB, (texture, level, layered, layer, format), (GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format))
@@ -25107,28 +25119,490 @@ void glatter_glBlendFunciARB_debug(GLuint buf, GLenum src, GLenum dst, const cha
 #define glBlendFunciARB_defined
 #endif
 #endif // defined(GL_ARB_draw_buffers_blend)
+#if defined(GL_ARB_draw_instanced)
+#ifndef glDrawArraysInstancedARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstancedARB, (mode, first, count, primcount), (GLenum mode, GLint first, GLsizei count, GLsizei primcount))
+void glatter_glDrawArraysInstancedARB_debug(GLenum mode, GLint first, GLsizei count, GLsizei primcount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawArraysInstancedARB, "(%s, %d, %d, %d)", enum_to_string_GL(mode), (int)first, (int)count, (int)primcount)
+    glatter_glDrawArraysInstancedARB(mode, first, count, primcount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawArraysInstancedARB_defined
+#endif
+#ifndef glDrawElementsInstancedARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedARB, (mode, count, type, indices, primcount), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount))
+void glatter_glDrawElementsInstancedARB_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawElementsInstancedARB, "(%s, %d, %s, %p, %d)", enum_to_string_GL(mode), (int)count, enum_to_string_GL(type), (void*)indices, (int)primcount)
+    glatter_glDrawElementsInstancedARB(mode, count, type, indices, primcount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawElementsInstancedARB_defined
+#endif
+#endif // defined(GL_ARB_draw_instanced)
+#if defined(GL_ARB_geometry_shader4)
+#ifndef glFramebufferTextureARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureARB, (target, attachment, texture, level), (GLenum target, GLenum attachment, GLuint texture, GLint level))
+void glatter_glFramebufferTextureARB_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferTextureARB, "(%s, %s, %u, %d)", enum_to_string_GL(target), enum_to_string_GL(attachment), (unsigned int)texture, (int)level)
+    glatter_glFramebufferTextureARB(target, attachment, texture, level);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferTextureARB_defined
+#endif
+#ifndef glFramebufferTextureFaceARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureFaceARB, (target, attachment, texture, level, face), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face))
+void glatter_glFramebufferTextureFaceARB_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferTextureFaceARB, "(%s, %s, %u, %d, %s)", enum_to_string_GL(target), enum_to_string_GL(attachment), (unsigned int)texture, (int)level, enum_to_string_GL(face))
+    glatter_glFramebufferTextureFaceARB(target, attachment, texture, level, face);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferTextureFaceARB_defined
+#endif
+#ifndef glFramebufferTextureLayerARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureLayerARB, (target, attachment, texture, level, layer), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer))
+void glatter_glFramebufferTextureLayerARB_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferTextureLayerARB, "(%s, %s, %u, %d, %d)", enum_to_string_GL(target), enum_to_string_GL(attachment), (unsigned int)texture, (int)level, (int)layer)
+    glatter_glFramebufferTextureLayerARB(target, attachment, texture, level, layer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferTextureLayerARB_defined
+#endif
+#ifndef glProgramParameteriARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramParameteriARB, (program, pname, value), (GLuint program, GLenum pname, GLint value))
+void glatter_glProgramParameteriARB_debug(GLuint program, GLenum pname, GLint value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramParameteriARB, "(%u, %s, %d)", (unsigned int)program, enum_to_string_GL(pname), (int)value)
+    glatter_glProgramParameteriARB(program, pname, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramParameteriARB_defined
+#endif
+#endif // defined(GL_ARB_geometry_shader4)
+#if defined(GL_ARB_gl_spirv)
+#ifndef glSpecializeShaderARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSpecializeShaderARB, (shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue), (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue))
+void glatter_glSpecializeShaderARB_debug(GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSpecializeShaderARB, "(%u, %p, %u, %p, %p)", (unsigned int)shader, (void*)pEntryPoint, (unsigned int)numSpecializationConstants, (void*)pConstantIndex, (void*)pConstantValue)
+    glatter_glSpecializeShaderARB(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSpecializeShaderARB_defined
+#endif
+#endif // defined(GL_ARB_gl_spirv)
+#if defined(GL_ARB_gpu_shader_int64)
+#ifndef glGetUniformi64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformi64vARB, (program, location, params), (GLuint program, GLint location, GLint64 *params))
+void glatter_glGetUniformi64vARB_debug(GLuint program, GLint location, GLint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformi64vARB, "(%u, %d, %p)", (unsigned int)program, (int)location, (void*)params)
+    glatter_glGetUniformi64vARB(program, location, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUniformi64vARB_defined
+#endif
+#ifndef glGetUniformui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformui64vARB, (program, location, params), (GLuint program, GLint location, GLuint64 *params))
+void glatter_glGetUniformui64vARB_debug(GLuint program, GLint location, GLuint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformui64vARB, "(%u, %d, %p)", (unsigned int)program, (int)location, (void*)params)
+    glatter_glGetUniformui64vARB(program, location, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUniformui64vARB_defined
+#endif
+#ifndef glGetnUniformi64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformi64vARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLint64 *params))
+void glatter_glGetnUniformi64vARB_debug(GLuint program, GLint location, GLsizei bufSize, GLint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformi64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformi64vARB(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformi64vARB_defined
+#endif
+#ifndef glGetnUniformui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformui64vARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLuint64 *params))
+void glatter_glGetnUniformui64vARB_debug(GLuint program, GLint location, GLsizei bufSize, GLuint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformui64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformui64vARB(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformui64vARB_defined
+#endif
+#ifndef glProgramUniform1i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64ARB, (program, location, x), (GLuint program, GLint location, GLint64 x))
+void glatter_glProgramUniform1i64ARB_debug(GLuint program, GLint location, GLint64 x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1i64ARB, "(%u, %d, %" PRId64 ")", (unsigned int)program, (int)location, (int64_t)x)
+    glatter_glProgramUniform1i64ARB(program, location, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1i64ARB_defined
+#endif
+#ifndef glProgramUniform1i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
+void glatter_glProgramUniform1i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1i64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1i64vARB(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1i64vARB_defined
+#endif
+#ifndef glProgramUniform1ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui64ARB, (program, location, x), (GLuint program, GLint location, GLuint64 x))
+void glatter_glProgramUniform1ui64ARB_debug(GLuint program, GLint location, GLuint64 x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1ui64ARB, "(%u, %d, %" PRIu64 ")", (unsigned int)program, (int)location, (uint64_t)x)
+    glatter_glProgramUniform1ui64ARB(program, location, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1ui64ARB_defined
+#endif
+#ifndef glProgramUniform1ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
+void glatter_glProgramUniform1ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1ui64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1ui64vARB(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1ui64vARB_defined
+#endif
+#ifndef glProgramUniform2i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i64ARB, (program, location, x, y), (GLuint program, GLint location, GLint64 x, GLint64 y))
+void glatter_glProgramUniform2i64ARB_debug(GLuint program, GLint location, GLint64 x, GLint64 y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2i64ARB, "(%u, %d, %" PRId64 ", %" PRId64 ")", (unsigned int)program, (int)location, (int64_t)x, (int64_t)y)
+    glatter_glProgramUniform2i64ARB(program, location, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2i64ARB_defined
+#endif
+#ifndef glProgramUniform2i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
+void glatter_glProgramUniform2i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2i64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2i64vARB(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2i64vARB_defined
+#endif
+#ifndef glProgramUniform2ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui64ARB, (program, location, x, y), (GLuint program, GLint location, GLuint64 x, GLuint64 y))
+void glatter_glProgramUniform2ui64ARB_debug(GLuint program, GLint location, GLuint64 x, GLuint64 y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2ui64ARB, "(%u, %d, %" PRIu64 ", %" PRIu64 ")", (unsigned int)program, (int)location, (uint64_t)x, (uint64_t)y)
+    glatter_glProgramUniform2ui64ARB(program, location, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2ui64ARB_defined
+#endif
+#ifndef glProgramUniform2ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
+void glatter_glProgramUniform2ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2ui64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2ui64vARB(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2ui64vARB_defined
+#endif
+#ifndef glProgramUniform3i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i64ARB, (program, location, x, y, z), (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z))
+void glatter_glProgramUniform3i64ARB_debug(GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3i64ARB, "(%u, %d, %" PRId64 ", %" PRId64 ", %" PRId64 ")", (unsigned int)program, (int)location, (int64_t)x, (int64_t)y, (int64_t)z)
+    glatter_glProgramUniform3i64ARB(program, location, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3i64ARB_defined
+#endif
+#ifndef glProgramUniform3i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
+void glatter_glProgramUniform3i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3i64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3i64vARB(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3i64vARB_defined
+#endif
+#ifndef glProgramUniform3ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui64ARB, (program, location, x, y, z), (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z))
+void glatter_glProgramUniform3ui64ARB_debug(GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3ui64ARB, "(%u, %d, %" PRIu64 ", %" PRIu64 ", %" PRIu64 ")", (unsigned int)program, (int)location, (uint64_t)x, (uint64_t)y, (uint64_t)z)
+    glatter_glProgramUniform3ui64ARB(program, location, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3ui64ARB_defined
+#endif
+#ifndef glProgramUniform3ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
+void glatter_glProgramUniform3ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3ui64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3ui64vARB(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3ui64vARB_defined
+#endif
+#ifndef glProgramUniform4i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i64ARB, (program, location, x, y, z, w), (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w))
+void glatter_glProgramUniform4i64ARB_debug(GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4i64ARB, "(%u, %d, %" PRId64 ", %" PRId64 ", %" PRId64 ", %" PRId64 ")", (unsigned int)program, (int)location, (int64_t)x, (int64_t)y, (int64_t)z, (int64_t)w)
+    glatter_glProgramUniform4i64ARB(program, location, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4i64ARB_defined
+#endif
+#ifndef glProgramUniform4i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
+void glatter_glProgramUniform4i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4i64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4i64vARB(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4i64vARB_defined
+#endif
+#ifndef glProgramUniform4ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui64ARB, (program, location, x, y, z, w), (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w))
+void glatter_glProgramUniform4ui64ARB_debug(GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4ui64ARB, "(%u, %d, %" PRIu64 ", %" PRIu64 ", %" PRIu64 ", %" PRIu64 ")", (unsigned int)program, (int)location, (uint64_t)x, (uint64_t)y, (uint64_t)z, (uint64_t)w)
+    glatter_glProgramUniform4ui64ARB(program, location, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4ui64ARB_defined
+#endif
+#ifndef glProgramUniform4ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
+void glatter_glProgramUniform4ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4ui64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4ui64vARB(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4ui64vARB_defined
+#endif
+#ifndef glUniform1i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i64ARB, (location, x), (GLint location, GLint64 x))
+void glatter_glUniform1i64ARB_debug(GLint location, GLint64 x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1i64ARB, "(%d, %" PRId64 ")", (int)location, (int64_t)x)
+    glatter_glUniform1i64ARB(location, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1i64ARB_defined
+#endif
+#ifndef glUniform1i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
+void glatter_glUniform1i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1i64vARB, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform1i64vARB(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1i64vARB_defined
+#endif
+#ifndef glUniform1ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui64ARB, (location, x), (GLint location, GLuint64 x))
+void glatter_glUniform1ui64ARB_debug(GLint location, GLuint64 x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1ui64ARB, "(%d, %" PRIu64 ")", (int)location, (uint64_t)x)
+    glatter_glUniform1ui64ARB(location, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1ui64ARB_defined
+#endif
+#ifndef glUniform1ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+void glatter_glUniform1ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1ui64vARB, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform1ui64vARB(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1ui64vARB_defined
+#endif
+#ifndef glUniform2i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i64ARB, (location, x, y), (GLint location, GLint64 x, GLint64 y))
+void glatter_glUniform2i64ARB_debug(GLint location, GLint64 x, GLint64 y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2i64ARB, "(%d, %" PRId64 ", %" PRId64 ")", (int)location, (int64_t)x, (int64_t)y)
+    glatter_glUniform2i64ARB(location, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2i64ARB_defined
+#endif
+#ifndef glUniform2i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
+void glatter_glUniform2i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2i64vARB, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform2i64vARB(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2i64vARB_defined
+#endif
+#ifndef glUniform2ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui64ARB, (location, x, y), (GLint location, GLuint64 x, GLuint64 y))
+void glatter_glUniform2ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2ui64ARB, "(%d, %" PRIu64 ", %" PRIu64 ")", (int)location, (uint64_t)x, (uint64_t)y)
+    glatter_glUniform2ui64ARB(location, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2ui64ARB_defined
+#endif
+#ifndef glUniform2ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+void glatter_glUniform2ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2ui64vARB, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform2ui64vARB(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2ui64vARB_defined
+#endif
+#ifndef glUniform3i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i64ARB, (location, x, y, z), (GLint location, GLint64 x, GLint64 y, GLint64 z))
+void glatter_glUniform3i64ARB_debug(GLint location, GLint64 x, GLint64 y, GLint64 z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3i64ARB, "(%d, %" PRId64 ", %" PRId64 ", %" PRId64 ")", (int)location, (int64_t)x, (int64_t)y, (int64_t)z)
+    glatter_glUniform3i64ARB(location, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3i64ARB_defined
+#endif
+#ifndef glUniform3i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
+void glatter_glUniform3i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3i64vARB, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform3i64vARB(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3i64vARB_defined
+#endif
+#ifndef glUniform3ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui64ARB, (location, x, y, z), (GLint location, GLuint64 x, GLuint64 y, GLuint64 z))
+void glatter_glUniform3ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, GLuint64 z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3ui64ARB, "(%d, %" PRIu64 ", %" PRIu64 ", %" PRIu64 ")", (int)location, (uint64_t)x, (uint64_t)y, (uint64_t)z)
+    glatter_glUniform3ui64ARB(location, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3ui64ARB_defined
+#endif
+#ifndef glUniform3ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+void glatter_glUniform3ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3ui64vARB, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform3ui64vARB(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3ui64vARB_defined
+#endif
+#ifndef glUniform4i64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i64ARB, (location, x, y, z, w), (GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w))
+void glatter_glUniform4i64ARB_debug(GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4i64ARB, "(%d, %" PRId64 ", %" PRId64 ", %" PRId64 ", %" PRId64 ")", (int)location, (int64_t)x, (int64_t)y, (int64_t)z, (int64_t)w)
+    glatter_glUniform4i64ARB(location, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4i64ARB_defined
+#endif
+#ifndef glUniform4i64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
+void glatter_glUniform4i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4i64vARB, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform4i64vARB(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4i64vARB_defined
+#endif
+#ifndef glUniform4ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui64ARB, (location, x, y, z, w), (GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w))
+void glatter_glUniform4ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4ui64ARB, "(%d, %" PRIu64 ", %" PRIu64 ", %" PRIu64 ", %" PRIu64 ")", (int)location, (uint64_t)x, (uint64_t)y, (uint64_t)z, (uint64_t)w)
+    glatter_glUniform4ui64ARB(location, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4ui64ARB_defined
+#endif
+#ifndef glUniform4ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+void glatter_glUniform4ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4ui64vARB, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform4ui64vARB(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4ui64vARB_defined
+#endif
+#endif // defined(GL_ARB_gpu_shader_int64)
 #if defined(GL_ARB_indirect_parameters)
 #ifndef glMultiDrawArraysIndirectCountARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
-void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirectCountARB, "(%s, %td, %td, %d, %d)", enum_to_string_GL(mode), (ptrdiff_t)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirectCountARB, "(%s, %p, %td, %d, %d)", enum_to_string_GL(mode), (void*)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
     glatter_glMultiDrawArraysIndirectCountARB(mode, indirect, drawcount, maxdrawcount, stride);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiDrawArraysIndirectCountARB_defined
 #endif
 #ifndef glMultiDrawElementsIndirectCountARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
-void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirectCountARB, "(%s, %s, %td, %td, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (ptrdiff_t)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirectCountARB, "(%s, %s, %p, %td, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (void*)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
     glatter_glMultiDrawElementsIndirectCountARB(mode, type, indirect, drawcount, maxdrawcount, stride);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiDrawElementsIndirectCountARB_defined
 #endif
 #endif // defined(GL_ARB_indirect_parameters)
+#if defined(GL_ARB_instanced_arrays)
+#ifndef glVertexAttribDivisorARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribDivisorARB, (index, divisor), (GLuint index, GLuint divisor))
+void glatter_glVertexAttribDivisorARB_debug(GLuint index, GLuint divisor, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribDivisorARB, "(%u, %u)", (unsigned int)index, (unsigned int)divisor)
+    glatter_glVertexAttribDivisorARB(index, divisor);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribDivisorARB_defined
+#endif
+#endif // defined(GL_ARB_instanced_arrays)
+#if defined(GL_ARB_parallel_shader_compile)
+#ifndef glMaxShaderCompilerThreadsARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMaxShaderCompilerThreadsARB, (count), (GLuint count))
+void glatter_glMaxShaderCompilerThreadsARB_debug(GLuint count, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMaxShaderCompilerThreadsARB, "(%u)", (unsigned int)count)
+    glatter_glMaxShaderCompilerThreadsARB(count);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMaxShaderCompilerThreadsARB_defined
+#endif
+#endif // defined(GL_ARB_parallel_shader_compile)
 #if defined(GL_ARB_robustness)
 #ifndef glGetGraphicsResetStatusARB_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glGetGraphicsResetStatusARB, (), (void))
@@ -25213,6 +25687,38 @@ void glatter_glReadnPixelsARB_debug(GLint x, GLint y, GLsizei width, GLsizei hei
 #define glReadnPixelsARB_defined
 #endif
 #endif // defined(GL_ARB_robustness)
+#if defined(GL_ARB_sample_locations)
+#ifndef glEvaluateDepthValuesARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEvaluateDepthValuesARB, (), (void))
+void glatter_glEvaluateDepthValuesARB_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEvaluateDepthValuesARB, "()")
+    glatter_glEvaluateDepthValuesARB();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEvaluateDepthValuesARB_defined
+#endif
+#ifndef glFramebufferSampleLocationsfvARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferSampleLocationsfvARB, (target, start, count, v), (GLenum target, GLuint start, GLsizei count, const GLfloat *v))
+void glatter_glFramebufferSampleLocationsfvARB_debug(GLenum target, GLuint start, GLsizei count, const GLfloat *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferSampleLocationsfvARB, "(%s, %u, %d, %p)", enum_to_string_GL(target), (unsigned int)start, (int)count, (void*)v)
+    glatter_glFramebufferSampleLocationsfvARB(target, start, count, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferSampleLocationsfvARB_defined
+#endif
+#ifndef glNamedFramebufferSampleLocationsfvARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferSampleLocationsfvARB, (framebuffer, start, count, v), (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v))
+void glatter_glNamedFramebufferSampleLocationsfvARB_debug(GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferSampleLocationsfvARB, "(%u, %u, %d, %p)", (unsigned int)framebuffer, (unsigned int)start, (int)count, (void*)v)
+    glatter_glNamedFramebufferSampleLocationsfvARB(framebuffer, start, count, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferSampleLocationsfvARB_defined
+#endif
+#endif // defined(GL_ARB_sample_locations)
 #if defined(GL_ARB_sample_shading)
 #ifndef glMinSampleShadingARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMinSampleShadingARB, (value), (GLfloat value))
@@ -25291,30 +25797,30 @@ void glatter_glNamedStringARB_debug(GLenum type, GLint namelen, const GLchar *na
 #endif // defined(GL_ARB_shading_language_include)
 #if defined(GL_ARB_sparse_buffer)
 #ifndef glBufferPageCommitmentARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferPageCommitmentARB, (target, offset, size, commit), (GLenum target, GLintptr offset, GLsizei size, GLboolean commit))
-void glatter_glBufferPageCommitmentARB_debug(GLenum target, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferPageCommitmentARB, (target, offset, size, commit), (GLenum target, GLintptr offset, GLsizeiptr size, GLboolean commit))
+void glatter_glBufferPageCommitmentARB_debug(GLenum target, GLintptr offset, GLsizeiptr size, GLboolean commit, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glBufferPageCommitmentARB, "(%s, %td, %d, %u)", enum_to_string_GL(target), (ptrdiff_t)offset, (int)size, (unsigned char)commit)
+    GLATTER_DBLOCK(file, line, glBufferPageCommitmentARB, "(%s, %td, %td, %u)", enum_to_string_GL(target), (ptrdiff_t)offset, (ptrdiff_t)size, (unsigned char)commit)
     glatter_glBufferPageCommitmentARB(target, offset, size, commit);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glBufferPageCommitmentARB_defined
 #endif
 #ifndef glNamedBufferPageCommitmentARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentARB, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit))
-void glatter_glNamedBufferPageCommitmentARB_debug(GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentARB, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit))
+void glatter_glNamedBufferPageCommitmentARB_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glNamedBufferPageCommitmentARB, "(%u, %td, %d, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (int)size, (unsigned char)commit)
+    GLATTER_DBLOCK(file, line, glNamedBufferPageCommitmentARB, "(%u, %td, %td, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size, (unsigned char)commit)
     glatter_glNamedBufferPageCommitmentARB(buffer, offset, size, commit);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedBufferPageCommitmentARB_defined
 #endif
 #ifndef glNamedBufferPageCommitmentEXT_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentEXT, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit))
-void glatter_glNamedBufferPageCommitmentEXT_debug(GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentEXT, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit))
+void glatter_glNamedBufferPageCommitmentEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glNamedBufferPageCommitmentEXT, "(%u, %td, %d, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (int)size, (unsigned char)commit)
+    GLATTER_DBLOCK(file, line, glNamedBufferPageCommitmentEXT, "(%u, %td, %td, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size, (unsigned char)commit)
     glatter_glNamedBufferPageCommitmentEXT(buffer, offset, size, commit);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
@@ -25323,16 +25829,50 @@ void glatter_glNamedBufferPageCommitmentEXT_debug(GLuint buffer, GLintptr offset
 #endif // defined(GL_ARB_sparse_buffer)
 #if defined(GL_ARB_sparse_texture)
 #ifndef glTexPageCommitmentARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexPageCommitmentARB, (target, level, xoffset, yoffset, zoffset, width, height, depth, resident), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident))
-void glatter_glTexPageCommitmentARB_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexPageCommitmentARB, (target, level, xoffset, yoffset, zoffset, width, height, depth, commit), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit))
+void glatter_glTexPageCommitmentARB_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glTexPageCommitmentARB, "(%s, %d, %d, %d, %d, %d, %d, %d, %u)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, (unsigned char)resident)
-    glatter_glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth, resident);
+    GLATTER_DBLOCK(file, line, glTexPageCommitmentARB, "(%s, %d, %d, %d, %d, %d, %d, %d, %u)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, (unsigned char)commit)
+    glatter_glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTexPageCommitmentARB_defined
 #endif
 #endif // defined(GL_ARB_sparse_texture)
+#if defined(GL_ARB_texture_buffer_object)
+#ifndef glTexBufferARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexBufferARB, (target, internalformat, buffer), (GLenum target, GLenum internalformat, GLuint buffer))
+void glatter_glTexBufferARB_debug(GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexBufferARB, "(%s, %s, %u)", enum_to_string_GL(target), enum_to_string_GL(internalformat), (unsigned int)buffer)
+    glatter_glTexBufferARB(target, internalformat, buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexBufferARB_defined
+#endif
+#endif // defined(GL_ARB_texture_buffer_object)
+#if defined(GL_EXT_EGL_image_storage)
+#ifndef glEGLImageTargetTexStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTexStorageEXT, (target, image, attrib_list), (GLenum target, GLeglImageOES image, const GLint* attrib_list))
+void glatter_glEGLImageTargetTexStorageEXT_debug(GLenum target, GLeglImageOES image, const GLint* attrib_list, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEGLImageTargetTexStorageEXT, "(%s, %p, %p)", enum_to_string_GL(target), (void*)image, (void*)attrib_list)
+    glatter_glEGLImageTargetTexStorageEXT(target, image, attrib_list);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEGLImageTargetTexStorageEXT_defined
+#endif
+#ifndef glEGLImageTargetTextureStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTextureStorageEXT, (texture, image, attrib_list), (GLuint texture, GLeglImageOES image, const GLint* attrib_list))
+void glatter_glEGLImageTargetTextureStorageEXT_debug(GLuint texture, GLeglImageOES image, const GLint* attrib_list, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEGLImageTargetTextureStorageEXT, "(%u, %p, %p)", (unsigned int)texture, (void*)image, (void*)attrib_list)
+    glatter_glEGLImageTargetTextureStorageEXT(texture, image, attrib_list);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEGLImageTargetTextureStorageEXT_defined
+#endif
+#endif // defined(GL_EXT_EGL_image_storage)
 #if defined(GL_EXT_debug_label)
 #ifndef glGetObjectLabelEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetObjectLabelEXT, (type, object, bufSize, length, label), (GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label))
@@ -25387,6 +25927,2568 @@ void glatter_glPushGroupMarkerEXT_debug(GLsizei length, const GLchar *marker, co
 #define glPushGroupMarkerEXT_defined
 #endif
 #endif // defined(GL_EXT_debug_marker)
+#if defined(GL_EXT_direct_state_access)
+#ifndef glBindMultiTextureEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindMultiTextureEXT, (texunit, target, texture), (GLenum texunit, GLenum target, GLuint texture))
+void glatter_glBindMultiTextureEXT_debug(GLenum texunit, GLenum target, GLuint texture, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindMultiTextureEXT, "(%s, %s, %u)", enum_to_string_GL(texunit), enum_to_string_GL(target), (unsigned int)texture)
+    glatter_glBindMultiTextureEXT(texunit, target, texture);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindMultiTextureEXT_defined
+#endif
+#ifndef glCheckNamedFramebufferStatusEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glCheckNamedFramebufferStatusEXT, (framebuffer, target), (GLuint framebuffer, GLenum target))
+GLenum glatter_glCheckNamedFramebufferStatusEXT_debug(GLuint framebuffer, GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCheckNamedFramebufferStatusEXT, "(%u, %s)", (unsigned int)framebuffer, enum_to_string_GL(target))
+    GLenum rval = glatter_glCheckNamedFramebufferStatusEXT(framebuffer, target);
+    GLATTER_RBLOCK("%s\n", enum_to_string_GL(rval));
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glCheckNamedFramebufferStatusEXT_defined
+#endif
+#ifndef glClearNamedBufferDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferDataEXT, (buffer, internalformat, format, type, data), (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data))
+void glatter_glClearNamedBufferDataEXT_debug(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearNamedBufferDataEXT, "(%u, %s, %s, %s, %p)", (unsigned int)buffer, enum_to_string_GL(internalformat), enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
+    glatter_glClearNamedBufferDataEXT(buffer, internalformat, format, type, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearNamedBufferDataEXT_defined
+#endif
+#ifndef glClearNamedBufferSubDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubDataEXT, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data))
+void glatter_glClearNamedBufferSubDataEXT_debug(GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearNamedBufferSubDataEXT, "(%u, %s, %td, %td, %s, %s, %p)", (unsigned int)buffer, enum_to_string_GL(internalformat), (ptrdiff_t)offset, (ptrdiff_t)size, enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
+    glatter_glClearNamedBufferSubDataEXT(buffer, internalformat, offset, size, format, type, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearNamedBufferSubDataEXT_defined
+#endif
+#ifndef glClientAttribDefaultEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClientAttribDefaultEXT, (mask), (GLbitfield mask))
+void glatter_glClientAttribDefaultEXT_debug(GLbitfield mask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClientAttribDefaultEXT, "(%u)", (unsigned int)mask)
+    glatter_glClientAttribDefaultEXT(mask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClientAttribDefaultEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage1DEXT, (texunit, target, level, internalformat, width, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits))
+void glatter_glCompressedMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedMultiTexImage1DEXT, "(%s, %s, %d, %s, %d, %d, %d, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)width, (int)border, (int)imageSize, (void*)bits)
+    glatter_glCompressedMultiTexImage1DEXT(texunit, target, level, internalformat, width, border, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedMultiTexImage1DEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage2DEXT, (texunit, target, level, internalformat, width, height, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits))
+void glatter_glCompressedMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedMultiTexImage2DEXT, "(%s, %s, %d, %s, %d, %d, %d, %d, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)width, (int)height, (int)border, (int)imageSize, (void*)bits)
+    glatter_glCompressedMultiTexImage2DEXT(texunit, target, level, internalformat, width, height, border, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedMultiTexImage2DEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage3DEXT, (texunit, target, level, internalformat, width, height, depth, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits))
+void glatter_glCompressedMultiTexImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedMultiTexImage3DEXT, "(%s, %s, %d, %s, %d, %d, %d, %d, %d, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth, (int)border, (int)imageSize, (void*)bits)
+    glatter_glCompressedMultiTexImage3DEXT(texunit, target, level, internalformat, width, height, depth, border, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedMultiTexImage3DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage1DEXT, (texunit, target, level, xoffset, width, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits))
+void glatter_glCompressedMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedMultiTexSubImage1DEXT, "(%s, %s, %d, %d, %d, %s, %d, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)xoffset, (int)width, enum_to_string_GL(format), (int)imageSize, (void*)bits)
+    glatter_glCompressedMultiTexSubImage1DEXT(texunit, target, level, xoffset, width, format, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, width, height, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits))
+void glatter_glCompressedMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedMultiTexSubImage2DEXT, "(%s, %s, %d, %d, %d, %d, %d, %s, %d, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)width, (int)height, enum_to_string_GL(format), (int)imageSize, (void*)bits)
+    glatter_glCompressedMultiTexSubImage2DEXT(texunit, target, level, xoffset, yoffset, width, height, format, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits))
+void glatter_glCompressedMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedMultiTexSubImage3DEXT, "(%s, %s, %d, %d, %d, %d, %d, %d, %d, %s, %d, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), (int)imageSize, (void*)bits)
+    glatter_glCompressedMultiTexSubImage3DEXT(texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glCompressedTextureImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage1DEXT, (texture, target, level, internalformat, width, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits))
+void glatter_glCompressedTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTextureImage1DEXT, "(%u, %s, %d, %s, %d, %d, %d, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)width, (int)border, (int)imageSize, (void*)bits)
+    glatter_glCompressedTextureImage1DEXT(texture, target, level, internalformat, width, border, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTextureImage1DEXT_defined
+#endif
+#ifndef glCompressedTextureImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage2DEXT, (texture, target, level, internalformat, width, height, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits))
+void glatter_glCompressedTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTextureImage2DEXT, "(%u, %s, %d, %s, %d, %d, %d, %d, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)width, (int)height, (int)border, (int)imageSize, (void*)bits)
+    glatter_glCompressedTextureImage2DEXT(texture, target, level, internalformat, width, height, border, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTextureImage2DEXT_defined
+#endif
+#ifndef glCompressedTextureImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage3DEXT, (texture, target, level, internalformat, width, height, depth, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits))
+void glatter_glCompressedTextureImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTextureImage3DEXT, "(%u, %s, %d, %s, %d, %d, %d, %d, %d, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth, (int)border, (int)imageSize, (void*)bits)
+    glatter_glCompressedTextureImage3DEXT(texture, target, level, internalformat, width, height, depth, border, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTextureImage3DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage1DEXT, (texture, target, level, xoffset, width, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits))
+void glatter_glCompressedTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTextureSubImage1DEXT, "(%u, %s, %d, %d, %d, %s, %d, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)xoffset, (int)width, enum_to_string_GL(format), (int)imageSize, (void*)bits)
+    glatter_glCompressedTextureSubImage1DEXT(texture, target, level, xoffset, width, format, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTextureSubImage1DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, width, height, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits))
+void glatter_glCompressedTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTextureSubImage2DEXT, "(%u, %s, %d, %d, %d, %d, %d, %s, %d, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)width, (int)height, enum_to_string_GL(format), (int)imageSize, (void*)bits)
+    glatter_glCompressedTextureSubImage2DEXT(texture, target, level, xoffset, yoffset, width, height, format, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTextureSubImage2DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits))
+void glatter_glCompressedTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTextureSubImage3DEXT, "(%u, %s, %d, %d, %d, %d, %d, %d, %d, %s, %d, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), (int)imageSize, (void*)bits)
+    glatter_glCompressedTextureSubImage3DEXT(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTextureSubImage3DEXT_defined
+#endif
+#ifndef glCopyMultiTexImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexImage1DEXT, (texunit, target, level, internalformat, x, y, width, border), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
+void glatter_glCopyMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyMultiTexImage1DEXT, "(%s, %s, %d, %s, %d, %d, %d, %d)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)x, (int)y, (int)width, (int)border)
+    glatter_glCopyMultiTexImage1DEXT(texunit, target, level, internalformat, x, y, width, border);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyMultiTexImage1DEXT_defined
+#endif
+#ifndef glCopyMultiTexImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexImage2DEXT, (texunit, target, level, internalformat, x, y, width, height, border), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
+void glatter_glCopyMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyMultiTexImage2DEXT, "(%s, %s, %d, %s, %d, %d, %d, %d, %d)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)x, (int)y, (int)width, (int)height, (int)border)
+    glatter_glCopyMultiTexImage2DEXT(texunit, target, level, internalformat, x, y, width, height, border);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyMultiTexImage2DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage1DEXT, (texunit, target, level, xoffset, x, y, width), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
+void glatter_glCopyMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyMultiTexSubImage1DEXT, "(%s, %s, %d, %d, %d, %d, %d)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)xoffset, (int)x, (int)y, (int)width)
+    glatter_glCopyMultiTexSubImage1DEXT(texunit, target, level, xoffset, x, y, width);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, x, y, width, height), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glCopyMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyMultiTexSubImage2DEXT, "(%s, %s, %d, %d, %d, %d, %d, %d, %d)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)x, (int)y, (int)width, (int)height)
+    glatter_glCopyMultiTexSubImage2DEXT(texunit, target, level, xoffset, yoffset, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glCopyMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyMultiTexSubImage3DEXT, "(%s, %s, %d, %d, %d, %d, %d, %d, %d, %d)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)x, (int)y, (int)width, (int)height)
+    glatter_glCopyMultiTexSubImage3DEXT(texunit, target, level, xoffset, yoffset, zoffset, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glCopyTextureImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureImage1DEXT, (texture, target, level, internalformat, x, y, width, border), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
+void glatter_glCopyTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTextureImage1DEXT, "(%u, %s, %d, %s, %d, %d, %d, %d)", (unsigned int)texture, enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)x, (int)y, (int)width, (int)border)
+    glatter_glCopyTextureImage1DEXT(texture, target, level, internalformat, x, y, width, border);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTextureImage1DEXT_defined
+#endif
+#ifndef glCopyTextureImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureImage2DEXT, (texture, target, level, internalformat, x, y, width, height, border), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
+void glatter_glCopyTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTextureImage2DEXT, "(%u, %s, %d, %s, %d, %d, %d, %d, %d)", (unsigned int)texture, enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)x, (int)y, (int)width, (int)height, (int)border)
+    glatter_glCopyTextureImage2DEXT(texture, target, level, internalformat, x, y, width, height, border);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTextureImage2DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage1DEXT, (texture, target, level, xoffset, x, y, width), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
+void glatter_glCopyTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTextureSubImage1DEXT, "(%u, %s, %d, %d, %d, %d, %d)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)xoffset, (int)x, (int)y, (int)width)
+    glatter_glCopyTextureSubImage1DEXT(texture, target, level, xoffset, x, y, width);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTextureSubImage1DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, x, y, width, height), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glCopyTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTextureSubImage2DEXT, "(%u, %s, %d, %d, %d, %d, %d, %d, %d)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)x, (int)y, (int)width, (int)height)
+    glatter_glCopyTextureSubImage2DEXT(texture, target, level, xoffset, yoffset, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTextureSubImage2DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glCopyTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTextureSubImage3DEXT, "(%u, %s, %d, %d, %d, %d, %d, %d, %d, %d)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)x, (int)y, (int)width, (int)height)
+    glatter_glCopyTextureSubImage3DEXT(texture, target, level, xoffset, yoffset, zoffset, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTextureSubImage3DEXT_defined
+#endif
+#ifndef glDisableClientStateIndexedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableClientStateIndexedEXT, (array, index), (GLenum array, GLuint index))
+void glatter_glDisableClientStateIndexedEXT_debug(GLenum array, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDisableClientStateIndexedEXT, "(%s, %u)", enum_to_string_GL(array), (unsigned int)index)
+    glatter_glDisableClientStateIndexedEXT(array, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDisableClientStateIndexedEXT_defined
+#endif
+#ifndef glDisableClientStateiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableClientStateiEXT, (array, index), (GLenum array, GLuint index))
+void glatter_glDisableClientStateiEXT_debug(GLenum array, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDisableClientStateiEXT, "(%s, %u)", enum_to_string_GL(array), (unsigned int)index)
+    glatter_glDisableClientStateiEXT(array, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDisableClientStateiEXT_defined
+#endif
+#ifndef glDisableIndexedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableIndexedEXT, (target, index), (GLenum target, GLuint index))
+void glatter_glDisableIndexedEXT_debug(GLenum target, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDisableIndexedEXT, "(%s, %u)", enum_to_string_GL(target), (unsigned int)index)
+    glatter_glDisableIndexedEXT(target, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDisableIndexedEXT_defined
+#endif
+#ifndef glDisableVertexArrayAttribEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayAttribEXT, (vaobj, index), (GLuint vaobj, GLuint index))
+void glatter_glDisableVertexArrayAttribEXT_debug(GLuint vaobj, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDisableVertexArrayAttribEXT, "(%u, %u)", (unsigned int)vaobj, (unsigned int)index)
+    glatter_glDisableVertexArrayAttribEXT(vaobj, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDisableVertexArrayAttribEXT_defined
+#endif
+#ifndef glDisableVertexArrayEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayEXT, (vaobj, array), (GLuint vaobj, GLenum array))
+void glatter_glDisableVertexArrayEXT_debug(GLuint vaobj, GLenum array, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDisableVertexArrayEXT, "(%u, %s)", (unsigned int)vaobj, enum_to_string_GL(array))
+    glatter_glDisableVertexArrayEXT(vaobj, array);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDisableVertexArrayEXT_defined
+#endif
+#ifndef glEnableClientStateIndexedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableClientStateIndexedEXT, (array, index), (GLenum array, GLuint index))
+void glatter_glEnableClientStateIndexedEXT_debug(GLenum array, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEnableClientStateIndexedEXT, "(%s, %u)", enum_to_string_GL(array), (unsigned int)index)
+    glatter_glEnableClientStateIndexedEXT(array, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEnableClientStateIndexedEXT_defined
+#endif
+#ifndef glEnableClientStateiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableClientStateiEXT, (array, index), (GLenum array, GLuint index))
+void glatter_glEnableClientStateiEXT_debug(GLenum array, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEnableClientStateiEXT, "(%s, %u)", enum_to_string_GL(array), (unsigned int)index)
+    glatter_glEnableClientStateiEXT(array, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEnableClientStateiEXT_defined
+#endif
+#ifndef glEnableIndexedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableIndexedEXT, (target, index), (GLenum target, GLuint index))
+void glatter_glEnableIndexedEXT_debug(GLenum target, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEnableIndexedEXT, "(%s, %u)", enum_to_string_GL(target), (unsigned int)index)
+    glatter_glEnableIndexedEXT(target, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEnableIndexedEXT_defined
+#endif
+#ifndef glEnableVertexArrayAttribEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayAttribEXT, (vaobj, index), (GLuint vaobj, GLuint index))
+void glatter_glEnableVertexArrayAttribEXT_debug(GLuint vaobj, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEnableVertexArrayAttribEXT, "(%u, %u)", (unsigned int)vaobj, (unsigned int)index)
+    glatter_glEnableVertexArrayAttribEXT(vaobj, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEnableVertexArrayAttribEXT_defined
+#endif
+#ifndef glEnableVertexArrayEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayEXT, (vaobj, array), (GLuint vaobj, GLenum array))
+void glatter_glEnableVertexArrayEXT_debug(GLuint vaobj, GLenum array, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEnableVertexArrayEXT, "(%u, %s)", (unsigned int)vaobj, enum_to_string_GL(array))
+    glatter_glEnableVertexArrayEXT(vaobj, array);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEnableVertexArrayEXT_defined
+#endif
+#ifndef glFlushMappedNamedBufferRangeEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRangeEXT, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizeiptr length))
+void glatter_glFlushMappedNamedBufferRangeEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFlushMappedNamedBufferRangeEXT, "(%u, %td, %td)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)length)
+    glatter_glFlushMappedNamedBufferRangeEXT(buffer, offset, length);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFlushMappedNamedBufferRangeEXT_defined
+#endif
+#ifndef glFramebufferDrawBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferDrawBufferEXT, (framebuffer, mode), (GLuint framebuffer, GLenum mode))
+void glatter_glFramebufferDrawBufferEXT_debug(GLuint framebuffer, GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferDrawBufferEXT, "(%u, %s)", (unsigned int)framebuffer, enum_to_string_GL(mode))
+    glatter_glFramebufferDrawBufferEXT(framebuffer, mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferDrawBufferEXT_defined
+#endif
+#ifndef glFramebufferDrawBuffersEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferDrawBuffersEXT, (framebuffer, n, bufs), (GLuint framebuffer, GLsizei n, const GLenum *bufs))
+void glatter_glFramebufferDrawBuffersEXT_debug(GLuint framebuffer, GLsizei n, const GLenum *bufs, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferDrawBuffersEXT, "(%u, %d, %p)", (unsigned int)framebuffer, (int)n, (void*)bufs)
+    glatter_glFramebufferDrawBuffersEXT(framebuffer, n, bufs);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferDrawBuffersEXT_defined
+#endif
+#ifndef glFramebufferReadBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferReadBufferEXT, (framebuffer, mode), (GLuint framebuffer, GLenum mode))
+void glatter_glFramebufferReadBufferEXT_debug(GLuint framebuffer, GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferReadBufferEXT, "(%u, %s)", (unsigned int)framebuffer, enum_to_string_GL(mode))
+    glatter_glFramebufferReadBufferEXT(framebuffer, mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferReadBufferEXT_defined
+#endif
+#ifndef glGenerateMultiTexMipmapEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateMultiTexMipmapEXT, (texunit, target), (GLenum texunit, GLenum target))
+void glatter_glGenerateMultiTexMipmapEXT_debug(GLenum texunit, GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenerateMultiTexMipmapEXT, "(%s, %s)", enum_to_string_GL(texunit), enum_to_string_GL(target))
+    glatter_glGenerateMultiTexMipmapEXT(texunit, target);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenerateMultiTexMipmapEXT_defined
+#endif
+#ifndef glGenerateTextureMipmapEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateTextureMipmapEXT, (texture, target), (GLuint texture, GLenum target))
+void glatter_glGenerateTextureMipmapEXT_debug(GLuint texture, GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenerateTextureMipmapEXT, "(%u, %s)", (unsigned int)texture, enum_to_string_GL(target))
+    glatter_glGenerateTextureMipmapEXT(texture, target);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenerateTextureMipmapEXT_defined
+#endif
+#ifndef glGetBooleanIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBooleanIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLboolean *data))
+void glatter_glGetBooleanIndexedvEXT_debug(GLenum target, GLuint index, GLboolean *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetBooleanIndexedvEXT, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetBooleanIndexedvEXT(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetBooleanIndexedvEXT_defined
+#endif
+#ifndef glGetCompressedMultiTexImageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedMultiTexImageEXT, (texunit, target, lod, img), (GLenum texunit, GLenum target, GLint lod, void *img))
+void glatter_glGetCompressedMultiTexImageEXT_debug(GLenum texunit, GLenum target, GLint lod, void *img, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetCompressedMultiTexImageEXT, "(%s, %s, %d, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)lod, (void*)img)
+    glatter_glGetCompressedMultiTexImageEXT(texunit, target, lod, img);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetCompressedMultiTexImageEXT_defined
+#endif
+#ifndef glGetCompressedTextureImageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTextureImageEXT, (texture, target, lod, img), (GLuint texture, GLenum target, GLint lod, void *img))
+void glatter_glGetCompressedTextureImageEXT_debug(GLuint texture, GLenum target, GLint lod, void *img, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetCompressedTextureImageEXT, "(%u, %s, %d, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)lod, (void*)img)
+    glatter_glGetCompressedTextureImageEXT(texture, target, lod, img);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetCompressedTextureImageEXT_defined
+#endif
+#ifndef glGetDoubleIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoubleIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLdouble *data))
+void glatter_glGetDoubleIndexedvEXT_debug(GLenum target, GLuint index, GLdouble *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetDoubleIndexedvEXT, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetDoubleIndexedvEXT(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetDoubleIndexedvEXT_defined
+#endif
+#ifndef glGetDoublei_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoublei_vEXT, (pname, index, params), (GLenum pname, GLuint index, GLdouble *params))
+void glatter_glGetDoublei_vEXT_debug(GLenum pname, GLuint index, GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetDoublei_vEXT, "(%s, %u, %p)", enum_to_string_GL(pname), (unsigned int)index, (void*)params)
+    glatter_glGetDoublei_vEXT(pname, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetDoublei_vEXT_defined
+#endif
+#ifndef glGetFloatIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloatIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLfloat *data))
+void glatter_glGetFloatIndexedvEXT_debug(GLenum target, GLuint index, GLfloat *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFloatIndexedvEXT, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetFloatIndexedvEXT(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetFloatIndexedvEXT_defined
+#endif
+#ifndef glGetFloati_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloati_vEXT, (pname, index, params), (GLenum pname, GLuint index, GLfloat *params))
+void glatter_glGetFloati_vEXT_debug(GLenum pname, GLuint index, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFloati_vEXT, "(%s, %u, %p)", enum_to_string_GL(pname), (unsigned int)index, (void*)params)
+    glatter_glGetFloati_vEXT(pname, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetFloati_vEXT_defined
+#endif
+#ifndef glGetFramebufferParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFramebufferParameterivEXT, (framebuffer, pname, params), (GLuint framebuffer, GLenum pname, GLint *params))
+void glatter_glGetFramebufferParameterivEXT_debug(GLuint framebuffer, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFramebufferParameterivEXT, "(%u, %s, %p)", (unsigned int)framebuffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetFramebufferParameterivEXT(framebuffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetFramebufferParameterivEXT_defined
+#endif
+#ifndef glGetIntegerIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLint *data))
+void glatter_glGetIntegerIndexedvEXT_debug(GLenum target, GLuint index, GLint *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetIntegerIndexedvEXT, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetIntegerIndexedvEXT(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetIntegerIndexedvEXT_defined
+#endif
+#ifndef glGetMultiTexEnvfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexEnvfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLfloat *params))
+void glatter_glGetMultiTexEnvfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexEnvfvEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexEnvfvEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexEnvfvEXT_defined
+#endif
+#ifndef glGetMultiTexEnvivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexEnvivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
+void glatter_glGetMultiTexEnvivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexEnvivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexEnvivEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexEnvivEXT_defined
+#endif
+#ifndef glGetMultiTexGendvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGendvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLdouble *params))
+void glatter_glGetMultiTexGendvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexGendvEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(coord), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexGendvEXT(texunit, coord, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexGendvEXT_defined
+#endif
+#ifndef glGetMultiTexGenfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGenfvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLfloat *params))
+void glatter_glGetMultiTexGenfvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexGenfvEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(coord), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexGenfvEXT(texunit, coord, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexGenfvEXT_defined
+#endif
+#ifndef glGetMultiTexGenivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGenivEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLint *params))
+void glatter_glGetMultiTexGenivEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexGenivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(coord), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexGenivEXT(texunit, coord, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexGenivEXT_defined
+#endif
+#ifndef glGetMultiTexImageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexImageEXT, (texunit, target, level, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
+void glatter_glGetMultiTexImageEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexImageEXT, "(%s, %s, %d, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glGetMultiTexImageEXT(texunit, target, level, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexImageEXT_defined
+#endif
+#ifndef glGetMultiTexLevelParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexLevelParameterfvEXT, (texunit, target, level, pname, params), (GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat *params))
+void glatter_glGetMultiTexLevelParameterfvEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexLevelParameterfvEXT, "(%s, %s, %d, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexLevelParameterfvEXT(texunit, target, level, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexLevelParameterfvEXT_defined
+#endif
+#ifndef glGetMultiTexLevelParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexLevelParameterivEXT, (texunit, target, level, pname, params), (GLenum texunit, GLenum target, GLint level, GLenum pname, GLint *params))
+void glatter_glGetMultiTexLevelParameterivEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexLevelParameterivEXT, "(%s, %s, %d, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexLevelParameterivEXT(texunit, target, level, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexLevelParameterivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterIivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
+void glatter_glGetMultiTexParameterIivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexParameterIivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexParameterIivEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexParameterIivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterIuivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLuint *params))
+void glatter_glGetMultiTexParameterIuivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexParameterIuivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexParameterIuivEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexParameterIuivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLfloat *params))
+void glatter_glGetMultiTexParameterfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexParameterfvEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexParameterfvEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexParameterfvEXT_defined
+#endif
+#ifndef glGetMultiTexParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
+void glatter_glGetMultiTexParameterivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultiTexParameterivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMultiTexParameterivEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultiTexParameterivEXT_defined
+#endif
+#ifndef glGetNamedBufferParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameterivEXT, (buffer, pname, params), (GLuint buffer, GLenum pname, GLint *params))
+void glatter_glGetNamedBufferParameterivEXT_debug(GLuint buffer, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedBufferParameterivEXT, "(%u, %s, %p)", (unsigned int)buffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedBufferParameterivEXT(buffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedBufferParameterivEXT_defined
+#endif
+#ifndef glGetNamedBufferPointervEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferPointervEXT, (buffer, pname, params), (GLuint buffer, GLenum pname, void **params))
+void glatter_glGetNamedBufferPointervEXT_debug(GLuint buffer, GLenum pname, void **params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedBufferPointervEXT, "(%u, %s, %p)", (unsigned int)buffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedBufferPointervEXT(buffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedBufferPointervEXT_defined
+#endif
+#ifndef glGetNamedBufferSubDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubDataEXT, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data))
+void glatter_glGetNamedBufferSubDataEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedBufferSubDataEXT, "(%u, %td, %td, %p)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size, (void*)data)
+    glatter_glGetNamedBufferSubDataEXT(buffer, offset, size, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedBufferSubDataEXT_defined
+#endif
+#ifndef glGetNamedFramebufferAttachmentParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferAttachmentParameterivEXT, (framebuffer, attachment, pname, params), (GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params))
+void glatter_glGetNamedFramebufferAttachmentParameterivEXT_debug(GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedFramebufferAttachmentParameterivEXT, "(%u, %s, %s, %p)", (unsigned int)framebuffer, enum_to_string_GL(attachment), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedFramebufferAttachmentParameterivEXT(framebuffer, attachment, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedFramebufferAttachmentParameterivEXT_defined
+#endif
+#ifndef glGetNamedFramebufferParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferParameterivEXT, (framebuffer, pname, params), (GLuint framebuffer, GLenum pname, GLint *params))
+void glatter_glGetNamedFramebufferParameterivEXT_debug(GLuint framebuffer, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedFramebufferParameterivEXT, "(%u, %s, %p)", (unsigned int)framebuffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedFramebufferParameterivEXT(framebuffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedFramebufferParameterivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterIivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLint *params))
+void glatter_glGetNamedProgramLocalParameterIivEXT_debug(GLuint program, GLenum target, GLuint index, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedProgramLocalParameterIivEXT, "(%u, %s, %u, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (void*)params)
+    glatter_glGetNamedProgramLocalParameterIivEXT(program, target, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedProgramLocalParameterIivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterIuivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLuint *params))
+void glatter_glGetNamedProgramLocalParameterIuivEXT_debug(GLuint program, GLenum target, GLuint index, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedProgramLocalParameterIuivEXT, "(%u, %s, %u, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (void*)params)
+    glatter_glGetNamedProgramLocalParameterIuivEXT(program, target, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedProgramLocalParameterIuivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterdvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterdvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLdouble *params))
+void glatter_glGetNamedProgramLocalParameterdvEXT_debug(GLuint program, GLenum target, GLuint index, GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedProgramLocalParameterdvEXT, "(%u, %s, %u, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (void*)params)
+    glatter_glGetNamedProgramLocalParameterdvEXT(program, target, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedProgramLocalParameterdvEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterfvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLfloat *params))
+void glatter_glGetNamedProgramLocalParameterfvEXT_debug(GLuint program, GLenum target, GLuint index, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedProgramLocalParameterfvEXT, "(%u, %s, %u, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (void*)params)
+    glatter_glGetNamedProgramLocalParameterfvEXT(program, target, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedProgramLocalParameterfvEXT_defined
+#endif
+#ifndef glGetNamedProgramStringEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramStringEXT, (program, target, pname, string), (GLuint program, GLenum target, GLenum pname, void *string))
+void glatter_glGetNamedProgramStringEXT_debug(GLuint program, GLenum target, GLenum pname, void *string, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedProgramStringEXT, "(%u, %s, %s, %p)", (unsigned int)program, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)string)
+    glatter_glGetNamedProgramStringEXT(program, target, pname, string);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedProgramStringEXT_defined
+#endif
+#ifndef glGetNamedProgramivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramivEXT, (program, target, pname, params), (GLuint program, GLenum target, GLenum pname, GLint *params))
+void glatter_glGetNamedProgramivEXT_debug(GLuint program, GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedProgramivEXT, "(%u, %s, %s, %p)", (unsigned int)program, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedProgramivEXT(program, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedProgramivEXT_defined
+#endif
+#ifndef glGetNamedRenderbufferParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedRenderbufferParameterivEXT, (renderbuffer, pname, params), (GLuint renderbuffer, GLenum pname, GLint *params))
+void glatter_glGetNamedRenderbufferParameterivEXT_debug(GLuint renderbuffer, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedRenderbufferParameterivEXT, "(%u, %s, %p)", (unsigned int)renderbuffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedRenderbufferParameterivEXT(renderbuffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedRenderbufferParameterivEXT_defined
+#endif
+#ifndef glGetPointerIndexedvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointerIndexedvEXT, (target, index, data), (GLenum target, GLuint index, void **data))
+void glatter_glGetPointerIndexedvEXT_debug(GLenum target, GLuint index, void **data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetPointerIndexedvEXT, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetPointerIndexedvEXT(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetPointerIndexedvEXT_defined
+#endif
+#ifndef glGetPointeri_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointeri_vEXT, (pname, index, params), (GLenum pname, GLuint index, void **params))
+void glatter_glGetPointeri_vEXT_debug(GLenum pname, GLuint index, void **params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetPointeri_vEXT, "(%s, %u, %p)", enum_to_string_GL(pname), (unsigned int)index, (void*)params)
+    glatter_glGetPointeri_vEXT(pname, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetPointeri_vEXT_defined
+#endif
+#ifndef glGetTextureImageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureImageEXT, (texture, target, level, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
+void glatter_glGetTextureImageEXT_debug(GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureImageEXT, "(%u, %s, %d, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glGetTextureImageEXT(texture, target, level, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureImageEXT_defined
+#endif
+#ifndef glGetTextureLevelParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterfvEXT, (texture, target, level, pname, params), (GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params))
+void glatter_glGetTextureLevelParameterfvEXT_debug(GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureLevelParameterfvEXT, "(%u, %s, %d, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureLevelParameterfvEXT(texture, target, level, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureLevelParameterfvEXT_defined
+#endif
+#ifndef glGetTextureLevelParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterivEXT, (texture, target, level, pname, params), (GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params))
+void glatter_glGetTextureLevelParameterivEXT_debug(GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureLevelParameterivEXT, "(%u, %s, %d, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureLevelParameterivEXT(texture, target, level, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureLevelParameterivEXT_defined
+#endif
+#ifndef glGetTextureParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLint *params))
+void glatter_glGetTextureParameterIivEXT_debug(GLuint texture, GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureParameterIivEXT, "(%u, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureParameterIivEXT(texture, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureParameterIivEXT_defined
+#endif
+#ifndef glGetTextureParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIuivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLuint *params))
+void glatter_glGetTextureParameterIuivEXT_debug(GLuint texture, GLenum target, GLenum pname, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureParameterIuivEXT, "(%u, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureParameterIuivEXT(texture, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureParameterIuivEXT_defined
+#endif
+#ifndef glGetTextureParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterfvEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLfloat *params))
+void glatter_glGetTextureParameterfvEXT_debug(GLuint texture, GLenum target, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureParameterfvEXT, "(%u, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureParameterfvEXT(texture, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureParameterfvEXT_defined
+#endif
+#ifndef glGetTextureParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLint *params))
+void glatter_glGetTextureParameterivEXT_debug(GLuint texture, GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureParameterivEXT, "(%u, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureParameterivEXT(texture, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureParameterivEXT_defined
+#endif
+#ifndef glGetVertexArrayIntegeri_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIntegeri_vEXT, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, GLint *param))
+void glatter_glGetVertexArrayIntegeri_vEXT_debug(GLuint vaobj, GLuint index, GLenum pname, GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexArrayIntegeri_vEXT, "(%u, %u, %s, %p)", (unsigned int)vaobj, (unsigned int)index, enum_to_string_GL(pname), (void*)param)
+    glatter_glGetVertexArrayIntegeri_vEXT(vaobj, index, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexArrayIntegeri_vEXT_defined
+#endif
+#ifndef glGetVertexArrayIntegervEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIntegervEXT, (vaobj, pname, param), (GLuint vaobj, GLenum pname, GLint *param))
+void glatter_glGetVertexArrayIntegervEXT_debug(GLuint vaobj, GLenum pname, GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexArrayIntegervEXT, "(%u, %s, %p)", (unsigned int)vaobj, enum_to_string_GL(pname), (void*)param)
+    glatter_glGetVertexArrayIntegervEXT(vaobj, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexArrayIntegervEXT_defined
+#endif
+#ifndef glGetVertexArrayPointeri_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayPointeri_vEXT, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, void **param))
+void glatter_glGetVertexArrayPointeri_vEXT_debug(GLuint vaobj, GLuint index, GLenum pname, void **param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexArrayPointeri_vEXT, "(%u, %u, %s, %p)", (unsigned int)vaobj, (unsigned int)index, enum_to_string_GL(pname), (void*)param)
+    glatter_glGetVertexArrayPointeri_vEXT(vaobj, index, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexArrayPointeri_vEXT_defined
+#endif
+#ifndef glGetVertexArrayPointervEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayPointervEXT, (vaobj, pname, param), (GLuint vaobj, GLenum pname, void **param))
+void glatter_glGetVertexArrayPointervEXT_debug(GLuint vaobj, GLenum pname, void **param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexArrayPointervEXT, "(%u, %s, %p)", (unsigned int)vaobj, enum_to_string_GL(pname), (void*)param)
+    glatter_glGetVertexArrayPointervEXT(vaobj, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexArrayPointervEXT_defined
+#endif
+#ifndef glIsEnabledIndexedEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsEnabledIndexedEXT, (target, index), (GLenum target, GLuint index))
+GLboolean glatter_glIsEnabledIndexedEXT_debug(GLenum target, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsEnabledIndexedEXT, "(%s, %u)", enum_to_string_GL(target), (unsigned int)index)
+    GLboolean rval = glatter_glIsEnabledIndexedEXT(target, index);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsEnabledIndexedEXT_defined
+#endif
+#ifndef glMapNamedBufferEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferEXT, (buffer, access), (GLuint buffer, GLenum access))
+void * glatter_glMapNamedBufferEXT_debug(GLuint buffer, GLenum access, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMapNamedBufferEXT, "(%u, %s)", (unsigned int)buffer, enum_to_string_GL(access))
+    void * rval = glatter_glMapNamedBufferEXT(buffer, access);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glMapNamedBufferEXT_defined
+#endif
+#ifndef glMapNamedBufferRangeEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRangeEXT, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access))
+void * glatter_glMapNamedBufferRangeEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMapNamedBufferRangeEXT, "(%u, %td, %td, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)length, (unsigned int)access)
+    void * rval = glatter_glMapNamedBufferRangeEXT(buffer, offset, length, access);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glMapNamedBufferRangeEXT_defined
+#endif
+#ifndef glMatrixFrustumEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixFrustumEXT, (mode, left, right, bottom, top, zNear, zFar), (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar))
+void glatter_glMatrixFrustumEXT_debug(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixFrustumEXT, "(%s, %f, %f, %f, %f, %f, %f)", enum_to_string_GL(mode), (double)left, (double)right, (double)bottom, (double)top, (double)zNear, (double)zFar)
+    glatter_glMatrixFrustumEXT(mode, left, right, bottom, top, zNear, zFar);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixFrustumEXT_defined
+#endif
+#ifndef glMatrixLoadIdentityEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadIdentityEXT, (mode), (GLenum mode))
+void glatter_glMatrixLoadIdentityEXT_debug(GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixLoadIdentityEXT, "(%s)", enum_to_string_GL(mode))
+    glatter_glMatrixLoadIdentityEXT(mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixLoadIdentityEXT_defined
+#endif
+#ifndef glMatrixLoadTransposedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadTransposedEXT, (mode, m), (GLenum mode, const GLdouble *m))
+void glatter_glMatrixLoadTransposedEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixLoadTransposedEXT, "(%s, %p)", enum_to_string_GL(mode), (void*)m)
+    glatter_glMatrixLoadTransposedEXT(mode, m);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixLoadTransposedEXT_defined
+#endif
+#ifndef glMatrixLoadTransposefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadTransposefEXT, (mode, m), (GLenum mode, const GLfloat *m))
+void glatter_glMatrixLoadTransposefEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixLoadTransposefEXT, "(%s, %p)", enum_to_string_GL(mode), (void*)m)
+    glatter_glMatrixLoadTransposefEXT(mode, m);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixLoadTransposefEXT_defined
+#endif
+#ifndef glMatrixLoaddEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoaddEXT, (mode, m), (GLenum mode, const GLdouble *m))
+void glatter_glMatrixLoaddEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixLoaddEXT, "(%s, %p)", enum_to_string_GL(mode), (void*)m)
+    glatter_glMatrixLoaddEXT(mode, m);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixLoaddEXT_defined
+#endif
+#ifndef glMatrixLoadfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadfEXT, (mode, m), (GLenum mode, const GLfloat *m))
+void glatter_glMatrixLoadfEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixLoadfEXT, "(%s, %p)", enum_to_string_GL(mode), (void*)m)
+    glatter_glMatrixLoadfEXT(mode, m);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixLoadfEXT_defined
+#endif
+#ifndef glMatrixMultTransposedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultTransposedEXT, (mode, m), (GLenum mode, const GLdouble *m))
+void glatter_glMatrixMultTransposedEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixMultTransposedEXT, "(%s, %p)", enum_to_string_GL(mode), (void*)m)
+    glatter_glMatrixMultTransposedEXT(mode, m);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixMultTransposedEXT_defined
+#endif
+#ifndef glMatrixMultTransposefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultTransposefEXT, (mode, m), (GLenum mode, const GLfloat *m))
+void glatter_glMatrixMultTransposefEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixMultTransposefEXT, "(%s, %p)", enum_to_string_GL(mode), (void*)m)
+    glatter_glMatrixMultTransposefEXT(mode, m);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixMultTransposefEXT_defined
+#endif
+#ifndef glMatrixMultdEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultdEXT, (mode, m), (GLenum mode, const GLdouble *m))
+void glatter_glMatrixMultdEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixMultdEXT, "(%s, %p)", enum_to_string_GL(mode), (void*)m)
+    glatter_glMatrixMultdEXT(mode, m);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixMultdEXT_defined
+#endif
+#ifndef glMatrixMultfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultfEXT, (mode, m), (GLenum mode, const GLfloat *m))
+void glatter_glMatrixMultfEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixMultfEXT, "(%s, %p)", enum_to_string_GL(mode), (void*)m)
+    glatter_glMatrixMultfEXT(mode, m);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixMultfEXT_defined
+#endif
+#ifndef glMatrixOrthoEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixOrthoEXT, (mode, left, right, bottom, top, zNear, zFar), (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar))
+void glatter_glMatrixOrthoEXT_debug(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixOrthoEXT, "(%s, %f, %f, %f, %f, %f, %f)", enum_to_string_GL(mode), (double)left, (double)right, (double)bottom, (double)top, (double)zNear, (double)zFar)
+    glatter_glMatrixOrthoEXT(mode, left, right, bottom, top, zNear, zFar);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixOrthoEXT_defined
+#endif
+#ifndef glMatrixPopEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixPopEXT, (mode), (GLenum mode))
+void glatter_glMatrixPopEXT_debug(GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixPopEXT, "(%s)", enum_to_string_GL(mode))
+    glatter_glMatrixPopEXT(mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixPopEXT_defined
+#endif
+#ifndef glMatrixPushEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixPushEXT, (mode), (GLenum mode))
+void glatter_glMatrixPushEXT_debug(GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixPushEXT, "(%s)", enum_to_string_GL(mode))
+    glatter_glMatrixPushEXT(mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixPushEXT_defined
+#endif
+#ifndef glMatrixRotatedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixRotatedEXT, (mode, angle, x, y, z), (GLenum mode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z))
+void glatter_glMatrixRotatedEXT_debug(GLenum mode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixRotatedEXT, "(%s, %f, %f, %f, %f)", enum_to_string_GL(mode), (double)angle, (double)x, (double)y, (double)z)
+    glatter_glMatrixRotatedEXT(mode, angle, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixRotatedEXT_defined
+#endif
+#ifndef glMatrixRotatefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixRotatefEXT, (mode, angle, x, y, z), (GLenum mode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z))
+void glatter_glMatrixRotatefEXT_debug(GLenum mode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixRotatefEXT, "(%s, %f, %f, %f, %f)", enum_to_string_GL(mode), (float)angle, (float)x, (float)y, (float)z)
+    glatter_glMatrixRotatefEXT(mode, angle, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixRotatefEXT_defined
+#endif
+#ifndef glMatrixScaledEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixScaledEXT, (mode, x, y, z), (GLenum mode, GLdouble x, GLdouble y, GLdouble z))
+void glatter_glMatrixScaledEXT_debug(GLenum mode, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixScaledEXT, "(%s, %f, %f, %f)", enum_to_string_GL(mode), (double)x, (double)y, (double)z)
+    glatter_glMatrixScaledEXT(mode, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixScaledEXT_defined
+#endif
+#ifndef glMatrixScalefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixScalefEXT, (mode, x, y, z), (GLenum mode, GLfloat x, GLfloat y, GLfloat z))
+void glatter_glMatrixScalefEXT_debug(GLenum mode, GLfloat x, GLfloat y, GLfloat z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixScalefEXT, "(%s, %f, %f, %f)", enum_to_string_GL(mode), (float)x, (float)y, (float)z)
+    glatter_glMatrixScalefEXT(mode, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixScalefEXT_defined
+#endif
+#ifndef glMatrixTranslatedEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixTranslatedEXT, (mode, x, y, z), (GLenum mode, GLdouble x, GLdouble y, GLdouble z))
+void glatter_glMatrixTranslatedEXT_debug(GLenum mode, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixTranslatedEXT, "(%s, %f, %f, %f)", enum_to_string_GL(mode), (double)x, (double)y, (double)z)
+    glatter_glMatrixTranslatedEXT(mode, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixTranslatedEXT_defined
+#endif
+#ifndef glMatrixTranslatefEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixTranslatefEXT, (mode, x, y, z), (GLenum mode, GLfloat x, GLfloat y, GLfloat z))
+void glatter_glMatrixTranslatefEXT_debug(GLenum mode, GLfloat x, GLfloat y, GLfloat z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMatrixTranslatefEXT, "(%s, %f, %f, %f)", enum_to_string_GL(mode), (float)x, (float)y, (float)z)
+    glatter_glMatrixTranslatefEXT(mode, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMatrixTranslatefEXT_defined
+#endif
+#ifndef glMultiTexBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexBufferEXT, (texunit, target, internalformat, buffer), (GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer))
+void glatter_glMultiTexBufferEXT_debug(GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexBufferEXT, "(%s, %s, %s, %u)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(internalformat), (unsigned int)buffer)
+    glatter_glMultiTexBufferEXT(texunit, target, internalformat, buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexBufferEXT_defined
+#endif
+#ifndef glMultiTexCoordPointerEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexCoordPointerEXT, (texunit, size, type, stride, pointer), (GLenum texunit, GLint size, GLenum type, GLsizei stride, const void *pointer))
+void glatter_glMultiTexCoordPointerEXT_debug(GLenum texunit, GLint size, GLenum type, GLsizei stride, const void *pointer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexCoordPointerEXT, "(%s, %d, %s, %d, %p)", enum_to_string_GL(texunit), (int)size, enum_to_string_GL(type), (int)stride, (void*)pointer)
+    glatter_glMultiTexCoordPointerEXT(texunit, size, type, stride, pointer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexCoordPointerEXT_defined
+#endif
+#ifndef glMultiTexEnvfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvfEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLfloat param))
+void glatter_glMultiTexEnvfEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexEnvfEXT, "(%s, %s, %s, %f)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (float)param)
+    glatter_glMultiTexEnvfEXT(texunit, target, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexEnvfEXT_defined
+#endif
+#ifndef glMultiTexEnvfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLfloat *params))
+void glatter_glMultiTexEnvfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexEnvfvEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glMultiTexEnvfvEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexEnvfvEXT_defined
+#endif
+#ifndef glMultiTexEnviEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnviEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLint param))
+void glatter_glMultiTexEnviEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexEnviEXT, "(%s, %s, %s, %d)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (int)param)
+    glatter_glMultiTexEnviEXT(texunit, target, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexEnviEXT_defined
+#endif
+#ifndef glMultiTexEnvivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
+void glatter_glMultiTexEnvivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexEnvivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glMultiTexEnvivEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexEnvivEXT_defined
+#endif
+#ifndef glMultiTexGendEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGendEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLdouble param))
+void glatter_glMultiTexGendEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLdouble param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexGendEXT, "(%s, %s, %s, %f)", enum_to_string_GL(texunit), enum_to_string_GL(coord), enum_to_string_GL(pname), (double)param)
+    glatter_glMultiTexGendEXT(texunit, coord, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexGendEXT_defined
+#endif
+#ifndef glMultiTexGendvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGendvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params))
+void glatter_glMultiTexGendvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexGendvEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(coord), enum_to_string_GL(pname), (void*)params)
+    glatter_glMultiTexGendvEXT(texunit, coord, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexGendvEXT_defined
+#endif
+#ifndef glMultiTexGenfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenfEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLfloat param))
+void glatter_glMultiTexGenfEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLfloat param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexGenfEXT, "(%s, %s, %s, %f)", enum_to_string_GL(texunit), enum_to_string_GL(coord), enum_to_string_GL(pname), (float)param)
+    glatter_glMultiTexGenfEXT(texunit, coord, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexGenfEXT_defined
+#endif
+#ifndef glMultiTexGenfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenfvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params))
+void glatter_glMultiTexGenfvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexGenfvEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(coord), enum_to_string_GL(pname), (void*)params)
+    glatter_glMultiTexGenfvEXT(texunit, coord, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexGenfvEXT_defined
+#endif
+#ifndef glMultiTexGeniEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGeniEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLint param))
+void glatter_glMultiTexGeniEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexGeniEXT, "(%s, %s, %s, %d)", enum_to_string_GL(texunit), enum_to_string_GL(coord), enum_to_string_GL(pname), (int)param)
+    glatter_glMultiTexGeniEXT(texunit, coord, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexGeniEXT_defined
+#endif
+#ifndef glMultiTexGenivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenivEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLint *params))
+void glatter_glMultiTexGenivEXT_debug(GLenum texunit, GLenum coord, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexGenivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(coord), enum_to_string_GL(pname), (void*)params)
+    glatter_glMultiTexGenivEXT(texunit, coord, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexGenivEXT_defined
+#endif
+#ifndef glMultiTexImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage1DEXT, (texunit, target, level, internalformat, width, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
+void glatter_glMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexImage1DEXT, "(%s, %s, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)internalformat, (int)width, (int)border, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glMultiTexImage1DEXT(texunit, target, level, internalformat, width, border, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexImage1DEXT_defined
+#endif
+#ifndef glMultiTexImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage2DEXT, (texunit, target, level, internalformat, width, height, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
+void glatter_glMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexImage2DEXT, "(%s, %s, %d, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)internalformat, (int)width, (int)height, (int)border, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glMultiTexImage2DEXT(texunit, target, level, internalformat, width, height, border, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexImage2DEXT_defined
+#endif
+#ifndef glMultiTexImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage3DEXT, (texunit, target, level, internalformat, width, height, depth, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
+void glatter_glMultiTexImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexImage3DEXT, "(%s, %s, %d, %d, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)internalformat, (int)width, (int)height, (int)depth, (int)border, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glMultiTexImage3DEXT(texunit, target, level, internalformat, width, height, depth, border, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexImage3DEXT_defined
+#endif
+#ifndef glMultiTexParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterIivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
+void glatter_glMultiTexParameterIivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexParameterIivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glMultiTexParameterIivEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexParameterIivEXT_defined
+#endif
+#ifndef glMultiTexParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterIuivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLuint *params))
+void glatter_glMultiTexParameterIuivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexParameterIuivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glMultiTexParameterIuivEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexParameterIuivEXT_defined
+#endif
+#ifndef glMultiTexParameterfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterfEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLfloat param))
+void glatter_glMultiTexParameterfEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexParameterfEXT, "(%s, %s, %s, %f)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (float)param)
+    glatter_glMultiTexParameterfEXT(texunit, target, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexParameterfEXT_defined
+#endif
+#ifndef glMultiTexParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLfloat *params))
+void glatter_glMultiTexParameterfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexParameterfvEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glMultiTexParameterfvEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexParameterfvEXT_defined
+#endif
+#ifndef glMultiTexParameteriEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameteriEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLint param))
+void glatter_glMultiTexParameteriEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexParameteriEXT, "(%s, %s, %s, %d)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (int)param)
+    glatter_glMultiTexParameteriEXT(texunit, target, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexParameteriEXT_defined
+#endif
+#ifndef glMultiTexParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
+void glatter_glMultiTexParameterivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexParameterivEXT, "(%s, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glMultiTexParameterivEXT(texunit, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexParameterivEXT_defined
+#endif
+#ifndef glMultiTexRenderbufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexRenderbufferEXT, (texunit, target, renderbuffer), (GLenum texunit, GLenum target, GLuint renderbuffer))
+void glatter_glMultiTexRenderbufferEXT_debug(GLenum texunit, GLenum target, GLuint renderbuffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexRenderbufferEXT, "(%s, %s, %u)", enum_to_string_GL(texunit), enum_to_string_GL(target), (unsigned int)renderbuffer)
+    glatter_glMultiTexRenderbufferEXT(texunit, target, renderbuffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexRenderbufferEXT_defined
+#endif
+#ifndef glMultiTexSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage1DEXT, (texunit, target, level, xoffset, width, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
+void glatter_glMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexSubImage1DEXT, "(%s, %s, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)xoffset, (int)width, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glMultiTexSubImage1DEXT(texunit, target, level, xoffset, width, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glMultiTexSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, width, height, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
+void glatter_glMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexSubImage2DEXT, "(%s, %s, %d, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)width, (int)height, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glMultiTexSubImage2DEXT(texunit, target, level, xoffset, yoffset, width, height, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glMultiTexSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
+void glatter_glMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiTexSubImage3DEXT, "(%s, %s, %d, %d, %d, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(texunit), enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glMultiTexSubImage3DEXT(texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glNamedBufferDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferDataEXT, (buffer, size, data, usage), (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage))
+void glatter_glNamedBufferDataEXT_debug(GLuint buffer, GLsizeiptr size, const void *data, GLenum usage, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferDataEXT, "(%u, %td, %p, %s)", (unsigned int)buffer, (ptrdiff_t)size, (void*)data, enum_to_string_GL(usage))
+    glatter_glNamedBufferDataEXT(buffer, size, data, usage);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferDataEXT_defined
+#endif
+#ifndef glNamedBufferStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorageEXT, (buffer, size, data, flags), (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags))
+void glatter_glNamedBufferStorageEXT_debug(GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferStorageEXT, "(%u, %td, %p, %u)", (unsigned int)buffer, (ptrdiff_t)size, (void*)data, (unsigned int)flags)
+    glatter_glNamedBufferStorageEXT(buffer, size, data, flags);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferStorageEXT_defined
+#endif
+#ifndef glNamedBufferSubDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubDataEXT, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
+void glatter_glNamedBufferSubDataEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferSubDataEXT, "(%u, %td, %td, %p)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size, (void*)data)
+    glatter_glNamedBufferSubDataEXT(buffer, offset, size, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferSubDataEXT_defined
+#endif
+#ifndef glNamedCopyBufferSubDataEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedCopyBufferSubDataEXT, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
+void glatter_glNamedCopyBufferSubDataEXT_debug(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedCopyBufferSubDataEXT, "(%u, %u, %td, %td, %td)", (unsigned int)readBuffer, (unsigned int)writeBuffer, (ptrdiff_t)readOffset, (ptrdiff_t)writeOffset, (ptrdiff_t)size)
+    glatter_glNamedCopyBufferSubDataEXT(readBuffer, writeBuffer, readOffset, writeOffset, size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedCopyBufferSubDataEXT_defined
+#endif
+#ifndef glNamedFramebufferParameteriEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferParameteriEXT, (framebuffer, pname, param), (GLuint framebuffer, GLenum pname, GLint param))
+void glatter_glNamedFramebufferParameteriEXT_debug(GLuint framebuffer, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferParameteriEXT, "(%u, %s, %d)", (unsigned int)framebuffer, enum_to_string_GL(pname), (int)param)
+    glatter_glNamedFramebufferParameteriEXT(framebuffer, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferParameteriEXT_defined
+#endif
+#ifndef glNamedFramebufferRenderbufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferRenderbufferEXT, (framebuffer, attachment, renderbuffertarget, renderbuffer), (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer))
+void glatter_glNamedFramebufferRenderbufferEXT_debug(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferRenderbufferEXT, "(%u, %s, %s, %u)", (unsigned int)framebuffer, enum_to_string_GL(attachment), enum_to_string_GL(renderbuffertarget), (unsigned int)renderbuffer)
+    glatter_glNamedFramebufferRenderbufferEXT(framebuffer, attachment, renderbuffertarget, renderbuffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferRenderbufferEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture1DEXT, (framebuffer, attachment, textarget, texture, level), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
+void glatter_glNamedFramebufferTexture1DEXT_debug(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferTexture1DEXT, "(%u, %s, %s, %u, %d)", (unsigned int)framebuffer, enum_to_string_GL(attachment), enum_to_string_GL(textarget), (unsigned int)texture, (int)level)
+    glatter_glNamedFramebufferTexture1DEXT(framebuffer, attachment, textarget, texture, level);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferTexture1DEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture2DEXT, (framebuffer, attachment, textarget, texture, level), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
+void glatter_glNamedFramebufferTexture2DEXT_debug(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferTexture2DEXT, "(%u, %s, %s, %u, %d)", (unsigned int)framebuffer, enum_to_string_GL(attachment), enum_to_string_GL(textarget), (unsigned int)texture, (int)level)
+    glatter_glNamedFramebufferTexture2DEXT(framebuffer, attachment, textarget, texture, level);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferTexture2DEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture3DEXT, (framebuffer, attachment, textarget, texture, level, zoffset), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset))
+void glatter_glNamedFramebufferTexture3DEXT_debug(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferTexture3DEXT, "(%u, %s, %s, %u, %d, %d)", (unsigned int)framebuffer, enum_to_string_GL(attachment), enum_to_string_GL(textarget), (unsigned int)texture, (int)level, (int)zoffset)
+    glatter_glNamedFramebufferTexture3DEXT(framebuffer, attachment, textarget, texture, level, zoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferTexture3DEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureEXT, (framebuffer, attachment, texture, level), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level))
+void glatter_glNamedFramebufferTextureEXT_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferTextureEXT, "(%u, %s, %u, %d)", (unsigned int)framebuffer, enum_to_string_GL(attachment), (unsigned int)texture, (int)level)
+    glatter_glNamedFramebufferTextureEXT(framebuffer, attachment, texture, level);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferTextureEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureFaceEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureFaceEXT, (framebuffer, attachment, texture, level, face), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face))
+void glatter_glNamedFramebufferTextureFaceEXT_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferTextureFaceEXT, "(%u, %s, %u, %d, %s)", (unsigned int)framebuffer, enum_to_string_GL(attachment), (unsigned int)texture, (int)level, enum_to_string_GL(face))
+    glatter_glNamedFramebufferTextureFaceEXT(framebuffer, attachment, texture, level, face);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferTextureFaceEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureLayerEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureLayerEXT, (framebuffer, attachment, texture, level, layer), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer))
+void glatter_glNamedFramebufferTextureLayerEXT_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferTextureLayerEXT, "(%u, %s, %u, %d, %d)", (unsigned int)framebuffer, enum_to_string_GL(attachment), (unsigned int)texture, (int)level, (int)layer)
+    glatter_glNamedFramebufferTextureLayerEXT(framebuffer, attachment, texture, level, layer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferTextureLayerEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4dEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+void glatter_glNamedProgramLocalParameter4dEXT_debug(GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParameter4dEXT, "(%u, %s, %u, %f, %f, %f, %f)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (double)x, (double)y, (double)z, (double)w)
+    glatter_glNamedProgramLocalParameter4dEXT(program, target, index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParameter4dEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4dvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLdouble *params))
+void glatter_glNamedProgramLocalParameter4dvEXT_debug(GLuint program, GLenum target, GLuint index, const GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParameter4dvEXT, "(%u, %s, %u, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (void*)params)
+    glatter_glNamedProgramLocalParameter4dvEXT(program, target, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParameter4dvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4fEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w))
+void glatter_glNamedProgramLocalParameter4fEXT_debug(GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParameter4fEXT, "(%u, %s, %u, %f, %f, %f, %f)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (float)x, (float)y, (float)z, (float)w)
+    glatter_glNamedProgramLocalParameter4fEXT(program, target, index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParameter4fEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4fvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLfloat *params))
+void glatter_glNamedProgramLocalParameter4fvEXT_debug(GLuint program, GLenum target, GLuint index, const GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParameter4fvEXT, "(%u, %s, %u, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (void*)params)
+    glatter_glNamedProgramLocalParameter4fvEXT(program, target, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParameter4fvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4iEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w))
+void glatter_glNamedProgramLocalParameterI4iEXT_debug(GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParameterI4iEXT, "(%u, %s, %u, %d, %d, %d, %d)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (int)x, (int)y, (int)z, (int)w)
+    glatter_glNamedProgramLocalParameterI4iEXT(program, target, index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParameterI4iEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4ivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLint *params))
+void glatter_glNamedProgramLocalParameterI4ivEXT_debug(GLuint program, GLenum target, GLuint index, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParameterI4ivEXT, "(%u, %s, %u, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (void*)params)
+    glatter_glNamedProgramLocalParameterI4ivEXT(program, target, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParameterI4ivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4uiEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w))
+void glatter_glNamedProgramLocalParameterI4uiEXT_debug(GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParameterI4uiEXT, "(%u, %s, %u, %u, %u, %u, %u)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (unsigned int)x, (unsigned int)y, (unsigned int)z, (unsigned int)w)
+    glatter_glNamedProgramLocalParameterI4uiEXT(program, target, index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParameterI4uiEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4uivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLuint *params))
+void glatter_glNamedProgramLocalParameterI4uivEXT_debug(GLuint program, GLenum target, GLuint index, const GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParameterI4uivEXT, "(%u, %s, %u, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (void*)params)
+    glatter_glNamedProgramLocalParameterI4uivEXT(program, target, index, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParameterI4uivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameters4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameters4fvEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat *params))
+void glatter_glNamedProgramLocalParameters4fvEXT_debug(GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParameters4fvEXT, "(%u, %s, %u, %d, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (int)count, (void*)params)
+    glatter_glNamedProgramLocalParameters4fvEXT(program, target, index, count, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParameters4fvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParametersI4ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParametersI4ivEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLint *params))
+void glatter_glNamedProgramLocalParametersI4ivEXT_debug(GLuint program, GLenum target, GLuint index, GLsizei count, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParametersI4ivEXT, "(%u, %s, %u, %d, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (int)count, (void*)params)
+    glatter_glNamedProgramLocalParametersI4ivEXT(program, target, index, count, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParametersI4ivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParametersI4uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParametersI4uivEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint *params))
+void glatter_glNamedProgramLocalParametersI4uivEXT_debug(GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramLocalParametersI4uivEXT, "(%u, %s, %u, %d, %p)", (unsigned int)program, enum_to_string_GL(target), (unsigned int)index, (int)count, (void*)params)
+    glatter_glNamedProgramLocalParametersI4uivEXT(program, target, index, count, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramLocalParametersI4uivEXT_defined
+#endif
+#ifndef glNamedProgramStringEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramStringEXT, (program, target, format, len, string), (GLuint program, GLenum target, GLenum format, GLsizei len, const void *string))
+void glatter_glNamedProgramStringEXT_debug(GLuint program, GLenum target, GLenum format, GLsizei len, const void *string, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedProgramStringEXT, "(%u, %s, %s, %d, %p)", (unsigned int)program, enum_to_string_GL(target), enum_to_string_GL(format), (int)len, (void*)string)
+    glatter_glNamedProgramStringEXT(program, target, format, len, string);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedProgramStringEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageEXT, (renderbuffer, internalformat, width, height), (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glNamedRenderbufferStorageEXT_debug(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedRenderbufferStorageEXT, "(%u, %s, %d, %d)", (unsigned int)renderbuffer, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glNamedRenderbufferStorageEXT(renderbuffer, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedRenderbufferStorageEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisampleCoverageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisampleCoverageEXT, (renderbuffer, coverageSamples, colorSamples, internalformat, width, height), (GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glNamedRenderbufferStorageMultisampleCoverageEXT_debug(GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedRenderbufferStorageMultisampleCoverageEXT, "(%u, %d, %d, %s, %d, %d)", (unsigned int)renderbuffer, (int)coverageSamples, (int)colorSamples, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glNamedRenderbufferStorageMultisampleCoverageEXT(renderbuffer, coverageSamples, colorSamples, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedRenderbufferStorageMultisampleCoverageEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisampleEXT, (renderbuffer, samples, internalformat, width, height), (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glNamedRenderbufferStorageMultisampleEXT_debug(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedRenderbufferStorageMultisampleEXT, "(%u, %d, %s, %d, %d)", (unsigned int)renderbuffer, (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glNamedRenderbufferStorageMultisampleEXT(renderbuffer, samples, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedRenderbufferStorageMultisampleEXT_defined
+#endif
+#ifndef glProgramUniform1dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dEXT, (program, location, x), (GLuint program, GLint location, GLdouble x))
+void glatter_glProgramUniform1dEXT_debug(GLuint program, GLint location, GLdouble x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1dEXT, "(%u, %d, %f)", (unsigned int)program, (int)location, (double)x)
+    glatter_glProgramUniform1dEXT(program, location, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1dEXT_defined
+#endif
+#ifndef glProgramUniform1dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+void glatter_glProgramUniform1dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1dvEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1dvEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1dvEXT_defined
+#endif
+#ifndef glProgramUniform1fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1fEXT, (program, location, v0), (GLuint program, GLint location, GLfloat v0))
+void glatter_glProgramUniform1fEXT_debug(GLuint program, GLint location, GLfloat v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1fEXT, "(%u, %d, %f)", (unsigned int)program, (int)location, (float)v0)
+    glatter_glProgramUniform1fEXT(program, location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1fEXT_defined
+#endif
+#ifndef glProgramUniform1fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1fvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+void glatter_glProgramUniform1fvEXT_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1fvEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1fvEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1fvEXT_defined
+#endif
+#ifndef glProgramUniform1iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1iEXT, (program, location, v0), (GLuint program, GLint location, GLint v0))
+void glatter_glProgramUniform1iEXT_debug(GLuint program, GLint location, GLint v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1iEXT, "(%u, %d, %d)", (unsigned int)program, (int)location, (int)v0)
+    glatter_glProgramUniform1iEXT(program, location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1iEXT_defined
+#endif
+#ifndef glProgramUniform1ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+void glatter_glProgramUniform1ivEXT_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1ivEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1ivEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1ivEXT_defined
+#endif
+#ifndef glProgramUniform1uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1uiEXT, (program, location, v0), (GLuint program, GLint location, GLuint v0))
+void glatter_glProgramUniform1uiEXT_debug(GLuint program, GLint location, GLuint v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1uiEXT, "(%u, %d, %u)", (unsigned int)program, (int)location, (unsigned int)v0)
+    glatter_glProgramUniform1uiEXT(program, location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1uiEXT_defined
+#endif
+#ifndef glProgramUniform1uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+void glatter_glProgramUniform1uivEXT_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1uivEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1uivEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1uivEXT_defined
+#endif
+#ifndef glProgramUniform2dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dEXT, (program, location, x, y), (GLuint program, GLint location, GLdouble x, GLdouble y))
+void glatter_glProgramUniform2dEXT_debug(GLuint program, GLint location, GLdouble x, GLdouble y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2dEXT, "(%u, %d, %f, %f)", (unsigned int)program, (int)location, (double)x, (double)y)
+    glatter_glProgramUniform2dEXT(program, location, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2dEXT_defined
+#endif
+#ifndef glProgramUniform2dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+void glatter_glProgramUniform2dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2dvEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2dvEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2dvEXT_defined
+#endif
+#ifndef glProgramUniform2fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2fEXT, (program, location, v0, v1), (GLuint program, GLint location, GLfloat v0, GLfloat v1))
+void glatter_glProgramUniform2fEXT_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2fEXT, "(%u, %d, %f, %f)", (unsigned int)program, (int)location, (float)v0, (float)v1)
+    glatter_glProgramUniform2fEXT(program, location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2fEXT_defined
+#endif
+#ifndef glProgramUniform2fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2fvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+void glatter_glProgramUniform2fvEXT_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2fvEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2fvEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2fvEXT_defined
+#endif
+#ifndef glProgramUniform2iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2iEXT, (program, location, v0, v1), (GLuint program, GLint location, GLint v0, GLint v1))
+void glatter_glProgramUniform2iEXT_debug(GLuint program, GLint location, GLint v0, GLint v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2iEXT, "(%u, %d, %d, %d)", (unsigned int)program, (int)location, (int)v0, (int)v1)
+    glatter_glProgramUniform2iEXT(program, location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2iEXT_defined
+#endif
+#ifndef glProgramUniform2ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+void glatter_glProgramUniform2ivEXT_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2ivEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2ivEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2ivEXT_defined
+#endif
+#ifndef glProgramUniform2uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2uiEXT, (program, location, v0, v1), (GLuint program, GLint location, GLuint v0, GLuint v1))
+void glatter_glProgramUniform2uiEXT_debug(GLuint program, GLint location, GLuint v0, GLuint v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2uiEXT, "(%u, %d, %u, %u)", (unsigned int)program, (int)location, (unsigned int)v0, (unsigned int)v1)
+    glatter_glProgramUniform2uiEXT(program, location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2uiEXT_defined
+#endif
+#ifndef glProgramUniform2uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+void glatter_glProgramUniform2uivEXT_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2uivEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2uivEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2uivEXT_defined
+#endif
+#ifndef glProgramUniform3dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dEXT, (program, location, x, y, z), (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z))
+void glatter_glProgramUniform3dEXT_debug(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3dEXT, "(%u, %d, %f, %f, %f)", (unsigned int)program, (int)location, (double)x, (double)y, (double)z)
+    glatter_glProgramUniform3dEXT(program, location, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3dEXT_defined
+#endif
+#ifndef glProgramUniform3dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+void glatter_glProgramUniform3dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3dvEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3dvEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3dvEXT_defined
+#endif
+#ifndef glProgramUniform3fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3fEXT, (program, location, v0, v1, v2), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2))
+void glatter_glProgramUniform3fEXT_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3fEXT, "(%u, %d, %f, %f, %f)", (unsigned int)program, (int)location, (float)v0, (float)v1, (float)v2)
+    glatter_glProgramUniform3fEXT(program, location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3fEXT_defined
+#endif
+#ifndef glProgramUniform3fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3fvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+void glatter_glProgramUniform3fvEXT_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3fvEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3fvEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3fvEXT_defined
+#endif
+#ifndef glProgramUniform3iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3iEXT, (program, location, v0, v1, v2), (GLuint program, GLint location, GLint v0, GLint v1, GLint v2))
+void glatter_glProgramUniform3iEXT_debug(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3iEXT, "(%u, %d, %d, %d, %d)", (unsigned int)program, (int)location, (int)v0, (int)v1, (int)v2)
+    glatter_glProgramUniform3iEXT(program, location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3iEXT_defined
+#endif
+#ifndef glProgramUniform3ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+void glatter_glProgramUniform3ivEXT_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3ivEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3ivEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3ivEXT_defined
+#endif
+#ifndef glProgramUniform3uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3uiEXT, (program, location, v0, v1, v2), (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2))
+void glatter_glProgramUniform3uiEXT_debug(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3uiEXT, "(%u, %d, %u, %u, %u)", (unsigned int)program, (int)location, (unsigned int)v0, (unsigned int)v1, (unsigned int)v2)
+    glatter_glProgramUniform3uiEXT(program, location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3uiEXT_defined
+#endif
+#ifndef glProgramUniform3uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+void glatter_glProgramUniform3uivEXT_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3uivEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3uivEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3uivEXT_defined
+#endif
+#ifndef glProgramUniform4dEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dEXT, (program, location, x, y, z, w), (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+void glatter_glProgramUniform4dEXT_debug(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4dEXT, "(%u, %d, %f, %f, %f, %f)", (unsigned int)program, (int)location, (double)x, (double)y, (double)z, (double)w)
+    glatter_glProgramUniform4dEXT(program, location, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4dEXT_defined
+#endif
+#ifndef glProgramUniform4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+void glatter_glProgramUniform4dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4dvEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4dvEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4dvEXT_defined
+#endif
+#ifndef glProgramUniform4fEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4fEXT, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3))
+void glatter_glProgramUniform4fEXT_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4fEXT, "(%u, %d, %f, %f, %f, %f)", (unsigned int)program, (int)location, (float)v0, (float)v1, (float)v2, (float)v3)
+    glatter_glProgramUniform4fEXT(program, location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4fEXT_defined
+#endif
+#ifndef glProgramUniform4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4fvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+void glatter_glProgramUniform4fvEXT_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4fvEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4fvEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4fvEXT_defined
+#endif
+#ifndef glProgramUniform4iEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4iEXT, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3))
+void glatter_glProgramUniform4iEXT_debug(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4iEXT, "(%u, %d, %d, %d, %d, %d)", (unsigned int)program, (int)location, (int)v0, (int)v1, (int)v2, (int)v3)
+    glatter_glProgramUniform4iEXT(program, location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4iEXT_defined
+#endif
+#ifndef glProgramUniform4ivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+void glatter_glProgramUniform4ivEXT_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4ivEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4ivEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4ivEXT_defined
+#endif
+#ifndef glProgramUniform4uiEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4uiEXT, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3))
+void glatter_glProgramUniform4uiEXT_debug(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4uiEXT, "(%u, %d, %u, %u, %u, %u)", (unsigned int)program, (int)location, (unsigned int)v0, (unsigned int)v1, (unsigned int)v2, (unsigned int)v3)
+    glatter_glProgramUniform4uiEXT(program, location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4uiEXT_defined
+#endif
+#ifndef glProgramUniform4uivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4uivEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+void glatter_glProgramUniform4uivEXT_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4uivEXT, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4uivEXT(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4uivEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix2dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2dvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2dvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix2fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2fvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2fvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2x3dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix2x3dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2x3dvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2x3dvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2x3dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2x3fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix2x3fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2x3fvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2x3fvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2x3fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2x4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix2x4dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2x4dvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2x4dvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2x4dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix2x4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix2x4fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2x4fvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2x4fvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2x4fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix3dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3dvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3dvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix3fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3fvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3fvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3x2dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix3x2dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3x2dvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3x2dvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3x2dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3x2fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix3x2fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3x2fvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3x2fvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3x2fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3x4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix3x4dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3x4dvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3x4dvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3x4dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix3x4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix3x4fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3x4fvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3x4fvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3x4fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix4dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4dvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4dvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix4fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4fvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4fvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4x2dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix4x2dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4x2dvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4x2dvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4x2dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4x2fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix4x2fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4x2fvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4x2fvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4x2fvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4x3dvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix4x3dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4x3dvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4x3dvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4x3dvEXT_defined
+#endif
+#ifndef glProgramUniformMatrix4x3fvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix4x3fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4x3fvEXT, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4x3fvEXT(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4x3fvEXT_defined
+#endif
+#ifndef glPushClientAttribDefaultEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPushClientAttribDefaultEXT, (mask), (GLbitfield mask))
+void glatter_glPushClientAttribDefaultEXT_debug(GLbitfield mask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPushClientAttribDefaultEXT, "(%u)", (unsigned int)mask)
+    glatter_glPushClientAttribDefaultEXT(mask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPushClientAttribDefaultEXT_defined
+#endif
+#ifndef glTextureBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferEXT, (texture, target, internalformat, buffer), (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer))
+void glatter_glTextureBufferEXT_debug(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureBufferEXT, "(%u, %s, %s, %u)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(internalformat), (unsigned int)buffer)
+    glatter_glTextureBufferEXT(texture, target, internalformat, buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureBufferEXT_defined
+#endif
+#ifndef glTextureBufferRangeEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRangeEXT, (texture, target, internalformat, buffer, offset, size), (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size))
+void glatter_glTextureBufferRangeEXT_debug(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureBufferRangeEXT, "(%u, %s, %s, %u, %td, %td)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(internalformat), (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size)
+    glatter_glTextureBufferRangeEXT(texture, target, internalformat, buffer, offset, size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureBufferRangeEXT_defined
+#endif
+#ifndef glTextureImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage1DEXT, (texture, target, level, internalformat, width, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
+void glatter_glTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureImage1DEXT, "(%u, %s, %d, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)internalformat, (int)width, (int)border, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTextureImage1DEXT(texture, target, level, internalformat, width, border, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureImage1DEXT_defined
+#endif
+#ifndef glTextureImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage2DEXT, (texture, target, level, internalformat, width, height, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
+void glatter_glTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureImage2DEXT, "(%u, %s, %d, %d, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)internalformat, (int)width, (int)height, (int)border, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTextureImage2DEXT(texture, target, level, internalformat, width, height, border, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureImage2DEXT_defined
+#endif
+#ifndef glTextureImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage3DEXT, (texture, target, level, internalformat, width, height, depth, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
+void glatter_glTextureImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureImage3DEXT, "(%u, %s, %d, %d, %d, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)internalformat, (int)width, (int)height, (int)depth, (int)border, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTextureImage3DEXT(texture, target, level, internalformat, width, height, depth, border, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureImage3DEXT_defined
+#endif
+#ifndef glTexturePageCommitmentEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexturePageCommitmentEXT, (texture, level, xoffset, yoffset, zoffset, width, height, depth, commit), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit))
+void glatter_glTexturePageCommitmentEXT_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexturePageCommitmentEXT, "(%u, %d, %d, %d, %d, %d, %d, %d, %u)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, (unsigned char)commit)
+    glatter_glTexturePageCommitmentEXT(texture, level, xoffset, yoffset, zoffset, width, height, depth, commit);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexturePageCommitmentEXT_defined
+#endif
+#ifndef glTextureParameterIivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLint *params))
+void glatter_glTextureParameterIivEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameterIivEXT, "(%u, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glTextureParameterIivEXT(texture, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameterIivEXT_defined
+#endif
+#ifndef glTextureParameterIuivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIuivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLuint *params))
+void glatter_glTextureParameterIuivEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameterIuivEXT, "(%u, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glTextureParameterIuivEXT(texture, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameterIuivEXT_defined
+#endif
+#ifndef glTextureParameterfEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfEXT, (texture, target, pname, param), (GLuint texture, GLenum target, GLenum pname, GLfloat param))
+void glatter_glTextureParameterfEXT_debug(GLuint texture, GLenum target, GLenum pname, GLfloat param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameterfEXT, "(%u, %s, %s, %f)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (float)param)
+    glatter_glTextureParameterfEXT(texture, target, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameterfEXT_defined
+#endif
+#ifndef glTextureParameterfvEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfvEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLfloat *params))
+void glatter_glTextureParameterfvEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameterfvEXT, "(%u, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glTextureParameterfvEXT(texture, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameterfvEXT_defined
+#endif
+#ifndef glTextureParameteriEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameteriEXT, (texture, target, pname, param), (GLuint texture, GLenum target, GLenum pname, GLint param))
+void glatter_glTextureParameteriEXT_debug(GLuint texture, GLenum target, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameteriEXT, "(%u, %s, %s, %d)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (int)param)
+    glatter_glTextureParameteriEXT(texture, target, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameteriEXT_defined
+#endif
+#ifndef glTextureParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLint *params))
+void glatter_glTextureParameterivEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameterivEXT, "(%u, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glTextureParameterivEXT(texture, target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameterivEXT_defined
+#endif
+#ifndef glTextureRenderbufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureRenderbufferEXT, (texture, target, renderbuffer), (GLuint texture, GLenum target, GLuint renderbuffer))
+void glatter_glTextureRenderbufferEXT_debug(GLuint texture, GLenum target, GLuint renderbuffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureRenderbufferEXT, "(%u, %s, %u)", (unsigned int)texture, enum_to_string_GL(target), (unsigned int)renderbuffer)
+    glatter_glTextureRenderbufferEXT(texture, target, renderbuffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureRenderbufferEXT_defined
+#endif
+#ifndef glTextureStorage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage1DEXT, (texture, target, levels, internalformat, width), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
+void glatter_glTextureStorage1DEXT_debug(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage1DEXT, "(%u, %s, %d, %s, %d)", (unsigned int)texture, enum_to_string_GL(target), (int)levels, enum_to_string_GL(internalformat), (int)width)
+    glatter_glTextureStorage1DEXT(texture, target, levels, internalformat, width);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage1DEXT_defined
+#endif
+#ifndef glTextureStorage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2DEXT, (texture, target, levels, internalformat, width, height), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glTextureStorage2DEXT_debug(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage2DEXT, "(%u, %s, %d, %s, %d, %d)", (unsigned int)texture, enum_to_string_GL(target), (int)levels, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glTextureStorage2DEXT(texture, target, levels, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage2DEXT_defined
+#endif
+#ifndef glTextureStorage2DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2DMultisampleEXT, (texture, target, samples, internalformat, width, height, fixedsamplelocations), (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
+void glatter_glTextureStorage2DMultisampleEXT_debug(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage2DMultisampleEXT, "(%u, %s, %d, %s, %d, %d, %u)", (unsigned int)texture, enum_to_string_GL(target), (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height, (unsigned char)fixedsamplelocations)
+    glatter_glTextureStorage2DMultisampleEXT(texture, target, samples, internalformat, width, height, fixedsamplelocations);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage2DMultisampleEXT_defined
+#endif
+#ifndef glTextureStorage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DEXT, (texture, target, levels, internalformat, width, height, depth), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
+void glatter_glTextureStorage3DEXT_debug(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage3DEXT, "(%u, %s, %d, %s, %d, %d, %d)", (unsigned int)texture, enum_to_string_GL(target), (int)levels, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth)
+    glatter_glTextureStorage3DEXT(texture, target, levels, internalformat, width, height, depth);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage3DEXT_defined
+#endif
+#ifndef glTextureStorage3DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DMultisampleEXT, (texture, target, samples, internalformat, width, height, depth, fixedsamplelocations), (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
+void glatter_glTextureStorage3DMultisampleEXT_debug(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage3DMultisampleEXT, "(%u, %s, %d, %s, %d, %d, %d, %u)", (unsigned int)texture, enum_to_string_GL(target), (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth, (unsigned char)fixedsamplelocations)
+    glatter_glTextureStorage3DMultisampleEXT(texture, target, samples, internalformat, width, height, depth, fixedsamplelocations);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage3DMultisampleEXT_defined
+#endif
+#ifndef glTextureSubImage1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage1DEXT, (texture, target, level, xoffset, width, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
+void glatter_glTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureSubImage1DEXT, "(%u, %s, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)xoffset, (int)width, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTextureSubImage1DEXT(texture, target, level, xoffset, width, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureSubImage1DEXT_defined
+#endif
+#ifndef glTextureSubImage2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, width, height, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
+void glatter_glTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureSubImage2DEXT, "(%u, %s, %d, %d, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)width, (int)height, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTextureSubImage2DEXT(texture, target, level, xoffset, yoffset, width, height, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureSubImage2DEXT_defined
+#endif
+#ifndef glTextureSubImage3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
+void glatter_glTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureSubImage3DEXT, "(%u, %s, %d, %d, %d, %d, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTextureSubImage3DEXT(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureSubImage3DEXT_defined
+#endif
+#ifndef glUnmapNamedBufferEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glUnmapNamedBufferEXT, (buffer), (GLuint buffer))
+GLboolean glatter_glUnmapNamedBufferEXT_debug(GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUnmapNamedBufferEXT, "(%u)", (unsigned int)buffer)
+    GLboolean rval = glatter_glUnmapNamedBufferEXT(buffer);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glUnmapNamedBufferEXT_defined
+#endif
+#ifndef glVertexArrayBindVertexBufferEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayBindVertexBufferEXT, (vaobj, bindingindex, buffer, offset, stride), (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride))
+void glatter_glVertexArrayBindVertexBufferEXT_debug(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayBindVertexBufferEXT, "(%u, %u, %u, %td, %d)", (unsigned int)vaobj, (unsigned int)bindingindex, (unsigned int)buffer, (ptrdiff_t)offset, (int)stride)
+    glatter_glVertexArrayBindVertexBufferEXT(vaobj, bindingindex, buffer, offset, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayBindVertexBufferEXT_defined
+#endif
+#ifndef glVertexArrayColorOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayColorOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayColorOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayColorOffsetEXT, "(%u, %u, %d, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, (int)size, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayColorOffsetEXT(vaobj, buffer, size, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayColorOffsetEXT_defined
+#endif
+#ifndef glVertexArrayEdgeFlagOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayEdgeFlagOffsetEXT, (vaobj, buffer, stride, offset), (GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayEdgeFlagOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayEdgeFlagOffsetEXT, "(%u, %u, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayEdgeFlagOffsetEXT(vaobj, buffer, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayEdgeFlagOffsetEXT_defined
+#endif
+#ifndef glVertexArrayFogCoordOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayFogCoordOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayFogCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayFogCoordOffsetEXT, "(%u, %u, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayFogCoordOffsetEXT(vaobj, buffer, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayFogCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayIndexOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayIndexOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayIndexOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayIndexOffsetEXT, "(%u, %u, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayIndexOffsetEXT(vaobj, buffer, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayIndexOffsetEXT_defined
+#endif
+#ifndef glVertexArrayMultiTexCoordOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayMultiTexCoordOffsetEXT, (vaobj, buffer, texunit, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayMultiTexCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayMultiTexCoordOffsetEXT, "(%u, %u, %s, %d, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, enum_to_string_GL(texunit), (int)size, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayMultiTexCoordOffsetEXT(vaobj, buffer, texunit, size, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayMultiTexCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayNormalOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayNormalOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayNormalOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayNormalOffsetEXT, "(%u, %u, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayNormalOffsetEXT(vaobj, buffer, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayNormalOffsetEXT_defined
+#endif
+#ifndef glVertexArraySecondaryColorOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArraySecondaryColorOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArraySecondaryColorOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArraySecondaryColorOffsetEXT, "(%u, %u, %d, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, (int)size, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArraySecondaryColorOffsetEXT(vaobj, buffer, size, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArraySecondaryColorOffsetEXT_defined
+#endif
+#ifndef glVertexArrayTexCoordOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayTexCoordOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayTexCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayTexCoordOffsetEXT, "(%u, %u, %d, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, (int)size, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayTexCoordOffsetEXT(vaobj, buffer, size, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayTexCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribBindingEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribBindingEXT, (vaobj, attribindex, bindingindex), (GLuint vaobj, GLuint attribindex, GLuint bindingindex))
+void glatter_glVertexArrayVertexAttribBindingEXT_debug(GLuint vaobj, GLuint attribindex, GLuint bindingindex, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexAttribBindingEXT, "(%u, %u, %u)", (unsigned int)vaobj, (unsigned int)attribindex, (unsigned int)bindingindex)
+    glatter_glVertexArrayVertexAttribBindingEXT(vaobj, attribindex, bindingindex);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexAttribBindingEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribDivisorEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribDivisorEXT, (vaobj, index, divisor), (GLuint vaobj, GLuint index, GLuint divisor))
+void glatter_glVertexArrayVertexAttribDivisorEXT_debug(GLuint vaobj, GLuint index, GLuint divisor, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexAttribDivisorEXT, "(%u, %u, %u)", (unsigned int)vaobj, (unsigned int)index, (unsigned int)divisor)
+    glatter_glVertexArrayVertexAttribDivisorEXT(vaobj, index, divisor);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexAttribDivisorEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribFormatEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribFormatEXT, (vaobj, attribindex, size, type, normalized, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset))
+void glatter_glVertexArrayVertexAttribFormatEXT_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexAttribFormatEXT, "(%u, %u, %d, %s, %u, %u)", (unsigned int)vaobj, (unsigned int)attribindex, (int)size, enum_to_string_GL(type), (unsigned char)normalized, (unsigned int)relativeoffset)
+    glatter_glVertexArrayVertexAttribFormatEXT(vaobj, attribindex, size, type, normalized, relativeoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexAttribFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribIFormatEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribIFormatEXT, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+void glatter_glVertexArrayVertexAttribIFormatEXT_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexAttribIFormatEXT, "(%u, %u, %d, %s, %u)", (unsigned int)vaobj, (unsigned int)attribindex, (int)size, enum_to_string_GL(type), (unsigned int)relativeoffset)
+    glatter_glVertexArrayVertexAttribIFormatEXT(vaobj, attribindex, size, type, relativeoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexAttribIFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribIOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribIOffsetEXT, (vaobj, buffer, index, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayVertexAttribIOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexAttribIOffsetEXT, "(%u, %u, %u, %d, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, (unsigned int)index, (int)size, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayVertexAttribIOffsetEXT(vaobj, buffer, index, size, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexAttribIOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribLFormatEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribLFormatEXT, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+void glatter_glVertexArrayVertexAttribLFormatEXT_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexAttribLFormatEXT, "(%u, %u, %d, %s, %u)", (unsigned int)vaobj, (unsigned int)attribindex, (int)size, enum_to_string_GL(type), (unsigned int)relativeoffset)
+    glatter_glVertexArrayVertexAttribLFormatEXT(vaobj, attribindex, size, type, relativeoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexAttribLFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribLOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribLOffsetEXT, (vaobj, buffer, index, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayVertexAttribLOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexAttribLOffsetEXT, "(%u, %u, %u, %d, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, (unsigned int)index, (int)size, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayVertexAttribLOffsetEXT(vaobj, buffer, index, size, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexAttribLOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribOffsetEXT, (vaobj, buffer, index, size, type, normalized, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayVertexAttribOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexAttribOffsetEXT, "(%u, %u, %u, %d, %s, %u, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, (unsigned int)index, (int)size, enum_to_string_GL(type), (unsigned char)normalized, (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayVertexAttribOffsetEXT(vaobj, buffer, index, size, type, normalized, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexAttribOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexBindingDivisorEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBindingDivisorEXT, (vaobj, bindingindex, divisor), (GLuint vaobj, GLuint bindingindex, GLuint divisor))
+void glatter_glVertexArrayVertexBindingDivisorEXT_debug(GLuint vaobj, GLuint bindingindex, GLuint divisor, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexBindingDivisorEXT, "(%u, %u, %u)", (unsigned int)vaobj, (unsigned int)bindingindex, (unsigned int)divisor)
+    glatter_glVertexArrayVertexBindingDivisorEXT(vaobj, bindingindex, divisor);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexBindingDivisorEXT_defined
+#endif
+#ifndef glVertexArrayVertexOffsetEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
+void glatter_glVertexArrayVertexOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexOffsetEXT, "(%u, %u, %d, %s, %d, %td)", (unsigned int)vaobj, (unsigned int)buffer, (int)size, enum_to_string_GL(type), (int)stride, (ptrdiff_t)offset)
+    glatter_glVertexArrayVertexOffsetEXT(vaobj, buffer, size, type, stride, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexOffsetEXT_defined
+#endif
+#endif // defined(GL_EXT_direct_state_access)
 #if defined(GL_EXT_draw_instanced)
 #ifndef glDrawArraysInstancedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstancedEXT, (mode, start, count, primcount), (GLenum mode, GLint start, GLsizei count, GLsizei primcount))
@@ -25467,6 +28569,18 @@ void glatter_glUseShaderProgramEXT_debug(GLenum type, GLuint program, const char
 #define glUseShaderProgramEXT_defined
 #endif
 #endif // defined(GL_EXT_separate_shader_objects)
+#if defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
+#ifndef glFramebufferFetchBarrierEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferFetchBarrierEXT, (), (void))
+void glatter_glFramebufferFetchBarrierEXT_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferFetchBarrierEXT, "()")
+    glatter_glFramebufferFetchBarrierEXT();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferFetchBarrierEXT_defined
+#endif
+#endif // defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
 #if defined(GL_EXT_window_rectangles)
 #ifndef glWindowRectanglesEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWindowRectanglesEXT, (mode, count, box), (GLenum mode, GLsizei count, const GLint *box))
@@ -25563,8 +28677,8 @@ void glatter_glGetPerfCounterInfoINTEL_debug(GLuint queryId, GLuint counterId, G
 #define glGetPerfCounterInfoINTEL_defined
 #endif
 #ifndef glGetPerfQueryDataINTEL_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfQueryDataINTEL, (queryHandle, flags, dataSize, data, bytesWritten), (GLuint queryHandle, GLuint flags, GLsizei dataSize, GLvoid *data, GLuint *bytesWritten))
-void glatter_glGetPerfQueryDataINTEL_debug(GLuint queryHandle, GLuint flags, GLsizei dataSize, GLvoid *data, GLuint *bytesWritten, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfQueryDataINTEL, (queryHandle, flags, dataSize, data, bytesWritten), (GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten))
+void glatter_glGetPerfQueryDataINTEL_debug(GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, glGetPerfQueryDataINTEL, "(%u, %u, %d, %p, %p)", (unsigned int)queryHandle, (unsigned int)flags, (int)dataSize, (void*)data, (void*)bytesWritten)
     glatter_glGetPerfQueryDataINTEL(queryHandle, flags, dataSize, data, bytesWritten);
@@ -25605,6 +28719,62 @@ void glatter_glBlendBarrierKHR_debug(const char* file, int line)
 #define glBlendBarrierKHR_defined
 #endif
 #endif // defined(GL_KHR_blend_equation_advanced)
+#if defined(GL_KHR_parallel_shader_compile)
+#ifndef glMaxShaderCompilerThreadsKHR_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMaxShaderCompilerThreadsKHR, (count), (GLuint count))
+void glatter_glMaxShaderCompilerThreadsKHR_debug(GLuint count, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMaxShaderCompilerThreadsKHR, "(%u)", (unsigned int)count)
+    glatter_glMaxShaderCompilerThreadsKHR(count);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMaxShaderCompilerThreadsKHR_defined
+#endif
+#endif // defined(GL_KHR_parallel_shader_compile)
+#if defined(GL_NV_bindless_multi_draw_indirect)
+#ifndef glMultiDrawArraysIndirectBindlessNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectBindlessNV, (mode, indirect, drawCount, stride, vertexBufferCount), (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount))
+void glatter_glMultiDrawArraysIndirectBindlessNV_debug(GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirectBindlessNV, "(%s, %p, %d, %d, %d)", enum_to_string_GL(mode), (void*)indirect, (int)drawCount, (int)stride, (int)vertexBufferCount)
+    glatter_glMultiDrawArraysIndirectBindlessNV(mode, indirect, drawCount, stride, vertexBufferCount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawArraysIndirectBindlessNV_defined
+#endif
+#ifndef glMultiDrawElementsIndirectBindlessNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectBindlessNV, (mode, type, indirect, drawCount, stride, vertexBufferCount), (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount))
+void glatter_glMultiDrawElementsIndirectBindlessNV_debug(GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirectBindlessNV, "(%s, %s, %p, %d, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (void*)indirect, (int)drawCount, (int)stride, (int)vertexBufferCount)
+    glatter_glMultiDrawElementsIndirectBindlessNV(mode, type, indirect, drawCount, stride, vertexBufferCount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawElementsIndirectBindlessNV_defined
+#endif
+#endif // defined(GL_NV_bindless_multi_draw_indirect)
+#if defined(GL_NV_bindless_multi_draw_indirect_count)
+#ifndef glMultiDrawArraysIndirectBindlessCountNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectBindlessCountNV, (mode, indirect, drawCount, maxDrawCount, stride, vertexBufferCount), (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount))
+void glatter_glMultiDrawArraysIndirectBindlessCountNV_debug(GLenum mode, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirectBindlessCountNV, "(%s, %p, %d, %d, %d, %d)", enum_to_string_GL(mode), (void*)indirect, (int)drawCount, (int)maxDrawCount, (int)stride, (int)vertexBufferCount)
+    glatter_glMultiDrawArraysIndirectBindlessCountNV(mode, indirect, drawCount, maxDrawCount, stride, vertexBufferCount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawArraysIndirectBindlessCountNV_defined
+#endif
+#ifndef glMultiDrawElementsIndirectBindlessCountNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectBindlessCountNV, (mode, type, indirect, drawCount, maxDrawCount, stride, vertexBufferCount), (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount))
+void glatter_glMultiDrawElementsIndirectBindlessCountNV_debug(GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirectBindlessCountNV, "(%s, %s, %p, %d, %d, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (void*)indirect, (int)drawCount, (int)maxDrawCount, (int)stride, (int)vertexBufferCount)
+    glatter_glMultiDrawElementsIndirectBindlessCountNV(mode, type, indirect, drawCount, maxDrawCount, stride, vertexBufferCount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawElementsIndirectBindlessCountNV_defined
+#endif
+#endif // defined(GL_NV_bindless_multi_draw_indirect_count)
 #if defined(GL_NV_bindless_texture)
 #ifndef glGetImageHandleNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetImageHandleNV, (texture, level, layered, layer, format), (GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format))
@@ -25769,6 +28939,198 @@ void glatter_glBlendParameteriNV_debug(GLenum pname, GLint value, const char* fi
 #define glBlendParameteriNV_defined
 #endif
 #endif // defined(GL_NV_blend_equation_advanced)
+#if defined(GL_NV_clip_space_w_scaling)
+#ifndef glViewportPositionWScaleNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportPositionWScaleNV, (index, xcoeff, ycoeff), (GLuint index, GLfloat xcoeff, GLfloat ycoeff))
+void glatter_glViewportPositionWScaleNV_debug(GLuint index, GLfloat xcoeff, GLfloat ycoeff, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glViewportPositionWScaleNV, "(%u, %f, %f)", (unsigned int)index, (float)xcoeff, (float)ycoeff)
+    glatter_glViewportPositionWScaleNV(index, xcoeff, ycoeff);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glViewportPositionWScaleNV_defined
+#endif
+#endif // defined(GL_NV_clip_space_w_scaling)
+#if defined(GL_NV_command_list)
+#ifndef glCallCommandListNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCallCommandListNV, (list), (GLuint list))
+void glatter_glCallCommandListNV_debug(GLuint list, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCallCommandListNV, "(%u)", (unsigned int)list)
+    glatter_glCallCommandListNV(list);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCallCommandListNV_defined
+#endif
+#ifndef glCommandListSegmentsNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCommandListSegmentsNV, (list, segments), (GLuint list, GLuint segments))
+void glatter_glCommandListSegmentsNV_debug(GLuint list, GLuint segments, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCommandListSegmentsNV, "(%u, %u)", (unsigned int)list, (unsigned int)segments)
+    glatter_glCommandListSegmentsNV(list, segments);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCommandListSegmentsNV_defined
+#endif
+#ifndef glCompileCommandListNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompileCommandListNV, (list), (GLuint list))
+void glatter_glCompileCommandListNV_debug(GLuint list, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompileCommandListNV, "(%u)", (unsigned int)list)
+    glatter_glCompileCommandListNV(list);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompileCommandListNV_defined
+#endif
+#ifndef glCreateCommandListsNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateCommandListsNV, (n, lists), (GLsizei n, GLuint *lists))
+void glatter_glCreateCommandListsNV_debug(GLsizei n, GLuint *lists, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateCommandListsNV, "(%d, %p)", (int)n, (void*)lists)
+    glatter_glCreateCommandListsNV(n, lists);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateCommandListsNV_defined
+#endif
+#ifndef glCreateStatesNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateStatesNV, (n, states), (GLsizei n, GLuint *states))
+void glatter_glCreateStatesNV_debug(GLsizei n, GLuint *states, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateStatesNV, "(%d, %p)", (int)n, (void*)states)
+    glatter_glCreateStatesNV(n, states);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateStatesNV_defined
+#endif
+#ifndef glDeleteCommandListsNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteCommandListsNV, (n, lists), (GLsizei n, const GLuint *lists))
+void glatter_glDeleteCommandListsNV_debug(GLsizei n, const GLuint *lists, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteCommandListsNV, "(%d, %p)", (int)n, (void*)lists)
+    glatter_glDeleteCommandListsNV(n, lists);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteCommandListsNV_defined
+#endif
+#ifndef glDeleteStatesNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteStatesNV, (n, states), (GLsizei n, const GLuint *states))
+void glatter_glDeleteStatesNV_debug(GLsizei n, const GLuint *states, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteStatesNV, "(%d, %p)", (int)n, (void*)states)
+    glatter_glDeleteStatesNV(n, states);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteStatesNV_defined
+#endif
+#ifndef glDrawCommandsAddressNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsAddressNV, (primitiveMode, indirects, sizes, count), (GLenum primitiveMode, const GLuint64 *indirects, const GLsizei *sizes, GLuint count))
+void glatter_glDrawCommandsAddressNV_debug(GLenum primitiveMode, const GLuint64 *indirects, const GLsizei *sizes, GLuint count, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawCommandsAddressNV, "(%s, %p, %p, %u)", enum_to_string_GL(primitiveMode), (void*)indirects, (void*)sizes, (unsigned int)count)
+    glatter_glDrawCommandsAddressNV(primitiveMode, indirects, sizes, count);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawCommandsAddressNV_defined
+#endif
+#ifndef glDrawCommandsNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsNV, (primitiveMode, buffer, indirects, sizes, count), (GLenum primitiveMode, GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, GLuint count))
+void glatter_glDrawCommandsNV_debug(GLenum primitiveMode, GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, GLuint count, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawCommandsNV, "(%s, %u, %p, %p, %u)", enum_to_string_GL(primitiveMode), (unsigned int)buffer, (void*)indirects, (void*)sizes, (unsigned int)count)
+    glatter_glDrawCommandsNV(primitiveMode, buffer, indirects, sizes, count);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawCommandsNV_defined
+#endif
+#ifndef glDrawCommandsStatesAddressNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsStatesAddressNV, (indirects, sizes, states, fbos, count), (const GLuint64 *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
+void glatter_glDrawCommandsStatesAddressNV_debug(const GLuint64 *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawCommandsStatesAddressNV, "(%p, %p, %p, %p, %u)", (void*)indirects, (void*)sizes, (void*)states, (void*)fbos, (unsigned int)count)
+    glatter_glDrawCommandsStatesAddressNV(indirects, sizes, states, fbos, count);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawCommandsStatesAddressNV_defined
+#endif
+#ifndef glDrawCommandsStatesNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsStatesNV, (buffer, indirects, sizes, states, fbos, count), (GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
+void glatter_glDrawCommandsStatesNV_debug(GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawCommandsStatesNV, "(%u, %p, %p, %p, %p, %u)", (unsigned int)buffer, (void*)indirects, (void*)sizes, (void*)states, (void*)fbos, (unsigned int)count)
+    glatter_glDrawCommandsStatesNV(buffer, indirects, sizes, states, fbos, count);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawCommandsStatesNV_defined
+#endif
+#ifndef glGetCommandHeaderNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetCommandHeaderNV, (tokenID, size), (GLenum tokenID, GLuint size))
+GLuint glatter_glGetCommandHeaderNV_debug(GLenum tokenID, GLuint size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetCommandHeaderNV, "(%s, %u)", enum_to_string_GL(tokenID), (unsigned int)size)
+    GLuint rval = glatter_glGetCommandHeaderNV(tokenID, size);
+    GLATTER_RBLOCK("%u\n", (unsigned int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetCommandHeaderNV_defined
+#endif
+#ifndef glGetStageIndexNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLushort, APIENTRY, glGetStageIndexNV, (shadertype), (GLenum shadertype))
+GLushort glatter_glGetStageIndexNV_debug(GLenum shadertype, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetStageIndexNV, "(%s)", enum_to_string_GL(shadertype))
+    GLushort rval = glatter_glGetStageIndexNV(shadertype);
+    GLATTER_RBLOCK("%hu\n", (unsigned short)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetStageIndexNV_defined
+#endif
+#ifndef glIsCommandListNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsCommandListNV, (list), (GLuint list))
+GLboolean glatter_glIsCommandListNV_debug(GLuint list, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsCommandListNV, "(%u)", (unsigned int)list)
+    GLboolean rval = glatter_glIsCommandListNV(list);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsCommandListNV_defined
+#endif
+#ifndef glIsStateNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsStateNV, (state), (GLuint state))
+GLboolean glatter_glIsStateNV_debug(GLuint state, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsStateNV, "(%u)", (unsigned int)state)
+    GLboolean rval = glatter_glIsStateNV(state);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsStateNV_defined
+#endif
+#ifndef glListDrawCommandsStatesClientNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glListDrawCommandsStatesClientNV, (list, segment, indirects, sizes, states, fbos, count), (GLuint list, GLuint segment, const void **indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
+void glatter_glListDrawCommandsStatesClientNV_debug(GLuint list, GLuint segment, const void **indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glListDrawCommandsStatesClientNV, "(%u, %u, %p, %p, %p, %p, %u)", (unsigned int)list, (unsigned int)segment, (void*)indirects, (void*)sizes, (void*)states, (void*)fbos, (unsigned int)count)
+    glatter_glListDrawCommandsStatesClientNV(list, segment, indirects, sizes, states, fbos, count);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glListDrawCommandsStatesClientNV_defined
+#endif
+#ifndef glStateCaptureNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStateCaptureNV, (state, mode), (GLuint state, GLenum mode))
+void glatter_glStateCaptureNV_debug(GLuint state, GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glStateCaptureNV, "(%u, %s)", (unsigned int)state, enum_to_string_GL(mode))
+    glatter_glStateCaptureNV(state, mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glStateCaptureNV_defined
+#endif
+#endif // defined(GL_NV_command_list)
 #if defined(GL_NV_conditional_render)
 #ifndef glBeginConditionalRenderNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginConditionalRenderNV, (id, mode), (GLuint id, GLenum mode))
@@ -25803,6 +29165,18 @@ void glatter_glSubpixelPrecisionBiasNV_debug(GLuint xbits, GLuint ybits, const c
 #define glSubpixelPrecisionBiasNV_defined
 #endif
 #endif // defined(GL_NV_conservative_raster)
+#if defined(GL_NV_conservative_raster_dilate)
+#ifndef glConservativeRasterParameterfNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glConservativeRasterParameterfNV, (pname, value), (GLenum pname, GLfloat value))
+void glatter_glConservativeRasterParameterfNV_debug(GLenum pname, GLfloat value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glConservativeRasterParameterfNV, "(%s, %f)", enum_to_string_GL(pname), (float)value)
+    glatter_glConservativeRasterParameterfNV(pname, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glConservativeRasterParameterfNV_defined
+#endif
+#endif // defined(GL_NV_conservative_raster_dilate)
 #if defined(GL_NV_conservative_raster_pre_snap_triangles)
 #ifndef glConservativeRasterParameteriNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glConservativeRasterParameteriNV, (pname, param), (GLenum pname, GLint param))
@@ -25815,6 +29189,60 @@ void glatter_glConservativeRasterParameteriNV_debug(GLenum pname, GLint param, c
 #define glConservativeRasterParameteriNV_defined
 #endif
 #endif // defined(GL_NV_conservative_raster_pre_snap_triangles)
+#if defined(GL_NV_draw_vulkan_image)
+#ifndef glDrawVkImageNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawVkImageNV, (vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1), (GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1))
+void glatter_glDrawVkImageNV_debug(GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawVkImageNV, "(%" PRIu64 ", %u, %f, %f, %f, %f, %f, %f, %f, %f, %f)", (uint64_t)vkImage, (unsigned int)sampler, (float)x0, (float)y0, (float)x1, (float)y1, (float)z, (float)s0, (float)t0, (float)s1, (float)t1)
+    glatter_glDrawVkImageNV(vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawVkImageNV_defined
+#endif
+#ifndef glGetVkProcAddrNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLVULKANPROCNV, APIENTRY, glGetVkProcAddrNV, (name), (const GLchar *name))
+GLVULKANPROCNV glatter_glGetVkProcAddrNV_debug(const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVkProcAddrNV, "(%p)", (void*)name)
+    GLVULKANPROCNV rval = glatter_glGetVkProcAddrNV(name);
+    GLATTER_RBLOCK("%s\n", GET_PRS(rval));
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetVkProcAddrNV_defined
+#endif
+#ifndef glSignalVkFenceNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalVkFenceNV, (vkFence), (GLuint64 vkFence))
+void glatter_glSignalVkFenceNV_debug(GLuint64 vkFence, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSignalVkFenceNV, "(%" PRIu64 ")", (uint64_t)vkFence)
+    glatter_glSignalVkFenceNV(vkFence);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSignalVkFenceNV_defined
+#endif
+#ifndef glSignalVkSemaphoreNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalVkSemaphoreNV, (vkSemaphore), (GLuint64 vkSemaphore))
+void glatter_glSignalVkSemaphoreNV_debug(GLuint64 vkSemaphore, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSignalVkSemaphoreNV, "(%" PRIu64 ")", (uint64_t)vkSemaphore)
+    glatter_glSignalVkSemaphoreNV(vkSemaphore);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSignalVkSemaphoreNV_defined
+#endif
+#ifndef glWaitVkSemaphoreNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWaitVkSemaphoreNV, (vkSemaphore), (GLuint64 vkSemaphore))
+void glatter_glWaitVkSemaphoreNV_debug(GLuint64 vkSemaphore, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glWaitVkSemaphoreNV, "(%" PRIu64 ")", (uint64_t)vkSemaphore)
+    glatter_glWaitVkSemaphoreNV(vkSemaphore);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glWaitVkSemaphoreNV_defined
+#endif
+#endif // defined(GL_NV_draw_vulkan_image)
 #if defined(GL_NV_fragment_coverage_to_color)
 #ifndef glFragmentCoverageColorNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFragmentCoverageColorNV, (color), (GLuint color))
@@ -25859,6 +29287,18 @@ void glatter_glGetCoverageModulationTableNV_debug(GLsizei bufsize, GLfloat *v, c
 #define glGetCoverageModulationTableNV_defined
 #endif
 #endif // defined(GL_NV_framebuffer_mixed_samples)
+#if defined(GL_NV_framebuffer_multisample_coverage)
+#ifndef glRenderbufferStorageMultisampleCoverageNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderbufferStorageMultisampleCoverageNV, (target, coverageSamples, colorSamples, internalformat, width, height), (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glRenderbufferStorageMultisampleCoverageNV_debug(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glRenderbufferStorageMultisampleCoverageNV, "(%s, %d, %d, %s, %d, %d)", enum_to_string_GL(target), (int)coverageSamples, (int)colorSamples, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glRenderbufferStorageMultisampleCoverageNV(target, coverageSamples, colorSamples, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glRenderbufferStorageMultisampleCoverageNV_defined
+#endif
+#endif // defined(GL_NV_framebuffer_multisample_coverage)
 #if defined(GL_NV_gpu_shader5)
 #ifndef glGetUniformi64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformi64vNV, (program, location, params), (GLuint program, GLint location, GLint64EXT *params))
@@ -26825,6 +30265,478 @@ void glatter_glResolveDepthValuesNV_debug(const char* file, int line)
 #define glResolveDepthValuesNV_defined
 #endif
 #endif // defined(GL_NV_sample_locations)
+#if defined(GL_NV_shader_buffer_load)
+#ifndef glGetBufferParameterui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferParameterui64vNV, (target, pname, params), (GLenum target, GLenum pname, GLuint64EXT *params))
+void glatter_glGetBufferParameterui64vNV_debug(GLenum target, GLenum pname, GLuint64EXT *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetBufferParameterui64vNV, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetBufferParameterui64vNV(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetBufferParameterui64vNV_defined
+#endif
+#ifndef glGetIntegerui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerui64vNV, (value, result), (GLenum value, GLuint64EXT *result))
+void glatter_glGetIntegerui64vNV_debug(GLenum value, GLuint64EXT *result, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetIntegerui64vNV, "(%s, %p)", enum_to_string_GL(value), (void*)result)
+    glatter_glGetIntegerui64vNV(value, result);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetIntegerui64vNV_defined
+#endif
+#ifndef glGetNamedBufferParameterui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameterui64vNV, (buffer, pname, params), (GLuint buffer, GLenum pname, GLuint64EXT *params))
+void glatter_glGetNamedBufferParameterui64vNV_debug(GLuint buffer, GLenum pname, GLuint64EXT *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedBufferParameterui64vNV, "(%u, %s, %p)", (unsigned int)buffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedBufferParameterui64vNV(buffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedBufferParameterui64vNV_defined
+#endif
+#ifndef glGetUniformui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformui64vNV, (program, location, params), (GLuint program, GLint location, GLuint64EXT *params))
+void glatter_glGetUniformui64vNV_debug(GLuint program, GLint location, GLuint64EXT *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformui64vNV, "(%u, %d, %p)", (unsigned int)program, (int)location, (void*)params)
+    glatter_glGetUniformui64vNV(program, location, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUniformui64vNV_defined
+#endif
+#ifndef glIsBufferResidentNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsBufferResidentNV, (target), (GLenum target))
+GLboolean glatter_glIsBufferResidentNV_debug(GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsBufferResidentNV, "(%s)", enum_to_string_GL(target))
+    GLboolean rval = glatter_glIsBufferResidentNV(target);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsBufferResidentNV_defined
+#endif
+#ifndef glIsNamedBufferResidentNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsNamedBufferResidentNV, (buffer), (GLuint buffer))
+GLboolean glatter_glIsNamedBufferResidentNV_debug(GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsNamedBufferResidentNV, "(%u)", (unsigned int)buffer)
+    GLboolean rval = glatter_glIsNamedBufferResidentNV(buffer);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsNamedBufferResidentNV_defined
+#endif
+#ifndef glMakeBufferNonResidentNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeBufferNonResidentNV, (target), (GLenum target))
+void glatter_glMakeBufferNonResidentNV_debug(GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMakeBufferNonResidentNV, "(%s)", enum_to_string_GL(target))
+    glatter_glMakeBufferNonResidentNV(target);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMakeBufferNonResidentNV_defined
+#endif
+#ifndef glMakeBufferResidentNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeBufferResidentNV, (target, access), (GLenum target, GLenum access))
+void glatter_glMakeBufferResidentNV_debug(GLenum target, GLenum access, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMakeBufferResidentNV, "(%s, %s)", enum_to_string_GL(target), enum_to_string_GL(access))
+    glatter_glMakeBufferResidentNV(target, access);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMakeBufferResidentNV_defined
+#endif
+#ifndef glMakeNamedBufferNonResidentNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeNamedBufferNonResidentNV, (buffer), (GLuint buffer))
+void glatter_glMakeNamedBufferNonResidentNV_debug(GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMakeNamedBufferNonResidentNV, "(%u)", (unsigned int)buffer)
+    glatter_glMakeNamedBufferNonResidentNV(buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMakeNamedBufferNonResidentNV_defined
+#endif
+#ifndef glMakeNamedBufferResidentNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeNamedBufferResidentNV, (buffer, access), (GLuint buffer, GLenum access))
+void glatter_glMakeNamedBufferResidentNV_debug(GLuint buffer, GLenum access, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMakeNamedBufferResidentNV, "(%u, %s)", (unsigned int)buffer, enum_to_string_GL(access))
+    glatter_glMakeNamedBufferResidentNV(buffer, access);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMakeNamedBufferResidentNV_defined
+#endif
+#ifndef glProgramUniformui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformui64NV, (program, location, value), (GLuint program, GLint location, GLuint64EXT value))
+void glatter_glProgramUniformui64NV_debug(GLuint program, GLint location, GLuint64EXT value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformui64NV, "(%u, %d, %" PRIu64 ")", (unsigned int)program, (int)location, (uint64_t)value)
+    glatter_glProgramUniformui64NV(program, location, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformui64NV_defined
+#endif
+#ifndef glProgramUniformui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformui64vNV, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value))
+void glatter_glProgramUniformui64vNV_debug(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformui64vNV, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniformui64vNV(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformui64vNV_defined
+#endif
+#ifndef glUniformui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformui64NV, (location, value), (GLint location, GLuint64EXT value))
+void glatter_glUniformui64NV_debug(GLint location, GLuint64EXT value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformui64NV, "(%d, %" PRIu64 ")", (int)location, (uint64_t)value)
+    glatter_glUniformui64NV(location, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformui64NV_defined
+#endif
+#ifndef glUniformui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformui64vNV, (location, count, value), (GLint location, GLsizei count, const GLuint64EXT *value))
+void glatter_glUniformui64vNV_debug(GLint location, GLsizei count, const GLuint64EXT *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformui64vNV, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniformui64vNV(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformui64vNV_defined
+#endif
+#endif // defined(GL_NV_shader_buffer_load)
+#if defined(GL_NV_texture_barrier)
+#ifndef glTextureBarrierNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBarrierNV, (), (void))
+void glatter_glTextureBarrierNV_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureBarrierNV, "()")
+    glatter_glTextureBarrierNV();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureBarrierNV_defined
+#endif
+#endif // defined(GL_NV_texture_barrier)
+#if defined(GL_NV_vertex_attrib_integer_64bit)
+#ifndef glGetVertexAttribLi64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLi64vNV, (index, pname, params), (GLuint index, GLenum pname, GLint64EXT *params))
+void glatter_glGetVertexAttribLi64vNV_debug(GLuint index, GLenum pname, GLint64EXT *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribLi64vNV, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetVertexAttribLi64vNV(index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribLi64vNV_defined
+#endif
+#ifndef glGetVertexAttribLui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLui64vNV, (index, pname, params), (GLuint index, GLenum pname, GLuint64EXT *params))
+void glatter_glGetVertexAttribLui64vNV_debug(GLuint index, GLenum pname, GLuint64EXT *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribLui64vNV, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetVertexAttribLui64vNV(index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribLui64vNV_defined
+#endif
+#ifndef glVertexAttribL1i64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1i64NV, (index, x), (GLuint index, GLint64EXT x))
+void glatter_glVertexAttribL1i64NV_debug(GLuint index, GLint64EXT x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL1i64NV, "(%u, %" PRId64 ")", (unsigned int)index, (int64_t)x)
+    glatter_glVertexAttribL1i64NV(index, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL1i64NV_defined
+#endif
+#ifndef glVertexAttribL1i64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
+void glatter_glVertexAttribL1i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL1i64vNV, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL1i64vNV(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL1i64vNV_defined
+#endif
+#ifndef glVertexAttribL1ui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64NV, (index, x), (GLuint index, GLuint64EXT x))
+void glatter_glVertexAttribL1ui64NV_debug(GLuint index, GLuint64EXT x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL1ui64NV, "(%u, %" PRIu64 ")", (unsigned int)index, (uint64_t)x)
+    glatter_glVertexAttribL1ui64NV(index, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL1ui64NV_defined
+#endif
+#ifndef glVertexAttribL1ui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
+void glatter_glVertexAttribL1ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL1ui64vNV, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL1ui64vNV(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL1ui64vNV_defined
+#endif
+#ifndef glVertexAttribL2i64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2i64NV, (index, x, y), (GLuint index, GLint64EXT x, GLint64EXT y))
+void glatter_glVertexAttribL2i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL2i64NV, "(%u, %" PRId64 ", %" PRId64 ")", (unsigned int)index, (int64_t)x, (int64_t)y)
+    glatter_glVertexAttribL2i64NV(index, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL2i64NV_defined
+#endif
+#ifndef glVertexAttribL2i64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
+void glatter_glVertexAttribL2i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL2i64vNV, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL2i64vNV(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL2i64vNV_defined
+#endif
+#ifndef glVertexAttribL2ui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2ui64NV, (index, x, y), (GLuint index, GLuint64EXT x, GLuint64EXT y))
+void glatter_glVertexAttribL2ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64EXT y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL2ui64NV, "(%u, %" PRIu64 ", %" PRIu64 ")", (unsigned int)index, (uint64_t)x, (uint64_t)y)
+    glatter_glVertexAttribL2ui64NV(index, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL2ui64NV_defined
+#endif
+#ifndef glVertexAttribL2ui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
+void glatter_glVertexAttribL2ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL2ui64vNV, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL2ui64vNV(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL2ui64vNV_defined
+#endif
+#ifndef glVertexAttribL3i64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3i64NV, (index, x, y, z), (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z))
+void glatter_glVertexAttribL3i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL3i64NV, "(%u, %" PRId64 ", %" PRId64 ", %" PRId64 ")", (unsigned int)index, (int64_t)x, (int64_t)y, (int64_t)z)
+    glatter_glVertexAttribL3i64NV(index, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL3i64NV_defined
+#endif
+#ifndef glVertexAttribL3i64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
+void glatter_glVertexAttribL3i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL3i64vNV, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL3i64vNV(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL3i64vNV_defined
+#endif
+#ifndef glVertexAttribL3ui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3ui64NV, (index, x, y, z), (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z))
+void glatter_glVertexAttribL3ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL3ui64NV, "(%u, %" PRIu64 ", %" PRIu64 ", %" PRIu64 ")", (unsigned int)index, (uint64_t)x, (uint64_t)y, (uint64_t)z)
+    glatter_glVertexAttribL3ui64NV(index, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL3ui64NV_defined
+#endif
+#ifndef glVertexAttribL3ui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
+void glatter_glVertexAttribL3ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL3ui64vNV, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL3ui64vNV(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL3ui64vNV_defined
+#endif
+#ifndef glVertexAttribL4i64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4i64NV, (index, x, y, z, w), (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w))
+void glatter_glVertexAttribL4i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL4i64NV, "(%u, %" PRId64 ", %" PRId64 ", %" PRId64 ", %" PRId64 ")", (unsigned int)index, (int64_t)x, (int64_t)y, (int64_t)z, (int64_t)w)
+    glatter_glVertexAttribL4i64NV(index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL4i64NV_defined
+#endif
+#ifndef glVertexAttribL4i64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
+void glatter_glVertexAttribL4i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL4i64vNV, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL4i64vNV(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL4i64vNV_defined
+#endif
+#ifndef glVertexAttribL4ui64NV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4ui64NV, (index, x, y, z, w), (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w))
+void glatter_glVertexAttribL4ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL4ui64NV, "(%u, %" PRIu64 ", %" PRIu64 ", %" PRIu64 ", %" PRIu64 ")", (unsigned int)index, (uint64_t)x, (uint64_t)y, (uint64_t)z, (uint64_t)w)
+    glatter_glVertexAttribL4ui64NV(index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL4ui64NV_defined
+#endif
+#ifndef glVertexAttribL4ui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
+void glatter_glVertexAttribL4ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL4ui64vNV, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL4ui64vNV(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL4ui64vNV_defined
+#endif
+#ifndef glVertexAttribLFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribLFormatNV, (index, size, type, stride), (GLuint index, GLint size, GLenum type, GLsizei stride))
+void glatter_glVertexAttribLFormatNV_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribLFormatNV, "(%u, %d, %s, %d)", (unsigned int)index, (int)size, enum_to_string_GL(type), (int)stride)
+    glatter_glVertexAttribLFormatNV(index, size, type, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribLFormatNV_defined
+#endif
+#endif // defined(GL_NV_vertex_attrib_integer_64bit)
+#if defined(GL_NV_vertex_buffer_unified_memory)
+#ifndef glBufferAddressRangeNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferAddressRangeNV, (pname, index, address, length), (GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length))
+void glatter_glBufferAddressRangeNV_debug(GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBufferAddressRangeNV, "(%s, %u, %" PRIu64 ", %td)", enum_to_string_GL(pname), (unsigned int)index, (uint64_t)address, (ptrdiff_t)length)
+    glatter_glBufferAddressRangeNV(pname, index, address, length);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBufferAddressRangeNV_defined
+#endif
+#ifndef glColorFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
+void glatter_glColorFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glColorFormatNV, "(%d, %s, %d)", (int)size, enum_to_string_GL(type), (int)stride)
+    glatter_glColorFormatNV(size, type, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glColorFormatNV_defined
+#endif
+#ifndef glEdgeFlagFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEdgeFlagFormatNV, (stride), (GLsizei stride))
+void glatter_glEdgeFlagFormatNV_debug(GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEdgeFlagFormatNV, "(%d)", (int)stride)
+    glatter_glEdgeFlagFormatNV(stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEdgeFlagFormatNV_defined
+#endif
+#ifndef glFogCoordFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFogCoordFormatNV, (type, stride), (GLenum type, GLsizei stride))
+void glatter_glFogCoordFormatNV_debug(GLenum type, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFogCoordFormatNV, "(%s, %d)", enum_to_string_GL(type), (int)stride)
+    glatter_glFogCoordFormatNV(type, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFogCoordFormatNV_defined
+#endif
+#ifndef glGetIntegerui64i_vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerui64i_vNV, (value, index, result), (GLenum value, GLuint index, GLuint64EXT *result))
+void glatter_glGetIntegerui64i_vNV_debug(GLenum value, GLuint index, GLuint64EXT *result, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetIntegerui64i_vNV, "(%s, %u, %p)", enum_to_string_GL(value), (unsigned int)index, (void*)result)
+    glatter_glGetIntegerui64i_vNV(value, index, result);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetIntegerui64i_vNV_defined
+#endif
+#ifndef glIndexFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glIndexFormatNV, (type, stride), (GLenum type, GLsizei stride))
+void glatter_glIndexFormatNV_debug(GLenum type, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIndexFormatNV, "(%s, %d)", enum_to_string_GL(type), (int)stride)
+    glatter_glIndexFormatNV(type, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glIndexFormatNV_defined
+#endif
+#ifndef glNormalFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNormalFormatNV, (type, stride), (GLenum type, GLsizei stride))
+void glatter_glNormalFormatNV_debug(GLenum type, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNormalFormatNV, "(%s, %d)", enum_to_string_GL(type), (int)stride)
+    glatter_glNormalFormatNV(type, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNormalFormatNV_defined
+#endif
+#ifndef glSecondaryColorFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSecondaryColorFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
+void glatter_glSecondaryColorFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSecondaryColorFormatNV, "(%d, %s, %d)", (int)size, enum_to_string_GL(type), (int)stride)
+    glatter_glSecondaryColorFormatNV(size, type, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSecondaryColorFormatNV_defined
+#endif
+#ifndef glTexCoordFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexCoordFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
+void glatter_glTexCoordFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexCoordFormatNV, "(%d, %s, %d)", (int)size, enum_to_string_GL(type), (int)stride)
+    glatter_glTexCoordFormatNV(size, type, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexCoordFormatNV_defined
+#endif
+#ifndef glVertexAttribFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribFormatNV, (index, size, type, normalized, stride), (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride))
+void glatter_glVertexAttribFormatNV_debug(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribFormatNV, "(%u, %d, %s, %u, %d)", (unsigned int)index, (int)size, enum_to_string_GL(type), (unsigned char)normalized, (int)stride)
+    glatter_glVertexAttribFormatNV(index, size, type, normalized, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribFormatNV_defined
+#endif
+#ifndef glVertexAttribIFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribIFormatNV, (index, size, type, stride), (GLuint index, GLint size, GLenum type, GLsizei stride))
+void glatter_glVertexAttribIFormatNV_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribIFormatNV, "(%u, %d, %s, %d)", (unsigned int)index, (int)size, enum_to_string_GL(type), (int)stride)
+    glatter_glVertexAttribIFormatNV(index, size, type, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribIFormatNV_defined
+#endif
+#ifndef glVertexFormatNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
+void glatter_glVertexFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexFormatNV, "(%d, %s, %d)", (int)size, enum_to_string_GL(type), (int)stride)
+    glatter_glVertexFormatNV(size, type, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexFormatNV_defined
+#endif
+#endif // defined(GL_NV_vertex_buffer_unified_memory)
 #if defined(GL_NV_viewport_swizzle)
 #ifndef glViewportSwizzleNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportSwizzleNV, (index, swizzlex, swizzley, swizzlez, swizzlew), (GLuint index, GLenum swizzlex, GLenum swizzley, GLenum swizzlez, GLenum swizzlew))
@@ -26941,11 +30853,11 @@ void glatter_glDepthMask_debug(GLboolean flag, const char* file, int line)
 #define glDepthMask_defined
 #endif
 #ifndef glDepthRange_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRange, (near, far), (GLdouble near, GLdouble far))
-void glatter_glDepthRange_debug(GLdouble near, GLdouble far, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRange, (n, f), (GLdouble n, GLdouble f))
+void glatter_glDepthRange_debug(GLdouble n, GLdouble f, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glDepthRange, "(%f, %f)", (double)near, (double)far)
-    glatter_glDepthRange(near, far);
+    GLATTER_DBLOCK(file, line, glDepthRange, "(%f, %f)", (double)n, (double)f)
+    glatter_glDepthRange(n, f);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDepthRange_defined
@@ -32431,21 +36343,21 @@ void glatter_glClearNamedBufferData_debug(GLuint buffer, GLenum internalformat, 
 #define glClearNamedBufferData_defined
 #endif
 #ifndef glClearNamedBufferSubData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubData, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizei size, GLenum format, GLenum type, const void *data))
-void glatter_glClearNamedBufferSubData_debug(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizei size, GLenum format, GLenum type, const void *data, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubData, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data))
+void glatter_glClearNamedBufferSubData_debug(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glClearNamedBufferSubData, "(%u, %s, %td, %d, %s, %s, %p)", (unsigned int)buffer, enum_to_string_GL(internalformat), (ptrdiff_t)offset, (int)size, enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
+    GLATTER_DBLOCK(file, line, glClearNamedBufferSubData, "(%u, %s, %td, %td, %s, %s, %p)", (unsigned int)buffer, enum_to_string_GL(internalformat), (ptrdiff_t)offset, (ptrdiff_t)size, enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
     glatter_glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glClearNamedBufferSubData_defined
 #endif
 #ifndef glClearNamedFramebufferfi_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferfi, (framebuffer, buffer, depth, stencil), (GLuint framebuffer, GLenum buffer, const GLfloat depth, GLint stencil))
-void glatter_glClearNamedFramebufferfi_debug(GLuint framebuffer, GLenum buffer, const GLfloat depth, GLint stencil, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferfi, (framebuffer, buffer, drawbuffer, depth, stencil), (GLuint framebuffer, GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil))
+void glatter_glClearNamedFramebufferfi_debug(GLuint framebuffer, GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glClearNamedFramebufferfi, "(%u, %s, %s, %d)", (unsigned int)framebuffer, enum_to_string_GL(buffer), GET_PRS(depth), (int)stencil)
-    glatter_glClearNamedFramebufferfi(framebuffer, buffer, depth, stencil);
+    GLATTER_DBLOCK(file, line, glClearNamedFramebufferfi, "(%u, %s, %d, %f, %d)", (unsigned int)framebuffer, enum_to_string_GL(buffer), (int)drawbuffer, (float)depth, (int)stencil)
+    glatter_glClearNamedFramebufferfi(framebuffer, buffer, drawbuffer, depth, stencil);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glClearNamedFramebufferfi_defined
@@ -32521,10 +36433,10 @@ void glatter_glCompressedTextureSubImage3D_debug(GLuint texture, GLint level, GL
 #define glCompressedTextureSubImage3D_defined
 #endif
 #ifndef glCopyNamedBufferSubData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyNamedBufferSubData, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizei size))
-void glatter_glCopyNamedBufferSubData_debug(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizei size, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyNamedBufferSubData, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
+void glatter_glCopyNamedBufferSubData_debug(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glCopyNamedBufferSubData, "(%u, %u, %td, %td, %d)", (unsigned int)readBuffer, (unsigned int)writeBuffer, (ptrdiff_t)readOffset, (ptrdiff_t)writeOffset, (int)size)
+    GLATTER_DBLOCK(file, line, glCopyNamedBufferSubData, "(%u, %u, %td, %td, %td)", (unsigned int)readBuffer, (unsigned int)writeBuffer, (ptrdiff_t)readOffset, (ptrdiff_t)writeOffset, (ptrdiff_t)size)
     glatter_glCopyNamedBufferSubData(readBuffer, writeBuffer, readOffset, writeOffset, size);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
@@ -32671,10 +36583,10 @@ void glatter_glEnableVertexArrayAttrib_debug(GLuint vaobj, GLuint index, const c
 #define glEnableVertexArrayAttrib_defined
 #endif
 #ifndef glFlushMappedNamedBufferRange_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRange, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizei length))
-void glatter_glFlushMappedNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizei length, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRange, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizeiptr length))
+void glatter_glFlushMappedNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glFlushMappedNamedBufferRange, "(%u, %td, %d)", (unsigned int)buffer, (ptrdiff_t)offset, (int)length)
+    GLATTER_DBLOCK(file, line, glFlushMappedNamedBufferRange, "(%u, %td, %td)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)length)
     glatter_glFlushMappedNamedBufferRange(buffer, offset, length);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
@@ -32753,10 +36665,10 @@ void glatter_glGetNamedBufferPointerv_debug(GLuint buffer, GLenum pname, void **
 #define glGetNamedBufferPointerv_defined
 #endif
 #ifndef glGetNamedBufferSubData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizei size, void *data))
-void glatter_glGetNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizei size, void *data, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data))
+void glatter_glGetNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, void *data, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glGetNamedBufferSubData, "(%u, %td, %d, %p)", (unsigned int)buffer, (ptrdiff_t)offset, (int)size, (void*)data)
+    GLATTER_DBLOCK(file, line, glGetNamedBufferSubData, "(%u, %td, %td, %p)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size, (void*)data)
     glatter_glGetNamedBufferSubData(buffer, offset, size, data);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
@@ -33065,10 +36977,10 @@ void * glatter_glMapNamedBuffer_debug(GLuint buffer, GLenum access, const char* 
 #define glMapNamedBuffer_defined
 #endif
 #ifndef glMapNamedBufferRange_defined
-GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRange, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizei length, GLbitfield access))
-void * glatter_glMapNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizei length, GLbitfield access, const char* file, int line)
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRange, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access))
+void * glatter_glMapNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glMapNamedBufferRange, "(%u, %td, %d, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (int)length, (unsigned int)access)
+    GLATTER_DBLOCK(file, line, glMapNamedBufferRange, "(%u, %td, %td, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)length, (unsigned int)access)
     void * rval = glatter_glMapNamedBufferRange(buffer, offset, length, access);
     GLATTER_RBLOCK("%p\n", (void*)rval);
     GLATTER_CHECK_ERROR(GL, file, line)
@@ -33087,30 +36999,30 @@ void glatter_glMemoryBarrierByRegion_debug(GLbitfield barriers, const char* file
 #define glMemoryBarrierByRegion_defined
 #endif
 #ifndef glNamedBufferData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferData, (buffer, size, data, usage), (GLuint buffer, GLsizei size, const void *data, GLenum usage))
-void glatter_glNamedBufferData_debug(GLuint buffer, GLsizei size, const void *data, GLenum usage, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferData, (buffer, size, data, usage), (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage))
+void glatter_glNamedBufferData_debug(GLuint buffer, GLsizeiptr size, const void *data, GLenum usage, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glNamedBufferData, "(%u, %d, %p, %s)", (unsigned int)buffer, (int)size, (void*)data, enum_to_string_GL(usage))
+    GLATTER_DBLOCK(file, line, glNamedBufferData, "(%u, %td, %p, %s)", (unsigned int)buffer, (ptrdiff_t)size, (void*)data, enum_to_string_GL(usage))
     glatter_glNamedBufferData(buffer, size, data, usage);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedBufferData_defined
 #endif
 #ifndef glNamedBufferStorage_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorage, (buffer, size, data, flags), (GLuint buffer, GLsizei size, const void *data, GLbitfield flags))
-void glatter_glNamedBufferStorage_debug(GLuint buffer, GLsizei size, const void *data, GLbitfield flags, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorage, (buffer, size, data, flags), (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags))
+void glatter_glNamedBufferStorage_debug(GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glNamedBufferStorage, "(%u, %d, %p, %u)", (unsigned int)buffer, (int)size, (void*)data, (unsigned int)flags)
+    GLATTER_DBLOCK(file, line, glNamedBufferStorage, "(%u, %td, %p, %u)", (unsigned int)buffer, (ptrdiff_t)size, (void*)data, (unsigned int)flags)
     glatter_glNamedBufferStorage(buffer, size, data, flags);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedBufferStorage_defined
 #endif
 #ifndef glNamedBufferSubData_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizei size, const void *data))
-void glatter_glNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizei size, const void *data, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
+void glatter_glNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glNamedBufferSubData, "(%u, %td, %d, %p)", (unsigned int)buffer, (ptrdiff_t)offset, (int)size, (void*)data)
+    GLATTER_DBLOCK(file, line, glNamedBufferSubData, "(%u, %td, %td, %p)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size, (void*)data)
     glatter_glNamedBufferSubData(buffer, offset, size, data);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
@@ -33237,10 +37149,10 @@ void glatter_glTextureBuffer_debug(GLuint texture, GLenum internalformat, GLuint
 #define glTextureBuffer_defined
 #endif
 #ifndef glTextureBufferRange_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRange, (texture, internalformat, buffer, offset, size), (GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizei size))
-void glatter_glTextureBufferRange_debug(GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizei size, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRange, (texture, internalformat, buffer, offset, size), (GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size))
+void glatter_glTextureBufferRange_debug(GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glTextureBufferRange, "(%u, %s, %u, %td, %d)", (unsigned int)texture, enum_to_string_GL(internalformat), (unsigned int)buffer, (ptrdiff_t)offset, (int)size)
+    GLATTER_DBLOCK(file, line, glTextureBufferRange, "(%u, %s, %u, %td, %td)", (unsigned int)texture, enum_to_string_GL(internalformat), (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size)
     glatter_glTextureBufferRange(texture, internalformat, buffer, offset, size);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
@@ -33397,10 +37309,10 @@ void glatter_glTransformFeedbackBufferBase_debug(GLuint xfb, GLuint index, GLuin
 #define glTransformFeedbackBufferBase_defined
 #endif
 #ifndef glTransformFeedbackBufferRange_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackBufferRange, (xfb, index, buffer, offset, size), (GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizei size))
-void glatter_glTransformFeedbackBufferRange_debug(GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizei size, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackBufferRange, (xfb, index, buffer, offset, size), (GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size))
+void glatter_glTransformFeedbackBufferRange_debug(GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glTransformFeedbackBufferRange, "(%u, %u, %u, %td, %d)", (unsigned int)xfb, (unsigned int)index, (unsigned int)buffer, (ptrdiff_t)offset, (int)size)
+    GLATTER_DBLOCK(file, line, glTransformFeedbackBufferRange, "(%u, %u, %u, %td, %td)", (unsigned int)xfb, (unsigned int)index, (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size)
     glatter_glTransformFeedbackBufferRange(xfb, index, buffer, offset, size);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
@@ -33499,8 +37411,50 @@ void glatter_glVertexArrayVertexBuffers_debug(GLuint vaobj, GLuint first, GLsize
 #define glVertexArrayVertexBuffers_defined
 #endif
 #endif // defined(GL_VERSION_4_5)
-#endif // defined(__glcorearb_h_)
-#if defined(__glext_h_)
+#if defined(GL_VERSION_4_6)
+#ifndef glMultiDrawArraysIndirectCount_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCount, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawArraysIndirectCount_debug(GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirectCount, "(%s, %p, %td, %d, %d)", enum_to_string_GL(mode), (void*)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    glatter_glMultiDrawArraysIndirectCount(mode, indirect, drawcount, maxdrawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawArraysIndirectCount_defined
+#endif
+#ifndef glMultiDrawElementsIndirectCount_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCount, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawElementsIndirectCount_debug(GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirectCount, "(%s, %s, %p, %td, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (void*)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    glatter_glMultiDrawElementsIndirectCount(mode, type, indirect, drawcount, maxdrawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawElementsIndirectCount_defined
+#endif
+#ifndef glPolygonOffsetClamp_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPolygonOffsetClamp, (factor, units, clamp), (GLfloat factor, GLfloat units, GLfloat clamp))
+void glatter_glPolygonOffsetClamp_debug(GLfloat factor, GLfloat units, GLfloat clamp, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPolygonOffsetClamp, "(%f, %f, %f)", (float)factor, (float)units, (float)clamp)
+    glatter_glPolygonOffsetClamp(factor, units, clamp);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPolygonOffsetClamp_defined
+#endif
+#ifndef glSpecializeShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSpecializeShader, (shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue), (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue))
+void glatter_glSpecializeShader_debug(GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSpecializeShader, "(%u, %p, %u, %p, %p)", (unsigned int)shader, (void*)pEntryPoint, (unsigned int)numSpecializationConstants, (void*)pConstantIndex, (void*)pConstantValue)
+    glatter_glSpecializeShader(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSpecializeShader_defined
+#endif
+#endif // defined(GL_VERSION_4_6)
+#endif // defined(__gl_glcorearb_h_)
+#if defined(__gl_glext_h_)
 #if defined(GL_3DFX_tbuffer)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTbufferMask3DFX, (mask), (GLuint mask))
 void glatter_glTbufferMask3DFX_debug(GLuint mask, const char* file, int line)
@@ -33626,6 +37580,7 @@ void glatter_glGetUniformi64vNV_debug(GLuint program, GLint location, GLint64EXT
 }
 #define glGetUniformi64vNV_defined
 #endif
+#ifndef glGetUniformui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformui64vNV, (program, location, params), (GLuint program, GLint location, GLuint64EXT *params))
 void glatter_glGetUniformui64vNV_debug(GLuint program, GLint location, GLuint64EXT *params, const char* file, int line)
 {
@@ -33634,6 +37589,7 @@ void glatter_glGetUniformui64vNV_debug(GLuint program, GLint location, GLuint64E
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetUniformui64vNV_defined
+#endif
 #ifndef glProgramUniform1i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64NV, (program, location, x), (GLuint program, GLint location, GLint64EXT x))
 void glatter_glProgramUniform1i64NV_debug(GLuint program, GLint location, GLint64EXT x, const char* file, int line)
@@ -34492,6 +38448,7 @@ void glatter_glMapVertexAttrib2fAPPLE_debug(GLuint index, GLuint size, GLfloat u
 #define glMapVertexAttrib2fAPPLE_defined
 #endif // defined(GL_APPLE_vertex_program_evaluators)
 #if defined(GL_ARB_ES3_2_compatibility)
+#ifndef glPrimitiveBoundingBoxARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPrimitiveBoundingBoxARB, (minX, minY, minZ, minW, maxX, maxY, maxZ, maxW), (GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW))
 void glatter_glPrimitiveBoundingBoxARB_debug(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW, const char* file, int line)
 {
@@ -34500,6 +38457,7 @@ void glatter_glPrimitiveBoundingBoxARB_debug(GLfloat minX, GLfloat minY, GLfloat
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glPrimitiveBoundingBoxARB_defined
+#endif
 #endif // defined(GL_ARB_ES3_2_compatibility)
 #if defined(GL_ARB_bindless_texture)
 #ifndef glGetImageHandleARB_defined
@@ -34806,6 +38764,7 @@ void glatter_glBlendFunciARB_debug(GLuint buf, GLenum src, GLenum dst, const cha
 #endif
 #endif // defined(GL_ARB_draw_buffers_blend)
 #if defined(GL_ARB_draw_instanced)
+#ifndef glDrawArraysInstancedARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstancedARB, (mode, first, count, primcount), (GLenum mode, GLint first, GLsizei count, GLsizei primcount))
 void glatter_glDrawArraysInstancedARB_debug(GLenum mode, GLint first, GLsizei count, GLsizei primcount, const char* file, int line)
 {
@@ -34814,6 +38773,8 @@ void glatter_glDrawArraysInstancedARB_debug(GLenum mode, GLint first, GLsizei co
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDrawArraysInstancedARB_defined
+#endif
+#ifndef glDrawElementsInstancedARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedARB, (mode, count, type, indices, primcount), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount))
 void glatter_glDrawElementsInstancedARB_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount, const char* file, int line)
 {
@@ -34822,6 +38783,7 @@ void glatter_glDrawElementsInstancedARB_debug(GLenum mode, GLsizei count, GLenum
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDrawElementsInstancedARB_defined
+#endif
 #endif // defined(GL_ARB_draw_instanced)
 #if defined(GL_ARB_fragment_program)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindProgramARB, (target, program), (GLenum target, GLuint program))
@@ -34980,6 +38942,7 @@ void glatter_glProgramStringARB_debug(GLenum target, GLenum format, GLsizei len,
 #define glProgramStringARB_defined
 #endif // defined(GL_ARB_fragment_program)
 #if defined(GL_ARB_geometry_shader4)
+#ifndef glFramebufferTextureARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureARB, (target, attachment, texture, level), (GLenum target, GLenum attachment, GLuint texture, GLint level))
 void glatter_glFramebufferTextureARB_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, const char* file, int line)
 {
@@ -34988,6 +38951,8 @@ void glatter_glFramebufferTextureARB_debug(GLenum target, GLenum attachment, GLu
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glFramebufferTextureARB_defined
+#endif
+#ifndef glFramebufferTextureFaceARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureFaceARB, (target, attachment, texture, level, face), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face))
 void glatter_glFramebufferTextureFaceARB_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face, const char* file, int line)
 {
@@ -34996,6 +38961,8 @@ void glatter_glFramebufferTextureFaceARB_debug(GLenum target, GLenum attachment,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glFramebufferTextureFaceARB_defined
+#endif
+#ifndef glFramebufferTextureLayerARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureLayerARB, (target, attachment, texture, level, layer), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer))
 void glatter_glFramebufferTextureLayerARB_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line)
 {
@@ -35004,6 +38971,8 @@ void glatter_glFramebufferTextureLayerARB_debug(GLenum target, GLenum attachment
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glFramebufferTextureLayerARB_defined
+#endif
+#ifndef glProgramParameteriARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramParameteriARB, (program, pname, value), (GLuint program, GLenum pname, GLint value))
 void glatter_glProgramParameteriARB_debug(GLuint program, GLenum pname, GLint value, const char* file, int line)
 {
@@ -35012,8 +38981,22 @@ void glatter_glProgramParameteriARB_debug(GLuint program, GLenum pname, GLint va
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramParameteriARB_defined
+#endif
 #endif // defined(GL_ARB_geometry_shader4)
+#if defined(GL_ARB_gl_spirv)
+#ifndef glSpecializeShaderARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSpecializeShaderARB, (shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue), (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue))
+void glatter_glSpecializeShaderARB_debug(GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSpecializeShaderARB, "(%u, %p, %u, %p, %p)", (unsigned int)shader, (void*)pEntryPoint, (unsigned int)numSpecializationConstants, (void*)pConstantIndex, (void*)pConstantValue)
+    glatter_glSpecializeShaderARB(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSpecializeShaderARB_defined
+#endif
+#endif // defined(GL_ARB_gl_spirv)
 #if defined(GL_ARB_gpu_shader_int64)
+#ifndef glGetUniformi64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformi64vARB, (program, location, params), (GLuint program, GLint location, GLint64 *params))
 void glatter_glGetUniformi64vARB_debug(GLuint program, GLint location, GLint64 *params, const char* file, int line)
 {
@@ -35022,6 +39005,8 @@ void glatter_glGetUniformi64vARB_debug(GLuint program, GLint location, GLint64 *
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetUniformi64vARB_defined
+#endif
+#ifndef glGetUniformui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformui64vARB, (program, location, params), (GLuint program, GLint location, GLuint64 *params))
 void glatter_glGetUniformui64vARB_debug(GLuint program, GLint location, GLuint64 *params, const char* file, int line)
 {
@@ -35030,6 +39015,8 @@ void glatter_glGetUniformui64vARB_debug(GLuint program, GLint location, GLuint64
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetUniformui64vARB_defined
+#endif
+#ifndef glGetnUniformi64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformi64vARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLint64 *params))
 void glatter_glGetnUniformi64vARB_debug(GLuint program, GLint location, GLsizei bufSize, GLint64 *params, const char* file, int line)
 {
@@ -35038,6 +39025,8 @@ void glatter_glGetnUniformi64vARB_debug(GLuint program, GLint location, GLsizei 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetnUniformi64vARB_defined
+#endif
+#ifndef glGetnUniformui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformui64vARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLuint64 *params))
 void glatter_glGetnUniformui64vARB_debug(GLuint program, GLint location, GLsizei bufSize, GLuint64 *params, const char* file, int line)
 {
@@ -35046,6 +39035,8 @@ void glatter_glGetnUniformui64vARB_debug(GLuint program, GLint location, GLsizei
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetnUniformui64vARB_defined
+#endif
+#ifndef glProgramUniform1i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64ARB, (program, location, x), (GLuint program, GLint location, GLint64 x))
 void glatter_glProgramUniform1i64ARB_debug(GLuint program, GLint location, GLint64 x, const char* file, int line)
 {
@@ -35054,6 +39045,8 @@ void glatter_glProgramUniform1i64ARB_debug(GLuint program, GLint location, GLint
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform1i64ARB_defined
+#endif
+#ifndef glProgramUniform1i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
 void glatter_glProgramUniform1i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
 {
@@ -35062,6 +39055,8 @@ void glatter_glProgramUniform1i64vARB_debug(GLuint program, GLint location, GLsi
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform1i64vARB_defined
+#endif
+#ifndef glProgramUniform1ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui64ARB, (program, location, x), (GLuint program, GLint location, GLuint64 x))
 void glatter_glProgramUniform1ui64ARB_debug(GLuint program, GLint location, GLuint64 x, const char* file, int line)
 {
@@ -35070,6 +39065,8 @@ void glatter_glProgramUniform1ui64ARB_debug(GLuint program, GLint location, GLui
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform1ui64ARB_defined
+#endif
+#ifndef glProgramUniform1ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
 void glatter_glProgramUniform1ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
 {
@@ -35078,6 +39075,8 @@ void glatter_glProgramUniform1ui64vARB_debug(GLuint program, GLint location, GLs
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform1ui64vARB_defined
+#endif
+#ifndef glProgramUniform2i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i64ARB, (program, location, x, y), (GLuint program, GLint location, GLint64 x, GLint64 y))
 void glatter_glProgramUniform2i64ARB_debug(GLuint program, GLint location, GLint64 x, GLint64 y, const char* file, int line)
 {
@@ -35086,6 +39085,8 @@ void glatter_glProgramUniform2i64ARB_debug(GLuint program, GLint location, GLint
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform2i64ARB_defined
+#endif
+#ifndef glProgramUniform2i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
 void glatter_glProgramUniform2i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
 {
@@ -35094,6 +39095,8 @@ void glatter_glProgramUniform2i64vARB_debug(GLuint program, GLint location, GLsi
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform2i64vARB_defined
+#endif
+#ifndef glProgramUniform2ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui64ARB, (program, location, x, y), (GLuint program, GLint location, GLuint64 x, GLuint64 y))
 void glatter_glProgramUniform2ui64ARB_debug(GLuint program, GLint location, GLuint64 x, GLuint64 y, const char* file, int line)
 {
@@ -35102,6 +39105,8 @@ void glatter_glProgramUniform2ui64ARB_debug(GLuint program, GLint location, GLui
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform2ui64ARB_defined
+#endif
+#ifndef glProgramUniform2ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
 void glatter_glProgramUniform2ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
 {
@@ -35110,6 +39115,8 @@ void glatter_glProgramUniform2ui64vARB_debug(GLuint program, GLint location, GLs
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform2ui64vARB_defined
+#endif
+#ifndef glProgramUniform3i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i64ARB, (program, location, x, y, z), (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z))
 void glatter_glProgramUniform3i64ARB_debug(GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, const char* file, int line)
 {
@@ -35118,6 +39125,8 @@ void glatter_glProgramUniform3i64ARB_debug(GLuint program, GLint location, GLint
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform3i64ARB_defined
+#endif
+#ifndef glProgramUniform3i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
 void glatter_glProgramUniform3i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
 {
@@ -35126,6 +39135,8 @@ void glatter_glProgramUniform3i64vARB_debug(GLuint program, GLint location, GLsi
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform3i64vARB_defined
+#endif
+#ifndef glProgramUniform3ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui64ARB, (program, location, x, y, z), (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z))
 void glatter_glProgramUniform3ui64ARB_debug(GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, const char* file, int line)
 {
@@ -35134,6 +39145,8 @@ void glatter_glProgramUniform3ui64ARB_debug(GLuint program, GLint location, GLui
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform3ui64ARB_defined
+#endif
+#ifndef glProgramUniform3ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
 void glatter_glProgramUniform3ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
 {
@@ -35142,6 +39155,8 @@ void glatter_glProgramUniform3ui64vARB_debug(GLuint program, GLint location, GLs
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform3ui64vARB_defined
+#endif
+#ifndef glProgramUniform4i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i64ARB, (program, location, x, y, z, w), (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w))
 void glatter_glProgramUniform4i64ARB_debug(GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w, const char* file, int line)
 {
@@ -35150,6 +39165,8 @@ void glatter_glProgramUniform4i64ARB_debug(GLuint program, GLint location, GLint
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform4i64ARB_defined
+#endif
+#ifndef glProgramUniform4i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint64 *value))
 void glatter_glProgramUniform4i64vARB_debug(GLuint program, GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
 {
@@ -35158,6 +39175,8 @@ void glatter_glProgramUniform4i64vARB_debug(GLuint program, GLint location, GLsi
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform4i64vARB_defined
+#endif
+#ifndef glProgramUniform4ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui64ARB, (program, location, x, y, z, w), (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w))
 void glatter_glProgramUniform4ui64ARB_debug(GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w, const char* file, int line)
 {
@@ -35166,6 +39185,8 @@ void glatter_glProgramUniform4ui64ARB_debug(GLuint program, GLint location, GLui
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform4ui64ARB_defined
+#endif
+#ifndef glProgramUniform4ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui64vARB, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64 *value))
 void glatter_glProgramUniform4ui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
 {
@@ -35174,6 +39195,8 @@ void glatter_glProgramUniform4ui64vARB_debug(GLuint program, GLint location, GLs
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform4ui64vARB_defined
+#endif
+#ifndef glUniform1i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i64ARB, (location, x), (GLint location, GLint64 x))
 void glatter_glUniform1i64ARB_debug(GLint location, GLint64 x, const char* file, int line)
 {
@@ -35182,6 +39205,8 @@ void glatter_glUniform1i64ARB_debug(GLint location, GLint64 x, const char* file,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform1i64ARB_defined
+#endif
+#ifndef glUniform1i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
 void glatter_glUniform1i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
 {
@@ -35190,6 +39215,8 @@ void glatter_glUniform1i64vARB_debug(GLint location, GLsizei count, const GLint6
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform1i64vARB_defined
+#endif
+#ifndef glUniform1ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui64ARB, (location, x), (GLint location, GLuint64 x))
 void glatter_glUniform1ui64ARB_debug(GLint location, GLuint64 x, const char* file, int line)
 {
@@ -35198,6 +39225,8 @@ void glatter_glUniform1ui64ARB_debug(GLint location, GLuint64 x, const char* fil
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform1ui64ARB_defined
+#endif
+#ifndef glUniform1ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
 void glatter_glUniform1ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
 {
@@ -35206,6 +39235,8 @@ void glatter_glUniform1ui64vARB_debug(GLint location, GLsizei count, const GLuin
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform1ui64vARB_defined
+#endif
+#ifndef glUniform2i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i64ARB, (location, x, y), (GLint location, GLint64 x, GLint64 y))
 void glatter_glUniform2i64ARB_debug(GLint location, GLint64 x, GLint64 y, const char* file, int line)
 {
@@ -35214,6 +39245,8 @@ void glatter_glUniform2i64ARB_debug(GLint location, GLint64 x, GLint64 y, const 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform2i64ARB_defined
+#endif
+#ifndef glUniform2i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
 void glatter_glUniform2i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
 {
@@ -35222,6 +39255,8 @@ void glatter_glUniform2i64vARB_debug(GLint location, GLsizei count, const GLint6
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform2i64vARB_defined
+#endif
+#ifndef glUniform2ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui64ARB, (location, x, y), (GLint location, GLuint64 x, GLuint64 y))
 void glatter_glUniform2ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, const char* file, int line)
 {
@@ -35230,6 +39265,8 @@ void glatter_glUniform2ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform2ui64ARB_defined
+#endif
+#ifndef glUniform2ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
 void glatter_glUniform2ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
 {
@@ -35238,6 +39275,8 @@ void glatter_glUniform2ui64vARB_debug(GLint location, GLsizei count, const GLuin
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform2ui64vARB_defined
+#endif
+#ifndef glUniform3i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i64ARB, (location, x, y, z), (GLint location, GLint64 x, GLint64 y, GLint64 z))
 void glatter_glUniform3i64ARB_debug(GLint location, GLint64 x, GLint64 y, GLint64 z, const char* file, int line)
 {
@@ -35246,6 +39285,8 @@ void glatter_glUniform3i64ARB_debug(GLint location, GLint64 x, GLint64 y, GLint6
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform3i64ARB_defined
+#endif
+#ifndef glUniform3i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
 void glatter_glUniform3i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
 {
@@ -35254,6 +39295,8 @@ void glatter_glUniform3i64vARB_debug(GLint location, GLsizei count, const GLint6
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform3i64vARB_defined
+#endif
+#ifndef glUniform3ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui64ARB, (location, x, y, z), (GLint location, GLuint64 x, GLuint64 y, GLuint64 z))
 void glatter_glUniform3ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, GLuint64 z, const char* file, int line)
 {
@@ -35262,6 +39305,8 @@ void glatter_glUniform3ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, GLu
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform3ui64ARB_defined
+#endif
+#ifndef glUniform3ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
 void glatter_glUniform3ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
 {
@@ -35270,6 +39315,8 @@ void glatter_glUniform3ui64vARB_debug(GLint location, GLsizei count, const GLuin
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform3ui64vARB_defined
+#endif
+#ifndef glUniform4i64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i64ARB, (location, x, y, z, w), (GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w))
 void glatter_glUniform4i64ARB_debug(GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w, const char* file, int line)
 {
@@ -35278,6 +39325,8 @@ void glatter_glUniform4i64ARB_debug(GLint location, GLint64 x, GLint64 y, GLint6
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform4i64ARB_defined
+#endif
+#ifndef glUniform4i64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i64vARB, (location, count, value), (GLint location, GLsizei count, const GLint64 *value))
 void glatter_glUniform4i64vARB_debug(GLint location, GLsizei count, const GLint64 *value, const char* file, int line)
 {
@@ -35286,6 +39335,8 @@ void glatter_glUniform4i64vARB_debug(GLint location, GLsizei count, const GLint6
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform4i64vARB_defined
+#endif
+#ifndef glUniform4ui64ARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui64ARB, (location, x, y, z, w), (GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w))
 void glatter_glUniform4ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w, const char* file, int line)
 {
@@ -35294,6 +39345,8 @@ void glatter_glUniform4ui64ARB_debug(GLint location, GLuint64 x, GLuint64 y, GLu
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform4ui64ARB_defined
+#endif
+#ifndef glUniform4ui64vARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
 void glatter_glUniform4ui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
 {
@@ -35302,6 +39355,7 @@ void glatter_glUniform4ui64vARB_debug(GLint location, GLsizei count, const GLuin
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniform4ui64vARB_defined
+#endif
 #endif // defined(GL_ARB_gpu_shader_int64)
 #if defined(GL_ARB_imaging)
 #ifndef glColorSubTable_defined
@@ -35627,20 +39681,20 @@ void glatter_glSeparableFilter2D_debug(GLenum target, GLenum internalformat, GLs
 #endif // defined(GL_ARB_imaging)
 #if defined(GL_ARB_indirect_parameters)
 #ifndef glMultiDrawArraysIndirectCountARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
-void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirectCountARB, "(%s, %td, %td, %d, %d)", enum_to_string_GL(mode), (ptrdiff_t)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirectCountARB, "(%s, %p, %td, %d, %d)", enum_to_string_GL(mode), (void*)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
     glatter_glMultiDrawArraysIndirectCountARB(mode, indirect, drawcount, maxdrawcount, stride);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiDrawArraysIndirectCountARB_defined
 #endif
 #ifndef glMultiDrawElementsIndirectCountARB_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
-void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirectCountARB, "(%s, %s, %td, %td, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (ptrdiff_t)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirectCountARB, "(%s, %s, %p, %td, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (void*)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
     glatter_glMultiDrawElementsIndirectCountARB(mode, type, indirect, drawcount, maxdrawcount, stride);
     GLATTER_CHECK_ERROR(GL, file, line)
 }
@@ -35648,6 +39702,7 @@ void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type,
 #endif
 #endif // defined(GL_ARB_indirect_parameters)
 #if defined(GL_ARB_instanced_arrays)
+#ifndef glVertexAttribDivisorARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribDivisorARB, (index, divisor), (GLuint index, GLuint divisor))
 void glatter_glVertexAttribDivisorARB_debug(GLuint index, GLuint divisor, const char* file, int line)
 {
@@ -35656,6 +39711,7 @@ void glatter_glVertexAttribDivisorARB_debug(GLuint index, GLuint divisor, const 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribDivisorARB_defined
+#endif
 #endif // defined(GL_ARB_instanced_arrays)
 #if defined(GL_ARB_matrix_palette)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCurrentPaletteMatrixARB, (index), (GLint index))
@@ -36120,6 +40176,7 @@ GLboolean glatter_glIsQueryARB_debug(GLuint id, const char* file, int line)
 #define glIsQueryARB_defined
 #endif // defined(GL_ARB_occlusion_query)
 #if defined(GL_ARB_parallel_shader_compile)
+#ifndef glMaxShaderCompilerThreadsARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMaxShaderCompilerThreadsARB, (count), (GLuint count))
 void glatter_glMaxShaderCompilerThreadsARB_debug(GLuint count, const char* file, int line)
 {
@@ -36128,6 +40185,7 @@ void glatter_glMaxShaderCompilerThreadsARB_debug(GLuint count, const char* file,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMaxShaderCompilerThreadsARB_defined
+#endif
 #endif // defined(GL_ARB_parallel_shader_compile)
 #if defined(GL_ARB_point_parameters)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameterfARB, (pname, param), (GLenum pname, GLfloat param))
@@ -36328,6 +40386,7 @@ void glatter_glReadnPixelsARB_debug(GLint x, GLint y, GLsizei width, GLsizei hei
 #endif
 #endif // defined(GL_ARB_robustness)
 #if defined(GL_ARB_sample_locations)
+#ifndef glEvaluateDepthValuesARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEvaluateDepthValuesARB, (), (void))
 void glatter_glEvaluateDepthValuesARB_debug(const char* file, int line)
 {
@@ -36336,6 +40395,8 @@ void glatter_glEvaluateDepthValuesARB_debug(const char* file, int line)
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glEvaluateDepthValuesARB_defined
+#endif
+#ifndef glFramebufferSampleLocationsfvARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferSampleLocationsfvARB, (target, start, count, v), (GLenum target, GLuint start, GLsizei count, const GLfloat *v))
 void glatter_glFramebufferSampleLocationsfvARB_debug(GLenum target, GLuint start, GLsizei count, const GLfloat *v, const char* file, int line)
 {
@@ -36344,6 +40405,8 @@ void glatter_glFramebufferSampleLocationsfvARB_debug(GLenum target, GLuint start
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glFramebufferSampleLocationsfvARB_defined
+#endif
+#ifndef glNamedFramebufferSampleLocationsfvARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferSampleLocationsfvARB, (framebuffer, start, count, v), (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v))
 void glatter_glNamedFramebufferSampleLocationsfvARB_debug(GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v, const char* file, int line)
 {
@@ -36352,6 +40415,7 @@ void glatter_glNamedFramebufferSampleLocationsfvARB_debug(GLuint framebuffer, GL
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedFramebufferSampleLocationsfvARB_defined
+#endif
 #endif // defined(GL_ARB_sample_locations)
 #if defined(GL_ARB_sample_shading)
 #ifndef glMinSampleShadingARB_defined
@@ -36796,6 +40860,7 @@ void glatter_glTexPageCommitmentARB_debug(GLenum target, GLint level, GLint xoff
 #endif
 #endif // defined(GL_ARB_sparse_texture)
 #if defined(GL_ARB_texture_buffer_object)
+#ifndef glTexBufferARB_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexBufferARB, (target, internalformat, buffer), (GLenum target, GLenum internalformat, GLuint buffer))
 void glatter_glTexBufferARB_debug(GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line)
 {
@@ -36804,6 +40869,7 @@ void glatter_glTexBufferARB_debug(GLenum target, GLenum internalformat, GLuint b
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTexBufferARB_defined
+#endif
 #endif // defined(GL_ARB_texture_buffer_object)
 #if defined(GL_ARB_texture_compression)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexImage1DARB, (target, level, internalformat, width, border, imageSize, data), (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data))
@@ -38311,6 +42377,28 @@ void glatter_glVertexStream4svATI_debug(GLenum stream, const GLshort *coords, co
 }
 #define glVertexStream4svATI_defined
 #endif // defined(GL_ATI_vertex_streams)
+#if defined(GL_EXT_EGL_image_storage)
+#ifndef glEGLImageTargetTexStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTexStorageEXT, (target, image, attrib_list), (GLenum target, GLeglImageOES image, const GLint* attrib_list))
+void glatter_glEGLImageTargetTexStorageEXT_debug(GLenum target, GLeglImageOES image, const GLint* attrib_list, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEGLImageTargetTexStorageEXT, "(%s, %p, %p)", enum_to_string_GL(target), (void*)image, (void*)attrib_list)
+    glatter_glEGLImageTargetTexStorageEXT(target, image, attrib_list);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEGLImageTargetTexStorageEXT_defined
+#endif
+#ifndef glEGLImageTargetTextureStorageEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTextureStorageEXT, (texture, image, attrib_list), (GLuint texture, GLeglImageOES image, const GLint* attrib_list))
+void glatter_glEGLImageTargetTextureStorageEXT_debug(GLuint texture, GLeglImageOES image, const GLint* attrib_list, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEGLImageTargetTextureStorageEXT, "(%u, %p, %p)", (unsigned int)texture, (void*)image, (void*)attrib_list)
+    glatter_glEGLImageTargetTextureStorageEXT(texture, image, attrib_list);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEGLImageTargetTextureStorageEXT_defined
+#endif
+#endif // defined(GL_EXT_EGL_image_storage)
 #if defined(GL_EXT_bindable_uniform)
 GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetUniformBufferSizeEXT, (program, location), (GLuint program, GLint location))
 GLint glatter_glGetUniformBufferSizeEXT_debug(GLuint program, GLint location, const char* file, int line)
@@ -38826,6 +42914,7 @@ void glatter_glDepthBoundsEXT_debug(GLclampd zmin, GLclampd zmax, const char* fi
 #define glDepthBoundsEXT_defined
 #endif // defined(GL_EXT_depth_bounds_test)
 #if defined(GL_EXT_direct_state_access)
+#ifndef glBindMultiTextureEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindMultiTextureEXT, (texunit, target, texture), (GLenum texunit, GLenum target, GLuint texture))
 void glatter_glBindMultiTextureEXT_debug(GLenum texunit, GLenum target, GLuint texture, const char* file, int line)
 {
@@ -38834,6 +42923,8 @@ void glatter_glBindMultiTextureEXT_debug(GLenum texunit, GLenum target, GLuint t
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glBindMultiTextureEXT_defined
+#endif
+#ifndef glCheckNamedFramebufferStatusEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glCheckNamedFramebufferStatusEXT, (framebuffer, target), (GLuint framebuffer, GLenum target))
 GLenum glatter_glCheckNamedFramebufferStatusEXT_debug(GLuint framebuffer, GLenum target, const char* file, int line)
 {
@@ -38844,6 +42935,8 @@ GLenum glatter_glCheckNamedFramebufferStatusEXT_debug(GLuint framebuffer, GLenum
     return rval;
 }
 #define glCheckNamedFramebufferStatusEXT_defined
+#endif
+#ifndef glClearNamedBufferDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferDataEXT, (buffer, internalformat, format, type, data), (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data))
 void glatter_glClearNamedBufferDataEXT_debug(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data, const char* file, int line)
 {
@@ -38852,6 +42945,8 @@ void glatter_glClearNamedBufferDataEXT_debug(GLuint buffer, GLenum internalforma
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glClearNamedBufferDataEXT_defined
+#endif
+#ifndef glClearNamedBufferSubDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubDataEXT, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data))
 void glatter_glClearNamedBufferSubDataEXT_debug(GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data, const char* file, int line)
 {
@@ -38860,6 +42955,8 @@ void glatter_glClearNamedBufferSubDataEXT_debug(GLuint buffer, GLenum internalfo
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glClearNamedBufferSubDataEXT_defined
+#endif
+#ifndef glClientAttribDefaultEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClientAttribDefaultEXT, (mask), (GLbitfield mask))
 void glatter_glClientAttribDefaultEXT_debug(GLbitfield mask, const char* file, int line)
 {
@@ -38868,6 +42965,8 @@ void glatter_glClientAttribDefaultEXT_debug(GLbitfield mask, const char* file, i
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glClientAttribDefaultEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage1DEXT, (texunit, target, level, internalformat, width, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits))
 void glatter_glCompressedMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38876,6 +42975,8 @@ void glatter_glCompressedMultiTexImage1DEXT_debug(GLenum texunit, GLenum target,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedMultiTexImage1DEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage2DEXT, (texunit, target, level, internalformat, width, height, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits))
 void glatter_glCompressedMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38884,6 +42985,8 @@ void glatter_glCompressedMultiTexImage2DEXT_debug(GLenum texunit, GLenum target,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedMultiTexImage2DEXT_defined
+#endif
+#ifndef glCompressedMultiTexImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexImage3DEXT, (texunit, target, level, internalformat, width, height, depth, border, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits))
 void glatter_glCompressedMultiTexImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38892,6 +42995,8 @@ void glatter_glCompressedMultiTexImage3DEXT_debug(GLenum texunit, GLenum target,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedMultiTexImage3DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage1DEXT, (texunit, target, level, xoffset, width, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits))
 void glatter_glCompressedMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38900,6 +43005,8 @@ void glatter_glCompressedMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum targ
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, width, height, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits))
 void glatter_glCompressedMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38908,6 +43015,8 @@ void glatter_glCompressedMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum targ
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glCompressedMultiTexSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits))
 void glatter_glCompressedMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38916,6 +43025,8 @@ void glatter_glCompressedMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum targ
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glCompressedTextureImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage1DEXT, (texture, target, level, internalformat, width, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits))
 void glatter_glCompressedTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38924,6 +43035,8 @@ void glatter_glCompressedTextureImage1DEXT_debug(GLuint texture, GLenum target, 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedTextureImage1DEXT_defined
+#endif
+#ifndef glCompressedTextureImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage2DEXT, (texture, target, level, internalformat, width, height, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits))
 void glatter_glCompressedTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38932,6 +43045,8 @@ void glatter_glCompressedTextureImage2DEXT_debug(GLuint texture, GLenum target, 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedTextureImage2DEXT_defined
+#endif
+#ifndef glCompressedTextureImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureImage3DEXT, (texture, target, level, internalformat, width, height, depth, border, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits))
 void glatter_glCompressedTextureImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38940,6 +43055,8 @@ void glatter_glCompressedTextureImage3DEXT_debug(GLuint texture, GLenum target, 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedTextureImage3DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage1DEXT, (texture, target, level, xoffset, width, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits))
 void glatter_glCompressedTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38948,6 +43065,8 @@ void glatter_glCompressedTextureSubImage1DEXT_debug(GLuint texture, GLenum targe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedTextureSubImage1DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, width, height, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits))
 void glatter_glCompressedTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38956,6 +43075,8 @@ void glatter_glCompressedTextureSubImage2DEXT_debug(GLuint texture, GLenum targe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedTextureSubImage2DEXT_defined
+#endif
+#ifndef glCompressedTextureSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, bits), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits))
 void glatter_glCompressedTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits, const char* file, int line)
 {
@@ -38964,6 +43085,8 @@ void glatter_glCompressedTextureSubImage3DEXT_debug(GLuint texture, GLenum targe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompressedTextureSubImage3DEXT_defined
+#endif
+#ifndef glCopyMultiTexImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexImage1DEXT, (texunit, target, level, internalformat, x, y, width, border), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
 void glatter_glCopyMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border, const char* file, int line)
 {
@@ -38972,6 +43095,8 @@ void glatter_glCopyMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyMultiTexImage1DEXT_defined
+#endif
+#ifndef glCopyMultiTexImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexImage2DEXT, (texunit, target, level, internalformat, x, y, width, height, border), (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
 void glatter_glCopyMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border, const char* file, int line)
 {
@@ -38980,6 +43105,8 @@ void glatter_glCopyMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyMultiTexImage2DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage1DEXT, (texunit, target, level, xoffset, x, y, width), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
 void glatter_glCopyMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line)
 {
@@ -38988,6 +43115,8 @@ void glatter_glCopyMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GL
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, x, y, width, height), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
 void glatter_glCopyMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
 {
@@ -38996,6 +43125,8 @@ void glatter_glCopyMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GL
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glCopyMultiTexSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
 void glatter_glCopyMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
 {
@@ -39004,6 +43135,8 @@ void glatter_glCopyMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GL
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glCopyTextureImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureImage1DEXT, (texture, target, level, internalformat, x, y, width, border), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
 void glatter_glCopyTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border, const char* file, int line)
 {
@@ -39012,6 +43145,8 @@ void glatter_glCopyTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyTextureImage1DEXT_defined
+#endif
+#ifndef glCopyTextureImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureImage2DEXT, (texture, target, level, internalformat, x, y, width, height, border), (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
 void glatter_glCopyTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border, const char* file, int line)
 {
@@ -39020,6 +43155,8 @@ void glatter_glCopyTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyTextureImage2DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage1DEXT, (texture, target, level, xoffset, x, y, width), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
 void glatter_glCopyTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line)
 {
@@ -39028,6 +43165,8 @@ void glatter_glCopyTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLi
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyTextureSubImage1DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, x, y, width, height), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
 void glatter_glCopyTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
 {
@@ -39036,6 +43175,8 @@ void glatter_glCopyTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLi
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyTextureSubImage2DEXT_defined
+#endif
+#ifndef glCopyTextureSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
 void glatter_glCopyTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
 {
@@ -39044,6 +43185,8 @@ void glatter_glCopyTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLi
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCopyTextureSubImage3DEXT_defined
+#endif
+#ifndef glDisableClientStateIndexedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableClientStateIndexedEXT, (array, index), (GLenum array, GLuint index))
 void glatter_glDisableClientStateIndexedEXT_debug(GLenum array, GLuint index, const char* file, int line)
 {
@@ -39052,6 +43195,8 @@ void glatter_glDisableClientStateIndexedEXT_debug(GLenum array, GLuint index, co
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDisableClientStateIndexedEXT_defined
+#endif
+#ifndef glDisableClientStateiEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableClientStateiEXT, (array, index), (GLenum array, GLuint index))
 void glatter_glDisableClientStateiEXT_debug(GLenum array, GLuint index, const char* file, int line)
 {
@@ -39060,6 +43205,8 @@ void glatter_glDisableClientStateiEXT_debug(GLenum array, GLuint index, const ch
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDisableClientStateiEXT_defined
+#endif
+#ifndef glDisableIndexedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableIndexedEXT, (target, index), (GLenum target, GLuint index))
 void glatter_glDisableIndexedEXT_debug(GLenum target, GLuint index, const char* file, int line)
 {
@@ -39068,6 +43215,8 @@ void glatter_glDisableIndexedEXT_debug(GLenum target, GLuint index, const char* 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDisableIndexedEXT_defined
+#endif
+#ifndef glDisableVertexArrayAttribEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayAttribEXT, (vaobj, index), (GLuint vaobj, GLuint index))
 void glatter_glDisableVertexArrayAttribEXT_debug(GLuint vaobj, GLuint index, const char* file, int line)
 {
@@ -39076,6 +43225,8 @@ void glatter_glDisableVertexArrayAttribEXT_debug(GLuint vaobj, GLuint index, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDisableVertexArrayAttribEXT_defined
+#endif
+#ifndef glDisableVertexArrayEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayEXT, (vaobj, array), (GLuint vaobj, GLenum array))
 void glatter_glDisableVertexArrayEXT_debug(GLuint vaobj, GLenum array, const char* file, int line)
 {
@@ -39084,6 +43235,8 @@ void glatter_glDisableVertexArrayEXT_debug(GLuint vaobj, GLenum array, const cha
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDisableVertexArrayEXT_defined
+#endif
+#ifndef glEnableClientStateIndexedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableClientStateIndexedEXT, (array, index), (GLenum array, GLuint index))
 void glatter_glEnableClientStateIndexedEXT_debug(GLenum array, GLuint index, const char* file, int line)
 {
@@ -39092,6 +43245,8 @@ void glatter_glEnableClientStateIndexedEXT_debug(GLenum array, GLuint index, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glEnableClientStateIndexedEXT_defined
+#endif
+#ifndef glEnableClientStateiEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableClientStateiEXT, (array, index), (GLenum array, GLuint index))
 void glatter_glEnableClientStateiEXT_debug(GLenum array, GLuint index, const char* file, int line)
 {
@@ -39100,6 +43255,8 @@ void glatter_glEnableClientStateiEXT_debug(GLenum array, GLuint index, const cha
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glEnableClientStateiEXT_defined
+#endif
+#ifndef glEnableIndexedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableIndexedEXT, (target, index), (GLenum target, GLuint index))
 void glatter_glEnableIndexedEXT_debug(GLenum target, GLuint index, const char* file, int line)
 {
@@ -39108,6 +43265,8 @@ void glatter_glEnableIndexedEXT_debug(GLenum target, GLuint index, const char* f
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glEnableIndexedEXT_defined
+#endif
+#ifndef glEnableVertexArrayAttribEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayAttribEXT, (vaobj, index), (GLuint vaobj, GLuint index))
 void glatter_glEnableVertexArrayAttribEXT_debug(GLuint vaobj, GLuint index, const char* file, int line)
 {
@@ -39116,6 +43275,8 @@ void glatter_glEnableVertexArrayAttribEXT_debug(GLuint vaobj, GLuint index, cons
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glEnableVertexArrayAttribEXT_defined
+#endif
+#ifndef glEnableVertexArrayEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayEXT, (vaobj, array), (GLuint vaobj, GLenum array))
 void glatter_glEnableVertexArrayEXT_debug(GLuint vaobj, GLenum array, const char* file, int line)
 {
@@ -39124,6 +43285,8 @@ void glatter_glEnableVertexArrayEXT_debug(GLuint vaobj, GLenum array, const char
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glEnableVertexArrayEXT_defined
+#endif
+#ifndef glFlushMappedNamedBufferRangeEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRangeEXT, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizeiptr length))
 void glatter_glFlushMappedNamedBufferRangeEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, const char* file, int line)
 {
@@ -39132,6 +43295,8 @@ void glatter_glFlushMappedNamedBufferRangeEXT_debug(GLuint buffer, GLintptr offs
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glFlushMappedNamedBufferRangeEXT_defined
+#endif
+#ifndef glFramebufferDrawBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferDrawBufferEXT, (framebuffer, mode), (GLuint framebuffer, GLenum mode))
 void glatter_glFramebufferDrawBufferEXT_debug(GLuint framebuffer, GLenum mode, const char* file, int line)
 {
@@ -39140,6 +43305,8 @@ void glatter_glFramebufferDrawBufferEXT_debug(GLuint framebuffer, GLenum mode, c
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glFramebufferDrawBufferEXT_defined
+#endif
+#ifndef glFramebufferDrawBuffersEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferDrawBuffersEXT, (framebuffer, n, bufs), (GLuint framebuffer, GLsizei n, const GLenum *bufs))
 void glatter_glFramebufferDrawBuffersEXT_debug(GLuint framebuffer, GLsizei n, const GLenum *bufs, const char* file, int line)
 {
@@ -39148,6 +43315,8 @@ void glatter_glFramebufferDrawBuffersEXT_debug(GLuint framebuffer, GLsizei n, co
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glFramebufferDrawBuffersEXT_defined
+#endif
+#ifndef glFramebufferReadBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferReadBufferEXT, (framebuffer, mode), (GLuint framebuffer, GLenum mode))
 void glatter_glFramebufferReadBufferEXT_debug(GLuint framebuffer, GLenum mode, const char* file, int line)
 {
@@ -39156,6 +43325,8 @@ void glatter_glFramebufferReadBufferEXT_debug(GLuint framebuffer, GLenum mode, c
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glFramebufferReadBufferEXT_defined
+#endif
+#ifndef glGenerateMultiTexMipmapEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateMultiTexMipmapEXT, (texunit, target), (GLenum texunit, GLenum target))
 void glatter_glGenerateMultiTexMipmapEXT_debug(GLenum texunit, GLenum target, const char* file, int line)
 {
@@ -39164,6 +43335,8 @@ void glatter_glGenerateMultiTexMipmapEXT_debug(GLenum texunit, GLenum target, co
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGenerateMultiTexMipmapEXT_defined
+#endif
+#ifndef glGenerateTextureMipmapEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateTextureMipmapEXT, (texture, target), (GLuint texture, GLenum target))
 void glatter_glGenerateTextureMipmapEXT_debug(GLuint texture, GLenum target, const char* file, int line)
 {
@@ -39172,6 +43345,8 @@ void glatter_glGenerateTextureMipmapEXT_debug(GLuint texture, GLenum target, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGenerateTextureMipmapEXT_defined
+#endif
+#ifndef glGetBooleanIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBooleanIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLboolean *data))
 void glatter_glGetBooleanIndexedvEXT_debug(GLenum target, GLuint index, GLboolean *data, const char* file, int line)
 {
@@ -39180,6 +43355,8 @@ void glatter_glGetBooleanIndexedvEXT_debug(GLenum target, GLuint index, GLboolea
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetBooleanIndexedvEXT_defined
+#endif
+#ifndef glGetCompressedMultiTexImageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedMultiTexImageEXT, (texunit, target, lod, img), (GLenum texunit, GLenum target, GLint lod, void *img))
 void glatter_glGetCompressedMultiTexImageEXT_debug(GLenum texunit, GLenum target, GLint lod, void *img, const char* file, int line)
 {
@@ -39188,6 +43365,8 @@ void glatter_glGetCompressedMultiTexImageEXT_debug(GLenum texunit, GLenum target
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetCompressedMultiTexImageEXT_defined
+#endif
+#ifndef glGetCompressedTextureImageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTextureImageEXT, (texture, target, lod, img), (GLuint texture, GLenum target, GLint lod, void *img))
 void glatter_glGetCompressedTextureImageEXT_debug(GLuint texture, GLenum target, GLint lod, void *img, const char* file, int line)
 {
@@ -39196,6 +43375,8 @@ void glatter_glGetCompressedTextureImageEXT_debug(GLuint texture, GLenum target,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetCompressedTextureImageEXT_defined
+#endif
+#ifndef glGetDoubleIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoubleIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLdouble *data))
 void glatter_glGetDoubleIndexedvEXT_debug(GLenum target, GLuint index, GLdouble *data, const char* file, int line)
 {
@@ -39204,6 +43385,8 @@ void glatter_glGetDoubleIndexedvEXT_debug(GLenum target, GLuint index, GLdouble 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetDoubleIndexedvEXT_defined
+#endif
+#ifndef glGetDoublei_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoublei_vEXT, (pname, index, params), (GLenum pname, GLuint index, GLdouble *params))
 void glatter_glGetDoublei_vEXT_debug(GLenum pname, GLuint index, GLdouble *params, const char* file, int line)
 {
@@ -39212,6 +43395,8 @@ void glatter_glGetDoublei_vEXT_debug(GLenum pname, GLuint index, GLdouble *param
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetDoublei_vEXT_defined
+#endif
+#ifndef glGetFloatIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloatIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLfloat *data))
 void glatter_glGetFloatIndexedvEXT_debug(GLenum target, GLuint index, GLfloat *data, const char* file, int line)
 {
@@ -39220,6 +43405,8 @@ void glatter_glGetFloatIndexedvEXT_debug(GLenum target, GLuint index, GLfloat *d
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetFloatIndexedvEXT_defined
+#endif
+#ifndef glGetFloati_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloati_vEXT, (pname, index, params), (GLenum pname, GLuint index, GLfloat *params))
 void glatter_glGetFloati_vEXT_debug(GLenum pname, GLuint index, GLfloat *params, const char* file, int line)
 {
@@ -39228,6 +43415,8 @@ void glatter_glGetFloati_vEXT_debug(GLenum pname, GLuint index, GLfloat *params,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetFloati_vEXT_defined
+#endif
+#ifndef glGetFramebufferParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFramebufferParameterivEXT, (framebuffer, pname, params), (GLuint framebuffer, GLenum pname, GLint *params))
 void glatter_glGetFramebufferParameterivEXT_debug(GLuint framebuffer, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39236,6 +43425,8 @@ void glatter_glGetFramebufferParameterivEXT_debug(GLuint framebuffer, GLenum pna
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetFramebufferParameterivEXT_defined
+#endif
+#ifndef glGetIntegerIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerIndexedvEXT, (target, index, data), (GLenum target, GLuint index, GLint *data))
 void glatter_glGetIntegerIndexedvEXT_debug(GLenum target, GLuint index, GLint *data, const char* file, int line)
 {
@@ -39244,6 +43435,8 @@ void glatter_glGetIntegerIndexedvEXT_debug(GLenum target, GLuint index, GLint *d
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetIntegerIndexedvEXT_defined
+#endif
+#ifndef glGetMultiTexEnvfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexEnvfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLfloat *params))
 void glatter_glGetMultiTexEnvfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat *params, const char* file, int line)
 {
@@ -39252,6 +43445,8 @@ void glatter_glGetMultiTexEnvfvEXT_debug(GLenum texunit, GLenum target, GLenum p
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexEnvfvEXT_defined
+#endif
+#ifndef glGetMultiTexEnvivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexEnvivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
 void glatter_glGetMultiTexEnvivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39260,6 +43455,8 @@ void glatter_glGetMultiTexEnvivEXT_debug(GLenum texunit, GLenum target, GLenum p
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexEnvivEXT_defined
+#endif
+#ifndef glGetMultiTexGendvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGendvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLdouble *params))
 void glatter_glGetMultiTexGendvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLdouble *params, const char* file, int line)
 {
@@ -39268,6 +43465,8 @@ void glatter_glGetMultiTexGendvEXT_debug(GLenum texunit, GLenum coord, GLenum pn
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexGendvEXT_defined
+#endif
+#ifndef glGetMultiTexGenfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGenfvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLfloat *params))
 void glatter_glGetMultiTexGenfvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLfloat *params, const char* file, int line)
 {
@@ -39276,6 +43475,8 @@ void glatter_glGetMultiTexGenfvEXT_debug(GLenum texunit, GLenum coord, GLenum pn
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexGenfvEXT_defined
+#endif
+#ifndef glGetMultiTexGenivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexGenivEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, GLint *params))
 void glatter_glGetMultiTexGenivEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39284,6 +43485,8 @@ void glatter_glGetMultiTexGenivEXT_debug(GLenum texunit, GLenum coord, GLenum pn
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexGenivEXT_defined
+#endif
+#ifndef glGetMultiTexImageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexImageEXT, (texunit, target, level, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
 void glatter_glGetMultiTexImageEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void *pixels, const char* file, int line)
 {
@@ -39292,6 +43495,8 @@ void glatter_glGetMultiTexImageEXT_debug(GLenum texunit, GLenum target, GLint le
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexImageEXT_defined
+#endif
+#ifndef glGetMultiTexLevelParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexLevelParameterfvEXT, (texunit, target, level, pname, params), (GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat *params))
 void glatter_glGetMultiTexLevelParameterfvEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat *params, const char* file, int line)
 {
@@ -39300,6 +43505,8 @@ void glatter_glGetMultiTexLevelParameterfvEXT_debug(GLenum texunit, GLenum targe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexLevelParameterfvEXT_defined
+#endif
+#ifndef glGetMultiTexLevelParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexLevelParameterivEXT, (texunit, target, level, pname, params), (GLenum texunit, GLenum target, GLint level, GLenum pname, GLint *params))
 void glatter_glGetMultiTexLevelParameterivEXT_debug(GLenum texunit, GLenum target, GLint level, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39308,6 +43515,8 @@ void glatter_glGetMultiTexLevelParameterivEXT_debug(GLenum texunit, GLenum targe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexLevelParameterivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterIivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
 void glatter_glGetMultiTexParameterIivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39316,6 +43525,8 @@ void glatter_glGetMultiTexParameterIivEXT_debug(GLenum texunit, GLenum target, G
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexParameterIivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterIuivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLuint *params))
 void glatter_glGetMultiTexParameterIuivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLuint *params, const char* file, int line)
 {
@@ -39324,6 +43535,8 @@ void glatter_glGetMultiTexParameterIuivEXT_debug(GLenum texunit, GLenum target, 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexParameterIuivEXT_defined
+#endif
+#ifndef glGetMultiTexParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLfloat *params))
 void glatter_glGetMultiTexParameterfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat *params, const char* file, int line)
 {
@@ -39332,6 +43545,8 @@ void glatter_glGetMultiTexParameterfvEXT_debug(GLenum texunit, GLenum target, GL
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexParameterfvEXT_defined
+#endif
+#ifndef glGetMultiTexParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultiTexParameterivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, GLint *params))
 void glatter_glGetMultiTexParameterivEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39340,6 +43555,8 @@ void glatter_glGetMultiTexParameterivEXT_debug(GLenum texunit, GLenum target, GL
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetMultiTexParameterivEXT_defined
+#endif
+#ifndef glGetNamedBufferParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameterivEXT, (buffer, pname, params), (GLuint buffer, GLenum pname, GLint *params))
 void glatter_glGetNamedBufferParameterivEXT_debug(GLuint buffer, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39348,6 +43565,8 @@ void glatter_glGetNamedBufferParameterivEXT_debug(GLuint buffer, GLenum pname, G
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedBufferParameterivEXT_defined
+#endif
+#ifndef glGetNamedBufferPointervEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferPointervEXT, (buffer, pname, params), (GLuint buffer, GLenum pname, void **params))
 void glatter_glGetNamedBufferPointervEXT_debug(GLuint buffer, GLenum pname, void **params, const char* file, int line)
 {
@@ -39356,6 +43575,8 @@ void glatter_glGetNamedBufferPointervEXT_debug(GLuint buffer, GLenum pname, void
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedBufferPointervEXT_defined
+#endif
+#ifndef glGetNamedBufferSubDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubDataEXT, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data))
 void glatter_glGetNamedBufferSubDataEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, void *data, const char* file, int line)
 {
@@ -39364,6 +43585,8 @@ void glatter_glGetNamedBufferSubDataEXT_debug(GLuint buffer, GLintptr offset, GL
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedBufferSubDataEXT_defined
+#endif
+#ifndef glGetNamedFramebufferAttachmentParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferAttachmentParameterivEXT, (framebuffer, attachment, pname, params), (GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params))
 void glatter_glGetNamedFramebufferAttachmentParameterivEXT_debug(GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39372,6 +43595,8 @@ void glatter_glGetNamedFramebufferAttachmentParameterivEXT_debug(GLuint framebuf
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedFramebufferAttachmentParameterivEXT_defined
+#endif
+#ifndef glGetNamedFramebufferParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferParameterivEXT, (framebuffer, pname, params), (GLuint framebuffer, GLenum pname, GLint *params))
 void glatter_glGetNamedFramebufferParameterivEXT_debug(GLuint framebuffer, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39380,6 +43605,8 @@ void glatter_glGetNamedFramebufferParameterivEXT_debug(GLuint framebuffer, GLenu
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedFramebufferParameterivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterIivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLint *params))
 void glatter_glGetNamedProgramLocalParameterIivEXT_debug(GLuint program, GLenum target, GLuint index, GLint *params, const char* file, int line)
 {
@@ -39388,6 +43615,8 @@ void glatter_glGetNamedProgramLocalParameterIivEXT_debug(GLuint program, GLenum 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedProgramLocalParameterIivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterIuivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLuint *params))
 void glatter_glGetNamedProgramLocalParameterIuivEXT_debug(GLuint program, GLenum target, GLuint index, GLuint *params, const char* file, int line)
 {
@@ -39396,6 +43625,8 @@ void glatter_glGetNamedProgramLocalParameterIuivEXT_debug(GLuint program, GLenum
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedProgramLocalParameterIuivEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterdvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterdvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLdouble *params))
 void glatter_glGetNamedProgramLocalParameterdvEXT_debug(GLuint program, GLenum target, GLuint index, GLdouble *params, const char* file, int line)
 {
@@ -39404,6 +43635,8 @@ void glatter_glGetNamedProgramLocalParameterdvEXT_debug(GLuint program, GLenum t
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedProgramLocalParameterdvEXT_defined
+#endif
+#ifndef glGetNamedProgramLocalParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramLocalParameterfvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, GLfloat *params))
 void glatter_glGetNamedProgramLocalParameterfvEXT_debug(GLuint program, GLenum target, GLuint index, GLfloat *params, const char* file, int line)
 {
@@ -39412,6 +43645,8 @@ void glatter_glGetNamedProgramLocalParameterfvEXT_debug(GLuint program, GLenum t
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedProgramLocalParameterfvEXT_defined
+#endif
+#ifndef glGetNamedProgramStringEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramStringEXT, (program, target, pname, string), (GLuint program, GLenum target, GLenum pname, void *string))
 void glatter_glGetNamedProgramStringEXT_debug(GLuint program, GLenum target, GLenum pname, void *string, const char* file, int line)
 {
@@ -39420,6 +43655,8 @@ void glatter_glGetNamedProgramStringEXT_debug(GLuint program, GLenum target, GLe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedProgramStringEXT_defined
+#endif
+#ifndef glGetNamedProgramivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedProgramivEXT, (program, target, pname, params), (GLuint program, GLenum target, GLenum pname, GLint *params))
 void glatter_glGetNamedProgramivEXT_debug(GLuint program, GLenum target, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39428,6 +43665,8 @@ void glatter_glGetNamedProgramivEXT_debug(GLuint program, GLenum target, GLenum 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedProgramivEXT_defined
+#endif
+#ifndef glGetNamedRenderbufferParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedRenderbufferParameterivEXT, (renderbuffer, pname, params), (GLuint renderbuffer, GLenum pname, GLint *params))
 void glatter_glGetNamedRenderbufferParameterivEXT_debug(GLuint renderbuffer, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39436,6 +43675,8 @@ void glatter_glGetNamedRenderbufferParameterivEXT_debug(GLuint renderbuffer, GLe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedRenderbufferParameterivEXT_defined
+#endif
+#ifndef glGetPointerIndexedvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointerIndexedvEXT, (target, index, data), (GLenum target, GLuint index, void **data))
 void glatter_glGetPointerIndexedvEXT_debug(GLenum target, GLuint index, void **data, const char* file, int line)
 {
@@ -39444,6 +43685,8 @@ void glatter_glGetPointerIndexedvEXT_debug(GLenum target, GLuint index, void **d
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetPointerIndexedvEXT_defined
+#endif
+#ifndef glGetPointeri_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointeri_vEXT, (pname, index, params), (GLenum pname, GLuint index, void **params))
 void glatter_glGetPointeri_vEXT_debug(GLenum pname, GLuint index, void **params, const char* file, int line)
 {
@@ -39452,6 +43695,8 @@ void glatter_glGetPointeri_vEXT_debug(GLenum pname, GLuint index, void **params,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetPointeri_vEXT_defined
+#endif
+#ifndef glGetTextureImageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureImageEXT, (texture, target, level, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
 void glatter_glGetTextureImageEXT_debug(GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void *pixels, const char* file, int line)
 {
@@ -39460,6 +43705,8 @@ void glatter_glGetTextureImageEXT_debug(GLuint texture, GLenum target, GLint lev
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetTextureImageEXT_defined
+#endif
+#ifndef glGetTextureLevelParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterfvEXT, (texture, target, level, pname, params), (GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params))
 void glatter_glGetTextureLevelParameterfvEXT_debug(GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params, const char* file, int line)
 {
@@ -39468,6 +43715,8 @@ void glatter_glGetTextureLevelParameterfvEXT_debug(GLuint texture, GLenum target
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetTextureLevelParameterfvEXT_defined
+#endif
+#ifndef glGetTextureLevelParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterivEXT, (texture, target, level, pname, params), (GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params))
 void glatter_glGetTextureLevelParameterivEXT_debug(GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39476,6 +43725,8 @@ void glatter_glGetTextureLevelParameterivEXT_debug(GLuint texture, GLenum target
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetTextureLevelParameterivEXT_defined
+#endif
+#ifndef glGetTextureParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLint *params))
 void glatter_glGetTextureParameterIivEXT_debug(GLuint texture, GLenum target, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39484,6 +43735,8 @@ void glatter_glGetTextureParameterIivEXT_debug(GLuint texture, GLenum target, GL
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetTextureParameterIivEXT_defined
+#endif
+#ifndef glGetTextureParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIuivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLuint *params))
 void glatter_glGetTextureParameterIuivEXT_debug(GLuint texture, GLenum target, GLenum pname, GLuint *params, const char* file, int line)
 {
@@ -39492,6 +43745,8 @@ void glatter_glGetTextureParameterIuivEXT_debug(GLuint texture, GLenum target, G
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetTextureParameterIuivEXT_defined
+#endif
+#ifndef glGetTextureParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterfvEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLfloat *params))
 void glatter_glGetTextureParameterfvEXT_debug(GLuint texture, GLenum target, GLenum pname, GLfloat *params, const char* file, int line)
 {
@@ -39500,6 +43755,8 @@ void glatter_glGetTextureParameterfvEXT_debug(GLuint texture, GLenum target, GLe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetTextureParameterfvEXT_defined
+#endif
+#ifndef glGetTextureParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, GLint *params))
 void glatter_glGetTextureParameterivEXT_debug(GLuint texture, GLenum target, GLenum pname, GLint *params, const char* file, int line)
 {
@@ -39508,6 +43765,8 @@ void glatter_glGetTextureParameterivEXT_debug(GLuint texture, GLenum target, GLe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetTextureParameterivEXT_defined
+#endif
+#ifndef glGetVertexArrayIntegeri_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIntegeri_vEXT, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, GLint *param))
 void glatter_glGetVertexArrayIntegeri_vEXT_debug(GLuint vaobj, GLuint index, GLenum pname, GLint *param, const char* file, int line)
 {
@@ -39516,6 +43775,8 @@ void glatter_glGetVertexArrayIntegeri_vEXT_debug(GLuint vaobj, GLuint index, GLe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetVertexArrayIntegeri_vEXT_defined
+#endif
+#ifndef glGetVertexArrayIntegervEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIntegervEXT, (vaobj, pname, param), (GLuint vaobj, GLenum pname, GLint *param))
 void glatter_glGetVertexArrayIntegervEXT_debug(GLuint vaobj, GLenum pname, GLint *param, const char* file, int line)
 {
@@ -39524,6 +43785,8 @@ void glatter_glGetVertexArrayIntegervEXT_debug(GLuint vaobj, GLenum pname, GLint
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetVertexArrayIntegervEXT_defined
+#endif
+#ifndef glGetVertexArrayPointeri_vEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayPointeri_vEXT, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, void **param))
 void glatter_glGetVertexArrayPointeri_vEXT_debug(GLuint vaobj, GLuint index, GLenum pname, void **param, const char* file, int line)
 {
@@ -39532,6 +43795,8 @@ void glatter_glGetVertexArrayPointeri_vEXT_debug(GLuint vaobj, GLuint index, GLe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetVertexArrayPointeri_vEXT_defined
+#endif
+#ifndef glGetVertexArrayPointervEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayPointervEXT, (vaobj, pname, param), (GLuint vaobj, GLenum pname, void **param))
 void glatter_glGetVertexArrayPointervEXT_debug(GLuint vaobj, GLenum pname, void **param, const char* file, int line)
 {
@@ -39540,6 +43805,8 @@ void glatter_glGetVertexArrayPointervEXT_debug(GLuint vaobj, GLenum pname, void 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetVertexArrayPointervEXT_defined
+#endif
+#ifndef glIsEnabledIndexedEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsEnabledIndexedEXT, (target, index), (GLenum target, GLuint index))
 GLboolean glatter_glIsEnabledIndexedEXT_debug(GLenum target, GLuint index, const char* file, int line)
 {
@@ -39550,6 +43817,8 @@ GLboolean glatter_glIsEnabledIndexedEXT_debug(GLenum target, GLuint index, const
     return rval;
 }
 #define glIsEnabledIndexedEXT_defined
+#endif
+#ifndef glMapNamedBufferEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferEXT, (buffer, access), (GLuint buffer, GLenum access))
 void * glatter_glMapNamedBufferEXT_debug(GLuint buffer, GLenum access, const char* file, int line)
 {
@@ -39560,6 +43829,8 @@ void * glatter_glMapNamedBufferEXT_debug(GLuint buffer, GLenum access, const cha
     return rval;
 }
 #define glMapNamedBufferEXT_defined
+#endif
+#ifndef glMapNamedBufferRangeEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRangeEXT, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access))
 void * glatter_glMapNamedBufferRangeEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access, const char* file, int line)
 {
@@ -39570,6 +43841,8 @@ void * glatter_glMapNamedBufferRangeEXT_debug(GLuint buffer, GLintptr offset, GL
     return rval;
 }
 #define glMapNamedBufferRangeEXT_defined
+#endif
+#ifndef glMatrixFrustumEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixFrustumEXT, (mode, left, right, bottom, top, zNear, zFar), (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar))
 void glatter_glMatrixFrustumEXT_debug(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar, const char* file, int line)
 {
@@ -39578,6 +43851,8 @@ void glatter_glMatrixFrustumEXT_debug(GLenum mode, GLdouble left, GLdouble right
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixFrustumEXT_defined
+#endif
+#ifndef glMatrixLoadIdentityEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadIdentityEXT, (mode), (GLenum mode))
 void glatter_glMatrixLoadIdentityEXT_debug(GLenum mode, const char* file, int line)
 {
@@ -39586,6 +43861,8 @@ void glatter_glMatrixLoadIdentityEXT_debug(GLenum mode, const char* file, int li
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixLoadIdentityEXT_defined
+#endif
+#ifndef glMatrixLoadTransposedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadTransposedEXT, (mode, m), (GLenum mode, const GLdouble *m))
 void glatter_glMatrixLoadTransposedEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line)
 {
@@ -39594,6 +43871,8 @@ void glatter_glMatrixLoadTransposedEXT_debug(GLenum mode, const GLdouble *m, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixLoadTransposedEXT_defined
+#endif
+#ifndef glMatrixLoadTransposefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadTransposefEXT, (mode, m), (GLenum mode, const GLfloat *m))
 void glatter_glMatrixLoadTransposefEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line)
 {
@@ -39602,6 +43881,8 @@ void glatter_glMatrixLoadTransposefEXT_debug(GLenum mode, const GLfloat *m, cons
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixLoadTransposefEXT_defined
+#endif
+#ifndef glMatrixLoaddEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoaddEXT, (mode, m), (GLenum mode, const GLdouble *m))
 void glatter_glMatrixLoaddEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line)
 {
@@ -39610,6 +43891,8 @@ void glatter_glMatrixLoaddEXT_debug(GLenum mode, const GLdouble *m, const char* 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixLoaddEXT_defined
+#endif
+#ifndef glMatrixLoadfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixLoadfEXT, (mode, m), (GLenum mode, const GLfloat *m))
 void glatter_glMatrixLoadfEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line)
 {
@@ -39618,6 +43901,8 @@ void glatter_glMatrixLoadfEXT_debug(GLenum mode, const GLfloat *m, const char* f
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixLoadfEXT_defined
+#endif
+#ifndef glMatrixMultTransposedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultTransposedEXT, (mode, m), (GLenum mode, const GLdouble *m))
 void glatter_glMatrixMultTransposedEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line)
 {
@@ -39626,6 +43911,8 @@ void glatter_glMatrixMultTransposedEXT_debug(GLenum mode, const GLdouble *m, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixMultTransposedEXT_defined
+#endif
+#ifndef glMatrixMultTransposefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultTransposefEXT, (mode, m), (GLenum mode, const GLfloat *m))
 void glatter_glMatrixMultTransposefEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line)
 {
@@ -39634,6 +43921,8 @@ void glatter_glMatrixMultTransposefEXT_debug(GLenum mode, const GLfloat *m, cons
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixMultTransposefEXT_defined
+#endif
+#ifndef glMatrixMultdEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultdEXT, (mode, m), (GLenum mode, const GLdouble *m))
 void glatter_glMatrixMultdEXT_debug(GLenum mode, const GLdouble *m, const char* file, int line)
 {
@@ -39642,6 +43931,8 @@ void glatter_glMatrixMultdEXT_debug(GLenum mode, const GLdouble *m, const char* 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixMultdEXT_defined
+#endif
+#ifndef glMatrixMultfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixMultfEXT, (mode, m), (GLenum mode, const GLfloat *m))
 void glatter_glMatrixMultfEXT_debug(GLenum mode, const GLfloat *m, const char* file, int line)
 {
@@ -39650,6 +43941,8 @@ void glatter_glMatrixMultfEXT_debug(GLenum mode, const GLfloat *m, const char* f
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixMultfEXT_defined
+#endif
+#ifndef glMatrixOrthoEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixOrthoEXT, (mode, left, right, bottom, top, zNear, zFar), (GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar))
 void glatter_glMatrixOrthoEXT_debug(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar, const char* file, int line)
 {
@@ -39658,6 +43951,8 @@ void glatter_glMatrixOrthoEXT_debug(GLenum mode, GLdouble left, GLdouble right, 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixOrthoEXT_defined
+#endif
+#ifndef glMatrixPopEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixPopEXT, (mode), (GLenum mode))
 void glatter_glMatrixPopEXT_debug(GLenum mode, const char* file, int line)
 {
@@ -39666,6 +43961,8 @@ void glatter_glMatrixPopEXT_debug(GLenum mode, const char* file, int line)
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixPopEXT_defined
+#endif
+#ifndef glMatrixPushEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixPushEXT, (mode), (GLenum mode))
 void glatter_glMatrixPushEXT_debug(GLenum mode, const char* file, int line)
 {
@@ -39674,6 +43971,8 @@ void glatter_glMatrixPushEXT_debug(GLenum mode, const char* file, int line)
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixPushEXT_defined
+#endif
+#ifndef glMatrixRotatedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixRotatedEXT, (mode, angle, x, y, z), (GLenum mode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z))
 void glatter_glMatrixRotatedEXT_debug(GLenum mode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
 {
@@ -39682,6 +43981,8 @@ void glatter_glMatrixRotatedEXT_debug(GLenum mode, GLdouble angle, GLdouble x, G
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixRotatedEXT_defined
+#endif
+#ifndef glMatrixRotatefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixRotatefEXT, (mode, angle, x, y, z), (GLenum mode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z))
 void glatter_glMatrixRotatefEXT_debug(GLenum mode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z, const char* file, int line)
 {
@@ -39690,6 +43991,8 @@ void glatter_glMatrixRotatefEXT_debug(GLenum mode, GLfloat angle, GLfloat x, GLf
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixRotatefEXT_defined
+#endif
+#ifndef glMatrixScaledEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixScaledEXT, (mode, x, y, z), (GLenum mode, GLdouble x, GLdouble y, GLdouble z))
 void glatter_glMatrixScaledEXT_debug(GLenum mode, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
 {
@@ -39698,6 +44001,8 @@ void glatter_glMatrixScaledEXT_debug(GLenum mode, GLdouble x, GLdouble y, GLdoub
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixScaledEXT_defined
+#endif
+#ifndef glMatrixScalefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixScalefEXT, (mode, x, y, z), (GLenum mode, GLfloat x, GLfloat y, GLfloat z))
 void glatter_glMatrixScalefEXT_debug(GLenum mode, GLfloat x, GLfloat y, GLfloat z, const char* file, int line)
 {
@@ -39706,6 +44011,8 @@ void glatter_glMatrixScalefEXT_debug(GLenum mode, GLfloat x, GLfloat y, GLfloat 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixScalefEXT_defined
+#endif
+#ifndef glMatrixTranslatedEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixTranslatedEXT, (mode, x, y, z), (GLenum mode, GLdouble x, GLdouble y, GLdouble z))
 void glatter_glMatrixTranslatedEXT_debug(GLenum mode, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
 {
@@ -39714,6 +44021,8 @@ void glatter_glMatrixTranslatedEXT_debug(GLenum mode, GLdouble x, GLdouble y, GL
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixTranslatedEXT_defined
+#endif
+#ifndef glMatrixTranslatefEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMatrixTranslatefEXT, (mode, x, y, z), (GLenum mode, GLfloat x, GLfloat y, GLfloat z))
 void glatter_glMatrixTranslatefEXT_debug(GLenum mode, GLfloat x, GLfloat y, GLfloat z, const char* file, int line)
 {
@@ -39722,6 +44031,8 @@ void glatter_glMatrixTranslatefEXT_debug(GLenum mode, GLfloat x, GLfloat y, GLfl
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMatrixTranslatefEXT_defined
+#endif
+#ifndef glMultiTexBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexBufferEXT, (texunit, target, internalformat, buffer), (GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer))
 void glatter_glMultiTexBufferEXT_debug(GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line)
 {
@@ -39730,6 +44041,8 @@ void glatter_glMultiTexBufferEXT_debug(GLenum texunit, GLenum target, GLenum int
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexBufferEXT_defined
+#endif
+#ifndef glMultiTexCoordPointerEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexCoordPointerEXT, (texunit, size, type, stride, pointer), (GLenum texunit, GLint size, GLenum type, GLsizei stride, const void *pointer))
 void glatter_glMultiTexCoordPointerEXT_debug(GLenum texunit, GLint size, GLenum type, GLsizei stride, const void *pointer, const char* file, int line)
 {
@@ -39738,6 +44051,8 @@ void glatter_glMultiTexCoordPointerEXT_debug(GLenum texunit, GLint size, GLenum 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexCoordPointerEXT_defined
+#endif
+#ifndef glMultiTexEnvfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvfEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLfloat param))
 void glatter_glMultiTexEnvfEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat param, const char* file, int line)
 {
@@ -39746,6 +44061,8 @@ void glatter_glMultiTexEnvfEXT_debug(GLenum texunit, GLenum target, GLenum pname
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexEnvfEXT_defined
+#endif
+#ifndef glMultiTexEnvfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLfloat *params))
 void glatter_glMultiTexEnvfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLfloat *params, const char* file, int line)
 {
@@ -39754,6 +44071,8 @@ void glatter_glMultiTexEnvfvEXT_debug(GLenum texunit, GLenum target, GLenum pnam
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexEnvfvEXT_defined
+#endif
+#ifndef glMultiTexEnviEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnviEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLint param))
 void glatter_glMultiTexEnviEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint param, const char* file, int line)
 {
@@ -39762,6 +44081,8 @@ void glatter_glMultiTexEnviEXT_debug(GLenum texunit, GLenum target, GLenum pname
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexEnviEXT_defined
+#endif
+#ifndef glMultiTexEnvivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexEnvivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
 void glatter_glMultiTexEnvivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
 {
@@ -39770,6 +44091,8 @@ void glatter_glMultiTexEnvivEXT_debug(GLenum texunit, GLenum target, GLenum pnam
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexEnvivEXT_defined
+#endif
+#ifndef glMultiTexGendEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGendEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLdouble param))
 void glatter_glMultiTexGendEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLdouble param, const char* file, int line)
 {
@@ -39778,6 +44101,8 @@ void glatter_glMultiTexGendEXT_debug(GLenum texunit, GLenum coord, GLenum pname,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexGendEXT_defined
+#endif
+#ifndef glMultiTexGendvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGendvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params))
 void glatter_glMultiTexGendvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params, const char* file, int line)
 {
@@ -39786,6 +44111,8 @@ void glatter_glMultiTexGendvEXT_debug(GLenum texunit, GLenum coord, GLenum pname
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexGendvEXT_defined
+#endif
+#ifndef glMultiTexGenfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenfEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLfloat param))
 void glatter_glMultiTexGenfEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLfloat param, const char* file, int line)
 {
@@ -39794,6 +44121,8 @@ void glatter_glMultiTexGenfEXT_debug(GLenum texunit, GLenum coord, GLenum pname,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexGenfEXT_defined
+#endif
+#ifndef glMultiTexGenfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenfvEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params))
 void glatter_glMultiTexGenfvEXT_debug(GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params, const char* file, int line)
 {
@@ -39802,6 +44131,8 @@ void glatter_glMultiTexGenfvEXT_debug(GLenum texunit, GLenum coord, GLenum pname
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexGenfvEXT_defined
+#endif
+#ifndef glMultiTexGeniEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGeniEXT, (texunit, coord, pname, param), (GLenum texunit, GLenum coord, GLenum pname, GLint param))
 void glatter_glMultiTexGeniEXT_debug(GLenum texunit, GLenum coord, GLenum pname, GLint param, const char* file, int line)
 {
@@ -39810,6 +44141,8 @@ void glatter_glMultiTexGeniEXT_debug(GLenum texunit, GLenum coord, GLenum pname,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexGeniEXT_defined
+#endif
+#ifndef glMultiTexGenivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexGenivEXT, (texunit, coord, pname, params), (GLenum texunit, GLenum coord, GLenum pname, const GLint *params))
 void glatter_glMultiTexGenivEXT_debug(GLenum texunit, GLenum coord, GLenum pname, const GLint *params, const char* file, int line)
 {
@@ -39818,6 +44151,8 @@ void glatter_glMultiTexGenivEXT_debug(GLenum texunit, GLenum coord, GLenum pname
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexGenivEXT_defined
+#endif
+#ifndef glMultiTexImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage1DEXT, (texunit, target, level, internalformat, width, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
 void glatter_glMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -39826,6 +44161,8 @@ void glatter_glMultiTexImage1DEXT_debug(GLenum texunit, GLenum target, GLint lev
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexImage1DEXT_defined
+#endif
+#ifndef glMultiTexImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage2DEXT, (texunit, target, level, internalformat, width, height, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
 void glatter_glMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -39834,6 +44171,8 @@ void glatter_glMultiTexImage2DEXT_debug(GLenum texunit, GLenum target, GLint lev
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexImage2DEXT_defined
+#endif
+#ifndef glMultiTexImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexImage3DEXT, (texunit, target, level, internalformat, width, height, depth, border, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
 void glatter_glMultiTexImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -39842,6 +44181,8 @@ void glatter_glMultiTexImage3DEXT_debug(GLenum texunit, GLenum target, GLint lev
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexImage3DEXT_defined
+#endif
+#ifndef glMultiTexParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterIivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
 void glatter_glMultiTexParameterIivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
 {
@@ -39850,6 +44191,8 @@ void glatter_glMultiTexParameterIivEXT_debug(GLenum texunit, GLenum target, GLen
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexParameterIivEXT_defined
+#endif
+#ifndef glMultiTexParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterIuivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLuint *params))
 void glatter_glMultiTexParameterIuivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLuint *params, const char* file, int line)
 {
@@ -39858,6 +44201,8 @@ void glatter_glMultiTexParameterIuivEXT_debug(GLenum texunit, GLenum target, GLe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexParameterIuivEXT_defined
+#endif
+#ifndef glMultiTexParameterfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterfEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLfloat param))
 void glatter_glMultiTexParameterfEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLfloat param, const char* file, int line)
 {
@@ -39866,6 +44211,8 @@ void glatter_glMultiTexParameterfEXT_debug(GLenum texunit, GLenum target, GLenum
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexParameterfEXT_defined
+#endif
+#ifndef glMultiTexParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterfvEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLfloat *params))
 void glatter_glMultiTexParameterfvEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLfloat *params, const char* file, int line)
 {
@@ -39874,6 +44221,8 @@ void glatter_glMultiTexParameterfvEXT_debug(GLenum texunit, GLenum target, GLenu
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexParameterfvEXT_defined
+#endif
+#ifndef glMultiTexParameteriEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameteriEXT, (texunit, target, pname, param), (GLenum texunit, GLenum target, GLenum pname, GLint param))
 void glatter_glMultiTexParameteriEXT_debug(GLenum texunit, GLenum target, GLenum pname, GLint param, const char* file, int line)
 {
@@ -39882,6 +44231,8 @@ void glatter_glMultiTexParameteriEXT_debug(GLenum texunit, GLenum target, GLenum
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexParameteriEXT_defined
+#endif
+#ifndef glMultiTexParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexParameterivEXT, (texunit, target, pname, params), (GLenum texunit, GLenum target, GLenum pname, const GLint *params))
 void glatter_glMultiTexParameterivEXT_debug(GLenum texunit, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
 {
@@ -39890,6 +44241,8 @@ void glatter_glMultiTexParameterivEXT_debug(GLenum texunit, GLenum target, GLenu
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexParameterivEXT_defined
+#endif
+#ifndef glMultiTexRenderbufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexRenderbufferEXT, (texunit, target, renderbuffer), (GLenum texunit, GLenum target, GLuint renderbuffer))
 void glatter_glMultiTexRenderbufferEXT_debug(GLenum texunit, GLenum target, GLuint renderbuffer, const char* file, int line)
 {
@@ -39898,6 +44251,8 @@ void glatter_glMultiTexRenderbufferEXT_debug(GLenum texunit, GLenum target, GLui
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexRenderbufferEXT_defined
+#endif
+#ifndef glMultiTexSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage1DEXT, (texunit, target, level, xoffset, width, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
 void glatter_glMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -39906,6 +44261,8 @@ void glatter_glMultiTexSubImage1DEXT_debug(GLenum texunit, GLenum target, GLint 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexSubImage1DEXT_defined
+#endif
+#ifndef glMultiTexSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage2DEXT, (texunit, target, level, xoffset, yoffset, width, height, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
 void glatter_glMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -39914,6 +44271,8 @@ void glatter_glMultiTexSubImage2DEXT_debug(GLenum texunit, GLenum target, GLint 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexSubImage2DEXT_defined
+#endif
+#ifndef glMultiTexSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiTexSubImage3DEXT, (texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
 void glatter_glMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -39922,6 +44281,8 @@ void glatter_glMultiTexSubImage3DEXT_debug(GLenum texunit, GLenum target, GLint 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiTexSubImage3DEXT_defined
+#endif
+#ifndef glNamedBufferDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferDataEXT, (buffer, size, data, usage), (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage))
 void glatter_glNamedBufferDataEXT_debug(GLuint buffer, GLsizeiptr size, const void *data, GLenum usage, const char* file, int line)
 {
@@ -39930,6 +44291,8 @@ void glatter_glNamedBufferDataEXT_debug(GLuint buffer, GLsizeiptr size, const vo
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedBufferDataEXT_defined
+#endif
+#ifndef glNamedBufferStorageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorageEXT, (buffer, size, data, flags), (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags))
 void glatter_glNamedBufferStorageEXT_debug(GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags, const char* file, int line)
 {
@@ -39938,6 +44301,8 @@ void glatter_glNamedBufferStorageEXT_debug(GLuint buffer, GLsizeiptr size, const
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedBufferStorageEXT_defined
+#endif
+#ifndef glNamedBufferSubDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubDataEXT, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
 void glatter_glNamedBufferSubDataEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line)
 {
@@ -39946,6 +44311,8 @@ void glatter_glNamedBufferSubDataEXT_debug(GLuint buffer, GLintptr offset, GLsiz
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedBufferSubDataEXT_defined
+#endif
+#ifndef glNamedCopyBufferSubDataEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedCopyBufferSubDataEXT, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
 void glatter_glNamedCopyBufferSubDataEXT_debug(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line)
 {
@@ -39954,6 +44321,8 @@ void glatter_glNamedCopyBufferSubDataEXT_debug(GLuint readBuffer, GLuint writeBu
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedCopyBufferSubDataEXT_defined
+#endif
+#ifndef glNamedFramebufferParameteriEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferParameteriEXT, (framebuffer, pname, param), (GLuint framebuffer, GLenum pname, GLint param))
 void glatter_glNamedFramebufferParameteriEXT_debug(GLuint framebuffer, GLenum pname, GLint param, const char* file, int line)
 {
@@ -39962,6 +44331,8 @@ void glatter_glNamedFramebufferParameteriEXT_debug(GLuint framebuffer, GLenum pn
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedFramebufferParameteriEXT_defined
+#endif
+#ifndef glNamedFramebufferRenderbufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferRenderbufferEXT, (framebuffer, attachment, renderbuffertarget, renderbuffer), (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer))
 void glatter_glNamedFramebufferRenderbufferEXT_debug(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer, const char* file, int line)
 {
@@ -39970,6 +44341,8 @@ void glatter_glNamedFramebufferRenderbufferEXT_debug(GLuint framebuffer, GLenum 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedFramebufferRenderbufferEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture1DEXT, (framebuffer, attachment, textarget, texture, level), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
 void glatter_glNamedFramebufferTexture1DEXT_debug(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line)
 {
@@ -39978,6 +44351,8 @@ void glatter_glNamedFramebufferTexture1DEXT_debug(GLuint framebuffer, GLenum att
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedFramebufferTexture1DEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture2DEXT, (framebuffer, attachment, textarget, texture, level), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
 void glatter_glNamedFramebufferTexture2DEXT_debug(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line)
 {
@@ -39986,6 +44361,8 @@ void glatter_glNamedFramebufferTexture2DEXT_debug(GLuint framebuffer, GLenum att
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedFramebufferTexture2DEXT_defined
+#endif
+#ifndef glNamedFramebufferTexture3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture3DEXT, (framebuffer, attachment, textarget, texture, level, zoffset), (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset))
 void glatter_glNamedFramebufferTexture3DEXT_debug(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset, const char* file, int line)
 {
@@ -39994,6 +44371,8 @@ void glatter_glNamedFramebufferTexture3DEXT_debug(GLuint framebuffer, GLenum att
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedFramebufferTexture3DEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureEXT, (framebuffer, attachment, texture, level), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level))
 void glatter_glNamedFramebufferTextureEXT_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, const char* file, int line)
 {
@@ -40002,6 +44381,8 @@ void glatter_glNamedFramebufferTextureEXT_debug(GLuint framebuffer, GLenum attac
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedFramebufferTextureEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureFaceEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureFaceEXT, (framebuffer, attachment, texture, level, face), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face))
 void glatter_glNamedFramebufferTextureFaceEXT_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face, const char* file, int line)
 {
@@ -40010,6 +44391,8 @@ void glatter_glNamedFramebufferTextureFaceEXT_debug(GLuint framebuffer, GLenum a
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedFramebufferTextureFaceEXT_defined
+#endif
+#ifndef glNamedFramebufferTextureLayerEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureLayerEXT, (framebuffer, attachment, texture, level, layer), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer))
 void glatter_glNamedFramebufferTextureLayerEXT_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line)
 {
@@ -40018,6 +44401,8 @@ void glatter_glNamedFramebufferTextureLayerEXT_debug(GLuint framebuffer, GLenum 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedFramebufferTextureLayerEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4dEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
 void glatter_glNamedProgramLocalParameter4dEXT_debug(GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line)
 {
@@ -40026,6 +44411,8 @@ void glatter_glNamedProgramLocalParameter4dEXT_debug(GLuint program, GLenum targ
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParameter4dEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4dvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLdouble *params))
 void glatter_glNamedProgramLocalParameter4dvEXT_debug(GLuint program, GLenum target, GLuint index, const GLdouble *params, const char* file, int line)
 {
@@ -40034,6 +44421,8 @@ void glatter_glNamedProgramLocalParameter4dvEXT_debug(GLuint program, GLenum tar
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParameter4dvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4fEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w))
 void glatter_glNamedProgramLocalParameter4fEXT_debug(GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w, const char* file, int line)
 {
@@ -40042,6 +44431,8 @@ void glatter_glNamedProgramLocalParameter4fEXT_debug(GLuint program, GLenum targ
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParameter4fEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameter4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameter4fvEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLfloat *params))
 void glatter_glNamedProgramLocalParameter4fvEXT_debug(GLuint program, GLenum target, GLuint index, const GLfloat *params, const char* file, int line)
 {
@@ -40050,6 +44441,8 @@ void glatter_glNamedProgramLocalParameter4fvEXT_debug(GLuint program, GLenum tar
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParameter4fvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4iEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4iEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w))
 void glatter_glNamedProgramLocalParameterI4iEXT_debug(GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w, const char* file, int line)
 {
@@ -40058,6 +44451,8 @@ void glatter_glNamedProgramLocalParameterI4iEXT_debug(GLuint program, GLenum tar
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParameterI4iEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4ivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4ivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLint *params))
 void glatter_glNamedProgramLocalParameterI4ivEXT_debug(GLuint program, GLenum target, GLuint index, const GLint *params, const char* file, int line)
 {
@@ -40066,6 +44461,8 @@ void glatter_glNamedProgramLocalParameterI4ivEXT_debug(GLuint program, GLenum ta
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParameterI4ivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4uiEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4uiEXT, (program, target, index, x, y, z, w), (GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w))
 void glatter_glNamedProgramLocalParameterI4uiEXT_debug(GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w, const char* file, int line)
 {
@@ -40074,6 +44471,8 @@ void glatter_glNamedProgramLocalParameterI4uiEXT_debug(GLuint program, GLenum ta
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParameterI4uiEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameterI4uivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameterI4uivEXT, (program, target, index, params), (GLuint program, GLenum target, GLuint index, const GLuint *params))
 void glatter_glNamedProgramLocalParameterI4uivEXT_debug(GLuint program, GLenum target, GLuint index, const GLuint *params, const char* file, int line)
 {
@@ -40082,6 +44481,8 @@ void glatter_glNamedProgramLocalParameterI4uivEXT_debug(GLuint program, GLenum t
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParameterI4uivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParameters4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParameters4fvEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat *params))
 void glatter_glNamedProgramLocalParameters4fvEXT_debug(GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat *params, const char* file, int line)
 {
@@ -40090,6 +44491,8 @@ void glatter_glNamedProgramLocalParameters4fvEXT_debug(GLuint program, GLenum ta
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParameters4fvEXT_defined
+#endif
+#ifndef glNamedProgramLocalParametersI4ivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParametersI4ivEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLint *params))
 void glatter_glNamedProgramLocalParametersI4ivEXT_debug(GLuint program, GLenum target, GLuint index, GLsizei count, const GLint *params, const char* file, int line)
 {
@@ -40098,6 +44501,8 @@ void glatter_glNamedProgramLocalParametersI4ivEXT_debug(GLuint program, GLenum t
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParametersI4ivEXT_defined
+#endif
+#ifndef glNamedProgramLocalParametersI4uivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramLocalParametersI4uivEXT, (program, target, index, count, params), (GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint *params))
 void glatter_glNamedProgramLocalParametersI4uivEXT_debug(GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint *params, const char* file, int line)
 {
@@ -40106,6 +44511,8 @@ void glatter_glNamedProgramLocalParametersI4uivEXT_debug(GLuint program, GLenum 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramLocalParametersI4uivEXT_defined
+#endif
+#ifndef glNamedProgramStringEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedProgramStringEXT, (program, target, format, len, string), (GLuint program, GLenum target, GLenum format, GLsizei len, const void *string))
 void glatter_glNamedProgramStringEXT_debug(GLuint program, GLenum target, GLenum format, GLsizei len, const void *string, const char* file, int line)
 {
@@ -40114,6 +44521,8 @@ void glatter_glNamedProgramStringEXT_debug(GLuint program, GLenum target, GLenum
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedProgramStringEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageEXT, (renderbuffer, internalformat, width, height), (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height))
 void glatter_glNamedRenderbufferStorageEXT_debug(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
 {
@@ -40122,6 +44531,8 @@ void glatter_glNamedRenderbufferStorageEXT_debug(GLuint renderbuffer, GLenum int
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedRenderbufferStorageEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisampleCoverageEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisampleCoverageEXT, (renderbuffer, coverageSamples, colorSamples, internalformat, width, height), (GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height))
 void glatter_glNamedRenderbufferStorageMultisampleCoverageEXT_debug(GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
 {
@@ -40130,6 +44541,8 @@ void glatter_glNamedRenderbufferStorageMultisampleCoverageEXT_debug(GLuint rende
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedRenderbufferStorageMultisampleCoverageEXT_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisampleEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisampleEXT, (renderbuffer, samples, internalformat, width, height), (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
 void glatter_glNamedRenderbufferStorageMultisampleEXT_debug(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
 {
@@ -40138,6 +44551,8 @@ void glatter_glNamedRenderbufferStorageMultisampleEXT_debug(GLuint renderbuffer,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNamedRenderbufferStorageMultisampleEXT_defined
+#endif
+#ifndef glProgramUniform1dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dEXT, (program, location, x), (GLuint program, GLint location, GLdouble x))
 void glatter_glProgramUniform1dEXT_debug(GLuint program, GLint location, GLdouble x, const char* file, int line)
 {
@@ -40146,6 +44561,8 @@ void glatter_glProgramUniform1dEXT_debug(GLuint program, GLint location, GLdoubl
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform1dEXT_defined
+#endif
+#ifndef glProgramUniform1dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
 void glatter_glProgramUniform1dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
 {
@@ -40154,6 +44571,7 @@ void glatter_glProgramUniform1dvEXT_debug(GLuint program, GLint location, GLsize
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform1dvEXT_defined
+#endif
 #ifndef glProgramUniform1fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1fEXT, (program, location, v0), (GLuint program, GLint location, GLfloat v0))
 void glatter_glProgramUniform1fEXT_debug(GLuint program, GLint location, GLfloat v0, const char* file, int line)
@@ -40214,6 +44632,7 @@ void glatter_glProgramUniform1uivEXT_debug(GLuint program, GLint location, GLsiz
 }
 #define glProgramUniform1uivEXT_defined
 #endif
+#ifndef glProgramUniform2dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dEXT, (program, location, x, y), (GLuint program, GLint location, GLdouble x, GLdouble y))
 void glatter_glProgramUniform2dEXT_debug(GLuint program, GLint location, GLdouble x, GLdouble y, const char* file, int line)
 {
@@ -40222,6 +44641,8 @@ void glatter_glProgramUniform2dEXT_debug(GLuint program, GLint location, GLdoubl
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform2dEXT_defined
+#endif
+#ifndef glProgramUniform2dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
 void glatter_glProgramUniform2dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
 {
@@ -40230,6 +44651,7 @@ void glatter_glProgramUniform2dvEXT_debug(GLuint program, GLint location, GLsize
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform2dvEXT_defined
+#endif
 #ifndef glProgramUniform2fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2fEXT, (program, location, v0, v1), (GLuint program, GLint location, GLfloat v0, GLfloat v1))
 void glatter_glProgramUniform2fEXT_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, const char* file, int line)
@@ -40290,6 +44712,7 @@ void glatter_glProgramUniform2uivEXT_debug(GLuint program, GLint location, GLsiz
 }
 #define glProgramUniform2uivEXT_defined
 #endif
+#ifndef glProgramUniform3dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dEXT, (program, location, x, y, z), (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z))
 void glatter_glProgramUniform3dEXT_debug(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
 {
@@ -40298,6 +44721,8 @@ void glatter_glProgramUniform3dEXT_debug(GLuint program, GLint location, GLdoubl
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform3dEXT_defined
+#endif
+#ifndef glProgramUniform3dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
 void glatter_glProgramUniform3dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
 {
@@ -40306,6 +44731,7 @@ void glatter_glProgramUniform3dvEXT_debug(GLuint program, GLint location, GLsize
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform3dvEXT_defined
+#endif
 #ifndef glProgramUniform3fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3fEXT, (program, location, v0, v1, v2), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2))
 void glatter_glProgramUniform3fEXT_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, const char* file, int line)
@@ -40366,6 +44792,7 @@ void glatter_glProgramUniform3uivEXT_debug(GLuint program, GLint location, GLsiz
 }
 #define glProgramUniform3uivEXT_defined
 #endif
+#ifndef glProgramUniform4dEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dEXT, (program, location, x, y, z, w), (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
 void glatter_glProgramUniform4dEXT_debug(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line)
 {
@@ -40374,6 +44801,8 @@ void glatter_glProgramUniform4dEXT_debug(GLuint program, GLint location, GLdoubl
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform4dEXT_defined
+#endif
+#ifndef glProgramUniform4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dvEXT, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
 void glatter_glProgramUniform4dvEXT_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
 {
@@ -40382,6 +44811,7 @@ void glatter_glProgramUniform4dvEXT_debug(GLuint program, GLint location, GLsize
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniform4dvEXT_defined
+#endif
 #ifndef glProgramUniform4fEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4fEXT, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3))
 void glatter_glProgramUniform4fEXT_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3, const char* file, int line)
@@ -40442,6 +44872,7 @@ void glatter_glProgramUniform4uivEXT_debug(GLuint program, GLint location, GLsiz
 }
 #define glProgramUniform4uivEXT_defined
 #endif
+#ifndef glProgramUniformMatrix2dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 void glatter_glProgramUniformMatrix2dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
 {
@@ -40450,6 +44881,7 @@ void glatter_glProgramUniformMatrix2dvEXT_debug(GLuint program, GLint location, 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformMatrix2dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix2fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 void glatter_glProgramUniformMatrix2fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
@@ -40460,6 +44892,7 @@ void glatter_glProgramUniformMatrix2fvEXT_debug(GLuint program, GLint location, 
 }
 #define glProgramUniformMatrix2fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix2x3dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 void glatter_glProgramUniformMatrix2x3dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
 {
@@ -40468,6 +44901,7 @@ void glatter_glProgramUniformMatrix2x3dvEXT_debug(GLuint program, GLint location
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformMatrix2x3dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix2x3fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 void glatter_glProgramUniformMatrix2x3fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
@@ -40478,6 +44912,7 @@ void glatter_glProgramUniformMatrix2x3fvEXT_debug(GLuint program, GLint location
 }
 #define glProgramUniformMatrix2x3fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix2x4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 void glatter_glProgramUniformMatrix2x4dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
 {
@@ -40486,6 +44921,7 @@ void glatter_glProgramUniformMatrix2x4dvEXT_debug(GLuint program, GLint location
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformMatrix2x4dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix2x4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 void glatter_glProgramUniformMatrix2x4fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
@@ -40496,6 +44932,7 @@ void glatter_glProgramUniformMatrix2x4fvEXT_debug(GLuint program, GLint location
 }
 #define glProgramUniformMatrix2x4fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix3dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 void glatter_glProgramUniformMatrix3dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
 {
@@ -40504,6 +44941,7 @@ void glatter_glProgramUniformMatrix3dvEXT_debug(GLuint program, GLint location, 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformMatrix3dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix3fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 void glatter_glProgramUniformMatrix3fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
@@ -40514,6 +44952,7 @@ void glatter_glProgramUniformMatrix3fvEXT_debug(GLuint program, GLint location, 
 }
 #define glProgramUniformMatrix3fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix3x2dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 void glatter_glProgramUniformMatrix3x2dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
 {
@@ -40522,6 +44961,7 @@ void glatter_glProgramUniformMatrix3x2dvEXT_debug(GLuint program, GLint location
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformMatrix3x2dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix3x2fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 void glatter_glProgramUniformMatrix3x2fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
@@ -40532,6 +44972,7 @@ void glatter_glProgramUniformMatrix3x2fvEXT_debug(GLuint program, GLint location
 }
 #define glProgramUniformMatrix3x2fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix3x4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 void glatter_glProgramUniformMatrix3x4dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
 {
@@ -40540,6 +44981,7 @@ void glatter_glProgramUniformMatrix3x4dvEXT_debug(GLuint program, GLint location
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformMatrix3x4dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix3x4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 void glatter_glProgramUniformMatrix3x4fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
@@ -40550,6 +44992,7 @@ void glatter_glProgramUniformMatrix3x4fvEXT_debug(GLuint program, GLint location
 }
 #define glProgramUniformMatrix3x4fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix4dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 void glatter_glProgramUniformMatrix4dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
 {
@@ -40558,6 +45001,7 @@ void glatter_glProgramUniformMatrix4dvEXT_debug(GLuint program, GLint location, 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformMatrix4dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix4fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 void glatter_glProgramUniformMatrix4fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
@@ -40568,6 +45012,7 @@ void glatter_glProgramUniformMatrix4fvEXT_debug(GLuint program, GLint location, 
 }
 #define glProgramUniformMatrix4fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix4x2dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 void glatter_glProgramUniformMatrix4x2dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
 {
@@ -40576,6 +45021,7 @@ void glatter_glProgramUniformMatrix4x2dvEXT_debug(GLuint program, GLint location
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformMatrix4x2dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix4x2fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 void glatter_glProgramUniformMatrix4x2fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
@@ -40586,6 +45032,7 @@ void glatter_glProgramUniformMatrix4x2fvEXT_debug(GLuint program, GLint location
 }
 #define glProgramUniformMatrix4x2fvEXT_defined
 #endif
+#ifndef glProgramUniformMatrix4x3dvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3dvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
 void glatter_glProgramUniformMatrix4x3dvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
 {
@@ -40594,6 +45041,7 @@ void glatter_glProgramUniformMatrix4x3dvEXT_debug(GLuint program, GLint location
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformMatrix4x3dvEXT_defined
+#endif
 #ifndef glProgramUniformMatrix4x3fvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3fvEXT, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
 void glatter_glProgramUniformMatrix4x3fvEXT_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
@@ -40604,6 +45052,7 @@ void glatter_glProgramUniformMatrix4x3fvEXT_debug(GLuint program, GLint location
 }
 #define glProgramUniformMatrix4x3fvEXT_defined
 #endif
+#ifndef glPushClientAttribDefaultEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPushClientAttribDefaultEXT, (mask), (GLbitfield mask))
 void glatter_glPushClientAttribDefaultEXT_debug(GLbitfield mask, const char* file, int line)
 {
@@ -40612,6 +45061,8 @@ void glatter_glPushClientAttribDefaultEXT_debug(GLbitfield mask, const char* fil
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glPushClientAttribDefaultEXT_defined
+#endif
+#ifndef glTextureBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferEXT, (texture, target, internalformat, buffer), (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer))
 void glatter_glTextureBufferEXT_debug(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line)
 {
@@ -40620,6 +45071,8 @@ void glatter_glTextureBufferEXT_debug(GLuint texture, GLenum target, GLenum inte
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureBufferEXT_defined
+#endif
+#ifndef glTextureBufferRangeEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRangeEXT, (texture, target, internalformat, buffer, offset, size), (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size))
 void glatter_glTextureBufferRangeEXT_debug(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line)
 {
@@ -40628,6 +45081,8 @@ void glatter_glTextureBufferRangeEXT_debug(GLuint texture, GLenum target, GLenum
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureBufferRangeEXT_defined
+#endif
+#ifndef glTextureImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage1DEXT, (texture, target, level, internalformat, width, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
 void glatter_glTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -40636,6 +45091,8 @@ void glatter_glTextureImage1DEXT_debug(GLuint texture, GLenum target, GLint leve
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureImage1DEXT_defined
+#endif
+#ifndef glTextureImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage2DEXT, (texture, target, level, internalformat, width, height, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
 void glatter_glTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -40644,6 +45101,8 @@ void glatter_glTextureImage2DEXT_debug(GLuint texture, GLenum target, GLint leve
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureImage2DEXT_defined
+#endif
+#ifndef glTextureImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureImage3DEXT, (texture, target, level, internalformat, width, height, depth, border, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
 void glatter_glTextureImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -40652,6 +45111,8 @@ void glatter_glTextureImage3DEXT_debug(GLuint texture, GLenum target, GLint leve
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureImage3DEXT_defined
+#endif
+#ifndef glTexturePageCommitmentEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexturePageCommitmentEXT, (texture, level, xoffset, yoffset, zoffset, width, height, depth, commit), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit))
 void glatter_glTexturePageCommitmentEXT_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit, const char* file, int line)
 {
@@ -40660,6 +45121,8 @@ void glatter_glTexturePageCommitmentEXT_debug(GLuint texture, GLint level, GLint
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTexturePageCommitmentEXT_defined
+#endif
+#ifndef glTextureParameterIivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLint *params))
 void glatter_glTextureParameterIivEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
 {
@@ -40668,6 +45131,8 @@ void glatter_glTextureParameterIivEXT_debug(GLuint texture, GLenum target, GLenu
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureParameterIivEXT_defined
+#endif
+#ifndef glTextureParameterIuivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIuivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLuint *params))
 void glatter_glTextureParameterIuivEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLuint *params, const char* file, int line)
 {
@@ -40676,6 +45141,8 @@ void glatter_glTextureParameterIuivEXT_debug(GLuint texture, GLenum target, GLen
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureParameterIuivEXT_defined
+#endif
+#ifndef glTextureParameterfEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfEXT, (texture, target, pname, param), (GLuint texture, GLenum target, GLenum pname, GLfloat param))
 void glatter_glTextureParameterfEXT_debug(GLuint texture, GLenum target, GLenum pname, GLfloat param, const char* file, int line)
 {
@@ -40684,6 +45151,8 @@ void glatter_glTextureParameterfEXT_debug(GLuint texture, GLenum target, GLenum 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureParameterfEXT_defined
+#endif
+#ifndef glTextureParameterfvEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfvEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLfloat *params))
 void glatter_glTextureParameterfvEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLfloat *params, const char* file, int line)
 {
@@ -40692,6 +45161,8 @@ void glatter_glTextureParameterfvEXT_debug(GLuint texture, GLenum target, GLenum
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureParameterfvEXT_defined
+#endif
+#ifndef glTextureParameteriEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameteriEXT, (texture, target, pname, param), (GLuint texture, GLenum target, GLenum pname, GLint param))
 void glatter_glTextureParameteriEXT_debug(GLuint texture, GLenum target, GLenum pname, GLint param, const char* file, int line)
 {
@@ -40700,6 +45171,8 @@ void glatter_glTextureParameteriEXT_debug(GLuint texture, GLenum target, GLenum 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureParameteriEXT_defined
+#endif
+#ifndef glTextureParameterivEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterivEXT, (texture, target, pname, params), (GLuint texture, GLenum target, GLenum pname, const GLint *params))
 void glatter_glTextureParameterivEXT_debug(GLuint texture, GLenum target, GLenum pname, const GLint *params, const char* file, int line)
 {
@@ -40708,6 +45181,8 @@ void glatter_glTextureParameterivEXT_debug(GLuint texture, GLenum target, GLenum
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureParameterivEXT_defined
+#endif
+#ifndef glTextureRenderbufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureRenderbufferEXT, (texture, target, renderbuffer), (GLuint texture, GLenum target, GLuint renderbuffer))
 void glatter_glTextureRenderbufferEXT_debug(GLuint texture, GLenum target, GLuint renderbuffer, const char* file, int line)
 {
@@ -40716,6 +45191,7 @@ void glatter_glTextureRenderbufferEXT_debug(GLuint texture, GLenum target, GLuin
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureRenderbufferEXT_defined
+#endif
 #ifndef glTextureStorage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage1DEXT, (texture, target, levels, internalformat, width), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
 void glatter_glTextureStorage1DEXT_debug(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, const char* file, int line)
@@ -40736,6 +45212,7 @@ void glatter_glTextureStorage2DEXT_debug(GLuint texture, GLenum target, GLsizei 
 }
 #define glTextureStorage2DEXT_defined
 #endif
+#ifndef glTextureStorage2DMultisampleEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2DMultisampleEXT, (texture, target, samples, internalformat, width, height, fixedsamplelocations), (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
 void glatter_glTextureStorage2DMultisampleEXT_debug(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations, const char* file, int line)
 {
@@ -40744,6 +45221,7 @@ void glatter_glTextureStorage2DMultisampleEXT_debug(GLuint texture, GLenum targe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureStorage2DMultisampleEXT_defined
+#endif
 #ifndef glTextureStorage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DEXT, (texture, target, levels, internalformat, width, height, depth), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
 void glatter_glTextureStorage3DEXT_debug(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line)
@@ -40754,6 +45232,7 @@ void glatter_glTextureStorage3DEXT_debug(GLuint texture, GLenum target, GLsizei 
 }
 #define glTextureStorage3DEXT_defined
 #endif
+#ifndef glTextureStorage3DMultisampleEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DMultisampleEXT, (texture, target, samples, internalformat, width, height, depth, fixedsamplelocations), (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
 void glatter_glTextureStorage3DMultisampleEXT_debug(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations, const char* file, int line)
 {
@@ -40762,6 +45241,8 @@ void glatter_glTextureStorage3DMultisampleEXT_debug(GLuint texture, GLenum targe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureStorage3DMultisampleEXT_defined
+#endif
+#ifndef glTextureSubImage1DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage1DEXT, (texture, target, level, xoffset, width, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
 void glatter_glTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -40770,6 +45251,8 @@ void glatter_glTextureSubImage1DEXT_debug(GLuint texture, GLenum target, GLint l
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureSubImage1DEXT_defined
+#endif
+#ifndef glTextureSubImage2DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage2DEXT, (texture, target, level, xoffset, yoffset, width, height, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
 void glatter_glTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -40778,6 +45261,8 @@ void glatter_glTextureSubImage2DEXT_debug(GLuint texture, GLenum target, GLint l
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureSubImage2DEXT_defined
+#endif
+#ifndef glTextureSubImage3DEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage3DEXT, (texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
 void glatter_glTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line)
 {
@@ -40786,6 +45271,8 @@ void glatter_glTextureSubImage3DEXT_debug(GLuint texture, GLenum target, GLint l
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureSubImage3DEXT_defined
+#endif
+#ifndef glUnmapNamedBufferEXT_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glUnmapNamedBufferEXT, (buffer), (GLuint buffer))
 GLboolean glatter_glUnmapNamedBufferEXT_debug(GLuint buffer, const char* file, int line)
 {
@@ -40796,6 +45283,8 @@ GLboolean glatter_glUnmapNamedBufferEXT_debug(GLuint buffer, const char* file, i
     return rval;
 }
 #define glUnmapNamedBufferEXT_defined
+#endif
+#ifndef glVertexArrayBindVertexBufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayBindVertexBufferEXT, (vaobj, bindingindex, buffer, offset, stride), (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride))
 void glatter_glVertexArrayBindVertexBufferEXT_debug(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride, const char* file, int line)
 {
@@ -40804,6 +45293,8 @@ void glatter_glVertexArrayBindVertexBufferEXT_debug(GLuint vaobj, GLuint binding
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayBindVertexBufferEXT_defined
+#endif
+#ifndef glVertexArrayColorOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayColorOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayColorOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40812,6 +45303,8 @@ void glatter_glVertexArrayColorOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLin
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayColorOffsetEXT_defined
+#endif
+#ifndef glVertexArrayEdgeFlagOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayEdgeFlagOffsetEXT, (vaobj, buffer, stride, offset), (GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayEdgeFlagOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40820,6 +45313,8 @@ void glatter_glVertexArrayEdgeFlagOffsetEXT_debug(GLuint vaobj, GLuint buffer, G
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayEdgeFlagOffsetEXT_defined
+#endif
+#ifndef glVertexArrayFogCoordOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayFogCoordOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayFogCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40828,6 +45323,8 @@ void glatter_glVertexArrayFogCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, G
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayFogCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayIndexOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayIndexOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayIndexOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40836,6 +45333,8 @@ void glatter_glVertexArrayIndexOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLen
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayIndexOffsetEXT_defined
+#endif
+#ifndef glVertexArrayMultiTexCoordOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayMultiTexCoordOffsetEXT, (vaobj, buffer, texunit, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayMultiTexCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40844,6 +45343,8 @@ void glatter_glVertexArrayMultiTexCoordOffsetEXT_debug(GLuint vaobj, GLuint buff
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayMultiTexCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayNormalOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayNormalOffsetEXT, (vaobj, buffer, type, stride, offset), (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayNormalOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40852,6 +45353,8 @@ void glatter_glVertexArrayNormalOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayNormalOffsetEXT_defined
+#endif
+#ifndef glVertexArraySecondaryColorOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArraySecondaryColorOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArraySecondaryColorOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40860,6 +45363,8 @@ void glatter_glVertexArraySecondaryColorOffsetEXT_debug(GLuint vaobj, GLuint buf
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArraySecondaryColorOffsetEXT_defined
+#endif
+#ifndef glVertexArrayTexCoordOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayTexCoordOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayTexCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40868,6 +45373,8 @@ void glatter_glVertexArrayTexCoordOffsetEXT_debug(GLuint vaobj, GLuint buffer, G
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayTexCoordOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribBindingEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribBindingEXT, (vaobj, attribindex, bindingindex), (GLuint vaobj, GLuint attribindex, GLuint bindingindex))
 void glatter_glVertexArrayVertexAttribBindingEXT_debug(GLuint vaobj, GLuint attribindex, GLuint bindingindex, const char* file, int line)
 {
@@ -40876,6 +45383,8 @@ void glatter_glVertexArrayVertexAttribBindingEXT_debug(GLuint vaobj, GLuint attr
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexAttribBindingEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribDivisorEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribDivisorEXT, (vaobj, index, divisor), (GLuint vaobj, GLuint index, GLuint divisor))
 void glatter_glVertexArrayVertexAttribDivisorEXT_debug(GLuint vaobj, GLuint index, GLuint divisor, const char* file, int line)
 {
@@ -40884,6 +45393,8 @@ void glatter_glVertexArrayVertexAttribDivisorEXT_debug(GLuint vaobj, GLuint inde
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexAttribDivisorEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribFormatEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribFormatEXT, (vaobj, attribindex, size, type, normalized, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset))
 void glatter_glVertexArrayVertexAttribFormatEXT_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset, const char* file, int line)
 {
@@ -40892,6 +45403,8 @@ void glatter_glVertexArrayVertexAttribFormatEXT_debug(GLuint vaobj, GLuint attri
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexAttribFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribIFormatEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribIFormatEXT, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
 void glatter_glVertexArrayVertexAttribIFormatEXT_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line)
 {
@@ -40900,6 +45413,8 @@ void glatter_glVertexArrayVertexAttribIFormatEXT_debug(GLuint vaobj, GLuint attr
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexAttribIFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribIOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribIOffsetEXT, (vaobj, buffer, index, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayVertexAttribIOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40908,6 +45423,8 @@ void glatter_glVertexArrayVertexAttribIOffsetEXT_debug(GLuint vaobj, GLuint buff
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexAttribIOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribLFormatEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribLFormatEXT, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
 void glatter_glVertexArrayVertexAttribLFormatEXT_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line)
 {
@@ -40916,6 +45433,8 @@ void glatter_glVertexArrayVertexAttribLFormatEXT_debug(GLuint vaobj, GLuint attr
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexAttribLFormatEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribLOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribLOffsetEXT, (vaobj, buffer, index, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayVertexAttribLOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40924,6 +45443,8 @@ void glatter_glVertexArrayVertexAttribLOffsetEXT_debug(GLuint vaobj, GLuint buff
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexAttribLOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexAttribOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexAttribOffsetEXT, (vaobj, buffer, index, size, type, normalized, stride, offset), (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayVertexAttribOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40932,6 +45453,8 @@ void glatter_glVertexArrayVertexAttribOffsetEXT_debug(GLuint vaobj, GLuint buffe
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexAttribOffsetEXT_defined
+#endif
+#ifndef glVertexArrayVertexBindingDivisorEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBindingDivisorEXT, (vaobj, bindingindex, divisor), (GLuint vaobj, GLuint bindingindex, GLuint divisor))
 void glatter_glVertexArrayVertexBindingDivisorEXT_debug(GLuint vaobj, GLuint bindingindex, GLuint divisor, const char* file, int line)
 {
@@ -40940,6 +45463,8 @@ void glatter_glVertexArrayVertexBindingDivisorEXT_debug(GLuint vaobj, GLuint bin
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexBindingDivisorEXT_defined
+#endif
+#ifndef glVertexArrayVertexOffsetEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexOffsetEXT, (vaobj, buffer, size, type, stride, offset), (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset))
 void glatter_glVertexArrayVertexOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset, const char* file, int line)
 {
@@ -40948,6 +45473,7 @@ void glatter_glVertexArrayVertexOffsetEXT_debug(GLuint vaobj, GLuint buffer, GLi
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexArrayVertexOffsetEXT_defined
+#endif
 #endif // defined(GL_EXT_direct_state_access)
 #if defined(GL_EXT_draw_buffers2)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorMaskIndexedEXT, (index, r, g, b, a), (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a))
@@ -40991,6 +45517,24 @@ void glatter_glDrawRangeElementsEXT_debug(GLenum mode, GLuint start, GLuint end,
 }
 #define glDrawRangeElementsEXT_defined
 #endif // defined(GL_EXT_draw_range_elements)
+#if defined(GL_EXT_external_buffer)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferStorageExternalEXT, (target, offset, size, clientBuffer, flags), (GLenum target, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags))
+void glatter_glBufferStorageExternalEXT_debug(GLenum target, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBufferStorageExternalEXT, "(%s, %td, %td, %p, %u)", enum_to_string_GL(target), (ptrdiff_t)offset, (ptrdiff_t)size, (void*)clientBuffer, (unsigned int)flags)
+    glatter_glBufferStorageExternalEXT(target, offset, size, clientBuffer, flags);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBufferStorageExternalEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorageExternalEXT, (buffer, offset, size, clientBuffer, flags), (GLuint buffer, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags))
+void glatter_glNamedBufferStorageExternalEXT_debug(GLuint buffer, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferStorageExternalEXT, "(%u, %td, %td, %p, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size, (void*)clientBuffer, (unsigned int)flags)
+    glatter_glNamedBufferStorageExternalEXT(buffer, offset, size, clientBuffer, flags);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferStorageExternalEXT_defined
+#endif // defined(GL_EXT_external_buffer)
 #if defined(GL_EXT_fog_coord)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFogCoordPointerEXT, (type, stride, pointer), (GLenum type, GLsizei stride, const void *pointer))
 void glatter_glFogCoordPointerEXT_debug(GLenum type, GLsizei stride, const void *pointer, const char* file, int line)
@@ -41451,6 +45995,190 @@ void glatter_glTextureMaterialEXT_debug(GLenum face, GLenum mode, const char* fi
 }
 #define glTextureMaterialEXT_defined
 #endif // defined(GL_EXT_light_texture)
+#if defined(GL_EXT_memory_object)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferStorageMemEXT, (target, size, memory, offset), (GLenum target, GLsizeiptr size, GLuint memory, GLuint64 offset))
+void glatter_glBufferStorageMemEXT_debug(GLenum target, GLsizeiptr size, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBufferStorageMemEXT, "(%s, %td, %u, %" PRIu64 ")", enum_to_string_GL(target), (ptrdiff_t)size, (unsigned int)memory, (uint64_t)offset)
+    glatter_glBufferStorageMemEXT(target, size, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBufferStorageMemEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateMemoryObjectsEXT, (n, memoryObjects), (GLsizei n, GLuint *memoryObjects))
+void glatter_glCreateMemoryObjectsEXT_debug(GLsizei n, GLuint *memoryObjects, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateMemoryObjectsEXT, "(%d, %p)", (int)n, (void*)memoryObjects)
+    glatter_glCreateMemoryObjectsEXT(n, memoryObjects);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateMemoryObjectsEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteMemoryObjectsEXT, (n, memoryObjects), (GLsizei n, const GLuint *memoryObjects))
+void glatter_glDeleteMemoryObjectsEXT_debug(GLsizei n, const GLuint *memoryObjects, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteMemoryObjectsEXT, "(%d, %p)", (int)n, (void*)memoryObjects)
+    glatter_glDeleteMemoryObjectsEXT(n, memoryObjects);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteMemoryObjectsEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMemoryObjectParameterivEXT, (memoryObject, pname, params), (GLuint memoryObject, GLenum pname, GLint *params))
+void glatter_glGetMemoryObjectParameterivEXT_debug(GLuint memoryObject, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMemoryObjectParameterivEXT, "(%u, %s, %p)", (unsigned int)memoryObject, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetMemoryObjectParameterivEXT(memoryObject, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMemoryObjectParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUnsignedBytei_vEXT, (target, index, data), (GLenum target, GLuint index, GLubyte *data))
+void glatter_glGetUnsignedBytei_vEXT_debug(GLenum target, GLuint index, GLubyte *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUnsignedBytei_vEXT, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetUnsignedBytei_vEXT(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUnsignedBytei_vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUnsignedBytevEXT, (pname, data), (GLenum pname, GLubyte *data))
+void glatter_glGetUnsignedBytevEXT_debug(GLenum pname, GLubyte *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUnsignedBytevEXT, "(%s, %p)", enum_to_string_GL(pname), (void*)data)
+    glatter_glGetUnsignedBytevEXT(pname, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUnsignedBytevEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsMemoryObjectEXT, (memoryObject), (GLuint memoryObject))
+GLboolean glatter_glIsMemoryObjectEXT_debug(GLuint memoryObject, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsMemoryObjectEXT, "(%u)", (unsigned int)memoryObject)
+    GLboolean rval = glatter_glIsMemoryObjectEXT(memoryObject);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsMemoryObjectEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMemoryObjectParameterivEXT, (memoryObject, pname, params), (GLuint memoryObject, GLenum pname, const GLint *params))
+void glatter_glMemoryObjectParameterivEXT_debug(GLuint memoryObject, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMemoryObjectParameterivEXT, "(%u, %s, %p)", (unsigned int)memoryObject, enum_to_string_GL(pname), (void*)params)
+    glatter_glMemoryObjectParameterivEXT(memoryObject, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMemoryObjectParameterivEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorageMemEXT, (buffer, size, memory, offset), (GLuint buffer, GLsizeiptr size, GLuint memory, GLuint64 offset))
+void glatter_glNamedBufferStorageMemEXT_debug(GLuint buffer, GLsizeiptr size, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferStorageMemEXT, "(%u, %td, %u, %" PRIu64 ")", (unsigned int)buffer, (ptrdiff_t)size, (unsigned int)memory, (uint64_t)offset)
+    glatter_glNamedBufferStorageMemEXT(buffer, size, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferStorageMemEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem1DEXT, (target, levels, internalFormat, width, memory, offset), (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset))
+void glatter_glTexStorageMem1DEXT_debug(GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorageMem1DEXT, "(%s, %d, %s, %d, %u, %" PRIu64 ")", enum_to_string_GL(target), (int)levels, enum_to_string_GL(internalFormat), (int)width, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTexStorageMem1DEXT(target, levels, internalFormat, width, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorageMem1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem2DEXT, (target, levels, internalFormat, width, height, memory, offset), (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset))
+void glatter_glTexStorageMem2DEXT_debug(GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorageMem2DEXT, "(%s, %d, %s, %d, %d, %u, %" PRIu64 ")", enum_to_string_GL(target), (int)levels, enum_to_string_GL(internalFormat), (int)width, (int)height, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTexStorageMem2DEXT(target, levels, internalFormat, width, height, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorageMem2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem2DMultisampleEXT, (target, samples, internalFormat, width, height, fixedSampleLocations, memory, offset), (GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset))
+void glatter_glTexStorageMem2DMultisampleEXT_debug(GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorageMem2DMultisampleEXT, "(%s, %d, %s, %d, %d, %u, %u, %" PRIu64 ")", enum_to_string_GL(target), (int)samples, enum_to_string_GL(internalFormat), (int)width, (int)height, (unsigned char)fixedSampleLocations, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTexStorageMem2DMultisampleEXT(target, samples, internalFormat, width, height, fixedSampleLocations, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorageMem2DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem3DEXT, (target, levels, internalFormat, width, height, depth, memory, offset), (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset))
+void glatter_glTexStorageMem3DEXT_debug(GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorageMem3DEXT, "(%s, %d, %s, %d, %d, %d, %u, %" PRIu64 ")", enum_to_string_GL(target), (int)levels, enum_to_string_GL(internalFormat), (int)width, (int)height, (int)depth, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTexStorageMem3DEXT(target, levels, internalFormat, width, height, depth, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorageMem3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorageMem3DMultisampleEXT, (target, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset), (GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset))
+void glatter_glTexStorageMem3DMultisampleEXT_debug(GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorageMem3DMultisampleEXT, "(%s, %d, %s, %d, %d, %d, %u, %u, %" PRIu64 ")", enum_to_string_GL(target), (int)samples, enum_to_string_GL(internalFormat), (int)width, (int)height, (int)depth, (unsigned char)fixedSampleLocations, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTexStorageMem3DMultisampleEXT(target, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorageMem3DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem1DEXT, (texture, levels, internalFormat, width, memory, offset), (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset))
+void glatter_glTextureStorageMem1DEXT_debug(GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorageMem1DEXT, "(%u, %d, %s, %d, %u, %" PRIu64 ")", (unsigned int)texture, (int)levels, enum_to_string_GL(internalFormat), (int)width, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTextureStorageMem1DEXT(texture, levels, internalFormat, width, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorageMem1DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem2DEXT, (texture, levels, internalFormat, width, height, memory, offset), (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset))
+void glatter_glTextureStorageMem2DEXT_debug(GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorageMem2DEXT, "(%u, %d, %s, %d, %d, %u, %" PRIu64 ")", (unsigned int)texture, (int)levels, enum_to_string_GL(internalFormat), (int)width, (int)height, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTextureStorageMem2DEXT(texture, levels, internalFormat, width, height, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorageMem2DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem2DMultisampleEXT, (texture, samples, internalFormat, width, height, fixedSampleLocations, memory, offset), (GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset))
+void glatter_glTextureStorageMem2DMultisampleEXT_debug(GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorageMem2DMultisampleEXT, "(%u, %d, %s, %d, %d, %u, %u, %" PRIu64 ")", (unsigned int)texture, (int)samples, enum_to_string_GL(internalFormat), (int)width, (int)height, (unsigned char)fixedSampleLocations, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTextureStorageMem2DMultisampleEXT(texture, samples, internalFormat, width, height, fixedSampleLocations, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorageMem2DMultisampleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem3DEXT, (texture, levels, internalFormat, width, height, depth, memory, offset), (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset))
+void glatter_glTextureStorageMem3DEXT_debug(GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorageMem3DEXT, "(%u, %d, %s, %d, %d, %d, %u, %" PRIu64 ")", (unsigned int)texture, (int)levels, enum_to_string_GL(internalFormat), (int)width, (int)height, (int)depth, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTextureStorageMem3DEXT(texture, levels, internalFormat, width, height, depth, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorageMem3DEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorageMem3DMultisampleEXT, (texture, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset), (GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset))
+void glatter_glTextureStorageMem3DMultisampleEXT_debug(GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorageMem3DMultisampleEXT, "(%u, %d, %s, %d, %d, %d, %u, %u, %" PRIu64 ")", (unsigned int)texture, (int)samples, enum_to_string_GL(internalFormat), (int)width, (int)height, (int)depth, (unsigned char)fixedSampleLocations, (unsigned int)memory, (uint64_t)offset)
+    glatter_glTextureStorageMem3DMultisampleEXT(texture, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorageMem3DMultisampleEXT_defined
+#endif // defined(GL_EXT_memory_object)
+#if defined(GL_EXT_memory_object_fd)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportMemoryFdEXT, (memory, size, handleType, fd), (GLuint memory, GLuint64 size, GLenum handleType, GLint fd))
+void glatter_glImportMemoryFdEXT_debug(GLuint memory, GLuint64 size, GLenum handleType, GLint fd, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glImportMemoryFdEXT, "(%u, %" PRIu64 ", %s, %d)", (unsigned int)memory, (uint64_t)size, enum_to_string_GL(handleType), (int)fd)
+    glatter_glImportMemoryFdEXT(memory, size, handleType, fd);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glImportMemoryFdEXT_defined
+#endif // defined(GL_EXT_memory_object_fd)
+#if defined(GL_EXT_memory_object_win32)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportMemoryWin32HandleEXT, (memory, size, handleType, handle), (GLuint memory, GLuint64 size, GLenum handleType, void *handle))
+void glatter_glImportMemoryWin32HandleEXT_debug(GLuint memory, GLuint64 size, GLenum handleType, void *handle, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glImportMemoryWin32HandleEXT, "(%u, %" PRIu64 ", %s, %p)", (unsigned int)memory, (uint64_t)size, enum_to_string_GL(handleType), (void*)handle)
+    glatter_glImportMemoryWin32HandleEXT(memory, size, handleType, handle);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glImportMemoryWin32HandleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportMemoryWin32NameEXT, (memory, size, handleType, name), (GLuint memory, GLuint64 size, GLenum handleType, const void *name))
+void glatter_glImportMemoryWin32NameEXT_debug(GLuint memory, GLuint64 size, GLenum handleType, const void *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glImportMemoryWin32NameEXT, "(%u, %" PRIu64 ", %s, %p)", (unsigned int)memory, (uint64_t)size, enum_to_string_GL(handleType), (void*)name)
+    glatter_glImportMemoryWin32NameEXT(memory, size, handleType, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glImportMemoryWin32NameEXT_defined
+#endif // defined(GL_EXT_memory_object_win32)
 #if defined(GL_EXT_multi_draw_arrays)
 #ifndef glMultiDrawArraysEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysEXT, (mode, first, count, primcount), (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount))
@@ -41775,6 +46503,94 @@ void glatter_glSecondaryColorPointerEXT_debug(GLint size, GLenum type, GLsizei s
 }
 #define glSecondaryColorPointerEXT_defined
 #endif // defined(GL_EXT_secondary_color)
+#if defined(GL_EXT_semaphore)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteSemaphoresEXT, (n, semaphores), (GLsizei n, const GLuint *semaphores))
+void glatter_glDeleteSemaphoresEXT_debug(GLsizei n, const GLuint *semaphores, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteSemaphoresEXT, "(%d, %p)", (int)n, (void*)semaphores)
+    glatter_glDeleteSemaphoresEXT(n, semaphores);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteSemaphoresEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenSemaphoresEXT, (n, semaphores), (GLsizei n, GLuint *semaphores))
+void glatter_glGenSemaphoresEXT_debug(GLsizei n, GLuint *semaphores, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenSemaphoresEXT, "(%d, %p)", (int)n, (void*)semaphores)
+    glatter_glGenSemaphoresEXT(n, semaphores);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenSemaphoresEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSemaphoreParameterui64vEXT, (semaphore, pname, params), (GLuint semaphore, GLenum pname, GLuint64 *params))
+void glatter_glGetSemaphoreParameterui64vEXT_debug(GLuint semaphore, GLenum pname, GLuint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetSemaphoreParameterui64vEXT, "(%u, %s, %p)", (unsigned int)semaphore, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetSemaphoreParameterui64vEXT(semaphore, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetSemaphoreParameterui64vEXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsSemaphoreEXT, (semaphore), (GLuint semaphore))
+GLboolean glatter_glIsSemaphoreEXT_debug(GLuint semaphore, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsSemaphoreEXT, "(%u)", (unsigned int)semaphore)
+    GLboolean rval = glatter_glIsSemaphoreEXT(semaphore);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsSemaphoreEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSemaphoreParameterui64vEXT, (semaphore, pname, params), (GLuint semaphore, GLenum pname, const GLuint64 *params))
+void glatter_glSemaphoreParameterui64vEXT_debug(GLuint semaphore, GLenum pname, const GLuint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSemaphoreParameterui64vEXT, "(%u, %s, %p)", (unsigned int)semaphore, enum_to_string_GL(pname), (void*)params)
+    glatter_glSemaphoreParameterui64vEXT(semaphore, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSemaphoreParameterui64vEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalSemaphoreEXT, (semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, dstLayouts), (GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *dstLayouts))
+void glatter_glSignalSemaphoreEXT_debug(GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *dstLayouts, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSignalSemaphoreEXT, "(%u, %u, %p, %u, %p, %p)", (unsigned int)semaphore, (unsigned int)numBufferBarriers, (void*)buffers, (unsigned int)numTextureBarriers, (void*)textures, (void*)dstLayouts)
+    glatter_glSignalSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, dstLayouts);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSignalSemaphoreEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWaitSemaphoreEXT, (semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, srcLayouts), (GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *srcLayouts))
+void glatter_glWaitSemaphoreEXT_debug(GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *srcLayouts, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glWaitSemaphoreEXT, "(%u, %u, %p, %u, %p, %p)", (unsigned int)semaphore, (unsigned int)numBufferBarriers, (void*)buffers, (unsigned int)numTextureBarriers, (void*)textures, (void*)srcLayouts)
+    glatter_glWaitSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, srcLayouts);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glWaitSemaphoreEXT_defined
+#endif // defined(GL_EXT_semaphore)
+#if defined(GL_EXT_semaphore_fd)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportSemaphoreFdEXT, (semaphore, handleType, fd), (GLuint semaphore, GLenum handleType, GLint fd))
+void glatter_glImportSemaphoreFdEXT_debug(GLuint semaphore, GLenum handleType, GLint fd, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glImportSemaphoreFdEXT, "(%u, %s, %d)", (unsigned int)semaphore, enum_to_string_GL(handleType), (int)fd)
+    glatter_glImportSemaphoreFdEXT(semaphore, handleType, fd);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glImportSemaphoreFdEXT_defined
+#endif // defined(GL_EXT_semaphore_fd)
+#if defined(GL_EXT_semaphore_win32)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportSemaphoreWin32HandleEXT, (semaphore, handleType, handle), (GLuint semaphore, GLenum handleType, void *handle))
+void glatter_glImportSemaphoreWin32HandleEXT_debug(GLuint semaphore, GLenum handleType, void *handle, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glImportSemaphoreWin32HandleEXT, "(%u, %s, %p)", (unsigned int)semaphore, enum_to_string_GL(handleType), (void*)handle)
+    glatter_glImportSemaphoreWin32HandleEXT(semaphore, handleType, handle);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glImportSemaphoreWin32HandleEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportSemaphoreWin32NameEXT, (semaphore, handleType, name), (GLuint semaphore, GLenum handleType, const void *name))
+void glatter_glImportSemaphoreWin32NameEXT_debug(GLuint semaphore, GLenum handleType, const void *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glImportSemaphoreWin32NameEXT, "(%u, %s, %p)", (unsigned int)semaphore, enum_to_string_GL(handleType), (void*)name)
+    glatter_glImportSemaphoreWin32NameEXT(semaphore, handleType, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glImportSemaphoreWin32NameEXT_defined
+#endif // defined(GL_EXT_semaphore_win32)
 #if defined(GL_EXT_separate_shader_objects)
 #ifndef glActiveProgramEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glActiveProgramEXT, (program), (GLuint program))
@@ -41809,6 +46625,18 @@ void glatter_glUseShaderProgramEXT_debug(GLenum type, GLuint program, const char
 #define glUseShaderProgramEXT_defined
 #endif
 #endif // defined(GL_EXT_separate_shader_objects)
+#if defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
+#ifndef glFramebufferFetchBarrierEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferFetchBarrierEXT, (), (void))
+void glatter_glFramebufferFetchBarrierEXT_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferFetchBarrierEXT, "()")
+    glatter_glFramebufferFetchBarrierEXT();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferFetchBarrierEXT_defined
+#endif
+#endif // defined(GL_EXT_shader_framebuffer_fetch_non_coherent)
 #if defined(GL_EXT_shader_image_load_store)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindImageTextureEXT, (index, texture, level, layered, layer, access, format), (GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format))
 void glatter_glBindImageTextureEXT_debug(GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format, const char* file, int line)
@@ -42643,6 +47471,28 @@ void glatter_glVertexWeightfvEXT_debug(const GLfloat *weight, const char* file, 
 }
 #define glVertexWeightfvEXT_defined
 #endif // defined(GL_EXT_vertex_weighting)
+#if defined(GL_EXT_win32_keyed_mutex)
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glAcquireKeyedMutexWin32EXT, (memory, key, timeout), (GLuint memory, GLuint64 key, GLuint timeout))
+GLboolean glatter_glAcquireKeyedMutexWin32EXT_debug(GLuint memory, GLuint64 key, GLuint timeout, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glAcquireKeyedMutexWin32EXT, "(%u, %" PRIu64 ", %u)", (unsigned int)memory, (uint64_t)key, (unsigned int)timeout)
+    GLboolean rval = glatter_glAcquireKeyedMutexWin32EXT(memory, key, timeout);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glAcquireKeyedMutexWin32EXT_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glReleaseKeyedMutexWin32EXT, (memory, key), (GLuint memory, GLuint64 key))
+GLboolean glatter_glReleaseKeyedMutexWin32EXT_debug(GLuint memory, GLuint64 key, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glReleaseKeyedMutexWin32EXT, "(%u, %" PRIu64 ")", (unsigned int)memory, (uint64_t)key)
+    GLboolean rval = glatter_glReleaseKeyedMutexWin32EXT(memory, key);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glReleaseKeyedMutexWin32EXT_defined
+#endif // defined(GL_EXT_win32_keyed_mutex)
 #if defined(GL_EXT_window_rectangles)
 #ifndef glWindowRectanglesEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWindowRectanglesEXT, (mode, count, box), (GLenum mode, GLsizei count, const GLint *box))
@@ -42987,8 +47837,8 @@ void glatter_glGetPerfCounterInfoINTEL_debug(GLuint queryId, GLuint counterId, G
 #define glGetPerfCounterInfoINTEL_defined
 #endif
 #ifndef glGetPerfQueryDataINTEL_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfQueryDataINTEL, (queryHandle, flags, dataSize, data, bytesWritten), (GLuint queryHandle, GLuint flags, GLsizei dataSize, GLvoid *data, GLuint *bytesWritten))
-void glatter_glGetPerfQueryDataINTEL_debug(GLuint queryHandle, GLuint flags, GLsizei dataSize, GLvoid *data, GLuint *bytesWritten, const char* file, int line)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPerfQueryDataINTEL, (queryHandle, flags, dataSize, data, bytesWritten), (GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten))
+void glatter_glGetPerfQueryDataINTEL_debug(GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, glGetPerfQueryDataINTEL, "(%u, %u, %d, %p, %p)", (unsigned int)queryHandle, (unsigned int)flags, (int)dataSize, (void*)data, (void*)bytesWritten)
     glatter_glGetPerfQueryDataINTEL(queryHandle, flags, dataSize, data, bytesWritten);
@@ -43029,6 +47879,18 @@ void glatter_glBlendBarrierKHR_debug(const char* file, int line)
 #define glBlendBarrierKHR_defined
 #endif
 #endif // defined(GL_KHR_blend_equation_advanced)
+#if defined(GL_KHR_parallel_shader_compile)
+#ifndef glMaxShaderCompilerThreadsKHR_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMaxShaderCompilerThreadsKHR, (count), (GLuint count))
+void glatter_glMaxShaderCompilerThreadsKHR_debug(GLuint count, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMaxShaderCompilerThreadsKHR, "(%u)", (unsigned int)count)
+    glatter_glMaxShaderCompilerThreadsKHR(count);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMaxShaderCompilerThreadsKHR_defined
+#endif
+#endif // defined(GL_KHR_parallel_shader_compile)
 #if defined(GL_MESA_resize_buffers)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glResizeBuffersMESA, (), (void))
 void glatter_glResizeBuffersMESA_debug(const char* file, int line)
@@ -43251,7 +48113,44 @@ void glatter_glEndConditionalRenderNVX_debug(const char* file, int line)
 }
 #define glEndConditionalRenderNVX_defined
 #endif // defined(GL_NVX_conditional_render)
+#if defined(GL_NVX_linked_gpu_multicast)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLGPUCopyImageSubDataNVX, (sourceGpu, destinationGpuMask, srcName, srcTarget, srcLevel, srcX, srxY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth), (GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth))
+void glatter_glLGPUCopyImageSubDataNVX_debug(GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glLGPUCopyImageSubDataNVX, "(%u, %u, %u, %s, %d, %d, %d, %d, %u, %s, %d, %d, %d, %d, %d, %d, %d)", (unsigned int)sourceGpu, (unsigned int)destinationGpuMask, (unsigned int)srcName, enum_to_string_GL(srcTarget), (int)srcLevel, (int)srcX, (int)srxY, (int)srcZ, (unsigned int)dstName, enum_to_string_GL(dstTarget), (int)dstLevel, (int)dstX, (int)dstY, (int)dstZ, (int)width, (int)height, (int)depth)
+    glatter_glLGPUCopyImageSubDataNVX(sourceGpu, destinationGpuMask, srcName, srcTarget, srcLevel, srcX, srxY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glLGPUCopyImageSubDataNVX_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLGPUInterlockNVX, (), (void))
+void glatter_glLGPUInterlockNVX_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glLGPUInterlockNVX, "()")
+    glatter_glLGPUInterlockNVX();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glLGPUInterlockNVX_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLGPUNamedBufferSubDataNVX, (gpuMask, buffer, offset, size, data), (GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
+void glatter_glLGPUNamedBufferSubDataNVX_debug(GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glLGPUNamedBufferSubDataNVX, "(%u, %u, %td, %td, %p)", (unsigned int)gpuMask, (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size, (void*)data)
+    glatter_glLGPUNamedBufferSubDataNVX(gpuMask, buffer, offset, size, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glLGPUNamedBufferSubDataNVX_defined
+#endif // defined(GL_NVX_linked_gpu_multicast)
+#if defined(GL_NV_alpha_to_coverage_dither_control)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glAlphaToCoverageDitherControlNV, (mode), (GLenum mode))
+void glatter_glAlphaToCoverageDitherControlNV_debug(GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glAlphaToCoverageDitherControlNV, "(%s)", enum_to_string_GL(mode))
+    glatter_glAlphaToCoverageDitherControlNV(mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glAlphaToCoverageDitherControlNV_defined
+#endif // defined(GL_NV_alpha_to_coverage_dither_control)
 #if defined(GL_NV_bindless_multi_draw_indirect)
+#ifndef glMultiDrawArraysIndirectBindlessNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectBindlessNV, (mode, indirect, drawCount, stride, vertexBufferCount), (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount))
 void glatter_glMultiDrawArraysIndirectBindlessNV_debug(GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line)
 {
@@ -43260,6 +48159,8 @@ void glatter_glMultiDrawArraysIndirectBindlessNV_debug(GLenum mode, const void *
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiDrawArraysIndirectBindlessNV_defined
+#endif
+#ifndef glMultiDrawElementsIndirectBindlessNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectBindlessNV, (mode, type, indirect, drawCount, stride, vertexBufferCount), (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount))
 void glatter_glMultiDrawElementsIndirectBindlessNV_debug(GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line)
 {
@@ -43268,8 +48169,10 @@ void glatter_glMultiDrawElementsIndirectBindlessNV_debug(GLenum mode, GLenum typ
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiDrawElementsIndirectBindlessNV_defined
+#endif
 #endif // defined(GL_NV_bindless_multi_draw_indirect)
 #if defined(GL_NV_bindless_multi_draw_indirect_count)
+#ifndef glMultiDrawArraysIndirectBindlessCountNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectBindlessCountNV, (mode, indirect, drawCount, maxDrawCount, stride, vertexBufferCount), (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount))
 void glatter_glMultiDrawArraysIndirectBindlessCountNV_debug(GLenum mode, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line)
 {
@@ -43278,6 +48181,8 @@ void glatter_glMultiDrawArraysIndirectBindlessCountNV_debug(GLenum mode, const v
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiDrawArraysIndirectBindlessCountNV_defined
+#endif
+#ifndef glMultiDrawElementsIndirectBindlessCountNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectBindlessCountNV, (mode, type, indirect, drawCount, maxDrawCount, stride, vertexBufferCount), (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount))
 void glatter_glMultiDrawElementsIndirectBindlessCountNV_debug(GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount, const char* file, int line)
 {
@@ -43286,6 +48191,7 @@ void glatter_glMultiDrawElementsIndirectBindlessCountNV_debug(GLenum mode, GLenu
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMultiDrawElementsIndirectBindlessCountNV_defined
+#endif
 #endif // defined(GL_NV_bindless_multi_draw_indirect_count)
 #if defined(GL_NV_bindless_texture)
 #ifndef glGetImageHandleNV_defined
@@ -43452,6 +48358,7 @@ void glatter_glBlendParameteriNV_debug(GLenum pname, GLint value, const char* fi
 #endif
 #endif // defined(GL_NV_blend_equation_advanced)
 #if defined(GL_NV_clip_space_w_scaling)
+#ifndef glViewportPositionWScaleNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportPositionWScaleNV, (index, xcoeff, ycoeff), (GLuint index, GLfloat xcoeff, GLfloat ycoeff))
 void glatter_glViewportPositionWScaleNV_debug(GLuint index, GLfloat xcoeff, GLfloat ycoeff, const char* file, int line)
 {
@@ -43460,8 +48367,10 @@ void glatter_glViewportPositionWScaleNV_debug(GLuint index, GLfloat xcoeff, GLfl
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glViewportPositionWScaleNV_defined
+#endif
 #endif // defined(GL_NV_clip_space_w_scaling)
 #if defined(GL_NV_command_list)
+#ifndef glCallCommandListNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCallCommandListNV, (list), (GLuint list))
 void glatter_glCallCommandListNV_debug(GLuint list, const char* file, int line)
 {
@@ -43470,6 +48379,8 @@ void glatter_glCallCommandListNV_debug(GLuint list, const char* file, int line)
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCallCommandListNV_defined
+#endif
+#ifndef glCommandListSegmentsNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCommandListSegmentsNV, (list, segments), (GLuint list, GLuint segments))
 void glatter_glCommandListSegmentsNV_debug(GLuint list, GLuint segments, const char* file, int line)
 {
@@ -43478,6 +48389,8 @@ void glatter_glCommandListSegmentsNV_debug(GLuint list, GLuint segments, const c
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCommandListSegmentsNV_defined
+#endif
+#ifndef glCompileCommandListNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompileCommandListNV, (list), (GLuint list))
 void glatter_glCompileCommandListNV_debug(GLuint list, const char* file, int line)
 {
@@ -43486,6 +48399,8 @@ void glatter_glCompileCommandListNV_debug(GLuint list, const char* file, int lin
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCompileCommandListNV_defined
+#endif
+#ifndef glCreateCommandListsNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateCommandListsNV, (n, lists), (GLsizei n, GLuint *lists))
 void glatter_glCreateCommandListsNV_debug(GLsizei n, GLuint *lists, const char* file, int line)
 {
@@ -43494,6 +48409,8 @@ void glatter_glCreateCommandListsNV_debug(GLsizei n, GLuint *lists, const char* 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCreateCommandListsNV_defined
+#endif
+#ifndef glCreateStatesNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateStatesNV, (n, states), (GLsizei n, GLuint *states))
 void glatter_glCreateStatesNV_debug(GLsizei n, GLuint *states, const char* file, int line)
 {
@@ -43502,6 +48419,8 @@ void glatter_glCreateStatesNV_debug(GLsizei n, GLuint *states, const char* file,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glCreateStatesNV_defined
+#endif
+#ifndef glDeleteCommandListsNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteCommandListsNV, (n, lists), (GLsizei n, const GLuint *lists))
 void glatter_glDeleteCommandListsNV_debug(GLsizei n, const GLuint *lists, const char* file, int line)
 {
@@ -43510,6 +48429,8 @@ void glatter_glDeleteCommandListsNV_debug(GLsizei n, const GLuint *lists, const 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDeleteCommandListsNV_defined
+#endif
+#ifndef glDeleteStatesNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteStatesNV, (n, states), (GLsizei n, const GLuint *states))
 void glatter_glDeleteStatesNV_debug(GLsizei n, const GLuint *states, const char* file, int line)
 {
@@ -43518,6 +48439,8 @@ void glatter_glDeleteStatesNV_debug(GLsizei n, const GLuint *states, const char*
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDeleteStatesNV_defined
+#endif
+#ifndef glDrawCommandsAddressNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsAddressNV, (primitiveMode, indirects, sizes, count), (GLenum primitiveMode, const GLuint64 *indirects, const GLsizei *sizes, GLuint count))
 void glatter_glDrawCommandsAddressNV_debug(GLenum primitiveMode, const GLuint64 *indirects, const GLsizei *sizes, GLuint count, const char* file, int line)
 {
@@ -43526,6 +48449,8 @@ void glatter_glDrawCommandsAddressNV_debug(GLenum primitiveMode, const GLuint64 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDrawCommandsAddressNV_defined
+#endif
+#ifndef glDrawCommandsNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsNV, (primitiveMode, buffer, indirects, sizes, count), (GLenum primitiveMode, GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, GLuint count))
 void glatter_glDrawCommandsNV_debug(GLenum primitiveMode, GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, GLuint count, const char* file, int line)
 {
@@ -43534,6 +48459,8 @@ void glatter_glDrawCommandsNV_debug(GLenum primitiveMode, GLuint buffer, const G
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDrawCommandsNV_defined
+#endif
+#ifndef glDrawCommandsStatesAddressNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsStatesAddressNV, (indirects, sizes, states, fbos, count), (const GLuint64 *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
 void glatter_glDrawCommandsStatesAddressNV_debug(const GLuint64 *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count, const char* file, int line)
 {
@@ -43542,6 +48469,8 @@ void glatter_glDrawCommandsStatesAddressNV_debug(const GLuint64 *indirects, cons
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDrawCommandsStatesAddressNV_defined
+#endif
+#ifndef glDrawCommandsStatesNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawCommandsStatesNV, (buffer, indirects, sizes, states, fbos, count), (GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
 void glatter_glDrawCommandsStatesNV_debug(GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count, const char* file, int line)
 {
@@ -43550,6 +48479,8 @@ void glatter_glDrawCommandsStatesNV_debug(GLuint buffer, const GLintptr *indirec
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glDrawCommandsStatesNV_defined
+#endif
+#ifndef glGetCommandHeaderNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetCommandHeaderNV, (tokenID, size), (GLenum tokenID, GLuint size))
 GLuint glatter_glGetCommandHeaderNV_debug(GLenum tokenID, GLuint size, const char* file, int line)
 {
@@ -43560,6 +48491,8 @@ GLuint glatter_glGetCommandHeaderNV_debug(GLenum tokenID, GLuint size, const cha
     return rval;
 }
 #define glGetCommandHeaderNV_defined
+#endif
+#ifndef glGetStageIndexNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLushort, APIENTRY, glGetStageIndexNV, (shadertype), (GLenum shadertype))
 GLushort glatter_glGetStageIndexNV_debug(GLenum shadertype, const char* file, int line)
 {
@@ -43570,6 +48503,8 @@ GLushort glatter_glGetStageIndexNV_debug(GLenum shadertype, const char* file, in
     return rval;
 }
 #define glGetStageIndexNV_defined
+#endif
+#ifndef glIsCommandListNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsCommandListNV, (list), (GLuint list))
 GLboolean glatter_glIsCommandListNV_debug(GLuint list, const char* file, int line)
 {
@@ -43580,6 +48515,8 @@ GLboolean glatter_glIsCommandListNV_debug(GLuint list, const char* file, int lin
     return rval;
 }
 #define glIsCommandListNV_defined
+#endif
+#ifndef glIsStateNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsStateNV, (state), (GLuint state))
 GLboolean glatter_glIsStateNV_debug(GLuint state, const char* file, int line)
 {
@@ -43590,6 +48527,8 @@ GLboolean glatter_glIsStateNV_debug(GLuint state, const char* file, int line)
     return rval;
 }
 #define glIsStateNV_defined
+#endif
+#ifndef glListDrawCommandsStatesClientNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glListDrawCommandsStatesClientNV, (list, segment, indirects, sizes, states, fbos, count), (GLuint list, GLuint segment, const void **indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count))
 void glatter_glListDrawCommandsStatesClientNV_debug(GLuint list, GLuint segment, const void **indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count, const char* file, int line)
 {
@@ -43598,6 +48537,8 @@ void glatter_glListDrawCommandsStatesClientNV_debug(GLuint list, GLuint segment,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glListDrawCommandsStatesClientNV_defined
+#endif
+#ifndef glStateCaptureNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStateCaptureNV, (state, mode), (GLuint state, GLenum mode))
 void glatter_glStateCaptureNV_debug(GLuint state, GLenum mode, const char* file, int line)
 {
@@ -43606,6 +48547,7 @@ void glatter_glStateCaptureNV_debug(GLuint state, GLenum mode, const char* file,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glStateCaptureNV_defined
+#endif
 #endif // defined(GL_NV_command_list)
 #if defined(GL_NV_conditional_render)
 #ifndef glBeginConditionalRenderNV_defined
@@ -43642,6 +48584,7 @@ void glatter_glSubpixelPrecisionBiasNV_debug(GLuint xbits, GLuint ybits, const c
 #endif
 #endif // defined(GL_NV_conservative_raster)
 #if defined(GL_NV_conservative_raster_dilate)
+#ifndef glConservativeRasterParameterfNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glConservativeRasterParameterfNV, (pname, value), (GLenum pname, GLfloat value))
 void glatter_glConservativeRasterParameterfNV_debug(GLenum pname, GLfloat value, const char* file, int line)
 {
@@ -43650,6 +48593,7 @@ void glatter_glConservativeRasterParameterfNV_debug(GLenum pname, GLfloat value,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glConservativeRasterParameterfNV_defined
+#endif
 #endif // defined(GL_NV_conservative_raster_dilate)
 #if defined(GL_NV_conservative_raster_pre_snap_triangles)
 #ifndef glConservativeRasterParameteriNV_defined
@@ -43709,6 +48653,60 @@ void glatter_glDrawTextureNV_debug(GLuint texture, GLuint sampler, GLfloat x0, G
 }
 #define glDrawTextureNV_defined
 #endif // defined(GL_NV_draw_texture)
+#if defined(GL_NV_draw_vulkan_image)
+#ifndef glDrawVkImageNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawVkImageNV, (vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1), (GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1))
+void glatter_glDrawVkImageNV_debug(GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawVkImageNV, "(%" PRIu64 ", %u, %f, %f, %f, %f, %f, %f, %f, %f, %f)", (uint64_t)vkImage, (unsigned int)sampler, (float)x0, (float)y0, (float)x1, (float)y1, (float)z, (float)s0, (float)t0, (float)s1, (float)t1)
+    glatter_glDrawVkImageNV(vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawVkImageNV_defined
+#endif
+#ifndef glGetVkProcAddrNV_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLVULKANPROCNV, APIENTRY, glGetVkProcAddrNV, (name), (const GLchar *name))
+GLVULKANPROCNV glatter_glGetVkProcAddrNV_debug(const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVkProcAddrNV, "(%p)", (void*)name)
+    GLVULKANPROCNV rval = glatter_glGetVkProcAddrNV(name);
+    GLATTER_RBLOCK("%s\n", GET_PRS(rval));
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetVkProcAddrNV_defined
+#endif
+#ifndef glSignalVkFenceNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalVkFenceNV, (vkFence), (GLuint64 vkFence))
+void glatter_glSignalVkFenceNV_debug(GLuint64 vkFence, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSignalVkFenceNV, "(%" PRIu64 ")", (uint64_t)vkFence)
+    glatter_glSignalVkFenceNV(vkFence);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSignalVkFenceNV_defined
+#endif
+#ifndef glSignalVkSemaphoreNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSignalVkSemaphoreNV, (vkSemaphore), (GLuint64 vkSemaphore))
+void glatter_glSignalVkSemaphoreNV_debug(GLuint64 vkSemaphore, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSignalVkSemaphoreNV, "(%" PRIu64 ")", (uint64_t)vkSemaphore)
+    glatter_glSignalVkSemaphoreNV(vkSemaphore);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSignalVkSemaphoreNV_defined
+#endif
+#ifndef glWaitVkSemaphoreNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWaitVkSemaphoreNV, (vkSemaphore), (GLuint64 vkSemaphore))
+void glatter_glWaitVkSemaphoreNV_debug(GLuint64 vkSemaphore, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glWaitVkSemaphoreNV, "(%" PRIu64 ")", (uint64_t)vkSemaphore)
+    glatter_glWaitVkSemaphoreNV(vkSemaphore);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glWaitVkSemaphoreNV_defined
+#endif
+#endif // defined(GL_NV_draw_vulkan_image)
 #if defined(GL_NV_evaluators)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEvalMapsNV, (target, mode), (GLenum target, GLenum mode))
 void glatter_glEvalMapsNV_debug(GLenum target, GLenum mode, const char* file, int line)
@@ -43980,6 +48978,7 @@ void glatter_glGetCoverageModulationTableNV_debug(GLsizei bufsize, GLfloat *v, c
 #endif
 #endif // defined(GL_NV_framebuffer_mixed_samples)
 #if defined(GL_NV_framebuffer_multisample_coverage)
+#ifndef glRenderbufferStorageMultisampleCoverageNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderbufferStorageMultisampleCoverageNV, (target, coverageSamples, colorSamples, internalformat, width, height), (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height))
 void glatter_glRenderbufferStorageMultisampleCoverageNV_debug(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
 {
@@ -43988,6 +48987,7 @@ void glatter_glRenderbufferStorageMultisampleCoverageNV_debug(GLenum target, GLs
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glRenderbufferStorageMultisampleCoverageNV_defined
+#endif
 #endif // defined(GL_NV_framebuffer_multisample_coverage)
 #if defined(GL_NV_geometry_program4)
 #ifndef glFramebufferTextureEXT_defined
@@ -44017,6 +49017,104 @@ void glatter_glProgramVertexLimitNV_debug(GLenum target, GLint limit, const char
 }
 #define glProgramVertexLimitNV_defined
 #endif // defined(GL_NV_geometry_program4)
+#if defined(GL_NV_gpu_multicast)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastBarrierNV, (), (void))
+void glatter_glMulticastBarrierNV_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastBarrierNV, "()")
+    glatter_glMulticastBarrierNV();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastBarrierNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastBlitFramebufferNV, (srcGpu, dstGpu, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLuint srcGpu, GLuint dstGpu, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
+void glatter_glMulticastBlitFramebufferNV_debug(GLuint srcGpu, GLuint dstGpu, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastBlitFramebufferNV, "(%u, %u, %d, %d, %d, %d, %d, %d, %d, %d, %u, %s)", (unsigned int)srcGpu, (unsigned int)dstGpu, (int)srcX0, (int)srcY0, (int)srcX1, (int)srcY1, (int)dstX0, (int)dstY0, (int)dstX1, (int)dstY1, (unsigned int)mask, enum_to_string_GL(filter))
+    glatter_glMulticastBlitFramebufferNV(srcGpu, dstGpu, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastBlitFramebufferNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastBufferSubDataNV, (gpuMask, buffer, offset, size, data), (GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data))
+void glatter_glMulticastBufferSubDataNV_debug(GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastBufferSubDataNV, "(%u, %u, %td, %td, %p)", (unsigned int)gpuMask, (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size, (void*)data)
+    glatter_glMulticastBufferSubDataNV(gpuMask, buffer, offset, size, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastBufferSubDataNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastCopyBufferSubDataNV, (readGpu, writeGpuMask, readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
+void glatter_glMulticastCopyBufferSubDataNV_debug(GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastCopyBufferSubDataNV, "(%u, %u, %u, %u, %td, %td, %td)", (unsigned int)readGpu, (unsigned int)writeGpuMask, (unsigned int)readBuffer, (unsigned int)writeBuffer, (ptrdiff_t)readOffset, (ptrdiff_t)writeOffset, (ptrdiff_t)size)
+    glatter_glMulticastCopyBufferSubDataNV(readGpu, writeGpuMask, readBuffer, writeBuffer, readOffset, writeOffset, size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastCopyBufferSubDataNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastCopyImageSubDataNV, (srcGpu, dstGpuMask, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth), (GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth))
+void glatter_glMulticastCopyImageSubDataNV_debug(GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastCopyImageSubDataNV, "(%u, %u, %u, %s, %d, %d, %d, %d, %u, %s, %d, %d, %d, %d, %d, %d, %d)", (unsigned int)srcGpu, (unsigned int)dstGpuMask, (unsigned int)srcName, enum_to_string_GL(srcTarget), (int)srcLevel, (int)srcX, (int)srcY, (int)srcZ, (unsigned int)dstName, enum_to_string_GL(dstTarget), (int)dstLevel, (int)dstX, (int)dstY, (int)dstZ, (int)srcWidth, (int)srcHeight, (int)srcDepth)
+    glatter_glMulticastCopyImageSubDataNV(srcGpu, dstGpuMask, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastCopyImageSubDataNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastFramebufferSampleLocationsfvNV, (gpu, framebuffer, start, count, v), (GLuint gpu, GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v))
+void glatter_glMulticastFramebufferSampleLocationsfvNV_debug(GLuint gpu, GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastFramebufferSampleLocationsfvNV, "(%u, %u, %u, %d, %p)", (unsigned int)gpu, (unsigned int)framebuffer, (unsigned int)start, (int)count, (void*)v)
+    glatter_glMulticastFramebufferSampleLocationsfvNV(gpu, framebuffer, start, count, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastFramebufferSampleLocationsfvNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastGetQueryObjecti64vNV, (gpu, id, pname, params), (GLuint gpu, GLuint id, GLenum pname, GLint64 *params))
+void glatter_glMulticastGetQueryObjecti64vNV_debug(GLuint gpu, GLuint id, GLenum pname, GLint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastGetQueryObjecti64vNV, "(%u, %u, %s, %p)", (unsigned int)gpu, (unsigned int)id, enum_to_string_GL(pname), (void*)params)
+    glatter_glMulticastGetQueryObjecti64vNV(gpu, id, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastGetQueryObjecti64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastGetQueryObjectivNV, (gpu, id, pname, params), (GLuint gpu, GLuint id, GLenum pname, GLint *params))
+void glatter_glMulticastGetQueryObjectivNV_debug(GLuint gpu, GLuint id, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastGetQueryObjectivNV, "(%u, %u, %s, %p)", (unsigned int)gpu, (unsigned int)id, enum_to_string_GL(pname), (void*)params)
+    glatter_glMulticastGetQueryObjectivNV(gpu, id, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastGetQueryObjectivNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastGetQueryObjectui64vNV, (gpu, id, pname, params), (GLuint gpu, GLuint id, GLenum pname, GLuint64 *params))
+void glatter_glMulticastGetQueryObjectui64vNV_debug(GLuint gpu, GLuint id, GLenum pname, GLuint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastGetQueryObjectui64vNV, "(%u, %u, %s, %p)", (unsigned int)gpu, (unsigned int)id, enum_to_string_GL(pname), (void*)params)
+    glatter_glMulticastGetQueryObjectui64vNV(gpu, id, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastGetQueryObjectui64vNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastGetQueryObjectuivNV, (gpu, id, pname, params), (GLuint gpu, GLuint id, GLenum pname, GLuint *params))
+void glatter_glMulticastGetQueryObjectuivNV_debug(GLuint gpu, GLuint id, GLenum pname, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastGetQueryObjectuivNV, "(%u, %u, %s, %p)", (unsigned int)gpu, (unsigned int)id, enum_to_string_GL(pname), (void*)params)
+    glatter_glMulticastGetQueryObjectuivNV(gpu, id, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastGetQueryObjectuivNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMulticastWaitSyncNV, (signalGpu, waitGpuMask), (GLuint signalGpu, GLbitfield waitGpuMask))
+void glatter_glMulticastWaitSyncNV_debug(GLuint signalGpu, GLbitfield waitGpuMask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMulticastWaitSyncNV, "(%u, %u)", (unsigned int)signalGpu, (unsigned int)waitGpuMask)
+    glatter_glMulticastWaitSyncNV(signalGpu, waitGpuMask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMulticastWaitSyncNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderGpuMaskNV, (mask), (GLbitfield mask))
+void glatter_glRenderGpuMaskNV_debug(GLbitfield mask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glRenderGpuMaskNV, "(%u)", (unsigned int)mask)
+    glatter_glRenderGpuMaskNV(mask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glRenderGpuMaskNV_defined
+#endif // defined(GL_NV_gpu_multicast)
 #if defined(GL_NV_gpu_program4)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramEnvParameterIivNV, (target, index, params), (GLenum target, GLuint index, GLint *params))
 void glatter_glGetProgramEnvParameterIivNV_debug(GLenum target, GLuint index, GLint *params, const char* file, int line)
@@ -45383,6 +50481,44 @@ void glatter_glPrimitiveRestartNV_debug(const char* file, int line)
 }
 #define glPrimitiveRestartNV_defined
 #endif // defined(GL_NV_primitive_restart)
+#if defined(GL_NV_query_resource)
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glQueryResourceNV, (queryType, tagId, bufSize, buffer), (GLenum queryType, GLint tagId, GLuint bufSize, GLint *buffer))
+GLint glatter_glQueryResourceNV_debug(GLenum queryType, GLint tagId, GLuint bufSize, GLint *buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glQueryResourceNV, "(%s, %d, %u, %p)", enum_to_string_GL(queryType), (int)tagId, (unsigned int)bufSize, (void*)buffer)
+    GLint rval = glatter_glQueryResourceNV(queryType, tagId, bufSize, buffer);
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glQueryResourceNV_defined
+#endif // defined(GL_NV_query_resource)
+#if defined(GL_NV_query_resource_tag)
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteQueryResourceTagNV, (n, tagIds), (GLsizei n, const GLint *tagIds))
+void glatter_glDeleteQueryResourceTagNV_debug(GLsizei n, const GLint *tagIds, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteQueryResourceTagNV, "(%d, %p)", (int)n, (void*)tagIds)
+    glatter_glDeleteQueryResourceTagNV(n, tagIds);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteQueryResourceTagNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenQueryResourceTagNV, (n, tagIds), (GLsizei n, GLint *tagIds))
+void glatter_glGenQueryResourceTagNV_debug(GLsizei n, GLint *tagIds, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenQueryResourceTagNV, "(%d, %p)", (int)n, (void*)tagIds)
+    glatter_glGenQueryResourceTagNV(n, tagIds);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenQueryResourceTagNV_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glQueryResourceTagNV, (tagId, tagString), (GLint tagId, const GLchar *tagString))
+void glatter_glQueryResourceTagNV_debug(GLint tagId, const GLchar *tagString, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glQueryResourceTagNV, "(%d, %p)", (int)tagId, (void*)tagString)
+    glatter_glQueryResourceTagNV(tagId, tagString);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glQueryResourceTagNV_defined
+#endif // defined(GL_NV_query_resource_tag)
 #if defined(GL_NV_register_combiners)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCombinerInputNV, (stage, portion, variable, input, mapping, componentUsage), (GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage))
 void glatter_glCombinerInputNV_debug(GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage, const char* file, int line)
@@ -45540,6 +50676,7 @@ void glatter_glResolveDepthValuesNV_debug(const char* file, int line)
 #endif
 #endif // defined(GL_NV_sample_locations)
 #if defined(GL_NV_shader_buffer_load)
+#ifndef glGetBufferParameterui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferParameterui64vNV, (target, pname, params), (GLenum target, GLenum pname, GLuint64EXT *params))
 void glatter_glGetBufferParameterui64vNV_debug(GLenum target, GLenum pname, GLuint64EXT *params, const char* file, int line)
 {
@@ -45548,6 +50685,8 @@ void glatter_glGetBufferParameterui64vNV_debug(GLenum target, GLenum pname, GLui
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetBufferParameterui64vNV_defined
+#endif
+#ifndef glGetIntegerui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerui64vNV, (value, result), (GLenum value, GLuint64EXT *result))
 void glatter_glGetIntegerui64vNV_debug(GLenum value, GLuint64EXT *result, const char* file, int line)
 {
@@ -45556,6 +50695,8 @@ void glatter_glGetIntegerui64vNV_debug(GLenum value, GLuint64EXT *result, const 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetIntegerui64vNV_defined
+#endif
+#ifndef glGetNamedBufferParameterui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameterui64vNV, (buffer, pname, params), (GLuint buffer, GLenum pname, GLuint64EXT *params))
 void glatter_glGetNamedBufferParameterui64vNV_debug(GLuint buffer, GLenum pname, GLuint64EXT *params, const char* file, int line)
 {
@@ -45564,6 +50705,8 @@ void glatter_glGetNamedBufferParameterui64vNV_debug(GLuint buffer, GLenum pname,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetNamedBufferParameterui64vNV_defined
+#endif
+#ifndef glIsBufferResidentNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsBufferResidentNV, (target), (GLenum target))
 GLboolean glatter_glIsBufferResidentNV_debug(GLenum target, const char* file, int line)
 {
@@ -45574,6 +50717,8 @@ GLboolean glatter_glIsBufferResidentNV_debug(GLenum target, const char* file, in
     return rval;
 }
 #define glIsBufferResidentNV_defined
+#endif
+#ifndef glIsNamedBufferResidentNV_defined
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsNamedBufferResidentNV, (buffer), (GLuint buffer))
 GLboolean glatter_glIsNamedBufferResidentNV_debug(GLuint buffer, const char* file, int line)
 {
@@ -45584,6 +50729,8 @@ GLboolean glatter_glIsNamedBufferResidentNV_debug(GLuint buffer, const char* fil
     return rval;
 }
 #define glIsNamedBufferResidentNV_defined
+#endif
+#ifndef glMakeBufferNonResidentNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeBufferNonResidentNV, (target), (GLenum target))
 void glatter_glMakeBufferNonResidentNV_debug(GLenum target, const char* file, int line)
 {
@@ -45592,6 +50739,8 @@ void glatter_glMakeBufferNonResidentNV_debug(GLenum target, const char* file, in
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMakeBufferNonResidentNV_defined
+#endif
+#ifndef glMakeBufferResidentNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeBufferResidentNV, (target, access), (GLenum target, GLenum access))
 void glatter_glMakeBufferResidentNV_debug(GLenum target, GLenum access, const char* file, int line)
 {
@@ -45600,6 +50749,8 @@ void glatter_glMakeBufferResidentNV_debug(GLenum target, GLenum access, const ch
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMakeBufferResidentNV_defined
+#endif
+#ifndef glMakeNamedBufferNonResidentNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeNamedBufferNonResidentNV, (buffer), (GLuint buffer))
 void glatter_glMakeNamedBufferNonResidentNV_debug(GLuint buffer, const char* file, int line)
 {
@@ -45608,6 +50759,8 @@ void glatter_glMakeNamedBufferNonResidentNV_debug(GLuint buffer, const char* fil
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMakeNamedBufferNonResidentNV_defined
+#endif
+#ifndef glMakeNamedBufferResidentNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeNamedBufferResidentNV, (buffer, access), (GLuint buffer, GLenum access))
 void glatter_glMakeNamedBufferResidentNV_debug(GLuint buffer, GLenum access, const char* file, int line)
 {
@@ -45616,6 +50769,8 @@ void glatter_glMakeNamedBufferResidentNV_debug(GLuint buffer, GLenum access, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glMakeNamedBufferResidentNV_defined
+#endif
+#ifndef glProgramUniformui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformui64NV, (program, location, value), (GLuint program, GLint location, GLuint64EXT value))
 void glatter_glProgramUniformui64NV_debug(GLuint program, GLint location, GLuint64EXT value, const char* file, int line)
 {
@@ -45624,6 +50779,8 @@ void glatter_glProgramUniformui64NV_debug(GLuint program, GLint location, GLuint
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformui64NV_defined
+#endif
+#ifndef glProgramUniformui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformui64vNV, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value))
 void glatter_glProgramUniformui64vNV_debug(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value, const char* file, int line)
 {
@@ -45632,6 +50789,8 @@ void glatter_glProgramUniformui64vNV_debug(GLuint program, GLint location, GLsiz
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glProgramUniformui64vNV_defined
+#endif
+#ifndef glUniformui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformui64NV, (location, value), (GLint location, GLuint64EXT value))
 void glatter_glUniformui64NV_debug(GLint location, GLuint64EXT value, const char* file, int line)
 {
@@ -45640,6 +50799,8 @@ void glatter_glUniformui64NV_debug(GLint location, GLuint64EXT value, const char
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniformui64NV_defined
+#endif
+#ifndef glUniformui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformui64vNV, (location, count, value), (GLint location, GLsizei count, const GLuint64EXT *value))
 void glatter_glUniformui64vNV_debug(GLint location, GLsizei count, const GLuint64EXT *value, const char* file, int line)
 {
@@ -45648,8 +50809,10 @@ void glatter_glUniformui64vNV_debug(GLint location, GLsizei count, const GLuint6
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glUniformui64vNV_defined
+#endif
 #endif // defined(GL_NV_shader_buffer_load)
 #if defined(GL_NV_texture_barrier)
+#ifndef glTextureBarrierNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBarrierNV, (), (void))
 void glatter_glTextureBarrierNV_debug(const char* file, int line)
 {
@@ -45658,6 +50821,7 @@ void glatter_glTextureBarrierNV_debug(const char* file, int line)
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTextureBarrierNV_defined
+#endif
 #endif // defined(GL_NV_texture_barrier)
 #if defined(GL_NV_texture_multisample)
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage2DMultisampleCoverageNV, (target, coverageSamples, colorSamples, internalFormat, width, height, fixedSampleLocations), (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations))
@@ -45976,6 +51140,7 @@ void glatter_glVertexArrayRangeNV_debug(GLsizei length, const void *pointer, con
 #define glVertexArrayRangeNV_defined
 #endif // defined(GL_NV_vertex_array_range)
 #if defined(GL_NV_vertex_attrib_integer_64bit)
+#ifndef glGetVertexAttribLi64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLi64vNV, (index, pname, params), (GLuint index, GLenum pname, GLint64EXT *params))
 void glatter_glGetVertexAttribLi64vNV_debug(GLuint index, GLenum pname, GLint64EXT *params, const char* file, int line)
 {
@@ -45984,6 +51149,8 @@ void glatter_glGetVertexAttribLi64vNV_debug(GLuint index, GLenum pname, GLint64E
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetVertexAttribLi64vNV_defined
+#endif
+#ifndef glGetVertexAttribLui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLui64vNV, (index, pname, params), (GLuint index, GLenum pname, GLuint64EXT *params))
 void glatter_glGetVertexAttribLui64vNV_debug(GLuint index, GLenum pname, GLuint64EXT *params, const char* file, int line)
 {
@@ -45992,6 +51159,8 @@ void glatter_glGetVertexAttribLui64vNV_debug(GLuint index, GLenum pname, GLuint6
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetVertexAttribLui64vNV_defined
+#endif
+#ifndef glVertexAttribL1i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1i64NV, (index, x), (GLuint index, GLint64EXT x))
 void glatter_glVertexAttribL1i64NV_debug(GLuint index, GLint64EXT x, const char* file, int line)
 {
@@ -46000,6 +51169,8 @@ void glatter_glVertexAttribL1i64NV_debug(GLuint index, GLint64EXT x, const char*
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL1i64NV_defined
+#endif
+#ifndef glVertexAttribL1i64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
 void glatter_glVertexAttribL1i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line)
 {
@@ -46008,6 +51179,8 @@ void glatter_glVertexAttribL1i64vNV_debug(GLuint index, const GLint64EXT *v, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL1i64vNV_defined
+#endif
+#ifndef glVertexAttribL1ui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64NV, (index, x), (GLuint index, GLuint64EXT x))
 void glatter_glVertexAttribL1ui64NV_debug(GLuint index, GLuint64EXT x, const char* file, int line)
 {
@@ -46016,6 +51189,8 @@ void glatter_glVertexAttribL1ui64NV_debug(GLuint index, GLuint64EXT x, const cha
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL1ui64NV_defined
+#endif
+#ifndef glVertexAttribL1ui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
 void glatter_glVertexAttribL1ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line)
 {
@@ -46024,6 +51199,8 @@ void glatter_glVertexAttribL1ui64vNV_debug(GLuint index, const GLuint64EXT *v, c
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL1ui64vNV_defined
+#endif
+#ifndef glVertexAttribL2i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2i64NV, (index, x, y), (GLuint index, GLint64EXT x, GLint64EXT y))
 void glatter_glVertexAttribL2i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT y, const char* file, int line)
 {
@@ -46032,6 +51209,8 @@ void glatter_glVertexAttribL2i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL2i64NV_defined
+#endif
+#ifndef glVertexAttribL2i64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
 void glatter_glVertexAttribL2i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line)
 {
@@ -46040,6 +51219,8 @@ void glatter_glVertexAttribL2i64vNV_debug(GLuint index, const GLint64EXT *v, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL2i64vNV_defined
+#endif
+#ifndef glVertexAttribL2ui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2ui64NV, (index, x, y), (GLuint index, GLuint64EXT x, GLuint64EXT y))
 void glatter_glVertexAttribL2ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64EXT y, const char* file, int line)
 {
@@ -46048,6 +51229,8 @@ void glatter_glVertexAttribL2ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64E
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL2ui64NV_defined
+#endif
+#ifndef glVertexAttribL2ui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
 void glatter_glVertexAttribL2ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line)
 {
@@ -46056,6 +51239,8 @@ void glatter_glVertexAttribL2ui64vNV_debug(GLuint index, const GLuint64EXT *v, c
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL2ui64vNV_defined
+#endif
+#ifndef glVertexAttribL3i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3i64NV, (index, x, y, z), (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z))
 void glatter_glVertexAttribL3i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, const char* file, int line)
 {
@@ -46064,6 +51249,8 @@ void glatter_glVertexAttribL3i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL3i64NV_defined
+#endif
+#ifndef glVertexAttribL3i64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
 void glatter_glVertexAttribL3i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line)
 {
@@ -46072,6 +51259,8 @@ void glatter_glVertexAttribL3i64vNV_debug(GLuint index, const GLint64EXT *v, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL3i64vNV_defined
+#endif
+#ifndef glVertexAttribL3ui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3ui64NV, (index, x, y, z), (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z))
 void glatter_glVertexAttribL3ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, const char* file, int line)
 {
@@ -46080,6 +51269,8 @@ void glatter_glVertexAttribL3ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64E
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL3ui64NV_defined
+#endif
+#ifndef glVertexAttribL3ui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
 void glatter_glVertexAttribL3ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line)
 {
@@ -46088,6 +51279,8 @@ void glatter_glVertexAttribL3ui64vNV_debug(GLuint index, const GLuint64EXT *v, c
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL3ui64vNV_defined
+#endif
+#ifndef glVertexAttribL4i64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4i64NV, (index, x, y, z, w), (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w))
 void glatter_glVertexAttribL4i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w, const char* file, int line)
 {
@@ -46096,6 +51289,8 @@ void glatter_glVertexAttribL4i64NV_debug(GLuint index, GLint64EXT x, GLint64EXT 
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL4i64NV_defined
+#endif
+#ifndef glVertexAttribL4i64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4i64vNV, (index, v), (GLuint index, const GLint64EXT *v))
 void glatter_glVertexAttribL4i64vNV_debug(GLuint index, const GLint64EXT *v, const char* file, int line)
 {
@@ -46104,6 +51299,8 @@ void glatter_glVertexAttribL4i64vNV_debug(GLuint index, const GLint64EXT *v, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL4i64vNV_defined
+#endif
+#ifndef glVertexAttribL4ui64NV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4ui64NV, (index, x, y, z, w), (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w))
 void glatter_glVertexAttribL4ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w, const char* file, int line)
 {
@@ -46112,6 +51309,8 @@ void glatter_glVertexAttribL4ui64NV_debug(GLuint index, GLuint64EXT x, GLuint64E
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL4ui64NV_defined
+#endif
+#ifndef glVertexAttribL4ui64vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4ui64vNV, (index, v), (GLuint index, const GLuint64EXT *v))
 void glatter_glVertexAttribL4ui64vNV_debug(GLuint index, const GLuint64EXT *v, const char* file, int line)
 {
@@ -46120,6 +51319,8 @@ void glatter_glVertexAttribL4ui64vNV_debug(GLuint index, const GLuint64EXT *v, c
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribL4ui64vNV_defined
+#endif
+#ifndef glVertexAttribLFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribLFormatNV, (index, size, type, stride), (GLuint index, GLint size, GLenum type, GLsizei stride))
 void glatter_glVertexAttribLFormatNV_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const char* file, int line)
 {
@@ -46128,8 +51329,10 @@ void glatter_glVertexAttribLFormatNV_debug(GLuint index, GLint size, GLenum type
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribLFormatNV_defined
+#endif
 #endif // defined(GL_NV_vertex_attrib_integer_64bit)
 #if defined(GL_NV_vertex_buffer_unified_memory)
+#ifndef glBufferAddressRangeNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferAddressRangeNV, (pname, index, address, length), (GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length))
 void glatter_glBufferAddressRangeNV_debug(GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length, const char* file, int line)
 {
@@ -46138,6 +51341,8 @@ void glatter_glBufferAddressRangeNV_debug(GLenum pname, GLuint index, GLuint64EX
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glBufferAddressRangeNV_defined
+#endif
+#ifndef glColorFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
 void glatter_glColorFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line)
 {
@@ -46146,6 +51351,8 @@ void glatter_glColorFormatNV_debug(GLint size, GLenum type, GLsizei stride, cons
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glColorFormatNV_defined
+#endif
+#ifndef glEdgeFlagFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEdgeFlagFormatNV, (stride), (GLsizei stride))
 void glatter_glEdgeFlagFormatNV_debug(GLsizei stride, const char* file, int line)
 {
@@ -46154,6 +51361,8 @@ void glatter_glEdgeFlagFormatNV_debug(GLsizei stride, const char* file, int line
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glEdgeFlagFormatNV_defined
+#endif
+#ifndef glFogCoordFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFogCoordFormatNV, (type, stride), (GLenum type, GLsizei stride))
 void glatter_glFogCoordFormatNV_debug(GLenum type, GLsizei stride, const char* file, int line)
 {
@@ -46162,6 +51371,8 @@ void glatter_glFogCoordFormatNV_debug(GLenum type, GLsizei stride, const char* f
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glFogCoordFormatNV_defined
+#endif
+#ifndef glGetIntegerui64i_vNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerui64i_vNV, (value, index, result), (GLenum value, GLuint index, GLuint64EXT *result))
 void glatter_glGetIntegerui64i_vNV_debug(GLenum value, GLuint index, GLuint64EXT *result, const char* file, int line)
 {
@@ -46170,6 +51381,8 @@ void glatter_glGetIntegerui64i_vNV_debug(GLenum value, GLuint index, GLuint64EXT
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glGetIntegerui64i_vNV_defined
+#endif
+#ifndef glIndexFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glIndexFormatNV, (type, stride), (GLenum type, GLsizei stride))
 void glatter_glIndexFormatNV_debug(GLenum type, GLsizei stride, const char* file, int line)
 {
@@ -46178,6 +51391,8 @@ void glatter_glIndexFormatNV_debug(GLenum type, GLsizei stride, const char* file
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glIndexFormatNV_defined
+#endif
+#ifndef glNormalFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNormalFormatNV, (type, stride), (GLenum type, GLsizei stride))
 void glatter_glNormalFormatNV_debug(GLenum type, GLsizei stride, const char* file, int line)
 {
@@ -46186,6 +51401,8 @@ void glatter_glNormalFormatNV_debug(GLenum type, GLsizei stride, const char* fil
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glNormalFormatNV_defined
+#endif
+#ifndef glSecondaryColorFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSecondaryColorFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
 void glatter_glSecondaryColorFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line)
 {
@@ -46194,6 +51411,8 @@ void glatter_glSecondaryColorFormatNV_debug(GLint size, GLenum type, GLsizei str
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glSecondaryColorFormatNV_defined
+#endif
+#ifndef glTexCoordFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexCoordFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
 void glatter_glTexCoordFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line)
 {
@@ -46202,6 +51421,8 @@ void glatter_glTexCoordFormatNV_debug(GLint size, GLenum type, GLsizei stride, c
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTexCoordFormatNV_defined
+#endif
+#ifndef glVertexAttribFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribFormatNV, (index, size, type, normalized, stride), (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride))
 void glatter_glVertexAttribFormatNV_debug(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const char* file, int line)
 {
@@ -46210,6 +51431,8 @@ void glatter_glVertexAttribFormatNV_debug(GLuint index, GLint size, GLenum type,
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribFormatNV_defined
+#endif
+#ifndef glVertexAttribIFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribIFormatNV, (index, size, type, stride), (GLuint index, GLint size, GLenum type, GLsizei stride))
 void glatter_glVertexAttribIFormatNV_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const char* file, int line)
 {
@@ -46218,6 +51441,8 @@ void glatter_glVertexAttribIFormatNV_debug(GLuint index, GLint size, GLenum type
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexAttribIFormatNV_defined
+#endif
+#ifndef glVertexFormatNV_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexFormatNV, (size, type, stride), (GLint size, GLenum type, GLsizei stride))
 void glatter_glVertexFormatNV_debug(GLint size, GLenum type, GLsizei stride, const char* file, int line)
 {
@@ -46226,6 +51451,7 @@ void glatter_glVertexFormatNV_debug(GLint size, GLenum type, GLsizei stride, con
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glVertexFormatNV_defined
+#endif
 #endif // defined(GL_NV_vertex_buffer_unified_memory)
 #if defined(GL_NV_vertex_program)
 GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glAreProgramsResidentNV, (n, programs, residences), (GLsizei n, const GLuint *programs, GLboolean *residences))
@@ -56304,7 +61530,7171 @@ void glatter_glVertexArrayVertexBuffers_debug(GLuint vaobj, GLuint first, GLsize
 }
 #define glVertexArrayVertexBuffers_defined
 #endif
-#endif // defined(__glext_h_)
+#endif // defined(GL_VERSION_4_5)
+#if defined(GL_VERSION_4_6)
+#ifndef glMultiDrawArraysIndirectCount_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCount, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawArraysIndirectCount_debug(GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirectCount, "(%s, %p, %td, %d, %d)", enum_to_string_GL(mode), (void*)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    glatter_glMultiDrawArraysIndirectCount(mode, indirect, drawcount, maxdrawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawArraysIndirectCount_defined
+#endif
+#ifndef glMultiDrawElementsIndirectCount_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCount, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawElementsIndirectCount_debug(GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirectCount, "(%s, %s, %p, %td, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (void*)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    glatter_glMultiDrawElementsIndirectCount(mode, type, indirect, drawcount, maxdrawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawElementsIndirectCount_defined
+#endif
+#ifndef glPolygonOffsetClamp_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPolygonOffsetClamp, (factor, units, clamp), (GLfloat factor, GLfloat units, GLfloat clamp))
+void glatter_glPolygonOffsetClamp_debug(GLfloat factor, GLfloat units, GLfloat clamp, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPolygonOffsetClamp, "(%f, %f, %f)", (float)factor, (float)units, (float)clamp)
+    glatter_glPolygonOffsetClamp(factor, units, clamp);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPolygonOffsetClamp_defined
+#endif
+#ifndef glSpecializeShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSpecializeShader, (shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue), (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue))
+void glatter_glSpecializeShader_debug(GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSpecializeShader, "(%u, %p, %u, %p, %p)", (unsigned int)shader, (void*)pEntryPoint, (unsigned int)numSpecializationConstants, (void*)pConstantIndex, (void*)pConstantValue)
+    glatter_glSpecializeShader(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSpecializeShader_defined
+#endif
+#endif // defined(GL_VERSION_4_6)
+#endif // defined(__gl_glext_h_)
+#if defined(__glcorearb_h_)
+#if defined(GL_ARB_bindless_texture)
+#ifndef glGetImageHandleARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetImageHandleARB, (texture, level, layered, layer, format), (GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format))
+GLuint64 glatter_glGetImageHandleARB_debug(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetImageHandleARB, "(%u, %d, %u, %d, %s)", (unsigned int)texture, (int)level, (unsigned char)layered, (int)layer, enum_to_string_GL(format))
+    GLuint64 rval = glatter_glGetImageHandleARB(texture, level, layered, layer, format);
+    GLATTER_RBLOCK("%" PRIu64 "\n", (uint64_t)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetImageHandleARB_defined
+#endif
+#ifndef glGetTextureHandleARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetTextureHandleARB, (texture), (GLuint texture))
+GLuint64 glatter_glGetTextureHandleARB_debug(GLuint texture, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureHandleARB, "(%u)", (unsigned int)texture)
+    GLuint64 rval = glatter_glGetTextureHandleARB(texture);
+    GLATTER_RBLOCK("%" PRIu64 "\n", (uint64_t)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetTextureHandleARB_defined
+#endif
+#ifndef glGetTextureSamplerHandleARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint64, APIENTRY, glGetTextureSamplerHandleARB, (texture, sampler), (GLuint texture, GLuint sampler))
+GLuint64 glatter_glGetTextureSamplerHandleARB_debug(GLuint texture, GLuint sampler, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureSamplerHandleARB, "(%u, %u)", (unsigned int)texture, (unsigned int)sampler)
+    GLuint64 rval = glatter_glGetTextureSamplerHandleARB(texture, sampler);
+    GLATTER_RBLOCK("%" PRIu64 "\n", (uint64_t)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetTextureSamplerHandleARB_defined
+#endif
+#ifndef glGetVertexAttribLui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLui64vARB, (index, pname, params), (GLuint index, GLenum pname, GLuint64EXT *params))
+void glatter_glGetVertexAttribLui64vARB_debug(GLuint index, GLenum pname, GLuint64EXT *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribLui64vARB, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetVertexAttribLui64vARB(index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribLui64vARB_defined
+#endif
+#ifndef glIsImageHandleResidentARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsImageHandleResidentARB, (handle), (GLuint64 handle))
+GLboolean glatter_glIsImageHandleResidentARB_debug(GLuint64 handle, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsImageHandleResidentARB, "(%" PRIu64 ")", (uint64_t)handle)
+    GLboolean rval = glatter_glIsImageHandleResidentARB(handle);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsImageHandleResidentARB_defined
+#endif
+#ifndef glIsTextureHandleResidentARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsTextureHandleResidentARB, (handle), (GLuint64 handle))
+GLboolean glatter_glIsTextureHandleResidentARB_debug(GLuint64 handle, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsTextureHandleResidentARB, "(%" PRIu64 ")", (uint64_t)handle)
+    GLboolean rval = glatter_glIsTextureHandleResidentARB(handle);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsTextureHandleResidentARB_defined
+#endif
+#ifndef glMakeImageHandleNonResidentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeImageHandleNonResidentARB, (handle), (GLuint64 handle))
+void glatter_glMakeImageHandleNonResidentARB_debug(GLuint64 handle, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMakeImageHandleNonResidentARB, "(%" PRIu64 ")", (uint64_t)handle)
+    glatter_glMakeImageHandleNonResidentARB(handle);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMakeImageHandleNonResidentARB_defined
+#endif
+#ifndef glMakeImageHandleResidentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeImageHandleResidentARB, (handle, access), (GLuint64 handle, GLenum access))
+void glatter_glMakeImageHandleResidentARB_debug(GLuint64 handle, GLenum access, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMakeImageHandleResidentARB, "(%" PRIu64 ", %s)", (uint64_t)handle, enum_to_string_GL(access))
+    glatter_glMakeImageHandleResidentARB(handle, access);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMakeImageHandleResidentARB_defined
+#endif
+#ifndef glMakeTextureHandleNonResidentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeTextureHandleNonResidentARB, (handle), (GLuint64 handle))
+void glatter_glMakeTextureHandleNonResidentARB_debug(GLuint64 handle, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMakeTextureHandleNonResidentARB, "(%" PRIu64 ")", (uint64_t)handle)
+    glatter_glMakeTextureHandleNonResidentARB(handle);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMakeTextureHandleNonResidentARB_defined
+#endif
+#ifndef glMakeTextureHandleResidentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMakeTextureHandleResidentARB, (handle), (GLuint64 handle))
+void glatter_glMakeTextureHandleResidentARB_debug(GLuint64 handle, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMakeTextureHandleResidentARB, "(%" PRIu64 ")", (uint64_t)handle)
+    glatter_glMakeTextureHandleResidentARB(handle);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMakeTextureHandleResidentARB_defined
+#endif
+#ifndef glProgramUniformHandleui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformHandleui64ARB, (program, location, value), (GLuint program, GLint location, GLuint64 value))
+void glatter_glProgramUniformHandleui64ARB_debug(GLuint program, GLint location, GLuint64 value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformHandleui64ARB, "(%u, %d, %" PRIu64 ")", (unsigned int)program, (int)location, (uint64_t)value)
+    glatter_glProgramUniformHandleui64ARB(program, location, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformHandleui64ARB_defined
+#endif
+#ifndef glProgramUniformHandleui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformHandleui64vARB, (program, location, count, values), (GLuint program, GLint location, GLsizei count, const GLuint64 *values))
+void glatter_glProgramUniformHandleui64vARB_debug(GLuint program, GLint location, GLsizei count, const GLuint64 *values, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformHandleui64vARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)values)
+    glatter_glProgramUniformHandleui64vARB(program, location, count, values);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformHandleui64vARB_defined
+#endif
+#ifndef glUniformHandleui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformHandleui64ARB, (location, value), (GLint location, GLuint64 value))
+void glatter_glUniformHandleui64ARB_debug(GLint location, GLuint64 value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformHandleui64ARB, "(%d, %" PRIu64 ")", (int)location, (uint64_t)value)
+    glatter_glUniformHandleui64ARB(location, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformHandleui64ARB_defined
+#endif
+#ifndef glUniformHandleui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformHandleui64vARB, (location, count, value), (GLint location, GLsizei count, const GLuint64 *value))
+void glatter_glUniformHandleui64vARB_debug(GLint location, GLsizei count, const GLuint64 *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformHandleui64vARB, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniformHandleui64vARB(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformHandleui64vARB_defined
+#endif
+#ifndef glVertexAttribL1ui64ARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64ARB, (index, x), (GLuint index, GLuint64EXT x))
+void glatter_glVertexAttribL1ui64ARB_debug(GLuint index, GLuint64EXT x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL1ui64ARB, "(%u, %" PRIu64 ")", (unsigned int)index, (uint64_t)x)
+    glatter_glVertexAttribL1ui64ARB(index, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL1ui64ARB_defined
+#endif
+#ifndef glVertexAttribL1ui64vARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1ui64vARB, (index, v), (GLuint index, const GLuint64EXT *v))
+void glatter_glVertexAttribL1ui64vARB_debug(GLuint index, const GLuint64EXT *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL1ui64vARB, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL1ui64vARB(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL1ui64vARB_defined
+#endif
+#endif // defined(GL_ARB_bindless_texture)
+#if defined(GL_ARB_cl_event)
+#ifndef glCreateSyncFromCLeventARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLsync, APIENTRY, glCreateSyncFromCLeventARB, (context, event, flags), (struct _cl_context *context, struct _cl_event *event, GLbitfield flags))
+GLsync glatter_glCreateSyncFromCLeventARB_debug(struct _cl_context *context, struct _cl_event *event, GLbitfield flags, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateSyncFromCLeventARB, "(%p, %p, %u)", (void*)context, (void*)event, (unsigned int)flags)
+    GLsync rval = glatter_glCreateSyncFromCLeventARB(context, event, flags);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glCreateSyncFromCLeventARB_defined
+#endif
+#endif // defined(GL_ARB_cl_event)
+#if defined(GL_ARB_compute_variable_group_size)
+#ifndef glDispatchComputeGroupSizeARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDispatchComputeGroupSizeARB, (num_groups_x, num_groups_y, num_groups_z, group_size_x, group_size_y, group_size_z), (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z))
+void glatter_glDispatchComputeGroupSizeARB_debug(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDispatchComputeGroupSizeARB, "(%u, %u, %u, %u, %u, %u)", (unsigned int)num_groups_x, (unsigned int)num_groups_y, (unsigned int)num_groups_z, (unsigned int)group_size_x, (unsigned int)group_size_y, (unsigned int)group_size_z)
+    glatter_glDispatchComputeGroupSizeARB(num_groups_x, num_groups_y, num_groups_z, group_size_x, group_size_y, group_size_z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDispatchComputeGroupSizeARB_defined
+#endif
+#endif // defined(GL_ARB_compute_variable_group_size)
+#if defined(GL_ARB_debug_output)
+#ifndef glDebugMessageCallbackARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageCallbackARB, (callback, userParam), (GLDEBUGPROCARB callback, const void *userParam))
+void glatter_glDebugMessageCallbackARB_debug(GLDEBUGPROCARB callback, const void *userParam, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDebugMessageCallbackARB, "(%s, %p)", GET_PRS(callback), (void*)userParam)
+    glatter_glDebugMessageCallbackARB(callback, userParam);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDebugMessageCallbackARB_defined
+#endif
+#ifndef glDebugMessageControlARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageControlARB, (source, type, severity, count, ids, enabled), (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled))
+void glatter_glDebugMessageControlARB_debug(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDebugMessageControlARB, "(%s, %s, %s, %d, %p, %u)", enum_to_string_GL(source), enum_to_string_GL(type), enum_to_string_GL(severity), (int)count, (void*)ids, (unsigned char)enabled)
+    glatter_glDebugMessageControlARB(source, type, severity, count, ids, enabled);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDebugMessageControlARB_defined
+#endif
+#ifndef glDebugMessageInsertARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageInsertARB, (source, type, id, severity, length, buf), (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf))
+void glatter_glDebugMessageInsertARB_debug(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDebugMessageInsertARB, "(%s, %s, %u, %s, %d, %p)", enum_to_string_GL(source), enum_to_string_GL(type), (unsigned int)id, enum_to_string_GL(severity), (int)length, (void*)buf)
+    glatter_glDebugMessageInsertARB(source, type, id, severity, length, buf);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDebugMessageInsertARB_defined
+#endif
+#ifndef glGetDebugMessageLogARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetDebugMessageLogARB, (count, bufSize, sources, types, ids, severities, lengths, messageLog), (GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog))
+GLuint glatter_glGetDebugMessageLogARB_debug(GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetDebugMessageLogARB, "(%u, %d, %p, %p, %p, %p, %p, %p)", (unsigned int)count, (int)bufSize, (void*)sources, (void*)types, (void*)ids, (void*)severities, (void*)lengths, (void*)messageLog)
+    GLuint rval = glatter_glGetDebugMessageLogARB(count, bufSize, sources, types, ids, severities, lengths, messageLog);
+    GLATTER_RBLOCK("%u\n", (unsigned int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetDebugMessageLogARB_defined
+#endif
+#endif // defined(GL_ARB_debug_output)
+#if defined(GL_ARB_draw_buffers_blend)
+#ifndef glBlendEquationSeparateiARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationSeparateiARB, (buf, modeRGB, modeAlpha), (GLuint buf, GLenum modeRGB, GLenum modeAlpha))
+void glatter_glBlendEquationSeparateiARB_debug(GLuint buf, GLenum modeRGB, GLenum modeAlpha, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendEquationSeparateiARB, "(%u, %s, %s)", (unsigned int)buf, enum_to_string_GL(modeRGB), enum_to_string_GL(modeAlpha))
+    glatter_glBlendEquationSeparateiARB(buf, modeRGB, modeAlpha);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendEquationSeparateiARB_defined
+#endif
+#ifndef glBlendEquationiARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationiARB, (buf, mode), (GLuint buf, GLenum mode))
+void glatter_glBlendEquationiARB_debug(GLuint buf, GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendEquationiARB, "(%u, %s)", (unsigned int)buf, enum_to_string_GL(mode))
+    glatter_glBlendEquationiARB(buf, mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendEquationiARB_defined
+#endif
+#ifndef glBlendFuncSeparateiARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFuncSeparateiARB, (buf, srcRGB, dstRGB, srcAlpha, dstAlpha), (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha))
+void glatter_glBlendFuncSeparateiARB_debug(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendFuncSeparateiARB, "(%u, %s, %s, %s, %s)", (unsigned int)buf, enum_to_string_GL(srcRGB), enum_to_string_GL(dstRGB), enum_to_string_GL(srcAlpha), enum_to_string_GL(dstAlpha))
+    glatter_glBlendFuncSeparateiARB(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendFuncSeparateiARB_defined
+#endif
+#ifndef glBlendFunciARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFunciARB, (buf, src, dst), (GLuint buf, GLenum src, GLenum dst))
+void glatter_glBlendFunciARB_debug(GLuint buf, GLenum src, GLenum dst, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendFunciARB, "(%u, %s, %s)", (unsigned int)buf, enum_to_string_GL(src), enum_to_string_GL(dst))
+    glatter_glBlendFunciARB(buf, src, dst);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendFunciARB_defined
+#endif
+#endif // defined(GL_ARB_draw_buffers_blend)
+#if defined(GL_ARB_indirect_parameters)
+#ifndef glMultiDrawArraysIndirectCountARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirectCountARB, (mode, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawArraysIndirectCountARB_debug(GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirectCountARB, "(%s, %td, %td, %d, %d)", enum_to_string_GL(mode), (ptrdiff_t)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    glatter_glMultiDrawArraysIndirectCountARB(mode, indirect, drawcount, maxdrawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawArraysIndirectCountARB_defined
+#endif
+#ifndef glMultiDrawElementsIndirectCountARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirectCountARB, (mode, type, indirect, drawcount, maxdrawcount, stride), (GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+void glatter_glMultiDrawElementsIndirectCountARB_debug(GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirectCountARB, "(%s, %s, %td, %td, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (ptrdiff_t)indirect, (ptrdiff_t)drawcount, (int)maxdrawcount, (int)stride)
+    glatter_glMultiDrawElementsIndirectCountARB(mode, type, indirect, drawcount, maxdrawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawElementsIndirectCountARB_defined
+#endif
+#endif // defined(GL_ARB_indirect_parameters)
+#if defined(GL_ARB_robustness)
+#ifndef glGetGraphicsResetStatusARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glGetGraphicsResetStatusARB, (), (void))
+GLenum glatter_glGetGraphicsResetStatusARB_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetGraphicsResetStatusARB, "()")
+    GLenum rval = glatter_glGetGraphicsResetStatusARB();
+    GLATTER_RBLOCK("%s\n", enum_to_string_GL(rval));
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetGraphicsResetStatusARB_defined
+#endif
+#ifndef glGetnCompressedTexImageARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnCompressedTexImageARB, (target, lod, bufSize, img), (GLenum target, GLint lod, GLsizei bufSize, void *img))
+void glatter_glGetnCompressedTexImageARB_debug(GLenum target, GLint lod, GLsizei bufSize, void *img, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnCompressedTexImageARB, "(%s, %d, %d, %p)", enum_to_string_GL(target), (int)lod, (int)bufSize, (void*)img)
+    glatter_glGetnCompressedTexImageARB(target, lod, bufSize, img);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnCompressedTexImageARB_defined
+#endif
+#ifndef glGetnTexImageARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnTexImageARB, (target, level, format, type, bufSize, img), (GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *img))
+void glatter_glGetnTexImageARB_debug(GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *img, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnTexImageARB, "(%s, %d, %s, %s, %d, %p)", enum_to_string_GL(target), (int)level, enum_to_string_GL(format), enum_to_string_GL(type), (int)bufSize, (void*)img)
+    glatter_glGetnTexImageARB(target, level, format, type, bufSize, img);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnTexImageARB_defined
+#endif
+#ifndef glGetnUniformdvARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformdvARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLdouble *params))
+void glatter_glGetnUniformdvARB_debug(GLuint program, GLint location, GLsizei bufSize, GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformdvARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformdvARB(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformdvARB_defined
+#endif
+#ifndef glGetnUniformfvARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformfvARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLfloat *params))
+void glatter_glGetnUniformfvARB_debug(GLuint program, GLint location, GLsizei bufSize, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformfvARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformfvARB(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformfvARB_defined
+#endif
+#ifndef glGetnUniformivARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformivARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLint *params))
+void glatter_glGetnUniformivARB_debug(GLuint program, GLint location, GLsizei bufSize, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformivARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformivARB(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformivARB_defined
+#endif
+#ifndef glGetnUniformuivARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformuivARB, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLuint *params))
+void glatter_glGetnUniformuivARB_debug(GLuint program, GLint location, GLsizei bufSize, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformuivARB, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformuivARB(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformuivARB_defined
+#endif
+#ifndef glReadnPixelsARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadnPixelsARB, (x, y, width, height, format, type, bufSize, data), (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data))
+void glatter_glReadnPixelsARB_debug(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glReadnPixelsARB, "(%d, %d, %d, %d, %s, %s, %d, %p)", (int)x, (int)y, (int)width, (int)height, enum_to_string_GL(format), enum_to_string_GL(type), (int)bufSize, (void*)data)
+    glatter_glReadnPixelsARB(x, y, width, height, format, type, bufSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glReadnPixelsARB_defined
+#endif
+#endif // defined(GL_ARB_robustness)
+#if defined(GL_ARB_sample_shading)
+#ifndef glMinSampleShadingARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMinSampleShadingARB, (value), (GLfloat value))
+void glatter_glMinSampleShadingARB_debug(GLfloat value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMinSampleShadingARB, "(%f)", (float)value)
+    glatter_glMinSampleShadingARB(value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMinSampleShadingARB_defined
+#endif
+#endif // defined(GL_ARB_sample_shading)
+#if defined(GL_ARB_shading_language_include)
+#ifndef glCompileShaderIncludeARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompileShaderIncludeARB, (shader, count, path, length), (GLuint shader, GLsizei count, const GLchar *const*path, const GLint *length))
+void glatter_glCompileShaderIncludeARB_debug(GLuint shader, GLsizei count, const GLchar *const*path, const GLint *length, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompileShaderIncludeARB, "(%u, %d, %p, %p)", (unsigned int)shader, (int)count, (void*)path, (void*)length)
+    glatter_glCompileShaderIncludeARB(shader, count, path, length);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompileShaderIncludeARB_defined
+#endif
+#ifndef glDeleteNamedStringARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteNamedStringARB, (namelen, name), (GLint namelen, const GLchar *name))
+void glatter_glDeleteNamedStringARB_debug(GLint namelen, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteNamedStringARB, "(%d, %p)", (int)namelen, (void*)name)
+    glatter_glDeleteNamedStringARB(namelen, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteNamedStringARB_defined
+#endif
+#ifndef glGetNamedStringARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedStringARB, (namelen, name, bufSize, stringlen, string), (GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string))
+void glatter_glGetNamedStringARB_debug(GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedStringARB, "(%d, %p, %d, %p, %p)", (int)namelen, (void*)name, (int)bufSize, (void*)stringlen, (void*)string)
+    glatter_glGetNamedStringARB(namelen, name, bufSize, stringlen, string);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedStringARB_defined
+#endif
+#ifndef glGetNamedStringivARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedStringivARB, (namelen, name, pname, params), (GLint namelen, const GLchar *name, GLenum pname, GLint *params))
+void glatter_glGetNamedStringivARB_debug(GLint namelen, const GLchar *name, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedStringivARB, "(%d, %p, %s, %p)", (int)namelen, (void*)name, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedStringivARB(namelen, name, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedStringivARB_defined
+#endif
+#ifndef glIsNamedStringARB_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsNamedStringARB, (namelen, name), (GLint namelen, const GLchar *name))
+GLboolean glatter_glIsNamedStringARB_debug(GLint namelen, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsNamedStringARB, "(%d, %p)", (int)namelen, (void*)name)
+    GLboolean rval = glatter_glIsNamedStringARB(namelen, name);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsNamedStringARB_defined
+#endif
+#ifndef glNamedStringARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedStringARB, (type, namelen, name, stringlen, string), (GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string))
+void glatter_glNamedStringARB_debug(GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedStringARB, "(%s, %d, %p, %d, %p)", enum_to_string_GL(type), (int)namelen, (void*)name, (int)stringlen, (void*)string)
+    glatter_glNamedStringARB(type, namelen, name, stringlen, string);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedStringARB_defined
+#endif
+#endif // defined(GL_ARB_shading_language_include)
+#if defined(GL_ARB_sparse_buffer)
+#ifndef glBufferPageCommitmentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferPageCommitmentARB, (target, offset, size, commit), (GLenum target, GLintptr offset, GLsizei size, GLboolean commit))
+void glatter_glBufferPageCommitmentARB_debug(GLenum target, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBufferPageCommitmentARB, "(%s, %td, %d, %u)", enum_to_string_GL(target), (ptrdiff_t)offset, (int)size, (unsigned char)commit)
+    glatter_glBufferPageCommitmentARB(target, offset, size, commit);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBufferPageCommitmentARB_defined
+#endif
+#ifndef glNamedBufferPageCommitmentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentARB, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit))
+void glatter_glNamedBufferPageCommitmentARB_debug(GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferPageCommitmentARB, "(%u, %td, %d, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (int)size, (unsigned char)commit)
+    glatter_glNamedBufferPageCommitmentARB(buffer, offset, size, commit);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferPageCommitmentARB_defined
+#endif
+#ifndef glNamedBufferPageCommitmentEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferPageCommitmentEXT, (buffer, offset, size, commit), (GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit))
+void glatter_glNamedBufferPageCommitmentEXT_debug(GLuint buffer, GLintptr offset, GLsizei size, GLboolean commit, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferPageCommitmentEXT, "(%u, %td, %d, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (int)size, (unsigned char)commit)
+    glatter_glNamedBufferPageCommitmentEXT(buffer, offset, size, commit);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferPageCommitmentEXT_defined
+#endif
+#endif // defined(GL_ARB_sparse_buffer)
+#if defined(GL_ARB_sparse_texture)
+#ifndef glTexPageCommitmentARB_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexPageCommitmentARB, (target, level, xoffset, yoffset, zoffset, width, height, depth, resident), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident))
+void glatter_glTexPageCommitmentARB_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexPageCommitmentARB, "(%s, %d, %d, %d, %d, %d, %d, %d, %u)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, (unsigned char)resident)
+    glatter_glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth, resident);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexPageCommitmentARB_defined
+#endif
+#endif // defined(GL_ARB_sparse_texture)
+#if defined(GL_VERSION_1_0)
+#ifndef glBlendFunc_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFunc, (sfactor, dfactor), (GLenum sfactor, GLenum dfactor))
+void glatter_glBlendFunc_debug(GLenum sfactor, GLenum dfactor, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendFunc, "(%s, %s)", enum_to_string_GL(sfactor), enum_to_string_GL(dfactor))
+    glatter_glBlendFunc(sfactor, dfactor);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendFunc_defined
+#endif
+#ifndef glClear_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClear, (mask), (GLbitfield mask))
+void glatter_glClear_debug(GLbitfield mask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClear, "(%u)", (unsigned int)mask)
+    glatter_glClear(mask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClear_defined
+#endif
+#ifndef glClearColor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearColor, (red, green, blue, alpha), (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha))
+void glatter_glClearColor_debug(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearColor, "(%f, %f, %f, %f)", (float)red, (float)green, (float)blue, (float)alpha)
+    glatter_glClearColor(red, green, blue, alpha);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearColor_defined
+#endif
+#ifndef glClearDepth_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearDepth, (depth), (GLdouble depth))
+void glatter_glClearDepth_debug(GLdouble depth, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearDepth, "(%f)", (double)depth)
+    glatter_glClearDepth(depth);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearDepth_defined
+#endif
+#ifndef glClearStencil_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearStencil, (s), (GLint s))
+void glatter_glClearStencil_debug(GLint s, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearStencil, "(%d)", (int)s)
+    glatter_glClearStencil(s);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearStencil_defined
+#endif
+#ifndef glColorMask_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorMask, (red, green, blue, alpha), (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha))
+void glatter_glColorMask_debug(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glColorMask, "(%u, %u, %u, %u)", (unsigned char)red, (unsigned char)green, (unsigned char)blue, (unsigned char)alpha)
+    glatter_glColorMask(red, green, blue, alpha);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glColorMask_defined
+#endif
+#ifndef glCullFace_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCullFace, (mode), (GLenum mode))
+void glatter_glCullFace_debug(GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCullFace, "(%s)", enum_to_string_GL(mode))
+    glatter_glCullFace(mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCullFace_defined
+#endif
+#ifndef glDepthFunc_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthFunc, (func), (GLenum func))
+void glatter_glDepthFunc_debug(GLenum func, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDepthFunc, "(%s)", enum_to_string_GL(func))
+    glatter_glDepthFunc(func);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDepthFunc_defined
+#endif
+#ifndef glDepthMask_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthMask, (flag), (GLboolean flag))
+void glatter_glDepthMask_debug(GLboolean flag, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDepthMask, "(%u)", (unsigned char)flag)
+    glatter_glDepthMask(flag);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDepthMask_defined
+#endif
+#ifndef glDepthRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRange, (near, far), (GLdouble near, GLdouble far))
+void glatter_glDepthRange_debug(GLdouble near, GLdouble far, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDepthRange, "(%f, %f)", (double)near, (double)far)
+    glatter_glDepthRange(near, far);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDepthRange_defined
+#endif
+#ifndef glDisable_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisable, (cap), (GLenum cap))
+void glatter_glDisable_debug(GLenum cap, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDisable, "(%s)", enum_to_string_GL(cap))
+    glatter_glDisable(cap);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDisable_defined
+#endif
+#ifndef glDrawBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawBuffer, (buf), (GLenum buf))
+void glatter_glDrawBuffer_debug(GLenum buf, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawBuffer, "(%s)", enum_to_string_GL(buf))
+    glatter_glDrawBuffer(buf);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawBuffer_defined
+#endif
+#ifndef glEnable_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnable, (cap), (GLenum cap))
+void glatter_glEnable_debug(GLenum cap, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEnable, "(%s)", enum_to_string_GL(cap))
+    glatter_glEnable(cap);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEnable_defined
+#endif
+#ifndef glFinish_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFinish, (), (void))
+void glatter_glFinish_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFinish, "()")
+    glatter_glFinish();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFinish_defined
+#endif
+#ifndef glFlush_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlush, (), (void))
+void glatter_glFlush_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFlush, "()")
+    glatter_glFlush();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFlush_defined
+#endif
+#ifndef glFrontFace_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFrontFace, (mode), (GLenum mode))
+void glatter_glFrontFace_debug(GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFrontFace, "(%s)", enum_to_string_GL(mode))
+    glatter_glFrontFace(mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFrontFace_defined
+#endif
+#ifndef glGetBooleanv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBooleanv, (pname, data), (GLenum pname, GLboolean *data))
+void glatter_glGetBooleanv_debug(GLenum pname, GLboolean *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetBooleanv, "(%s, %p)", enum_to_string_GL(pname), (void*)data)
+    glatter_glGetBooleanv(pname, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetBooleanv_defined
+#endif
+#ifndef glGetDoublev_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoublev, (pname, data), (GLenum pname, GLdouble *data))
+void glatter_glGetDoublev_debug(GLenum pname, GLdouble *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetDoublev, "(%s, %p)", enum_to_string_GL(pname), (void*)data)
+    glatter_glGetDoublev(pname, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetDoublev_defined
+#endif
+#ifndef glGetError_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glGetError, (), (void))
+GLenum glatter_glGetError_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetError, "()")
+    GLenum rval = glatter_glGetError();
+    GLATTER_RBLOCK("%s\n", enum_to_string_GL(rval));
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetError_defined
+#endif
+#ifndef glGetFloatv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloatv, (pname, data), (GLenum pname, GLfloat *data))
+void glatter_glGetFloatv_debug(GLenum pname, GLfloat *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFloatv, "(%s, %p)", enum_to_string_GL(pname), (void*)data)
+    glatter_glGetFloatv(pname, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetFloatv_defined
+#endif
+#ifndef glGetIntegerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegerv, (pname, data), (GLenum pname, GLint *data))
+void glatter_glGetIntegerv_debug(GLenum pname, GLint *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetIntegerv, "(%s, %p)", enum_to_string_GL(pname), (void*)data)
+    glatter_glGetIntegerv(pname, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetIntegerv_defined
+#endif
+#ifndef glGetString_defined
+GLATTER_FBLOCK(return, GL, GLAPI, const GLubyte *, APIENTRY, glGetString, (name), (GLenum name))
+const GLubyte * glatter_glGetString_debug(GLenum name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetString, "(%s)", enum_to_string_GL(name))
+    const GLubyte * rval = glatter_glGetString(name);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetString_defined
+#endif
+#ifndef glGetTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexImage, (target, level, format, type, pixels), (GLenum target, GLint level, GLenum format, GLenum type, void *pixels))
+void glatter_glGetTexImage_debug(GLenum target, GLint level, GLenum format, GLenum type, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTexImage, "(%s, %d, %s, %s, %p)", enum_to_string_GL(target), (int)level, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glGetTexImage(target, level, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTexImage_defined
+#endif
+#ifndef glGetTexLevelParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexLevelParameterfv, (target, level, pname, params), (GLenum target, GLint level, GLenum pname, GLfloat *params))
+void glatter_glGetTexLevelParameterfv_debug(GLenum target, GLint level, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTexLevelParameterfv, "(%s, %d, %s, %p)", enum_to_string_GL(target), (int)level, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTexLevelParameterfv(target, level, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTexLevelParameterfv_defined
+#endif
+#ifndef glGetTexLevelParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexLevelParameteriv, (target, level, pname, params), (GLenum target, GLint level, GLenum pname, GLint *params))
+void glatter_glGetTexLevelParameteriv_debug(GLenum target, GLint level, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTexLevelParameteriv, "(%s, %d, %s, %p)", enum_to_string_GL(target), (int)level, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTexLevelParameteriv(target, level, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTexLevelParameteriv_defined
+#endif
+#ifndef glGetTexParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexParameterfv, (target, pname, params), (GLenum target, GLenum pname, GLfloat *params))
+void glatter_glGetTexParameterfv_debug(GLenum target, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTexParameterfv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTexParameterfv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTexParameterfv_defined
+#endif
+#ifndef glGetTexParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexParameteriv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+void glatter_glGetTexParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTexParameteriv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTexParameteriv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTexParameteriv_defined
+#endif
+#ifndef glHint_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glHint, (target, mode), (GLenum target, GLenum mode))
+void glatter_glHint_debug(GLenum target, GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glHint, "(%s, %s)", enum_to_string_GL(target), enum_to_string_GL(mode))
+    glatter_glHint(target, mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glHint_defined
+#endif
+#ifndef glIsEnabled_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsEnabled, (cap), (GLenum cap))
+GLboolean glatter_glIsEnabled_debug(GLenum cap, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsEnabled, "(%s)", enum_to_string_GL(cap))
+    GLboolean rval = glatter_glIsEnabled(cap);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsEnabled_defined
+#endif
+#ifndef glLineWidth_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLineWidth, (width), (GLfloat width))
+void glatter_glLineWidth_debug(GLfloat width, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glLineWidth, "(%f)", (float)width)
+    glatter_glLineWidth(width);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glLineWidth_defined
+#endif
+#ifndef glLogicOp_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLogicOp, (opcode), (GLenum opcode))
+void glatter_glLogicOp_debug(GLenum opcode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glLogicOp, "(%s)", enum_to_string_GL(opcode))
+    glatter_glLogicOp(opcode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glLogicOp_defined
+#endif
+#ifndef glPixelStoref_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPixelStoref, (pname, param), (GLenum pname, GLfloat param))
+void glatter_glPixelStoref_debug(GLenum pname, GLfloat param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPixelStoref, "(%s, %f)", enum_to_string_GL(pname), (float)param)
+    glatter_glPixelStoref(pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPixelStoref_defined
+#endif
+#ifndef glPixelStorei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPixelStorei, (pname, param), (GLenum pname, GLint param))
+void glatter_glPixelStorei_debug(GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPixelStorei, "(%s, %d)", enum_to_string_GL(pname), (int)param)
+    glatter_glPixelStorei(pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPixelStorei_defined
+#endif
+#ifndef glPointSize_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointSize, (size), (GLfloat size))
+void glatter_glPointSize_debug(GLfloat size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPointSize, "(%f)", (float)size)
+    glatter_glPointSize(size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPointSize_defined
+#endif
+#ifndef glPolygonMode_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPolygonMode, (face, mode), (GLenum face, GLenum mode))
+void glatter_glPolygonMode_debug(GLenum face, GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPolygonMode, "(%s, %s)", enum_to_string_GL(face), enum_to_string_GL(mode))
+    glatter_glPolygonMode(face, mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPolygonMode_defined
+#endif
+#ifndef glReadBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadBuffer, (src), (GLenum src))
+void glatter_glReadBuffer_debug(GLenum src, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glReadBuffer, "(%s)", enum_to_string_GL(src))
+    glatter_glReadBuffer(src);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glReadBuffer_defined
+#endif
+#ifndef glReadPixels_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadPixels, (x, y, width, height, format, type, pixels), (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void *pixels))
+void glatter_glReadPixels_debug(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glReadPixels, "(%d, %d, %d, %d, %s, %s, %p)", (int)x, (int)y, (int)width, (int)height, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glReadPixels(x, y, width, height, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glReadPixels_defined
+#endif
+#ifndef glScissor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glScissor, (x, y, width, height), (GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glScissor_debug(GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glScissor, "(%d, %d, %d, %d)", (int)x, (int)y, (int)width, (int)height)
+    glatter_glScissor(x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glScissor_defined
+#endif
+#ifndef glStencilFunc_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilFunc, (func, ref, mask), (GLenum func, GLint ref, GLuint mask))
+void glatter_glStencilFunc_debug(GLenum func, GLint ref, GLuint mask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glStencilFunc, "(%s, %d, %u)", enum_to_string_GL(func), (int)ref, (unsigned int)mask)
+    glatter_glStencilFunc(func, ref, mask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glStencilFunc_defined
+#endif
+#ifndef glStencilMask_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilMask, (mask), (GLuint mask))
+void glatter_glStencilMask_debug(GLuint mask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glStencilMask, "(%u)", (unsigned int)mask)
+    glatter_glStencilMask(mask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glStencilMask_defined
+#endif
+#ifndef glStencilOp_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilOp, (fail, zfail, zpass), (GLenum fail, GLenum zfail, GLenum zpass))
+void glatter_glStencilOp_debug(GLenum fail, GLenum zfail, GLenum zpass, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glStencilOp, "(%s, %s, %s)", enum_to_string_GL(fail), enum_to_string_GL(zfail), enum_to_string_GL(zpass))
+    glatter_glStencilOp(fail, zfail, zpass);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glStencilOp_defined
+#endif
+#ifndef glTexImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage1D, (target, level, internalformat, width, border, format, type, pixels), (GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels))
+void glatter_glTexImage1D_debug(GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexImage1D, "(%s, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(target), (int)level, (int)internalformat, (int)width, (int)border, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTexImage1D(target, level, internalformat, width, border, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexImage1D_defined
+#endif
+#ifndef glTexImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage2D, (target, level, internalformat, width, height, border, format, type, pixels), (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels))
+void glatter_glTexImage2D_debug(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexImage2D, "(%s, %d, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(target), (int)level, (int)internalformat, (int)width, (int)height, (int)border, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexImage2D_defined
+#endif
+#ifndef glTexParameterf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameterf, (target, pname, param), (GLenum target, GLenum pname, GLfloat param))
+void glatter_glTexParameterf_debug(GLenum target, GLenum pname, GLfloat param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexParameterf, "(%s, %s, %f)", enum_to_string_GL(target), enum_to_string_GL(pname), (float)param)
+    glatter_glTexParameterf(target, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexParameterf_defined
+#endif
+#ifndef glTexParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameterfv, (target, pname, params), (GLenum target, GLenum pname, const GLfloat *params))
+void glatter_glTexParameterfv_debug(GLenum target, GLenum pname, const GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexParameterfv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glTexParameterfv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexParameterfv_defined
+#endif
+#ifndef glTexParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameteri, (target, pname, param), (GLenum target, GLenum pname, GLint param))
+void glatter_glTexParameteri_debug(GLenum target, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexParameteri, "(%s, %s, %d)", enum_to_string_GL(target), enum_to_string_GL(pname), (int)param)
+    glatter_glTexParameteri(target, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexParameteri_defined
+#endif
+#ifndef glTexParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameteriv, (target, pname, params), (GLenum target, GLenum pname, const GLint *params))
+void glatter_glTexParameteriv_debug(GLenum target, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexParameteriv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glTexParameteriv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexParameteriv_defined
+#endif
+#ifndef glViewport_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewport, (x, y, width, height), (GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glViewport_debug(GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glViewport, "(%d, %d, %d, %d)", (int)x, (int)y, (int)width, (int)height)
+    glatter_glViewport(x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glViewport_defined
+#endif
+#endif // defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_1)
+#ifndef glBindTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindTexture, (target, texture), (GLenum target, GLuint texture))
+void glatter_glBindTexture_debug(GLenum target, GLuint texture, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindTexture, "(%s, %u)", enum_to_string_GL(target), (unsigned int)texture)
+    glatter_glBindTexture(target, texture);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindTexture_defined
+#endif
+#ifndef glCopyTexImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexImage1D, (target, level, internalformat, x, y, width, border), (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border))
+void glatter_glCopyTexImage1D_debug(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTexImage1D, "(%s, %d, %s, %d, %d, %d, %d)", enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)x, (int)y, (int)width, (int)border)
+    glatter_glCopyTexImage1D(target, level, internalformat, x, y, width, border);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTexImage1D_defined
+#endif
+#ifndef glCopyTexImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexImage2D, (target, level, internalformat, x, y, width, height, border), (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border))
+void glatter_glCopyTexImage2D_debug(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTexImage2D, "(%s, %d, %s, %d, %d, %d, %d, %d)", enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)x, (int)y, (int)width, (int)height, (int)border)
+    glatter_glCopyTexImage2D(target, level, internalformat, x, y, width, height, border);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTexImage2D_defined
+#endif
+#ifndef glCopyTexSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexSubImage1D, (target, level, xoffset, x, y, width), (GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
+void glatter_glCopyTexSubImage1D_debug(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTexSubImage1D, "(%s, %d, %d, %d, %d, %d)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)x, (int)y, (int)width)
+    glatter_glCopyTexSubImage1D(target, level, xoffset, x, y, width);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTexSubImage1D_defined
+#endif
+#ifndef glCopyTexSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexSubImage2D, (target, level, xoffset, yoffset, x, y, width, height), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glCopyTexSubImage2D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTexSubImage2D, "(%s, %d, %d, %d, %d, %d, %d, %d)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)x, (int)y, (int)width, (int)height)
+    glatter_glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTexSubImage2D_defined
+#endif
+#ifndef glDeleteTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteTextures, (n, textures), (GLsizei n, const GLuint *textures))
+void glatter_glDeleteTextures_debug(GLsizei n, const GLuint *textures, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteTextures, "(%d, %p)", (int)n, (void*)textures)
+    glatter_glDeleteTextures(n, textures);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteTextures_defined
+#endif
+#ifndef glDrawArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArrays, (mode, first, count), (GLenum mode, GLint first, GLsizei count))
+void glatter_glDrawArrays_debug(GLenum mode, GLint first, GLsizei count, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawArrays, "(%s, %d, %d)", enum_to_string_GL(mode), (int)first, (int)count)
+    glatter_glDrawArrays(mode, first, count);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawArrays_defined
+#endif
+#ifndef glDrawElements_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElements, (mode, count, type, indices), (GLenum mode, GLsizei count, GLenum type, const void *indices))
+void glatter_glDrawElements_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawElements, "(%s, %d, %s, %p)", enum_to_string_GL(mode), (int)count, enum_to_string_GL(type), (void*)indices)
+    glatter_glDrawElements(mode, count, type, indices);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawElements_defined
+#endif
+#ifndef glGenTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenTextures, (n, textures), (GLsizei n, GLuint *textures))
+void glatter_glGenTextures_debug(GLsizei n, GLuint *textures, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenTextures, "(%d, %p)", (int)n, (void*)textures)
+    glatter_glGenTextures(n, textures);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenTextures_defined
+#endif
+#ifndef glGetPointerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetPointerv, (pname, params), (GLenum pname, void **params))
+void glatter_glGetPointerv_debug(GLenum pname, void **params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetPointerv, "(%s, %p)", enum_to_string_GL(pname), (void*)params)
+    glatter_glGetPointerv(pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetPointerv_defined
+#endif
+#ifndef glIsTexture_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsTexture, (texture), (GLuint texture))
+GLboolean glatter_glIsTexture_debug(GLuint texture, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsTexture, "(%u)", (unsigned int)texture)
+    GLboolean rval = glatter_glIsTexture(texture);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsTexture_defined
+#endif
+#ifndef glPolygonOffset_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPolygonOffset, (factor, units), (GLfloat factor, GLfloat units))
+void glatter_glPolygonOffset_debug(GLfloat factor, GLfloat units, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPolygonOffset, "(%f, %f)", (float)factor, (float)units)
+    glatter_glPolygonOffset(factor, units);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPolygonOffset_defined
+#endif
+#ifndef glTexSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexSubImage1D, (target, level, xoffset, width, format, type, pixels), (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
+void glatter_glTexSubImage1D_debug(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexSubImage1D, "(%s, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)width, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTexSubImage1D(target, level, xoffset, width, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexSubImage1D_defined
+#endif
+#ifndef glTexSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexSubImage2D, (target, level, xoffset, yoffset, width, height, format, type, pixels), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
+void glatter_glTexSubImage2D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexSubImage2D, "(%s, %d, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)width, (int)height, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexSubImage2D_defined
+#endif
+#endif // defined(GL_VERSION_1_1)
+#if defined(GL_VERSION_1_2)
+#ifndef glCopyTexSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTexSubImage3D, (target, level, xoffset, yoffset, zoffset, x, y, width, height), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glCopyTexSubImage3D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTexSubImage3D, "(%s, %d, %d, %d, %d, %d, %d, %d, %d)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)x, (int)y, (int)width, (int)height)
+    glatter_glCopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTexSubImage3D_defined
+#endif
+#ifndef glDrawRangeElements_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawRangeElements, (mode, start, end, count, type, indices), (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices))
+void glatter_glDrawRangeElements_debug(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawRangeElements, "(%s, %u, %u, %d, %s, %p)", enum_to_string_GL(mode), (unsigned int)start, (unsigned int)end, (int)count, enum_to_string_GL(type), (void*)indices)
+    glatter_glDrawRangeElements(mode, start, end, count, type, indices);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawRangeElements_defined
+#endif
+#ifndef glTexImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage3D, (target, level, internalformat, width, height, depth, border, format, type, pixels), (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels))
+void glatter_glTexImage3D_debug(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexImage3D, "(%s, %d, %d, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(target), (int)level, (int)internalformat, (int)width, (int)height, (int)depth, (int)border, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTexImage3D(target, level, internalformat, width, height, depth, border, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexImage3D_defined
+#endif
+#ifndef glTexSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexSubImage3D, (target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
+void glatter_glTexSubImage3D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexSubImage3D, "(%s, %d, %d, %d, %d, %d, %d, %d, %s, %s, %p)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexSubImage3D_defined
+#endif
+#endif // defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_3)
+#ifndef glActiveTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glActiveTexture, (texture), (GLenum texture))
+void glatter_glActiveTexture_debug(GLenum texture, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glActiveTexture, "(%s)", enum_to_string_GL(texture))
+    glatter_glActiveTexture(texture);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glActiveTexture_defined
+#endif
+#ifndef glCompressedTexImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexImage1D, (target, level, internalformat, width, border, imageSize, data), (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data))
+void glatter_glCompressedTexImage1D_debug(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTexImage1D, "(%s, %d, %s, %d, %d, %d, %p)", enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)width, (int)border, (int)imageSize, (void*)data)
+    glatter_glCompressedTexImage1D(target, level, internalformat, width, border, imageSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTexImage1D_defined
+#endif
+#ifndef glCompressedTexImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexImage2D, (target, level, internalformat, width, height, border, imageSize, data), (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data))
+void glatter_glCompressedTexImage2D_debug(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTexImage2D, "(%s, %d, %s, %d, %d, %d, %d, %p)", enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)width, (int)height, (int)border, (int)imageSize, (void*)data)
+    glatter_glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTexImage2D_defined
+#endif
+#ifndef glCompressedTexImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexImage3D, (target, level, internalformat, width, height, depth, border, imageSize, data), (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *data))
+void glatter_glCompressedTexImage3D_debug(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTexImage3D, "(%s, %d, %s, %d, %d, %d, %d, %d, %p)", enum_to_string_GL(target), (int)level, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth, (int)border, (int)imageSize, (void*)data)
+    glatter_glCompressedTexImage3D(target, level, internalformat, width, height, depth, border, imageSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTexImage3D_defined
+#endif
+#ifndef glCompressedTexSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexSubImage1D, (target, level, xoffset, width, format, imageSize, data), (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data))
+void glatter_glCompressedTexSubImage1D_debug(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTexSubImage1D, "(%s, %d, %d, %d, %s, %d, %p)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)width, enum_to_string_GL(format), (int)imageSize, (void*)data)
+    glatter_glCompressedTexSubImage1D(target, level, xoffset, width, format, imageSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTexSubImage1D_defined
+#endif
+#ifndef glCompressedTexSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexSubImage2D, (target, level, xoffset, yoffset, width, height, format, imageSize, data), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data))
+void glatter_glCompressedTexSubImage2D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTexSubImage2D, "(%s, %d, %d, %d, %d, %d, %s, %d, %p)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)width, (int)height, enum_to_string_GL(format), (int)imageSize, (void*)data)
+    glatter_glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTexSubImage2D_defined
+#endif
+#ifndef glCompressedTexSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTexSubImage3D, (target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data), (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data))
+void glatter_glCompressedTexSubImage3D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTexSubImage3D, "(%s, %d, %d, %d, %d, %d, %d, %d, %s, %d, %p)", enum_to_string_GL(target), (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), (int)imageSize, (void*)data)
+    glatter_glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTexSubImage3D_defined
+#endif
+#ifndef glGetCompressedTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTexImage, (target, level, img), (GLenum target, GLint level, void *img))
+void glatter_glGetCompressedTexImage_debug(GLenum target, GLint level, void *img, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetCompressedTexImage, "(%s, %d, %p)", enum_to_string_GL(target), (int)level, (void*)img)
+    glatter_glGetCompressedTexImage(target, level, img);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetCompressedTexImage_defined
+#endif
+#ifndef glSampleCoverage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSampleCoverage, (value, invert), (GLfloat value, GLboolean invert))
+void glatter_glSampleCoverage_debug(GLfloat value, GLboolean invert, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSampleCoverage, "(%f, %u)", (float)value, (unsigned char)invert)
+    glatter_glSampleCoverage(value, invert);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSampleCoverage_defined
+#endif
+#endif // defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_4)
+#ifndef glBlendColor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendColor, (red, green, blue, alpha), (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha))
+void glatter_glBlendColor_debug(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendColor, "(%f, %f, %f, %f)", (float)red, (float)green, (float)blue, (float)alpha)
+    glatter_glBlendColor(red, green, blue, alpha);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendColor_defined
+#endif
+#ifndef glBlendEquation_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquation, (mode), (GLenum mode))
+void glatter_glBlendEquation_debug(GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendEquation, "(%s)", enum_to_string_GL(mode))
+    glatter_glBlendEquation(mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendEquation_defined
+#endif
+#ifndef glBlendFuncSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFuncSeparate, (sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha), (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha))
+void glatter_glBlendFuncSeparate_debug(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendFuncSeparate, "(%s, %s, %s, %s)", enum_to_string_GL(sfactorRGB), enum_to_string_GL(dfactorRGB), enum_to_string_GL(sfactorAlpha), enum_to_string_GL(dfactorAlpha))
+    glatter_glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendFuncSeparate_defined
+#endif
+#ifndef glMultiDrawArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArrays, (mode, first, count, drawcount), (GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount))
+void glatter_glMultiDrawArrays_debug(GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawArrays, "(%s, %p, %p, %d)", enum_to_string_GL(mode), (void*)first, (void*)count, (int)drawcount)
+    glatter_glMultiDrawArrays(mode, first, count, drawcount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawArrays_defined
+#endif
+#ifndef glMultiDrawElements_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElements, (mode, count, type, indices, drawcount), (GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei drawcount))
+void glatter_glMultiDrawElements_debug(GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei drawcount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawElements, "(%s, %p, %s, %p, %d)", enum_to_string_GL(mode), (void*)count, enum_to_string_GL(type), (void*)indices, (int)drawcount)
+    glatter_glMultiDrawElements(mode, count, type, indices, drawcount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawElements_defined
+#endif
+#ifndef glPointParameterf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameterf, (pname, param), (GLenum pname, GLfloat param))
+void glatter_glPointParameterf_debug(GLenum pname, GLfloat param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPointParameterf, "(%s, %f)", enum_to_string_GL(pname), (float)param)
+    glatter_glPointParameterf(pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPointParameterf_defined
+#endif
+#ifndef glPointParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameterfv, (pname, params), (GLenum pname, const GLfloat *params))
+void glatter_glPointParameterfv_debug(GLenum pname, const GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPointParameterfv, "(%s, %p)", enum_to_string_GL(pname), (void*)params)
+    glatter_glPointParameterfv(pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPointParameterfv_defined
+#endif
+#ifndef glPointParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameteri, (pname, param), (GLenum pname, GLint param))
+void glatter_glPointParameteri_debug(GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPointParameteri, "(%s, %d)", enum_to_string_GL(pname), (int)param)
+    glatter_glPointParameteri(pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPointParameteri_defined
+#endif
+#ifndef glPointParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPointParameteriv, (pname, params), (GLenum pname, const GLint *params))
+void glatter_glPointParameteriv_debug(GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPointParameteriv, "(%s, %p)", enum_to_string_GL(pname), (void*)params)
+    glatter_glPointParameteriv(pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPointParameteriv_defined
+#endif
+#endif // defined(GL_VERSION_1_4)
+#if defined(GL_VERSION_1_5)
+#ifndef glBeginQuery_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginQuery, (target, id), (GLenum target, GLuint id))
+void glatter_glBeginQuery_debug(GLenum target, GLuint id, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBeginQuery, "(%s, %u)", enum_to_string_GL(target), (unsigned int)id)
+    glatter_glBeginQuery(target, id);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBeginQuery_defined
+#endif
+#ifndef glBindBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBuffer, (target, buffer), (GLenum target, GLuint buffer))
+void glatter_glBindBuffer_debug(GLenum target, GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindBuffer, "(%s, %u)", enum_to_string_GL(target), (unsigned int)buffer)
+    glatter_glBindBuffer(target, buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindBuffer_defined
+#endif
+#ifndef glBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferData, (target, size, data, usage), (GLenum target, GLsizeiptr size, const void *data, GLenum usage))
+void glatter_glBufferData_debug(GLenum target, GLsizeiptr size, const void *data, GLenum usage, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBufferData, "(%s, %td, %p, %s)", enum_to_string_GL(target), (ptrdiff_t)size, (void*)data, enum_to_string_GL(usage))
+    glatter_glBufferData(target, size, data, usage);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBufferData_defined
+#endif
+#ifndef glBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferSubData, (target, offset, size, data), (GLenum target, GLintptr offset, GLsizeiptr size, const void *data))
+void glatter_glBufferSubData_debug(GLenum target, GLintptr offset, GLsizeiptr size, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBufferSubData, "(%s, %td, %td, %p)", enum_to_string_GL(target), (ptrdiff_t)offset, (ptrdiff_t)size, (void*)data)
+    glatter_glBufferSubData(target, offset, size, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBufferSubData_defined
+#endif
+#ifndef glDeleteBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteBuffers, (n, buffers), (GLsizei n, const GLuint *buffers))
+void glatter_glDeleteBuffers_debug(GLsizei n, const GLuint *buffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteBuffers, "(%d, %p)", (int)n, (void*)buffers)
+    glatter_glDeleteBuffers(n, buffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteBuffers_defined
+#endif
+#ifndef glDeleteQueries_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteQueries, (n, ids), (GLsizei n, const GLuint *ids))
+void glatter_glDeleteQueries_debug(GLsizei n, const GLuint *ids, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteQueries, "(%d, %p)", (int)n, (void*)ids)
+    glatter_glDeleteQueries(n, ids);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteQueries_defined
+#endif
+#ifndef glEndQuery_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEndQuery, (target), (GLenum target))
+void glatter_glEndQuery_debug(GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEndQuery, "(%s)", enum_to_string_GL(target))
+    glatter_glEndQuery(target);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEndQuery_defined
+#endif
+#ifndef glGenBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenBuffers, (n, buffers), (GLsizei n, GLuint *buffers))
+void glatter_glGenBuffers_debug(GLsizei n, GLuint *buffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenBuffers, "(%d, %p)", (int)n, (void*)buffers)
+    glatter_glGenBuffers(n, buffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenBuffers_defined
+#endif
+#ifndef glGenQueries_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenQueries, (n, ids), (GLsizei n, GLuint *ids))
+void glatter_glGenQueries_debug(GLsizei n, GLuint *ids, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenQueries, "(%d, %p)", (int)n, (void*)ids)
+    glatter_glGenQueries(n, ids);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenQueries_defined
+#endif
+#ifndef glGetBufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferParameteriv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+void glatter_glGetBufferParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetBufferParameteriv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetBufferParameteriv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetBufferParameteriv_defined
+#endif
+#ifndef glGetBufferPointerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferPointerv, (target, pname, params), (GLenum target, GLenum pname, void **params))
+void glatter_glGetBufferPointerv_debug(GLenum target, GLenum pname, void **params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetBufferPointerv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetBufferPointerv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetBufferPointerv_defined
+#endif
+#ifndef glGetBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferSubData, (target, offset, size, data), (GLenum target, GLintptr offset, GLsizeiptr size, void *data))
+void glatter_glGetBufferSubData_debug(GLenum target, GLintptr offset, GLsizeiptr size, void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetBufferSubData, "(%s, %td, %td, %p)", enum_to_string_GL(target), (ptrdiff_t)offset, (ptrdiff_t)size, (void*)data)
+    glatter_glGetBufferSubData(target, offset, size, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetBufferSubData_defined
+#endif
+#ifndef glGetQueryObjectiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryObjectiv, (id, pname, params), (GLuint id, GLenum pname, GLint *params))
+void glatter_glGetQueryObjectiv_debug(GLuint id, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetQueryObjectiv, "(%u, %s, %p)", (unsigned int)id, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetQueryObjectiv(id, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetQueryObjectiv_defined
+#endif
+#ifndef glGetQueryObjectuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryObjectuiv, (id, pname, params), (GLuint id, GLenum pname, GLuint *params))
+void glatter_glGetQueryObjectuiv_debug(GLuint id, GLenum pname, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetQueryObjectuiv, "(%u, %s, %p)", (unsigned int)id, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetQueryObjectuiv(id, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetQueryObjectuiv_defined
+#endif
+#ifndef glGetQueryiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryiv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+void glatter_glGetQueryiv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetQueryiv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetQueryiv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetQueryiv_defined
+#endif
+#ifndef glIsBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsBuffer, (buffer), (GLuint buffer))
+GLboolean glatter_glIsBuffer_debug(GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsBuffer, "(%u)", (unsigned int)buffer)
+    GLboolean rval = glatter_glIsBuffer(buffer);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsBuffer_defined
+#endif
+#ifndef glIsQuery_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsQuery, (id), (GLuint id))
+GLboolean glatter_glIsQuery_debug(GLuint id, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsQuery, "(%u)", (unsigned int)id)
+    GLboolean rval = glatter_glIsQuery(id);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsQuery_defined
+#endif
+#ifndef glMapBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapBuffer, (target, access), (GLenum target, GLenum access))
+void * glatter_glMapBuffer_debug(GLenum target, GLenum access, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMapBuffer, "(%s, %s)", enum_to_string_GL(target), enum_to_string_GL(access))
+    void * rval = glatter_glMapBuffer(target, access);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glMapBuffer_defined
+#endif
+#ifndef glUnmapBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glUnmapBuffer, (target), (GLenum target))
+GLboolean glatter_glUnmapBuffer_debug(GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUnmapBuffer, "(%s)", enum_to_string_GL(target))
+    GLboolean rval = glatter_glUnmapBuffer(target);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glUnmapBuffer_defined
+#endif
+#endif // defined(GL_VERSION_1_5)
+#if defined(GL_VERSION_2_0)
+#ifndef glAttachShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glAttachShader, (program, shader), (GLuint program, GLuint shader))
+void glatter_glAttachShader_debug(GLuint program, GLuint shader, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glAttachShader, "(%u, %u)", (unsigned int)program, (unsigned int)shader)
+    glatter_glAttachShader(program, shader);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glAttachShader_defined
+#endif
+#ifndef glBindAttribLocation_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindAttribLocation, (program, index, name), (GLuint program, GLuint index, const GLchar *name))
+void glatter_glBindAttribLocation_debug(GLuint program, GLuint index, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindAttribLocation, "(%u, %u, %p)", (unsigned int)program, (unsigned int)index, (void*)name)
+    glatter_glBindAttribLocation(program, index, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindAttribLocation_defined
+#endif
+#ifndef glBlendEquationSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationSeparate, (modeRGB, modeAlpha), (GLenum modeRGB, GLenum modeAlpha))
+void glatter_glBlendEquationSeparate_debug(GLenum modeRGB, GLenum modeAlpha, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendEquationSeparate, "(%s, %s)", enum_to_string_GL(modeRGB), enum_to_string_GL(modeAlpha))
+    glatter_glBlendEquationSeparate(modeRGB, modeAlpha);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendEquationSeparate_defined
+#endif
+#ifndef glCompileShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompileShader, (shader), (GLuint shader))
+void glatter_glCompileShader_debug(GLuint shader, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompileShader, "(%u)", (unsigned int)shader)
+    glatter_glCompileShader(shader);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompileShader_defined
+#endif
+#ifndef glCreateProgram_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glCreateProgram, (), (void))
+GLuint glatter_glCreateProgram_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateProgram, "()")
+    GLuint rval = glatter_glCreateProgram();
+    GLATTER_RBLOCK("%u\n", (unsigned int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glCreateProgram_defined
+#endif
+#ifndef glCreateShader_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glCreateShader, (type), (GLenum type))
+GLuint glatter_glCreateShader_debug(GLenum type, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateShader, "(%s)", enum_to_string_GL(type))
+    GLuint rval = glatter_glCreateShader(type);
+    GLATTER_RBLOCK("%u\n", (unsigned int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glCreateShader_defined
+#endif
+#ifndef glDeleteProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteProgram, (program), (GLuint program))
+void glatter_glDeleteProgram_debug(GLuint program, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteProgram, "(%u)", (unsigned int)program)
+    glatter_glDeleteProgram(program);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteProgram_defined
+#endif
+#ifndef glDeleteShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteShader, (shader), (GLuint shader))
+void glatter_glDeleteShader_debug(GLuint shader, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteShader, "(%u)", (unsigned int)shader)
+    glatter_glDeleteShader(shader);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteShader_defined
+#endif
+#ifndef glDetachShader_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDetachShader, (program, shader), (GLuint program, GLuint shader))
+void glatter_glDetachShader_debug(GLuint program, GLuint shader, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDetachShader, "(%u, %u)", (unsigned int)program, (unsigned int)shader)
+    glatter_glDetachShader(program, shader);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDetachShader_defined
+#endif
+#ifndef glDisableVertexAttribArray_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexAttribArray, (index), (GLuint index))
+void glatter_glDisableVertexAttribArray_debug(GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDisableVertexAttribArray, "(%u)", (unsigned int)index)
+    glatter_glDisableVertexAttribArray(index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDisableVertexAttribArray_defined
+#endif
+#ifndef glDrawBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawBuffers, (n, bufs), (GLsizei n, const GLenum *bufs))
+void glatter_glDrawBuffers_debug(GLsizei n, const GLenum *bufs, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawBuffers, "(%d, %p)", (int)n, (void*)bufs)
+    glatter_glDrawBuffers(n, bufs);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawBuffers_defined
+#endif
+#ifndef glEnableVertexAttribArray_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexAttribArray, (index), (GLuint index))
+void glatter_glEnableVertexAttribArray_debug(GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEnableVertexAttribArray, "(%u)", (unsigned int)index)
+    glatter_glEnableVertexAttribArray(index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEnableVertexAttribArray_defined
+#endif
+#ifndef glGetActiveAttrib_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveAttrib, (program, index, bufSize, length, size, type, name), (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name))
+void glatter_glGetActiveAttrib_debug(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveAttrib, "(%u, %u, %d, %p, %p, %p, %p)", (unsigned int)program, (unsigned int)index, (int)bufSize, (void*)length, (void*)size, (void*)type, (void*)name)
+    glatter_glGetActiveAttrib(program, index, bufSize, length, size, type, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveAttrib_defined
+#endif
+#ifndef glGetActiveUniform_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniform, (program, index, bufSize, length, size, type, name), (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name))
+void glatter_glGetActiveUniform_debug(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveUniform, "(%u, %u, %d, %p, %p, %p, %p)", (unsigned int)program, (unsigned int)index, (int)bufSize, (void*)length, (void*)size, (void*)type, (void*)name)
+    glatter_glGetActiveUniform(program, index, bufSize, length, size, type, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveUniform_defined
+#endif
+#ifndef glGetAttachedShaders_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetAttachedShaders, (program, maxCount, count, shaders), (GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders))
+void glatter_glGetAttachedShaders_debug(GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetAttachedShaders, "(%u, %d, %p, %p)", (unsigned int)program, (int)maxCount, (void*)count, (void*)shaders)
+    glatter_glGetAttachedShaders(program, maxCount, count, shaders);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetAttachedShaders_defined
+#endif
+#ifndef glGetAttribLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetAttribLocation, (program, name), (GLuint program, const GLchar *name))
+GLint glatter_glGetAttribLocation_debug(GLuint program, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetAttribLocation, "(%u, %p)", (unsigned int)program, (void*)name)
+    GLint rval = glatter_glGetAttribLocation(program, name);
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetAttribLocation_defined
+#endif
+#ifndef glGetProgramInfoLog_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramInfoLog, (program, bufSize, length, infoLog), (GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog))
+void glatter_glGetProgramInfoLog_debug(GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramInfoLog, "(%u, %d, %p, %p)", (unsigned int)program, (int)bufSize, (void*)length, (void*)infoLog)
+    glatter_glGetProgramInfoLog(program, bufSize, length, infoLog);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetProgramInfoLog_defined
+#endif
+#ifndef glGetProgramiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramiv, (program, pname, params), (GLuint program, GLenum pname, GLint *params))
+void glatter_glGetProgramiv_debug(GLuint program, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramiv, "(%u, %s, %p)", (unsigned int)program, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetProgramiv(program, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetProgramiv_defined
+#endif
+#ifndef glGetShaderInfoLog_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetShaderInfoLog, (shader, bufSize, length, infoLog), (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog))
+void glatter_glGetShaderInfoLog_debug(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetShaderInfoLog, "(%u, %d, %p, %p)", (unsigned int)shader, (int)bufSize, (void*)length, (void*)infoLog)
+    glatter_glGetShaderInfoLog(shader, bufSize, length, infoLog);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetShaderInfoLog_defined
+#endif
+#ifndef glGetShaderSource_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetShaderSource, (shader, bufSize, length, source), (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source))
+void glatter_glGetShaderSource_debug(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetShaderSource, "(%u, %d, %p, %p)", (unsigned int)shader, (int)bufSize, (void*)length, (void*)source)
+    glatter_glGetShaderSource(shader, bufSize, length, source);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetShaderSource_defined
+#endif
+#ifndef glGetShaderiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetShaderiv, (shader, pname, params), (GLuint shader, GLenum pname, GLint *params))
+void glatter_glGetShaderiv_debug(GLuint shader, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetShaderiv, "(%u, %s, %p)", (unsigned int)shader, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetShaderiv(shader, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetShaderiv_defined
+#endif
+#ifndef glGetUniformLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetUniformLocation, (program, name), (GLuint program, const GLchar *name))
+GLint glatter_glGetUniformLocation_debug(GLuint program, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformLocation, "(%u, %p)", (unsigned int)program, (void*)name)
+    GLint rval = glatter_glGetUniformLocation(program, name);
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetUniformLocation_defined
+#endif
+#ifndef glGetUniformfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformfv, (program, location, params), (GLuint program, GLint location, GLfloat *params))
+void glatter_glGetUniformfv_debug(GLuint program, GLint location, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformfv, "(%u, %d, %p)", (unsigned int)program, (int)location, (void*)params)
+    glatter_glGetUniformfv(program, location, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUniformfv_defined
+#endif
+#ifndef glGetUniformiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformiv, (program, location, params), (GLuint program, GLint location, GLint *params))
+void glatter_glGetUniformiv_debug(GLuint program, GLint location, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformiv, "(%u, %d, %p)", (unsigned int)program, (int)location, (void*)params)
+    glatter_glGetUniformiv(program, location, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUniformiv_defined
+#endif
+#ifndef glGetVertexAttribPointerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribPointerv, (index, pname, pointer), (GLuint index, GLenum pname, void **pointer))
+void glatter_glGetVertexAttribPointerv_debug(GLuint index, GLenum pname, void **pointer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribPointerv, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)pointer)
+    glatter_glGetVertexAttribPointerv(index, pname, pointer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribPointerv_defined
+#endif
+#ifndef glGetVertexAttribdv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribdv, (index, pname, params), (GLuint index, GLenum pname, GLdouble *params))
+void glatter_glGetVertexAttribdv_debug(GLuint index, GLenum pname, GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribdv, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetVertexAttribdv(index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribdv_defined
+#endif
+#ifndef glGetVertexAttribfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribfv, (index, pname, params), (GLuint index, GLenum pname, GLfloat *params))
+void glatter_glGetVertexAttribfv_debug(GLuint index, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribfv, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetVertexAttribfv(index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribfv_defined
+#endif
+#ifndef glGetVertexAttribiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribiv, (index, pname, params), (GLuint index, GLenum pname, GLint *params))
+void glatter_glGetVertexAttribiv_debug(GLuint index, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribiv, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetVertexAttribiv(index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribiv_defined
+#endif
+#ifndef glIsProgram_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsProgram, (program), (GLuint program))
+GLboolean glatter_glIsProgram_debug(GLuint program, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsProgram, "(%u)", (unsigned int)program)
+    GLboolean rval = glatter_glIsProgram(program);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsProgram_defined
+#endif
+#ifndef glIsShader_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsShader, (shader), (GLuint shader))
+GLboolean glatter_glIsShader_debug(GLuint shader, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsShader, "(%u)", (unsigned int)shader)
+    GLboolean rval = glatter_glIsShader(shader);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsShader_defined
+#endif
+#ifndef glLinkProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glLinkProgram, (program), (GLuint program))
+void glatter_glLinkProgram_debug(GLuint program, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glLinkProgram, "(%u)", (unsigned int)program)
+    glatter_glLinkProgram(program);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glLinkProgram_defined
+#endif
+#ifndef glShaderSource_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShaderSource, (shader, count, string, length), (GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length))
+void glatter_glShaderSource_debug(GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glShaderSource, "(%u, %d, %p, %p)", (unsigned int)shader, (int)count, (void*)string, (void*)length)
+    glatter_glShaderSource(shader, count, string, length);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glShaderSource_defined
+#endif
+#ifndef glStencilFuncSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilFuncSeparate, (face, func, ref, mask), (GLenum face, GLenum func, GLint ref, GLuint mask))
+void glatter_glStencilFuncSeparate_debug(GLenum face, GLenum func, GLint ref, GLuint mask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glStencilFuncSeparate, "(%s, %s, %d, %u)", enum_to_string_GL(face), enum_to_string_GL(func), (int)ref, (unsigned int)mask)
+    glatter_glStencilFuncSeparate(face, func, ref, mask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glStencilFuncSeparate_defined
+#endif
+#ifndef glStencilMaskSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilMaskSeparate, (face, mask), (GLenum face, GLuint mask))
+void glatter_glStencilMaskSeparate_debug(GLenum face, GLuint mask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glStencilMaskSeparate, "(%s, %u)", enum_to_string_GL(face), (unsigned int)mask)
+    glatter_glStencilMaskSeparate(face, mask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glStencilMaskSeparate_defined
+#endif
+#ifndef glStencilOpSeparate_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glStencilOpSeparate, (face, sfail, dpfail, dppass), (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass))
+void glatter_glStencilOpSeparate_debug(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glStencilOpSeparate, "(%s, %s, %s, %s)", enum_to_string_GL(face), enum_to_string_GL(sfail), enum_to_string_GL(dpfail), enum_to_string_GL(dppass))
+    glatter_glStencilOpSeparate(face, sfail, dpfail, dppass);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glStencilOpSeparate_defined
+#endif
+#ifndef glUniform1f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1f, (location, v0), (GLint location, GLfloat v0))
+void glatter_glUniform1f_debug(GLint location, GLfloat v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1f, "(%d, %f)", (int)location, (float)v0)
+    glatter_glUniform1f(location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1f_defined
+#endif
+#ifndef glUniform1fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1fv, (location, count, value), (GLint location, GLsizei count, const GLfloat *value))
+void glatter_glUniform1fv_debug(GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1fv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform1fv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1fv_defined
+#endif
+#ifndef glUniform1i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1i, (location, v0), (GLint location, GLint v0))
+void glatter_glUniform1i_debug(GLint location, GLint v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1i, "(%d, %d)", (int)location, (int)v0)
+    glatter_glUniform1i(location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1i_defined
+#endif
+#ifndef glUniform1iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1iv, (location, count, value), (GLint location, GLsizei count, const GLint *value))
+void glatter_glUniform1iv_debug(GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1iv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform1iv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1iv_defined
+#endif
+#ifndef glUniform2f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2f, (location, v0, v1), (GLint location, GLfloat v0, GLfloat v1))
+void glatter_glUniform2f_debug(GLint location, GLfloat v0, GLfloat v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2f, "(%d, %f, %f)", (int)location, (float)v0, (float)v1)
+    glatter_glUniform2f(location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2f_defined
+#endif
+#ifndef glUniform2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2fv, (location, count, value), (GLint location, GLsizei count, const GLfloat *value))
+void glatter_glUniform2fv_debug(GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2fv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform2fv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2fv_defined
+#endif
+#ifndef glUniform2i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2i, (location, v0, v1), (GLint location, GLint v0, GLint v1))
+void glatter_glUniform2i_debug(GLint location, GLint v0, GLint v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2i, "(%d, %d, %d)", (int)location, (int)v0, (int)v1)
+    glatter_glUniform2i(location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2i_defined
+#endif
+#ifndef glUniform2iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2iv, (location, count, value), (GLint location, GLsizei count, const GLint *value))
+void glatter_glUniform2iv_debug(GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2iv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform2iv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2iv_defined
+#endif
+#ifndef glUniform3f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3f, (location, v0, v1, v2), (GLint location, GLfloat v0, GLfloat v1, GLfloat v2))
+void glatter_glUniform3f_debug(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3f, "(%d, %f, %f, %f)", (int)location, (float)v0, (float)v1, (float)v2)
+    glatter_glUniform3f(location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3f_defined
+#endif
+#ifndef glUniform3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3fv, (location, count, value), (GLint location, GLsizei count, const GLfloat *value))
+void glatter_glUniform3fv_debug(GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3fv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform3fv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3fv_defined
+#endif
+#ifndef glUniform3i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3i, (location, v0, v1, v2), (GLint location, GLint v0, GLint v1, GLint v2))
+void glatter_glUniform3i_debug(GLint location, GLint v0, GLint v1, GLint v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3i, "(%d, %d, %d, %d)", (int)location, (int)v0, (int)v1, (int)v2)
+    glatter_glUniform3i(location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3i_defined
+#endif
+#ifndef glUniform3iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3iv, (location, count, value), (GLint location, GLsizei count, const GLint *value))
+void glatter_glUniform3iv_debug(GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3iv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform3iv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3iv_defined
+#endif
+#ifndef glUniform4f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4f, (location, v0, v1, v2, v3), (GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3))
+void glatter_glUniform4f_debug(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4f, "(%d, %f, %f, %f, %f)", (int)location, (float)v0, (float)v1, (float)v2, (float)v3)
+    glatter_glUniform4f(location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4f_defined
+#endif
+#ifndef glUniform4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4fv, (location, count, value), (GLint location, GLsizei count, const GLfloat *value))
+void glatter_glUniform4fv_debug(GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4fv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform4fv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4fv_defined
+#endif
+#ifndef glUniform4i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4i, (location, v0, v1, v2, v3), (GLint location, GLint v0, GLint v1, GLint v2, GLint v3))
+void glatter_glUniform4i_debug(GLint location, GLint v0, GLint v1, GLint v2, GLint v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4i, "(%d, %d, %d, %d, %d)", (int)location, (int)v0, (int)v1, (int)v2, (int)v3)
+    glatter_glUniform4i(location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4i_defined
+#endif
+#ifndef glUniform4iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4iv, (location, count, value), (GLint location, GLsizei count, const GLint *value))
+void glatter_glUniform4iv_debug(GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4iv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform4iv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4iv_defined
+#endif
+#ifndef glUniformMatrix2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glUniformMatrix2fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix2fv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix2fv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix2fv_defined
+#endif
+#ifndef glUniformMatrix3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glUniformMatrix3fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix3fv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix3fv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix3fv_defined
+#endif
+#ifndef glUniformMatrix4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glUniformMatrix4fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix4fv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix4fv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix4fv_defined
+#endif
+#ifndef glUseProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUseProgram, (program), (GLuint program))
+void glatter_glUseProgram_debug(GLuint program, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUseProgram, "(%u)", (unsigned int)program)
+    glatter_glUseProgram(program);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUseProgram_defined
+#endif
+#ifndef glValidateProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glValidateProgram, (program), (GLuint program))
+void glatter_glValidateProgram_debug(GLuint program, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glValidateProgram, "(%u)", (unsigned int)program)
+    glatter_glValidateProgram(program);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glValidateProgram_defined
+#endif
+#ifndef glVertexAttrib1d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1d, (index, x), (GLuint index, GLdouble x))
+void glatter_glVertexAttrib1d_debug(GLuint index, GLdouble x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib1d, "(%u, %f)", (unsigned int)index, (double)x)
+    glatter_glVertexAttrib1d(index, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib1d_defined
+#endif
+#ifndef glVertexAttrib1dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1dv, (index, v), (GLuint index, const GLdouble *v))
+void glatter_glVertexAttrib1dv_debug(GLuint index, const GLdouble *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib1dv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib1dv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib1dv_defined
+#endif
+#ifndef glVertexAttrib1f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1f, (index, x), (GLuint index, GLfloat x))
+void glatter_glVertexAttrib1f_debug(GLuint index, GLfloat x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib1f, "(%u, %f)", (unsigned int)index, (float)x)
+    glatter_glVertexAttrib1f(index, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib1f_defined
+#endif
+#ifndef glVertexAttrib1fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1fv, (index, v), (GLuint index, const GLfloat *v))
+void glatter_glVertexAttrib1fv_debug(GLuint index, const GLfloat *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib1fv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib1fv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib1fv_defined
+#endif
+#ifndef glVertexAttrib1s_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1s, (index, x), (GLuint index, GLshort x))
+void glatter_glVertexAttrib1s_debug(GLuint index, GLshort x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib1s, "(%u, %hi)", (unsigned int)index, (short)x)
+    glatter_glVertexAttrib1s(index, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib1s_defined
+#endif
+#ifndef glVertexAttrib1sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib1sv, (index, v), (GLuint index, const GLshort *v))
+void glatter_glVertexAttrib1sv_debug(GLuint index, const GLshort *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib1sv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib1sv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib1sv_defined
+#endif
+#ifndef glVertexAttrib2d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2d, (index, x, y), (GLuint index, GLdouble x, GLdouble y))
+void glatter_glVertexAttrib2d_debug(GLuint index, GLdouble x, GLdouble y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib2d, "(%u, %f, %f)", (unsigned int)index, (double)x, (double)y)
+    glatter_glVertexAttrib2d(index, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib2d_defined
+#endif
+#ifndef glVertexAttrib2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2dv, (index, v), (GLuint index, const GLdouble *v))
+void glatter_glVertexAttrib2dv_debug(GLuint index, const GLdouble *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib2dv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib2dv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib2dv_defined
+#endif
+#ifndef glVertexAttrib2f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2f, (index, x, y), (GLuint index, GLfloat x, GLfloat y))
+void glatter_glVertexAttrib2f_debug(GLuint index, GLfloat x, GLfloat y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib2f, "(%u, %f, %f)", (unsigned int)index, (float)x, (float)y)
+    glatter_glVertexAttrib2f(index, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib2f_defined
+#endif
+#ifndef glVertexAttrib2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2fv, (index, v), (GLuint index, const GLfloat *v))
+void glatter_glVertexAttrib2fv_debug(GLuint index, const GLfloat *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib2fv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib2fv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib2fv_defined
+#endif
+#ifndef glVertexAttrib2s_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2s, (index, x, y), (GLuint index, GLshort x, GLshort y))
+void glatter_glVertexAttrib2s_debug(GLuint index, GLshort x, GLshort y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib2s, "(%u, %hi, %hi)", (unsigned int)index, (short)x, (short)y)
+    glatter_glVertexAttrib2s(index, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib2s_defined
+#endif
+#ifndef glVertexAttrib2sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib2sv, (index, v), (GLuint index, const GLshort *v))
+void glatter_glVertexAttrib2sv_debug(GLuint index, const GLshort *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib2sv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib2sv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib2sv_defined
+#endif
+#ifndef glVertexAttrib3d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3d, (index, x, y, z), (GLuint index, GLdouble x, GLdouble y, GLdouble z))
+void glatter_glVertexAttrib3d_debug(GLuint index, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib3d, "(%u, %f, %f, %f)", (unsigned int)index, (double)x, (double)y, (double)z)
+    glatter_glVertexAttrib3d(index, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib3d_defined
+#endif
+#ifndef glVertexAttrib3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3dv, (index, v), (GLuint index, const GLdouble *v))
+void glatter_glVertexAttrib3dv_debug(GLuint index, const GLdouble *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib3dv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib3dv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib3dv_defined
+#endif
+#ifndef glVertexAttrib3f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3f, (index, x, y, z), (GLuint index, GLfloat x, GLfloat y, GLfloat z))
+void glatter_glVertexAttrib3f_debug(GLuint index, GLfloat x, GLfloat y, GLfloat z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib3f, "(%u, %f, %f, %f)", (unsigned int)index, (float)x, (float)y, (float)z)
+    glatter_glVertexAttrib3f(index, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib3f_defined
+#endif
+#ifndef glVertexAttrib3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3fv, (index, v), (GLuint index, const GLfloat *v))
+void glatter_glVertexAttrib3fv_debug(GLuint index, const GLfloat *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib3fv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib3fv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib3fv_defined
+#endif
+#ifndef glVertexAttrib3s_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3s, (index, x, y, z), (GLuint index, GLshort x, GLshort y, GLshort z))
+void glatter_glVertexAttrib3s_debug(GLuint index, GLshort x, GLshort y, GLshort z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib3s, "(%u, %hi, %hi, %hi)", (unsigned int)index, (short)x, (short)y, (short)z)
+    glatter_glVertexAttrib3s(index, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib3s_defined
+#endif
+#ifndef glVertexAttrib3sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib3sv, (index, v), (GLuint index, const GLshort *v))
+void glatter_glVertexAttrib3sv_debug(GLuint index, const GLshort *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib3sv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib3sv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib3sv_defined
+#endif
+#ifndef glVertexAttrib4Nbv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nbv, (index, v), (GLuint index, const GLbyte *v))
+void glatter_glVertexAttrib4Nbv_debug(GLuint index, const GLbyte *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4Nbv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4Nbv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4Nbv_defined
+#endif
+#ifndef glVertexAttrib4Niv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Niv, (index, v), (GLuint index, const GLint *v))
+void glatter_glVertexAttrib4Niv_debug(GLuint index, const GLint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4Niv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4Niv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4Niv_defined
+#endif
+#ifndef glVertexAttrib4Nsv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nsv, (index, v), (GLuint index, const GLshort *v))
+void glatter_glVertexAttrib4Nsv_debug(GLuint index, const GLshort *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4Nsv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4Nsv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4Nsv_defined
+#endif
+#ifndef glVertexAttrib4Nub_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nub, (index, x, y, z, w), (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w))
+void glatter_glVertexAttrib4Nub_debug(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4Nub, "(%u, %u, %u, %u, %u)", (unsigned int)index, (unsigned char)x, (unsigned char)y, (unsigned char)z, (unsigned char)w)
+    glatter_glVertexAttrib4Nub(index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4Nub_defined
+#endif
+#ifndef glVertexAttrib4Nubv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nubv, (index, v), (GLuint index, const GLubyte *v))
+void glatter_glVertexAttrib4Nubv_debug(GLuint index, const GLubyte *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4Nubv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4Nubv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4Nubv_defined
+#endif
+#ifndef glVertexAttrib4Nuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nuiv, (index, v), (GLuint index, const GLuint *v))
+void glatter_glVertexAttrib4Nuiv_debug(GLuint index, const GLuint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4Nuiv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4Nuiv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4Nuiv_defined
+#endif
+#ifndef glVertexAttrib4Nusv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4Nusv, (index, v), (GLuint index, const GLushort *v))
+void glatter_glVertexAttrib4Nusv_debug(GLuint index, const GLushort *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4Nusv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4Nusv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4Nusv_defined
+#endif
+#ifndef glVertexAttrib4bv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4bv, (index, v), (GLuint index, const GLbyte *v))
+void glatter_glVertexAttrib4bv_debug(GLuint index, const GLbyte *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4bv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4bv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4bv_defined
+#endif
+#ifndef glVertexAttrib4d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4d, (index, x, y, z, w), (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+void glatter_glVertexAttrib4d_debug(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4d, "(%u, %f, %f, %f, %f)", (unsigned int)index, (double)x, (double)y, (double)z, (double)w)
+    glatter_glVertexAttrib4d(index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4d_defined
+#endif
+#ifndef glVertexAttrib4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4dv, (index, v), (GLuint index, const GLdouble *v))
+void glatter_glVertexAttrib4dv_debug(GLuint index, const GLdouble *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4dv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4dv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4dv_defined
+#endif
+#ifndef glVertexAttrib4f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4f, (index, x, y, z, w), (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w))
+void glatter_glVertexAttrib4f_debug(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4f, "(%u, %f, %f, %f, %f)", (unsigned int)index, (float)x, (float)y, (float)z, (float)w)
+    glatter_glVertexAttrib4f(index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4f_defined
+#endif
+#ifndef glVertexAttrib4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4fv, (index, v), (GLuint index, const GLfloat *v))
+void glatter_glVertexAttrib4fv_debug(GLuint index, const GLfloat *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4fv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4fv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4fv_defined
+#endif
+#ifndef glVertexAttrib4iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4iv, (index, v), (GLuint index, const GLint *v))
+void glatter_glVertexAttrib4iv_debug(GLuint index, const GLint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4iv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4iv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4iv_defined
+#endif
+#ifndef glVertexAttrib4s_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4s, (index, x, y, z, w), (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w))
+void glatter_glVertexAttrib4s_debug(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4s, "(%u, %hi, %hi, %hi, %hi)", (unsigned int)index, (short)x, (short)y, (short)z, (short)w)
+    glatter_glVertexAttrib4s(index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4s_defined
+#endif
+#ifndef glVertexAttrib4sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4sv, (index, v), (GLuint index, const GLshort *v))
+void glatter_glVertexAttrib4sv_debug(GLuint index, const GLshort *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4sv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4sv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4sv_defined
+#endif
+#ifndef glVertexAttrib4ubv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4ubv, (index, v), (GLuint index, const GLubyte *v))
+void glatter_glVertexAttrib4ubv_debug(GLuint index, const GLubyte *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4ubv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4ubv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4ubv_defined
+#endif
+#ifndef glVertexAttrib4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4uiv, (index, v), (GLuint index, const GLuint *v))
+void glatter_glVertexAttrib4uiv_debug(GLuint index, const GLuint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4uiv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4uiv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4uiv_defined
+#endif
+#ifndef glVertexAttrib4usv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttrib4usv, (index, v), (GLuint index, const GLushort *v))
+void glatter_glVertexAttrib4usv_debug(GLuint index, const GLushort *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttrib4usv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttrib4usv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttrib4usv_defined
+#endif
+#ifndef glVertexAttribPointer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribPointer, (index, size, type, normalized, stride, pointer), (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer))
+void glatter_glVertexAttribPointer_debug(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribPointer, "(%u, %d, %s, %u, %d, %p)", (unsigned int)index, (int)size, enum_to_string_GL(type), (unsigned char)normalized, (int)stride, (void*)pointer)
+    glatter_glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribPointer_defined
+#endif
+#endif // defined(GL_VERSION_2_0)
+#if defined(GL_VERSION_2_1)
+#ifndef glUniformMatrix2x3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2x3fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glUniformMatrix2x3fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix2x3fv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix2x3fv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix2x3fv_defined
+#endif
+#ifndef glUniformMatrix2x4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2x4fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glUniformMatrix2x4fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix2x4fv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix2x4fv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix2x4fv_defined
+#endif
+#ifndef glUniformMatrix3x2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3x2fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glUniformMatrix3x2fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix3x2fv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix3x2fv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix3x2fv_defined
+#endif
+#ifndef glUniformMatrix3x4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3x4fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glUniformMatrix3x4fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix3x4fv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix3x4fv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix3x4fv_defined
+#endif
+#ifndef glUniformMatrix4x2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4x2fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glUniformMatrix4x2fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix4x2fv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix4x2fv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix4x2fv_defined
+#endif
+#ifndef glUniformMatrix4x3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4x3fv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glUniformMatrix4x3fv_debug(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix4x3fv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix4x3fv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix4x3fv_defined
+#endif
+#endif // defined(GL_VERSION_2_1)
+#if defined(GL_VERSION_3_0)
+#ifndef glBeginConditionalRender_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginConditionalRender, (id, mode), (GLuint id, GLenum mode))
+void glatter_glBeginConditionalRender_debug(GLuint id, GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBeginConditionalRender, "(%u, %s)", (unsigned int)id, enum_to_string_GL(mode))
+    glatter_glBeginConditionalRender(id, mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBeginConditionalRender_defined
+#endif
+#ifndef glBeginTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginTransformFeedback, (primitiveMode), (GLenum primitiveMode))
+void glatter_glBeginTransformFeedback_debug(GLenum primitiveMode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBeginTransformFeedback, "(%s)", enum_to_string_GL(primitiveMode))
+    glatter_glBeginTransformFeedback(primitiveMode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBeginTransformFeedback_defined
+#endif
+#ifndef glBindBufferBase_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBufferBase, (target, index, buffer), (GLenum target, GLuint index, GLuint buffer))
+void glatter_glBindBufferBase_debug(GLenum target, GLuint index, GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindBufferBase, "(%s, %u, %u)", enum_to_string_GL(target), (unsigned int)index, (unsigned int)buffer)
+    glatter_glBindBufferBase(target, index, buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindBufferBase_defined
+#endif
+#ifndef glBindBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBufferRange, (target, index, buffer, offset, size), (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size))
+void glatter_glBindBufferRange_debug(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindBufferRange, "(%s, %u, %u, %td, %td)", enum_to_string_GL(target), (unsigned int)index, (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size)
+    glatter_glBindBufferRange(target, index, buffer, offset, size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindBufferRange_defined
+#endif
+#ifndef glBindFragDataLocation_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindFragDataLocation, (program, color, name), (GLuint program, GLuint color, const GLchar *name))
+void glatter_glBindFragDataLocation_debug(GLuint program, GLuint color, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindFragDataLocation, "(%u, %u, %p)", (unsigned int)program, (unsigned int)color, (void*)name)
+    glatter_glBindFragDataLocation(program, color, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindFragDataLocation_defined
+#endif
+#ifndef glBindFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindFramebuffer, (target, framebuffer), (GLenum target, GLuint framebuffer))
+void glatter_glBindFramebuffer_debug(GLenum target, GLuint framebuffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindFramebuffer, "(%s, %u)", enum_to_string_GL(target), (unsigned int)framebuffer)
+    glatter_glBindFramebuffer(target, framebuffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindFramebuffer_defined
+#endif
+#ifndef glBindRenderbuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindRenderbuffer, (target, renderbuffer), (GLenum target, GLuint renderbuffer))
+void glatter_glBindRenderbuffer_debug(GLenum target, GLuint renderbuffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindRenderbuffer, "(%s, %u)", enum_to_string_GL(target), (unsigned int)renderbuffer)
+    glatter_glBindRenderbuffer(target, renderbuffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindRenderbuffer_defined
+#endif
+#ifndef glBindVertexArray_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindVertexArray, (array), (GLuint array))
+void glatter_glBindVertexArray_debug(GLuint array, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindVertexArray, "(%u)", (unsigned int)array)
+    glatter_glBindVertexArray(array);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindVertexArray_defined
+#endif
+#ifndef glBlitFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlitFramebuffer, (srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
+void glatter_glBlitFramebuffer_debug(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlitFramebuffer, "(%d, %d, %d, %d, %d, %d, %d, %d, %u, %s)", (int)srcX0, (int)srcY0, (int)srcX1, (int)srcY1, (int)dstX0, (int)dstY0, (int)dstX1, (int)dstY1, (unsigned int)mask, enum_to_string_GL(filter))
+    glatter_glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlitFramebuffer_defined
+#endif
+#ifndef glCheckFramebufferStatus_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glCheckFramebufferStatus, (target), (GLenum target))
+GLenum glatter_glCheckFramebufferStatus_debug(GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCheckFramebufferStatus, "(%s)", enum_to_string_GL(target))
+    GLenum rval = glatter_glCheckFramebufferStatus(target);
+    GLATTER_RBLOCK("%s\n", enum_to_string_GL(rval));
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glCheckFramebufferStatus_defined
+#endif
+#ifndef glClampColor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClampColor, (target, clamp), (GLenum target, GLenum clamp))
+void glatter_glClampColor_debug(GLenum target, GLenum clamp, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClampColor, "(%s, %s)", enum_to_string_GL(target), enum_to_string_GL(clamp))
+    glatter_glClampColor(target, clamp);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClampColor_defined
+#endif
+#ifndef glClearBufferfi_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferfi, (buffer, drawbuffer, depth, stencil), (GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil))
+void glatter_glClearBufferfi_debug(GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearBufferfi, "(%s, %d, %f, %d)", enum_to_string_GL(buffer), (int)drawbuffer, (float)depth, (int)stencil)
+    glatter_glClearBufferfi(buffer, drawbuffer, depth, stencil);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearBufferfi_defined
+#endif
+#ifndef glClearBufferfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferfv, (buffer, drawbuffer, value), (GLenum buffer, GLint drawbuffer, const GLfloat *value))
+void glatter_glClearBufferfv_debug(GLenum buffer, GLint drawbuffer, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearBufferfv, "(%s, %d, %p)", enum_to_string_GL(buffer), (int)drawbuffer, (void*)value)
+    glatter_glClearBufferfv(buffer, drawbuffer, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearBufferfv_defined
+#endif
+#ifndef glClearBufferiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferiv, (buffer, drawbuffer, value), (GLenum buffer, GLint drawbuffer, const GLint *value))
+void glatter_glClearBufferiv_debug(GLenum buffer, GLint drawbuffer, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearBufferiv, "(%s, %d, %p)", enum_to_string_GL(buffer), (int)drawbuffer, (void*)value)
+    glatter_glClearBufferiv(buffer, drawbuffer, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearBufferiv_defined
+#endif
+#ifndef glClearBufferuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferuiv, (buffer, drawbuffer, value), (GLenum buffer, GLint drawbuffer, const GLuint *value))
+void glatter_glClearBufferuiv_debug(GLenum buffer, GLint drawbuffer, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearBufferuiv, "(%s, %d, %p)", enum_to_string_GL(buffer), (int)drawbuffer, (void*)value)
+    glatter_glClearBufferuiv(buffer, drawbuffer, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearBufferuiv_defined
+#endif
+#ifndef glColorMaski_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glColorMaski, (index, r, g, b, a), (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a))
+void glatter_glColorMaski_debug(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glColorMaski, "(%u, %u, %u, %u, %u)", (unsigned int)index, (unsigned char)r, (unsigned char)g, (unsigned char)b, (unsigned char)a)
+    glatter_glColorMaski(index, r, g, b, a);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glColorMaski_defined
+#endif
+#ifndef glDeleteFramebuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteFramebuffers, (n, framebuffers), (GLsizei n, const GLuint *framebuffers))
+void glatter_glDeleteFramebuffers_debug(GLsizei n, const GLuint *framebuffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteFramebuffers, "(%d, %p)", (int)n, (void*)framebuffers)
+    glatter_glDeleteFramebuffers(n, framebuffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteFramebuffers_defined
+#endif
+#ifndef glDeleteRenderbuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteRenderbuffers, (n, renderbuffers), (GLsizei n, const GLuint *renderbuffers))
+void glatter_glDeleteRenderbuffers_debug(GLsizei n, const GLuint *renderbuffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteRenderbuffers, "(%d, %p)", (int)n, (void*)renderbuffers)
+    glatter_glDeleteRenderbuffers(n, renderbuffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteRenderbuffers_defined
+#endif
+#ifndef glDeleteVertexArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteVertexArrays, (n, arrays), (GLsizei n, const GLuint *arrays))
+void glatter_glDeleteVertexArrays_debug(GLsizei n, const GLuint *arrays, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteVertexArrays, "(%d, %p)", (int)n, (void*)arrays)
+    glatter_glDeleteVertexArrays(n, arrays);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteVertexArrays_defined
+#endif
+#ifndef glDisablei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisablei, (target, index), (GLenum target, GLuint index))
+void glatter_glDisablei_debug(GLenum target, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDisablei, "(%s, %u)", enum_to_string_GL(target), (unsigned int)index)
+    glatter_glDisablei(target, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDisablei_defined
+#endif
+#ifndef glEnablei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnablei, (target, index), (GLenum target, GLuint index))
+void glatter_glEnablei_debug(GLenum target, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEnablei, "(%s, %u)", enum_to_string_GL(target), (unsigned int)index)
+    glatter_glEnablei(target, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEnablei_defined
+#endif
+#ifndef glEndConditionalRender_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEndConditionalRender, (), (void))
+void glatter_glEndConditionalRender_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEndConditionalRender, "()")
+    glatter_glEndConditionalRender();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEndConditionalRender_defined
+#endif
+#ifndef glEndTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEndTransformFeedback, (), (void))
+void glatter_glEndTransformFeedback_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEndTransformFeedback, "()")
+    glatter_glEndTransformFeedback();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEndTransformFeedback_defined
+#endif
+#ifndef glFlushMappedBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedBufferRange, (target, offset, length), (GLenum target, GLintptr offset, GLsizeiptr length))
+void glatter_glFlushMappedBufferRange_debug(GLenum target, GLintptr offset, GLsizeiptr length, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFlushMappedBufferRange, "(%s, %td, %td)", enum_to_string_GL(target), (ptrdiff_t)offset, (ptrdiff_t)length)
+    glatter_glFlushMappedBufferRange(target, offset, length);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFlushMappedBufferRange_defined
+#endif
+#ifndef glFramebufferRenderbuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferRenderbuffer, (target, attachment, renderbuffertarget, renderbuffer), (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer))
+void glatter_glFramebufferRenderbuffer_debug(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferRenderbuffer, "(%s, %s, %s, %u)", enum_to_string_GL(target), enum_to_string_GL(attachment), enum_to_string_GL(renderbuffertarget), (unsigned int)renderbuffer)
+    glatter_glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferRenderbuffer_defined
+#endif
+#ifndef glFramebufferTexture1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTexture1D, (target, attachment, textarget, texture, level), (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
+void glatter_glFramebufferTexture1D_debug(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferTexture1D, "(%s, %s, %s, %u, %d)", enum_to_string_GL(target), enum_to_string_GL(attachment), enum_to_string_GL(textarget), (unsigned int)texture, (int)level)
+    glatter_glFramebufferTexture1D(target, attachment, textarget, texture, level);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferTexture1D_defined
+#endif
+#ifndef glFramebufferTexture2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTexture2D, (target, attachment, textarget, texture, level), (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level))
+void glatter_glFramebufferTexture2D_debug(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferTexture2D, "(%s, %s, %s, %u, %d)", enum_to_string_GL(target), enum_to_string_GL(attachment), enum_to_string_GL(textarget), (unsigned int)texture, (int)level)
+    glatter_glFramebufferTexture2D(target, attachment, textarget, texture, level);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferTexture2D_defined
+#endif
+#ifndef glFramebufferTexture3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTexture3D, (target, attachment, textarget, texture, level, zoffset), (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset))
+void glatter_glFramebufferTexture3D_debug(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferTexture3D, "(%s, %s, %s, %u, %d, %d)", enum_to_string_GL(target), enum_to_string_GL(attachment), enum_to_string_GL(textarget), (unsigned int)texture, (int)level, (int)zoffset)
+    glatter_glFramebufferTexture3D(target, attachment, textarget, texture, level, zoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferTexture3D_defined
+#endif
+#ifndef glFramebufferTextureLayer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTextureLayer, (target, attachment, texture, level, layer), (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer))
+void glatter_glFramebufferTextureLayer_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferTextureLayer, "(%s, %s, %u, %d, %d)", enum_to_string_GL(target), enum_to_string_GL(attachment), (unsigned int)texture, (int)level, (int)layer)
+    glatter_glFramebufferTextureLayer(target, attachment, texture, level, layer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferTextureLayer_defined
+#endif
+#ifndef glGenFramebuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenFramebuffers, (n, framebuffers), (GLsizei n, GLuint *framebuffers))
+void glatter_glGenFramebuffers_debug(GLsizei n, GLuint *framebuffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenFramebuffers, "(%d, %p)", (int)n, (void*)framebuffers)
+    glatter_glGenFramebuffers(n, framebuffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenFramebuffers_defined
+#endif
+#ifndef glGenRenderbuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenRenderbuffers, (n, renderbuffers), (GLsizei n, GLuint *renderbuffers))
+void glatter_glGenRenderbuffers_debug(GLsizei n, GLuint *renderbuffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenRenderbuffers, "(%d, %p)", (int)n, (void*)renderbuffers)
+    glatter_glGenRenderbuffers(n, renderbuffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenRenderbuffers_defined
+#endif
+#ifndef glGenVertexArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenVertexArrays, (n, arrays), (GLsizei n, GLuint *arrays))
+void glatter_glGenVertexArrays_debug(GLsizei n, GLuint *arrays, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenVertexArrays, "(%d, %p)", (int)n, (void*)arrays)
+    glatter_glGenVertexArrays(n, arrays);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenVertexArrays_defined
+#endif
+#ifndef glGenerateMipmap_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateMipmap, (target), (GLenum target))
+void glatter_glGenerateMipmap_debug(GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenerateMipmap, "(%s)", enum_to_string_GL(target))
+    glatter_glGenerateMipmap(target);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenerateMipmap_defined
+#endif
+#ifndef glGetBooleani_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBooleani_v, (target, index, data), (GLenum target, GLuint index, GLboolean *data))
+void glatter_glGetBooleani_v_debug(GLenum target, GLuint index, GLboolean *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetBooleani_v, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetBooleani_v(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetBooleani_v_defined
+#endif
+#ifndef glGetFragDataLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetFragDataLocation, (program, name), (GLuint program, const GLchar *name))
+GLint glatter_glGetFragDataLocation_debug(GLuint program, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFragDataLocation, "(%u, %p)", (unsigned int)program, (void*)name)
+    GLint rval = glatter_glGetFragDataLocation(program, name);
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetFragDataLocation_defined
+#endif
+#ifndef glGetFramebufferAttachmentParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFramebufferAttachmentParameteriv, (target, attachment, pname, params), (GLenum target, GLenum attachment, GLenum pname, GLint *params))
+void glatter_glGetFramebufferAttachmentParameteriv_debug(GLenum target, GLenum attachment, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFramebufferAttachmentParameteriv, "(%s, %s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(attachment), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetFramebufferAttachmentParameteriv_defined
+#endif
+#ifndef glGetIntegeri_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetIntegeri_v, (target, index, data), (GLenum target, GLuint index, GLint *data))
+void glatter_glGetIntegeri_v_debug(GLenum target, GLuint index, GLint *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetIntegeri_v, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetIntegeri_v(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetIntegeri_v_defined
+#endif
+#ifndef glGetRenderbufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetRenderbufferParameteriv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+void glatter_glGetRenderbufferParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetRenderbufferParameteriv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetRenderbufferParameteriv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetRenderbufferParameteriv_defined
+#endif
+#ifndef glGetStringi_defined
+GLATTER_FBLOCK(return, GL, GLAPI, const GLubyte *, APIENTRY, glGetStringi, (name, index), (GLenum name, GLuint index))
+const GLubyte * glatter_glGetStringi_debug(GLenum name, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetStringi, "(%s, %u)", enum_to_string_GL(name), (unsigned int)index)
+    const GLubyte * rval = glatter_glGetStringi(name, index);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetStringi_defined
+#endif
+#ifndef glGetTexParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexParameterIiv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+void glatter_glGetTexParameterIiv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTexParameterIiv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTexParameterIiv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTexParameterIiv_defined
+#endif
+#ifndef glGetTexParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTexParameterIuiv, (target, pname, params), (GLenum target, GLenum pname, GLuint *params))
+void glatter_glGetTexParameterIuiv_debug(GLenum target, GLenum pname, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTexParameterIuiv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTexParameterIuiv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTexParameterIuiv_defined
+#endif
+#ifndef glGetTransformFeedbackVarying_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTransformFeedbackVarying, (program, index, bufSize, length, size, type, name), (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name))
+void glatter_glGetTransformFeedbackVarying_debug(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTransformFeedbackVarying, "(%u, %u, %d, %p, %p, %p, %p)", (unsigned int)program, (unsigned int)index, (int)bufSize, (void*)length, (void*)size, (void*)type, (void*)name)
+    glatter_glGetTransformFeedbackVarying(program, index, bufSize, length, size, type, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTransformFeedbackVarying_defined
+#endif
+#ifndef glGetUniformuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformuiv, (program, location, params), (GLuint program, GLint location, GLuint *params))
+void glatter_glGetUniformuiv_debug(GLuint program, GLint location, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformuiv, "(%u, %d, %p)", (unsigned int)program, (int)location, (void*)params)
+    glatter_glGetUniformuiv(program, location, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUniformuiv_defined
+#endif
+#ifndef glGetVertexAttribIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribIiv, (index, pname, params), (GLuint index, GLenum pname, GLint *params))
+void glatter_glGetVertexAttribIiv_debug(GLuint index, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribIiv, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetVertexAttribIiv(index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribIiv_defined
+#endif
+#ifndef glGetVertexAttribIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribIuiv, (index, pname, params), (GLuint index, GLenum pname, GLuint *params))
+void glatter_glGetVertexAttribIuiv_debug(GLuint index, GLenum pname, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribIuiv, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetVertexAttribIuiv(index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribIuiv_defined
+#endif
+#ifndef glIsEnabledi_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsEnabledi, (target, index), (GLenum target, GLuint index))
+GLboolean glatter_glIsEnabledi_debug(GLenum target, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsEnabledi, "(%s, %u)", enum_to_string_GL(target), (unsigned int)index)
+    GLboolean rval = glatter_glIsEnabledi(target, index);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsEnabledi_defined
+#endif
+#ifndef glIsFramebuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsFramebuffer, (framebuffer), (GLuint framebuffer))
+GLboolean glatter_glIsFramebuffer_debug(GLuint framebuffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsFramebuffer, "(%u)", (unsigned int)framebuffer)
+    GLboolean rval = glatter_glIsFramebuffer(framebuffer);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsFramebuffer_defined
+#endif
+#ifndef glIsRenderbuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsRenderbuffer, (renderbuffer), (GLuint renderbuffer))
+GLboolean glatter_glIsRenderbuffer_debug(GLuint renderbuffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsRenderbuffer, "(%u)", (unsigned int)renderbuffer)
+    GLboolean rval = glatter_glIsRenderbuffer(renderbuffer);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsRenderbuffer_defined
+#endif
+#ifndef glIsVertexArray_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsVertexArray, (array), (GLuint array))
+GLboolean glatter_glIsVertexArray_debug(GLuint array, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsVertexArray, "(%u)", (unsigned int)array)
+    GLboolean rval = glatter_glIsVertexArray(array);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsVertexArray_defined
+#endif
+#ifndef glMapBufferRange_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapBufferRange, (target, offset, length, access), (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access))
+void * glatter_glMapBufferRange_debug(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMapBufferRange, "(%s, %td, %td, %u)", enum_to_string_GL(target), (ptrdiff_t)offset, (ptrdiff_t)length, (unsigned int)access)
+    void * rval = glatter_glMapBufferRange(target, offset, length, access);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glMapBufferRange_defined
+#endif
+#ifndef glRenderbufferStorage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderbufferStorage, (target, internalformat, width, height), (GLenum target, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glRenderbufferStorage_debug(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glRenderbufferStorage, "(%s, %s, %d, %d)", enum_to_string_GL(target), enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glRenderbufferStorage(target, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glRenderbufferStorage_defined
+#endif
+#ifndef glRenderbufferStorageMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glRenderbufferStorageMultisample, (target, samples, internalformat, width, height), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glRenderbufferStorageMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glRenderbufferStorageMultisample, "(%s, %d, %s, %d, %d)", enum_to_string_GL(target), (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glRenderbufferStorageMultisample(target, samples, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glRenderbufferStorageMultisample_defined
+#endif
+#ifndef glTexParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameterIiv, (target, pname, params), (GLenum target, GLenum pname, const GLint *params))
+void glatter_glTexParameterIiv_debug(GLenum target, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexParameterIiv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glTexParameterIiv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexParameterIiv_defined
+#endif
+#ifndef glTexParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexParameterIuiv, (target, pname, params), (GLenum target, GLenum pname, const GLuint *params))
+void glatter_glTexParameterIuiv_debug(GLenum target, GLenum pname, const GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexParameterIuiv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glTexParameterIuiv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexParameterIuiv_defined
+#endif
+#ifndef glTransformFeedbackVaryings_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackVaryings, (program, count, varyings, bufferMode), (GLuint program, GLsizei count, const GLchar *const*varyings, GLenum bufferMode))
+void glatter_glTransformFeedbackVaryings_debug(GLuint program, GLsizei count, const GLchar *const*varyings, GLenum bufferMode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTransformFeedbackVaryings, "(%u, %d, %p, %s)", (unsigned int)program, (int)count, (void*)varyings, enum_to_string_GL(bufferMode))
+    glatter_glTransformFeedbackVaryings(program, count, varyings, bufferMode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTransformFeedbackVaryings_defined
+#endif
+#ifndef glUniform1ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1ui, (location, v0), (GLint location, GLuint v0))
+void glatter_glUniform1ui_debug(GLint location, GLuint v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1ui, "(%d, %u)", (int)location, (unsigned int)v0)
+    glatter_glUniform1ui(location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1ui_defined
+#endif
+#ifndef glUniform1uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1uiv, (location, count, value), (GLint location, GLsizei count, const GLuint *value))
+void glatter_glUniform1uiv_debug(GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1uiv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform1uiv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1uiv_defined
+#endif
+#ifndef glUniform2ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2ui, (location, v0, v1), (GLint location, GLuint v0, GLuint v1))
+void glatter_glUniform2ui_debug(GLint location, GLuint v0, GLuint v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2ui, "(%d, %u, %u)", (int)location, (unsigned int)v0, (unsigned int)v1)
+    glatter_glUniform2ui(location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2ui_defined
+#endif
+#ifndef glUniform2uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2uiv, (location, count, value), (GLint location, GLsizei count, const GLuint *value))
+void glatter_glUniform2uiv_debug(GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2uiv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform2uiv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2uiv_defined
+#endif
+#ifndef glUniform3ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3ui, (location, v0, v1, v2), (GLint location, GLuint v0, GLuint v1, GLuint v2))
+void glatter_glUniform3ui_debug(GLint location, GLuint v0, GLuint v1, GLuint v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3ui, "(%d, %u, %u, %u)", (int)location, (unsigned int)v0, (unsigned int)v1, (unsigned int)v2)
+    glatter_glUniform3ui(location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3ui_defined
+#endif
+#ifndef glUniform3uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3uiv, (location, count, value), (GLint location, GLsizei count, const GLuint *value))
+void glatter_glUniform3uiv_debug(GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3uiv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform3uiv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3uiv_defined
+#endif
+#ifndef glUniform4ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4ui, (location, v0, v1, v2, v3), (GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3))
+void glatter_glUniform4ui_debug(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4ui, "(%d, %u, %u, %u, %u)", (int)location, (unsigned int)v0, (unsigned int)v1, (unsigned int)v2, (unsigned int)v3)
+    glatter_glUniform4ui(location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4ui_defined
+#endif
+#ifndef glUniform4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4uiv, (location, count, value), (GLint location, GLsizei count, const GLuint *value))
+void glatter_glUniform4uiv_debug(GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4uiv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform4uiv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4uiv_defined
+#endif
+#ifndef glVertexAttribI1i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI1i, (index, x), (GLuint index, GLint x))
+void glatter_glVertexAttribI1i_debug(GLuint index, GLint x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI1i, "(%u, %d)", (unsigned int)index, (int)x)
+    glatter_glVertexAttribI1i(index, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI1i_defined
+#endif
+#ifndef glVertexAttribI1iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI1iv, (index, v), (GLuint index, const GLint *v))
+void glatter_glVertexAttribI1iv_debug(GLuint index, const GLint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI1iv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI1iv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI1iv_defined
+#endif
+#ifndef glVertexAttribI1ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI1ui, (index, x), (GLuint index, GLuint x))
+void glatter_glVertexAttribI1ui_debug(GLuint index, GLuint x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI1ui, "(%u, %u)", (unsigned int)index, (unsigned int)x)
+    glatter_glVertexAttribI1ui(index, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI1ui_defined
+#endif
+#ifndef glVertexAttribI1uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI1uiv, (index, v), (GLuint index, const GLuint *v))
+void glatter_glVertexAttribI1uiv_debug(GLuint index, const GLuint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI1uiv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI1uiv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI1uiv_defined
+#endif
+#ifndef glVertexAttribI2i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI2i, (index, x, y), (GLuint index, GLint x, GLint y))
+void glatter_glVertexAttribI2i_debug(GLuint index, GLint x, GLint y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI2i, "(%u, %d, %d)", (unsigned int)index, (int)x, (int)y)
+    glatter_glVertexAttribI2i(index, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI2i_defined
+#endif
+#ifndef glVertexAttribI2iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI2iv, (index, v), (GLuint index, const GLint *v))
+void glatter_glVertexAttribI2iv_debug(GLuint index, const GLint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI2iv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI2iv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI2iv_defined
+#endif
+#ifndef glVertexAttribI2ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI2ui, (index, x, y), (GLuint index, GLuint x, GLuint y))
+void glatter_glVertexAttribI2ui_debug(GLuint index, GLuint x, GLuint y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI2ui, "(%u, %u, %u)", (unsigned int)index, (unsigned int)x, (unsigned int)y)
+    glatter_glVertexAttribI2ui(index, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI2ui_defined
+#endif
+#ifndef glVertexAttribI2uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI2uiv, (index, v), (GLuint index, const GLuint *v))
+void glatter_glVertexAttribI2uiv_debug(GLuint index, const GLuint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI2uiv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI2uiv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI2uiv_defined
+#endif
+#ifndef glVertexAttribI3i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI3i, (index, x, y, z), (GLuint index, GLint x, GLint y, GLint z))
+void glatter_glVertexAttribI3i_debug(GLuint index, GLint x, GLint y, GLint z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI3i, "(%u, %d, %d, %d)", (unsigned int)index, (int)x, (int)y, (int)z)
+    glatter_glVertexAttribI3i(index, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI3i_defined
+#endif
+#ifndef glVertexAttribI3iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI3iv, (index, v), (GLuint index, const GLint *v))
+void glatter_glVertexAttribI3iv_debug(GLuint index, const GLint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI3iv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI3iv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI3iv_defined
+#endif
+#ifndef glVertexAttribI3ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI3ui, (index, x, y, z), (GLuint index, GLuint x, GLuint y, GLuint z))
+void glatter_glVertexAttribI3ui_debug(GLuint index, GLuint x, GLuint y, GLuint z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI3ui, "(%u, %u, %u, %u)", (unsigned int)index, (unsigned int)x, (unsigned int)y, (unsigned int)z)
+    glatter_glVertexAttribI3ui(index, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI3ui_defined
+#endif
+#ifndef glVertexAttribI3uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI3uiv, (index, v), (GLuint index, const GLuint *v))
+void glatter_glVertexAttribI3uiv_debug(GLuint index, const GLuint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI3uiv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI3uiv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI3uiv_defined
+#endif
+#ifndef glVertexAttribI4bv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4bv, (index, v), (GLuint index, const GLbyte *v))
+void glatter_glVertexAttribI4bv_debug(GLuint index, const GLbyte *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI4bv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI4bv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI4bv_defined
+#endif
+#ifndef glVertexAttribI4i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4i, (index, x, y, z, w), (GLuint index, GLint x, GLint y, GLint z, GLint w))
+void glatter_glVertexAttribI4i_debug(GLuint index, GLint x, GLint y, GLint z, GLint w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI4i, "(%u, %d, %d, %d, %d)", (unsigned int)index, (int)x, (int)y, (int)z, (int)w)
+    glatter_glVertexAttribI4i(index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI4i_defined
+#endif
+#ifndef glVertexAttribI4iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4iv, (index, v), (GLuint index, const GLint *v))
+void glatter_glVertexAttribI4iv_debug(GLuint index, const GLint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI4iv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI4iv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI4iv_defined
+#endif
+#ifndef glVertexAttribI4sv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4sv, (index, v), (GLuint index, const GLshort *v))
+void glatter_glVertexAttribI4sv_debug(GLuint index, const GLshort *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI4sv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI4sv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI4sv_defined
+#endif
+#ifndef glVertexAttribI4ubv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4ubv, (index, v), (GLuint index, const GLubyte *v))
+void glatter_glVertexAttribI4ubv_debug(GLuint index, const GLubyte *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI4ubv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI4ubv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI4ubv_defined
+#endif
+#ifndef glVertexAttribI4ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4ui, (index, x, y, z, w), (GLuint index, GLuint x, GLuint y, GLuint z, GLuint w))
+void glatter_glVertexAttribI4ui_debug(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI4ui, "(%u, %u, %u, %u, %u)", (unsigned int)index, (unsigned int)x, (unsigned int)y, (unsigned int)z, (unsigned int)w)
+    glatter_glVertexAttribI4ui(index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI4ui_defined
+#endif
+#ifndef glVertexAttribI4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4uiv, (index, v), (GLuint index, const GLuint *v))
+void glatter_glVertexAttribI4uiv_debug(GLuint index, const GLuint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI4uiv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI4uiv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI4uiv_defined
+#endif
+#ifndef glVertexAttribI4usv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribI4usv, (index, v), (GLuint index, const GLushort *v))
+void glatter_glVertexAttribI4usv_debug(GLuint index, const GLushort *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribI4usv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribI4usv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribI4usv_defined
+#endif
+#ifndef glVertexAttribIPointer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribIPointer, (index, size, type, stride, pointer), (GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer))
+void glatter_glVertexAttribIPointer_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribIPointer, "(%u, %d, %s, %d, %p)", (unsigned int)index, (int)size, enum_to_string_GL(type), (int)stride, (void*)pointer)
+    glatter_glVertexAttribIPointer(index, size, type, stride, pointer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribIPointer_defined
+#endif
+#endif // defined(GL_VERSION_3_0)
+#if defined(GL_VERSION_3_1)
+#ifndef glCopyBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyBufferSubData, (readTarget, writeTarget, readOffset, writeOffset, size), (GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size))
+void glatter_glCopyBufferSubData_debug(GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyBufferSubData, "(%s, %s, %td, %td, %td)", enum_to_string_GL(readTarget), enum_to_string_GL(writeTarget), (ptrdiff_t)readOffset, (ptrdiff_t)writeOffset, (ptrdiff_t)size)
+    glatter_glCopyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyBufferSubData_defined
+#endif
+#ifndef glDrawArraysInstanced_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstanced, (mode, first, count, instancecount), (GLenum mode, GLint first, GLsizei count, GLsizei instancecount))
+void glatter_glDrawArraysInstanced_debug(GLenum mode, GLint first, GLsizei count, GLsizei instancecount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawArraysInstanced, "(%s, %d, %d, %d)", enum_to_string_GL(mode), (int)first, (int)count, (int)instancecount)
+    glatter_glDrawArraysInstanced(mode, first, count, instancecount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawArraysInstanced_defined
+#endif
+#ifndef glDrawElementsInstanced_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstanced, (mode, count, type, indices, instancecount), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount))
+void glatter_glDrawElementsInstanced_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawElementsInstanced, "(%s, %d, %s, %p, %d)", enum_to_string_GL(mode), (int)count, enum_to_string_GL(type), (void*)indices, (int)instancecount)
+    glatter_glDrawElementsInstanced(mode, count, type, indices, instancecount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawElementsInstanced_defined
+#endif
+#ifndef glGetActiveUniformBlockName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniformBlockName, (program, uniformBlockIndex, bufSize, length, uniformBlockName), (GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformBlockName))
+void glatter_glGetActiveUniformBlockName_debug(GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformBlockName, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveUniformBlockName, "(%u, %u, %d, %p, %p)", (unsigned int)program, (unsigned int)uniformBlockIndex, (int)bufSize, (void*)length, (void*)uniformBlockName)
+    glatter_glGetActiveUniformBlockName(program, uniformBlockIndex, bufSize, length, uniformBlockName);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveUniformBlockName_defined
+#endif
+#ifndef glGetActiveUniformBlockiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniformBlockiv, (program, uniformBlockIndex, pname, params), (GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint *params))
+void glatter_glGetActiveUniformBlockiv_debug(GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveUniformBlockiv, "(%u, %u, %s, %p)", (unsigned int)program, (unsigned int)uniformBlockIndex, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetActiveUniformBlockiv(program, uniformBlockIndex, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveUniformBlockiv_defined
+#endif
+#ifndef glGetActiveUniformName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniformName, (program, uniformIndex, bufSize, length, uniformName), (GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName))
+void glatter_glGetActiveUniformName_debug(GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveUniformName, "(%u, %u, %d, %p, %p)", (unsigned int)program, (unsigned int)uniformIndex, (int)bufSize, (void*)length, (void*)uniformName)
+    glatter_glGetActiveUniformName(program, uniformIndex, bufSize, length, uniformName);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveUniformName_defined
+#endif
+#ifndef glGetActiveUniformsiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveUniformsiv, (program, uniformCount, uniformIndices, pname, params), (GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params))
+void glatter_glGetActiveUniformsiv_debug(GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveUniformsiv, "(%u, %d, %p, %s, %p)", (unsigned int)program, (int)uniformCount, (void*)uniformIndices, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetActiveUniformsiv(program, uniformCount, uniformIndices, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveUniformsiv_defined
+#endif
+#ifndef glGetUniformBlockIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetUniformBlockIndex, (program, uniformBlockName), (GLuint program, const GLchar *uniformBlockName))
+GLuint glatter_glGetUniformBlockIndex_debug(GLuint program, const GLchar *uniformBlockName, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformBlockIndex, "(%u, %p)", (unsigned int)program, (void*)uniformBlockName)
+    GLuint rval = glatter_glGetUniformBlockIndex(program, uniformBlockName);
+    GLATTER_RBLOCK("%u\n", (unsigned int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetUniformBlockIndex_defined
+#endif
+#ifndef glGetUniformIndices_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformIndices, (program, uniformCount, uniformNames, uniformIndices), (GLuint program, GLsizei uniformCount, const GLchar *const*uniformNames, GLuint *uniformIndices))
+void glatter_glGetUniformIndices_debug(GLuint program, GLsizei uniformCount, const GLchar *const*uniformNames, GLuint *uniformIndices, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformIndices, "(%u, %d, %p, %p)", (unsigned int)program, (int)uniformCount, (void*)uniformNames, (void*)uniformIndices)
+    glatter_glGetUniformIndices(program, uniformCount, uniformNames, uniformIndices);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUniformIndices_defined
+#endif
+#ifndef glPrimitiveRestartIndex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPrimitiveRestartIndex, (index), (GLuint index))
+void glatter_glPrimitiveRestartIndex_debug(GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPrimitiveRestartIndex, "(%u)", (unsigned int)index)
+    glatter_glPrimitiveRestartIndex(index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPrimitiveRestartIndex_defined
+#endif
+#ifndef glTexBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexBuffer, (target, internalformat, buffer), (GLenum target, GLenum internalformat, GLuint buffer))
+void glatter_glTexBuffer_debug(GLenum target, GLenum internalformat, GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexBuffer, "(%s, %s, %u)", enum_to_string_GL(target), enum_to_string_GL(internalformat), (unsigned int)buffer)
+    glatter_glTexBuffer(target, internalformat, buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexBuffer_defined
+#endif
+#ifndef glUniformBlockBinding_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformBlockBinding, (program, uniformBlockIndex, uniformBlockBinding), (GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding))
+void glatter_glUniformBlockBinding_debug(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformBlockBinding, "(%u, %u, %u)", (unsigned int)program, (unsigned int)uniformBlockIndex, (unsigned int)uniformBlockBinding)
+    glatter_glUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformBlockBinding_defined
+#endif
+#endif // defined(GL_VERSION_3_1)
+#if defined(GL_VERSION_3_2)
+#ifndef glClientWaitSync_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glClientWaitSync, (sync, flags, timeout), (GLsync sync, GLbitfield flags, GLuint64 timeout))
+GLenum glatter_glClientWaitSync_debug(GLsync sync, GLbitfield flags, GLuint64 timeout, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClientWaitSync, "(%p, %u, %" PRIu64 ")", (void*)sync, (unsigned int)flags, (uint64_t)timeout)
+    GLenum rval = glatter_glClientWaitSync(sync, flags, timeout);
+    GLATTER_RBLOCK("%s\n", enum_to_string_GL(rval));
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glClientWaitSync_defined
+#endif
+#ifndef glDeleteSync_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteSync, (sync), (GLsync sync))
+void glatter_glDeleteSync_debug(GLsync sync, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteSync, "(%p)", (void*)sync)
+    glatter_glDeleteSync(sync);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteSync_defined
+#endif
+#ifndef glDrawElementsBaseVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsBaseVertex, (mode, count, type, indices, basevertex), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLint basevertex))
+void glatter_glDrawElementsBaseVertex_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLint basevertex, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawElementsBaseVertex, "(%s, %d, %s, %p, %d)", enum_to_string_GL(mode), (int)count, enum_to_string_GL(type), (void*)indices, (int)basevertex)
+    glatter_glDrawElementsBaseVertex(mode, count, type, indices, basevertex);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawElementsBaseVertex_defined
+#endif
+#ifndef glDrawElementsInstancedBaseVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedBaseVertex, (mode, count, type, indices, instancecount, basevertex), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex))
+void glatter_glDrawElementsInstancedBaseVertex_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawElementsInstancedBaseVertex, "(%s, %d, %s, %p, %d, %d)", enum_to_string_GL(mode), (int)count, enum_to_string_GL(type), (void*)indices, (int)instancecount, (int)basevertex)
+    glatter_glDrawElementsInstancedBaseVertex(mode, count, type, indices, instancecount, basevertex);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawElementsInstancedBaseVertex_defined
+#endif
+#ifndef glDrawRangeElementsBaseVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawRangeElementsBaseVertex, (mode, start, end, count, type, indices, basevertex), (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices, GLint basevertex))
+void glatter_glDrawRangeElementsBaseVertex_debug(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices, GLint basevertex, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawRangeElementsBaseVertex, "(%s, %u, %u, %d, %s, %p, %d)", enum_to_string_GL(mode), (unsigned int)start, (unsigned int)end, (int)count, enum_to_string_GL(type), (void*)indices, (int)basevertex)
+    glatter_glDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawRangeElementsBaseVertex_defined
+#endif
+#ifndef glFenceSync_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLsync, APIENTRY, glFenceSync, (condition, flags), (GLenum condition, GLbitfield flags))
+GLsync glatter_glFenceSync_debug(GLenum condition, GLbitfield flags, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFenceSync, "(%s, %u)", enum_to_string_GL(condition), (unsigned int)flags)
+    GLsync rval = glatter_glFenceSync(condition, flags);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glFenceSync_defined
+#endif
+#ifndef glFramebufferTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferTexture, (target, attachment, texture, level), (GLenum target, GLenum attachment, GLuint texture, GLint level))
+void glatter_glFramebufferTexture_debug(GLenum target, GLenum attachment, GLuint texture, GLint level, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferTexture, "(%s, %s, %u, %d)", enum_to_string_GL(target), enum_to_string_GL(attachment), (unsigned int)texture, (int)level)
+    glatter_glFramebufferTexture(target, attachment, texture, level);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferTexture_defined
+#endif
+#ifndef glGetBufferParameteri64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetBufferParameteri64v, (target, pname, params), (GLenum target, GLenum pname, GLint64 *params))
+void glatter_glGetBufferParameteri64v_debug(GLenum target, GLenum pname, GLint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetBufferParameteri64v, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetBufferParameteri64v(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetBufferParameteri64v_defined
+#endif
+#ifndef glGetInteger64i_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetInteger64i_v, (target, index, data), (GLenum target, GLuint index, GLint64 *data))
+void glatter_glGetInteger64i_v_debug(GLenum target, GLuint index, GLint64 *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetInteger64i_v, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetInteger64i_v(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetInteger64i_v_defined
+#endif
+#ifndef glGetInteger64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetInteger64v, (pname, data), (GLenum pname, GLint64 *data))
+void glatter_glGetInteger64v_debug(GLenum pname, GLint64 *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetInteger64v, "(%s, %p)", enum_to_string_GL(pname), (void*)data)
+    glatter_glGetInteger64v(pname, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetInteger64v_defined
+#endif
+#ifndef glGetMultisamplefv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetMultisamplefv, (pname, index, val), (GLenum pname, GLuint index, GLfloat *val))
+void glatter_glGetMultisamplefv_debug(GLenum pname, GLuint index, GLfloat *val, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetMultisamplefv, "(%s, %u, %p)", enum_to_string_GL(pname), (unsigned int)index, (void*)val)
+    glatter_glGetMultisamplefv(pname, index, val);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetMultisamplefv_defined
+#endif
+#ifndef glGetSynciv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSynciv, (sync, pname, bufSize, length, values), (GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values))
+void glatter_glGetSynciv_debug(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetSynciv, "(%p, %s, %d, %p, %p)", (void*)sync, enum_to_string_GL(pname), (int)bufSize, (void*)length, (void*)values)
+    glatter_glGetSynciv(sync, pname, bufSize, length, values);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetSynciv_defined
+#endif
+#ifndef glIsSync_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsSync, (sync), (GLsync sync))
+GLboolean glatter_glIsSync_debug(GLsync sync, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsSync, "(%p)", (void*)sync)
+    GLboolean rval = glatter_glIsSync(sync);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsSync_defined
+#endif
+#ifndef glMultiDrawElementsBaseVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsBaseVertex, (mode, count, type, indices, drawcount, basevertex), (GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei drawcount, const GLint *basevertex))
+void glatter_glMultiDrawElementsBaseVertex_debug(GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei drawcount, const GLint *basevertex, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawElementsBaseVertex, "(%s, %p, %s, %p, %d, %p)", enum_to_string_GL(mode), (void*)count, enum_to_string_GL(type), (void*)indices, (int)drawcount, (void*)basevertex)
+    glatter_glMultiDrawElementsBaseVertex(mode, count, type, indices, drawcount, basevertex);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawElementsBaseVertex_defined
+#endif
+#ifndef glProvokingVertex_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProvokingVertex, (mode), (GLenum mode))
+void glatter_glProvokingVertex_debug(GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProvokingVertex, "(%s)", enum_to_string_GL(mode))
+    glatter_glProvokingVertex(mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProvokingVertex_defined
+#endif
+#ifndef glSampleMaski_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSampleMaski, (maskNumber, mask), (GLuint maskNumber, GLbitfield mask))
+void glatter_glSampleMaski_debug(GLuint maskNumber, GLbitfield mask, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSampleMaski, "(%u, %u)", (unsigned int)maskNumber, (unsigned int)mask)
+    glatter_glSampleMaski(maskNumber, mask);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSampleMaski_defined
+#endif
+#ifndef glTexImage2DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage2DMultisample, (target, samples, internalformat, width, height, fixedsamplelocations), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
+void glatter_glTexImage2DMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexImage2DMultisample, "(%s, %d, %s, %d, %d, %u)", enum_to_string_GL(target), (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height, (unsigned char)fixedsamplelocations)
+    glatter_glTexImage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexImage2DMultisample_defined
+#endif
+#ifndef glTexImage3DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexImage3DMultisample, (target, samples, internalformat, width, height, depth, fixedsamplelocations), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
+void glatter_glTexImage3DMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexImage3DMultisample, "(%s, %d, %s, %d, %d, %d, %u)", enum_to_string_GL(target), (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth, (unsigned char)fixedsamplelocations)
+    glatter_glTexImage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexImage3DMultisample_defined
+#endif
+#ifndef glWaitSync_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glWaitSync, (sync, flags, timeout), (GLsync sync, GLbitfield flags, GLuint64 timeout))
+void glatter_glWaitSync_debug(GLsync sync, GLbitfield flags, GLuint64 timeout, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glWaitSync, "(%p, %u, %" PRIu64 ")", (void*)sync, (unsigned int)flags, (uint64_t)timeout)
+    glatter_glWaitSync(sync, flags, timeout);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glWaitSync_defined
+#endif
+#endif // defined(GL_VERSION_3_2)
+#if defined(GL_VERSION_3_3)
+#ifndef glBindFragDataLocationIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindFragDataLocationIndexed, (program, colorNumber, index, name), (GLuint program, GLuint colorNumber, GLuint index, const GLchar *name))
+void glatter_glBindFragDataLocationIndexed_debug(GLuint program, GLuint colorNumber, GLuint index, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindFragDataLocationIndexed, "(%u, %u, %u, %p)", (unsigned int)program, (unsigned int)colorNumber, (unsigned int)index, (void*)name)
+    glatter_glBindFragDataLocationIndexed(program, colorNumber, index, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindFragDataLocationIndexed_defined
+#endif
+#ifndef glBindSampler_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindSampler, (unit, sampler), (GLuint unit, GLuint sampler))
+void glatter_glBindSampler_debug(GLuint unit, GLuint sampler, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindSampler, "(%u, %u)", (unsigned int)unit, (unsigned int)sampler)
+    glatter_glBindSampler(unit, sampler);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindSampler_defined
+#endif
+#ifndef glDeleteSamplers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteSamplers, (count, samplers), (GLsizei count, const GLuint *samplers))
+void glatter_glDeleteSamplers_debug(GLsizei count, const GLuint *samplers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteSamplers, "(%d, %p)", (int)count, (void*)samplers)
+    glatter_glDeleteSamplers(count, samplers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteSamplers_defined
+#endif
+#ifndef glGenSamplers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenSamplers, (count, samplers), (GLsizei count, GLuint *samplers))
+void glatter_glGenSamplers_debug(GLsizei count, GLuint *samplers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenSamplers, "(%d, %p)", (int)count, (void*)samplers)
+    glatter_glGenSamplers(count, samplers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenSamplers_defined
+#endif
+#ifndef glGetFragDataIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetFragDataIndex, (program, name), (GLuint program, const GLchar *name))
+GLint glatter_glGetFragDataIndex_debug(GLuint program, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFragDataIndex, "(%u, %p)", (unsigned int)program, (void*)name)
+    GLint rval = glatter_glGetFragDataIndex(program, name);
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetFragDataIndex_defined
+#endif
+#ifndef glGetQueryObjecti64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryObjecti64v, (id, pname, params), (GLuint id, GLenum pname, GLint64 *params))
+void glatter_glGetQueryObjecti64v_debug(GLuint id, GLenum pname, GLint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetQueryObjecti64v, "(%u, %s, %p)", (unsigned int)id, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetQueryObjecti64v(id, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetQueryObjecti64v_defined
+#endif
+#ifndef glGetQueryObjectui64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryObjectui64v, (id, pname, params), (GLuint id, GLenum pname, GLuint64 *params))
+void glatter_glGetQueryObjectui64v_debug(GLuint id, GLenum pname, GLuint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetQueryObjectui64v, "(%u, %s, %p)", (unsigned int)id, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetQueryObjectui64v(id, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetQueryObjectui64v_defined
+#endif
+#ifndef glGetSamplerParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSamplerParameterIiv, (sampler, pname, params), (GLuint sampler, GLenum pname, GLint *params))
+void glatter_glGetSamplerParameterIiv_debug(GLuint sampler, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetSamplerParameterIiv, "(%u, %s, %p)", (unsigned int)sampler, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetSamplerParameterIiv(sampler, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetSamplerParameterIiv_defined
+#endif
+#ifndef glGetSamplerParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSamplerParameterIuiv, (sampler, pname, params), (GLuint sampler, GLenum pname, GLuint *params))
+void glatter_glGetSamplerParameterIuiv_debug(GLuint sampler, GLenum pname, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetSamplerParameterIuiv, "(%u, %s, %p)", (unsigned int)sampler, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetSamplerParameterIuiv(sampler, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetSamplerParameterIuiv_defined
+#endif
+#ifndef glGetSamplerParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSamplerParameterfv, (sampler, pname, params), (GLuint sampler, GLenum pname, GLfloat *params))
+void glatter_glGetSamplerParameterfv_debug(GLuint sampler, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetSamplerParameterfv, "(%u, %s, %p)", (unsigned int)sampler, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetSamplerParameterfv(sampler, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetSamplerParameterfv_defined
+#endif
+#ifndef glGetSamplerParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetSamplerParameteriv, (sampler, pname, params), (GLuint sampler, GLenum pname, GLint *params))
+void glatter_glGetSamplerParameteriv_debug(GLuint sampler, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetSamplerParameteriv, "(%u, %s, %p)", (unsigned int)sampler, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetSamplerParameteriv(sampler, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetSamplerParameteriv_defined
+#endif
+#ifndef glIsSampler_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsSampler, (sampler), (GLuint sampler))
+GLboolean glatter_glIsSampler_debug(GLuint sampler, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsSampler, "(%u)", (unsigned int)sampler)
+    GLboolean rval = glatter_glIsSampler(sampler);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsSampler_defined
+#endif
+#ifndef glQueryCounter_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glQueryCounter, (id, target), (GLuint id, GLenum target))
+void glatter_glQueryCounter_debug(GLuint id, GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glQueryCounter, "(%u, %s)", (unsigned int)id, enum_to_string_GL(target))
+    glatter_glQueryCounter(id, target);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glQueryCounter_defined
+#endif
+#ifndef glSamplerParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameterIiv, (sampler, pname, param), (GLuint sampler, GLenum pname, const GLint *param))
+void glatter_glSamplerParameterIiv_debug(GLuint sampler, GLenum pname, const GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSamplerParameterIiv, "(%u, %s, %p)", (unsigned int)sampler, enum_to_string_GL(pname), (void*)param)
+    glatter_glSamplerParameterIiv(sampler, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSamplerParameterIiv_defined
+#endif
+#ifndef glSamplerParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameterIuiv, (sampler, pname, param), (GLuint sampler, GLenum pname, const GLuint *param))
+void glatter_glSamplerParameterIuiv_debug(GLuint sampler, GLenum pname, const GLuint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSamplerParameterIuiv, "(%u, %s, %p)", (unsigned int)sampler, enum_to_string_GL(pname), (void*)param)
+    glatter_glSamplerParameterIuiv(sampler, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSamplerParameterIuiv_defined
+#endif
+#ifndef glSamplerParameterf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameterf, (sampler, pname, param), (GLuint sampler, GLenum pname, GLfloat param))
+void glatter_glSamplerParameterf_debug(GLuint sampler, GLenum pname, GLfloat param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSamplerParameterf, "(%u, %s, %f)", (unsigned int)sampler, enum_to_string_GL(pname), (float)param)
+    glatter_glSamplerParameterf(sampler, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSamplerParameterf_defined
+#endif
+#ifndef glSamplerParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameterfv, (sampler, pname, param), (GLuint sampler, GLenum pname, const GLfloat *param))
+void glatter_glSamplerParameterfv_debug(GLuint sampler, GLenum pname, const GLfloat *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSamplerParameterfv, "(%u, %s, %p)", (unsigned int)sampler, enum_to_string_GL(pname), (void*)param)
+    glatter_glSamplerParameterfv(sampler, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSamplerParameterfv_defined
+#endif
+#ifndef glSamplerParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameteri, (sampler, pname, param), (GLuint sampler, GLenum pname, GLint param))
+void glatter_glSamplerParameteri_debug(GLuint sampler, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSamplerParameteri, "(%u, %s, %d)", (unsigned int)sampler, enum_to_string_GL(pname), (int)param)
+    glatter_glSamplerParameteri(sampler, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSamplerParameteri_defined
+#endif
+#ifndef glSamplerParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glSamplerParameteriv, (sampler, pname, param), (GLuint sampler, GLenum pname, const GLint *param))
+void glatter_glSamplerParameteriv_debug(GLuint sampler, GLenum pname, const GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glSamplerParameteriv, "(%u, %s, %p)", (unsigned int)sampler, enum_to_string_GL(pname), (void*)param)
+    glatter_glSamplerParameteriv(sampler, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glSamplerParameteriv_defined
+#endif
+#ifndef glVertexAttribDivisor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribDivisor, (index, divisor), (GLuint index, GLuint divisor))
+void glatter_glVertexAttribDivisor_debug(GLuint index, GLuint divisor, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribDivisor, "(%u, %u)", (unsigned int)index, (unsigned int)divisor)
+    glatter_glVertexAttribDivisor(index, divisor);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribDivisor_defined
+#endif
+#ifndef glVertexAttribP1ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP1ui, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, GLuint value))
+void glatter_glVertexAttribP1ui_debug(GLuint index, GLenum type, GLboolean normalized, GLuint value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribP1ui, "(%u, %s, %u, %u)", (unsigned int)index, enum_to_string_GL(type), (unsigned char)normalized, (unsigned int)value)
+    glatter_glVertexAttribP1ui(index, type, normalized, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribP1ui_defined
+#endif
+#ifndef glVertexAttribP1uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP1uiv, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, const GLuint *value))
+void glatter_glVertexAttribP1uiv_debug(GLuint index, GLenum type, GLboolean normalized, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribP1uiv, "(%u, %s, %u, %p)", (unsigned int)index, enum_to_string_GL(type), (unsigned char)normalized, (void*)value)
+    glatter_glVertexAttribP1uiv(index, type, normalized, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribP1uiv_defined
+#endif
+#ifndef glVertexAttribP2ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP2ui, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, GLuint value))
+void glatter_glVertexAttribP2ui_debug(GLuint index, GLenum type, GLboolean normalized, GLuint value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribP2ui, "(%u, %s, %u, %u)", (unsigned int)index, enum_to_string_GL(type), (unsigned char)normalized, (unsigned int)value)
+    glatter_glVertexAttribP2ui(index, type, normalized, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribP2ui_defined
+#endif
+#ifndef glVertexAttribP2uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP2uiv, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, const GLuint *value))
+void glatter_glVertexAttribP2uiv_debug(GLuint index, GLenum type, GLboolean normalized, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribP2uiv, "(%u, %s, %u, %p)", (unsigned int)index, enum_to_string_GL(type), (unsigned char)normalized, (void*)value)
+    glatter_glVertexAttribP2uiv(index, type, normalized, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribP2uiv_defined
+#endif
+#ifndef glVertexAttribP3ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP3ui, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, GLuint value))
+void glatter_glVertexAttribP3ui_debug(GLuint index, GLenum type, GLboolean normalized, GLuint value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribP3ui, "(%u, %s, %u, %u)", (unsigned int)index, enum_to_string_GL(type), (unsigned char)normalized, (unsigned int)value)
+    glatter_glVertexAttribP3ui(index, type, normalized, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribP3ui_defined
+#endif
+#ifndef glVertexAttribP3uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP3uiv, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, const GLuint *value))
+void glatter_glVertexAttribP3uiv_debug(GLuint index, GLenum type, GLboolean normalized, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribP3uiv, "(%u, %s, %u, %p)", (unsigned int)index, enum_to_string_GL(type), (unsigned char)normalized, (void*)value)
+    glatter_glVertexAttribP3uiv(index, type, normalized, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribP3uiv_defined
+#endif
+#ifndef glVertexAttribP4ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP4ui, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, GLuint value))
+void glatter_glVertexAttribP4ui_debug(GLuint index, GLenum type, GLboolean normalized, GLuint value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribP4ui, "(%u, %s, %u, %u)", (unsigned int)index, enum_to_string_GL(type), (unsigned char)normalized, (unsigned int)value)
+    glatter_glVertexAttribP4ui(index, type, normalized, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribP4ui_defined
+#endif
+#ifndef glVertexAttribP4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribP4uiv, (index, type, normalized, value), (GLuint index, GLenum type, GLboolean normalized, const GLuint *value))
+void glatter_glVertexAttribP4uiv_debug(GLuint index, GLenum type, GLboolean normalized, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribP4uiv, "(%u, %s, %u, %p)", (unsigned int)index, enum_to_string_GL(type), (unsigned char)normalized, (void*)value)
+    glatter_glVertexAttribP4uiv(index, type, normalized, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribP4uiv_defined
+#endif
+#endif // defined(GL_VERSION_3_3)
+#if defined(GL_VERSION_4_0)
+#ifndef glBeginQueryIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBeginQueryIndexed, (target, index, id), (GLenum target, GLuint index, GLuint id))
+void glatter_glBeginQueryIndexed_debug(GLenum target, GLuint index, GLuint id, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBeginQueryIndexed, "(%s, %u, %u)", enum_to_string_GL(target), (unsigned int)index, (unsigned int)id)
+    glatter_glBeginQueryIndexed(target, index, id);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBeginQueryIndexed_defined
+#endif
+#ifndef glBindTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindTransformFeedback, (target, id), (GLenum target, GLuint id))
+void glatter_glBindTransformFeedback_debug(GLenum target, GLuint id, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindTransformFeedback, "(%s, %u)", enum_to_string_GL(target), (unsigned int)id)
+    glatter_glBindTransformFeedback(target, id);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindTransformFeedback_defined
+#endif
+#ifndef glBlendEquationSeparatei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationSeparatei, (buf, modeRGB, modeAlpha), (GLuint buf, GLenum modeRGB, GLenum modeAlpha))
+void glatter_glBlendEquationSeparatei_debug(GLuint buf, GLenum modeRGB, GLenum modeAlpha, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendEquationSeparatei, "(%u, %s, %s)", (unsigned int)buf, enum_to_string_GL(modeRGB), enum_to_string_GL(modeAlpha))
+    glatter_glBlendEquationSeparatei(buf, modeRGB, modeAlpha);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendEquationSeparatei_defined
+#endif
+#ifndef glBlendEquationi_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendEquationi, (buf, mode), (GLuint buf, GLenum mode))
+void glatter_glBlendEquationi_debug(GLuint buf, GLenum mode, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendEquationi, "(%u, %s)", (unsigned int)buf, enum_to_string_GL(mode))
+    glatter_glBlendEquationi(buf, mode);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendEquationi_defined
+#endif
+#ifndef glBlendFuncSeparatei_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFuncSeparatei, (buf, srcRGB, dstRGB, srcAlpha, dstAlpha), (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha))
+void glatter_glBlendFuncSeparatei_debug(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendFuncSeparatei, "(%u, %s, %s, %s, %s)", (unsigned int)buf, enum_to_string_GL(srcRGB), enum_to_string_GL(dstRGB), enum_to_string_GL(srcAlpha), enum_to_string_GL(dstAlpha))
+    glatter_glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendFuncSeparatei_defined
+#endif
+#ifndef glBlendFunci_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlendFunci, (buf, src, dst), (GLuint buf, GLenum src, GLenum dst))
+void glatter_glBlendFunci_debug(GLuint buf, GLenum src, GLenum dst, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlendFunci, "(%u, %s, %s)", (unsigned int)buf, enum_to_string_GL(src), enum_to_string_GL(dst))
+    glatter_glBlendFunci(buf, src, dst);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlendFunci_defined
+#endif
+#ifndef glDeleteTransformFeedbacks_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteTransformFeedbacks, (n, ids), (GLsizei n, const GLuint *ids))
+void glatter_glDeleteTransformFeedbacks_debug(GLsizei n, const GLuint *ids, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteTransformFeedbacks, "(%d, %p)", (int)n, (void*)ids)
+    glatter_glDeleteTransformFeedbacks(n, ids);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteTransformFeedbacks_defined
+#endif
+#ifndef glDrawArraysIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysIndirect, (mode, indirect), (GLenum mode, const void *indirect))
+void glatter_glDrawArraysIndirect_debug(GLenum mode, const void *indirect, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawArraysIndirect, "(%s, %p)", enum_to_string_GL(mode), (void*)indirect)
+    glatter_glDrawArraysIndirect(mode, indirect);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawArraysIndirect_defined
+#endif
+#ifndef glDrawElementsIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsIndirect, (mode, type, indirect), (GLenum mode, GLenum type, const void *indirect))
+void glatter_glDrawElementsIndirect_debug(GLenum mode, GLenum type, const void *indirect, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawElementsIndirect, "(%s, %s, %p)", enum_to_string_GL(mode), enum_to_string_GL(type), (void*)indirect)
+    glatter_glDrawElementsIndirect(mode, type, indirect);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawElementsIndirect_defined
+#endif
+#ifndef glDrawTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawTransformFeedback, (mode, id), (GLenum mode, GLuint id))
+void glatter_glDrawTransformFeedback_debug(GLenum mode, GLuint id, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawTransformFeedback, "(%s, %u)", enum_to_string_GL(mode), (unsigned int)id)
+    glatter_glDrawTransformFeedback(mode, id);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawTransformFeedback_defined
+#endif
+#ifndef glDrawTransformFeedbackStream_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawTransformFeedbackStream, (mode, id, stream), (GLenum mode, GLuint id, GLuint stream))
+void glatter_glDrawTransformFeedbackStream_debug(GLenum mode, GLuint id, GLuint stream, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawTransformFeedbackStream, "(%s, %u, %u)", enum_to_string_GL(mode), (unsigned int)id, (unsigned int)stream)
+    glatter_glDrawTransformFeedbackStream(mode, id, stream);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawTransformFeedbackStream_defined
+#endif
+#ifndef glEndQueryIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEndQueryIndexed, (target, index), (GLenum target, GLuint index))
+void glatter_glEndQueryIndexed_debug(GLenum target, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEndQueryIndexed, "(%s, %u)", enum_to_string_GL(target), (unsigned int)index)
+    glatter_glEndQueryIndexed(target, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEndQueryIndexed_defined
+#endif
+#ifndef glGenTransformFeedbacks_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenTransformFeedbacks, (n, ids), (GLsizei n, GLuint *ids))
+void glatter_glGenTransformFeedbacks_debug(GLsizei n, GLuint *ids, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenTransformFeedbacks, "(%d, %p)", (int)n, (void*)ids)
+    glatter_glGenTransformFeedbacks(n, ids);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenTransformFeedbacks_defined
+#endif
+#ifndef glGetActiveSubroutineName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveSubroutineName, (program, shadertype, index, bufsize, length, name), (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name))
+void glatter_glGetActiveSubroutineName_debug(GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveSubroutineName, "(%u, %s, %u, %d, %p, %p)", (unsigned int)program, enum_to_string_GL(shadertype), (unsigned int)index, (int)bufsize, (void*)length, (void*)name)
+    glatter_glGetActiveSubroutineName(program, shadertype, index, bufsize, length, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveSubroutineName_defined
+#endif
+#ifndef glGetActiveSubroutineUniformName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveSubroutineUniformName, (program, shadertype, index, bufsize, length, name), (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name))
+void glatter_glGetActiveSubroutineUniformName_debug(GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveSubroutineUniformName, "(%u, %s, %u, %d, %p, %p)", (unsigned int)program, enum_to_string_GL(shadertype), (unsigned int)index, (int)bufsize, (void*)length, (void*)name)
+    glatter_glGetActiveSubroutineUniformName(program, shadertype, index, bufsize, length, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveSubroutineUniformName_defined
+#endif
+#ifndef glGetActiveSubroutineUniformiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveSubroutineUniformiv, (program, shadertype, index, pname, values), (GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint *values))
+void glatter_glGetActiveSubroutineUniformiv_debug(GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint *values, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveSubroutineUniformiv, "(%u, %s, %u, %s, %p)", (unsigned int)program, enum_to_string_GL(shadertype), (unsigned int)index, enum_to_string_GL(pname), (void*)values)
+    glatter_glGetActiveSubroutineUniformiv(program, shadertype, index, pname, values);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveSubroutineUniformiv_defined
+#endif
+#ifndef glGetProgramStageiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramStageiv, (program, shadertype, pname, values), (GLuint program, GLenum shadertype, GLenum pname, GLint *values))
+void glatter_glGetProgramStageiv_debug(GLuint program, GLenum shadertype, GLenum pname, GLint *values, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramStageiv, "(%u, %s, %s, %p)", (unsigned int)program, enum_to_string_GL(shadertype), enum_to_string_GL(pname), (void*)values)
+    glatter_glGetProgramStageiv(program, shadertype, pname, values);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetProgramStageiv_defined
+#endif
+#ifndef glGetQueryIndexediv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetQueryIndexediv, (target, index, pname, params), (GLenum target, GLuint index, GLenum pname, GLint *params))
+void glatter_glGetQueryIndexediv_debug(GLenum target, GLuint index, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetQueryIndexediv, "(%s, %u, %s, %p)", enum_to_string_GL(target), (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetQueryIndexediv(target, index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetQueryIndexediv_defined
+#endif
+#ifndef glGetSubroutineIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetSubroutineIndex, (program, shadertype, name), (GLuint program, GLenum shadertype, const GLchar *name))
+GLuint glatter_glGetSubroutineIndex_debug(GLuint program, GLenum shadertype, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetSubroutineIndex, "(%u, %s, %p)", (unsigned int)program, enum_to_string_GL(shadertype), (void*)name)
+    GLuint rval = glatter_glGetSubroutineIndex(program, shadertype, name);
+    GLATTER_RBLOCK("%u\n", (unsigned int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetSubroutineIndex_defined
+#endif
+#ifndef glGetSubroutineUniformLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetSubroutineUniformLocation, (program, shadertype, name), (GLuint program, GLenum shadertype, const GLchar *name))
+GLint glatter_glGetSubroutineUniformLocation_debug(GLuint program, GLenum shadertype, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetSubroutineUniformLocation, "(%u, %s, %p)", (unsigned int)program, enum_to_string_GL(shadertype), (void*)name)
+    GLint rval = glatter_glGetSubroutineUniformLocation(program, shadertype, name);
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetSubroutineUniformLocation_defined
+#endif
+#ifndef glGetUniformSubroutineuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformSubroutineuiv, (shadertype, location, params), (GLenum shadertype, GLint location, GLuint *params))
+void glatter_glGetUniformSubroutineuiv_debug(GLenum shadertype, GLint location, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformSubroutineuiv, "(%s, %d, %p)", enum_to_string_GL(shadertype), (int)location, (void*)params)
+    glatter_glGetUniformSubroutineuiv(shadertype, location, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUniformSubroutineuiv_defined
+#endif
+#ifndef glGetUniformdv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetUniformdv, (program, location, params), (GLuint program, GLint location, GLdouble *params))
+void glatter_glGetUniformdv_debug(GLuint program, GLint location, GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetUniformdv, "(%u, %d, %p)", (unsigned int)program, (int)location, (void*)params)
+    glatter_glGetUniformdv(program, location, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetUniformdv_defined
+#endif
+#ifndef glIsTransformFeedback_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsTransformFeedback, (id), (GLuint id))
+GLboolean glatter_glIsTransformFeedback_debug(GLuint id, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsTransformFeedback, "(%u)", (unsigned int)id)
+    GLboolean rval = glatter_glIsTransformFeedback(id);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsTransformFeedback_defined
+#endif
+#ifndef glMinSampleShading_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMinSampleShading, (value), (GLfloat value))
+void glatter_glMinSampleShading_debug(GLfloat value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMinSampleShading, "(%f)", (float)value)
+    glatter_glMinSampleShading(value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMinSampleShading_defined
+#endif
+#ifndef glPatchParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPatchParameterfv, (pname, values), (GLenum pname, const GLfloat *values))
+void glatter_glPatchParameterfv_debug(GLenum pname, const GLfloat *values, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPatchParameterfv, "(%s, %p)", enum_to_string_GL(pname), (void*)values)
+    glatter_glPatchParameterfv(pname, values);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPatchParameterfv_defined
+#endif
+#ifndef glPatchParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPatchParameteri, (pname, value), (GLenum pname, GLint value))
+void glatter_glPatchParameteri_debug(GLenum pname, GLint value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPatchParameteri, "(%s, %d)", enum_to_string_GL(pname), (int)value)
+    glatter_glPatchParameteri(pname, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPatchParameteri_defined
+#endif
+#ifndef glPauseTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPauseTransformFeedback, (), (void))
+void glatter_glPauseTransformFeedback_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPauseTransformFeedback, "()")
+    glatter_glPauseTransformFeedback();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPauseTransformFeedback_defined
+#endif
+#ifndef glResumeTransformFeedback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glResumeTransformFeedback, (), (void))
+void glatter_glResumeTransformFeedback_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glResumeTransformFeedback, "()")
+    glatter_glResumeTransformFeedback();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glResumeTransformFeedback_defined
+#endif
+#ifndef glUniform1d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1d, (location, x), (GLint location, GLdouble x))
+void glatter_glUniform1d_debug(GLint location, GLdouble x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1d, "(%d, %f)", (int)location, (double)x)
+    glatter_glUniform1d(location, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1d_defined
+#endif
+#ifndef glUniform1dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform1dv, (location, count, value), (GLint location, GLsizei count, const GLdouble *value))
+void glatter_glUniform1dv_debug(GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform1dv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform1dv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform1dv_defined
+#endif
+#ifndef glUniform2d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2d, (location, x, y), (GLint location, GLdouble x, GLdouble y))
+void glatter_glUniform2d_debug(GLint location, GLdouble x, GLdouble y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2d, "(%d, %f, %f)", (int)location, (double)x, (double)y)
+    glatter_glUniform2d(location, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2d_defined
+#endif
+#ifndef glUniform2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform2dv, (location, count, value), (GLint location, GLsizei count, const GLdouble *value))
+void glatter_glUniform2dv_debug(GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform2dv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform2dv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform2dv_defined
+#endif
+#ifndef glUniform3d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3d, (location, x, y, z), (GLint location, GLdouble x, GLdouble y, GLdouble z))
+void glatter_glUniform3d_debug(GLint location, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3d, "(%d, %f, %f, %f)", (int)location, (double)x, (double)y, (double)z)
+    glatter_glUniform3d(location, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3d_defined
+#endif
+#ifndef glUniform3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform3dv, (location, count, value), (GLint location, GLsizei count, const GLdouble *value))
+void glatter_glUniform3dv_debug(GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform3dv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform3dv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform3dv_defined
+#endif
+#ifndef glUniform4d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4d, (location, x, y, z, w), (GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+void glatter_glUniform4d_debug(GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4d, "(%d, %f, %f, %f, %f)", (int)location, (double)x, (double)y, (double)z, (double)w)
+    glatter_glUniform4d(location, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4d_defined
+#endif
+#ifndef glUniform4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniform4dv, (location, count, value), (GLint location, GLsizei count, const GLdouble *value))
+void glatter_glUniform4dv_debug(GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniform4dv, "(%d, %d, %p)", (int)location, (int)count, (void*)value)
+    glatter_glUniform4dv(location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniform4dv_defined
+#endif
+#ifndef glUniformMatrix2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glUniformMatrix2dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix2dv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix2dv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix2dv_defined
+#endif
+#ifndef glUniformMatrix2x3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2x3dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glUniformMatrix2x3dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix2x3dv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix2x3dv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix2x3dv_defined
+#endif
+#ifndef glUniformMatrix2x4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix2x4dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glUniformMatrix2x4dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix2x4dv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix2x4dv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix2x4dv_defined
+#endif
+#ifndef glUniformMatrix3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glUniformMatrix3dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix3dv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix3dv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix3dv_defined
+#endif
+#ifndef glUniformMatrix3x2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3x2dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glUniformMatrix3x2dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix3x2dv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix3x2dv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix3x2dv_defined
+#endif
+#ifndef glUniformMatrix3x4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix3x4dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glUniformMatrix3x4dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix3x4dv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix3x4dv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix3x4dv_defined
+#endif
+#ifndef glUniformMatrix4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glUniformMatrix4dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix4dv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix4dv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix4dv_defined
+#endif
+#ifndef glUniformMatrix4x2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4x2dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glUniformMatrix4x2dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix4x2dv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix4x2dv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix4x2dv_defined
+#endif
+#ifndef glUniformMatrix4x3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformMatrix4x3dv, (location, count, transpose, value), (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glUniformMatrix4x3dv_debug(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformMatrix4x3dv, "(%d, %d, %u, %p)", (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glUniformMatrix4x3dv(location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformMatrix4x3dv_defined
+#endif
+#ifndef glUniformSubroutinesuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUniformSubroutinesuiv, (shadertype, count, indices), (GLenum shadertype, GLsizei count, const GLuint *indices))
+void glatter_glUniformSubroutinesuiv_debug(GLenum shadertype, GLsizei count, const GLuint *indices, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUniformSubroutinesuiv, "(%s, %d, %p)", enum_to_string_GL(shadertype), (int)count, (void*)indices)
+    glatter_glUniformSubroutinesuiv(shadertype, count, indices);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUniformSubroutinesuiv_defined
+#endif
+#endif // defined(GL_VERSION_4_0)
+#if defined(GL_VERSION_4_1)
+#ifndef glActiveShaderProgram_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glActiveShaderProgram, (pipeline, program), (GLuint pipeline, GLuint program))
+void glatter_glActiveShaderProgram_debug(GLuint pipeline, GLuint program, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glActiveShaderProgram, "(%u, %u)", (unsigned int)pipeline, (unsigned int)program)
+    glatter_glActiveShaderProgram(pipeline, program);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glActiveShaderProgram_defined
+#endif
+#ifndef glBindProgramPipeline_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindProgramPipeline, (pipeline), (GLuint pipeline))
+void glatter_glBindProgramPipeline_debug(GLuint pipeline, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindProgramPipeline, "(%u)", (unsigned int)pipeline)
+    glatter_glBindProgramPipeline(pipeline);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindProgramPipeline_defined
+#endif
+#ifndef glClearDepthf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearDepthf, (d), (GLfloat d))
+void glatter_glClearDepthf_debug(GLfloat d, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearDepthf, "(%f)", (float)d)
+    glatter_glClearDepthf(d);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearDepthf_defined
+#endif
+#ifndef glCreateShaderProgramv_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glCreateShaderProgramv, (type, count, strings), (GLenum type, GLsizei count, const GLchar *const*strings))
+GLuint glatter_glCreateShaderProgramv_debug(GLenum type, GLsizei count, const GLchar *const*strings, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateShaderProgramv, "(%s, %d, %p)", enum_to_string_GL(type), (int)count, (void*)strings)
+    GLuint rval = glatter_glCreateShaderProgramv(type, count, strings);
+    GLATTER_RBLOCK("%u\n", (unsigned int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glCreateShaderProgramv_defined
+#endif
+#ifndef glDeleteProgramPipelines_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDeleteProgramPipelines, (n, pipelines), (GLsizei n, const GLuint *pipelines))
+void glatter_glDeleteProgramPipelines_debug(GLsizei n, const GLuint *pipelines, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDeleteProgramPipelines, "(%d, %p)", (int)n, (void*)pipelines)
+    glatter_glDeleteProgramPipelines(n, pipelines);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDeleteProgramPipelines_defined
+#endif
+#ifndef glDepthRangeArrayv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRangeArrayv, (first, count, v), (GLuint first, GLsizei count, const GLdouble *v))
+void glatter_glDepthRangeArrayv_debug(GLuint first, GLsizei count, const GLdouble *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDepthRangeArrayv, "(%u, %d, %p)", (unsigned int)first, (int)count, (void*)v)
+    glatter_glDepthRangeArrayv(first, count, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDepthRangeArrayv_defined
+#endif
+#ifndef glDepthRangeIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRangeIndexed, (index, n, f), (GLuint index, GLdouble n, GLdouble f))
+void glatter_glDepthRangeIndexed_debug(GLuint index, GLdouble n, GLdouble f, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDepthRangeIndexed, "(%u, %f, %f)", (unsigned int)index, (double)n, (double)f)
+    glatter_glDepthRangeIndexed(index, n, f);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDepthRangeIndexed_defined
+#endif
+#ifndef glDepthRangef_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDepthRangef, (n, f), (GLfloat n, GLfloat f))
+void glatter_glDepthRangef_debug(GLfloat n, GLfloat f, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDepthRangef, "(%f, %f)", (float)n, (float)f)
+    glatter_glDepthRangef(n, f);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDepthRangef_defined
+#endif
+#ifndef glGenProgramPipelines_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenProgramPipelines, (n, pipelines), (GLsizei n, GLuint *pipelines))
+void glatter_glGenProgramPipelines_debug(GLsizei n, GLuint *pipelines, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenProgramPipelines, "(%d, %p)", (int)n, (void*)pipelines)
+    glatter_glGenProgramPipelines(n, pipelines);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenProgramPipelines_defined
+#endif
+#ifndef glGetDoublei_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetDoublei_v, (target, index, data), (GLenum target, GLuint index, GLdouble *data))
+void glatter_glGetDoublei_v_debug(GLenum target, GLuint index, GLdouble *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetDoublei_v, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetDoublei_v(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetDoublei_v_defined
+#endif
+#ifndef glGetFloati_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFloati_v, (target, index, data), (GLenum target, GLuint index, GLfloat *data))
+void glatter_glGetFloati_v_debug(GLenum target, GLuint index, GLfloat *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFloati_v, "(%s, %u, %p)", enum_to_string_GL(target), (unsigned int)index, (void*)data)
+    glatter_glGetFloati_v(target, index, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetFloati_v_defined
+#endif
+#ifndef glGetProgramBinary_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramBinary, (program, bufSize, length, binaryFormat, binary), (GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, void *binary))
+void glatter_glGetProgramBinary_debug(GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, void *binary, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramBinary, "(%u, %d, %p, %p, %p)", (unsigned int)program, (int)bufSize, (void*)length, (void*)binaryFormat, (void*)binary)
+    glatter_glGetProgramBinary(program, bufSize, length, binaryFormat, binary);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetProgramBinary_defined
+#endif
+#ifndef glGetProgramPipelineInfoLog_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramPipelineInfoLog, (pipeline, bufSize, length, infoLog), (GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog))
+void glatter_glGetProgramPipelineInfoLog_debug(GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramPipelineInfoLog, "(%u, %d, %p, %p)", (unsigned int)pipeline, (int)bufSize, (void*)length, (void*)infoLog)
+    glatter_glGetProgramPipelineInfoLog(pipeline, bufSize, length, infoLog);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetProgramPipelineInfoLog_defined
+#endif
+#ifndef glGetProgramPipelineiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramPipelineiv, (pipeline, pname, params), (GLuint pipeline, GLenum pname, GLint *params))
+void glatter_glGetProgramPipelineiv_debug(GLuint pipeline, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramPipelineiv, "(%u, %s, %p)", (unsigned int)pipeline, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetProgramPipelineiv(pipeline, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetProgramPipelineiv_defined
+#endif
+#ifndef glGetShaderPrecisionFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetShaderPrecisionFormat, (shadertype, precisiontype, range, precision), (GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision))
+void glatter_glGetShaderPrecisionFormat_debug(GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetShaderPrecisionFormat, "(%s, %s, %p, %p)", enum_to_string_GL(shadertype), enum_to_string_GL(precisiontype), (void*)range, (void*)precision)
+    glatter_glGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetShaderPrecisionFormat_defined
+#endif
+#ifndef glGetVertexAttribLdv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexAttribLdv, (index, pname, params), (GLuint index, GLenum pname, GLdouble *params))
+void glatter_glGetVertexAttribLdv_debug(GLuint index, GLenum pname, GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexAttribLdv, "(%u, %s, %p)", (unsigned int)index, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetVertexAttribLdv(index, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexAttribLdv_defined
+#endif
+#ifndef glIsProgramPipeline_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glIsProgramPipeline, (pipeline), (GLuint pipeline))
+GLboolean glatter_glIsProgramPipeline_debug(GLuint pipeline, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glIsProgramPipeline, "(%u)", (unsigned int)pipeline)
+    GLboolean rval = glatter_glIsProgramPipeline(pipeline);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glIsProgramPipeline_defined
+#endif
+#ifndef glProgramBinary_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramBinary, (program, binaryFormat, binary, length), (GLuint program, GLenum binaryFormat, const void *binary, GLsizei length))
+void glatter_glProgramBinary_debug(GLuint program, GLenum binaryFormat, const void *binary, GLsizei length, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramBinary, "(%u, %s, %p, %d)", (unsigned int)program, enum_to_string_GL(binaryFormat), (void*)binary, (int)length)
+    glatter_glProgramBinary(program, binaryFormat, binary, length);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramBinary_defined
+#endif
+#ifndef glProgramParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramParameteri, (program, pname, value), (GLuint program, GLenum pname, GLint value))
+void glatter_glProgramParameteri_debug(GLuint program, GLenum pname, GLint value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramParameteri, "(%u, %s, %d)", (unsigned int)program, enum_to_string_GL(pname), (int)value)
+    glatter_glProgramParameteri(program, pname, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramParameteri_defined
+#endif
+#ifndef glProgramUniform1d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1d, (program, location, v0), (GLuint program, GLint location, GLdouble v0))
+void glatter_glProgramUniform1d_debug(GLuint program, GLint location, GLdouble v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1d, "(%u, %d, %f)", (unsigned int)program, (int)location, (double)v0)
+    glatter_glProgramUniform1d(program, location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1d_defined
+#endif
+#ifndef glProgramUniform1dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1dv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+void glatter_glProgramUniform1dv_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1dv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1dv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1dv_defined
+#endif
+#ifndef glProgramUniform1f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1f, (program, location, v0), (GLuint program, GLint location, GLfloat v0))
+void glatter_glProgramUniform1f_debug(GLuint program, GLint location, GLfloat v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1f, "(%u, %d, %f)", (unsigned int)program, (int)location, (float)v0)
+    glatter_glProgramUniform1f(program, location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1f_defined
+#endif
+#ifndef glProgramUniform1fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1fv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+void glatter_glProgramUniform1fv_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1fv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1fv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1fv_defined
+#endif
+#ifndef glProgramUniform1i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1i, (program, location, v0), (GLuint program, GLint location, GLint v0))
+void glatter_glProgramUniform1i_debug(GLuint program, GLint location, GLint v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1i, "(%u, %d, %d)", (unsigned int)program, (int)location, (int)v0)
+    glatter_glProgramUniform1i(program, location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1i_defined
+#endif
+#ifndef glProgramUniform1iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1iv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+void glatter_glProgramUniform1iv_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1iv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1iv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1iv_defined
+#endif
+#ifndef glProgramUniform1ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1ui, (program, location, v0), (GLuint program, GLint location, GLuint v0))
+void glatter_glProgramUniform1ui_debug(GLuint program, GLint location, GLuint v0, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1ui, "(%u, %d, %u)", (unsigned int)program, (int)location, (unsigned int)v0)
+    glatter_glProgramUniform1ui(program, location, v0);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1ui_defined
+#endif
+#ifndef glProgramUniform1uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform1uiv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+void glatter_glProgramUniform1uiv_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform1uiv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform1uiv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform1uiv_defined
+#endif
+#ifndef glProgramUniform2d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2d, (program, location, v0, v1), (GLuint program, GLint location, GLdouble v0, GLdouble v1))
+void glatter_glProgramUniform2d_debug(GLuint program, GLint location, GLdouble v0, GLdouble v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2d, "(%u, %d, %f, %f)", (unsigned int)program, (int)location, (double)v0, (double)v1)
+    glatter_glProgramUniform2d(program, location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2d_defined
+#endif
+#ifndef glProgramUniform2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2dv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+void glatter_glProgramUniform2dv_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2dv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2dv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2dv_defined
+#endif
+#ifndef glProgramUniform2f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2f, (program, location, v0, v1), (GLuint program, GLint location, GLfloat v0, GLfloat v1))
+void glatter_glProgramUniform2f_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2f, "(%u, %d, %f, %f)", (unsigned int)program, (int)location, (float)v0, (float)v1)
+    glatter_glProgramUniform2f(program, location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2f_defined
+#endif
+#ifndef glProgramUniform2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2fv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+void glatter_glProgramUniform2fv_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2fv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2fv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2fv_defined
+#endif
+#ifndef glProgramUniform2i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2i, (program, location, v0, v1), (GLuint program, GLint location, GLint v0, GLint v1))
+void glatter_glProgramUniform2i_debug(GLuint program, GLint location, GLint v0, GLint v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2i, "(%u, %d, %d, %d)", (unsigned int)program, (int)location, (int)v0, (int)v1)
+    glatter_glProgramUniform2i(program, location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2i_defined
+#endif
+#ifndef glProgramUniform2iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2iv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+void glatter_glProgramUniform2iv_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2iv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2iv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2iv_defined
+#endif
+#ifndef glProgramUniform2ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2ui, (program, location, v0, v1), (GLuint program, GLint location, GLuint v0, GLuint v1))
+void glatter_glProgramUniform2ui_debug(GLuint program, GLint location, GLuint v0, GLuint v1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2ui, "(%u, %d, %u, %u)", (unsigned int)program, (int)location, (unsigned int)v0, (unsigned int)v1)
+    glatter_glProgramUniform2ui(program, location, v0, v1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2ui_defined
+#endif
+#ifndef glProgramUniform2uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform2uiv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+void glatter_glProgramUniform2uiv_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform2uiv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform2uiv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform2uiv_defined
+#endif
+#ifndef glProgramUniform3d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3d, (program, location, v0, v1, v2), (GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2))
+void glatter_glProgramUniform3d_debug(GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3d, "(%u, %d, %f, %f, %f)", (unsigned int)program, (int)location, (double)v0, (double)v1, (double)v2)
+    glatter_glProgramUniform3d(program, location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3d_defined
+#endif
+#ifndef glProgramUniform3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3dv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+void glatter_glProgramUniform3dv_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3dv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3dv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3dv_defined
+#endif
+#ifndef glProgramUniform3f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3f, (program, location, v0, v1, v2), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2))
+void glatter_glProgramUniform3f_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3f, "(%u, %d, %f, %f, %f)", (unsigned int)program, (int)location, (float)v0, (float)v1, (float)v2)
+    glatter_glProgramUniform3f(program, location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3f_defined
+#endif
+#ifndef glProgramUniform3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3fv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+void glatter_glProgramUniform3fv_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3fv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3fv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3fv_defined
+#endif
+#ifndef glProgramUniform3i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3i, (program, location, v0, v1, v2), (GLuint program, GLint location, GLint v0, GLint v1, GLint v2))
+void glatter_glProgramUniform3i_debug(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3i, "(%u, %d, %d, %d, %d)", (unsigned int)program, (int)location, (int)v0, (int)v1, (int)v2)
+    glatter_glProgramUniform3i(program, location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3i_defined
+#endif
+#ifndef glProgramUniform3iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3iv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+void glatter_glProgramUniform3iv_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3iv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3iv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3iv_defined
+#endif
+#ifndef glProgramUniform3ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3ui, (program, location, v0, v1, v2), (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2))
+void glatter_glProgramUniform3ui_debug(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3ui, "(%u, %d, %u, %u, %u)", (unsigned int)program, (int)location, (unsigned int)v0, (unsigned int)v1, (unsigned int)v2)
+    glatter_glProgramUniform3ui(program, location, v0, v1, v2);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3ui_defined
+#endif
+#ifndef glProgramUniform3uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform3uiv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+void glatter_glProgramUniform3uiv_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform3uiv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform3uiv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform3uiv_defined
+#endif
+#ifndef glProgramUniform4d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4d, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3))
+void glatter_glProgramUniform4d_debug(GLuint program, GLint location, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4d, "(%u, %d, %f, %f, %f, %f)", (unsigned int)program, (int)location, (double)v0, (double)v1, (double)v2, (double)v3)
+    glatter_glProgramUniform4d(program, location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4d_defined
+#endif
+#ifndef glProgramUniform4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4dv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLdouble *value))
+void glatter_glProgramUniform4dv_debug(GLuint program, GLint location, GLsizei count, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4dv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4dv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4dv_defined
+#endif
+#ifndef glProgramUniform4f_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4f, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3))
+void glatter_glProgramUniform4f_debug(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4f, "(%u, %d, %f, %f, %f, %f)", (unsigned int)program, (int)location, (float)v0, (float)v1, (float)v2, (float)v3)
+    glatter_glProgramUniform4f(program, location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4f_defined
+#endif
+#ifndef glProgramUniform4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4fv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLfloat *value))
+void glatter_glProgramUniform4fv_debug(GLuint program, GLint location, GLsizei count, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4fv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4fv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4fv_defined
+#endif
+#ifndef glProgramUniform4i_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4i, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3))
+void glatter_glProgramUniform4i_debug(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4i, "(%u, %d, %d, %d, %d, %d)", (unsigned int)program, (int)location, (int)v0, (int)v1, (int)v2, (int)v3)
+    glatter_glProgramUniform4i(program, location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4i_defined
+#endif
+#ifndef glProgramUniform4iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4iv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLint *value))
+void glatter_glProgramUniform4iv_debug(GLuint program, GLint location, GLsizei count, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4iv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4iv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4iv_defined
+#endif
+#ifndef glProgramUniform4ui_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4ui, (program, location, v0, v1, v2, v3), (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3))
+void glatter_glProgramUniform4ui_debug(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4ui, "(%u, %d, %u, %u, %u, %u)", (unsigned int)program, (int)location, (unsigned int)v0, (unsigned int)v1, (unsigned int)v2, (unsigned int)v3)
+    glatter_glProgramUniform4ui(program, location, v0, v1, v2, v3);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4ui_defined
+#endif
+#ifndef glProgramUniform4uiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniform4uiv, (program, location, count, value), (GLuint program, GLint location, GLsizei count, const GLuint *value))
+void glatter_glProgramUniform4uiv_debug(GLuint program, GLint location, GLsizei count, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniform4uiv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)count, (void*)value)
+    glatter_glProgramUniform4uiv(program, location, count, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniform4uiv_defined
+#endif
+#ifndef glProgramUniformMatrix2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix2dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2dv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2dv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2dv_defined
+#endif
+#ifndef glProgramUniformMatrix2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix2fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2fv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2fv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2fv_defined
+#endif
+#ifndef glProgramUniformMatrix2x3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix2x3dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2x3dv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2x3dv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2x3dv_defined
+#endif
+#ifndef glProgramUniformMatrix2x3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x3fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix2x3fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2x3fv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2x3fv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2x3fv_defined
+#endif
+#ifndef glProgramUniformMatrix2x4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix2x4dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2x4dv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2x4dv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2x4dv_defined
+#endif
+#ifndef glProgramUniformMatrix2x4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix2x4fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix2x4fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix2x4fv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix2x4fv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix2x4fv_defined
+#endif
+#ifndef glProgramUniformMatrix3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix3dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3dv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3dv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3dv_defined
+#endif
+#ifndef glProgramUniformMatrix3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix3fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3fv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3fv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3fv_defined
+#endif
+#ifndef glProgramUniformMatrix3x2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix3x2dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3x2dv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3x2dv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3x2dv_defined
+#endif
+#ifndef glProgramUniformMatrix3x2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x2fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix3x2fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3x2fv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3x2fv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3x2fv_defined
+#endif
+#ifndef glProgramUniformMatrix3x4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix3x4dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3x4dv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3x4dv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3x4dv_defined
+#endif
+#ifndef glProgramUniformMatrix3x4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix3x4fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix3x4fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix3x4fv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix3x4fv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix3x4fv_defined
+#endif
+#ifndef glProgramUniformMatrix4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix4dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4dv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4dv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4dv_defined
+#endif
+#ifndef glProgramUniformMatrix4fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix4fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4fv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4fv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4fv_defined
+#endif
+#ifndef glProgramUniformMatrix4x2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix4x2dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4x2dv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4x2dv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4x2dv_defined
+#endif
+#ifndef glProgramUniformMatrix4x2fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x2fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix4x2fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4x2fv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4x2fv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4x2fv_defined
+#endif
+#ifndef glProgramUniformMatrix4x3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3dv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value))
+void glatter_glProgramUniformMatrix4x3dv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4x3dv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4x3dv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4x3dv_defined
+#endif
+#ifndef glProgramUniformMatrix4x3fv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glProgramUniformMatrix4x3fv, (program, location, count, transpose, value), (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
+void glatter_glProgramUniformMatrix4x3fv_debug(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glProgramUniformMatrix4x3fv, "(%u, %d, %d, %u, %p)", (unsigned int)program, (int)location, (int)count, (unsigned char)transpose, (void*)value)
+    glatter_glProgramUniformMatrix4x3fv(program, location, count, transpose, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glProgramUniformMatrix4x3fv_defined
+#endif
+#ifndef glReleaseShaderCompiler_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReleaseShaderCompiler, (), (void))
+void glatter_glReleaseShaderCompiler_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glReleaseShaderCompiler, "()")
+    glatter_glReleaseShaderCompiler();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glReleaseShaderCompiler_defined
+#endif
+#ifndef glScissorArrayv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glScissorArrayv, (first, count, v), (GLuint first, GLsizei count, const GLint *v))
+void glatter_glScissorArrayv_debug(GLuint first, GLsizei count, const GLint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glScissorArrayv, "(%u, %d, %p)", (unsigned int)first, (int)count, (void*)v)
+    glatter_glScissorArrayv(first, count, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glScissorArrayv_defined
+#endif
+#ifndef glScissorIndexed_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glScissorIndexed, (index, left, bottom, width, height), (GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height))
+void glatter_glScissorIndexed_debug(GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glScissorIndexed, "(%u, %d, %d, %d, %d)", (unsigned int)index, (int)left, (int)bottom, (int)width, (int)height)
+    glatter_glScissorIndexed(index, left, bottom, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glScissorIndexed_defined
+#endif
+#ifndef glScissorIndexedv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glScissorIndexedv, (index, v), (GLuint index, const GLint *v))
+void glatter_glScissorIndexedv_debug(GLuint index, const GLint *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glScissorIndexedv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glScissorIndexedv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glScissorIndexedv_defined
+#endif
+#ifndef glShaderBinary_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShaderBinary, (count, shaders, binaryformat, binary, length), (GLsizei count, const GLuint *shaders, GLenum binaryformat, const void *binary, GLsizei length))
+void glatter_glShaderBinary_debug(GLsizei count, const GLuint *shaders, GLenum binaryformat, const void *binary, GLsizei length, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glShaderBinary, "(%d, %p, %s, %p, %d)", (int)count, (void*)shaders, enum_to_string_GL(binaryformat), (void*)binary, (int)length)
+    glatter_glShaderBinary(count, shaders, binaryformat, binary, length);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glShaderBinary_defined
+#endif
+#ifndef glUseProgramStages_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glUseProgramStages, (pipeline, stages, program), (GLuint pipeline, GLbitfield stages, GLuint program))
+void glatter_glUseProgramStages_debug(GLuint pipeline, GLbitfield stages, GLuint program, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUseProgramStages, "(%u, %u, %u)", (unsigned int)pipeline, (unsigned int)stages, (unsigned int)program)
+    glatter_glUseProgramStages(pipeline, stages, program);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glUseProgramStages_defined
+#endif
+#ifndef glValidateProgramPipeline_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glValidateProgramPipeline, (pipeline), (GLuint pipeline))
+void glatter_glValidateProgramPipeline_debug(GLuint pipeline, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glValidateProgramPipeline, "(%u)", (unsigned int)pipeline)
+    glatter_glValidateProgramPipeline(pipeline);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glValidateProgramPipeline_defined
+#endif
+#ifndef glVertexAttribL1d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1d, (index, x), (GLuint index, GLdouble x))
+void glatter_glVertexAttribL1d_debug(GLuint index, GLdouble x, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL1d, "(%u, %f)", (unsigned int)index, (double)x)
+    glatter_glVertexAttribL1d(index, x);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL1d_defined
+#endif
+#ifndef glVertexAttribL1dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL1dv, (index, v), (GLuint index, const GLdouble *v))
+void glatter_glVertexAttribL1dv_debug(GLuint index, const GLdouble *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL1dv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL1dv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL1dv_defined
+#endif
+#ifndef glVertexAttribL2d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2d, (index, x, y), (GLuint index, GLdouble x, GLdouble y))
+void glatter_glVertexAttribL2d_debug(GLuint index, GLdouble x, GLdouble y, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL2d, "(%u, %f, %f)", (unsigned int)index, (double)x, (double)y)
+    glatter_glVertexAttribL2d(index, x, y);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL2d_defined
+#endif
+#ifndef glVertexAttribL2dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL2dv, (index, v), (GLuint index, const GLdouble *v))
+void glatter_glVertexAttribL2dv_debug(GLuint index, const GLdouble *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL2dv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL2dv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL2dv_defined
+#endif
+#ifndef glVertexAttribL3d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3d, (index, x, y, z), (GLuint index, GLdouble x, GLdouble y, GLdouble z))
+void glatter_glVertexAttribL3d_debug(GLuint index, GLdouble x, GLdouble y, GLdouble z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL3d, "(%u, %f, %f, %f)", (unsigned int)index, (double)x, (double)y, (double)z)
+    glatter_glVertexAttribL3d(index, x, y, z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL3d_defined
+#endif
+#ifndef glVertexAttribL3dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL3dv, (index, v), (GLuint index, const GLdouble *v))
+void glatter_glVertexAttribL3dv_debug(GLuint index, const GLdouble *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL3dv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL3dv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL3dv_defined
+#endif
+#ifndef glVertexAttribL4d_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4d, (index, x, y, z, w), (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w))
+void glatter_glVertexAttribL4d_debug(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL4d, "(%u, %f, %f, %f, %f)", (unsigned int)index, (double)x, (double)y, (double)z, (double)w)
+    glatter_glVertexAttribL4d(index, x, y, z, w);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL4d_defined
+#endif
+#ifndef glVertexAttribL4dv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribL4dv, (index, v), (GLuint index, const GLdouble *v))
+void glatter_glVertexAttribL4dv_debug(GLuint index, const GLdouble *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribL4dv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glVertexAttribL4dv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribL4dv_defined
+#endif
+#ifndef glVertexAttribLPointer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribLPointer, (index, size, type, stride, pointer), (GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer))
+void glatter_glVertexAttribLPointer_debug(GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribLPointer, "(%u, %d, %s, %d, %p)", (unsigned int)index, (int)size, enum_to_string_GL(type), (int)stride, (void*)pointer)
+    glatter_glVertexAttribLPointer(index, size, type, stride, pointer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribLPointer_defined
+#endif
+#ifndef glViewportArrayv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportArrayv, (first, count, v), (GLuint first, GLsizei count, const GLfloat *v))
+void glatter_glViewportArrayv_debug(GLuint first, GLsizei count, const GLfloat *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glViewportArrayv, "(%u, %d, %p)", (unsigned int)first, (int)count, (void*)v)
+    glatter_glViewportArrayv(first, count, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glViewportArrayv_defined
+#endif
+#ifndef glViewportIndexedf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportIndexedf, (index, x, y, w, h), (GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h))
+void glatter_glViewportIndexedf_debug(GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glViewportIndexedf, "(%u, %f, %f, %f, %f)", (unsigned int)index, (float)x, (float)y, (float)w, (float)h)
+    glatter_glViewportIndexedf(index, x, y, w, h);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glViewportIndexedf_defined
+#endif
+#ifndef glViewportIndexedfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glViewportIndexedfv, (index, v), (GLuint index, const GLfloat *v))
+void glatter_glViewportIndexedfv_debug(GLuint index, const GLfloat *v, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glViewportIndexedfv, "(%u, %p)", (unsigned int)index, (void*)v)
+    glatter_glViewportIndexedfv(index, v);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glViewportIndexedfv_defined
+#endif
+#endif // defined(GL_VERSION_4_1)
+#if defined(GL_VERSION_4_2)
+#ifndef glBindImageTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindImageTexture, (unit, texture, level, layered, layer, access, format), (GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format))
+void glatter_glBindImageTexture_debug(GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindImageTexture, "(%u, %u, %d, %u, %d, %s, %s)", (unsigned int)unit, (unsigned int)texture, (int)level, (unsigned char)layered, (int)layer, enum_to_string_GL(access), enum_to_string_GL(format))
+    glatter_glBindImageTexture(unit, texture, level, layered, layer, access, format);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindImageTexture_defined
+#endif
+#ifndef glDrawArraysInstancedBaseInstance_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawArraysInstancedBaseInstance, (mode, first, count, instancecount, baseinstance), (GLenum mode, GLint first, GLsizei count, GLsizei instancecount, GLuint baseinstance))
+void glatter_glDrawArraysInstancedBaseInstance_debug(GLenum mode, GLint first, GLsizei count, GLsizei instancecount, GLuint baseinstance, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawArraysInstancedBaseInstance, "(%s, %d, %d, %d, %u)", enum_to_string_GL(mode), (int)first, (int)count, (int)instancecount, (unsigned int)baseinstance)
+    glatter_glDrawArraysInstancedBaseInstance(mode, first, count, instancecount, baseinstance);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawArraysInstancedBaseInstance_defined
+#endif
+#ifndef glDrawElementsInstancedBaseInstance_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedBaseInstance, (mode, count, type, indices, instancecount, baseinstance), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLuint baseinstance))
+void glatter_glDrawElementsInstancedBaseInstance_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLuint baseinstance, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawElementsInstancedBaseInstance, "(%s, %d, %s, %p, %d, %u)", enum_to_string_GL(mode), (int)count, enum_to_string_GL(type), (void*)indices, (int)instancecount, (unsigned int)baseinstance)
+    glatter_glDrawElementsInstancedBaseInstance(mode, count, type, indices, instancecount, baseinstance);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawElementsInstancedBaseInstance_defined
+#endif
+#ifndef glDrawElementsInstancedBaseVertexBaseInstance_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawElementsInstancedBaseVertexBaseInstance, (mode, count, type, indices, instancecount, basevertex, baseinstance), (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex, GLuint baseinstance))
+void glatter_glDrawElementsInstancedBaseVertexBaseInstance_debug(GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex, GLuint baseinstance, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawElementsInstancedBaseVertexBaseInstance, "(%s, %d, %s, %p, %d, %d, %u)", enum_to_string_GL(mode), (int)count, enum_to_string_GL(type), (void*)indices, (int)instancecount, (int)basevertex, (unsigned int)baseinstance)
+    glatter_glDrawElementsInstancedBaseVertexBaseInstance(mode, count, type, indices, instancecount, basevertex, baseinstance);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawElementsInstancedBaseVertexBaseInstance_defined
+#endif
+#ifndef glDrawTransformFeedbackInstanced_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawTransformFeedbackInstanced, (mode, id, instancecount), (GLenum mode, GLuint id, GLsizei instancecount))
+void glatter_glDrawTransformFeedbackInstanced_debug(GLenum mode, GLuint id, GLsizei instancecount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawTransformFeedbackInstanced, "(%s, %u, %d)", enum_to_string_GL(mode), (unsigned int)id, (int)instancecount)
+    glatter_glDrawTransformFeedbackInstanced(mode, id, instancecount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawTransformFeedbackInstanced_defined
+#endif
+#ifndef glDrawTransformFeedbackStreamInstanced_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawTransformFeedbackStreamInstanced, (mode, id, stream, instancecount), (GLenum mode, GLuint id, GLuint stream, GLsizei instancecount))
+void glatter_glDrawTransformFeedbackStreamInstanced_debug(GLenum mode, GLuint id, GLuint stream, GLsizei instancecount, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawTransformFeedbackStreamInstanced, "(%s, %u, %u, %d)", enum_to_string_GL(mode), (unsigned int)id, (unsigned int)stream, (int)instancecount)
+    glatter_glDrawTransformFeedbackStreamInstanced(mode, id, stream, instancecount);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawTransformFeedbackStreamInstanced_defined
+#endif
+#ifndef glGetActiveAtomicCounterBufferiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetActiveAtomicCounterBufferiv, (program, bufferIndex, pname, params), (GLuint program, GLuint bufferIndex, GLenum pname, GLint *params))
+void glatter_glGetActiveAtomicCounterBufferiv_debug(GLuint program, GLuint bufferIndex, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetActiveAtomicCounterBufferiv, "(%u, %u, %s, %p)", (unsigned int)program, (unsigned int)bufferIndex, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetActiveAtomicCounterBufferiv_defined
+#endif
+#ifndef glGetInternalformativ_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetInternalformativ, (target, internalformat, pname, bufSize, params), (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params))
+void glatter_glGetInternalformativ_debug(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetInternalformativ, "(%s, %s, %s, %d, %p)", enum_to_string_GL(target), enum_to_string_GL(internalformat), enum_to_string_GL(pname), (int)bufSize, (void*)params)
+    glatter_glGetInternalformativ(target, internalformat, pname, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetInternalformativ_defined
+#endif
+#ifndef glMemoryBarrier_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMemoryBarrier, (barriers), (GLbitfield barriers))
+void glatter_glMemoryBarrier_debug(GLbitfield barriers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMemoryBarrier, "(%u)", (unsigned int)barriers)
+    glatter_glMemoryBarrier(barriers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMemoryBarrier_defined
+#endif
+#ifndef glTexStorage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage1D, (target, levels, internalformat, width), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
+void glatter_glTexStorage1D_debug(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorage1D, "(%s, %d, %s, %d)", enum_to_string_GL(target), (int)levels, enum_to_string_GL(internalformat), (int)width)
+    glatter_glTexStorage1D(target, levels, internalformat, width);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorage1D_defined
+#endif
+#ifndef glTexStorage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage2D, (target, levels, internalformat, width, height), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glTexStorage2D_debug(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorage2D, "(%s, %d, %s, %d, %d)", enum_to_string_GL(target), (int)levels, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glTexStorage2D(target, levels, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorage2D_defined
+#endif
+#ifndef glTexStorage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage3D, (target, levels, internalformat, width, height, depth), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
+void glatter_glTexStorage3D_debug(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorage3D, "(%s, %d, %s, %d, %d, %d)", enum_to_string_GL(target), (int)levels, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth)
+    glatter_glTexStorage3D(target, levels, internalformat, width, height, depth);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorage3D_defined
+#endif
+#endif // defined(GL_VERSION_4_2)
+#if defined(GL_VERSION_4_3)
+#ifndef glBindVertexBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindVertexBuffer, (bindingindex, buffer, offset, stride), (GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride))
+void glatter_glBindVertexBuffer_debug(GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindVertexBuffer, "(%u, %u, %td, %d)", (unsigned int)bindingindex, (unsigned int)buffer, (ptrdiff_t)offset, (int)stride)
+    glatter_glBindVertexBuffer(bindingindex, buffer, offset, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindVertexBuffer_defined
+#endif
+#ifndef glClearBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferData, (target, internalformat, format, type, data), (GLenum target, GLenum internalformat, GLenum format, GLenum type, const void *data))
+void glatter_glClearBufferData_debug(GLenum target, GLenum internalformat, GLenum format, GLenum type, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearBufferData, "(%s, %s, %s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(internalformat), enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
+    glatter_glClearBufferData(target, internalformat, format, type, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearBufferData_defined
+#endif
+#ifndef glClearBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearBufferSubData, (target, internalformat, offset, size, format, type, data), (GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data))
+void glatter_glClearBufferSubData_debug(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearBufferSubData, "(%s, %s, %td, %td, %s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(internalformat), (ptrdiff_t)offset, (ptrdiff_t)size, enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
+    glatter_glClearBufferSubData(target, internalformat, offset, size, format, type, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearBufferSubData_defined
+#endif
+#ifndef glCopyImageSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyImageSubData, (srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth), (GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth))
+void glatter_glCopyImageSubData_debug(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyImageSubData, "(%u, %s, %d, %d, %d, %d, %u, %s, %d, %d, %d, %d, %d, %d, %d)", (unsigned int)srcName, enum_to_string_GL(srcTarget), (int)srcLevel, (int)srcX, (int)srcY, (int)srcZ, (unsigned int)dstName, enum_to_string_GL(dstTarget), (int)dstLevel, (int)dstX, (int)dstY, (int)dstZ, (int)srcWidth, (int)srcHeight, (int)srcDepth)
+    glatter_glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyImageSubData_defined
+#endif
+#ifndef glDebugMessageCallback_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageCallback, (callback, userParam), (GLDEBUGPROC callback, const void *userParam))
+void glatter_glDebugMessageCallback_debug(GLDEBUGPROC callback, const void *userParam, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDebugMessageCallback, "(%s, %p)", GET_PRS(callback), (void*)userParam)
+    glatter_glDebugMessageCallback(callback, userParam);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDebugMessageCallback_defined
+#endif
+#ifndef glDebugMessageControl_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageControl, (source, type, severity, count, ids, enabled), (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled))
+void glatter_glDebugMessageControl_debug(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDebugMessageControl, "(%s, %s, %s, %d, %p, %u)", enum_to_string_GL(source), enum_to_string_GL(type), enum_to_string_GL(severity), (int)count, (void*)ids, (unsigned char)enabled)
+    glatter_glDebugMessageControl(source, type, severity, count, ids, enabled);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDebugMessageControl_defined
+#endif
+#ifndef glDebugMessageInsert_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDebugMessageInsert, (source, type, id, severity, length, buf), (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf))
+void glatter_glDebugMessageInsert_debug(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDebugMessageInsert, "(%s, %s, %u, %s, %d, %p)", enum_to_string_GL(source), enum_to_string_GL(type), (unsigned int)id, enum_to_string_GL(severity), (int)length, (void*)buf)
+    glatter_glDebugMessageInsert(source, type, id, severity, length, buf);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDebugMessageInsert_defined
+#endif
+#ifndef glDispatchCompute_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDispatchCompute, (num_groups_x, num_groups_y, num_groups_z), (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z))
+void glatter_glDispatchCompute_debug(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDispatchCompute, "(%u, %u, %u)", (unsigned int)num_groups_x, (unsigned int)num_groups_y, (unsigned int)num_groups_z)
+    glatter_glDispatchCompute(num_groups_x, num_groups_y, num_groups_z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDispatchCompute_defined
+#endif
+#ifndef glDispatchComputeIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDispatchComputeIndirect, (indirect), (GLintptr indirect))
+void glatter_glDispatchComputeIndirect_debug(GLintptr indirect, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDispatchComputeIndirect, "(%td)", (ptrdiff_t)indirect)
+    glatter_glDispatchComputeIndirect(indirect);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDispatchComputeIndirect_defined
+#endif
+#ifndef glFramebufferParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferParameteri, (target, pname, param), (GLenum target, GLenum pname, GLint param))
+void glatter_glFramebufferParameteri_debug(GLenum target, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferParameteri, "(%s, %s, %d)", enum_to_string_GL(target), enum_to_string_GL(pname), (int)param)
+    glatter_glFramebufferParameteri(target, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferParameteri_defined
+#endif
+#ifndef glGetDebugMessageLog_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetDebugMessageLog, (count, bufSize, sources, types, ids, severities, lengths, messageLog), (GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog))
+GLuint glatter_glGetDebugMessageLog_debug(GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetDebugMessageLog, "(%u, %d, %p, %p, %p, %p, %p, %p)", (unsigned int)count, (int)bufSize, (void*)sources, (void*)types, (void*)ids, (void*)severities, (void*)lengths, (void*)messageLog)
+    GLuint rval = glatter_glGetDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths, messageLog);
+    GLATTER_RBLOCK("%u\n", (unsigned int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetDebugMessageLog_defined
+#endif
+#ifndef glGetFramebufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFramebufferParameteriv, (target, pname, params), (GLenum target, GLenum pname, GLint *params))
+void glatter_glGetFramebufferParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFramebufferParameteriv, "(%s, %s, %p)", enum_to_string_GL(target), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetFramebufferParameteriv(target, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetFramebufferParameteriv_defined
+#endif
+#ifndef glGetInternalformati64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetInternalformati64v, (target, internalformat, pname, bufSize, params), (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 *params))
+void glatter_glGetInternalformati64v_debug(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetInternalformati64v, "(%s, %s, %s, %d, %p)", enum_to_string_GL(target), enum_to_string_GL(internalformat), enum_to_string_GL(pname), (int)bufSize, (void*)params)
+    glatter_glGetInternalformati64v(target, internalformat, pname, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetInternalformati64v_defined
+#endif
+#ifndef glGetObjectLabel_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetObjectLabel, (identifier, name, bufSize, length, label), (GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label))
+void glatter_glGetObjectLabel_debug(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetObjectLabel, "(%s, %u, %d, %p, %p)", enum_to_string_GL(identifier), (unsigned int)name, (int)bufSize, (void*)length, (void*)label)
+    glatter_glGetObjectLabel(identifier, name, bufSize, length, label);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetObjectLabel_defined
+#endif
+#ifndef glGetObjectPtrLabel_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetObjectPtrLabel, (ptr, bufSize, length, label), (const void *ptr, GLsizei bufSize, GLsizei *length, GLchar *label))
+void glatter_glGetObjectPtrLabel_debug(const void *ptr, GLsizei bufSize, GLsizei *length, GLchar *label, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetObjectPtrLabel, "(%p, %d, %p, %p)", (void*)ptr, (int)bufSize, (void*)length, (void*)label)
+    glatter_glGetObjectPtrLabel(ptr, bufSize, length, label);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetObjectPtrLabel_defined
+#endif
+#ifndef glGetProgramInterfaceiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramInterfaceiv, (program, programInterface, pname, params), (GLuint program, GLenum programInterface, GLenum pname, GLint *params))
+void glatter_glGetProgramInterfaceiv_debug(GLuint program, GLenum programInterface, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramInterfaceiv, "(%u, %s, %s, %p)", (unsigned int)program, enum_to_string_GL(programInterface), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetProgramInterfaceiv(program, programInterface, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetProgramInterfaceiv_defined
+#endif
+#ifndef glGetProgramResourceIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLuint, APIENTRY, glGetProgramResourceIndex, (program, programInterface, name), (GLuint program, GLenum programInterface, const GLchar *name))
+GLuint glatter_glGetProgramResourceIndex_debug(GLuint program, GLenum programInterface, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramResourceIndex, "(%u, %s, %p)", (unsigned int)program, enum_to_string_GL(programInterface), (void*)name)
+    GLuint rval = glatter_glGetProgramResourceIndex(program, programInterface, name);
+    GLATTER_RBLOCK("%u\n", (unsigned int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetProgramResourceIndex_defined
+#endif
+#ifndef glGetProgramResourceLocation_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetProgramResourceLocation, (program, programInterface, name), (GLuint program, GLenum programInterface, const GLchar *name))
+GLint glatter_glGetProgramResourceLocation_debug(GLuint program, GLenum programInterface, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramResourceLocation, "(%u, %s, %p)", (unsigned int)program, enum_to_string_GL(programInterface), (void*)name)
+    GLint rval = glatter_glGetProgramResourceLocation(program, programInterface, name);
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetProgramResourceLocation_defined
+#endif
+#ifndef glGetProgramResourceLocationIndex_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLint, APIENTRY, glGetProgramResourceLocationIndex, (program, programInterface, name), (GLuint program, GLenum programInterface, const GLchar *name))
+GLint glatter_glGetProgramResourceLocationIndex_debug(GLuint program, GLenum programInterface, const GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramResourceLocationIndex, "(%u, %s, %p)", (unsigned int)program, enum_to_string_GL(programInterface), (void*)name)
+    GLint rval = glatter_glGetProgramResourceLocationIndex(program, programInterface, name);
+    GLATTER_RBLOCK("%d\n", (int)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetProgramResourceLocationIndex_defined
+#endif
+#ifndef glGetProgramResourceName_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramResourceName, (program, programInterface, index, bufSize, length, name), (GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name))
+void glatter_glGetProgramResourceName_debug(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramResourceName, "(%u, %s, %u, %d, %p, %p)", (unsigned int)program, enum_to_string_GL(programInterface), (unsigned int)index, (int)bufSize, (void*)length, (void*)name)
+    glatter_glGetProgramResourceName(program, programInterface, index, bufSize, length, name);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetProgramResourceName_defined
+#endif
+#ifndef glGetProgramResourceiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetProgramResourceiv, (program, programInterface, index, propCount, props, bufSize, length, params), (GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei bufSize, GLsizei *length, GLint *params))
+void glatter_glGetProgramResourceiv_debug(GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei bufSize, GLsizei *length, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetProgramResourceiv, "(%u, %s, %u, %d, %p, %d, %p, %p)", (unsigned int)program, enum_to_string_GL(programInterface), (unsigned int)index, (int)propCount, (void*)props, (int)bufSize, (void*)length, (void*)params)
+    glatter_glGetProgramResourceiv(program, programInterface, index, propCount, props, bufSize, length, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetProgramResourceiv_defined
+#endif
+#ifndef glInvalidateBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateBufferData, (buffer), (GLuint buffer))
+void glatter_glInvalidateBufferData_debug(GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glInvalidateBufferData, "(%u)", (unsigned int)buffer)
+    glatter_glInvalidateBufferData(buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glInvalidateBufferData_defined
+#endif
+#ifndef glInvalidateBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateBufferSubData, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizeiptr length))
+void glatter_glInvalidateBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizeiptr length, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glInvalidateBufferSubData, "(%u, %td, %td)", (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)length)
+    glatter_glInvalidateBufferSubData(buffer, offset, length);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glInvalidateBufferSubData_defined
+#endif
+#ifndef glInvalidateFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateFramebuffer, (target, numAttachments, attachments), (GLenum target, GLsizei numAttachments, const GLenum *attachments))
+void glatter_glInvalidateFramebuffer_debug(GLenum target, GLsizei numAttachments, const GLenum *attachments, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glInvalidateFramebuffer, "(%s, %d, %p)", enum_to_string_GL(target), (int)numAttachments, (void*)attachments)
+    glatter_glInvalidateFramebuffer(target, numAttachments, attachments);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glInvalidateFramebuffer_defined
+#endif
+#ifndef glInvalidateSubFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateSubFramebuffer, (target, numAttachments, attachments, x, y, width, height), (GLenum target, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glInvalidateSubFramebuffer_debug(GLenum target, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glInvalidateSubFramebuffer, "(%s, %d, %p, %d, %d, %d, %d)", enum_to_string_GL(target), (int)numAttachments, (void*)attachments, (int)x, (int)y, (int)width, (int)height)
+    glatter_glInvalidateSubFramebuffer(target, numAttachments, attachments, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glInvalidateSubFramebuffer_defined
+#endif
+#ifndef glInvalidateTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateTexImage, (texture, level), (GLuint texture, GLint level))
+void glatter_glInvalidateTexImage_debug(GLuint texture, GLint level, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glInvalidateTexImage, "(%u, %d)", (unsigned int)texture, (int)level)
+    glatter_glInvalidateTexImage(texture, level);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glInvalidateTexImage_defined
+#endif
+#ifndef glInvalidateTexSubImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateTexSubImage, (texture, level, xoffset, yoffset, zoffset, width, height, depth), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth))
+void glatter_glInvalidateTexSubImage_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glInvalidateTexSubImage, "(%u, %d, %d, %d, %d, %d, %d, %d)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth)
+    glatter_glInvalidateTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glInvalidateTexSubImage_defined
+#endif
+#ifndef glMultiDrawArraysIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysIndirect, (mode, indirect, drawcount, stride), (GLenum mode, const void *indirect, GLsizei drawcount, GLsizei stride))
+void glatter_glMultiDrawArraysIndirect_debug(GLenum mode, const void *indirect, GLsizei drawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawArraysIndirect, "(%s, %p, %d, %d)", enum_to_string_GL(mode), (void*)indirect, (int)drawcount, (int)stride)
+    glatter_glMultiDrawArraysIndirect(mode, indirect, drawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawArraysIndirect_defined
+#endif
+#ifndef glMultiDrawElementsIndirect_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawElementsIndirect, (mode, type, indirect, drawcount, stride), (GLenum mode, GLenum type, const void *indirect, GLsizei drawcount, GLsizei stride))
+void glatter_glMultiDrawElementsIndirect_debug(GLenum mode, GLenum type, const void *indirect, GLsizei drawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawElementsIndirect, "(%s, %s, %p, %d, %d)", enum_to_string_GL(mode), enum_to_string_GL(type), (void*)indirect, (int)drawcount, (int)stride)
+    glatter_glMultiDrawElementsIndirect(mode, type, indirect, drawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawElementsIndirect_defined
+#endif
+#ifndef glObjectLabel_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glObjectLabel, (identifier, name, length, label), (GLenum identifier, GLuint name, GLsizei length, const GLchar *label))
+void glatter_glObjectLabel_debug(GLenum identifier, GLuint name, GLsizei length, const GLchar *label, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glObjectLabel, "(%s, %u, %d, %p)", enum_to_string_GL(identifier), (unsigned int)name, (int)length, (void*)label)
+    glatter_glObjectLabel(identifier, name, length, label);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glObjectLabel_defined
+#endif
+#ifndef glObjectPtrLabel_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glObjectPtrLabel, (ptr, length, label), (const void *ptr, GLsizei length, const GLchar *label))
+void glatter_glObjectPtrLabel_debug(const void *ptr, GLsizei length, const GLchar *label, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glObjectPtrLabel, "(%p, %d, %p)", (void*)ptr, (int)length, (void*)label)
+    glatter_glObjectPtrLabel(ptr, length, label);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glObjectPtrLabel_defined
+#endif
+#ifndef glPopDebugGroup_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPopDebugGroup, (), (void))
+void glatter_glPopDebugGroup_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPopDebugGroup, "()")
+    glatter_glPopDebugGroup();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPopDebugGroup_defined
+#endif
+#ifndef glPushDebugGroup_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glPushDebugGroup, (source, id, length, message), (GLenum source, GLuint id, GLsizei length, const GLchar *message))
+void glatter_glPushDebugGroup_debug(GLenum source, GLuint id, GLsizei length, const GLchar *message, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glPushDebugGroup, "(%s, %u, %d, %p)", enum_to_string_GL(source), (unsigned int)id, (int)length, (void*)message)
+    glatter_glPushDebugGroup(source, id, length, message);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glPushDebugGroup_defined
+#endif
+#ifndef glShaderStorageBlockBinding_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShaderStorageBlockBinding, (program, storageBlockIndex, storageBlockBinding), (GLuint program, GLuint storageBlockIndex, GLuint storageBlockBinding))
+void glatter_glShaderStorageBlockBinding_debug(GLuint program, GLuint storageBlockIndex, GLuint storageBlockBinding, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glShaderStorageBlockBinding, "(%u, %u, %u)", (unsigned int)program, (unsigned int)storageBlockIndex, (unsigned int)storageBlockBinding)
+    glatter_glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glShaderStorageBlockBinding_defined
+#endif
+#ifndef glTexBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexBufferRange, (target, internalformat, buffer, offset, size), (GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size))
+void glatter_glTexBufferRange_debug(GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexBufferRange, "(%s, %s, %u, %td, %td)", enum_to_string_GL(target), enum_to_string_GL(internalformat), (unsigned int)buffer, (ptrdiff_t)offset, (ptrdiff_t)size)
+    glatter_glTexBufferRange(target, internalformat, buffer, offset, size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexBufferRange_defined
+#endif
+#ifndef glTexStorage2DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage2DMultisample, (target, samples, internalformat, width, height, fixedsamplelocations), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
+void glatter_glTexStorage2DMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorage2DMultisample, "(%s, %d, %s, %d, %d, %u)", enum_to_string_GL(target), (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height, (unsigned char)fixedsamplelocations)
+    glatter_glTexStorage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorage2DMultisample_defined
+#endif
+#ifndef glTexStorage3DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTexStorage3DMultisample, (target, samples, internalformat, width, height, depth, fixedsamplelocations), (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
+void glatter_glTexStorage3DMultisample_debug(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTexStorage3DMultisample, "(%s, %d, %s, %d, %d, %d, %u)", enum_to_string_GL(target), (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth, (unsigned char)fixedsamplelocations)
+    glatter_glTexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTexStorage3DMultisample_defined
+#endif
+#ifndef glTextureView_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureView, (texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers), (GLuint texture, GLenum target, GLuint origtexture, GLenum internalformat, GLuint minlevel, GLuint numlevels, GLuint minlayer, GLuint numlayers))
+void glatter_glTextureView_debug(GLuint texture, GLenum target, GLuint origtexture, GLenum internalformat, GLuint minlevel, GLuint numlevels, GLuint minlayer, GLuint numlayers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureView, "(%u, %s, %u, %s, %u, %u, %u, %u)", (unsigned int)texture, enum_to_string_GL(target), (unsigned int)origtexture, enum_to_string_GL(internalformat), (unsigned int)minlevel, (unsigned int)numlevels, (unsigned int)minlayer, (unsigned int)numlayers)
+    glatter_glTextureView(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureView_defined
+#endif
+#ifndef glVertexAttribBinding_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribBinding, (attribindex, bindingindex), (GLuint attribindex, GLuint bindingindex))
+void glatter_glVertexAttribBinding_debug(GLuint attribindex, GLuint bindingindex, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribBinding, "(%u, %u)", (unsigned int)attribindex, (unsigned int)bindingindex)
+    glatter_glVertexAttribBinding(attribindex, bindingindex);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribBinding_defined
+#endif
+#ifndef glVertexAttribFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribFormat, (attribindex, size, type, normalized, relativeoffset), (GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset))
+void glatter_glVertexAttribFormat_debug(GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribFormat, "(%u, %d, %s, %u, %u)", (unsigned int)attribindex, (int)size, enum_to_string_GL(type), (unsigned char)normalized, (unsigned int)relativeoffset)
+    glatter_glVertexAttribFormat(attribindex, size, type, normalized, relativeoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribFormat_defined
+#endif
+#ifndef glVertexAttribIFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribIFormat, (attribindex, size, type, relativeoffset), (GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+void glatter_glVertexAttribIFormat_debug(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribIFormat, "(%u, %d, %s, %u)", (unsigned int)attribindex, (int)size, enum_to_string_GL(type), (unsigned int)relativeoffset)
+    glatter_glVertexAttribIFormat(attribindex, size, type, relativeoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribIFormat_defined
+#endif
+#ifndef glVertexAttribLFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexAttribLFormat, (attribindex, size, type, relativeoffset), (GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+void glatter_glVertexAttribLFormat_debug(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexAttribLFormat, "(%u, %d, %s, %u)", (unsigned int)attribindex, (int)size, enum_to_string_GL(type), (unsigned int)relativeoffset)
+    glatter_glVertexAttribLFormat(attribindex, size, type, relativeoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexAttribLFormat_defined
+#endif
+#ifndef glVertexBindingDivisor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexBindingDivisor, (bindingindex, divisor), (GLuint bindingindex, GLuint divisor))
+void glatter_glVertexBindingDivisor_debug(GLuint bindingindex, GLuint divisor, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexBindingDivisor, "(%u, %u)", (unsigned int)bindingindex, (unsigned int)divisor)
+    glatter_glVertexBindingDivisor(bindingindex, divisor);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexBindingDivisor_defined
+#endif
+#endif // defined(GL_VERSION_4_3)
+#if defined(GL_VERSION_4_4)
+#ifndef glBindBuffersBase_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBuffersBase, (target, first, count, buffers), (GLenum target, GLuint first, GLsizei count, const GLuint *buffers))
+void glatter_glBindBuffersBase_debug(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindBuffersBase, "(%s, %u, %d, %p)", enum_to_string_GL(target), (unsigned int)first, (int)count, (void*)buffers)
+    glatter_glBindBuffersBase(target, first, count, buffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindBuffersBase_defined
+#endif
+#ifndef glBindBuffersRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindBuffersRange, (target, first, count, buffers, offsets, sizes), (GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes))
+void glatter_glBindBuffersRange_debug(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindBuffersRange, "(%s, %u, %d, %p, %p, %p)", enum_to_string_GL(target), (unsigned int)first, (int)count, (void*)buffers, (void*)offsets, (void*)sizes)
+    glatter_glBindBuffersRange(target, first, count, buffers, offsets, sizes);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindBuffersRange_defined
+#endif
+#ifndef glBindImageTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindImageTextures, (first, count, textures), (GLuint first, GLsizei count, const GLuint *textures))
+void glatter_glBindImageTextures_debug(GLuint first, GLsizei count, const GLuint *textures, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindImageTextures, "(%u, %d, %p)", (unsigned int)first, (int)count, (void*)textures)
+    glatter_glBindImageTextures(first, count, textures);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindImageTextures_defined
+#endif
+#ifndef glBindSamplers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindSamplers, (first, count, samplers), (GLuint first, GLsizei count, const GLuint *samplers))
+void glatter_glBindSamplers_debug(GLuint first, GLsizei count, const GLuint *samplers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindSamplers, "(%u, %d, %p)", (unsigned int)first, (int)count, (void*)samplers)
+    glatter_glBindSamplers(first, count, samplers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindSamplers_defined
+#endif
+#ifndef glBindTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindTextures, (first, count, textures), (GLuint first, GLsizei count, const GLuint *textures))
+void glatter_glBindTextures_debug(GLuint first, GLsizei count, const GLuint *textures, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindTextures, "(%u, %d, %p)", (unsigned int)first, (int)count, (void*)textures)
+    glatter_glBindTextures(first, count, textures);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindTextures_defined
+#endif
+#ifndef glBindVertexBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindVertexBuffers, (first, count, buffers, offsets, strides), (GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides))
+void glatter_glBindVertexBuffers_debug(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindVertexBuffers, "(%u, %d, %p, %p, %p)", (unsigned int)first, (int)count, (void*)buffers, (void*)offsets, (void*)strides)
+    glatter_glBindVertexBuffers(first, count, buffers, offsets, strides);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindVertexBuffers_defined
+#endif
+#ifndef glBufferStorage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBufferStorage, (target, size, data, flags), (GLenum target, GLsizeiptr size, const void *data, GLbitfield flags))
+void glatter_glBufferStorage_debug(GLenum target, GLsizeiptr size, const void *data, GLbitfield flags, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBufferStorage, "(%s, %td, %p, %u)", enum_to_string_GL(target), (ptrdiff_t)size, (void*)data, (unsigned int)flags)
+    glatter_glBufferStorage(target, size, data, flags);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBufferStorage_defined
+#endif
+#ifndef glClearTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearTexImage, (texture, level, format, type, data), (GLuint texture, GLint level, GLenum format, GLenum type, const void *data))
+void glatter_glClearTexImage_debug(GLuint texture, GLint level, GLenum format, GLenum type, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearTexImage, "(%u, %d, %s, %s, %p)", (unsigned int)texture, (int)level, enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
+    glatter_glClearTexImage(texture, level, format, type, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearTexImage_defined
+#endif
+#ifndef glClearTexSubImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearTexSubImage, (texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *data))
+void glatter_glClearTexSubImage_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearTexSubImage, "(%u, %d, %d, %d, %d, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
+    glatter_glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearTexSubImage_defined
+#endif
+#endif // defined(GL_VERSION_4_4)
+#if defined(GL_VERSION_4_5)
+#ifndef glBindTextureUnit_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBindTextureUnit, (unit, texture), (GLuint unit, GLuint texture))
+void glatter_glBindTextureUnit_debug(GLuint unit, GLuint texture, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBindTextureUnit, "(%u, %u)", (unsigned int)unit, (unsigned int)texture)
+    glatter_glBindTextureUnit(unit, texture);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBindTextureUnit_defined
+#endif
+#ifndef glBlitNamedFramebuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlitNamedFramebuffer, (readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLuint readFramebuffer, GLuint drawFramebuffer, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
+void glatter_glBlitNamedFramebuffer_debug(GLuint readFramebuffer, GLuint drawFramebuffer, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glBlitNamedFramebuffer, "(%u, %u, %d, %d, %d, %d, %d, %d, %d, %d, %u, %s)", (unsigned int)readFramebuffer, (unsigned int)drawFramebuffer, (int)srcX0, (int)srcY0, (int)srcX1, (int)srcY1, (int)dstX0, (int)dstY0, (int)dstX1, (int)dstY1, (unsigned int)mask, enum_to_string_GL(filter))
+    glatter_glBlitNamedFramebuffer(readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glBlitNamedFramebuffer_defined
+#endif
+#ifndef glCheckNamedFramebufferStatus_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glCheckNamedFramebufferStatus, (framebuffer, target), (GLuint framebuffer, GLenum target))
+GLenum glatter_glCheckNamedFramebufferStatus_debug(GLuint framebuffer, GLenum target, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCheckNamedFramebufferStatus, "(%u, %s)", (unsigned int)framebuffer, enum_to_string_GL(target))
+    GLenum rval = glatter_glCheckNamedFramebufferStatus(framebuffer, target);
+    GLATTER_RBLOCK("%s\n", enum_to_string_GL(rval));
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glCheckNamedFramebufferStatus_defined
+#endif
+#ifndef glClearNamedBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferData, (buffer, internalformat, format, type, data), (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data))
+void glatter_glClearNamedBufferData_debug(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearNamedBufferData, "(%u, %s, %s, %s, %p)", (unsigned int)buffer, enum_to_string_GL(internalformat), enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
+    glatter_glClearNamedBufferData(buffer, internalformat, format, type, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearNamedBufferData_defined
+#endif
+#ifndef glClearNamedBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedBufferSubData, (buffer, internalformat, offset, size, format, type, data), (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizei size, GLenum format, GLenum type, const void *data))
+void glatter_glClearNamedBufferSubData_debug(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizei size, GLenum format, GLenum type, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearNamedBufferSubData, "(%u, %s, %td, %d, %s, %s, %p)", (unsigned int)buffer, enum_to_string_GL(internalformat), (ptrdiff_t)offset, (int)size, enum_to_string_GL(format), enum_to_string_GL(type), (void*)data)
+    glatter_glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearNamedBufferSubData_defined
+#endif
+#ifndef glClearNamedFramebufferfi_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferfi, (framebuffer, buffer, depth, stencil), (GLuint framebuffer, GLenum buffer, const GLfloat depth, GLint stencil))
+void glatter_glClearNamedFramebufferfi_debug(GLuint framebuffer, GLenum buffer, const GLfloat depth, GLint stencil, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearNamedFramebufferfi, "(%u, %s, %s, %d)", (unsigned int)framebuffer, enum_to_string_GL(buffer), GET_PRS(depth), (int)stencil)
+    glatter_glClearNamedFramebufferfi(framebuffer, buffer, depth, stencil);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearNamedFramebufferfi_defined
+#endif
+#ifndef glClearNamedFramebufferfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferfv, (framebuffer, buffer, drawbuffer, value), (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLfloat *value))
+void glatter_glClearNamedFramebufferfv_debug(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLfloat *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearNamedFramebufferfv, "(%u, %s, %d, %p)", (unsigned int)framebuffer, enum_to_string_GL(buffer), (int)drawbuffer, (void*)value)
+    glatter_glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearNamedFramebufferfv_defined
+#endif
+#ifndef glClearNamedFramebufferiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferiv, (framebuffer, buffer, drawbuffer, value), (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLint *value))
+void glatter_glClearNamedFramebufferiv_debug(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearNamedFramebufferiv, "(%u, %s, %d, %p)", (unsigned int)framebuffer, enum_to_string_GL(buffer), (int)drawbuffer, (void*)value)
+    glatter_glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearNamedFramebufferiv_defined
+#endif
+#ifndef glClearNamedFramebufferuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClearNamedFramebufferuiv, (framebuffer, buffer, drawbuffer, value), (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLuint *value))
+void glatter_glClearNamedFramebufferuiv_debug(GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLuint *value, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClearNamedFramebufferuiv, "(%u, %s, %d, %p)", (unsigned int)framebuffer, enum_to_string_GL(buffer), (int)drawbuffer, (void*)value)
+    glatter_glClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClearNamedFramebufferuiv_defined
+#endif
+#ifndef glClipControl_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glClipControl, (origin, depth), (GLenum origin, GLenum depth))
+void glatter_glClipControl_debug(GLenum origin, GLenum depth, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glClipControl, "(%s, %s)", enum_to_string_GL(origin), enum_to_string_GL(depth))
+    glatter_glClipControl(origin, depth);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glClipControl_defined
+#endif
+#ifndef glCompressedTextureSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage1D, (texture, level, xoffset, width, format, imageSize, data), (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data))
+void glatter_glCompressedTextureSubImage1D_debug(GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTextureSubImage1D, "(%u, %d, %d, %d, %s, %d, %p)", (unsigned int)texture, (int)level, (int)xoffset, (int)width, enum_to_string_GL(format), (int)imageSize, (void*)data)
+    glatter_glCompressedTextureSubImage1D(texture, level, xoffset, width, format, imageSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTextureSubImage1D_defined
+#endif
+#ifndef glCompressedTextureSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage2D, (texture, level, xoffset, yoffset, width, height, format, imageSize, data), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data))
+void glatter_glCompressedTextureSubImage2D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTextureSubImage2D, "(%u, %d, %d, %d, %d, %d, %s, %d, %p)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)width, (int)height, enum_to_string_GL(format), (int)imageSize, (void*)data)
+    glatter_glCompressedTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, imageSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTextureSubImage2D_defined
+#endif
+#ifndef glCompressedTextureSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCompressedTextureSubImage3D, (texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data))
+void glatter_glCompressedTextureSubImage3D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCompressedTextureSubImage3D, "(%u, %d, %d, %d, %d, %d, %d, %d, %s, %d, %p)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), (int)imageSize, (void*)data)
+    glatter_glCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCompressedTextureSubImage3D_defined
+#endif
+#ifndef glCopyNamedBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyNamedBufferSubData, (readBuffer, writeBuffer, readOffset, writeOffset, size), (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizei size))
+void glatter_glCopyNamedBufferSubData_debug(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizei size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyNamedBufferSubData, "(%u, %u, %td, %td, %d)", (unsigned int)readBuffer, (unsigned int)writeBuffer, (ptrdiff_t)readOffset, (ptrdiff_t)writeOffset, (int)size)
+    glatter_glCopyNamedBufferSubData(readBuffer, writeBuffer, readOffset, writeOffset, size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyNamedBufferSubData_defined
+#endif
+#ifndef glCopyTextureSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage1D, (texture, level, xoffset, x, y, width), (GLuint texture, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width))
+void glatter_glCopyTextureSubImage1D_debug(GLuint texture, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTextureSubImage1D, "(%u, %d, %d, %d, %d, %d)", (unsigned int)texture, (int)level, (int)xoffset, (int)x, (int)y, (int)width)
+    glatter_glCopyTextureSubImage1D(texture, level, xoffset, x, y, width);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTextureSubImage1D_defined
+#endif
+#ifndef glCopyTextureSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage2D, (texture, level, xoffset, yoffset, x, y, width, height), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glCopyTextureSubImage2D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTextureSubImage2D, "(%u, %d, %d, %d, %d, %d, %d, %d)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)x, (int)y, (int)width, (int)height)
+    glatter_glCopyTextureSubImage2D(texture, level, xoffset, yoffset, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTextureSubImage2D_defined
+#endif
+#ifndef glCopyTextureSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCopyTextureSubImage3D, (texture, level, xoffset, yoffset, zoffset, x, y, width, height), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glCopyTextureSubImage3D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCopyTextureSubImage3D, "(%u, %d, %d, %d, %d, %d, %d, %d, %d)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)x, (int)y, (int)width, (int)height)
+    glatter_glCopyTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCopyTextureSubImage3D_defined
+#endif
+#ifndef glCreateBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateBuffers, (n, buffers), (GLsizei n, GLuint *buffers))
+void glatter_glCreateBuffers_debug(GLsizei n, GLuint *buffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateBuffers, "(%d, %p)", (int)n, (void*)buffers)
+    glatter_glCreateBuffers(n, buffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateBuffers_defined
+#endif
+#ifndef glCreateFramebuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateFramebuffers, (n, framebuffers), (GLsizei n, GLuint *framebuffers))
+void glatter_glCreateFramebuffers_debug(GLsizei n, GLuint *framebuffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateFramebuffers, "(%d, %p)", (int)n, (void*)framebuffers)
+    glatter_glCreateFramebuffers(n, framebuffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateFramebuffers_defined
+#endif
+#ifndef glCreateProgramPipelines_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateProgramPipelines, (n, pipelines), (GLsizei n, GLuint *pipelines))
+void glatter_glCreateProgramPipelines_debug(GLsizei n, GLuint *pipelines, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateProgramPipelines, "(%d, %p)", (int)n, (void*)pipelines)
+    glatter_glCreateProgramPipelines(n, pipelines);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateProgramPipelines_defined
+#endif
+#ifndef glCreateQueries_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateQueries, (target, n, ids), (GLenum target, GLsizei n, GLuint *ids))
+void glatter_glCreateQueries_debug(GLenum target, GLsizei n, GLuint *ids, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateQueries, "(%s, %d, %p)", enum_to_string_GL(target), (int)n, (void*)ids)
+    glatter_glCreateQueries(target, n, ids);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateQueries_defined
+#endif
+#ifndef glCreateRenderbuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateRenderbuffers, (n, renderbuffers), (GLsizei n, GLuint *renderbuffers))
+void glatter_glCreateRenderbuffers_debug(GLsizei n, GLuint *renderbuffers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateRenderbuffers, "(%d, %p)", (int)n, (void*)renderbuffers)
+    glatter_glCreateRenderbuffers(n, renderbuffers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateRenderbuffers_defined
+#endif
+#ifndef glCreateSamplers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateSamplers, (n, samplers), (GLsizei n, GLuint *samplers))
+void glatter_glCreateSamplers_debug(GLsizei n, GLuint *samplers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateSamplers, "(%d, %p)", (int)n, (void*)samplers)
+    glatter_glCreateSamplers(n, samplers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateSamplers_defined
+#endif
+#ifndef glCreateTextures_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateTextures, (target, n, textures), (GLenum target, GLsizei n, GLuint *textures))
+void glatter_glCreateTextures_debug(GLenum target, GLsizei n, GLuint *textures, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateTextures, "(%s, %d, %p)", enum_to_string_GL(target), (int)n, (void*)textures)
+    glatter_glCreateTextures(target, n, textures);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateTextures_defined
+#endif
+#ifndef glCreateTransformFeedbacks_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateTransformFeedbacks, (n, ids), (GLsizei n, GLuint *ids))
+void glatter_glCreateTransformFeedbacks_debug(GLsizei n, GLuint *ids, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateTransformFeedbacks, "(%d, %p)", (int)n, (void*)ids)
+    glatter_glCreateTransformFeedbacks(n, ids);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateTransformFeedbacks_defined
+#endif
+#ifndef glCreateVertexArrays_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glCreateVertexArrays, (n, arrays), (GLsizei n, GLuint *arrays))
+void glatter_glCreateVertexArrays_debug(GLsizei n, GLuint *arrays, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glCreateVertexArrays, "(%d, %p)", (int)n, (void*)arrays)
+    glatter_glCreateVertexArrays(n, arrays);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glCreateVertexArrays_defined
+#endif
+#ifndef glDisableVertexArrayAttrib_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDisableVertexArrayAttrib, (vaobj, index), (GLuint vaobj, GLuint index))
+void glatter_glDisableVertexArrayAttrib_debug(GLuint vaobj, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDisableVertexArrayAttrib, "(%u, %u)", (unsigned int)vaobj, (unsigned int)index)
+    glatter_glDisableVertexArrayAttrib(vaobj, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDisableVertexArrayAttrib_defined
+#endif
+#ifndef glEnableVertexArrayAttrib_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEnableVertexArrayAttrib, (vaobj, index), (GLuint vaobj, GLuint index))
+void glatter_glEnableVertexArrayAttrib_debug(GLuint vaobj, GLuint index, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glEnableVertexArrayAttrib, "(%u, %u)", (unsigned int)vaobj, (unsigned int)index)
+    glatter_glEnableVertexArrayAttrib(vaobj, index);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glEnableVertexArrayAttrib_defined
+#endif
+#ifndef glFlushMappedNamedBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFlushMappedNamedBufferRange, (buffer, offset, length), (GLuint buffer, GLintptr offset, GLsizei length))
+void glatter_glFlushMappedNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizei length, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFlushMappedNamedBufferRange, "(%u, %td, %d)", (unsigned int)buffer, (ptrdiff_t)offset, (int)length)
+    glatter_glFlushMappedNamedBufferRange(buffer, offset, length);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFlushMappedNamedBufferRange_defined
+#endif
+#ifndef glGenerateTextureMipmap_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGenerateTextureMipmap, (texture), (GLuint texture))
+void glatter_glGenerateTextureMipmap_debug(GLuint texture, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGenerateTextureMipmap, "(%u)", (unsigned int)texture)
+    glatter_glGenerateTextureMipmap(texture);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGenerateTextureMipmap_defined
+#endif
+#ifndef glGetCompressedTextureImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTextureImage, (texture, level, bufSize, pixels), (GLuint texture, GLint level, GLsizei bufSize, void *pixels))
+void glatter_glGetCompressedTextureImage_debug(GLuint texture, GLint level, GLsizei bufSize, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetCompressedTextureImage, "(%u, %d, %d, %p)", (unsigned int)texture, (int)level, (int)bufSize, (void*)pixels)
+    glatter_glGetCompressedTextureImage(texture, level, bufSize, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetCompressedTextureImage_defined
+#endif
+#ifndef glGetCompressedTextureSubImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetCompressedTextureSubImage, (texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels))
+void glatter_glGetCompressedTextureSubImage_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetCompressedTextureSubImage, "(%u, %d, %d, %d, %d, %d, %d, %d, %d, %p)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, (int)bufSize, (void*)pixels)
+    glatter_glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetCompressedTextureSubImage_defined
+#endif
+#ifndef glGetGraphicsResetStatus_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLenum, APIENTRY, glGetGraphicsResetStatus, (), (void))
+GLenum glatter_glGetGraphicsResetStatus_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetGraphicsResetStatus, "()")
+    GLenum rval = glatter_glGetGraphicsResetStatus();
+    GLATTER_RBLOCK("%s\n", enum_to_string_GL(rval));
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glGetGraphicsResetStatus_defined
+#endif
+#ifndef glGetNamedBufferParameteri64v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameteri64v, (buffer, pname, params), (GLuint buffer, GLenum pname, GLint64 *params))
+void glatter_glGetNamedBufferParameteri64v_debug(GLuint buffer, GLenum pname, GLint64 *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedBufferParameteri64v, "(%u, %s, %p)", (unsigned int)buffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedBufferParameteri64v(buffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedBufferParameteri64v_defined
+#endif
+#ifndef glGetNamedBufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferParameteriv, (buffer, pname, params), (GLuint buffer, GLenum pname, GLint *params))
+void glatter_glGetNamedBufferParameteriv_debug(GLuint buffer, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedBufferParameteriv, "(%u, %s, %p)", (unsigned int)buffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedBufferParameteriv(buffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedBufferParameteriv_defined
+#endif
+#ifndef glGetNamedBufferPointerv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferPointerv, (buffer, pname, params), (GLuint buffer, GLenum pname, void **params))
+void glatter_glGetNamedBufferPointerv_debug(GLuint buffer, GLenum pname, void **params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedBufferPointerv, "(%u, %s, %p)", (unsigned int)buffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedBufferPointerv(buffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedBufferPointerv_defined
+#endif
+#ifndef glGetNamedBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizei size, void *data))
+void glatter_glGetNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizei size, void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedBufferSubData, "(%u, %td, %d, %p)", (unsigned int)buffer, (ptrdiff_t)offset, (int)size, (void*)data)
+    glatter_glGetNamedBufferSubData(buffer, offset, size, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedBufferSubData_defined
+#endif
+#ifndef glGetNamedFramebufferAttachmentParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferAttachmentParameteriv, (framebuffer, attachment, pname, params), (GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params))
+void glatter_glGetNamedFramebufferAttachmentParameteriv_debug(GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedFramebufferAttachmentParameteriv, "(%u, %s, %s, %p)", (unsigned int)framebuffer, enum_to_string_GL(attachment), enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedFramebufferAttachmentParameteriv_defined
+#endif
+#ifndef glGetNamedFramebufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedFramebufferParameteriv, (framebuffer, pname, param), (GLuint framebuffer, GLenum pname, GLint *param))
+void glatter_glGetNamedFramebufferParameteriv_debug(GLuint framebuffer, GLenum pname, GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedFramebufferParameteriv, "(%u, %s, %p)", (unsigned int)framebuffer, enum_to_string_GL(pname), (void*)param)
+    glatter_glGetNamedFramebufferParameteriv(framebuffer, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedFramebufferParameteriv_defined
+#endif
+#ifndef glGetNamedRenderbufferParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetNamedRenderbufferParameteriv, (renderbuffer, pname, params), (GLuint renderbuffer, GLenum pname, GLint *params))
+void glatter_glGetNamedRenderbufferParameteriv_debug(GLuint renderbuffer, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetNamedRenderbufferParameteriv, "(%u, %s, %p)", (unsigned int)renderbuffer, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetNamedRenderbufferParameteriv(renderbuffer, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetNamedRenderbufferParameteriv_defined
+#endif
+#ifndef glGetTextureImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureImage, (texture, level, format, type, bufSize, pixels), (GLuint texture, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels))
+void glatter_glGetTextureImage_debug(GLuint texture, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureImage, "(%u, %d, %s, %s, %d, %p)", (unsigned int)texture, (int)level, enum_to_string_GL(format), enum_to_string_GL(type), (int)bufSize, (void*)pixels)
+    glatter_glGetTextureImage(texture, level, format, type, bufSize, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureImage_defined
+#endif
+#ifndef glGetTextureLevelParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameterfv, (texture, level, pname, params), (GLuint texture, GLint level, GLenum pname, GLfloat *params))
+void glatter_glGetTextureLevelParameterfv_debug(GLuint texture, GLint level, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureLevelParameterfv, "(%u, %d, %s, %p)", (unsigned int)texture, (int)level, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureLevelParameterfv(texture, level, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureLevelParameterfv_defined
+#endif
+#ifndef glGetTextureLevelParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureLevelParameteriv, (texture, level, pname, params), (GLuint texture, GLint level, GLenum pname, GLint *params))
+void glatter_glGetTextureLevelParameteriv_debug(GLuint texture, GLint level, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureLevelParameteriv, "(%u, %d, %s, %p)", (unsigned int)texture, (int)level, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureLevelParameteriv(texture, level, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureLevelParameteriv_defined
+#endif
+#ifndef glGetTextureParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIiv, (texture, pname, params), (GLuint texture, GLenum pname, GLint *params))
+void glatter_glGetTextureParameterIiv_debug(GLuint texture, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureParameterIiv, "(%u, %s, %p)", (unsigned int)texture, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureParameterIiv(texture, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureParameterIiv_defined
+#endif
+#ifndef glGetTextureParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterIuiv, (texture, pname, params), (GLuint texture, GLenum pname, GLuint *params))
+void glatter_glGetTextureParameterIuiv_debug(GLuint texture, GLenum pname, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureParameterIuiv, "(%u, %s, %p)", (unsigned int)texture, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureParameterIuiv(texture, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureParameterIuiv_defined
+#endif
+#ifndef glGetTextureParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameterfv, (texture, pname, params), (GLuint texture, GLenum pname, GLfloat *params))
+void glatter_glGetTextureParameterfv_debug(GLuint texture, GLenum pname, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureParameterfv, "(%u, %s, %p)", (unsigned int)texture, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureParameterfv(texture, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureParameterfv_defined
+#endif
+#ifndef glGetTextureParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureParameteriv, (texture, pname, params), (GLuint texture, GLenum pname, GLint *params))
+void glatter_glGetTextureParameteriv_debug(GLuint texture, GLenum pname, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureParameteriv, "(%u, %s, %p)", (unsigned int)texture, enum_to_string_GL(pname), (void*)params)
+    glatter_glGetTextureParameteriv(texture, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureParameteriv_defined
+#endif
+#ifndef glGetTextureSubImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTextureSubImage, (texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, bufSize, pixels), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLsizei bufSize, void *pixels))
+void glatter_glGetTextureSubImage_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLsizei bufSize, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTextureSubImage, "(%u, %d, %d, %d, %d, %d, %d, %d, %s, %s, %d, %p)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), enum_to_string_GL(type), (int)bufSize, (void*)pixels)
+    glatter_glGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, bufSize, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTextureSubImage_defined
+#endif
+#ifndef glGetTransformFeedbacki64_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTransformFeedbacki64_v, (xfb, pname, index, param), (GLuint xfb, GLenum pname, GLuint index, GLint64 *param))
+void glatter_glGetTransformFeedbacki64_v_debug(GLuint xfb, GLenum pname, GLuint index, GLint64 *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTransformFeedbacki64_v, "(%u, %s, %u, %p)", (unsigned int)xfb, enum_to_string_GL(pname), (unsigned int)index, (void*)param)
+    glatter_glGetTransformFeedbacki64_v(xfb, pname, index, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTransformFeedbacki64_v_defined
+#endif
+#ifndef glGetTransformFeedbacki_v_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTransformFeedbacki_v, (xfb, pname, index, param), (GLuint xfb, GLenum pname, GLuint index, GLint *param))
+void glatter_glGetTransformFeedbacki_v_debug(GLuint xfb, GLenum pname, GLuint index, GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTransformFeedbacki_v, "(%u, %s, %u, %p)", (unsigned int)xfb, enum_to_string_GL(pname), (unsigned int)index, (void*)param)
+    glatter_glGetTransformFeedbacki_v(xfb, pname, index, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTransformFeedbacki_v_defined
+#endif
+#ifndef glGetTransformFeedbackiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetTransformFeedbackiv, (xfb, pname, param), (GLuint xfb, GLenum pname, GLint *param))
+void glatter_glGetTransformFeedbackiv_debug(GLuint xfb, GLenum pname, GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetTransformFeedbackiv, "(%u, %s, %p)", (unsigned int)xfb, enum_to_string_GL(pname), (void*)param)
+    glatter_glGetTransformFeedbackiv(xfb, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetTransformFeedbackiv_defined
+#endif
+#ifndef glGetVertexArrayIndexed64iv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIndexed64iv, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, GLint64 *param))
+void glatter_glGetVertexArrayIndexed64iv_debug(GLuint vaobj, GLuint index, GLenum pname, GLint64 *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexArrayIndexed64iv, "(%u, %u, %s, %p)", (unsigned int)vaobj, (unsigned int)index, enum_to_string_GL(pname), (void*)param)
+    glatter_glGetVertexArrayIndexed64iv(vaobj, index, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexArrayIndexed64iv_defined
+#endif
+#ifndef glGetVertexArrayIndexediv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayIndexediv, (vaobj, index, pname, param), (GLuint vaobj, GLuint index, GLenum pname, GLint *param))
+void glatter_glGetVertexArrayIndexediv_debug(GLuint vaobj, GLuint index, GLenum pname, GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexArrayIndexediv, "(%u, %u, %s, %p)", (unsigned int)vaobj, (unsigned int)index, enum_to_string_GL(pname), (void*)param)
+    glatter_glGetVertexArrayIndexediv(vaobj, index, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexArrayIndexediv_defined
+#endif
+#ifndef glGetVertexArrayiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetVertexArrayiv, (vaobj, pname, param), (GLuint vaobj, GLenum pname, GLint *param))
+void glatter_glGetVertexArrayiv_debug(GLuint vaobj, GLenum pname, GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetVertexArrayiv, "(%u, %s, %p)", (unsigned int)vaobj, enum_to_string_GL(pname), (void*)param)
+    glatter_glGetVertexArrayiv(vaobj, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetVertexArrayiv_defined
+#endif
+#ifndef glGetnCompressedTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnCompressedTexImage, (target, lod, bufSize, pixels), (GLenum target, GLint lod, GLsizei bufSize, void *pixels))
+void glatter_glGetnCompressedTexImage_debug(GLenum target, GLint lod, GLsizei bufSize, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnCompressedTexImage, "(%s, %d, %d, %p)", enum_to_string_GL(target), (int)lod, (int)bufSize, (void*)pixels)
+    glatter_glGetnCompressedTexImage(target, lod, bufSize, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnCompressedTexImage_defined
+#endif
+#ifndef glGetnTexImage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnTexImage, (target, level, format, type, bufSize, pixels), (GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels))
+void glatter_glGetnTexImage_debug(GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnTexImage, "(%s, %d, %s, %s, %d, %p)", enum_to_string_GL(target), (int)level, enum_to_string_GL(format), enum_to_string_GL(type), (int)bufSize, (void*)pixels)
+    glatter_glGetnTexImage(target, level, format, type, bufSize, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnTexImage_defined
+#endif
+#ifndef glGetnUniformdv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformdv, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLdouble *params))
+void glatter_glGetnUniformdv_debug(GLuint program, GLint location, GLsizei bufSize, GLdouble *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformdv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformdv(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformdv_defined
+#endif
+#ifndef glGetnUniformfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformfv, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLfloat *params))
+void glatter_glGetnUniformfv_debug(GLuint program, GLint location, GLsizei bufSize, GLfloat *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformfv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformfv(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformfv_defined
+#endif
+#ifndef glGetnUniformiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformiv, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLint *params))
+void glatter_glGetnUniformiv_debug(GLuint program, GLint location, GLsizei bufSize, GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformiv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformiv(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformiv_defined
+#endif
+#ifndef glGetnUniformuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetnUniformuiv, (program, location, bufSize, params), (GLuint program, GLint location, GLsizei bufSize, GLuint *params))
+void glatter_glGetnUniformuiv_debug(GLuint program, GLint location, GLsizei bufSize, GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetnUniformuiv, "(%u, %d, %d, %p)", (unsigned int)program, (int)location, (int)bufSize, (void*)params)
+    glatter_glGetnUniformuiv(program, location, bufSize, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetnUniformuiv_defined
+#endif
+#ifndef glInvalidateNamedFramebufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateNamedFramebufferData, (framebuffer, numAttachments, attachments), (GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments))
+void glatter_glInvalidateNamedFramebufferData_debug(GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glInvalidateNamedFramebufferData, "(%u, %d, %p)", (unsigned int)framebuffer, (int)numAttachments, (void*)attachments)
+    glatter_glInvalidateNamedFramebufferData(framebuffer, numAttachments, attachments);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glInvalidateNamedFramebufferData_defined
+#endif
+#ifndef glInvalidateNamedFramebufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glInvalidateNamedFramebufferSubData, (framebuffer, numAttachments, attachments, x, y, width, height), (GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height))
+void glatter_glInvalidateNamedFramebufferSubData_debug(GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glInvalidateNamedFramebufferSubData, "(%u, %d, %p, %d, %d, %d, %d)", (unsigned int)framebuffer, (int)numAttachments, (void*)attachments, (int)x, (int)y, (int)width, (int)height)
+    glatter_glInvalidateNamedFramebufferSubData(framebuffer, numAttachments, attachments, x, y, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glInvalidateNamedFramebufferSubData_defined
+#endif
+#ifndef glMapNamedBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBuffer, (buffer, access), (GLuint buffer, GLenum access))
+void * glatter_glMapNamedBuffer_debug(GLuint buffer, GLenum access, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMapNamedBuffer, "(%u, %s)", (unsigned int)buffer, enum_to_string_GL(access))
+    void * rval = glatter_glMapNamedBuffer(buffer, access);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glMapNamedBuffer_defined
+#endif
+#ifndef glMapNamedBufferRange_defined
+GLATTER_FBLOCK(return, GL, GLAPI, void *, APIENTRY, glMapNamedBufferRange, (buffer, offset, length, access), (GLuint buffer, GLintptr offset, GLsizei length, GLbitfield access))
+void * glatter_glMapNamedBufferRange_debug(GLuint buffer, GLintptr offset, GLsizei length, GLbitfield access, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMapNamedBufferRange, "(%u, %td, %d, %u)", (unsigned int)buffer, (ptrdiff_t)offset, (int)length, (unsigned int)access)
+    void * rval = glatter_glMapNamedBufferRange(buffer, offset, length, access);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glMapNamedBufferRange_defined
+#endif
+#ifndef glMemoryBarrierByRegion_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMemoryBarrierByRegion, (barriers), (GLbitfield barriers))
+void glatter_glMemoryBarrierByRegion_debug(GLbitfield barriers, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMemoryBarrierByRegion, "(%u)", (unsigned int)barriers)
+    glatter_glMemoryBarrierByRegion(barriers);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMemoryBarrierByRegion_defined
+#endif
+#ifndef glNamedBufferData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferData, (buffer, size, data, usage), (GLuint buffer, GLsizei size, const void *data, GLenum usage))
+void glatter_glNamedBufferData_debug(GLuint buffer, GLsizei size, const void *data, GLenum usage, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferData, "(%u, %d, %p, %s)", (unsigned int)buffer, (int)size, (void*)data, enum_to_string_GL(usage))
+    glatter_glNamedBufferData(buffer, size, data, usage);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferData_defined
+#endif
+#ifndef glNamedBufferStorage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferStorage, (buffer, size, data, flags), (GLuint buffer, GLsizei size, const void *data, GLbitfield flags))
+void glatter_glNamedBufferStorage_debug(GLuint buffer, GLsizei size, const void *data, GLbitfield flags, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferStorage, "(%u, %d, %p, %u)", (unsigned int)buffer, (int)size, (void*)data, (unsigned int)flags)
+    glatter_glNamedBufferStorage(buffer, size, data, flags);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferStorage_defined
+#endif
+#ifndef glNamedBufferSubData_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedBufferSubData, (buffer, offset, size, data), (GLuint buffer, GLintptr offset, GLsizei size, const void *data))
+void glatter_glNamedBufferSubData_debug(GLuint buffer, GLintptr offset, GLsizei size, const void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedBufferSubData, "(%u, %td, %d, %p)", (unsigned int)buffer, (ptrdiff_t)offset, (int)size, (void*)data)
+    glatter_glNamedBufferSubData(buffer, offset, size, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedBufferSubData_defined
+#endif
+#ifndef glNamedFramebufferDrawBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferDrawBuffer, (framebuffer, buf), (GLuint framebuffer, GLenum buf))
+void glatter_glNamedFramebufferDrawBuffer_debug(GLuint framebuffer, GLenum buf, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferDrawBuffer, "(%u, %s)", (unsigned int)framebuffer, enum_to_string_GL(buf))
+    glatter_glNamedFramebufferDrawBuffer(framebuffer, buf);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferDrawBuffer_defined
+#endif
+#ifndef glNamedFramebufferDrawBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferDrawBuffers, (framebuffer, n, bufs), (GLuint framebuffer, GLsizei n, const GLenum *bufs))
+void glatter_glNamedFramebufferDrawBuffers_debug(GLuint framebuffer, GLsizei n, const GLenum *bufs, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferDrawBuffers, "(%u, %d, %p)", (unsigned int)framebuffer, (int)n, (void*)bufs)
+    glatter_glNamedFramebufferDrawBuffers(framebuffer, n, bufs);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferDrawBuffers_defined
+#endif
+#ifndef glNamedFramebufferParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferParameteri, (framebuffer, pname, param), (GLuint framebuffer, GLenum pname, GLint param))
+void glatter_glNamedFramebufferParameteri_debug(GLuint framebuffer, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferParameteri, "(%u, %s, %d)", (unsigned int)framebuffer, enum_to_string_GL(pname), (int)param)
+    glatter_glNamedFramebufferParameteri(framebuffer, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferParameteri_defined
+#endif
+#ifndef glNamedFramebufferReadBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferReadBuffer, (framebuffer, src), (GLuint framebuffer, GLenum src))
+void glatter_glNamedFramebufferReadBuffer_debug(GLuint framebuffer, GLenum src, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferReadBuffer, "(%u, %s)", (unsigned int)framebuffer, enum_to_string_GL(src))
+    glatter_glNamedFramebufferReadBuffer(framebuffer, src);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferReadBuffer_defined
+#endif
+#ifndef glNamedFramebufferRenderbuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferRenderbuffer, (framebuffer, attachment, renderbuffertarget, renderbuffer), (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer))
+void glatter_glNamedFramebufferRenderbuffer_debug(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferRenderbuffer, "(%u, %s, %s, %u)", (unsigned int)framebuffer, enum_to_string_GL(attachment), enum_to_string_GL(renderbuffertarget), (unsigned int)renderbuffer)
+    glatter_glNamedFramebufferRenderbuffer(framebuffer, attachment, renderbuffertarget, renderbuffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferRenderbuffer_defined
+#endif
+#ifndef glNamedFramebufferTexture_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTexture, (framebuffer, attachment, texture, level), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level))
+void glatter_glNamedFramebufferTexture_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferTexture, "(%u, %s, %u, %d)", (unsigned int)framebuffer, enum_to_string_GL(attachment), (unsigned int)texture, (int)level)
+    glatter_glNamedFramebufferTexture(framebuffer, attachment, texture, level);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferTexture_defined
+#endif
+#ifndef glNamedFramebufferTextureLayer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedFramebufferTextureLayer, (framebuffer, attachment, texture, level, layer), (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer))
+void glatter_glNamedFramebufferTextureLayer_debug(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedFramebufferTextureLayer, "(%u, %s, %u, %d, %d)", (unsigned int)framebuffer, enum_to_string_GL(attachment), (unsigned int)texture, (int)level, (int)layer)
+    glatter_glNamedFramebufferTextureLayer(framebuffer, attachment, texture, level, layer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedFramebufferTextureLayer_defined
+#endif
+#ifndef glNamedRenderbufferStorage_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorage, (renderbuffer, internalformat, width, height), (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glNamedRenderbufferStorage_debug(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedRenderbufferStorage, "(%u, %s, %d, %d)", (unsigned int)renderbuffer, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glNamedRenderbufferStorage(renderbuffer, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedRenderbufferStorage_defined
+#endif
+#ifndef glNamedRenderbufferStorageMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glNamedRenderbufferStorageMultisample, (renderbuffer, samples, internalformat, width, height), (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glNamedRenderbufferStorageMultisample_debug(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glNamedRenderbufferStorageMultisample, "(%u, %d, %s, %d, %d)", (unsigned int)renderbuffer, (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glNamedRenderbufferStorageMultisample(renderbuffer, samples, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glNamedRenderbufferStorageMultisample_defined
+#endif
+#ifndef glReadnPixels_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glReadnPixels, (x, y, width, height, format, type, bufSize, data), (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data))
+void glatter_glReadnPixels_debug(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glReadnPixels, "(%d, %d, %d, %d, %s, %s, %d, %p)", (int)x, (int)y, (int)width, (int)height, enum_to_string_GL(format), enum_to_string_GL(type), (int)bufSize, (void*)data)
+    glatter_glReadnPixels(x, y, width, height, format, type, bufSize, data);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glReadnPixels_defined
+#endif
+#ifndef glTextureBarrier_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBarrier, (), (void))
+void glatter_glTextureBarrier_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureBarrier, "()")
+    glatter_glTextureBarrier();
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureBarrier_defined
+#endif
+#ifndef glTextureBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBuffer, (texture, internalformat, buffer), (GLuint texture, GLenum internalformat, GLuint buffer))
+void glatter_glTextureBuffer_debug(GLuint texture, GLenum internalformat, GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureBuffer, "(%u, %s, %u)", (unsigned int)texture, enum_to_string_GL(internalformat), (unsigned int)buffer)
+    glatter_glTextureBuffer(texture, internalformat, buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureBuffer_defined
+#endif
+#ifndef glTextureBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureBufferRange, (texture, internalformat, buffer, offset, size), (GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizei size))
+void glatter_glTextureBufferRange_debug(GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizei size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureBufferRange, "(%u, %s, %u, %td, %d)", (unsigned int)texture, enum_to_string_GL(internalformat), (unsigned int)buffer, (ptrdiff_t)offset, (int)size)
+    glatter_glTextureBufferRange(texture, internalformat, buffer, offset, size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureBufferRange_defined
+#endif
+#ifndef glTextureParameterIiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIiv, (texture, pname, params), (GLuint texture, GLenum pname, const GLint *params))
+void glatter_glTextureParameterIiv_debug(GLuint texture, GLenum pname, const GLint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameterIiv, "(%u, %s, %p)", (unsigned int)texture, enum_to_string_GL(pname), (void*)params)
+    glatter_glTextureParameterIiv(texture, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameterIiv_defined
+#endif
+#ifndef glTextureParameterIuiv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterIuiv, (texture, pname, params), (GLuint texture, GLenum pname, const GLuint *params))
+void glatter_glTextureParameterIuiv_debug(GLuint texture, GLenum pname, const GLuint *params, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameterIuiv, "(%u, %s, %p)", (unsigned int)texture, enum_to_string_GL(pname), (void*)params)
+    glatter_glTextureParameterIuiv(texture, pname, params);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameterIuiv_defined
+#endif
+#ifndef glTextureParameterf_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterf, (texture, pname, param), (GLuint texture, GLenum pname, GLfloat param))
+void glatter_glTextureParameterf_debug(GLuint texture, GLenum pname, GLfloat param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameterf, "(%u, %s, %f)", (unsigned int)texture, enum_to_string_GL(pname), (float)param)
+    glatter_glTextureParameterf(texture, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameterf_defined
+#endif
+#ifndef glTextureParameterfv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameterfv, (texture, pname, param), (GLuint texture, GLenum pname, const GLfloat *param))
+void glatter_glTextureParameterfv_debug(GLuint texture, GLenum pname, const GLfloat *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameterfv, "(%u, %s, %p)", (unsigned int)texture, enum_to_string_GL(pname), (void*)param)
+    glatter_glTextureParameterfv(texture, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameterfv_defined
+#endif
+#ifndef glTextureParameteri_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameteri, (texture, pname, param), (GLuint texture, GLenum pname, GLint param))
+void glatter_glTextureParameteri_debug(GLuint texture, GLenum pname, GLint param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameteri, "(%u, %s, %d)", (unsigned int)texture, enum_to_string_GL(pname), (int)param)
+    glatter_glTextureParameteri(texture, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameteri_defined
+#endif
+#ifndef glTextureParameteriv_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureParameteriv, (texture, pname, param), (GLuint texture, GLenum pname, const GLint *param))
+void glatter_glTextureParameteriv_debug(GLuint texture, GLenum pname, const GLint *param, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureParameteriv, "(%u, %s, %p)", (unsigned int)texture, enum_to_string_GL(pname), (void*)param)
+    glatter_glTextureParameteriv(texture, pname, param);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureParameteriv_defined
+#endif
+#ifndef glTextureStorage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage1D, (texture, levels, internalformat, width), (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width))
+void glatter_glTextureStorage1D_debug(GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage1D, "(%u, %d, %s, %d)", (unsigned int)texture, (int)levels, enum_to_string_GL(internalformat), (int)width)
+    glatter_glTextureStorage1D(texture, levels, internalformat, width);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage1D_defined
+#endif
+#ifndef glTextureStorage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2D, (texture, levels, internalformat, width, height), (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height))
+void glatter_glTextureStorage2D_debug(GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage2D, "(%u, %d, %s, %d, %d)", (unsigned int)texture, (int)levels, enum_to_string_GL(internalformat), (int)width, (int)height)
+    glatter_glTextureStorage2D(texture, levels, internalformat, width, height);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage2D_defined
+#endif
+#ifndef glTextureStorage2DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage2DMultisample, (texture, samples, internalformat, width, height, fixedsamplelocations), (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations))
+void glatter_glTextureStorage2DMultisample_debug(GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage2DMultisample, "(%u, %d, %s, %d, %d, %u)", (unsigned int)texture, (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height, (unsigned char)fixedsamplelocations)
+    glatter_glTextureStorage2DMultisample(texture, samples, internalformat, width, height, fixedsamplelocations);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage2DMultisample_defined
+#endif
+#ifndef glTextureStorage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3D, (texture, levels, internalformat, width, height, depth), (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
+void glatter_glTextureStorage3D_debug(GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage3D, "(%u, %d, %s, %d, %d, %d)", (unsigned int)texture, (int)levels, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth)
+    glatter_glTextureStorage3D(texture, levels, internalformat, width, height, depth);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage3D_defined
+#endif
+#ifndef glTextureStorage3DMultisample_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureStorage3DMultisample, (texture, samples, internalformat, width, height, depth, fixedsamplelocations), (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations))
+void glatter_glTextureStorage3DMultisample_debug(GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureStorage3DMultisample, "(%u, %d, %s, %d, %d, %d, %u)", (unsigned int)texture, (int)samples, enum_to_string_GL(internalformat), (int)width, (int)height, (int)depth, (unsigned char)fixedsamplelocations)
+    glatter_glTextureStorage3DMultisample(texture, samples, internalformat, width, height, depth, fixedsamplelocations);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureStorage3DMultisample_defined
+#endif
+#ifndef glTextureSubImage1D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage1D, (texture, level, xoffset, width, format, type, pixels), (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels))
+void glatter_glTextureSubImage1D_debug(GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureSubImage1D, "(%u, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, (int)level, (int)xoffset, (int)width, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureSubImage1D_defined
+#endif
+#ifndef glTextureSubImage2D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage2D, (texture, level, xoffset, yoffset, width, height, format, type, pixels), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels))
+void glatter_glTextureSubImage2D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureSubImage2D, "(%u, %d, %d, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)width, (int)height, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureSubImage2D_defined
+#endif
+#ifndef glTextureSubImage3D_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTextureSubImage3D, (texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels), (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels))
+void glatter_glTextureSubImage3D_debug(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTextureSubImage3D, "(%u, %d, %d, %d, %d, %d, %d, %d, %s, %s, %p)", (unsigned int)texture, (int)level, (int)xoffset, (int)yoffset, (int)zoffset, (int)width, (int)height, (int)depth, enum_to_string_GL(format), enum_to_string_GL(type), (void*)pixels)
+    glatter_glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTextureSubImage3D_defined
+#endif
+#ifndef glTransformFeedbackBufferBase_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackBufferBase, (xfb, index, buffer), (GLuint xfb, GLuint index, GLuint buffer))
+void glatter_glTransformFeedbackBufferBase_debug(GLuint xfb, GLuint index, GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTransformFeedbackBufferBase, "(%u, %u, %u)", (unsigned int)xfb, (unsigned int)index, (unsigned int)buffer)
+    glatter_glTransformFeedbackBufferBase(xfb, index, buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTransformFeedbackBufferBase_defined
+#endif
+#ifndef glTransformFeedbackBufferRange_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glTransformFeedbackBufferRange, (xfb, index, buffer, offset, size), (GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizei size))
+void glatter_glTransformFeedbackBufferRange_debug(GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizei size, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glTransformFeedbackBufferRange, "(%u, %u, %u, %td, %d)", (unsigned int)xfb, (unsigned int)index, (unsigned int)buffer, (ptrdiff_t)offset, (int)size)
+    glatter_glTransformFeedbackBufferRange(xfb, index, buffer, offset, size);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glTransformFeedbackBufferRange_defined
+#endif
+#ifndef glUnmapNamedBuffer_defined
+GLATTER_FBLOCK(return, GL, GLAPI, GLboolean, APIENTRY, glUnmapNamedBuffer, (buffer), (GLuint buffer))
+GLboolean glatter_glUnmapNamedBuffer_debug(GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glUnmapNamedBuffer, "(%u)", (unsigned int)buffer)
+    GLboolean rval = glatter_glUnmapNamedBuffer(buffer);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
+    GLATTER_CHECK_ERROR(GL, file, line)
+    return rval;
+}
+#define glUnmapNamedBuffer_defined
+#endif
+#ifndef glVertexArrayAttribBinding_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayAttribBinding, (vaobj, attribindex, bindingindex), (GLuint vaobj, GLuint attribindex, GLuint bindingindex))
+void glatter_glVertexArrayAttribBinding_debug(GLuint vaobj, GLuint attribindex, GLuint bindingindex, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayAttribBinding, "(%u, %u, %u)", (unsigned int)vaobj, (unsigned int)attribindex, (unsigned int)bindingindex)
+    glatter_glVertexArrayAttribBinding(vaobj, attribindex, bindingindex);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayAttribBinding_defined
+#endif
+#ifndef glVertexArrayAttribFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayAttribFormat, (vaobj, attribindex, size, type, normalized, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset))
+void glatter_glVertexArrayAttribFormat_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayAttribFormat, "(%u, %u, %d, %s, %u, %u)", (unsigned int)vaobj, (unsigned int)attribindex, (int)size, enum_to_string_GL(type), (unsigned char)normalized, (unsigned int)relativeoffset)
+    glatter_glVertexArrayAttribFormat(vaobj, attribindex, size, type, normalized, relativeoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayAttribFormat_defined
+#endif
+#ifndef glVertexArrayAttribIFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayAttribIFormat, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+void glatter_glVertexArrayAttribIFormat_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayAttribIFormat, "(%u, %u, %d, %s, %u)", (unsigned int)vaobj, (unsigned int)attribindex, (int)size, enum_to_string_GL(type), (unsigned int)relativeoffset)
+    glatter_glVertexArrayAttribIFormat(vaobj, attribindex, size, type, relativeoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayAttribIFormat_defined
+#endif
+#ifndef glVertexArrayAttribLFormat_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayAttribLFormat, (vaobj, attribindex, size, type, relativeoffset), (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset))
+void glatter_glVertexArrayAttribLFormat_debug(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayAttribLFormat, "(%u, %u, %d, %s, %u)", (unsigned int)vaobj, (unsigned int)attribindex, (int)size, enum_to_string_GL(type), (unsigned int)relativeoffset)
+    glatter_glVertexArrayAttribLFormat(vaobj, attribindex, size, type, relativeoffset);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayAttribLFormat_defined
+#endif
+#ifndef glVertexArrayBindingDivisor_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayBindingDivisor, (vaobj, bindingindex, divisor), (GLuint vaobj, GLuint bindingindex, GLuint divisor))
+void glatter_glVertexArrayBindingDivisor_debug(GLuint vaobj, GLuint bindingindex, GLuint divisor, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayBindingDivisor, "(%u, %u, %u)", (unsigned int)vaobj, (unsigned int)bindingindex, (unsigned int)divisor)
+    glatter_glVertexArrayBindingDivisor(vaobj, bindingindex, divisor);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayBindingDivisor_defined
+#endif
+#ifndef glVertexArrayElementBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayElementBuffer, (vaobj, buffer), (GLuint vaobj, GLuint buffer))
+void glatter_glVertexArrayElementBuffer_debug(GLuint vaobj, GLuint buffer, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayElementBuffer, "(%u, %u)", (unsigned int)vaobj, (unsigned int)buffer)
+    glatter_glVertexArrayElementBuffer(vaobj, buffer);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayElementBuffer_defined
+#endif
+#ifndef glVertexArrayVertexBuffer_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBuffer, (vaobj, bindingindex, buffer, offset, stride), (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride))
+void glatter_glVertexArrayVertexBuffer_debug(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexBuffer, "(%u, %u, %u, %td, %d)", (unsigned int)vaobj, (unsigned int)bindingindex, (unsigned int)buffer, (ptrdiff_t)offset, (int)stride)
+    glatter_glVertexArrayVertexBuffer(vaobj, bindingindex, buffer, offset, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexBuffer_defined
+#endif
+#ifndef glVertexArrayVertexBuffers_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glVertexArrayVertexBuffers, (vaobj, first, count, buffers, offsets, strides), (GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides))
+void glatter_glVertexArrayVertexBuffers_debug(GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glVertexArrayVertexBuffers, "(%u, %u, %d, %p, %p, %p)", (unsigned int)vaobj, (unsigned int)first, (int)count, (void*)buffers, (void*)offsets, (void*)strides)
+    glatter_glVertexArrayVertexBuffers(vaobj, first, count, buffers, offsets, strides);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glVertexArrayVertexBuffers_defined
+#endif
+#endif // defined(__glcorearb_h_)
 #endif // defined(GL_VERSION_4_5)
 #endif // GLATTER_GL
 

@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #ifdef GLATTER_WGL
-#if defined(__wglext_h_)
+#if defined(__wgl_wglext_h_)
 #if defined(WGL_3DL_stereo_control)
 #define wglSetStereoEmitterState3DL(hDC, uState) glatter_wglSetStereoEmitterState3DL_debug((hDC), (uState), __FILE__, __LINE__)
 BOOL glatter_wglSetStereoEmitterState3DL_debug(HDC hDC, UINT uState, const char* file, int line);
@@ -328,7 +328,7 @@ INT64 glatter_wglSwapLayerBuffersMscOML_debug(HDC hdc, int fuPlanes, INT64 targe
 BOOL glatter_wglWaitForMscOML_debug(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 *ust, INT64 *msc, INT64 *sbc, const char* file, int line);
 #define wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc) glatter_wglWaitForSbcOML_debug((hdc), (target_sbc), (ust), (msc), (sbc), __FILE__, __LINE__)
 BOOL glatter_wglWaitForSbcOML_debug(HDC hdc, INT64 target_sbc, INT64 *ust, INT64 *msc, INT64 *sbc, const char* file, int line);
-#endif // defined(__wglext_h_)
+#endif // defined(__wgl_wglext_h_)
 #endif // defined(WGL_OML_sync_control)
 #endif // GLATTER_WGL
 

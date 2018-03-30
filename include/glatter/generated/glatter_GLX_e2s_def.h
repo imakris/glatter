@@ -164,6 +164,9 @@ const char* enum_to_string_GLX(GLenum e)
         case 0x21a7: return "GLX_GPU_NUM_RB_AMD";
         case 0x21a8: return "GLX_GPU_NUM_SPI_AMD";
 #endif
+#if defined(GLX_ARB_create_context_no_error)
+        case 0x31b3: return "GLX_CONTEXT_OPENGL_NO_ERROR_ARB";
+#endif
         case 0x8000:
 #if defined(GLX_VERSION_1_3) || defined(GLX_H)
                     return "GLX_NONE";
