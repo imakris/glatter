@@ -88,7 +88,7 @@ void* glatter_get_proc_address_GL(const char* function_name)
     if (ptr == 0)
         ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("opengl32.dll")), function_name);
 #elif defined(GLATTER_GLX)
-    ptr = (void*) glXGetProcAddress(function_name);
+    ptr = (void*) glXGetProcAddress((const GLubyte*)function_name);
     if (ptr == 0)
         ptr = (void*) dlsym(dlopen("libGL.so", RTLD_LAZY), function_name);
 #endif
@@ -285,7 +285,7 @@ Printable get_prs(size_t sz, void* obj)
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     cder rtype cconv name dargs;\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
-    extern glatter_##name##_t glatter_##name##;\
+    extern glatter_##name##_t glatter_##name ;\
     extern rtype cconv glatter_##name##_init dargs;\
     rtype cconv glatter_##name##_init dargs\
     {\
