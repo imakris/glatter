@@ -15,14 +15,21 @@
 
 #include <GL/gl.h>
 #include <GL/glx.h>
+
+#if !defined(GLX_GLXEXT_VERSION)
+// Using glatter's glxext.h
 #include "../../tools/glatter/input_headers/glext/glxext.h"
+#endif
 
 #include <pthread.h>
 #include <dlfcn.h>
 
 #endif
 
+#if !defined(GL_GLEXT_VERSION)
+// Using glatter's glext.h
 #include "../../tools/glatter/input_headers/glext/glext.h"
+#endif
 
 #else //defined(GLATTER_GLES)
 
