@@ -113,6 +113,7 @@ int x_error_handler(Display *dsp, XErrorEvent *error)
     char error_string[128];
     XGetErrorText(dsp, error->error_code, error_string, 128);
     printf("X Error: %s\n", error_string);
+    return 0;
 }
 #endif //!defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
 
@@ -304,10 +305,10 @@ Printable get_prs(size_t sz, void* obj)
     #define GLATTER_DBLOCK(file, line, name, printf_fmt, ...) \
         glatter_pre_callback(file, line);\
         printf("GLATTER: in '%s'(%d):\n", file, line);\
-        printf("GLATTER: " #name printf_fmt "\n", __VA_ARGS__);
+        printf("GLATTER: " #name printf_fmt "\n",##__VA_ARGS__);
 
     #define GLATTER_RBLOCK(...)\
-        printf("GLATTER: returned "__VA_ARGS__);
+        printf("GLATTER: returned " __VA_ARGS__);
 
 #else
 

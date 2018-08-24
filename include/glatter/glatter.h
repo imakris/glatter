@@ -32,33 +32,44 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 extern "C" {
 
-#ifdef GLATTER_HEADER_ONLY
-    #define GLATTER_INCLUDED_FROM_HEADER
-    #include "glatter_def.h"
-#else
-    #define GLATTER_INLINE_OR_NOT
-#endif
+#elif defined (GLATTER_HEADER_ONLY)
 
-#else
-
-#ifdef GLATTER_HEADER_ONLY
     #error GLATTER_HEADER_ONLY can only be used in C++
-#else
-    #define GLATTER_INLINE_OR_NOT
-#endif
 
 #endif //__cplusplus
+
+
+#ifdef GLATTER_HEADER_ONLY
+
+    #define GLATTER_INCLUDED_FROM_HEADER
+    #include "glatter_def.h"
+
+    #if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_ERRORS)
+        #define GLATTER_UBLOCK(rtype, cconv, name, dargs)\
+            typedef rtype (cconv *glatter_##name##_t) dargs;\
+            extern glatter_##name##_t glatter_##name;
+    #else
+        #define GLATTER_UBLOCK(...)
+    #endif
+
+#else
+
+#define GLATTER_UBLOCK(rtype, cconv, name, dargs)\
+    typedef rtype (cconv *glatter_##name##_t) dargs;\
+    extern glatter_##name##_t glatter_##name;
+
+#endif
+
+
+#ifndef GLATTER_INLINE_OR_NOT
+#define GLATTER_INLINE_OR_NOT
+#endif
 
 
 GLATTER_INLINE_OR_NOT const char* enum_to_string_GL(GLenum e);
 GLATTER_INLINE_OR_NOT const char* enum_to_string_GLX(GLenum e);
 GLATTER_INLINE_OR_NOT const char* enum_to_string_WGL(GLenum e);
 GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLenum e);
-
-
-#define GLATTER_UBLOCK(rtype, cconv, name, dargs)\
-    typedef rtype (cconv *glatter_##name##_t) dargs;\
-    extern glatter_##name##_t glatter_##name;
 
 
 #if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_CALLS)

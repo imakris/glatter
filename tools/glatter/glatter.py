@@ -740,14 +740,17 @@ def get_function_mdnd(family): #macros, declarations and definitions
             a1s = '(void)'
 
         dn_mac = '''
-#define ''' + x.name + a2s + ' glatter_' + x.name + '_debug' + a3e
-
-        df_dec = '\n' + x.rtype + ' glatter_' + x.name + '_debug' + a1e + ';'
+#ifndef ''' + x.name + '''
+#define ''' + x.name + a2s + ' glatter_' + x.name + '_debug' + a3e + '''
+#endif'''
+        df_dec = '\nGLATTER_INLINE_OR_NOT ' + x.rtype + ' glatter_' + x.name + '_debug' + a1e + ';'
 
         ic_nam = 'glatter_' + x.name
 
         rn_mac = '''
-#define ''' + x.name + a2s + ' ' + ic_nam + a3s
+#ifndef ''' + x.name + '''
+#define ''' + x.name + a2s + ' ' + ic_nam + a3s + '''
+#endif'''
 
         pt_typ = 'glatter_' + x.name + '_t'
 

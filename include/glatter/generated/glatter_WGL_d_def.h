@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(__wgl_wglext_h_)
 #if defined(WGL_3DL_stereo_control)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglSetStereoEmitterState3DL, (hDC, uState), (HDC hDC, UINT uState))
-BOOL glatter_wglSetStereoEmitterState3DL_debug(HDC hDC, UINT uState, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglSetStereoEmitterState3DL_debug(HDC hDC, UINT uState, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSetStereoEmitterState3DL, "(%s, %u)", GET_PRS(hDC), (unsigned int)uState)
     BOOL rval = glatter_wglSetStereoEmitterState3DL(hDC, uState);
@@ -43,7 +43,7 @@ BOOL glatter_wglSetStereoEmitterState3DL_debug(HDC hDC, UINT uState, const char*
 #endif // defined(WGL_3DL_stereo_control)
 #if defined(WGL_AMD_gpu_association)
 GLATTER_FBLOCK(, WGL, , VOID, WINAPI, wglBlitContextFramebufferAMD, (dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
-VOID glatter_wglBlitContextFramebufferAMD_debug(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line)
+GLATTER_INLINE_OR_NOT VOID glatter_wglBlitContextFramebufferAMD_debug(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglBlitContextFramebufferAMD, "(%s, %d, %d, %d, %d, %d, %d, %d, %d, %u, %s)", GET_PRS(dstCtx), (int)srcX0, (int)srcY0, (int)srcX1, (int)srcY1, (int)dstX0, (int)dstY0, (int)dstX1, (int)dstY1, (unsigned int)mask, enum_to_string_GL(filter))
     glatter_wglBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
@@ -51,7 +51,7 @@ VOID glatter_wglBlitContextFramebufferAMD_debug(HGLRC dstCtx, GLint srcX0, GLint
 }
 #define wglBlitContextFramebufferAMD_defined
 GLATTER_FBLOCK(return, WGL, , HGLRC, WINAPI, wglCreateAssociatedContextAMD, (id), (UINT id))
-HGLRC glatter_wglCreateAssociatedContextAMD_debug(UINT id, const char* file, int line)
+GLATTER_INLINE_OR_NOT HGLRC glatter_wglCreateAssociatedContextAMD_debug(UINT id, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCreateAssociatedContextAMD, "(%u)", (unsigned int)id)
     HGLRC rval = glatter_wglCreateAssociatedContextAMD(id);
@@ -61,7 +61,7 @@ HGLRC glatter_wglCreateAssociatedContextAMD_debug(UINT id, const char* file, int
 }
 #define wglCreateAssociatedContextAMD_defined
 GLATTER_FBLOCK(return, WGL, , HGLRC, WINAPI, wglCreateAssociatedContextAttribsAMD, (id, hShareContext, attribList), (UINT id, HGLRC hShareContext, const int *attribList))
-HGLRC glatter_wglCreateAssociatedContextAttribsAMD_debug(UINT id, HGLRC hShareContext, const int *attribList, const char* file, int line)
+GLATTER_INLINE_OR_NOT HGLRC glatter_wglCreateAssociatedContextAttribsAMD_debug(UINT id, HGLRC hShareContext, const int *attribList, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCreateAssociatedContextAttribsAMD, "(%u, %s, %p)", (unsigned int)id, GET_PRS(hShareContext), (void*)attribList)
     HGLRC rval = glatter_wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList);
@@ -71,7 +71,7 @@ HGLRC glatter_wglCreateAssociatedContextAttribsAMD_debug(UINT id, HGLRC hShareCo
 }
 #define wglCreateAssociatedContextAttribsAMD_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDeleteAssociatedContextAMD, (hglrc), (HGLRC hglrc))
-BOOL glatter_wglDeleteAssociatedContextAMD_debug(HGLRC hglrc, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDeleteAssociatedContextAMD_debug(HGLRC hglrc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDeleteAssociatedContextAMD, "(%s)", GET_PRS(hglrc))
     BOOL rval = glatter_wglDeleteAssociatedContextAMD(hglrc);
@@ -81,7 +81,7 @@ BOOL glatter_wglDeleteAssociatedContextAMD_debug(HGLRC hglrc, const char* file, 
 }
 #define wglDeleteAssociatedContextAMD_defined
 GLATTER_FBLOCK(return, WGL, , UINT, WINAPI, wglGetContextGPUIDAMD, (hglrc), (HGLRC hglrc))
-UINT glatter_wglGetContextGPUIDAMD_debug(HGLRC hglrc, const char* file, int line)
+GLATTER_INLINE_OR_NOT UINT glatter_wglGetContextGPUIDAMD_debug(HGLRC hglrc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetContextGPUIDAMD, "(%s)", GET_PRS(hglrc))
     UINT rval = glatter_wglGetContextGPUIDAMD(hglrc);
@@ -91,7 +91,7 @@ UINT glatter_wglGetContextGPUIDAMD_debug(HGLRC hglrc, const char* file, int line
 }
 #define wglGetContextGPUIDAMD_defined
 GLATTER_FBLOCK(return, WGL, , HGLRC, WINAPI, wglGetCurrentAssociatedContextAMD, (), (void))
-HGLRC glatter_wglGetCurrentAssociatedContextAMD_debug(const char* file, int line)
+GLATTER_INLINE_OR_NOT HGLRC glatter_wglGetCurrentAssociatedContextAMD_debug(const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetCurrentAssociatedContextAMD, "()")
     HGLRC rval = glatter_wglGetCurrentAssociatedContextAMD();
@@ -101,7 +101,7 @@ HGLRC glatter_wglGetCurrentAssociatedContextAMD_debug(const char* file, int line
 }
 #define wglGetCurrentAssociatedContextAMD_defined
 GLATTER_FBLOCK(return, WGL, , UINT, WINAPI, wglGetGPUIDsAMD, (maxCount, ids), (UINT maxCount, UINT *ids))
-UINT glatter_wglGetGPUIDsAMD_debug(UINT maxCount, UINT *ids, const char* file, int line)
+GLATTER_INLINE_OR_NOT UINT glatter_wglGetGPUIDsAMD_debug(UINT maxCount, UINT *ids, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetGPUIDsAMD, "(%u, %p)", (unsigned int)maxCount, (void*)ids)
     UINT rval = glatter_wglGetGPUIDsAMD(maxCount, ids);
@@ -111,7 +111,7 @@ UINT glatter_wglGetGPUIDsAMD_debug(UINT maxCount, UINT *ids, const char* file, i
 }
 #define wglGetGPUIDsAMD_defined
 GLATTER_FBLOCK(return, WGL, , INT, WINAPI, wglGetGPUInfoAMD, (id, property, dataType, size, data), (UINT id, int property, GLenum dataType, UINT size, void *data))
-INT glatter_wglGetGPUInfoAMD_debug(UINT id, int property, GLenum dataType, UINT size, void *data, const char* file, int line)
+GLATTER_INLINE_OR_NOT INT glatter_wglGetGPUInfoAMD_debug(UINT id, int property, GLenum dataType, UINT size, void *data, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetGPUInfoAMD, "(%u, %d, %s, %u, %p)", (unsigned int)id, (int)property, enum_to_string_GL(dataType), (unsigned int)size, (void*)data)
     INT rval = glatter_wglGetGPUInfoAMD(id, property, dataType, size, data);
@@ -121,7 +121,7 @@ INT glatter_wglGetGPUInfoAMD_debug(UINT id, int property, GLenum dataType, UINT 
 }
 #define wglGetGPUInfoAMD_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglMakeAssociatedContextCurrentAMD, (hglrc), (HGLRC hglrc))
-BOOL glatter_wglMakeAssociatedContextCurrentAMD_debug(HGLRC hglrc, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglMakeAssociatedContextCurrentAMD_debug(HGLRC hglrc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglMakeAssociatedContextCurrentAMD, "(%s)", GET_PRS(hglrc))
     BOOL rval = glatter_wglMakeAssociatedContextCurrentAMD(hglrc);
@@ -133,7 +133,7 @@ BOOL glatter_wglMakeAssociatedContextCurrentAMD_debug(HGLRC hglrc, const char* f
 #endif // defined(WGL_AMD_gpu_association)
 #if defined(WGL_ARB_buffer_region)
 GLATTER_FBLOCK(return, WGL, , HANDLE, WINAPI, wglCreateBufferRegionARB, (hDC, iLayerPlane, uType), (HDC hDC, int iLayerPlane, UINT uType))
-HANDLE glatter_wglCreateBufferRegionARB_debug(HDC hDC, int iLayerPlane, UINT uType, const char* file, int line)
+GLATTER_INLINE_OR_NOT HANDLE glatter_wglCreateBufferRegionARB_debug(HDC hDC, int iLayerPlane, UINT uType, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCreateBufferRegionARB, "(%s, %d, %u)", GET_PRS(hDC), (int)iLayerPlane, (unsigned int)uType)
     HANDLE rval = glatter_wglCreateBufferRegionARB(hDC, iLayerPlane, uType);
@@ -143,7 +143,7 @@ HANDLE glatter_wglCreateBufferRegionARB_debug(HDC hDC, int iLayerPlane, UINT uTy
 }
 #define wglCreateBufferRegionARB_defined
 GLATTER_FBLOCK(, WGL, , VOID, WINAPI, wglDeleteBufferRegionARB, (hRegion), (HANDLE hRegion))
-VOID glatter_wglDeleteBufferRegionARB_debug(HANDLE hRegion, const char* file, int line)
+GLATTER_INLINE_OR_NOT VOID glatter_wglDeleteBufferRegionARB_debug(HANDLE hRegion, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDeleteBufferRegionARB, "(%s)", GET_PRS(hRegion))
     glatter_wglDeleteBufferRegionARB(hRegion);
@@ -151,7 +151,7 @@ VOID glatter_wglDeleteBufferRegionARB_debug(HANDLE hRegion, const char* file, in
 }
 #define wglDeleteBufferRegionARB_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglRestoreBufferRegionARB, (hRegion, x, y, width, height, xSrc, ySrc), (HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc))
-BOOL glatter_wglRestoreBufferRegionARB_debug(HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglRestoreBufferRegionARB_debug(HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglRestoreBufferRegionARB, "(%s, %d, %d, %d, %d, %d, %d)", GET_PRS(hRegion), (int)x, (int)y, (int)width, (int)height, (int)xSrc, (int)ySrc)
     BOOL rval = glatter_wglRestoreBufferRegionARB(hRegion, x, y, width, height, xSrc, ySrc);
@@ -161,7 +161,7 @@ BOOL glatter_wglRestoreBufferRegionARB_debug(HANDLE hRegion, int x, int y, int w
 }
 #define wglRestoreBufferRegionARB_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglSaveBufferRegionARB, (hRegion, x, y, width, height), (HANDLE hRegion, int x, int y, int width, int height))
-BOOL glatter_wglSaveBufferRegionARB_debug(HANDLE hRegion, int x, int y, int width, int height, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglSaveBufferRegionARB_debug(HANDLE hRegion, int x, int y, int width, int height, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSaveBufferRegionARB, "(%s, %d, %d, %d, %d)", GET_PRS(hRegion), (int)x, (int)y, (int)width, (int)height)
     BOOL rval = glatter_wglSaveBufferRegionARB(hRegion, x, y, width, height);
@@ -173,7 +173,7 @@ BOOL glatter_wglSaveBufferRegionARB_debug(HANDLE hRegion, int x, int y, int widt
 #endif // defined(WGL_ARB_buffer_region)
 #if defined(WGL_ARB_create_context)
 GLATTER_FBLOCK(return, WGL, , HGLRC, WINAPI, wglCreateContextAttribsARB, (hDC, hShareContext, attribList), (HDC hDC, HGLRC hShareContext, const int *attribList))
-HGLRC glatter_wglCreateContextAttribsARB_debug(HDC hDC, HGLRC hShareContext, const int *attribList, const char* file, int line)
+GLATTER_INLINE_OR_NOT HGLRC glatter_wglCreateContextAttribsARB_debug(HDC hDC, HGLRC hShareContext, const int *attribList, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCreateContextAttribsARB, "(%s, %s, %p)", GET_PRS(hDC), GET_PRS(hShareContext), (void*)attribList)
     HGLRC rval = glatter_wglCreateContextAttribsARB(hDC, hShareContext, attribList);
@@ -185,7 +185,7 @@ HGLRC glatter_wglCreateContextAttribsARB_debug(HDC hDC, HGLRC hShareContext, con
 #endif // defined(WGL_ARB_create_context)
 #if defined(WGL_ARB_extensions_string)
 GLATTER_FBLOCK(return, WGL, , const char *, WINAPI, wglGetExtensionsStringARB, (hdc), (HDC hdc))
-const char * glatter_wglGetExtensionsStringARB_debug(HDC hdc, const char* file, int line)
+GLATTER_INLINE_OR_NOT const char * glatter_wglGetExtensionsStringARB_debug(HDC hdc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetExtensionsStringARB, "(%s)", GET_PRS(hdc))
     const char * rval = glatter_wglGetExtensionsStringARB(hdc);
@@ -197,7 +197,7 @@ const char * glatter_wglGetExtensionsStringARB_debug(HDC hdc, const char* file, 
 #endif // defined(WGL_ARB_extensions_string)
 #if defined(WGL_ARB_make_current_read)
 GLATTER_FBLOCK(return, WGL, , HDC, WINAPI, wglGetCurrentReadDCARB, (), (void))
-HDC glatter_wglGetCurrentReadDCARB_debug(const char* file, int line)
+GLATTER_INLINE_OR_NOT HDC glatter_wglGetCurrentReadDCARB_debug(const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetCurrentReadDCARB, "()")
     HDC rval = glatter_wglGetCurrentReadDCARB();
@@ -207,7 +207,7 @@ HDC glatter_wglGetCurrentReadDCARB_debug(const char* file, int line)
 }
 #define wglGetCurrentReadDCARB_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglMakeContextCurrentARB, (hDrawDC, hReadDC, hglrc), (HDC hDrawDC, HDC hReadDC, HGLRC hglrc))
-BOOL glatter_wglMakeContextCurrentARB_debug(HDC hDrawDC, HDC hReadDC, HGLRC hglrc, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglMakeContextCurrentARB_debug(HDC hDrawDC, HDC hReadDC, HGLRC hglrc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglMakeContextCurrentARB, "(%s, %s, %s)", GET_PRS(hDrawDC), GET_PRS(hReadDC), GET_PRS(hglrc))
     BOOL rval = glatter_wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc);
@@ -219,7 +219,7 @@ BOOL glatter_wglMakeContextCurrentARB_debug(HDC hDrawDC, HDC hReadDC, HGLRC hglr
 #endif // defined(WGL_ARB_make_current_read)
 #if defined(WGL_ARB_pbuffer)
 GLATTER_FBLOCK(return, WGL, , HPBUFFERARB, WINAPI, wglCreatePbufferARB, (hDC, iPixelFormat, iWidth, iHeight, piAttribList), (HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList))
-HPBUFFERARB glatter_wglCreatePbufferARB_debug(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList, const char* file, int line)
+GLATTER_INLINE_OR_NOT HPBUFFERARB glatter_wglCreatePbufferARB_debug(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCreatePbufferARB, "(%s, %d, %d, %d, %p)", GET_PRS(hDC), (int)iPixelFormat, (int)iWidth, (int)iHeight, (void*)piAttribList)
     HPBUFFERARB rval = glatter_wglCreatePbufferARB(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
@@ -229,7 +229,7 @@ HPBUFFERARB glatter_wglCreatePbufferARB_debug(HDC hDC, int iPixelFormat, int iWi
 }
 #define wglCreatePbufferARB_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDestroyPbufferARB, (hPbuffer), (HPBUFFERARB hPbuffer))
-BOOL glatter_wglDestroyPbufferARB_debug(HPBUFFERARB hPbuffer, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDestroyPbufferARB_debug(HPBUFFERARB hPbuffer, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDestroyPbufferARB, "(%s)", GET_PRS(hPbuffer))
     BOOL rval = glatter_wglDestroyPbufferARB(hPbuffer);
@@ -239,7 +239,7 @@ BOOL glatter_wglDestroyPbufferARB_debug(HPBUFFERARB hPbuffer, const char* file, 
 }
 #define wglDestroyPbufferARB_defined
 GLATTER_FBLOCK(return, WGL, , HDC, WINAPI, wglGetPbufferDCARB, (hPbuffer), (HPBUFFERARB hPbuffer))
-HDC glatter_wglGetPbufferDCARB_debug(HPBUFFERARB hPbuffer, const char* file, int line)
+GLATTER_INLINE_OR_NOT HDC glatter_wglGetPbufferDCARB_debug(HPBUFFERARB hPbuffer, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetPbufferDCARB, "(%s)", GET_PRS(hPbuffer))
     HDC rval = glatter_wglGetPbufferDCARB(hPbuffer);
@@ -249,7 +249,7 @@ HDC glatter_wglGetPbufferDCARB_debug(HPBUFFERARB hPbuffer, const char* file, int
 }
 #define wglGetPbufferDCARB_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQueryPbufferARB, (hPbuffer, iAttribute, piValue), (HPBUFFERARB hPbuffer, int iAttribute, int *piValue))
-BOOL glatter_wglQueryPbufferARB_debug(HPBUFFERARB hPbuffer, int iAttribute, int *piValue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQueryPbufferARB_debug(HPBUFFERARB hPbuffer, int iAttribute, int *piValue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQueryPbufferARB, "(%s, %d, %p)", GET_PRS(hPbuffer), (int)iAttribute, (void*)piValue)
     BOOL rval = glatter_wglQueryPbufferARB(hPbuffer, iAttribute, piValue);
@@ -259,7 +259,7 @@ BOOL glatter_wglQueryPbufferARB_debug(HPBUFFERARB hPbuffer, int iAttribute, int 
 }
 #define wglQueryPbufferARB_defined
 GLATTER_FBLOCK(return, WGL, , int, WINAPI, wglReleasePbufferDCARB, (hPbuffer, hDC), (HPBUFFERARB hPbuffer, HDC hDC))
-int glatter_wglReleasePbufferDCARB_debug(HPBUFFERARB hPbuffer, HDC hDC, const char* file, int line)
+GLATTER_INLINE_OR_NOT int glatter_wglReleasePbufferDCARB_debug(HPBUFFERARB hPbuffer, HDC hDC, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglReleasePbufferDCARB, "(%s, %s)", GET_PRS(hPbuffer), GET_PRS(hDC))
     int rval = glatter_wglReleasePbufferDCARB(hPbuffer, hDC);
@@ -271,7 +271,7 @@ int glatter_wglReleasePbufferDCARB_debug(HPBUFFERARB hPbuffer, HDC hDC, const ch
 #endif // defined(WGL_ARB_pbuffer)
 #if defined(WGL_ARB_pixel_format)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglChoosePixelFormatARB, (hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats), (HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats))
-BOOL glatter_wglChoosePixelFormatARB_debug(HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglChoosePixelFormatARB_debug(HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglChoosePixelFormatARB, "(%s, %p, %p, %u, %p, %p)", GET_PRS(hdc), (void*)piAttribIList, (void*)pfAttribFList, (unsigned int)nMaxFormats, (void*)piFormats, (void*)nNumFormats)
     BOOL rval = glatter_wglChoosePixelFormatARB(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
@@ -281,7 +281,7 @@ BOOL glatter_wglChoosePixelFormatARB_debug(HDC hdc, const int *piAttribIList, co
 }
 #define wglChoosePixelFormatARB_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetPixelFormatAttribfvARB, (hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues), (HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues))
-BOOL glatter_wglGetPixelFormatAttribfvARB_debug(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetPixelFormatAttribfvARB_debug(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetPixelFormatAttribfvARB, "(%s, %d, %d, %u, %p, %p)", GET_PRS(hdc), (int)iPixelFormat, (int)iLayerPlane, (unsigned int)nAttributes, (void*)piAttributes, (void*)pfValues)
     BOOL rval = glatter_wglGetPixelFormatAttribfvARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
@@ -291,7 +291,7 @@ BOOL glatter_wglGetPixelFormatAttribfvARB_debug(HDC hdc, int iPixelFormat, int i
 }
 #define wglGetPixelFormatAttribfvARB_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetPixelFormatAttribivARB, (hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues), (HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues))
-BOOL glatter_wglGetPixelFormatAttribivARB_debug(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetPixelFormatAttribivARB_debug(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetPixelFormatAttribivARB, "(%s, %d, %d, %u, %p, %p)", GET_PRS(hdc), (int)iPixelFormat, (int)iLayerPlane, (unsigned int)nAttributes, (void*)piAttributes, (void*)piValues)
     BOOL rval = glatter_wglGetPixelFormatAttribivARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
@@ -303,7 +303,7 @@ BOOL glatter_wglGetPixelFormatAttribivARB_debug(HDC hdc, int iPixelFormat, int i
 #endif // defined(WGL_ARB_pixel_format)
 #if defined(WGL_ARB_render_texture)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglBindTexImageARB, (hPbuffer, iBuffer), (HPBUFFERARB hPbuffer, int iBuffer))
-BOOL glatter_wglBindTexImageARB_debug(HPBUFFERARB hPbuffer, int iBuffer, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglBindTexImageARB_debug(HPBUFFERARB hPbuffer, int iBuffer, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglBindTexImageARB, "(%s, %d)", GET_PRS(hPbuffer), (int)iBuffer)
     BOOL rval = glatter_wglBindTexImageARB(hPbuffer, iBuffer);
@@ -313,7 +313,7 @@ BOOL glatter_wglBindTexImageARB_debug(HPBUFFERARB hPbuffer, int iBuffer, const c
 }
 #define wglBindTexImageARB_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglReleaseTexImageARB, (hPbuffer, iBuffer), (HPBUFFERARB hPbuffer, int iBuffer))
-BOOL glatter_wglReleaseTexImageARB_debug(HPBUFFERARB hPbuffer, int iBuffer, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglReleaseTexImageARB_debug(HPBUFFERARB hPbuffer, int iBuffer, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglReleaseTexImageARB, "(%s, %d)", GET_PRS(hPbuffer), (int)iBuffer)
     BOOL rval = glatter_wglReleaseTexImageARB(hPbuffer, iBuffer);
@@ -323,7 +323,7 @@ BOOL glatter_wglReleaseTexImageARB_debug(HPBUFFERARB hPbuffer, int iBuffer, cons
 }
 #define wglReleaseTexImageARB_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglSetPbufferAttribARB, (hPbuffer, piAttribList), (HPBUFFERARB hPbuffer, const int *piAttribList))
-BOOL glatter_wglSetPbufferAttribARB_debug(HPBUFFERARB hPbuffer, const int *piAttribList, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglSetPbufferAttribARB_debug(HPBUFFERARB hPbuffer, const int *piAttribList, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSetPbufferAttribARB, "(%s, %p)", GET_PRS(hPbuffer), (void*)piAttribList)
     BOOL rval = glatter_wglSetPbufferAttribARB(hPbuffer, piAttribList);
@@ -335,7 +335,7 @@ BOOL glatter_wglSetPbufferAttribARB_debug(HPBUFFERARB hPbuffer, const int *piAtt
 #endif // defined(WGL_ARB_render_texture)
 #if defined(WGL_EXT_display_color_table)
 GLATTER_FBLOCK(return, WGL, , GLboolean, WINAPI, wglBindDisplayColorTableEXT, (id), (GLushort id))
-GLboolean glatter_wglBindDisplayColorTableEXT_debug(GLushort id, const char* file, int line)
+GLATTER_INLINE_OR_NOT GLboolean glatter_wglBindDisplayColorTableEXT_debug(GLushort id, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglBindDisplayColorTableEXT, "(%hu)", (unsigned short)id)
     GLboolean rval = glatter_wglBindDisplayColorTableEXT(id);
@@ -345,7 +345,7 @@ GLboolean glatter_wglBindDisplayColorTableEXT_debug(GLushort id, const char* fil
 }
 #define wglBindDisplayColorTableEXT_defined
 GLATTER_FBLOCK(return, WGL, , GLboolean, WINAPI, wglCreateDisplayColorTableEXT, (id), (GLushort id))
-GLboolean glatter_wglCreateDisplayColorTableEXT_debug(GLushort id, const char* file, int line)
+GLATTER_INLINE_OR_NOT GLboolean glatter_wglCreateDisplayColorTableEXT_debug(GLushort id, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCreateDisplayColorTableEXT, "(%hu)", (unsigned short)id)
     GLboolean rval = glatter_wglCreateDisplayColorTableEXT(id);
@@ -355,7 +355,7 @@ GLboolean glatter_wglCreateDisplayColorTableEXT_debug(GLushort id, const char* f
 }
 #define wglCreateDisplayColorTableEXT_defined
 GLATTER_FBLOCK(, WGL, , VOID, WINAPI, wglDestroyDisplayColorTableEXT, (id), (GLushort id))
-VOID glatter_wglDestroyDisplayColorTableEXT_debug(GLushort id, const char* file, int line)
+GLATTER_INLINE_OR_NOT VOID glatter_wglDestroyDisplayColorTableEXT_debug(GLushort id, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDestroyDisplayColorTableEXT, "(%hu)", (unsigned short)id)
     glatter_wglDestroyDisplayColorTableEXT(id);
@@ -363,7 +363,7 @@ VOID glatter_wglDestroyDisplayColorTableEXT_debug(GLushort id, const char* file,
 }
 #define wglDestroyDisplayColorTableEXT_defined
 GLATTER_FBLOCK(return, WGL, , GLboolean, WINAPI, wglLoadDisplayColorTableEXT, (table, length), (const GLushort *table, GLuint length))
-GLboolean glatter_wglLoadDisplayColorTableEXT_debug(const GLushort *table, GLuint length, const char* file, int line)
+GLATTER_INLINE_OR_NOT GLboolean glatter_wglLoadDisplayColorTableEXT_debug(const GLushort *table, GLuint length, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglLoadDisplayColorTableEXT, "(%p, %u)", (void*)table, (unsigned int)length)
     GLboolean rval = glatter_wglLoadDisplayColorTableEXT(table, length);
@@ -375,7 +375,7 @@ GLboolean glatter_wglLoadDisplayColorTableEXT_debug(const GLushort *table, GLuin
 #endif // defined(WGL_EXT_display_color_table)
 #if defined(WGL_EXT_extensions_string)
 GLATTER_FBLOCK(return, WGL, , const char *, WINAPI, wglGetExtensionsStringEXT, (), (void))
-const char * glatter_wglGetExtensionsStringEXT_debug(const char* file, int line)
+GLATTER_INLINE_OR_NOT const char * glatter_wglGetExtensionsStringEXT_debug(const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetExtensionsStringEXT, "()")
     const char * rval = glatter_wglGetExtensionsStringEXT();
@@ -387,7 +387,7 @@ const char * glatter_wglGetExtensionsStringEXT_debug(const char* file, int line)
 #endif // defined(WGL_EXT_extensions_string)
 #if defined(WGL_EXT_make_current_read)
 GLATTER_FBLOCK(return, WGL, , HDC, WINAPI, wglGetCurrentReadDCEXT, (), (void))
-HDC glatter_wglGetCurrentReadDCEXT_debug(const char* file, int line)
+GLATTER_INLINE_OR_NOT HDC glatter_wglGetCurrentReadDCEXT_debug(const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetCurrentReadDCEXT, "()")
     HDC rval = glatter_wglGetCurrentReadDCEXT();
@@ -397,7 +397,7 @@ HDC glatter_wglGetCurrentReadDCEXT_debug(const char* file, int line)
 }
 #define wglGetCurrentReadDCEXT_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglMakeContextCurrentEXT, (hDrawDC, hReadDC, hglrc), (HDC hDrawDC, HDC hReadDC, HGLRC hglrc))
-BOOL glatter_wglMakeContextCurrentEXT_debug(HDC hDrawDC, HDC hReadDC, HGLRC hglrc, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglMakeContextCurrentEXT_debug(HDC hDrawDC, HDC hReadDC, HGLRC hglrc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglMakeContextCurrentEXT, "(%s, %s, %s)", GET_PRS(hDrawDC), GET_PRS(hReadDC), GET_PRS(hglrc))
     BOOL rval = glatter_wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc);
@@ -409,7 +409,7 @@ BOOL glatter_wglMakeContextCurrentEXT_debug(HDC hDrawDC, HDC hReadDC, HGLRC hglr
 #endif // defined(WGL_EXT_make_current_read)
 #if defined(WGL_EXT_pbuffer)
 GLATTER_FBLOCK(return, WGL, , HPBUFFEREXT, WINAPI, wglCreatePbufferEXT, (hDC, iPixelFormat, iWidth, iHeight, piAttribList), (HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList))
-HPBUFFEREXT glatter_wglCreatePbufferEXT_debug(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList, const char* file, int line)
+GLATTER_INLINE_OR_NOT HPBUFFEREXT glatter_wglCreatePbufferEXT_debug(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCreatePbufferEXT, "(%s, %d, %d, %d, %p)", GET_PRS(hDC), (int)iPixelFormat, (int)iWidth, (int)iHeight, (void*)piAttribList)
     HPBUFFEREXT rval = glatter_wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
@@ -419,7 +419,7 @@ HPBUFFEREXT glatter_wglCreatePbufferEXT_debug(HDC hDC, int iPixelFormat, int iWi
 }
 #define wglCreatePbufferEXT_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDestroyPbufferEXT, (hPbuffer), (HPBUFFEREXT hPbuffer))
-BOOL glatter_wglDestroyPbufferEXT_debug(HPBUFFEREXT hPbuffer, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDestroyPbufferEXT_debug(HPBUFFEREXT hPbuffer, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDestroyPbufferEXT, "(%s)", GET_PRS(hPbuffer))
     BOOL rval = glatter_wglDestroyPbufferEXT(hPbuffer);
@@ -429,7 +429,7 @@ BOOL glatter_wglDestroyPbufferEXT_debug(HPBUFFEREXT hPbuffer, const char* file, 
 }
 #define wglDestroyPbufferEXT_defined
 GLATTER_FBLOCK(return, WGL, , HDC, WINAPI, wglGetPbufferDCEXT, (hPbuffer), (HPBUFFEREXT hPbuffer))
-HDC glatter_wglGetPbufferDCEXT_debug(HPBUFFEREXT hPbuffer, const char* file, int line)
+GLATTER_INLINE_OR_NOT HDC glatter_wglGetPbufferDCEXT_debug(HPBUFFEREXT hPbuffer, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetPbufferDCEXT, "(%s)", GET_PRS(hPbuffer))
     HDC rval = glatter_wglGetPbufferDCEXT(hPbuffer);
@@ -439,7 +439,7 @@ HDC glatter_wglGetPbufferDCEXT_debug(HPBUFFEREXT hPbuffer, const char* file, int
 }
 #define wglGetPbufferDCEXT_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQueryPbufferEXT, (hPbuffer, iAttribute, piValue), (HPBUFFEREXT hPbuffer, int iAttribute, int *piValue))
-BOOL glatter_wglQueryPbufferEXT_debug(HPBUFFEREXT hPbuffer, int iAttribute, int *piValue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQueryPbufferEXT_debug(HPBUFFEREXT hPbuffer, int iAttribute, int *piValue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQueryPbufferEXT, "(%s, %d, %p)", GET_PRS(hPbuffer), (int)iAttribute, (void*)piValue)
     BOOL rval = glatter_wglQueryPbufferEXT(hPbuffer, iAttribute, piValue);
@@ -449,7 +449,7 @@ BOOL glatter_wglQueryPbufferEXT_debug(HPBUFFEREXT hPbuffer, int iAttribute, int 
 }
 #define wglQueryPbufferEXT_defined
 GLATTER_FBLOCK(return, WGL, , int, WINAPI, wglReleasePbufferDCEXT, (hPbuffer, hDC), (HPBUFFEREXT hPbuffer, HDC hDC))
-int glatter_wglReleasePbufferDCEXT_debug(HPBUFFEREXT hPbuffer, HDC hDC, const char* file, int line)
+GLATTER_INLINE_OR_NOT int glatter_wglReleasePbufferDCEXT_debug(HPBUFFEREXT hPbuffer, HDC hDC, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglReleasePbufferDCEXT, "(%s, %s)", GET_PRS(hPbuffer), GET_PRS(hDC))
     int rval = glatter_wglReleasePbufferDCEXT(hPbuffer, hDC);
@@ -461,7 +461,7 @@ int glatter_wglReleasePbufferDCEXT_debug(HPBUFFEREXT hPbuffer, HDC hDC, const ch
 #endif // defined(WGL_EXT_pbuffer)
 #if defined(WGL_EXT_pixel_format)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglChoosePixelFormatEXT, (hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats), (HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats))
-BOOL glatter_wglChoosePixelFormatEXT_debug(HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglChoosePixelFormatEXT_debug(HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglChoosePixelFormatEXT, "(%s, %p, %p, %u, %p, %p)", GET_PRS(hdc), (void*)piAttribIList, (void*)pfAttribFList, (unsigned int)nMaxFormats, (void*)piFormats, (void*)nNumFormats)
     BOOL rval = glatter_wglChoosePixelFormatEXT(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
@@ -471,7 +471,7 @@ BOOL glatter_wglChoosePixelFormatEXT_debug(HDC hdc, const int *piAttribIList, co
 }
 #define wglChoosePixelFormatEXT_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetPixelFormatAttribfvEXT, (hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues), (HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int *piAttributes, FLOAT *pfValues))
-BOOL glatter_wglGetPixelFormatAttribfvEXT_debug(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int *piAttributes, FLOAT *pfValues, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetPixelFormatAttribfvEXT_debug(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int *piAttributes, FLOAT *pfValues, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetPixelFormatAttribfvEXT, "(%s, %d, %d, %u, %p, %p)", GET_PRS(hdc), (int)iPixelFormat, (int)iLayerPlane, (unsigned int)nAttributes, (void*)piAttributes, (void*)pfValues)
     BOOL rval = glatter_wglGetPixelFormatAttribfvEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
@@ -481,7 +481,7 @@ BOOL glatter_wglGetPixelFormatAttribfvEXT_debug(HDC hdc, int iPixelFormat, int i
 }
 #define wglGetPixelFormatAttribfvEXT_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetPixelFormatAttribivEXT, (hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues), (HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int *piAttributes, int *piValues))
-BOOL glatter_wglGetPixelFormatAttribivEXT_debug(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int *piAttributes, int *piValues, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetPixelFormatAttribivEXT_debug(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int *piAttributes, int *piValues, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetPixelFormatAttribivEXT, "(%s, %d, %d, %u, %p, %p)", GET_PRS(hdc), (int)iPixelFormat, (int)iLayerPlane, (unsigned int)nAttributes, (void*)piAttributes, (void*)piValues)
     BOOL rval = glatter_wglGetPixelFormatAttribivEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
@@ -493,7 +493,7 @@ BOOL glatter_wglGetPixelFormatAttribivEXT_debug(HDC hdc, int iPixelFormat, int i
 #endif // defined(WGL_EXT_pixel_format)
 #if defined(WGL_EXT_swap_control)
 GLATTER_FBLOCK(return, WGL, , int, WINAPI, wglGetSwapIntervalEXT, (), (void))
-int glatter_wglGetSwapIntervalEXT_debug(const char* file, int line)
+GLATTER_INLINE_OR_NOT int glatter_wglGetSwapIntervalEXT_debug(const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetSwapIntervalEXT, "()")
     int rval = glatter_wglGetSwapIntervalEXT();
@@ -503,7 +503,7 @@ int glatter_wglGetSwapIntervalEXT_debug(const char* file, int line)
 }
 #define wglGetSwapIntervalEXT_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglSwapIntervalEXT, (interval), (int interval))
-BOOL glatter_wglSwapIntervalEXT_debug(int interval, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglSwapIntervalEXT_debug(int interval, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSwapIntervalEXT, "(%d)", (int)interval)
     BOOL rval = glatter_wglSwapIntervalEXT(interval);
@@ -515,7 +515,7 @@ BOOL glatter_wglSwapIntervalEXT_debug(int interval, const char* file, int line)
 #endif // defined(WGL_EXT_swap_control)
 #if defined(WGL_I3D_digital_video_control)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetDigitalVideoParametersI3D, (hDC, iAttribute, piValue), (HDC hDC, int iAttribute, int *piValue))
-BOOL glatter_wglGetDigitalVideoParametersI3D_debug(HDC hDC, int iAttribute, int *piValue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetDigitalVideoParametersI3D_debug(HDC hDC, int iAttribute, int *piValue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetDigitalVideoParametersI3D, "(%s, %d, %p)", GET_PRS(hDC), (int)iAttribute, (void*)piValue)
     BOOL rval = glatter_wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
@@ -525,7 +525,7 @@ BOOL glatter_wglGetDigitalVideoParametersI3D_debug(HDC hDC, int iAttribute, int 
 }
 #define wglGetDigitalVideoParametersI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglSetDigitalVideoParametersI3D, (hDC, iAttribute, piValue), (HDC hDC, int iAttribute, const int *piValue))
-BOOL glatter_wglSetDigitalVideoParametersI3D_debug(HDC hDC, int iAttribute, const int *piValue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglSetDigitalVideoParametersI3D_debug(HDC hDC, int iAttribute, const int *piValue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSetDigitalVideoParametersI3D, "(%s, %d, %p)", GET_PRS(hDC), (int)iAttribute, (void*)piValue)
     BOOL rval = glatter_wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
@@ -537,7 +537,7 @@ BOOL glatter_wglSetDigitalVideoParametersI3D_debug(HDC hDC, int iAttribute, cons
 #endif // defined(WGL_I3D_digital_video_control)
 #if defined(WGL_I3D_gamma)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetGammaTableI3D, (hDC, iEntries, puRed, puGreen, puBlue), (HDC hDC, int iEntries, USHORT *puRed, USHORT *puGreen, USHORT *puBlue))
-BOOL glatter_wglGetGammaTableI3D_debug(HDC hDC, int iEntries, USHORT *puRed, USHORT *puGreen, USHORT *puBlue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetGammaTableI3D_debug(HDC hDC, int iEntries, USHORT *puRed, USHORT *puGreen, USHORT *puBlue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetGammaTableI3D, "(%s, %d, %p, %p, %p)", GET_PRS(hDC), (int)iEntries, (void*)puRed, (void*)puGreen, (void*)puBlue)
     BOOL rval = glatter_wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
@@ -547,7 +547,7 @@ BOOL glatter_wglGetGammaTableI3D_debug(HDC hDC, int iEntries, USHORT *puRed, USH
 }
 #define wglGetGammaTableI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetGammaTableParametersI3D, (hDC, iAttribute, piValue), (HDC hDC, int iAttribute, int *piValue))
-BOOL glatter_wglGetGammaTableParametersI3D_debug(HDC hDC, int iAttribute, int *piValue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetGammaTableParametersI3D_debug(HDC hDC, int iAttribute, int *piValue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetGammaTableParametersI3D, "(%s, %d, %p)", GET_PRS(hDC), (int)iAttribute, (void*)piValue)
     BOOL rval = glatter_wglGetGammaTableParametersI3D(hDC, iAttribute, piValue);
@@ -557,7 +557,7 @@ BOOL glatter_wglGetGammaTableParametersI3D_debug(HDC hDC, int iAttribute, int *p
 }
 #define wglGetGammaTableParametersI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglSetGammaTableI3D, (hDC, iEntries, puRed, puGreen, puBlue), (HDC hDC, int iEntries, const USHORT *puRed, const USHORT *puGreen, const USHORT *puBlue))
-BOOL glatter_wglSetGammaTableI3D_debug(HDC hDC, int iEntries, const USHORT *puRed, const USHORT *puGreen, const USHORT *puBlue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglSetGammaTableI3D_debug(HDC hDC, int iEntries, const USHORT *puRed, const USHORT *puGreen, const USHORT *puBlue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSetGammaTableI3D, "(%s, %d, %p, %p, %p)", GET_PRS(hDC), (int)iEntries, (void*)puRed, (void*)puGreen, (void*)puBlue)
     BOOL rval = glatter_wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
@@ -567,7 +567,7 @@ BOOL glatter_wglSetGammaTableI3D_debug(HDC hDC, int iEntries, const USHORT *puRe
 }
 #define wglSetGammaTableI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglSetGammaTableParametersI3D, (hDC, iAttribute, piValue), (HDC hDC, int iAttribute, const int *piValue))
-BOOL glatter_wglSetGammaTableParametersI3D_debug(HDC hDC, int iAttribute, const int *piValue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglSetGammaTableParametersI3D_debug(HDC hDC, int iAttribute, const int *piValue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSetGammaTableParametersI3D, "(%s, %d, %p)", GET_PRS(hDC), (int)iAttribute, (void*)piValue)
     BOOL rval = glatter_wglSetGammaTableParametersI3D(hDC, iAttribute, piValue);
@@ -579,7 +579,7 @@ BOOL glatter_wglSetGammaTableParametersI3D_debug(HDC hDC, int iAttribute, const 
 #endif // defined(WGL_I3D_gamma)
 #if defined(WGL_I3D_genlock)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDisableGenlockI3D, (hDC), (HDC hDC))
-BOOL glatter_wglDisableGenlockI3D_debug(HDC hDC, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDisableGenlockI3D_debug(HDC hDC, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDisableGenlockI3D, "(%s)", GET_PRS(hDC))
     BOOL rval = glatter_wglDisableGenlockI3D(hDC);
@@ -589,7 +589,7 @@ BOOL glatter_wglDisableGenlockI3D_debug(HDC hDC, const char* file, int line)
 }
 #define wglDisableGenlockI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglEnableGenlockI3D, (hDC), (HDC hDC))
-BOOL glatter_wglEnableGenlockI3D_debug(HDC hDC, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglEnableGenlockI3D_debug(HDC hDC, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglEnableGenlockI3D, "(%s)", GET_PRS(hDC))
     BOOL rval = glatter_wglEnableGenlockI3D(hDC);
@@ -599,7 +599,7 @@ BOOL glatter_wglEnableGenlockI3D_debug(HDC hDC, const char* file, int line)
 }
 #define wglEnableGenlockI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGenlockSampleRateI3D, (hDC, uRate), (HDC hDC, UINT uRate))
-BOOL glatter_wglGenlockSampleRateI3D_debug(HDC hDC, UINT uRate, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGenlockSampleRateI3D_debug(HDC hDC, UINT uRate, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGenlockSampleRateI3D, "(%s, %u)", GET_PRS(hDC), (unsigned int)uRate)
     BOOL rval = glatter_wglGenlockSampleRateI3D(hDC, uRate);
@@ -609,7 +609,7 @@ BOOL glatter_wglGenlockSampleRateI3D_debug(HDC hDC, UINT uRate, const char* file
 }
 #define wglGenlockSampleRateI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGenlockSourceDelayI3D, (hDC, uDelay), (HDC hDC, UINT uDelay))
-BOOL glatter_wglGenlockSourceDelayI3D_debug(HDC hDC, UINT uDelay, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGenlockSourceDelayI3D_debug(HDC hDC, UINT uDelay, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGenlockSourceDelayI3D, "(%s, %u)", GET_PRS(hDC), (unsigned int)uDelay)
     BOOL rval = glatter_wglGenlockSourceDelayI3D(hDC, uDelay);
@@ -619,7 +619,7 @@ BOOL glatter_wglGenlockSourceDelayI3D_debug(HDC hDC, UINT uDelay, const char* fi
 }
 #define wglGenlockSourceDelayI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGenlockSourceEdgeI3D, (hDC, uEdge), (HDC hDC, UINT uEdge))
-BOOL glatter_wglGenlockSourceEdgeI3D_debug(HDC hDC, UINT uEdge, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGenlockSourceEdgeI3D_debug(HDC hDC, UINT uEdge, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGenlockSourceEdgeI3D, "(%s, %u)", GET_PRS(hDC), (unsigned int)uEdge)
     BOOL rval = glatter_wglGenlockSourceEdgeI3D(hDC, uEdge);
@@ -629,7 +629,7 @@ BOOL glatter_wglGenlockSourceEdgeI3D_debug(HDC hDC, UINT uEdge, const char* file
 }
 #define wglGenlockSourceEdgeI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGenlockSourceI3D, (hDC, uSource), (HDC hDC, UINT uSource))
-BOOL glatter_wglGenlockSourceI3D_debug(HDC hDC, UINT uSource, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGenlockSourceI3D_debug(HDC hDC, UINT uSource, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGenlockSourceI3D, "(%s, %u)", GET_PRS(hDC), (unsigned int)uSource)
     BOOL rval = glatter_wglGenlockSourceI3D(hDC, uSource);
@@ -639,7 +639,7 @@ BOOL glatter_wglGenlockSourceI3D_debug(HDC hDC, UINT uSource, const char* file, 
 }
 #define wglGenlockSourceI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetGenlockSampleRateI3D, (hDC, uRate), (HDC hDC, UINT *uRate))
-BOOL glatter_wglGetGenlockSampleRateI3D_debug(HDC hDC, UINT *uRate, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetGenlockSampleRateI3D_debug(HDC hDC, UINT *uRate, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetGenlockSampleRateI3D, "(%s, %p)", GET_PRS(hDC), (void*)uRate)
     BOOL rval = glatter_wglGetGenlockSampleRateI3D(hDC, uRate);
@@ -649,7 +649,7 @@ BOOL glatter_wglGetGenlockSampleRateI3D_debug(HDC hDC, UINT *uRate, const char* 
 }
 #define wglGetGenlockSampleRateI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetGenlockSourceDelayI3D, (hDC, uDelay), (HDC hDC, UINT *uDelay))
-BOOL glatter_wglGetGenlockSourceDelayI3D_debug(HDC hDC, UINT *uDelay, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetGenlockSourceDelayI3D_debug(HDC hDC, UINT *uDelay, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetGenlockSourceDelayI3D, "(%s, %p)", GET_PRS(hDC), (void*)uDelay)
     BOOL rval = glatter_wglGetGenlockSourceDelayI3D(hDC, uDelay);
@@ -659,7 +659,7 @@ BOOL glatter_wglGetGenlockSourceDelayI3D_debug(HDC hDC, UINT *uDelay, const char
 }
 #define wglGetGenlockSourceDelayI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetGenlockSourceEdgeI3D, (hDC, uEdge), (HDC hDC, UINT *uEdge))
-BOOL glatter_wglGetGenlockSourceEdgeI3D_debug(HDC hDC, UINT *uEdge, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetGenlockSourceEdgeI3D_debug(HDC hDC, UINT *uEdge, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetGenlockSourceEdgeI3D, "(%s, %p)", GET_PRS(hDC), (void*)uEdge)
     BOOL rval = glatter_wglGetGenlockSourceEdgeI3D(hDC, uEdge);
@@ -669,7 +669,7 @@ BOOL glatter_wglGetGenlockSourceEdgeI3D_debug(HDC hDC, UINT *uEdge, const char* 
 }
 #define wglGetGenlockSourceEdgeI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetGenlockSourceI3D, (hDC, uSource), (HDC hDC, UINT *uSource))
-BOOL glatter_wglGetGenlockSourceI3D_debug(HDC hDC, UINT *uSource, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetGenlockSourceI3D_debug(HDC hDC, UINT *uSource, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetGenlockSourceI3D, "(%s, %p)", GET_PRS(hDC), (void*)uSource)
     BOOL rval = glatter_wglGetGenlockSourceI3D(hDC, uSource);
@@ -679,7 +679,7 @@ BOOL glatter_wglGetGenlockSourceI3D_debug(HDC hDC, UINT *uSource, const char* fi
 }
 #define wglGetGenlockSourceI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglIsEnabledGenlockI3D, (hDC, pFlag), (HDC hDC, BOOL *pFlag))
-BOOL glatter_wglIsEnabledGenlockI3D_debug(HDC hDC, BOOL *pFlag, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglIsEnabledGenlockI3D_debug(HDC hDC, BOOL *pFlag, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglIsEnabledGenlockI3D, "(%s, %p)", GET_PRS(hDC), (void*)pFlag)
     BOOL rval = glatter_wglIsEnabledGenlockI3D(hDC, pFlag);
@@ -689,7 +689,7 @@ BOOL glatter_wglIsEnabledGenlockI3D_debug(HDC hDC, BOOL *pFlag, const char* file
 }
 #define wglIsEnabledGenlockI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQueryGenlockMaxSourceDelayI3D, (hDC, uMaxLineDelay, uMaxPixelDelay), (HDC hDC, UINT *uMaxLineDelay, UINT *uMaxPixelDelay))
-BOOL glatter_wglQueryGenlockMaxSourceDelayI3D_debug(HDC hDC, UINT *uMaxLineDelay, UINT *uMaxPixelDelay, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQueryGenlockMaxSourceDelayI3D_debug(HDC hDC, UINT *uMaxLineDelay, UINT *uMaxPixelDelay, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQueryGenlockMaxSourceDelayI3D, "(%s, %p, %p)", GET_PRS(hDC), (void*)uMaxLineDelay, (void*)uMaxPixelDelay)
     BOOL rval = glatter_wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay);
@@ -701,7 +701,7 @@ BOOL glatter_wglQueryGenlockMaxSourceDelayI3D_debug(HDC hDC, UINT *uMaxLineDelay
 #endif // defined(WGL_I3D_genlock)
 #if defined(WGL_I3D_image_buffer)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglAssociateImageBufferEventsI3D, (hDC, pEvent, pAddress, pSize, count), (HDC hDC, const HANDLE *pEvent, const LPVOID *pAddress, const DWORD *pSize, UINT count))
-BOOL glatter_wglAssociateImageBufferEventsI3D_debug(HDC hDC, const HANDLE *pEvent, const LPVOID *pAddress, const DWORD *pSize, UINT count, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglAssociateImageBufferEventsI3D_debug(HDC hDC, const HANDLE *pEvent, const LPVOID *pAddress, const DWORD *pSize, UINT count, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglAssociateImageBufferEventsI3D, "(%s, %p, %p, %p, %u)", GET_PRS(hDC), (void*)pEvent, (void*)pAddress, (void*)pSize, (unsigned int)count)
     BOOL rval = glatter_wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count);
@@ -711,7 +711,7 @@ BOOL glatter_wglAssociateImageBufferEventsI3D_debug(HDC hDC, const HANDLE *pEven
 }
 #define wglAssociateImageBufferEventsI3D_defined
 GLATTER_FBLOCK(return, WGL, , LPVOID, WINAPI, wglCreateImageBufferI3D, (hDC, dwSize, uFlags), (HDC hDC, DWORD dwSize, UINT uFlags))
-LPVOID glatter_wglCreateImageBufferI3D_debug(HDC hDC, DWORD dwSize, UINT uFlags, const char* file, int line)
+GLATTER_INLINE_OR_NOT LPVOID glatter_wglCreateImageBufferI3D_debug(HDC hDC, DWORD dwSize, UINT uFlags, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCreateImageBufferI3D, "(%s, %lu, %u)", GET_PRS(hDC), (unsigned long)dwSize, (unsigned int)uFlags)
     LPVOID rval = glatter_wglCreateImageBufferI3D(hDC, dwSize, uFlags);
@@ -721,7 +721,7 @@ LPVOID glatter_wglCreateImageBufferI3D_debug(HDC hDC, DWORD dwSize, UINT uFlags,
 }
 #define wglCreateImageBufferI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDestroyImageBufferI3D, (hDC, pAddress), (HDC hDC, LPVOID pAddress))
-BOOL glatter_wglDestroyImageBufferI3D_debug(HDC hDC, LPVOID pAddress, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDestroyImageBufferI3D_debug(HDC hDC, LPVOID pAddress, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDestroyImageBufferI3D, "(%s, %s)", GET_PRS(hDC), GET_PRS(pAddress))
     BOOL rval = glatter_wglDestroyImageBufferI3D(hDC, pAddress);
@@ -731,7 +731,7 @@ BOOL glatter_wglDestroyImageBufferI3D_debug(HDC hDC, LPVOID pAddress, const char
 }
 #define wglDestroyImageBufferI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglReleaseImageBufferEventsI3D, (hDC, pAddress, count), (HDC hDC, const LPVOID *pAddress, UINT count))
-BOOL glatter_wglReleaseImageBufferEventsI3D_debug(HDC hDC, const LPVOID *pAddress, UINT count, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglReleaseImageBufferEventsI3D_debug(HDC hDC, const LPVOID *pAddress, UINT count, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglReleaseImageBufferEventsI3D, "(%s, %p, %u)", GET_PRS(hDC), (void*)pAddress, (unsigned int)count)
     BOOL rval = glatter_wglReleaseImageBufferEventsI3D(hDC, pAddress, count);
@@ -743,7 +743,7 @@ BOOL glatter_wglReleaseImageBufferEventsI3D_debug(HDC hDC, const LPVOID *pAddres
 #endif // defined(WGL_I3D_image_buffer)
 #if defined(WGL_I3D_swap_frame_lock)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDisableFrameLockI3D, (), (void))
-BOOL glatter_wglDisableFrameLockI3D_debug(const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDisableFrameLockI3D_debug(const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDisableFrameLockI3D, "()")
     BOOL rval = glatter_wglDisableFrameLockI3D();
@@ -753,7 +753,7 @@ BOOL glatter_wglDisableFrameLockI3D_debug(const char* file, int line)
 }
 #define wglDisableFrameLockI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglEnableFrameLockI3D, (), (void))
-BOOL glatter_wglEnableFrameLockI3D_debug(const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglEnableFrameLockI3D_debug(const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglEnableFrameLockI3D, "()")
     BOOL rval = glatter_wglEnableFrameLockI3D();
@@ -763,7 +763,7 @@ BOOL glatter_wglEnableFrameLockI3D_debug(const char* file, int line)
 }
 #define wglEnableFrameLockI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglIsEnabledFrameLockI3D, (pFlag), (BOOL *pFlag))
-BOOL glatter_wglIsEnabledFrameLockI3D_debug(BOOL *pFlag, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglIsEnabledFrameLockI3D_debug(BOOL *pFlag, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglIsEnabledFrameLockI3D, "(%p)", (void*)pFlag)
     BOOL rval = glatter_wglIsEnabledFrameLockI3D(pFlag);
@@ -773,7 +773,7 @@ BOOL glatter_wglIsEnabledFrameLockI3D_debug(BOOL *pFlag, const char* file, int l
 }
 #define wglIsEnabledFrameLockI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQueryFrameLockMasterI3D, (pFlag), (BOOL *pFlag))
-BOOL glatter_wglQueryFrameLockMasterI3D_debug(BOOL *pFlag, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQueryFrameLockMasterI3D_debug(BOOL *pFlag, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQueryFrameLockMasterI3D, "(%p)", (void*)pFlag)
     BOOL rval = glatter_wglQueryFrameLockMasterI3D(pFlag);
@@ -785,7 +785,7 @@ BOOL glatter_wglQueryFrameLockMasterI3D_debug(BOOL *pFlag, const char* file, int
 #endif // defined(WGL_I3D_swap_frame_lock)
 #if defined(WGL_I3D_swap_frame_usage)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglBeginFrameTrackingI3D, (), (void))
-BOOL glatter_wglBeginFrameTrackingI3D_debug(const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglBeginFrameTrackingI3D_debug(const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglBeginFrameTrackingI3D, "()")
     BOOL rval = glatter_wglBeginFrameTrackingI3D();
@@ -795,7 +795,7 @@ BOOL glatter_wglBeginFrameTrackingI3D_debug(const char* file, int line)
 }
 #define wglBeginFrameTrackingI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglEndFrameTrackingI3D, (), (void))
-BOOL glatter_wglEndFrameTrackingI3D_debug(const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglEndFrameTrackingI3D_debug(const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglEndFrameTrackingI3D, "()")
     BOOL rval = glatter_wglEndFrameTrackingI3D();
@@ -805,7 +805,7 @@ BOOL glatter_wglEndFrameTrackingI3D_debug(const char* file, int line)
 }
 #define wglEndFrameTrackingI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetFrameUsageI3D, (pUsage), (float *pUsage))
-BOOL glatter_wglGetFrameUsageI3D_debug(float *pUsage, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetFrameUsageI3D_debug(float *pUsage, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetFrameUsageI3D, "(%p)", (void*)pUsage)
     BOOL rval = glatter_wglGetFrameUsageI3D(pUsage);
@@ -815,7 +815,7 @@ BOOL glatter_wglGetFrameUsageI3D_debug(float *pUsage, const char* file, int line
 }
 #define wglGetFrameUsageI3D_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQueryFrameTrackingI3D, (pFrameCount, pMissedFrames, pLastMissedUsage), (DWORD *pFrameCount, DWORD *pMissedFrames, float *pLastMissedUsage))
-BOOL glatter_wglQueryFrameTrackingI3D_debug(DWORD *pFrameCount, DWORD *pMissedFrames, float *pLastMissedUsage, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQueryFrameTrackingI3D_debug(DWORD *pFrameCount, DWORD *pMissedFrames, float *pLastMissedUsage, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQueryFrameTrackingI3D, "(%p, %p, %p)", (void*)pFrameCount, (void*)pMissedFrames, (void*)pLastMissedUsage)
     BOOL rval = glatter_wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage);
@@ -827,7 +827,7 @@ BOOL glatter_wglQueryFrameTrackingI3D_debug(DWORD *pFrameCount, DWORD *pMissedFr
 #endif // defined(WGL_I3D_swap_frame_usage)
 #if defined(WGL_NV_DX_interop)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDXCloseDeviceNV, (hDevice), (HANDLE hDevice))
-BOOL glatter_wglDXCloseDeviceNV_debug(HANDLE hDevice, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDXCloseDeviceNV_debug(HANDLE hDevice, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDXCloseDeviceNV, "(%s)", GET_PRS(hDevice))
     BOOL rval = glatter_wglDXCloseDeviceNV(hDevice);
@@ -837,7 +837,7 @@ BOOL glatter_wglDXCloseDeviceNV_debug(HANDLE hDevice, const char* file, int line
 }
 #define wglDXCloseDeviceNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDXLockObjectsNV, (hDevice, count, hObjects), (HANDLE hDevice, GLint count, HANDLE *hObjects))
-BOOL glatter_wglDXLockObjectsNV_debug(HANDLE hDevice, GLint count, HANDLE *hObjects, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDXLockObjectsNV_debug(HANDLE hDevice, GLint count, HANDLE *hObjects, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDXLockObjectsNV, "(%s, %d, %p)", GET_PRS(hDevice), (int)count, (void*)hObjects)
     BOOL rval = glatter_wglDXLockObjectsNV(hDevice, count, hObjects);
@@ -847,7 +847,7 @@ BOOL glatter_wglDXLockObjectsNV_debug(HANDLE hDevice, GLint count, HANDLE *hObje
 }
 #define wglDXLockObjectsNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDXObjectAccessNV, (hObject, access), (HANDLE hObject, GLenum access))
-BOOL glatter_wglDXObjectAccessNV_debug(HANDLE hObject, GLenum access, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDXObjectAccessNV_debug(HANDLE hObject, GLenum access, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDXObjectAccessNV, "(%s, %s)", GET_PRS(hObject), enum_to_string_GL(access))
     BOOL rval = glatter_wglDXObjectAccessNV(hObject, access);
@@ -857,7 +857,7 @@ BOOL glatter_wglDXObjectAccessNV_debug(HANDLE hObject, GLenum access, const char
 }
 #define wglDXObjectAccessNV_defined
 GLATTER_FBLOCK(return, WGL, , HANDLE, WINAPI, wglDXOpenDeviceNV, (dxDevice), (void *dxDevice))
-HANDLE glatter_wglDXOpenDeviceNV_debug(void *dxDevice, const char* file, int line)
+GLATTER_INLINE_OR_NOT HANDLE glatter_wglDXOpenDeviceNV_debug(void *dxDevice, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDXOpenDeviceNV, "(%p)", (void*)dxDevice)
     HANDLE rval = glatter_wglDXOpenDeviceNV(dxDevice);
@@ -867,7 +867,7 @@ HANDLE glatter_wglDXOpenDeviceNV_debug(void *dxDevice, const char* file, int lin
 }
 #define wglDXOpenDeviceNV_defined
 GLATTER_FBLOCK(return, WGL, , HANDLE, WINAPI, wglDXRegisterObjectNV, (hDevice, dxObject, name, type, access), (HANDLE hDevice, void *dxObject, GLuint name, GLenum type, GLenum access))
-HANDLE glatter_wglDXRegisterObjectNV_debug(HANDLE hDevice, void *dxObject, GLuint name, GLenum type, GLenum access, const char* file, int line)
+GLATTER_INLINE_OR_NOT HANDLE glatter_wglDXRegisterObjectNV_debug(HANDLE hDevice, void *dxObject, GLuint name, GLenum type, GLenum access, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDXRegisterObjectNV, "(%s, %p, %u, %s, %s)", GET_PRS(hDevice), (void*)dxObject, (unsigned int)name, enum_to_string_GL(type), enum_to_string_GL(access))
     HANDLE rval = glatter_wglDXRegisterObjectNV(hDevice, dxObject, name, type, access);
@@ -877,7 +877,7 @@ HANDLE glatter_wglDXRegisterObjectNV_debug(HANDLE hDevice, void *dxObject, GLuin
 }
 #define wglDXRegisterObjectNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDXSetResourceShareHandleNV, (dxObject, shareHandle), (void *dxObject, HANDLE shareHandle))
-BOOL glatter_wglDXSetResourceShareHandleNV_debug(void *dxObject, HANDLE shareHandle, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDXSetResourceShareHandleNV_debug(void *dxObject, HANDLE shareHandle, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDXSetResourceShareHandleNV, "(%p, %s)", (void*)dxObject, GET_PRS(shareHandle))
     BOOL rval = glatter_wglDXSetResourceShareHandleNV(dxObject, shareHandle);
@@ -887,7 +887,7 @@ BOOL glatter_wglDXSetResourceShareHandleNV_debug(void *dxObject, HANDLE shareHan
 }
 #define wglDXSetResourceShareHandleNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDXUnlockObjectsNV, (hDevice, count, hObjects), (HANDLE hDevice, GLint count, HANDLE *hObjects))
-BOOL glatter_wglDXUnlockObjectsNV_debug(HANDLE hDevice, GLint count, HANDLE *hObjects, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDXUnlockObjectsNV_debug(HANDLE hDevice, GLint count, HANDLE *hObjects, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDXUnlockObjectsNV, "(%s, %d, %p)", GET_PRS(hDevice), (int)count, (void*)hObjects)
     BOOL rval = glatter_wglDXUnlockObjectsNV(hDevice, count, hObjects);
@@ -897,7 +897,7 @@ BOOL glatter_wglDXUnlockObjectsNV_debug(HANDLE hDevice, GLint count, HANDLE *hOb
 }
 #define wglDXUnlockObjectsNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDXUnregisterObjectNV, (hDevice, hObject), (HANDLE hDevice, HANDLE hObject))
-BOOL glatter_wglDXUnregisterObjectNV_debug(HANDLE hDevice, HANDLE hObject, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDXUnregisterObjectNV_debug(HANDLE hDevice, HANDLE hObject, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDXUnregisterObjectNV, "(%s, %s)", GET_PRS(hDevice), GET_PRS(hObject))
     BOOL rval = glatter_wglDXUnregisterObjectNV(hDevice, hObject);
@@ -909,7 +909,7 @@ BOOL glatter_wglDXUnregisterObjectNV_debug(HANDLE hDevice, HANDLE hObject, const
 #endif // defined(WGL_NV_DX_interop)
 #if defined(WGL_NV_copy_image)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglCopyImageSubDataNV, (hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth), (HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth))
-BOOL glatter_wglCopyImageSubDataNV_debug(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglCopyImageSubDataNV_debug(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCopyImageSubDataNV, "(%s, %u, %s, %d, %d, %d, %d, %s, %u, %s, %d, %d, %d, %d, %d, %d, %d)", GET_PRS(hSrcRC), (unsigned int)srcName, enum_to_string_GL(srcTarget), (int)srcLevel, (int)srcX, (int)srcY, (int)srcZ, GET_PRS(hDstRC), (unsigned int)dstName, enum_to_string_GL(dstTarget), (int)dstLevel, (int)dstX, (int)dstY, (int)dstZ, (int)width, (int)height, (int)depth)
     BOOL rval = glatter_wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
@@ -921,7 +921,7 @@ BOOL glatter_wglCopyImageSubDataNV_debug(HGLRC hSrcRC, GLuint srcName, GLenum sr
 #endif // defined(WGL_NV_copy_image)
 #if defined(WGL_NV_delay_before_swap)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDelayBeforeSwapNV, (hDC, seconds), (HDC hDC, GLfloat seconds))
-BOOL glatter_wglDelayBeforeSwapNV_debug(HDC hDC, GLfloat seconds, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDelayBeforeSwapNV_debug(HDC hDC, GLfloat seconds, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDelayBeforeSwapNV, "(%s, %f)", GET_PRS(hDC), (float)seconds)
     BOOL rval = glatter_wglDelayBeforeSwapNV(hDC, seconds);
@@ -933,7 +933,7 @@ BOOL glatter_wglDelayBeforeSwapNV_debug(HDC hDC, GLfloat seconds, const char* fi
 #endif // defined(WGL_NV_delay_before_swap)
 #if defined(WGL_NV_gpu_affinity)
 GLATTER_FBLOCK(return, WGL, , HDC, WINAPI, wglCreateAffinityDCNV, (phGpuList), (const HGPUNV *phGpuList))
-HDC glatter_wglCreateAffinityDCNV_debug(const HGPUNV *phGpuList, const char* file, int line)
+GLATTER_INLINE_OR_NOT HDC glatter_wglCreateAffinityDCNV_debug(const HGPUNV *phGpuList, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglCreateAffinityDCNV, "(%p)", (void*)phGpuList)
     HDC rval = glatter_wglCreateAffinityDCNV(phGpuList);
@@ -943,7 +943,7 @@ HDC glatter_wglCreateAffinityDCNV_debug(const HGPUNV *phGpuList, const char* fil
 }
 #define wglCreateAffinityDCNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglDeleteDCNV, (hdc), (HDC hdc))
-BOOL glatter_wglDeleteDCNV_debug(HDC hdc, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglDeleteDCNV_debug(HDC hdc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglDeleteDCNV, "(%s)", GET_PRS(hdc))
     BOOL rval = glatter_wglDeleteDCNV(hdc);
@@ -953,7 +953,7 @@ BOOL glatter_wglDeleteDCNV_debug(HDC hdc, const char* file, int line)
 }
 #define wglDeleteDCNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglEnumGpuDevicesNV, (hGpu, iDeviceIndex, lpGpuDevice), (HGPUNV hGpu, UINT iDeviceIndex, PGPU_DEVICE lpGpuDevice))
-BOOL glatter_wglEnumGpuDevicesNV_debug(HGPUNV hGpu, UINT iDeviceIndex, PGPU_DEVICE lpGpuDevice, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglEnumGpuDevicesNV_debug(HGPUNV hGpu, UINT iDeviceIndex, PGPU_DEVICE lpGpuDevice, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglEnumGpuDevicesNV, "(%s, %u, %s)", GET_PRS(hGpu), (unsigned int)iDeviceIndex, GET_PRS(lpGpuDevice))
     BOOL rval = glatter_wglEnumGpuDevicesNV(hGpu, iDeviceIndex, lpGpuDevice);
@@ -963,7 +963,7 @@ BOOL glatter_wglEnumGpuDevicesNV_debug(HGPUNV hGpu, UINT iDeviceIndex, PGPU_DEVI
 }
 #define wglEnumGpuDevicesNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglEnumGpusFromAffinityDCNV, (hAffinityDC, iGpuIndex, hGpu), (HDC hAffinityDC, UINT iGpuIndex, HGPUNV *hGpu))
-BOOL glatter_wglEnumGpusFromAffinityDCNV_debug(HDC hAffinityDC, UINT iGpuIndex, HGPUNV *hGpu, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglEnumGpusFromAffinityDCNV_debug(HDC hAffinityDC, UINT iGpuIndex, HGPUNV *hGpu, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglEnumGpusFromAffinityDCNV, "(%s, %u, %p)", GET_PRS(hAffinityDC), (unsigned int)iGpuIndex, (void*)hGpu)
     BOOL rval = glatter_wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu);
@@ -973,7 +973,7 @@ BOOL glatter_wglEnumGpusFromAffinityDCNV_debug(HDC hAffinityDC, UINT iGpuIndex, 
 }
 #define wglEnumGpusFromAffinityDCNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglEnumGpusNV, (iGpuIndex, phGpu), (UINT iGpuIndex, HGPUNV *phGpu))
-BOOL glatter_wglEnumGpusNV_debug(UINT iGpuIndex, HGPUNV *phGpu, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglEnumGpusNV_debug(UINT iGpuIndex, HGPUNV *phGpu, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglEnumGpusNV, "(%u, %p)", (unsigned int)iGpuIndex, (void*)phGpu)
     BOOL rval = glatter_wglEnumGpusNV(iGpuIndex, phGpu);
@@ -985,7 +985,7 @@ BOOL glatter_wglEnumGpusNV_debug(UINT iGpuIndex, HGPUNV *phGpu, const char* file
 #endif // defined(WGL_NV_gpu_affinity)
 #if defined(WGL_NV_present_video)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglBindVideoDeviceNV, (hDC, uVideoSlot, hVideoDevice, piAttribList), (HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList))
-BOOL glatter_wglBindVideoDeviceNV_debug(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglBindVideoDeviceNV_debug(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglBindVideoDeviceNV, "(%s, %u, %s, %p)", GET_PRS(hDC), (unsigned int)uVideoSlot, GET_PRS(hVideoDevice), (void*)piAttribList)
     BOOL rval = glatter_wglBindVideoDeviceNV(hDC, uVideoSlot, hVideoDevice, piAttribList);
@@ -995,7 +995,7 @@ BOOL glatter_wglBindVideoDeviceNV_debug(HDC hDC, unsigned int uVideoSlot, HVIDEO
 }
 #define wglBindVideoDeviceNV_defined
 GLATTER_FBLOCK(return, WGL, , int, WINAPI, wglEnumerateVideoDevicesNV, (hDC, phDeviceList), (HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList))
-int glatter_wglEnumerateVideoDevicesNV_debug(HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList, const char* file, int line)
+GLATTER_INLINE_OR_NOT int glatter_wglEnumerateVideoDevicesNV_debug(HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglEnumerateVideoDevicesNV, "(%s, %p)", GET_PRS(hDC), (void*)phDeviceList)
     int rval = glatter_wglEnumerateVideoDevicesNV(hDC, phDeviceList);
@@ -1005,7 +1005,7 @@ int glatter_wglEnumerateVideoDevicesNV_debug(HDC hDC, HVIDEOOUTPUTDEVICENV *phDe
 }
 #define wglEnumerateVideoDevicesNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQueryCurrentContextNV, (iAttribute, piValue), (int iAttribute, int *piValue))
-BOOL glatter_wglQueryCurrentContextNV_debug(int iAttribute, int *piValue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQueryCurrentContextNV_debug(int iAttribute, int *piValue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQueryCurrentContextNV, "(%d, %p)", (int)iAttribute, (void*)piValue)
     BOOL rval = glatter_wglQueryCurrentContextNV(iAttribute, piValue);
@@ -1017,7 +1017,7 @@ BOOL glatter_wglQueryCurrentContextNV_debug(int iAttribute, int *piValue, const 
 #endif // defined(WGL_NV_present_video)
 #if defined(WGL_NV_swap_group)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglBindSwapBarrierNV, (group, barrier), (GLuint group, GLuint barrier))
-BOOL glatter_wglBindSwapBarrierNV_debug(GLuint group, GLuint barrier, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglBindSwapBarrierNV_debug(GLuint group, GLuint barrier, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglBindSwapBarrierNV, "(%u, %u)", (unsigned int)group, (unsigned int)barrier)
     BOOL rval = glatter_wglBindSwapBarrierNV(group, barrier);
@@ -1027,7 +1027,7 @@ BOOL glatter_wglBindSwapBarrierNV_debug(GLuint group, GLuint barrier, const char
 }
 #define wglBindSwapBarrierNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglJoinSwapGroupNV, (hDC, group), (HDC hDC, GLuint group))
-BOOL glatter_wglJoinSwapGroupNV_debug(HDC hDC, GLuint group, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglJoinSwapGroupNV_debug(HDC hDC, GLuint group, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglJoinSwapGroupNV, "(%s, %u)", GET_PRS(hDC), (unsigned int)group)
     BOOL rval = glatter_wglJoinSwapGroupNV(hDC, group);
@@ -1037,7 +1037,7 @@ BOOL glatter_wglJoinSwapGroupNV_debug(HDC hDC, GLuint group, const char* file, i
 }
 #define wglJoinSwapGroupNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQueryFrameCountNV, (hDC, count), (HDC hDC, GLuint *count))
-BOOL glatter_wglQueryFrameCountNV_debug(HDC hDC, GLuint *count, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQueryFrameCountNV_debug(HDC hDC, GLuint *count, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQueryFrameCountNV, "(%s, %p)", GET_PRS(hDC), (void*)count)
     BOOL rval = glatter_wglQueryFrameCountNV(hDC, count);
@@ -1047,7 +1047,7 @@ BOOL glatter_wglQueryFrameCountNV_debug(HDC hDC, GLuint *count, const char* file
 }
 #define wglQueryFrameCountNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQueryMaxSwapGroupsNV, (hDC, maxGroups, maxBarriers), (HDC hDC, GLuint *maxGroups, GLuint *maxBarriers))
-BOOL glatter_wglQueryMaxSwapGroupsNV_debug(HDC hDC, GLuint *maxGroups, GLuint *maxBarriers, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQueryMaxSwapGroupsNV_debug(HDC hDC, GLuint *maxGroups, GLuint *maxBarriers, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQueryMaxSwapGroupsNV, "(%s, %p, %p)", GET_PRS(hDC), (void*)maxGroups, (void*)maxBarriers)
     BOOL rval = glatter_wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers);
@@ -1057,7 +1057,7 @@ BOOL glatter_wglQueryMaxSwapGroupsNV_debug(HDC hDC, GLuint *maxGroups, GLuint *m
 }
 #define wglQueryMaxSwapGroupsNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQuerySwapGroupNV, (hDC, group, barrier), (HDC hDC, GLuint *group, GLuint *barrier))
-BOOL glatter_wglQuerySwapGroupNV_debug(HDC hDC, GLuint *group, GLuint *barrier, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQuerySwapGroupNV_debug(HDC hDC, GLuint *group, GLuint *barrier, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQuerySwapGroupNV, "(%s, %p, %p)", GET_PRS(hDC), (void*)group, (void*)barrier)
     BOOL rval = glatter_wglQuerySwapGroupNV(hDC, group, barrier);
@@ -1067,7 +1067,7 @@ BOOL glatter_wglQuerySwapGroupNV_debug(HDC hDC, GLuint *group, GLuint *barrier, 
 }
 #define wglQuerySwapGroupNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglResetFrameCountNV, (hDC), (HDC hDC))
-BOOL glatter_wglResetFrameCountNV_debug(HDC hDC, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglResetFrameCountNV_debug(HDC hDC, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglResetFrameCountNV, "(%s)", GET_PRS(hDC))
     BOOL rval = glatter_wglResetFrameCountNV(hDC);
@@ -1079,7 +1079,7 @@ BOOL glatter_wglResetFrameCountNV_debug(HDC hDC, const char* file, int line)
 #endif // defined(WGL_NV_swap_group)
 #if defined(WGL_NV_vertex_array_range)
 GLATTER_FBLOCK(return, WGL, , void *, WINAPI, wglAllocateMemoryNV, (size, readfreq, writefreq, priority), (GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority))
-void * glatter_wglAllocateMemoryNV_debug(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority, const char* file, int line)
+GLATTER_INLINE_OR_NOT void * glatter_wglAllocateMemoryNV_debug(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglAllocateMemoryNV, "(%d, %f, %f, %f)", (int)size, (float)readfreq, (float)writefreq, (float)priority)
     void * rval = glatter_wglAllocateMemoryNV(size, readfreq, writefreq, priority);
@@ -1089,7 +1089,7 @@ void * glatter_wglAllocateMemoryNV_debug(GLsizei size, GLfloat readfreq, GLfloat
 }
 #define wglAllocateMemoryNV_defined
 GLATTER_FBLOCK(, WGL, , void, WINAPI, wglFreeMemoryNV, (pointer), (void *pointer))
-void glatter_wglFreeMemoryNV_debug(void *pointer, const char* file, int line)
+GLATTER_INLINE_OR_NOT void glatter_wglFreeMemoryNV_debug(void *pointer, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglFreeMemoryNV, "(%p)", (void*)pointer)
     glatter_wglFreeMemoryNV(pointer);
@@ -1099,7 +1099,7 @@ void glatter_wglFreeMemoryNV_debug(void *pointer, const char* file, int line)
 #endif // defined(WGL_NV_vertex_array_range)
 #if defined(WGL_NV_video_capture)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglBindVideoCaptureDeviceNV, (uVideoSlot, hDevice), (UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice))
-BOOL glatter_wglBindVideoCaptureDeviceNV_debug(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglBindVideoCaptureDeviceNV_debug(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglBindVideoCaptureDeviceNV, "(%u, %s)", (unsigned int)uVideoSlot, GET_PRS(hDevice))
     BOOL rval = glatter_wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice);
@@ -1109,7 +1109,7 @@ BOOL glatter_wglBindVideoCaptureDeviceNV_debug(UINT uVideoSlot, HVIDEOINPUTDEVIC
 }
 #define wglBindVideoCaptureDeviceNV_defined
 GLATTER_FBLOCK(return, WGL, , UINT, WINAPI, wglEnumerateVideoCaptureDevicesNV, (hDc, phDeviceList), (HDC hDc, HVIDEOINPUTDEVICENV *phDeviceList))
-UINT glatter_wglEnumerateVideoCaptureDevicesNV_debug(HDC hDc, HVIDEOINPUTDEVICENV *phDeviceList, const char* file, int line)
+GLATTER_INLINE_OR_NOT UINT glatter_wglEnumerateVideoCaptureDevicesNV_debug(HDC hDc, HVIDEOINPUTDEVICENV *phDeviceList, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglEnumerateVideoCaptureDevicesNV, "(%s, %p)", GET_PRS(hDc), (void*)phDeviceList)
     UINT rval = glatter_wglEnumerateVideoCaptureDevicesNV(hDc, phDeviceList);
@@ -1119,7 +1119,7 @@ UINT glatter_wglEnumerateVideoCaptureDevicesNV_debug(HDC hDc, HVIDEOINPUTDEVICEN
 }
 #define wglEnumerateVideoCaptureDevicesNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglLockVideoCaptureDeviceNV, (hDc, hDevice), (HDC hDc, HVIDEOINPUTDEVICENV hDevice))
-BOOL glatter_wglLockVideoCaptureDeviceNV_debug(HDC hDc, HVIDEOINPUTDEVICENV hDevice, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglLockVideoCaptureDeviceNV_debug(HDC hDc, HVIDEOINPUTDEVICENV hDevice, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglLockVideoCaptureDeviceNV, "(%s, %s)", GET_PRS(hDc), GET_PRS(hDevice))
     BOOL rval = glatter_wglLockVideoCaptureDeviceNV(hDc, hDevice);
@@ -1129,7 +1129,7 @@ BOOL glatter_wglLockVideoCaptureDeviceNV_debug(HDC hDc, HVIDEOINPUTDEVICENV hDev
 }
 #define wglLockVideoCaptureDeviceNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglQueryVideoCaptureDeviceNV, (hDc, hDevice, iAttribute, piValue), (HDC hDc, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int *piValue))
-BOOL glatter_wglQueryVideoCaptureDeviceNV_debug(HDC hDc, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int *piValue, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglQueryVideoCaptureDeviceNV_debug(HDC hDc, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int *piValue, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglQueryVideoCaptureDeviceNV, "(%s, %s, %d, %p)", GET_PRS(hDc), GET_PRS(hDevice), (int)iAttribute, (void*)piValue)
     BOOL rval = glatter_wglQueryVideoCaptureDeviceNV(hDc, hDevice, iAttribute, piValue);
@@ -1139,7 +1139,7 @@ BOOL glatter_wglQueryVideoCaptureDeviceNV_debug(HDC hDc, HVIDEOINPUTDEVICENV hDe
 }
 #define wglQueryVideoCaptureDeviceNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglReleaseVideoCaptureDeviceNV, (hDc, hDevice), (HDC hDc, HVIDEOINPUTDEVICENV hDevice))
-BOOL glatter_wglReleaseVideoCaptureDeviceNV_debug(HDC hDc, HVIDEOINPUTDEVICENV hDevice, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglReleaseVideoCaptureDeviceNV_debug(HDC hDc, HVIDEOINPUTDEVICENV hDevice, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglReleaseVideoCaptureDeviceNV, "(%s, %s)", GET_PRS(hDc), GET_PRS(hDevice))
     BOOL rval = glatter_wglReleaseVideoCaptureDeviceNV(hDc, hDevice);
@@ -1151,7 +1151,7 @@ BOOL glatter_wglReleaseVideoCaptureDeviceNV_debug(HDC hDc, HVIDEOINPUTDEVICENV h
 #endif // defined(WGL_NV_video_capture)
 #if defined(WGL_NV_video_output)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglBindVideoImageNV, (hVideoDevice, hPbuffer, iVideoBuffer), (HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer))
-BOOL glatter_wglBindVideoImageNV_debug(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglBindVideoImageNV_debug(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglBindVideoImageNV, "(%s, %s, %d)", GET_PRS(hVideoDevice), GET_PRS(hPbuffer), (int)iVideoBuffer)
     BOOL rval = glatter_wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer);
@@ -1161,7 +1161,7 @@ BOOL glatter_wglBindVideoImageNV_debug(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbu
 }
 #define wglBindVideoImageNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetVideoDeviceNV, (hDC, numDevices, hVideoDevice), (HDC hDC, int numDevices, HPVIDEODEV *hVideoDevice))
-BOOL glatter_wglGetVideoDeviceNV_debug(HDC hDC, int numDevices, HPVIDEODEV *hVideoDevice, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetVideoDeviceNV_debug(HDC hDC, int numDevices, HPVIDEODEV *hVideoDevice, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetVideoDeviceNV, "(%s, %d, %p)", GET_PRS(hDC), (int)numDevices, (void*)hVideoDevice)
     BOOL rval = glatter_wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice);
@@ -1171,7 +1171,7 @@ BOOL glatter_wglGetVideoDeviceNV_debug(HDC hDC, int numDevices, HPVIDEODEV *hVid
 }
 #define wglGetVideoDeviceNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetVideoInfoNV, (hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo), (HPVIDEODEV hpVideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo))
-BOOL glatter_wglGetVideoInfoNV_debug(HPVIDEODEV hpVideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetVideoInfoNV_debug(HPVIDEODEV hpVideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetVideoInfoNV, "(%s, %p, %p)", GET_PRS(hpVideoDevice), (void*)pulCounterOutputPbuffer, (void*)pulCounterOutputVideo)
     BOOL rval = glatter_wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
@@ -1181,7 +1181,7 @@ BOOL glatter_wglGetVideoInfoNV_debug(HPVIDEODEV hpVideoDevice, unsigned long *pu
 }
 #define wglGetVideoInfoNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglReleaseVideoDeviceNV, (hVideoDevice), (HPVIDEODEV hVideoDevice))
-BOOL glatter_wglReleaseVideoDeviceNV_debug(HPVIDEODEV hVideoDevice, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglReleaseVideoDeviceNV_debug(HPVIDEODEV hVideoDevice, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglReleaseVideoDeviceNV, "(%s)", GET_PRS(hVideoDevice))
     BOOL rval = glatter_wglReleaseVideoDeviceNV(hVideoDevice);
@@ -1191,7 +1191,7 @@ BOOL glatter_wglReleaseVideoDeviceNV_debug(HPVIDEODEV hVideoDevice, const char* 
 }
 #define wglReleaseVideoDeviceNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglReleaseVideoImageNV, (hPbuffer, iVideoBuffer), (HPBUFFERARB hPbuffer, int iVideoBuffer))
-BOOL glatter_wglReleaseVideoImageNV_debug(HPBUFFERARB hPbuffer, int iVideoBuffer, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglReleaseVideoImageNV_debug(HPBUFFERARB hPbuffer, int iVideoBuffer, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglReleaseVideoImageNV, "(%s, %d)", GET_PRS(hPbuffer), (int)iVideoBuffer)
     BOOL rval = glatter_wglReleaseVideoImageNV(hPbuffer, iVideoBuffer);
@@ -1201,7 +1201,7 @@ BOOL glatter_wglReleaseVideoImageNV_debug(HPBUFFERARB hPbuffer, int iVideoBuffer
 }
 #define wglReleaseVideoImageNV_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglSendPbufferToVideoNV, (hPbuffer, iBufferType, pulCounterPbuffer, bBlock), (HPBUFFERARB hPbuffer, int iBufferType, unsigned long *pulCounterPbuffer, BOOL bBlock))
-BOOL glatter_wglSendPbufferToVideoNV_debug(HPBUFFERARB hPbuffer, int iBufferType, unsigned long *pulCounterPbuffer, BOOL bBlock, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglSendPbufferToVideoNV_debug(HPBUFFERARB hPbuffer, int iBufferType, unsigned long *pulCounterPbuffer, BOOL bBlock, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSendPbufferToVideoNV, "(%s, %d, %p, %li)", GET_PRS(hPbuffer), (int)iBufferType, (void*)pulCounterPbuffer, (long)bBlock)
     BOOL rval = glatter_wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock);
@@ -1213,7 +1213,7 @@ BOOL glatter_wglSendPbufferToVideoNV_debug(HPBUFFERARB hPbuffer, int iBufferType
 #endif // defined(WGL_NV_video_output)
 #if defined(WGL_OML_sync_control)
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetMscRateOML, (hdc, numerator, denominator), (HDC hdc, INT32 *numerator, INT32 *denominator))
-BOOL glatter_wglGetMscRateOML_debug(HDC hdc, INT32 *numerator, INT32 *denominator, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetMscRateOML_debug(HDC hdc, INT32 *numerator, INT32 *denominator, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetMscRateOML, "(%s, %p, %p)", GET_PRS(hdc), (void*)numerator, (void*)denominator)
     BOOL rval = glatter_wglGetMscRateOML(hdc, numerator, denominator);
@@ -1223,7 +1223,7 @@ BOOL glatter_wglGetMscRateOML_debug(HDC hdc, INT32 *numerator, INT32 *denominato
 }
 #define wglGetMscRateOML_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglGetSyncValuesOML, (hdc, ust, msc, sbc), (HDC hdc, INT64 *ust, INT64 *msc, INT64 *sbc))
-BOOL glatter_wglGetSyncValuesOML_debug(HDC hdc, INT64 *ust, INT64 *msc, INT64 *sbc, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglGetSyncValuesOML_debug(HDC hdc, INT64 *ust, INT64 *msc, INT64 *sbc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetSyncValuesOML, "(%s, %p, %p, %p)", GET_PRS(hdc), (void*)ust, (void*)msc, (void*)sbc)
     BOOL rval = glatter_wglGetSyncValuesOML(hdc, ust, msc, sbc);
@@ -1233,7 +1233,7 @@ BOOL glatter_wglGetSyncValuesOML_debug(HDC hdc, INT64 *ust, INT64 *msc, INT64 *s
 }
 #define wglGetSyncValuesOML_defined
 GLATTER_FBLOCK(return, WGL, , INT64, WINAPI, wglSwapBuffersMscOML, (hdc, target_msc, divisor, remainder), (HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder))
-INT64 glatter_wglSwapBuffersMscOML_debug(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, const char* file, int line)
+GLATTER_INLINE_OR_NOT INT64 glatter_wglSwapBuffersMscOML_debug(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSwapBuffersMscOML, "(%s, %s, %s, %s)", GET_PRS(hdc), GET_PRS(target_msc), GET_PRS(divisor), GET_PRS(remainder))
     INT64 rval = glatter_wglSwapBuffersMscOML(hdc, target_msc, divisor, remainder);
@@ -1243,7 +1243,7 @@ INT64 glatter_wglSwapBuffersMscOML_debug(HDC hdc, INT64 target_msc, INT64 diviso
 }
 #define wglSwapBuffersMscOML_defined
 GLATTER_FBLOCK(return, WGL, , INT64, WINAPI, wglSwapLayerBuffersMscOML, (hdc, fuPlanes, target_msc, divisor, remainder), (HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder))
-INT64 glatter_wglSwapLayerBuffersMscOML_debug(HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder, const char* file, int line)
+GLATTER_INLINE_OR_NOT INT64 glatter_wglSwapLayerBuffersMscOML_debug(HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSwapLayerBuffersMscOML, "(%s, %d, %s, %s, %s)", GET_PRS(hdc), (int)fuPlanes, GET_PRS(target_msc), GET_PRS(divisor), GET_PRS(remainder))
     INT64 rval = glatter_wglSwapLayerBuffersMscOML(hdc, fuPlanes, target_msc, divisor, remainder);
@@ -1253,7 +1253,7 @@ INT64 glatter_wglSwapLayerBuffersMscOML_debug(HDC hdc, int fuPlanes, INT64 targe
 }
 #define wglSwapLayerBuffersMscOML_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglWaitForMscOML, (hdc, target_msc, divisor, remainder, ust, msc, sbc), (HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 *ust, INT64 *msc, INT64 *sbc))
-BOOL glatter_wglWaitForMscOML_debug(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 *ust, INT64 *msc, INT64 *sbc, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglWaitForMscOML_debug(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 *ust, INT64 *msc, INT64 *sbc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglWaitForMscOML, "(%s, %s, %s, %s, %p, %p, %p)", GET_PRS(hdc), GET_PRS(target_msc), GET_PRS(divisor), GET_PRS(remainder), (void*)ust, (void*)msc, (void*)sbc)
     BOOL rval = glatter_wglWaitForMscOML(hdc, target_msc, divisor, remainder, ust, msc, sbc);
@@ -1263,7 +1263,7 @@ BOOL glatter_wglWaitForMscOML_debug(HDC hdc, INT64 target_msc, INT64 divisor, IN
 }
 #define wglWaitForMscOML_defined
 GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglWaitForSbcOML, (hdc, target_sbc, ust, msc, sbc), (HDC hdc, INT64 target_sbc, INT64 *ust, INT64 *msc, INT64 *sbc))
-BOOL glatter_wglWaitForSbcOML_debug(HDC hdc, INT64 target_sbc, INT64 *ust, INT64 *msc, INT64 *sbc, const char* file, int line)
+GLATTER_INLINE_OR_NOT BOOL glatter_wglWaitForSbcOML_debug(HDC hdc, INT64 target_sbc, INT64 *ust, INT64 *msc, INT64 *sbc, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglWaitForSbcOML, "(%s, %s, %p, %p, %p)", GET_PRS(hdc), GET_PRS(target_sbc), (void*)ust, (void*)msc, (void*)sbc)
     BOOL rval = glatter_wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc);

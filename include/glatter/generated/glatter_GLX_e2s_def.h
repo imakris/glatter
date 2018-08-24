@@ -480,7 +480,7 @@ const char* enum_to_string_GLX(GLenum e)
         case 0x9126: return "GLX_CONTEXT_PROFILE_MASK_ARB";
 #endif
         case 0x186a0:
-#if defined(GLX_H) || defined(GLX_VERSION_1_4)
+#if defined(GLX_VERSION_1_4) || defined(GLX_H)
                     return "GLX_SAMPLE_BUFFERS";
 #endif
 #if defined(GLX_ARB_multisample)
@@ -494,7 +494,7 @@ const char* enum_to_string_GLX(GLenum e)
 #if defined(GLX_NV_multisample_coverage)
                     return "GLX_COVERAGE_SAMPLES_NV";
 #endif
-#if defined(GLX_H) || defined(GLX_VERSION_1_4)
+#if defined(GLX_VERSION_1_4) || defined(GLX_H)
                     return "GLX_SAMPLES";
 #endif
 #if defined(GLX_ARB_multisample)

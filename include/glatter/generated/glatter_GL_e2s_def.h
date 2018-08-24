@@ -31,7 +31,7 @@ GLATTER_INLINE_OR_NOT
 const char* enum_to_string_GL(GLenum e)
 {
     switch (e) {
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x0: return "GL_POINTS";
         case 0x1: return "GL_LINES";
         case 0x2: return "GL_LINE_LOOP";
@@ -40,7 +40,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x5: return "GL_TRIANGLE_STRIP";
         case 0x6: return "GL_TRIANGLE_FAN";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0x7: return "GL_QUADS";
 #endif
 #if defined(__gl_h_)
@@ -52,7 +52,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x103: return "GL_MULT";
         case 0x104: return "GL_ADD";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x200: return "GL_NEVER";
         case 0x201: return "GL_LESS";
         case 0x202: return "GL_EQUAL";
@@ -71,28 +71,28 @@ const char* enum_to_string_GL(GLenum e)
         case 0x307: return "GL_ONE_MINUS_DST_COLOR";
 #endif
         case 0x308:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
                     return "GL_SRC_ALPHA_SATURATE";
 #endif
 #if defined(GL_EXT_blend_func_extended)
                     return "GL_SRC_ALPHA_SATURATE_EXT";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0x400: return "GL_FRONT_LEFT";
         case 0x401: return "GL_FRONT_RIGHT";
         case 0x402: return "GL_BACK_LEFT";
         case 0x403: return "GL_BACK_RIGHT";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x404: return "GL_FRONT";
         case 0x405: return "GL_BACK";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0x406: return "GL_LEFT";
         case 0x407: return "GL_RIGHT";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x408: return "GL_FRONT_AND_BACK";
 #endif
 #if defined(__gl_h_)
@@ -101,13 +101,13 @@ const char* enum_to_string_GL(GLenum e)
         case 0x40b: return "GL_AUX2";
         case 0x40c: return "GL_AUX3";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x500: return "GL_INVALID_ENUM";
         case 0x501: return "GL_INVALID_VALUE";
         case 0x502: return "GL_INVALID_OPERATION";
 #endif
         case 0x503:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_3_2)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
                     return "GL_STACK_OVERFLOW";
 #endif
 #if defined(GL_KHR_debug)
@@ -115,18 +115,18 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x504:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_3_2)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
                     return "GL_STACK_UNDERFLOW";
 #endif
 #if defined(GL_KHR_debug)
                     return "GL_STACK_UNDERFLOW_KHR";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x505: return "GL_OUT_OF_MEMORY";
 #endif
         case 0x506:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_INVALID_FRAMEBUFFER_OPERATION";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -134,7 +134,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x507:
-#if defined(GL_VERSION_4_5) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_5)
                     return "GL_CONTEXT_LOST";
 #endif
 #if defined(GL_KHR_robustness)
@@ -158,7 +158,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x800: return "GL_EXP";
         case 0x801: return "GL_EXP2";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x900: return "GL_CW";
         case 0x901: return "GL_CCW";
 #endif
@@ -178,11 +178,11 @@ const char* enum_to_string_GL(GLenum e)
         case 0xb09: return "GL_CURRENT_RASTER_DISTANCE";
         case 0xb10: return "GL_POINT_SMOOTH";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xb11: return "GL_POINT_SIZE";
 #endif
         case 0xb12:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
                     return "GL_POINT_SIZE_RANGE";
 #endif
 #if defined(__gl_h_) || defined(GL_VERSION_1_2)
@@ -190,21 +190,21 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0xb13:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_POINT_SIZE_GRANULARITY";
 #endif
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_SMOOTH_POINT_SIZE_GRANULARITY";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xb20: return "GL_LINE_SMOOTH";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xb21: return "GL_LINE_WIDTH";
 #endif
         case 0xb22:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
                     return "GL_LINE_WIDTH_RANGE";
 #endif
 #if defined(__gl_h_) || defined(GL_VERSION_1_2)
@@ -212,10 +212,10 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0xb23:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_LINE_WIDTH_GRANULARITY";
 #endif
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_SMOOTH_LINE_WIDTH_GRANULARITY";
 #endif
             break;
@@ -229,21 +229,21 @@ const char* enum_to_string_GL(GLenum e)
         case 0xb33: return "GL_LIST_INDEX";
 #endif
         case 0xb40:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_POLYGON_MODE";
 #endif
 #if defined(GL_NV_polygon_mode)
                     return "GL_POLYGON_MODE_NV";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0xb41: return "GL_POLYGON_SMOOTH";
 #endif
 #if defined(__gl_h_)
         case 0xb42: return "GL_POLYGON_STIPPLE";
         case 0xb43: return "GL_EDGE_FLAG";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xb44: return "GL_CULL_FACE";
         case 0xb45: return "GL_CULL_FACE_MODE";
         case 0xb46: return "GL_FRONT_FACE";
@@ -265,7 +265,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0xb65: return "GL_FOG_MODE";
         case 0xb66: return "GL_FOG_COLOR";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xb70: return "GL_DEPTH_RANGE";
         case 0xb71: return "GL_DEPTH_TEST";
         case 0xb72: return "GL_DEPTH_WRITEMASK";
@@ -275,7 +275,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(__gl_h_)
         case 0xb80: return "GL_ACCUM_CLEAR_VALUE";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xb90: return "GL_STENCIL_TEST";
         case 0xb91: return "GL_STENCIL_CLEAR_VALUE";
         case 0xb92: return "GL_STENCIL_FUNC";
@@ -290,7 +290,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0xba0: return "GL_MATRIX_MODE";
         case 0xba1: return "GL_NORMALIZE";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xba2: return "GL_VIEWPORT";
 #endif
         case 0xba3:
@@ -363,17 +363,17 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_ALPHA_TEST_REF_QCOM";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xbd0: return "GL_DITHER";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xbe0: return "GL_BLEND_DST";
         case 0xbe1: return "GL_BLEND_SRC";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xbe2: return "GL_BLEND";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xbf0: return "GL_LOGIC_OP_MODE";
 #endif
         case 0xbf1:
@@ -384,14 +384,14 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_LOGIC_OP";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_)
+#if defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0xbf2: return "GL_COLOR_LOGIC_OP";
 #endif
 #if defined(__gl_h_)
         case 0xc00: return "GL_AUX_BUFFERS";
 #endif
         case 0xc01:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_DRAW_BUFFER";
 #endif
 #if defined(GL_EXT_multiview_draw_buffers)
@@ -399,7 +399,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0xc02:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_READ_BUFFER";
 #endif
 #if defined(GL_EXT_multiview_draw_buffers)
@@ -409,7 +409,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_READ_BUFFER_NV";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xc10: return "GL_SCISSOR_BOX";
         case 0xc11: return "GL_SCISSOR_TEST";
 #endif
@@ -417,7 +417,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0xc20: return "GL_INDEX_CLEAR_VALUE";
         case 0xc21: return "GL_INDEX_WRITEMASK";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xc22: return "GL_COLOR_CLEAR_VALUE";
         case 0xc23: return "GL_COLOR_WRITEMASK";
 #endif
@@ -425,7 +425,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0xc30: return "GL_INDEX_MODE";
         case 0xc31: return "GL_RGBA_MODE";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0xc32: return "GL_DOUBLEBUFFER";
         case 0xc33: return "GL_STEREO";
 #endif
@@ -434,8 +434,10 @@ const char* enum_to_string_GL(GLenum e)
         case 0xc50: return "GL_PERSPECTIVE_CORRECTION_HINT";
         case 0xc51: return "GL_POINT_SMOOTH_HINT";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xc52: return "GL_LINE_SMOOTH_HINT";
+#endif
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0xc53: return "GL_POLYGON_SMOOTH_HINT";
 #endif
 #if defined(__gl_h_)
@@ -465,12 +467,12 @@ const char* enum_to_string_GL(GLenum e)
         case 0xcb8: return "GL_PIXEL_MAP_B_TO_B_SIZE";
         case 0xcb9: return "GL_PIXEL_MAP_A_TO_A_SIZE";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0xcf0: return "GL_UNPACK_SWAP_BYTES";
         case 0xcf1: return "GL_UNPACK_LSB_FIRST";
 #endif
         case 0xcf2:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_UNPACK_ROW_LENGTH";
 #endif
 #if defined(GL_EXT_unpack_subimage)
@@ -478,7 +480,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0xcf3:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_UNPACK_SKIP_ROWS";
 #endif
 #if defined(GL_EXT_unpack_subimage)
@@ -486,26 +488,26 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0xcf4:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_UNPACK_SKIP_PIXELS";
 #endif
 #if defined(GL_EXT_unpack_subimage)
                     return "GL_UNPACK_SKIP_PIXELS_EXT";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xcf5: return "GL_UNPACK_ALIGNMENT";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0xd00: return "GL_PACK_SWAP_BYTES";
         case 0xd01: return "GL_PACK_LSB_FIRST";
 #endif
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0xd02: return "GL_PACK_ROW_LENGTH";
         case 0xd03: return "GL_PACK_SKIP_ROWS";
         case 0xd04: return "GL_PACK_SKIP_PIXELS";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xd05: return "GL_PACK_ALIGNMENT";
 #endif
 #if defined(__gl_h_)
@@ -542,7 +544,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_MAX_CLIP_PLANES";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xd33: return "GL_MAX_TEXTURE_SIZE";
 #endif
 #if defined(__gl_h_)
@@ -571,7 +573,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(__gl_h_)
         case 0xd39: return "GL_MAX_TEXTURE_STACK_DEPTH";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xd3a: return "GL_MAX_VIEWPORT_DIMS";
 #endif
 #if defined(__gl_h_)
@@ -601,10 +603,10 @@ const char* enum_to_string_GL(GLenum e)
         case 0xdd2: return "GL_MAP2_GRID_DOMAIN";
         case 0xdd3: return "GL_MAP2_GRID_SEGMENTS";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0xde0: return "GL_TEXTURE_1D";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0xde1: return "GL_TEXTURE_2D";
 #endif
 #if defined(__gl_h_)
@@ -614,7 +616,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0xdf3: return "GL_SELECTION_BUFFER_POINTER";
         case 0xdf4: return "GL_SELECTION_BUFFER_SIZE";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0x1000: return "GL_TEXTURE_WIDTH";
         case 0x1001: return "GL_TEXTURE_HEIGHT";
 #endif
@@ -622,12 +624,12 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(__gl_h_)
                     return "GL_TEXTURE_COMPONENTS";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_TEXTURE_INTERNAL_FORMAT";
 #endif
             break;
         case 0x1004:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_2) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_TEXTURE_BORDER_COLOR";
 #endif
 #if defined(GL_EXT_texture_border_clamp)
@@ -646,7 +648,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_4_5)
         case 0x1006: return "GL_TEXTURE_TARGET";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x1100: return "GL_DONT_CARE";
         case 0x1101: return "GL_FASTEST";
         case 0x1102: return "GL_NICEST";
@@ -665,13 +667,17 @@ const char* enum_to_string_GL(GLenum e)
         case 0x1300: return "GL_COMPILE";
         case 0x1301: return "GL_COMPILE_AND_EXECUTE";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x1400: return "GL_BYTE";
         case 0x1401: return "GL_UNSIGNED_BYTE";
         case 0x1402: return "GL_SHORT";
         case 0x1403: return "GL_UNSIGNED_SHORT";
+#endif
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0x1404: return "GL_INT";
         case 0x1405: return "GL_UNSIGNED_INT";
+#endif
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x1406: return "GL_FLOAT";
 #endif
         case 0x1407:
@@ -716,7 +722,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x140c:
-#if defined(__gl_h_) || defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_4_1)
                     return "GL_FIXED";
 #endif
 #if defined(GL_OES_fixed_point)
@@ -739,7 +745,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_UNSIGNED_INT64_NV";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x1500: return "GL_CLEAR";
         case 0x1501: return "GL_AND";
         case 0x1502: return "GL_AND_REVERSE";
@@ -748,22 +754,22 @@ const char* enum_to_string_GL(GLenum e)
         case 0x1505: return "GL_NOOP";
 #endif
         case 0x1506:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
                     return "GL_XOR";
 #endif
 #if defined(GL_NV_blend_equation_advanced)
                     return "GL_XOR_NV";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x1507: return "GL_OR";
         case 0x1508: return "GL_NOR";
         case 0x1509: return "GL_EQUIV";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x150a: return "GL_INVERT";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x150b: return "GL_OR_REVERSE";
         case 0x150c: return "GL_COPY_INVERTED";
         case 0x150d: return "GL_OR_INVERTED";
@@ -798,11 +804,11 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_PROJECTION";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x1702: return "GL_TEXTURE";
 #endif
         case 0x1800:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_COLOR";
 #endif
 #if defined(GL_EXT_discard_framebuffer)
@@ -810,7 +816,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x1801:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_DEPTH";
 #endif
 #if defined(GL_EXT_discard_framebuffer)
@@ -818,7 +824,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x1802:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_STENCIL";
 #endif
 #if defined(GL_EXT_discard_framebuffer)
@@ -829,18 +835,18 @@ const char* enum_to_string_GL(GLenum e)
         case 0x1900: return "GL_COLOR_INDEX";
 #endif
         case 0x1901:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_STENCIL_INDEX";
 #endif
 #if defined(GL_OES_texture_stencil8)
                     return "GL_STENCIL_INDEX_OES";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
         case 0x1902: return "GL_DEPTH_COMPONENT";
 #endif
         case 0x1903:
-#if defined(GL_VERSION_1_1) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_RED";
 #endif
 #if defined(GL_EXT_texture_rg)
@@ -851,7 +857,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x1904:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_GREEN";
 #endif
 #if defined(GL_NV_blend_equation_advanced)
@@ -859,14 +865,14 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x1905:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_BLUE";
 #endif
 #if defined(GL_NV_blend_equation_advanced)
                     return "GL_BLUE_NV";
 #endif
             break;
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x1906: return "GL_ALPHA";
         case 0x1907: return "GL_RGB";
         case 0x1908: return "GL_RGBA";
@@ -879,7 +885,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x1a00: return "GL_BITMAP";
 #endif
         case 0x1b00:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_POINT";
 #endif
 #if defined(GL_NV_polygon_mode)
@@ -887,7 +893,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x1b01:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_LINE";
 #endif
 #if defined(GL_NV_polygon_mode)
@@ -895,7 +901,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x1b02:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0)
+#if defined(GL_VERSION_1_0) || defined(__gl_h_) || defined(GL_VERSION_1_1)
                     return "GL_FILL";
 #endif
 #if defined(GL_NV_polygon_mode)
@@ -909,7 +915,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x1d00: return "GL_FLAT";
         case 0x1d01: return "GL_SMOOTH";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x1e00: return "GL_KEEP";
         case 0x1e01: return "GL_REPLACE";
         case 0x1e02: return "GL_INCR";
@@ -952,7 +958,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x2501: return "GL_OBJECT_PLANE";
         case 0x2502: return "GL_EYE_PLANE";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x2600: return "GL_NEAREST";
         case 0x2601: return "GL_LINEAR";
         case 0x2700: return "GL_NEAREST_MIPMAP_NEAREST";
@@ -967,10 +973,10 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(__gl_h_)
         case 0x2900: return "GL_CLAMP";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_VERSION_1_0) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_0) || defined(GL_VERSION_1_1)
         case 0x2901: return "GL_REPEAT";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_1)
         case 0x2a00: return "GL_POLYGON_OFFSET_UNITS";
 #endif
         case 0x2a01:
@@ -1128,7 +1134,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8000: return "GL_ABGR_EXT";
 #endif
         case 0x8001:
-#if defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4) || defined(__gl_h_)
                     return "GL_CONSTANT_COLOR";
 #endif
 #if defined(GL_EXT_blend_color)
@@ -1136,7 +1142,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8002:
-#if defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4) || defined(__gl_h_)
                     return "GL_ONE_MINUS_CONSTANT_COLOR";
 #endif
 #if defined(GL_EXT_blend_color)
@@ -1144,7 +1150,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8003:
-#if defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4) || defined(__gl_h_)
                     return "GL_CONSTANT_ALPHA";
 #endif
 #if defined(GL_EXT_blend_color)
@@ -1152,7 +1158,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8004:
-#if defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4) || defined(__gl_h_)
                     return "GL_ONE_MINUS_CONSTANT_ALPHA";
 #endif
 #if defined(GL_EXT_blend_color)
@@ -1160,7 +1166,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8005:
-#if defined(GL_ARB_imaging) || defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4) || defined(__gl_h_) || defined(GL_ARB_imaging)
                     return "GL_BLEND_COLOR";
 #endif
 #if defined(GL_EXT_blend_color)
@@ -1168,7 +1174,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8006:
-#if defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4) || defined(__gl_h_)
                     return "GL_FUNC_ADD";
 #endif
 #if defined(GL_EXT_blend_minmax)
@@ -1176,7 +1182,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8007:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_OES_draw_buffers_indexed)
+#if defined(GL_OES_draw_buffers_indexed) || defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_4) || defined(__gl_h_)
                     return "GL_MIN";
 #endif
 #if defined(GL_EXT_blend_minmax)
@@ -1184,7 +1190,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8008:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_OES_draw_buffers_indexed)
+#if defined(GL_OES_draw_buffers_indexed) || defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_4) || defined(__gl_h_)
                     return "GL_MAX";
 #endif
 #if defined(GL_EXT_blend_minmax)
@@ -1192,13 +1198,13 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8009:
-#if defined(GL_ARB_imaging) || defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4) || defined(__gl_h_) || defined(GL_ARB_imaging)
                     return "GL_BLEND_EQUATION";
 #endif
 #if defined(GL_EXT_blend_minmax)
                     return "GL_BLEND_EQUATION_EXT";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_BLEND_EQUATION_RGB";
 #endif
 #if defined(GL_EXT_blend_equation_separate)
@@ -1206,7 +1212,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x800a:
-#if defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4) || defined(__gl_h_)
                     return "GL_FUNC_SUBTRACT";
 #endif
 #if defined(GL_EXT_blend_subtract)
@@ -1214,7 +1220,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x800b:
-#if defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4) || defined(__gl_h_)
                     return "GL_FUNC_REVERSE_SUBTRACT";
 #endif
 #if defined(GL_EXT_blend_subtract)
@@ -1228,7 +1234,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x800f: return "GL_UNPACK_CMYK_HINT_EXT";
 #endif
         case 0x8010:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONVOLUTION_1D";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1236,7 +1242,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8011:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONVOLUTION_2D";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1244,7 +1250,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8012:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_SEPARABLE_2D";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1252,7 +1258,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8013:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONVOLUTION_BORDER_MODE";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1260,7 +1266,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8014:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONVOLUTION_FILTER_SCALE";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1268,7 +1274,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8015:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONVOLUTION_FILTER_BIAS";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1276,7 +1282,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8016:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_REDUCE";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1284,7 +1290,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8017:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONVOLUTION_FORMAT";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1292,7 +1298,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8018:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONVOLUTION_WIDTH";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1300,7 +1306,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8019:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONVOLUTION_HEIGHT";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1308,7 +1314,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x801a:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_MAX_CONVOLUTION_WIDTH";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1316,7 +1322,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x801b:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_MAX_CONVOLUTION_HEIGHT";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1324,7 +1330,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x801c:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_CONVOLUTION_RED_SCALE";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1332,7 +1338,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x801d:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_CONVOLUTION_GREEN_SCALE";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1340,7 +1346,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x801e:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_CONVOLUTION_BLUE_SCALE";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1348,7 +1354,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x801f:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_CONVOLUTION_ALPHA_SCALE";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1356,7 +1362,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8020:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_CONVOLUTION_RED_BIAS";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1364,7 +1370,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8021:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_CONVOLUTION_GREEN_BIAS";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1372,7 +1378,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8022:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_CONVOLUTION_BLUE_BIAS";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1380,7 +1386,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8023:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_CONVOLUTION_ALPHA_BIAS";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1388,7 +1394,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8024:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_HISTOGRAM";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1396,7 +1402,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8025:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_PROXY_HISTOGRAM";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1404,7 +1410,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8026:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_HISTOGRAM_WIDTH";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1412,7 +1418,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8027:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_HISTOGRAM_FORMAT";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1420,7 +1426,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8028:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_HISTOGRAM_RED_SIZE";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1428,7 +1434,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8029:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_HISTOGRAM_GREEN_SIZE";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1436,7 +1442,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x802a:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_HISTOGRAM_BLUE_SIZE";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1444,7 +1450,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x802b:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_HISTOGRAM_ALPHA_SIZE";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1452,7 +1458,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x802c:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_HISTOGRAM_LUMINANCE_SIZE";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1460,7 +1466,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x802d:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_HISTOGRAM_SINK";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1468,7 +1474,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x802e:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_MINMAX";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1476,7 +1482,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x802f:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_MINMAX_FORMAT";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1484,7 +1490,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8030:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_MINMAX_SINK";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1492,7 +1498,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8031:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_TABLE_TOO_LARGE";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1500,7 +1506,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8032:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_UNSIGNED_BYTE_3_3_2";
 #endif
 #if defined(GL_EXT_packed_pixels)
@@ -1508,7 +1514,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8033:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_2)
                     return "GL_UNSIGNED_SHORT_4_4_4_4";
 #endif
 #if defined(GL_EXT_packed_pixels)
@@ -1516,7 +1522,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8034:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_2)
                     return "GL_UNSIGNED_SHORT_5_5_5_1";
 #endif
 #if defined(GL_EXT_packed_pixels)
@@ -1524,7 +1530,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8035:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_UNSIGNED_INT_8_8_8_8";
 #endif
 #if defined(GL_EXT_packed_pixels)
@@ -1532,7 +1538,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8036:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_UNSIGNED_INT_10_10_10_2";
 #endif
 #if defined(GL_EXT_packed_pixels)
@@ -1543,12 +1549,12 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_EXT_polygon_offset)
                     return "GL_POLYGON_OFFSET_EXT";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_1)
                     return "GL_POLYGON_OFFSET_FILL";
 #endif
             break;
         case 0x8038:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_1)
                     return "GL_POLYGON_OFFSET_FACTOR";
 #endif
 #if defined(GL_EXT_polygon_offset)
@@ -1750,7 +1756,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8051:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_RGB8";
 #endif
 #if defined(GL_EXT_texture)
@@ -1764,7 +1770,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_RGB10";
 #endif
-#if defined(GL_EXT_texture) || defined(GL_OES_required_internalformat)
+#if defined(GL_OES_required_internalformat) || defined(GL_EXT_texture)
                     return "GL_RGB10_EXT";
 #endif
             break;
@@ -1780,7 +1786,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_RGB16";
 #endif
-#if defined(GL_EXT_texture) || defined(GL_EXT_texture_norm16)
+#if defined(GL_EXT_texture_norm16) || defined(GL_EXT_texture)
                     return "GL_RGB16_EXT";
 #endif
             break;
@@ -1793,7 +1799,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8056:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_RGBA4";
 #endif
 #if defined(GL_EXT_texture)
@@ -1804,7 +1810,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8057:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_RGB5_A1";
 #endif
 #if defined(GL_EXT_texture)
@@ -1815,7 +1821,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8058:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_RGBA8";
 #endif
 #if defined(GL_EXT_texture)
@@ -1826,10 +1832,10 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8059:
-#if defined(GL_VERSION_1_1) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_RGB10_A2";
 #endif
-#if defined(GL_EXT_texture) || defined(GL_OES_required_internalformat)
+#if defined(GL_OES_required_internalformat) || defined(GL_EXT_texture)
                     return "GL_RGB10_A2_EXT";
 #endif
             break;
@@ -1845,12 +1851,12 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_RGBA16";
 #endif
-#if defined(GL_EXT_texture) || defined(GL_EXT_texture_norm16)
+#if defined(GL_EXT_texture_norm16) || defined(GL_EXT_texture)
                     return "GL_RGBA16_EXT";
 #endif
             break;
         case 0x805c:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_TEXTURE_RED_SIZE";
 #endif
 #if defined(GL_EXT_texture)
@@ -1858,7 +1864,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x805d:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_TEXTURE_GREEN_SIZE";
 #endif
 #if defined(GL_EXT_texture)
@@ -1866,7 +1872,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x805e:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_TEXTURE_BLUE_SIZE";
 #endif
 #if defined(GL_EXT_texture)
@@ -1874,7 +1880,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x805f:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_1) || defined(__gl_h_)
                     return "GL_TEXTURE_ALPHA_SIZE";
 #endif
 #if defined(GL_EXT_texture)
@@ -1947,7 +1953,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_EXT_texture_object)
                     return "GL_TEXTURE_2D_BINDING_EXT";
 #endif
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_1)
                     return "GL_TEXTURE_BINDING_2D";
 #endif
             break;
@@ -1963,7 +1969,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x806b:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_PACK_SKIP_IMAGES";
 #endif
 #if defined(GL_EXT_texture3D)
@@ -1971,7 +1977,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x806c:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_PACK_IMAGE_HEIGHT";
 #endif
 #if defined(GL_EXT_texture3D)
@@ -1979,7 +1985,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x806d:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_UNPACK_SKIP_IMAGES";
 #endif
 #if defined(GL_EXT_texture3D)
@@ -1987,7 +1993,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x806e:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_UNPACK_IMAGE_HEIGHT";
 #endif
 #if defined(GL_EXT_texture3D)
@@ -1995,7 +2001,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x806f:
-#if defined(GL_VERSION_1_2) || defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_EXT_sparse_texture)
+#if defined(GL_EXT_sparse_texture) || defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_TEXTURE_3D";
 #endif
 #if defined(GL_EXT_texture3D)
@@ -2006,7 +2012,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8070:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_PROXY_TEXTURE_3D";
 #endif
 #if defined(GL_EXT_texture3D)
@@ -2014,7 +2020,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8071:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_TEXTURE_DEPTH";
 #endif
 #if defined(GL_EXT_texture3D)
@@ -2044,7 +2050,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8074:
-#if defined(GL_VERSION_1_1) || defined(__gl_h_) || defined(GL_ES_VERSION_3_2)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_1_1)
                     return "GL_VERTEX_ARRAY";
 #endif
 #if defined(__gl_h_) || defined(GL_EXT_vertex_array)
@@ -2074,7 +2080,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(__gl_h_)
                     return "GL_INDEX_ARRAY";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_INDEX_ARRAY_EXT";
 #endif
             break;
@@ -2090,7 +2096,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_EXT";
 #endif
             break;
@@ -2118,7 +2124,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_VERTEX_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x807d: return "GL_VERTEX_ARRAY_COUNT_EXT";
 #endif
         case 0x807e:
@@ -2137,7 +2143,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_NORMAL_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x8080: return "GL_NORMAL_ARRAY_COUNT_EXT";
 #endif
         case 0x8081:
@@ -2164,14 +2170,14 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_COLOR_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x8084: return "GL_COLOR_ARRAY_COUNT_EXT";
 #endif
         case 0x8085:
 #if defined(__gl_h_)
                     return "GL_INDEX_ARRAY_TYPE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_INDEX_ARRAY_TYPE_EXT";
 #endif
             break;
@@ -2179,11 +2185,11 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(__gl_h_)
                     return "GL_INDEX_ARRAY_STRIDE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_INDEX_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x8087: return "GL_INDEX_ARRAY_COUNT_EXT";
 #endif
         case 0x8088:
@@ -2210,18 +2216,18 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_TEXTURE_COORD_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x808b: return "GL_TEXTURE_COORD_ARRAY_COUNT_EXT";
 #endif
         case 0x808c:
 #if defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_STRIDE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x808d: return "GL_EDGE_FLAG_ARRAY_COUNT_EXT";
 #endif
         case 0x808e:
@@ -2252,7 +2258,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(__gl_h_)
                     return "GL_INDEX_ARRAY_POINTER";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_INDEX_ARRAY_POINTER_EXT";
 #endif
             break;
@@ -2268,7 +2274,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_POINTER";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_POINTER_EXT";
 #endif
             break;
@@ -2292,7 +2298,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_multisample)
                     return "GL_MULTISAMPLE_ARB";
 #endif
-#if defined(GL_EXT_multisample) || defined(GL_EXT_multisampled_compatibility)
+#if defined(GL_EXT_multisampled_compatibility) || defined(GL_EXT_multisample)
                     return "GL_MULTISAMPLE_EXT";
 #endif
 #if defined(GL_SGIS_multisample)
@@ -2320,7 +2326,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_multisample)
                     return "GL_SAMPLE_ALPHA_TO_ONE_ARB";
 #endif
-#if defined(GL_EXT_multisample) || defined(GL_EXT_multisampled_compatibility)
+#if defined(GL_EXT_multisampled_compatibility) || defined(GL_EXT_multisample)
                     return "GL_SAMPLE_ALPHA_TO_ONE_EXT";
 #endif
 #if defined(GL_SGIS_multisample)
@@ -2571,7 +2577,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80c8:
-#if defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4)
                     return "GL_BLEND_DST_RGB";
 #endif
 #if defined(GL_EXT_blend_func_separate)
@@ -2579,7 +2585,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80c9:
-#if defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4)
                     return "GL_BLEND_SRC_RGB";
 #endif
 #if defined(GL_EXT_blend_func_separate)
@@ -2587,7 +2593,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80ca:
-#if defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4)
                     return "GL_BLEND_DST_ALPHA";
 #endif
 #if defined(GL_EXT_blend_func_separate)
@@ -2595,7 +2601,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80cb:
-#if defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4)
                     return "GL_BLEND_SRC_ALPHA";
 #endif
 #if defined(GL_EXT_blend_func_separate)
@@ -2609,7 +2615,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x80cf: return "GL_422_REV_AVERAGE_EXT";
 #endif
         case 0x80d0:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2617,7 +2623,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d1:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_CONVOLUTION_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2625,7 +2631,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d2:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_POST_COLOR_MATRIX_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2633,7 +2639,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d3:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_PROXY_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2641,7 +2647,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d4:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_PROXY_POST_CONVOLUTION_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2649,7 +2655,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d5:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2657,7 +2663,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d6:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_SCALE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2665,7 +2671,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d7:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_BIAS";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2673,7 +2679,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d8:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_FORMAT";
 #endif
 #if defined(__gl_h_)
@@ -2684,7 +2690,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d9:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_WIDTH";
 #endif
 #if defined(__gl_h_)
@@ -2695,7 +2701,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80da:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_RED_SIZE";
 #endif
 #if defined(__gl_h_)
@@ -2706,7 +2712,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80db:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_GREEN_SIZE";
 #endif
 #if defined(__gl_h_)
@@ -2717,7 +2723,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80dc:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_BLUE_SIZE";
 #endif
 #if defined(__gl_h_)
@@ -2728,7 +2734,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80dd:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_ALPHA_SIZE";
 #endif
 #if defined(__gl_h_)
@@ -2739,7 +2745,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80de:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_LUMINANCE_SIZE";
 #endif
 #if defined(__gl_h_)
@@ -2750,7 +2756,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80df:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_COLOR_TABLE_INTENSITY_SIZE";
 #endif
 #if defined(__gl_h_)
@@ -2761,25 +2767,25 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80e0:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_BGR";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_bgra)
+#if defined(GL_EXT_bgra) || defined(__gl_h_)
                     return "GL_BGR_EXT";
 #endif
             break;
         case 0x80e1:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_BGRA";
 #endif
-#if defined(__gl_h_) || defined(GL_APPLE_texture_format_BGRA8888) || defined(GL_EXT_bgra)
+#if defined(GL_APPLE_texture_format_BGRA8888) || defined(GL_EXT_bgra) || defined(__gl_h_)
                     return "GL_BGRA_EXT";
 #endif
 #if defined(GL_IMG_read_format)
                     return "GL_BGRA_IMG";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_paletted_texture)
+#if defined(GL_EXT_paletted_texture) || defined(__gl_h_)
         case 0x80e2: return "GL_COLOR_INDEX1_EXT";
         case 0x80e3: return "GL_COLOR_INDEX2_EXT";
         case 0x80e4: return "GL_COLOR_INDEX4_EXT";
@@ -2788,7 +2794,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x80e7: return "GL_COLOR_INDEX16_EXT";
 #endif
         case 0x80e8:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_MAX_ELEMENTS_VERTICES";
 #endif
 #if defined(GL_EXT_draw_range_elements)
@@ -2799,7 +2805,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80e9:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_MAX_ELEMENTS_INDICES";
 #endif
 #if defined(GL_EXT_draw_range_elements)
@@ -2813,7 +2819,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x80ea: return "GL_PHONG_WIN";
         case 0x80eb: return "GL_PHONG_HINT_WIN";
 #endif
-#if defined(__gl_h_) || defined(GL_WIN_specular_fog)
+#if defined(GL_WIN_specular_fog) || defined(__gl_h_)
         case 0x80ec: return "GL_FOG_SPECULAR_TEXTURE_WIN";
 #endif
 #if defined(GL_EXT_paletted_texture)
@@ -2924,7 +2930,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x812c: return "GL_MAX_FOG_FUNC_POINTS_SGIS";
 #endif
         case 0x812d:
-#if defined(GL_ES_VERSION_3_2) || defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_CLAMP_TO_BORDER";
 #endif
 #if defined(GL_ARB_texture_border_clamp)
@@ -2947,7 +2953,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x812e: return "GL_TEXTURE_MULTI_BUFFER_HINT_SGIX";
 #endif
         case 0x812f:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_2)
                     return "GL_CLAMP_TO_EDGE";
 #endif
 #if defined(GL_SGIS_texture_edge_clamp)
@@ -2969,7 +2975,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8139: return "GL_PIXEL_TEX_GEN_SGIX";
 #endif
         case 0x813a:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_TEXTURE_MIN_LOD";
 #endif
 #if defined(GL_SGIS_texture_lod)
@@ -2977,7 +2983,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x813b:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_TEXTURE_MAX_LOD";
 #endif
 #if defined(GL_SGIS_texture_lod)
@@ -2985,7 +2991,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x813c:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_TEXTURE_BASE_LEVEL";
 #endif
 #if defined(GL_SGIS_texture_lod)
@@ -3033,7 +3039,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8150: return "GL_IGNORE_BORDER_HP";
 #endif
         case 0x8151:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONSTANT_BORDER";
 #endif
 #if defined(GL_HP_convolution_border_modes)
@@ -3041,7 +3047,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8153:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_REPLICATE_BORDER";
 #endif
 #if defined(GL_HP_convolution_border_modes)
@@ -3049,7 +3055,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8154:
-#if defined(__gl_h_) || defined(GL_ARB_imaging)
+#if defined(GL_ARB_imaging) || defined(__gl_h_)
                     return "GL_CONVOLUTION_BORDER_COLOR";
 #endif
 #if defined(GL_HP_convolution_border_modes)
@@ -3135,7 +3141,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8192:
-#if defined(__gl_h_) || defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4)
                     return "GL_GENERATE_MIPMAP_HINT";
 #endif
 #if defined(GL_SGIS_generate_mipmap)
@@ -3159,7 +3165,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x819d: return "GL_TEXTURE_GEQUAL_R_SGIX";
 #endif
         case 0x81a5:
-#if defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4)
                     return "GL_DEPTH_COMPONENT16";
 #endif
 #if defined(GL_ARB_depth_texture)
@@ -3262,7 +3268,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x81f7: return "GL_OBJECT_LINE_SGIS";
 #endif
         case 0x81f8:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_LIGHT_MODEL_COLOR_CONTROL";
 #endif
 #if defined(GL_EXT_separate_specular_color)
@@ -3270,7 +3276,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x81f9:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_SINGLE_COLOR";
 #endif
 #if defined(GL_EXT_separate_specular_color)
@@ -3278,7 +3284,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x81fa:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_SEPARATE_SPECULAR_COLOR";
 #endif
 #if defined(GL_EXT_separate_specular_color)
@@ -3330,7 +3336,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x821c: return "GL_MINOR_VERSION";
         case 0x821d: return "GL_NUM_EXTENSIONS";
 #endif
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_0)
         case 0x821e: return "GL_CONTEXT_FLAGS";
 #endif
         case 0x821f:
@@ -3350,7 +3356,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8221:
-#if defined(GL_VERSION_4_4) || defined(GL_EXT_tessellation_shader) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_EXT_tessellation_shader) || defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_4)
                     return "GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED";
 #endif
 #if defined(GL_OES_tessellation_shader)
@@ -3456,7 +3462,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8241: return "GL_SYNC_CL_EVENT_COMPLETE_ARB";
 #endif
         case 0x8242:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_OUTPUT_SYNCHRONOUS";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3467,7 +3473,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8243:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3478,7 +3484,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8244:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_CALLBACK_FUNCTION";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3489,7 +3495,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8245:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_CALLBACK_USER_PARAM";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3500,7 +3506,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8246:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SOURCE_API";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3511,7 +3517,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8247:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SOURCE_WINDOW_SYSTEM";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3522,7 +3528,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8248:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SOURCE_SHADER_COMPILER";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3533,7 +3539,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8249:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SOURCE_THIRD_PARTY";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3544,7 +3550,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x824a:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SOURCE_APPLICATION";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3555,7 +3561,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x824b:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SOURCE_OTHER";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3566,7 +3572,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x824c:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_TYPE_ERROR";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3577,7 +3583,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x824d:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3588,7 +3594,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x824e:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3599,7 +3605,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x824f:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_TYPE_PORTABILITY";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3610,7 +3616,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8250:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_TYPE_PERFORMANCE";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3621,7 +3627,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8251:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_TYPE_OTHER";
 #endif
 #if defined(GL_ARB_debug_output)
@@ -3632,7 +3638,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8252:
-#if defined(GL_VERSION_4_5) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_5)
                     return "GL_LOSE_CONTEXT_ON_RESET";
 #endif
 #if defined(GL_ARB_robustness)
@@ -3646,7 +3652,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8253:
-#if defined(GL_VERSION_4_5) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_5)
                     return "GL_GUILTY_CONTEXT_RESET";
 #endif
 #if defined(GL_ARB_robustness)
@@ -3660,7 +3666,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8254:
-#if defined(GL_VERSION_4_5) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_5)
                     return "GL_INNOCENT_CONTEXT_RESET";
 #endif
 #if defined(GL_ARB_robustness)
@@ -3674,7 +3680,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8255:
-#if defined(GL_VERSION_4_5) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_5)
                     return "GL_UNKNOWN_CONTEXT_RESET";
 #endif
 #if defined(GL_ARB_robustness)
@@ -3688,7 +3694,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8256:
-#if defined(GL_VERSION_4_5) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_5)
                     return "GL_RESET_NOTIFICATION_STRATEGY";
 #endif
 #if defined(GL_ARB_robustness)
@@ -3705,7 +3711,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8257: return "GL_PROGRAM_BINARY_RETRIEVABLE_HINT";
 #endif
         case 0x8258:
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_1)
                     return "GL_PROGRAM_SEPARABLE";
 #endif
 #if defined(GL_EXT_separate_shader_objects)
@@ -3713,7 +3719,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8259:
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_1)
                     return "GL_ACTIVE_PROGRAM";
 #endif
 #if defined(GL_EXT_separate_shader_objects)
@@ -3721,7 +3727,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x825a:
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_1)
                     return "GL_PROGRAM_PIPELINE_BINDING";
 #endif
 #if defined(GL_EXT_separate_shader_objects)
@@ -3751,7 +3757,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x825e:
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_1)
                     return "GL_LAYER_PROVOKING_VERTEX";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -3773,7 +3779,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8260:
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_1)
                     return "GL_UNDEFINED_VERTEX";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -3784,7 +3790,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8261:
-#if defined(GL_VERSION_4_5) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_5)
                     return "GL_NO_RESET_NOTIFICATION";
 #endif
 #if defined(GL_ARB_robustness)
@@ -3797,7 +3803,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_NO_RESET_NOTIFICATION_KHR";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x8262: return "GL_MAX_COMPUTE_SHARED_MEMORY_SIZE";
         case 0x8263: return "GL_MAX_COMPUTE_UNIFORM_COMPONENTS";
         case 0x8264: return "GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS";
@@ -3806,7 +3812,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8267: return "GL_COMPUTE_WORK_GROUP_SIZE";
 #endif
         case 0x8268:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_TYPE_MARKER";
 #endif
 #if defined(GL_KHR_debug)
@@ -3814,7 +3820,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8269:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_TYPE_PUSH_GROUP";
 #endif
 #if defined(GL_KHR_debug)
@@ -3822,7 +3828,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x826a:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_TYPE_POP_GROUP";
 #endif
 #if defined(GL_KHR_debug)
@@ -3830,7 +3836,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x826b:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SEVERITY_NOTIFICATION";
 #endif
 #if defined(GL_KHR_debug)
@@ -3838,7 +3844,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x826c:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_MAX_DEBUG_GROUP_STACK_DEPTH";
 #endif
 #if defined(GL_KHR_debug)
@@ -3846,14 +3852,14 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x826d:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_GROUP_STACK_DEPTH";
 #endif
 #if defined(GL_KHR_debug)
                     return "GL_DEBUG_GROUP_STACK_DEPTH_KHR";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x826e: return "GL_MAX_UNIFORM_LOCATIONS";
 #endif
 #if defined(GL_VERSION_4_3)
@@ -3953,7 +3959,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x82d2: return "GL_VIEW_CLASS_BPTC_UNORM";
         case 0x82d3: return "GL_VIEW_CLASS_BPTC_FLOAT";
 #endif
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x82d4: return "GL_VERTEX_ATTRIB_BINDING";
         case 0x82d5: return "GL_VERTEX_ATTRIB_RELATIVE_OFFSET";
         case 0x82d6: return "GL_VERTEX_BINDING_DIVISOR";
@@ -4006,11 +4012,11 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_TEXTURE_VIEW_NUM_LAYERS_OES";
 #endif
             break;
-#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_4_3) || defined(GL_OES_texture_view)
+#if defined(GL_OES_texture_view) || defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_4_3)
         case 0x82df: return "GL_TEXTURE_IMMUTABLE_LEVELS";
 #endif
         case 0x82e0:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_BUFFER";
 #endif
 #if defined(GL_KHR_debug)
@@ -4018,7 +4024,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x82e1:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_SHADER";
 #endif
 #if defined(GL_KHR_debug)
@@ -4026,7 +4032,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x82e2:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_PROGRAM";
 #endif
 #if defined(GL_KHR_debug)
@@ -4034,7 +4040,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x82e3:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_QUERY";
 #endif
 #if defined(GL_KHR_debug)
@@ -4042,18 +4048,18 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x82e4:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_PROGRAM_PIPELINE";
 #endif
 #if defined(GL_KHR_debug)
                     return "GL_PROGRAM_PIPELINE_KHR";
 #endif
             break;
-#if defined(GL_VERSION_4_4) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_4)
         case 0x82e5: return "GL_MAX_VERTEX_ATTRIB_STRIDE";
 #endif
         case 0x82e6:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2) || defined(GL_KHR_debug)
+#if defined(GL_KHR_debug) || defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_SAMPLER";
 #endif
 #if defined(GL_KHR_debug)
@@ -4064,7 +4070,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x82e7: return "GL_DISPLAY_LIST";
 #endif
         case 0x82e8:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_MAX_LABEL_LENGTH";
 #endif
 #if defined(GL_KHR_debug)
@@ -4269,17 +4275,17 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8360: return "GL_MAX_ASYNC_DRAW_PIXELS_SGIX";
         case 0x8361: return "GL_MAX_ASYNC_READ_PIXELS_SGIX";
 #endif
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
         case 0x8362: return "GL_UNSIGNED_BYTE_2_3_3_REV";
 #endif
-#if defined(__gl_h_) || defined(GL_VERSION_1_2) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_2)
         case 0x8363: return "GL_UNSIGNED_SHORT_5_6_5";
 #endif
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
         case 0x8364: return "GL_UNSIGNED_SHORT_5_6_5_REV";
 #endif
         case 0x8365:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_UNSIGNED_SHORT_4_4_4_4_REV";
 #endif
 #if defined(GL_EXT_read_format_bgra)
@@ -4290,18 +4296,18 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8366:
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_UNSIGNED_SHORT_1_5_5_5_REV";
 #endif
 #if defined(GL_EXT_read_format_bgra)
                     return "GL_UNSIGNED_SHORT_1_5_5_5_REV_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_VERSION_1_2) || defined(__gl_h_)
         case 0x8367: return "GL_UNSIGNED_INT_8_8_8_8_REV";
 #endif
         case 0x8368:
-#if defined(GL_ES_VERSION_3_0) || defined(__gl_h_) || defined(GL_VERSION_1_2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_1_2) || defined(__gl_h_)
                     return "GL_UNSIGNED_INT_2_10_10_10_REV";
 #endif
 #if defined(GL_EXT_texture_type_2_10_10_10_REV)
@@ -4314,7 +4320,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x836b: return "GL_TEXTURE_MAX_CLAMP_R_SGIX";
 #endif
         case 0x8370:
-#if defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4)
                     return "GL_MIRRORED_REPEAT";
 #endif
 #if defined(GL_ARB_texture_mirrored_repeat)
@@ -4336,7 +4342,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x83ee: return "GL_VERTEX_PRECLIP_SGIX";
         case 0x83ef: return "GL_VERTEX_PRECLIP_HINT_SGIX";
 #endif
-#if defined(GL_EXT_texture_compression_s3tc) || defined(GL_EXT_texture_compression_dxt1)
+#if defined(GL_EXT_texture_compression_dxt1) || defined(GL_EXT_texture_compression_s3tc)
         case 0x83f0: return "GL_COMPRESSED_RGB_S3TC_DXT1_EXT";
         case 0x83f1: return "GL_COMPRESSED_RGBA_S3TC_DXT1_EXT";
 #endif
@@ -4574,7 +4580,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_2_1)
         case 0x845f: return "GL_CURRENT_RASTER_SECONDARY_COLOR";
 #endif
-#if defined(__gl_h_) || defined(GL_VERSION_1_2) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_2)
         case 0x846d: return "GL_ALIASED_POINT_SIZE_RANGE";
         case 0x846e: return "GL_ALIASED_LINE_WIDTH_RANGE";
 #endif
@@ -4583,7 +4589,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8491: return "GL_INVERTED_SCREEN_W_REND";
 #endif
         case 0x84c0:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE0";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4591,7 +4597,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84c1:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE1";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4599,7 +4605,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84c2:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE2";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4607,7 +4613,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84c3:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE3";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4615,7 +4621,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84c4:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE4";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4623,7 +4629,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84c5:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE5";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4631,7 +4637,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84c6:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE6";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4639,7 +4645,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84c7:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE7";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4647,7 +4653,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84c8:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE8";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4655,7 +4661,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84c9:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE9";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4663,7 +4669,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84ca:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE10";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4671,7 +4677,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84cb:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE11";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4679,7 +4685,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84cc:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE12";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4687,7 +4693,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84cd:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE13";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4695,7 +4701,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84ce:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE14";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4703,7 +4709,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84cf:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE15";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4711,7 +4717,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d0:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE16";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4719,7 +4725,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d1:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE17";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4727,7 +4733,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d2:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE18";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4735,7 +4741,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d3:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE19";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4743,7 +4749,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d4:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE20";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4751,7 +4757,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d5:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE21";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4759,7 +4765,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d6:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE22";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4767,7 +4773,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d7:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE23";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4775,7 +4781,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d8:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE24";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4783,7 +4789,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84d9:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE25";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4791,7 +4797,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84da:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE26";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4799,7 +4805,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84db:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE27";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4807,7 +4813,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84dc:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE28";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4815,7 +4821,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84dd:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE29";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4823,7 +4829,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84de:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE30";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4831,7 +4837,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84df:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_TEXTURE31";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4839,7 +4845,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84e0:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_ACTIVE_TEXTURE";
 #endif
 #if defined(GL_ARB_multitexture)
@@ -4866,7 +4872,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_path_rendering)
                     return "GL_PATH_TRANSPOSE_MODELVIEW_MATRIX_NV";
 #endif
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TRANSPOSE_MODELVIEW_MATRIX";
 #endif
 #if defined(GL_ARB_transpose_matrix)
@@ -4877,7 +4883,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_path_rendering)
                     return "GL_PATH_TRANSPOSE_PROJECTION_MATRIX_NV";
 #endif
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TRANSPOSE_PROJECTION_MATRIX";
 #endif
 #if defined(GL_ARB_transpose_matrix)
@@ -4885,7 +4891,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84e5:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TRANSPOSE_TEXTURE_MATRIX";
 #endif
 #if defined(GL_ARB_transpose_matrix)
@@ -4893,7 +4899,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84e6:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TRANSPOSE_COLOR_MATRIX";
 #endif
 #if defined(GL_ARB_transpose_matrix)
@@ -4909,7 +4915,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84e8:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_MAX_RENDERBUFFER_SIZE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -4917,7 +4923,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84e9:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_COMPRESSED_ALPHA";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -4925,7 +4931,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84ea:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_COMPRESSED_LUMINANCE";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -4933,7 +4939,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84eb:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_COMPRESSED_LUMINANCE_ALPHA";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -4941,7 +4947,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84ec:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_COMPRESSED_INTENSITY";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -4949,7 +4955,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84ed:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_COMPRESSED_RGB";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -4957,7 +4963,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84ee:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_COMPRESSED_RGBA";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -4965,7 +4971,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x84ef:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_COMPRESSION_HINT";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -5107,7 +5113,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8506: return "GL_MODELVIEW1_MATRIX_EXT";
 #endif
         case 0x8507:
-#if defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4)
                     return "GL_INCR_WRAP";
 #endif
 #if defined(GL_EXT_stencil_wrap)
@@ -5115,7 +5121,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8508:
-#if defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_4)
                     return "GL_DECR_WRAP";
 #endif
 #if defined(GL_EXT_stencil_wrap)
@@ -5142,7 +5148,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8510: return "GL_VERTEX_WEIGHT_ARRAY_POINTER_EXT";
 #endif
         case 0x8511:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_NORMAL_MAP";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5156,7 +5162,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8512:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_REFLECTION_MAP";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5170,7 +5176,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8513:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_CUBE_MAP";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5181,7 +5187,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8514:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_BINDING_CUBE_MAP";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5192,7 +5198,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8515:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_CUBE_MAP_POSITIVE_X";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5203,7 +5209,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8516:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_CUBE_MAP_NEGATIVE_X";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5214,7 +5220,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8517:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_CUBE_MAP_POSITIVE_Y";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5225,7 +5231,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8518:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5236,7 +5242,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8519:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_CUBE_MAP_POSITIVE_Z";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5247,7 +5253,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x851a:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5258,7 +5264,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x851b:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_PROXY_TEXTURE_CUBE_MAP";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5269,7 +5275,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x851c:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_MAX_CUBE_MAP_TEXTURE_SIZE";
 #endif
 #if defined(GL_ARB_texture_cube_map)
@@ -5580,7 +5586,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_EXT_texture_env_combine)
                     return "GL_SOURCE1_ALPHA_EXT";
 #endif
-#if defined(GL_VERSION_1_5) || defined(__gl_h_)
+#if defined(__gl_h_) || defined(GL_VERSION_1_5)
                     return "GL_SRC1_ALPHA";
 #endif
 #if defined(GL_EXT_blend_func_extended)
@@ -5775,7 +5781,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8621: return "GL_VERTEX_STATE_PROGRAM_NV";
 #endif
         case 0x8622:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_VERTEX_ATTRIB_ARRAY_ENABLED";
 #endif
 #if defined(GL_ARB_vertex_program)
@@ -5786,7 +5792,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_vertex_program)
                     return "GL_ATTRIB_ARRAY_SIZE_NV";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_VERTEX_ATTRIB_ARRAY_SIZE";
 #endif
 #if defined(GL_ARB_vertex_program)
@@ -5797,7 +5803,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_vertex_program)
                     return "GL_ATTRIB_ARRAY_STRIDE_NV";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_VERTEX_ATTRIB_ARRAY_STRIDE";
 #endif
 #if defined(GL_ARB_vertex_program)
@@ -5808,7 +5814,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_vertex_program)
                     return "GL_ATTRIB_ARRAY_TYPE_NV";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_VERTEX_ATTRIB_ARRAY_TYPE";
 #endif
 #if defined(GL_ARB_vertex_program)
@@ -5819,7 +5825,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_vertex_program)
                     return "GL_CURRENT_ATTRIB_NV";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_CURRENT_VERTEX_ATTRIB";
 #endif
 #if defined(GL_ARB_vertex_program)
@@ -5929,7 +5935,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_vertex_program)
                     return "GL_ATTRIB_ARRAY_POINTER_NV";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_VERTEX_ATTRIB_ARRAY_POINTER";
 #endif
 #if defined(GL_ARB_vertex_program)
@@ -6024,7 +6030,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x867f: return "GL_MAP2_VERTEX_ATTRIB15_4_NV";
 #endif
         case 0x86a0:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3)
+#if defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_COMPRESSED_IMAGE_SIZE";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -6032,7 +6038,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x86a1:
-#if defined(__gl_h_) || defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_3)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_3) || defined(__gl_h_)
                     return "GL_TEXTURE_COMPRESSED";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -6040,7 +6046,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x86a2:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_NUM_COMPRESSED_TEXTURE_FORMATS";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -6048,7 +6054,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x86a3:
-#if defined(__gl_h_) || defined(GL_VERSION_1_3) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_3)
                     return "GL_COMPRESSED_TEXTURE_FORMATS";
 #endif
 #if defined(GL_ARB_texture_compression)
@@ -6351,7 +6357,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8763: return "GL_DISCARD_ATI";
 #endif
         case 0x8764:
-#if defined(__gl_h_) || defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_BUFFER_SIZE";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -6362,7 +6368,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8765:
-#if defined(__gl_h_) || defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_BUFFER_USAGE";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -6555,7 +6561,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8800:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_STENCIL_BACK_FUNC";
 #endif
 #if defined(GL_ATI_separate_stencil)
@@ -6563,7 +6569,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8801:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_STENCIL_BACK_FAIL";
 #endif
 #if defined(GL_ATI_separate_stencil)
@@ -6571,7 +6577,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8802:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_STENCIL_BACK_PASS_DEPTH_FAIL";
 #endif
 #if defined(GL_ATI_separate_stencil)
@@ -6579,7 +6585,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8803:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_STENCIL_BACK_PASS_DEPTH_PASS";
 #endif
 #if defined(GL_ATI_separate_stencil)
@@ -6602,7 +6608,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8810: return "GL_MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB";
 #endif
         case 0x8814:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_RGBA32F";
 #endif
 #if defined(GL_ARB_texture_float)
@@ -6619,7 +6625,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8815:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_RGB32F";
 #endif
 #if defined(GL_ARB_texture_float)
@@ -6689,7 +6695,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x881a:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_RGBA16F";
 #endif
 #if defined(GL_ARB_texture_float)
@@ -6706,7 +6712,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x881b:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_RGB16F";
 #endif
 #if defined(GL_ARB_texture_float)
@@ -6787,7 +6793,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8823: return "GL_WRITEONLY_RENDERING_QCOM";
 #endif
         case 0x8824:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_MAX_DRAW_BUFFERS";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6804,7 +6810,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8825:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER0";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6821,7 +6827,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8826:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER1";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6838,7 +6844,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8827:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER2";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6855,7 +6861,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8828:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER3";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6872,7 +6878,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8829:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER4";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6889,7 +6895,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x882a:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER5";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6906,7 +6912,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x882b:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER6";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6923,7 +6929,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x882c:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER7";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6940,7 +6946,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x882d:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER8";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6957,7 +6963,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x882e:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER9";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6974,7 +6980,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x882f:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER10";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -6991,7 +6997,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8830:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER11";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -7008,7 +7014,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8831:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER12";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -7025,7 +7031,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8832:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER13";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -7042,7 +7048,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8833:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER14";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -7059,7 +7065,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8834:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_2_0)
                     return "GL_DRAW_BUFFER15";
 #endif
 #if defined(GL_ARB_draw_buffers)
@@ -7082,7 +7088,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ATI_blend_equation_separate)
                     return "GL_ALPHA_BLEND_EQUATION_ATI";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_BLEND_EQUATION_ALPHA";
 #endif
 #if defined(GL_EXT_blend_equation_separate)
@@ -7105,7 +7111,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8849: return "GL_MATRIX_INDEX_ARRAY_POINTER_ARB";
 #endif
         case 0x884a:
-#if defined(GL_VERSION_1_4) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_1_4)
                     return "GL_TEXTURE_DEPTH_SIZE";
 #endif
 #if defined(GL_ARB_depth_texture)
@@ -7146,7 +7152,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_EXT_texture_array)
                     return "GL_COMPARE_REF_DEPTH_TO_TEXTURE_EXT";
 #endif
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COMPARE_REF_TO_TEXTURE";
 #endif
 #if defined(GL_EXT_shadow_samplers)
@@ -7258,7 +7264,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8868: return "GL_MAX_FRAGMENT_PROGRAM_LOCAL_PARAMETERS_NV";
 #endif
         case 0x8869:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_MAX_VERTEX_ATTRIBS";
 #endif
 #if defined(GL_ARB_vertex_program)
@@ -7266,7 +7272,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x886a:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_VERTEX_ATTRIB_ARRAY_NORMALIZED";
 #endif
 #if defined(GL_ARB_vertex_program)
@@ -7314,7 +7320,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8872:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_MAX_TEXTURE_IMAGE_UNITS";
 #endif
 #if defined(GL_ARB_fragment_program)
@@ -7348,7 +7354,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x887d: return "GL_READ_PIXEL_DATA_RANGE_POINTER_NV";
 #endif
         case 0x887f:
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_GEOMETRY_SHADER_INVOCATIONS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -7383,7 +7389,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8891: return "GL_DEPTH_BOUNDS_EXT";
 #endif
         case 0x8892:
-#if defined(__gl_h_) || defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_ARRAY_BUFFER";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -7391,7 +7397,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8893:
-#if defined(__gl_h_) || defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_ELEMENT_ARRAY_BUFFER";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -7399,7 +7405,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8894:
-#if defined(__gl_h_) || defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_ARRAY_BUFFER_BINDING";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -7407,7 +7413,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8895:
-#if defined(__gl_h_) || defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_ELEMENT_ARRAY_BUFFER_BINDING";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -7490,7 +7496,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x889f:
-#if defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -7594,7 +7600,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_3_3)
                     return "GL_TIME_ELAPSED";
 #endif
-#if defined(GL_EXT_timer_query) || defined(GL_EXT_disjoint_timer_query)
+#if defined(GL_EXT_disjoint_timer_query) || defined(GL_EXT_timer_query)
                     return "GL_TIME_ELAPSED_EXT";
 #endif
             break;
@@ -7633,7 +7639,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x88df: return "GL_MATRIX31_ARB";
 #endif
         case 0x88e0:
-#if defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_STREAM_DRAW";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -7657,7 +7663,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x88e4:
-#if defined(__gl_h_) || defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_STATIC_DRAW";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -7681,7 +7687,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x88e8:
-#if defined(__gl_h_) || defined(GL_VERSION_1_5) || defined(GL_ES_VERSION_2_0)
+#if defined(__gl_h_) || defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_1_5)
                     return "GL_DYNAMIC_DRAW";
 #endif
 #if defined(GL_ARB_vertex_buffer_object)
@@ -7763,7 +7769,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x88f1:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_0)
                     return "GL_TEXTURE_STENCIL_SIZE";
 #endif
 #if defined(GL_EXT_packed_depth_stencil)
@@ -7898,12 +7904,12 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_OES_geometry_shader)
                     return "GL_GEOMETRY_LINKED_VERTICES_OUT_OES";
 #endif
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_GEOMETRY_VERTICES_OUT";
 #endif
             break;
         case 0x8917:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_GEOMETRY_INPUT_TYPE";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -7920,7 +7926,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_OES_geometry_shader)
                     return "GL_GEOMETRY_LINKED_OUTPUT_TYPE_OES";
 #endif
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_GEOMETRY_OUTPUT_TYPE";
 #endif
             break;
@@ -8132,7 +8138,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8a2b: return "GL_MAX_VERTEX_UNIFORM_BLOCKS";
 #endif
         case 0x8a2c:
-#if defined(GL_VERSION_3_1) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_1)
                     return "GL_MAX_GEOMETRY_UNIFORM_BLOCKS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -8150,7 +8156,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8a31: return "GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS";
 #endif
         case 0x8a32:
-#if defined(GL_VERSION_3_1) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_1)
                     return "GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -8210,7 +8216,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8a57: return "GL_COMPRESSED_SRGB_ALPHA_PVRTC_4BPPV1_EXT";
 #endif
         case 0x8b30:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_FRAGMENT_SHADER";
 #endif
 #if defined(GL_ARB_fragment_shader)
@@ -8218,7 +8224,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b31:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_VERTEX_SHADER";
 #endif
 #if defined(GL_ARB_vertex_shader)
@@ -8272,7 +8278,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b4c:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS";
 #endif
 #if defined(GL_ARB_vertex_shader)
@@ -8280,7 +8286,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b4d:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS";
 #endif
 #if defined(GL_ARB_vertex_shader)
@@ -8294,12 +8300,12 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_shader_objects)
                     return "GL_OBJECT_SUBTYPE_ARB";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_SHADER_TYPE";
 #endif
             break;
         case 0x8b50:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_FLOAT_VEC2";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8307,7 +8313,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b51:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_FLOAT_VEC3";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8315,7 +8321,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b52:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_FLOAT_VEC4";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8323,7 +8329,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b53:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_INT_VEC2";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8331,7 +8337,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b54:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_INT_VEC3";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8339,7 +8345,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b55:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_INT_VEC4";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8347,7 +8353,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b56:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_BOOL";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8355,7 +8361,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b57:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_BOOL_VEC2";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8363,7 +8369,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b58:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_BOOL_VEC3";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8371,7 +8377,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b59:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_BOOL_VEC4";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8379,7 +8385,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b5a:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_FLOAT_MAT2";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8387,7 +8393,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b5b:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_FLOAT_MAT3";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8395,7 +8401,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b5c:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_FLOAT_MAT4";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8411,7 +8417,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b5e:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_SAMPLER_2D";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8430,7 +8436,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b60:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_SAMPLER_CUBE";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8521,7 +8527,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b80:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_DELETE_STATUS";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8529,7 +8535,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b81:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_COMPILE_STATUS";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8537,7 +8543,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b82:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_LINK_STATUS";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8548,12 +8554,12 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_shader_objects)
                     return "GL_OBJECT_VALIDATE_STATUS_ARB";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_VALIDATE_STATUS";
 #endif
             break;
         case 0x8b84:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_INFO_LOG_LENGTH";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8561,7 +8567,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b85:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_ATTACHED_SHADERS";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8569,7 +8575,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b86:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_ACTIVE_UNIFORMS";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8577,7 +8583,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b87:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_ACTIVE_UNIFORM_MAX_LENGTH";
 #endif
 #if defined(GL_ARB_shader_objects)
@@ -8588,12 +8594,12 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_shader_objects)
                     return "GL_OBJECT_SHADER_SOURCE_LENGTH_ARB";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_SHADER_SOURCE_LENGTH";
 #endif
             break;
         case 0x8b89:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_ACTIVE_ATTRIBUTES";
 #endif
 #if defined(GL_ARB_vertex_shader)
@@ -8601,7 +8607,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b8a:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_ACTIVE_ATTRIBUTE_MAX_LENGTH";
 #endif
 #if defined(GL_ARB_vertex_shader)
@@ -8620,7 +8626,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8b8c:
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_SHADING_LANGUAGE_VERSION";
 #endif
 #if defined(GL_ARB_shading_language_100)
@@ -8631,7 +8637,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_EXT_separate_shader_objects)
                     return "GL_ACTIVE_PROGRAM_EXT";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
                     return "GL_CURRENT_PROGRAM";
 #endif
             break;
@@ -8648,18 +8654,18 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8b99: return "GL_PALETTE8_RGB5_A1_OES";
 #endif
         case 0x8b9a:
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_4_1)
                     return "GL_IMPLEMENTATION_COLOR_READ_TYPE";
 #endif
-#if defined(GL_OES_read_format) || !defined(GL_OES_read_format)
+#if !defined(GL_OES_read_format) || defined(GL_OES_read_format)
                     return "GL_IMPLEMENTATION_COLOR_READ_TYPE_OES";
 #endif
             break;
         case 0x8b9b:
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_4_1)
                     return "GL_IMPLEMENTATION_COLOR_READ_FORMAT";
 #endif
-#if defined(GL_OES_read_format) || !defined(GL_OES_read_format)
+#if !defined(GL_OES_read_format) || defined(GL_OES_read_format)
                     return "GL_IMPLEMENTATION_COLOR_READ_FORMAT_OES";
 #endif
             break;
@@ -8710,7 +8716,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8c0a: return "GL_SGX_BINARY_IMG";
 #endif
         case 0x8c10:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_0)
                     return "GL_TEXTURE_RED_TYPE";
 #endif
 #if defined(GL_ARB_texture_float)
@@ -8718,7 +8724,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8c11:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_0)
                     return "GL_TEXTURE_GREEN_TYPE";
 #endif
 #if defined(GL_ARB_texture_float)
@@ -8726,7 +8732,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8c12:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_0)
                     return "GL_TEXTURE_BLUE_TYPE";
 #endif
 #if defined(GL_ARB_texture_float)
@@ -8734,7 +8740,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8c13:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_0)
                     return "GL_TEXTURE_ALPHA_TYPE";
 #endif
 #if defined(GL_ARB_texture_float)
@@ -8758,7 +8764,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8c16:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_0)
                     return "GL_TEXTURE_DEPTH_TYPE";
 #endif
 #if defined(GL_ARB_texture_float)
@@ -8793,7 +8799,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8c1a:
-#if defined(GL_ES_VERSION_3_0) || defined(GL_EXT_sparse_texture) || defined(GL_VERSION_3_0)
+#if defined(GL_EXT_sparse_texture) || defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_TEXTURE_2D_ARRAY";
 #endif
 #if defined(GL_EXT_texture_array)
@@ -8830,7 +8836,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8c28: return "GL_MAX_PROGRAM_TOTAL_OUTPUT_COMPONENTS_NV";
 #endif
         case 0x8c29:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS";
 #endif
 #if defined(GL_ARB_geometry_shader4)
@@ -8859,7 +8865,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_OES_texture_buffer)
                     return "GL_TEXTURE_BUFFER_BINDING_OES";
 #endif
-#if defined(GL_EXT_texture_buffer_object) || defined(GL_EXT_texture_buffer)
+#if defined(GL_EXT_texture_buffer) || defined(GL_EXT_texture_buffer_object)
                     return "GL_TEXTURE_BUFFER_EXT";
 #endif
 #if defined(GL_OES_texture_buffer)
@@ -8873,7 +8879,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_texture_buffer_object)
                     return "GL_MAX_TEXTURE_BUFFER_SIZE_ARB";
 #endif
-#if defined(GL_EXT_texture_buffer_object) || defined(GL_EXT_texture_buffer)
+#if defined(GL_EXT_texture_buffer) || defined(GL_EXT_texture_buffer_object)
                     return "GL_MAX_TEXTURE_BUFFER_SIZE_EXT";
 #endif
 #if defined(GL_OES_texture_buffer)
@@ -8887,7 +8893,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_texture_buffer_object)
                     return "GL_TEXTURE_BINDING_BUFFER_ARB";
 #endif
-#if defined(GL_EXT_texture_buffer_object) || defined(GL_EXT_texture_buffer)
+#if defined(GL_EXT_texture_buffer) || defined(GL_EXT_texture_buffer_object)
                     return "GL_TEXTURE_BINDING_BUFFER_EXT";
 #endif
 #if defined(GL_OES_texture_buffer)
@@ -8901,7 +8907,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_texture_buffer_object)
                     return "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_ARB";
 #endif
-#if defined(GL_EXT_texture_buffer_object) || defined(GL_EXT_texture_buffer)
+#if defined(GL_EXT_texture_buffer) || defined(GL_EXT_texture_buffer_object)
                     return "GL_TEXTURE_BUFFER_DATA_STORE_BINDING_EXT";
 #endif
 #if defined(GL_OES_texture_buffer)
@@ -8925,7 +8931,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8c36:
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_SAMPLE_SHADING";
 #endif
 #if defined(GL_ARB_sample_shading)
@@ -8936,7 +8942,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8c37:
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_MIN_SAMPLE_SHADING_VALUE";
 #endif
 #if defined(GL_ARB_sample_shading)
@@ -8994,7 +9000,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8c3f:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_0)
                     return "GL_TEXTURE_SHARED_SIZE";
 #endif
 #if defined(GL_EXT_texture_shared_exponent)
@@ -9235,7 +9241,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8c86: return "GL_TRANSFORM_FEEDBACK_RECORD_NV";
 #endif
         case 0x8c87:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_0)
                     return "GL_PRIMITIVES_GENERATED";
 #endif
 #if defined(GL_EXT_geometry_shader) || defined(GL_EXT_transform_feedback)
@@ -9345,13 +9351,13 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8ca1: return "GL_LOWER_LEFT";
         case 0x8ca2: return "GL_UPPER_LEFT";
 #endif
-#if defined(GL_VERSION_2_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_2_0)
         case 0x8ca3: return "GL_STENCIL_BACK_REF";
         case 0x8ca4: return "GL_STENCIL_BACK_VALUE_MASK";
         case 0x8ca5: return "GL_STENCIL_BACK_WRITEMASK";
 #endif
         case 0x8ca6:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_DRAW_FRAMEBUFFER_BINDING";
 #endif
 #if defined(GL_ANGLE_framebuffer_blit)
@@ -9366,7 +9372,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_framebuffer_blit)
                     return "GL_DRAW_FRAMEBUFFER_BINDING_NV";
 #endif
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_BINDING";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9374,7 +9380,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ca7:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_BINDING";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9382,7 +9388,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ca8:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_READ_FRAMEBUFFER";
 #endif
 #if defined(GL_ANGLE_framebuffer_blit)
@@ -9399,7 +9405,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ca9:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_DRAW_FRAMEBUFFER";
 #endif
 #if defined(GL_ANGLE_framebuffer_blit)
@@ -9416,7 +9422,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8caa:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_READ_FRAMEBUFFER_BINDING";
 #endif
 #if defined(GL_ANGLE_framebuffer_blit)
@@ -9436,7 +9442,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_framebuffer_multisample_coverage)
                     return "GL_RENDERBUFFER_COVERAGE_SAMPLES_NV";
 #endif
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_SAMPLES";
 #endif
 #if defined(GL_ANGLE_framebuffer_multisample)
@@ -9457,7 +9463,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8cad: return "GL_DEPTH32F_STENCIL8";
 #endif
         case 0x8cd0:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9465,7 +9471,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cd1:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9473,7 +9479,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cd2:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9481,7 +9487,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cd3:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9503,7 +9509,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cd5:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_COMPLETE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9511,7 +9517,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cd6:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9519,7 +9525,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cd7:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9554,7 +9560,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cdd:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_UNSUPPORTED";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9562,7 +9568,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cdf:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_MAX_COLOR_ATTACHMENTS";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9573,7 +9579,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce0:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT0";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9584,7 +9590,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce1:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT1";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9595,7 +9601,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce2:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT2";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9606,7 +9612,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce3:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT3";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9617,7 +9623,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce4:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT4";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9628,7 +9634,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce5:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT5";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9639,7 +9645,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce6:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT6";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9650,7 +9656,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce7:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT7";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9661,7 +9667,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce8:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT8";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9672,7 +9678,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ce9:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT9";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9683,7 +9689,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cea:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT10";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9694,7 +9700,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ceb:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT11";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9705,7 +9711,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cec:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT12";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9716,7 +9722,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ced:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT13";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9727,7 +9733,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cee:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT14";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9738,7 +9744,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8cef:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_COLOR_ATTACHMENT15";
 #endif
 #if defined(GL_EXT_draw_buffers) || defined(GL_EXT_framebuffer_object)
@@ -9767,7 +9773,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8cff: return "GL_COLOR_ATTACHMENT31";
 #endif
         case 0x8d00:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_DEPTH_ATTACHMENT";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9775,7 +9781,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d20:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_STENCIL_ATTACHMENT";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9783,7 +9789,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d40:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9791,7 +9797,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d41:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9799,7 +9805,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d42:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_WIDTH";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9807,7 +9813,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d43:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_HEIGHT";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9815,7 +9821,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d44:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_INTERNAL_FORMAT";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9845,7 +9851,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d48:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_STENCIL_INDEX8";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9864,7 +9870,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d50:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_RED_SIZE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9872,7 +9878,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d51:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_GREEN_SIZE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9880,7 +9886,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d52:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_BLUE_SIZE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9888,7 +9894,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d53:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_ALPHA_SIZE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9896,7 +9902,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d54:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_DEPTH_SIZE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9904,7 +9910,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d55:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_3_0)
                     return "GL_RENDERBUFFER_STENCIL_SIZE";
 #endif
 #if defined(GL_EXT_framebuffer_object)
@@ -9912,7 +9918,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d56:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE";
 #endif
 #if defined(GL_ANGLE_framebuffer_multisample)
@@ -9929,7 +9935,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8d57:
-#if defined(GL_VERSION_3_0) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_0)
                     return "GL_MAX_SAMPLES";
 #endif
 #if defined(GL_ANGLE_framebuffer_multisample)
@@ -9949,7 +9955,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8d61: return "GL_HALF_FLOAT_OES";
 #endif
         case 0x8d62:
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_4_1)
                     return "GL_RGB565";
 #endif
 #if defined(GL_OES_required_internalformat)
@@ -10198,7 +10204,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8da6: return "GL_MAX_PROGRAM_GENERIC_RESULTS_NV";
 #endif
         case 0x8da7:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_FRAMEBUFFER_ATTACHMENT_LAYERED";
 #endif
 #if defined(GL_ARB_geometry_shader4)
@@ -10212,7 +10218,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8da8:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS";
 #endif
 #if defined(GL_ARB_geometry_shader4)
@@ -10258,7 +10264,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_3_0)
                     return "GL_FRAMEBUFFER_SRGB";
 #endif
-#if defined(GL_EXT_framebuffer_sRGB) || defined(GL_EXT_sRGB_write_control)
+#if defined(GL_EXT_sRGB_write_control) || defined(GL_EXT_framebuffer_sRGB)
                     return "GL_FRAMEBUFFER_SRGB_EXT";
 #endif
             break;
@@ -10513,7 +10519,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8dd9:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_GEOMETRY_SHADER";
 #endif
 #if defined(GL_ARB_geometry_shader4)
@@ -10567,7 +10573,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8ddf:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_MAX_GEOMETRY_UNIFORM_COMPONENTS";
 #endif
 #if defined(GL_ARB_geometry_shader4)
@@ -10581,7 +10587,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8de0:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_MAX_GEOMETRY_OUTPUT_VERTICES";
 #endif
 #if defined(GL_ARB_geometry_shader4)
@@ -10595,7 +10601,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8de1:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS";
 #endif
 #if defined(GL_ARB_geometry_shader4)
@@ -10628,7 +10634,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8dee: return "GL_UNIFORM_BUFFER_EXT";
         case 0x8def: return "GL_UNIFORM_BUFFER_BINDING_EXT";
 #endif
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_4_1)
         case 0x8df0: return "GL_LOW_FLOAT";
         case 0x8df1: return "GL_MEDIUM_FLOAT";
         case 0x8df2: return "GL_HIGH_FLOAT";
@@ -10640,7 +10646,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8df6: return "GL_UNSIGNED_INT_10_10_10_2_OES";
         case 0x8df7: return "GL_INT_10_10_10_2_OES";
 #endif
-#if defined(GL_VERSION_4_1) || defined(GL_ES_VERSION_2_0)
+#if defined(GL_ES_VERSION_2_0) || defined(GL_VERSION_4_1)
         case 0x8df8: return "GL_SHADER_BINARY_FORMATS";
         case 0x8df9: return "GL_NUM_SHADER_BINARY_FORMATS";
         case 0x8dfa: return "GL_SHADER_COMPILER";
@@ -10739,12 +10745,12 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_transform_feedback2)
                     return "GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV";
 #endif
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_0) || defined(GL_ARB_transform_feedback2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_4_2) || defined(GL_ARB_transform_feedback2)
                     return "GL_TRANSFORM_FEEDBACK_PAUSED";
 #endif
             break;
         case 0x8e24:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_0) || defined(GL_ARB_transform_feedback2)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_4_2) || defined(GL_ARB_transform_feedback2)
                     return "GL_TRANSFORM_FEEDBACK_ACTIVE";
 #endif
 #if defined(GL_VERSION_4_0)
@@ -10846,10 +10852,10 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8e4d:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_FIRST_VERTEX_CONVENTION";
 #endif
-#if defined(GL_EXT_provoking_vertex) || defined(GL_EXT_geometry_shader)
+#if defined(GL_EXT_geometry_shader) || defined(GL_EXT_provoking_vertex)
                     return "GL_FIRST_VERTEX_CONVENTION_EXT";
 #endif
 #if defined(GL_OES_geometry_shader)
@@ -10857,10 +10863,10 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8e4e:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_LAST_VERTEX_CONVENTION";
 #endif
-#if defined(GL_EXT_provoking_vertex) || defined(GL_EXT_geometry_shader)
+#if defined(GL_EXT_geometry_shader) || defined(GL_EXT_provoking_vertex)
                     return "GL_LAST_VERTEX_CONVENTION_EXT";
 #endif
 #if defined(GL_OES_geometry_shader)
@@ -10882,7 +10888,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_sample_locations)
                     return "GL_SAMPLE_LOCATION_NV";
 #endif
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_2)
                     return "GL_SAMPLE_POSITION";
 #endif
 #if defined(GL_NV_explicit_multisample)
@@ -10890,7 +10896,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8e51:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_2)
                     return "GL_SAMPLE_MASK";
 #endif
 #if defined(GL_NV_explicit_multisample)
@@ -10898,7 +10904,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8e52:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_2)
                     return "GL_SAMPLE_MASK_VALUE";
 #endif
 #if defined(GL_NV_explicit_multisample)
@@ -10914,7 +10920,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8e58: return "GL_UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV";
 #endif
         case 0x8e59:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_2)
                     return "GL_MAX_SAMPLE_MASK_WORDS";
 #endif
 #if defined(GL_NV_explicit_multisample)
@@ -10925,7 +10931,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_gpu_program5)
                     return "GL_MAX_GEOMETRY_PROGRAM_INVOCATIONS_NV";
 #endif
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_MAX_GEOMETRY_SHADER_INVOCATIONS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -11325,7 +11331,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_1)
                     return "GL_COPY_READ_BUFFER";
 #endif
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_0) || defined(GL_ARB_copy_buffer)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_4_2) || defined(GL_ARB_copy_buffer)
                     return "GL_COPY_READ_BUFFER_BINDING";
 #endif
 #if defined(GL_NV_copy_buffer)
@@ -11336,7 +11342,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_1)
                     return "GL_COPY_WRITE_BUFFER";
 #endif
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_0) || defined(GL_ARB_copy_buffer)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_4_2) || defined(GL_ARB_copy_buffer)
                     return "GL_COPY_WRITE_BUFFER_BINDING";
 #endif
 #if defined(GL_NV_copy_buffer)
@@ -11344,7 +11350,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8f38:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_MAX_IMAGE_UNITS";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11358,12 +11364,12 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_EXT_shader_image_load_store)
                     return "GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS_EXT";
 #endif
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
                     return "GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES";
 #endif
             break;
         case 0x8f3a:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_BINDING_NAME";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11371,7 +11377,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8f3b:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_BINDING_LEVEL";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11379,7 +11385,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8f3c:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_BINDING_LAYERED";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11387,7 +11393,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8f3d:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_BINDING_LAYER";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11395,7 +11401,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8f3e:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_BINDING_ACCESS";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11489,7 +11495,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_DOUBLE_MAT4x3_EXT";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x8f4f: return "GL_VERTEX_BINDING_BUFFER";
 #endif
 #if defined(GL_ARM_mali_shader_binary)
@@ -11515,14 +11521,14 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8f92: return "GL_RGB_SNORM";
         case 0x8f93: return "GL_RGBA_SNORM";
 #endif
-#if defined(GL_ES_VERSION_3_0) || defined(GL_EXT_render_snorm) || defined(GL_VERSION_3_1)
+#if defined(GL_EXT_render_snorm) || defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_1)
         case 0x8f94: return "GL_R8_SNORM";
         case 0x8f95: return "GL_RG8_SNORM";
 #endif
 #if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_1)
         case 0x8f96: return "GL_RGB8_SNORM";
 #endif
-#if defined(GL_ES_VERSION_3_0) || defined(GL_EXT_render_snorm) || defined(GL_VERSION_3_1)
+#if defined(GL_EXT_render_snorm) || defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_1)
         case 0x8f97: return "GL_RGBA8_SNORM";
 #endif
         case 0x8f98:
@@ -11696,7 +11702,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x9007: return "GL_CONTINUOUS_AMD";
 #endif
         case 0x9009:
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_TEXTURE_CUBE_MAP_ARRAY";
 #endif
 #if defined(GL_ARB_texture_cube_map_array)
@@ -11710,7 +11716,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x900a:
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_TEXTURE_BINDING_CUBE_MAP_ARRAY";
 #endif
 #if defined(GL_ARB_texture_cube_map_array)
@@ -11732,7 +11738,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x900c:
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_SAMPLER_CUBE_MAP_ARRAY";
 #endif
 #if defined(GL_ARB_texture_cube_map_array)
@@ -11746,7 +11752,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x900d:
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW";
 #endif
 #if defined(GL_ARB_texture_cube_map_array)
@@ -11760,7 +11766,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x900e:
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_INT_SAMPLER_CUBE_MAP_ARRAY";
 #endif
 #if defined(GL_ARB_texture_cube_map_array)
@@ -11774,7 +11780,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x900f:
-#if defined(GL_VERSION_4_0) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_0)
                     return "GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY";
 #endif
 #if defined(GL_ARB_texture_cube_map_array)
@@ -11860,7 +11866,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x904d:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_2D";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11868,7 +11874,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x904e:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_3D";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11884,7 +11890,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9050:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_CUBE";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11892,7 +11898,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9051:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_BUFFER";
 #endif
 #if defined(GL_EXT_texture_buffer) || defined(GL_EXT_shader_image_load_store)
@@ -11911,7 +11917,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9053:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_2D_ARRAY";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11919,7 +11925,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9054:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_CUBE_MAP_ARRAY";
 #endif
 #if defined(GL_EXT_texture_cube_map_array) || defined(GL_EXT_shader_image_load_store)
@@ -11954,7 +11960,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9058:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_INT_IMAGE_2D";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11962,7 +11968,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9059:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_INT_IMAGE_3D";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11978,7 +11984,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x905b:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_INT_IMAGE_CUBE";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -11986,7 +11992,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x905c:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_INT_IMAGE_BUFFER";
 #endif
 #if defined(GL_EXT_texture_buffer) || defined(GL_EXT_shader_image_load_store)
@@ -12005,7 +12011,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x905e:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_INT_IMAGE_2D_ARRAY";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -12013,7 +12019,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x905f:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_INT_IMAGE_CUBE_MAP_ARRAY";
 #endif
 #if defined(GL_EXT_texture_cube_map_array) || defined(GL_EXT_shader_image_load_store)
@@ -12048,7 +12054,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9063:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_UNSIGNED_INT_IMAGE_2D";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -12056,7 +12062,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9064:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_UNSIGNED_INT_IMAGE_3D";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -12072,7 +12078,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9066:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_UNSIGNED_INT_IMAGE_CUBE";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -12080,7 +12086,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9067:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_UNSIGNED_INT_IMAGE_BUFFER";
 #endif
 #if defined(GL_EXT_texture_buffer) || defined(GL_EXT_shader_image_load_store)
@@ -12099,7 +12105,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9069:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_UNSIGNED_INT_IMAGE_2D_ARRAY";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -12107,7 +12113,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x906a:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY";
 #endif
 #if defined(GL_EXT_texture_cube_map_array) || defined(GL_EXT_shader_image_load_store)
@@ -12142,7 +12148,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x906e:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
                     return "GL_IMAGE_BINDING_FORMAT";
 #endif
 #if defined(GL_EXT_shader_image_load_store)
@@ -12232,14 +12238,14 @@ const char* enum_to_string_GL(GLenum e)
         case 0x90be: return "GL_PATH_STENCIL_DEPTH_OFFSET_UNITS_NV";
         case 0x90bf: return "GL_PATH_COVER_DEPTH_FUNC_NV";
 #endif
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
         case 0x90c7: return "GL_IMAGE_FORMAT_COMPATIBILITY_TYPE";
         case 0x90c8: return "GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE";
         case 0x90c9: return "GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS";
         case 0x90ca: return "GL_MAX_VERTEX_IMAGE_UNIFORMS";
 #endif
         case 0x90cb:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -12250,7 +12256,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x90cc:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -12261,7 +12267,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x90cd:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_MAX_GEOMETRY_IMAGE_UNIFORMS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -12271,7 +12277,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_MAX_GEOMETRY_IMAGE_UNIFORMS_OES";
 #endif
             break;
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
         case 0x90ce: return "GL_MAX_FRAGMENT_IMAGE_UNIFORMS";
         case 0x90cf: return "GL_MAX_COMBINED_IMAGE_UNIFORMS";
 #endif
@@ -12279,7 +12285,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x90d0: return "GL_MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV";
         case 0x90d1: return "GL_MAX_DEEP_3D_TEXTURE_DEPTH_NV";
 #endif
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x90d2: return "GL_SHADER_STORAGE_BUFFER";
         case 0x90d3: return "GL_SHADER_STORAGE_BUFFER_BINDING";
         case 0x90d4: return "GL_SHADER_STORAGE_BUFFER_START";
@@ -12287,7 +12293,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x90d6: return "GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS";
 #endif
         case 0x90d7:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -12298,7 +12304,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x90d8:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -12309,7 +12315,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x90d9:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -12319,7 +12325,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS_OES";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x90da: return "GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS";
         case 0x90db: return "GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS";
         case 0x90dc: return "GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS";
@@ -12330,14 +12336,14 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_EXT_x11_sync_object)
         case 0x90e1: return "GL_SYNC_X11_FENCE_EXT";
 #endif
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x90ea: return "GL_DEPTH_STENCIL_TEXTURE_MODE";
 #endif
         case 0x90eb:
 #if defined(GL_ARB_compute_variable_group_size)
                     return "GL_MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB";
 #endif
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
                     return "GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS";
 #endif
             break;
@@ -12345,7 +12351,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x90ec: return "GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER";
         case 0x90ed: return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER";
 #endif
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x90ee: return "GL_DISPATCH_INDIRECT_BUFFER";
         case 0x90ef: return "GL_DISPATCH_INDIRECT_BUFFER_BINDING";
 #endif
@@ -12369,14 +12375,14 @@ const char* enum_to_string_GL(GLenum e)
         case 0x90fb: return "GL_COMPUTE_PROGRAM_NV";
         case 0x90fc: return "GL_COMPUTE_PROGRAM_PARAMETER_BUFFER_NV";
 #endif
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_1) || defined(GL_NV_internalformat_sample_query)
+#if defined(GL_NV_internalformat_sample_query) || defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_2)
         case 0x9100: return "GL_TEXTURE_2D_MULTISAMPLE";
 #endif
 #if defined(GL_VERSION_3_2)
         case 0x9101: return "GL_PROXY_TEXTURE_2D_MULTISAMPLE";
 #endif
         case 0x9102:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2) || defined(GL_NV_internalformat_sample_query)
+#if defined(GL_NV_internalformat_sample_query) || defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_TEXTURE_2D_MULTISAMPLE_ARRAY";
 #endif
 #if defined(GL_OES_texture_storage_multisample_2d_array)
@@ -12386,18 +12392,18 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_3_2)
         case 0x9103: return "GL_PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY";
 #endif
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_2)
         case 0x9104: return "GL_TEXTURE_BINDING_2D_MULTISAMPLE";
 #endif
         case 0x9105:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY";
 #endif
 #if defined(GL_OES_texture_storage_multisample_2d_array)
                     return "GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY_OES";
 #endif
             break;
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_2)
         case 0x9106: return "GL_TEXTURE_SAMPLES";
         case 0x9107: return "GL_TEXTURE_FIXED_SAMPLE_LOCATIONS";
         case 0x9108: return "GL_SAMPLER_2D_MULTISAMPLE";
@@ -12405,7 +12411,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x910a: return "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE";
 #endif
         case 0x910b:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_SAMPLER_2D_MULTISAMPLE_ARRAY";
 #endif
 #if defined(GL_OES_texture_storage_multisample_2d_array)
@@ -12413,7 +12419,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x910c:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY";
 #endif
 #if defined(GL_OES_texture_storage_multisample_2d_array)
@@ -12421,20 +12427,20 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x910d:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY";
 #endif
 #if defined(GL_OES_texture_storage_multisample_2d_array)
                     return "GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES";
 #endif
             break;
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_3_2)
         case 0x910e: return "GL_MAX_COLOR_TEXTURE_SAMPLES";
         case 0x910f: return "GL_MAX_DEPTH_TEXTURE_SAMPLES";
         case 0x9110: return "GL_MAX_INTEGER_SAMPLES";
 #endif
         case 0x9111:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_MAX_SERVER_WAIT_TIMEOUT";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12442,7 +12448,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9112:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_OBJECT_TYPE";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12450,7 +12456,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9113:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_SYNC_CONDITION";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12458,7 +12464,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9114:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_SYNC_STATUS";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12466,7 +12472,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9115:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_SYNC_FLAGS";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12474,7 +12480,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9116:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_SYNC_FENCE";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12482,7 +12488,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9117:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_SYNC_GPU_COMMANDS_COMPLETE";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12490,7 +12496,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9118:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_UNSIGNALED";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12498,7 +12504,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9119:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_SIGNALED";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12506,7 +12512,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x911a:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_ALREADY_SIGNALED";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12514,7 +12520,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x911b:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_TIMEOUT_EXPIRED";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12522,7 +12528,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x911c:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_CONDITION_SATISFIED";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12530,7 +12536,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x911d:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
                     return "GL_WAIT_FAILED";
 #endif
 #if defined(GL_APPLE_sync)
@@ -12542,11 +12548,11 @@ const char* enum_to_string_GL(GLenum e)
         case 0x9120: return "GL_BUFFER_MAP_LENGTH";
         case 0x9121: return "GL_BUFFER_MAP_OFFSET";
 #endif
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
         case 0x9122: return "GL_MAX_VERTEX_OUTPUT_COMPONENTS";
 #endif
         case 0x9123:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_MAX_GEOMETRY_INPUT_COMPONENTS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -12557,7 +12563,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9124:
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_3_2)
                     return "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -12567,7 +12573,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_MAX_GEOMETRY_OUTPUT_COMPONENTS_OES";
 #endif
             break;
-#if defined(GL_VERSION_3_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_3_2)
         case 0x9125: return "GL_MAX_FRAGMENT_INPUT_COMPONENTS";
 #endif
 #if defined(GL_VERSION_3_2)
@@ -12584,7 +12590,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x912e: return "GL_PACK_COMPRESSED_BLOCK_SIZE";
 #endif
         case 0x912f:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_4_2)
                     return "GL_TEXTURE_IMMUTABLE_FORMAT";
 #endif
 #if defined(GL_EXT_texture_storage)
@@ -12616,7 +12622,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x913f: return "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SCALE_IMG";
 #endif
         case 0x9143:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_MAX_DEBUG_MESSAGE_LENGTH";
 #endif
 #if defined(GL_AMD_debug_output)
@@ -12630,7 +12636,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9144:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_MAX_DEBUG_LOGGED_MESSAGES";
 #endif
 #if defined(GL_AMD_debug_output)
@@ -12644,7 +12650,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9145:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_LOGGED_MESSAGES";
 #endif
 #if defined(GL_AMD_debug_output)
@@ -12658,7 +12664,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9146:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SEVERITY_HIGH";
 #endif
 #if defined(GL_AMD_debug_output)
@@ -12672,7 +12678,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9147:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SEVERITY_MEDIUM";
 #endif
 #if defined(GL_AMD_debug_output)
@@ -12686,7 +12692,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9148:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_SEVERITY_LOW";
 #endif
 #if defined(GL_AMD_debug_output)
@@ -12844,7 +12850,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x919c: return "GL_MIN_LOD_WARNING_AMD";
 #endif
         case 0x919d:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_TEXTURE_BUFFER_OFFSET";
 #endif
 #if defined(GL_EXT_texture_buffer)
@@ -12855,7 +12861,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x919e:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_TEXTURE_BUFFER_SIZE";
 #endif
 #if defined(GL_EXT_texture_buffer)
@@ -12866,7 +12872,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x919f:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT";
 #endif
 #if defined(GL_EXT_texture_buffer)
@@ -12943,7 +12949,15 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_COMPLETION_STATUS_KHR";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_AMD_framebuffer_multisample_advanced)
+        case 0x91b2: return "GL_RENDERBUFFER_STORAGE_SAMPLES_AMD";
+        case 0x91b3: return "GL_MAX_COLOR_FRAMEBUFFER_SAMPLES_AMD";
+        case 0x91b4: return "GL_MAX_COLOR_FRAMEBUFFER_STORAGE_SAMPLES_AMD";
+        case 0x91b5: return "GL_MAX_DEPTH_STENCIL_FRAMEBUFFER_SAMPLES_AMD";
+        case 0x91b6: return "GL_NUM_SUPPORTED_MULTISAMPLE_MODES_AMD";
+        case 0x91b7: return "GL_SUPPORTED_MULTISAMPLE_MODES_AMD";
+#endif
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x91b9: return "GL_COMPUTE_SHADER";
         case 0x91bb: return "GL_MAX_COMPUTE_UNIFORM_BLOCKS";
         case 0x91bc: return "GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS";
@@ -12954,7 +12968,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_compute_variable_group_size)
                     return "GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB";
 #endif
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
                     return "GL_MAX_COMPUTE_WORK_GROUP_SIZE";
 #endif
             break;
@@ -13233,7 +13247,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_alpha_to_coverage_dither_control)
         case 0x92bf: return "GL_ALPHA_TO_COVERAGE_DITHER_MODE_NV";
 #endif
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
         case 0x92c0: return "GL_ATOMIC_COUNTER_BUFFER";
         case 0x92c1: return "GL_ATOMIC_COUNTER_BUFFER_BINDING";
         case 0x92c2: return "GL_ATOMIC_COUNTER_BUFFER_START";
@@ -13249,11 +13263,11 @@ const char* enum_to_string_GL(GLenum e)
         case 0x92ca: return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER";
         case 0x92cb: return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER";
 #endif
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
         case 0x92cc: return "GL_MAX_VERTEX_ATOMIC_COUNTER_BUFFERS";
 #endif
         case 0x92cd:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -13264,7 +13278,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x92ce:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -13275,7 +13289,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x92cf:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -13285,13 +13299,13 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS_OES";
 #endif
             break;
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
         case 0x92d0: return "GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS";
         case 0x92d1: return "GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS";
         case 0x92d2: return "GL_MAX_VERTEX_ATOMIC_COUNTERS";
 #endif
         case 0x92d3:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -13302,7 +13316,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x92d4:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -13313,7 +13327,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x92d5:
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_2)
                     return "GL_MAX_GEOMETRY_ATOMIC_COUNTERS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -13323,7 +13337,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_MAX_GEOMETRY_ATOMIC_COUNTERS_OES";
 #endif
             break;
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
         case 0x92d6: return "GL_MAX_FRAGMENT_ATOMIC_COUNTERS";
         case 0x92d7: return "GL_MAX_COMBINED_ATOMIC_COUNTERS";
         case 0x92d8: return "GL_MAX_ATOMIC_COUNTER_BUFFER_SIZE";
@@ -13332,7 +13346,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_4_2)
         case 0x92da: return "GL_UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX";
 #endif
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_2)
         case 0x92db: return "GL_UNSIGNED_INT_ATOMIC_COUNTER";
         case 0x92dc: return "GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS";
 #endif
@@ -13341,14 +13355,14 @@ const char* enum_to_string_GL(GLenum e)
         case 0x92de: return "GL_FRAGMENT_COVERAGE_COLOR_NV";
 #endif
         case 0x92e0:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_DEBUG_OUTPUT";
 #endif
 #if defined(GL_KHR_debug)
                     return "GL_DEBUG_OUTPUT_KHR";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x92e1: return "GL_UNIFORM";
         case 0x92e2: return "GL_UNIFORM_BLOCK";
         case 0x92e3: return "GL_PROGRAM_INPUT";
@@ -13357,7 +13371,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x92e6: return "GL_SHADER_STORAGE_BLOCK";
 #endif
         case 0x92e7:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_IS_PER_PATCH";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -13381,7 +13395,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x92f2: return "GL_FRAGMENT_SUBROUTINE_UNIFORM";
         case 0x92f3: return "GL_COMPUTE_SUBROUTINE_UNIFORM";
 #endif
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x92f4: return "GL_TRANSFORM_FEEDBACK_VARYING";
         case 0x92f5: return "GL_ACTIVE_RESOURCES";
         case 0x92f6: return "GL_MAX_NAME_LENGTH";
@@ -13390,7 +13404,7 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_VERSION_4_3)
         case 0x92f8: return "GL_MAX_NUM_COMPATIBLE_SUBROUTINES";
 #endif
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x92f9: return "GL_NAME_LENGTH";
         case 0x92fa: return "GL_TYPE";
         case 0x92fb: return "GL_ARRAY_SIZE";
@@ -13407,7 +13421,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x9306: return "GL_REFERENCED_BY_VERTEX_SHADER";
 #endif
         case 0x9307:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_REFERENCED_BY_TESS_CONTROL_SHADER";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -13418,7 +13432,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9308:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_REFERENCED_BY_TESS_EVALUATION_SHADER";
 #endif
 #if defined(GL_EXT_tessellation_shader)
@@ -13429,7 +13443,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x9309:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_REFERENCED_BY_GEOMETRY_SHADER";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -13439,7 +13453,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_REFERENCED_BY_GEOMETRY_SHADER_OES";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x930a: return "GL_REFERENCED_BY_FRAGMENT_SHADER";
         case 0x930b: return "GL_REFERENCED_BY_COMPUTE_SHADER";
         case 0x930c: return "GL_TOP_LEVEL_ARRAY_SIZE";
@@ -13454,12 +13468,12 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_LOCATION_INDEX_EXT";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x9310: return "GL_FRAMEBUFFER_DEFAULT_WIDTH";
         case 0x9311: return "GL_FRAMEBUFFER_DEFAULT_HEIGHT";
 #endif
         case 0x9312:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_FRAMEBUFFER_DEFAULT_LAYERS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -13469,14 +13483,14 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_FRAMEBUFFER_DEFAULT_LAYERS_OES";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x9313: return "GL_FRAMEBUFFER_DEFAULT_SAMPLES";
         case 0x9314: return "GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS";
         case 0x9315: return "GL_MAX_FRAMEBUFFER_WIDTH";
         case 0x9316: return "GL_MAX_FRAMEBUFFER_HEIGHT";
 #endif
         case 0x9317:
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_VERSION_4_3)
                     return "GL_MAX_FRAMEBUFFER_LAYERS";
 #endif
 #if defined(GL_EXT_geometry_shader)
@@ -13486,7 +13500,7 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_MAX_FRAMEBUFFER_LAYERS_OES";
 #endif
             break;
-#if defined(GL_VERSION_4_3) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_VERSION_4_3)
         case 0x9318: return "GL_MAX_FRAMEBUFFER_SAMPLES";
 #endif
 #if defined(GL_EXT_raster_multisample)
@@ -13647,7 +13661,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x937d: return "GL_VIEWPORT_POSITION_W_SCALE_X_COEFF_NV";
         case 0x937e: return "GL_VIEWPORT_POSITION_W_SCALE_Y_COEFF_NV";
 #endif
-#if defined(GL_VERSION_4_2) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_VERSION_4_2)
         case 0x9380: return "GL_NUM_SAMPLE_COUNTS";
 #endif
         case 0x9381:
