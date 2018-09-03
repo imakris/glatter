@@ -1,5 +1,5 @@
 /*
-Copyright 2017 Ioannis Makris
+Copyright 2018 Ioannis Makris
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #include "glatter_config.h"
-#include "glatter_system_headers.h"
+#include "glatter_platform_headers.h"
 
 
 #if  defined(GLATTER_HEADER_ONLY) &&  defined(GLATTER_INCLUDED_FROM_HEADER) ||\
@@ -120,18 +120,22 @@ int x_error_handler(Display *dsp, XErrorEvent *error)
 
 GLATTER_INLINE_OR_NOT
 void* glatter_get_proc_address_GLX_init(const char* function_name);
-void* (*glatter_get_proc_address_GLX)(const char*) = glatter_get_proc_address_GLX_init;
 
 
 GLATTER_INLINE_OR_NOT
-void* glatter_get_proc_address_GLX_init(const char* function_name)
+void* glatter_get_proc_address_GLX(const char* function_name)
 {
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
-    XSetErrorHandler(x_error_handler);
+	static bool initialized = false;
+	if (!initialized) {
+		XSetErrorHandler(x_error_handler);
+		initialized = true;
+	}
 #endif //!defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
-    glatter_get_proc_address_GLX = glatter_get_proc_address_GL;
+
     return glatter_get_proc_address_GL(function_name);
 }
+
 
 GLATTER_INLINE_OR_NOT
 void glatter_check_error_GLX(const char* file, int line)
@@ -182,6 +186,7 @@ void* glatter_get_proc_address_WGL(const char* function_name)
 #endif // defined(GLATTER_WGL)  //
 //////////////////////////////////
 
+
 ////////////////////////////
 #if defined(GLATTER_EGL)  //
 ////////////////////////////
@@ -210,6 +215,42 @@ void* glatter_get_proc_address_EGL(const char* function_name)
 //////////////////////////////////
 #endif // defined(GLATTER_EGL)  //
 //////////////////////////////////
+
+////////////////////////////
+#if defined(GLATTER_GLU)  //
+////////////////////////////
+
+GLATTER_INLINE_OR_NOT
+const char* enum_to_string_GLU(GLenum e);
+
+
+GLATTER_INLINE_OR_NOT
+void glatter_check_error_GLU(const char* file, int line)
+{
+    glatter_check_error_GL(file, line);
+}
+
+
+GLATTER_INLINE_OR_NOT
+void* glatter_get_proc_address_GLU(const char* function_name)
+{
+    void* ptr = 0;
+
+#if defined(_WIN32)
+    ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("glu32.dll")), function_name);
+#elif defined (__linux__)
+    ptr = (void*) dlsym(dlopen("libGLU.so", RTLD_LAZY), function_name);
+#else
+    #error There is no implementation for your platform. Your contribution would be greatly appreciated!
+#endif
+
+    return ptr;
+}
+
+//////////////////////////////////
+#endif // defined(GLATTER_GLU)  //
+//////////////////////////////////
+
 
 GLATTER_INLINE_OR_NOT
 void glatter_pre_callback(const char* file, int line)
@@ -336,79 +377,84 @@ Printable get_prs(size_t sz, void* obj)
 
 
 #if defined(__llvm__) || defined (__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-value"
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wunused-value"
 #elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wsizeof-array-argument"
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wsizeof-array-argument"
 #endif
+
+
+#define GLATTER_str(s) #s
+#define GLATTER_xstr(s) GLATTER_str(s)
+#define GLATTER_PDIR(pd) platforms/pd
 
 
 #if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_CALLS)
 
     #if defined(GLATTER_GL)
-    #include "generated/glatter_GL_d_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_d_def.h)
     #endif
 
     #if defined(GLATTER_GLX)
-    #include "generated/glatter_GLX_d_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_d_def.h)
     #endif
 
     #if defined(GLATTER_EGL)
-    #include "generated/glatter_EGL_d_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_d_def.h)
     #endif
 
     #if defined(GLATTER_WGL)
-    #include "generated/glatter_WGL_d_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_d_def.h)
     #endif
 
     #if defined(GLATTER_GLU)
-    #include "generated/glatter_GLU_d_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_d_def.h)
     #endif
 
 #else
 
     #if defined(GLATTER_GL)
-    #include "generated/glatter_GL_r_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_r_def.h)
     #endif
 
     #if defined(GLATTER_GLX)
-    #include "generated/glatter_GLX_r_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_r_def.h)
     #endif
 
     #if defined(GLATTER_EGL)
-    #include "generated/glatter_EGL_r_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_r_def.h)
     #endif
 
     #if defined(GLATTER_WGL)
-    #include "generated/glatter_WGL_r_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_r_def.h)
     #endif
 
     #if defined(GLATTER_GLU)
-    #include "generated/glatter_GLU_r_def.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_r_def.h)
     #endif
 
 #endif
 
 
 #if defined(GLATTER_GL)
-#include "generated/glatter_GL_e2s_def.h"
+	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_e2s_def.h)
 #endif
 
 #if defined(GLATTER_GLX)
-#include "generated/glatter_GLX_e2s_def.h"
+	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_e2s_def.h)
 #endif
 
 #if defined(GLATTER_EGL)
-#include "generated/glatter_EGL_e2s_def.h"
+	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_e2s_def.h)
 #endif
 
 #if defined(GLATTER_WGL)
-#include "generated/glatter_WGL_e2s_def.h"
+	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_e2s_def.h)
 #endif
 
 #if defined(GLATTER_GLU)
-#include "generated/glatter_GLU_e2s_def.h"
+	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_e2s_def.h)
 #endif
 
 

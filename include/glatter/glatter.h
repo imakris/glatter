@@ -1,5 +1,5 @@
 /*
-Copyright 2017 Ioannis Makris
+Copyright 2018 Ioannis Makris
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -26,7 +26,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef __GLATTER_HEADER__
 
 #include "glatter_config.h"
-#include "glatter_system_headers.h"
+#include "glatter_platform_headers.h"
 
 #ifdef __cplusplus
 
@@ -72,48 +72,55 @@ GLATTER_INLINE_OR_NOT const char* enum_to_string_WGL(GLenum e);
 GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLenum e);
 
 
+#ifndef GLATTER_str
+#define GLATTER_str(s) #s
+#define GLATTER_xstr(s) GLATTER_str(s)
+#define GLATTER_PDIR(pd) platforms/pd
+#endif
+
+
 #if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_CALLS)
 
     #if defined(GLATTER_GL)
-    #include "generated/glatter_GL_d.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_d.h)
     #endif
 
     #if defined(GLATTER_GLX)
-    #include "generated/glatter_GLX_d.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_d.h)
     #endif
 
     #if defined(GLATTER_EGL)
-    #include "generated/glatter_EGL_d.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_d.h)
     #endif
 
     #if defined(GLATTER_WGL)
-    #include "generated/glatter_WGL_d.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_d.h)
     #endif
 
     #if defined(GLATTER_GLU)
-    #include "generated/glatter_GLU_d.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_d.h)
     #endif
 
 #else
 
     #if defined(GLATTER_GL)
-    #include "generated/glatter_GL_r.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_r.h)
     #endif
 
     #if defined(GLATTER_GLX)
-    #include "generated/glatter_GLX_r.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_r.h)
     #endif
 
     #if defined(GLATTER_EGL)
-    #include "generated/glatter_EGL_r.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_r.h)
     #endif
 
     #if defined(GLATTER_WGL)
-    #include "generated/glatter_WGL_r.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_r.h)
     #endif
 
     #if defined(GLATTER_GLU)
-    #include "generated/glatter_GLU_r.h"
+		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_r.h)
     #endif
 
 #endif
