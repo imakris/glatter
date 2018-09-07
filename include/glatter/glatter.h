@@ -23,7 +23,8 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef __GLATTER_HEADER__
+#ifndef __GLATTER_H__
+#define __GLATTER_H__
 
 #include "glatter_config.h"
 #include "glatter_platform_headers.h"
