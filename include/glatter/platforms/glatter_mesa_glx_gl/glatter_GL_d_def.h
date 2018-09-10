@@ -383,24 +383,6 @@ GLATTER_INLINE_OR_NOT void glatter_glBlendEquationSeparateATI_debug(GLenum modeR
 }
 #define glBlendEquationSeparateATI_defined
 #endif // defined(GL_ATI_blend_equation_separate)
-#if defined(GL_OES_EGL_image)
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetRenderbufferStorageOES, (target, image), (GLenum target, GLeglImageOES image))
-GLATTER_INLINE_OR_NOT void glatter_glEGLImageTargetRenderbufferStorageOES_debug(GLenum target, GLeglImageOES image, const char* file, int line)
-{
-    GLATTER_DBLOCK(file, line, glEGLImageTargetRenderbufferStorageOES, "(%s, %p)", enum_to_string_GL(target), (void*)image)
-    glatter_glEGLImageTargetRenderbufferStorageOES(target, image);
-    GLATTER_CHECK_ERROR(GL, file, line)
-}
-#define glEGLImageTargetRenderbufferStorageOES_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTexture2DOES, (target, image), (GLenum target, GLeglImageOES image))
-GLATTER_INLINE_OR_NOT void glatter_glEGLImageTargetTexture2DOES_debug(GLenum target, GLeglImageOES image, const char* file, int line)
-{
-    GLATTER_DBLOCK(file, line, glEGLImageTargetTexture2DOES, "(%s, %p)", enum_to_string_GL(target), (void*)image)
-    glatter_glEGLImageTargetTexture2DOES(target, image);
-    GLATTER_CHECK_ERROR(GL, file, line)
-}
-#define glEGLImageTargetTexture2DOES_defined
-#endif // defined(GL_OES_EGL_image)
 #ifndef glAccum_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, GLAPIENTRY, glAccum, (op, value), (GLenum op, GLfloat value))
 GLATTER_INLINE_OR_NOT void glatter_glAccum_debug(GLenum op, GLfloat value, const char* file, int line)

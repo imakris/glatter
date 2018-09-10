@@ -668,14 +668,10 @@ GLATTER_FBLOCK(return, GL, GL_API, GLboolean, GL_APIENTRY, glTestFenceNV, (fence
 #endif
 #endif // defined(GL_NV_fence)
 #if defined(GL_OES_EGL_image)
-#ifndef glEGLImageTargetRenderbufferStorageOES_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glEGLImageTargetRenderbufferStorageOES, (target, image), (GLenum target, GLeglImageOES image))
 #define glEGLImageTargetRenderbufferStorageOES_defined
-#endif
-#ifndef glEGLImageTargetTexture2DOES_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glEGLImageTargetTexture2DOES, (target, image), (GLenum target, GLeglImageOES image))
 #define glEGLImageTargetTexture2DOES_defined
-#endif
 #endif // defined(GL_OES_EGL_image)
 #if defined(GL_OES_blend_equation_separate)
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glBlendEquationSeparateOES, (modeRGB, modeAlpha), (GLenum modeRGB, GLenum modeAlpha))

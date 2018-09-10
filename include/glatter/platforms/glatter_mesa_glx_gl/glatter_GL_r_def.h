@@ -173,12 +173,6 @@ GLATTER_FBLOCK(, GL, GLAPI, void, GLAPIENTRY, glMultiTexCoord4svARB, (target, v)
 GLATTER_FBLOCK(, GL, GLAPI, void, GLAPIENTRY, glBlendEquationSeparateATI, (modeRGB, modeA), (GLenum modeRGB, GLenum modeA))
 #define glBlendEquationSeparateATI_defined
 #endif // defined(GL_ATI_blend_equation_separate)
-#if defined(GL_OES_EGL_image)
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetRenderbufferStorageOES, (target, image), (GLenum target, GLeglImageOES image))
-#define glEGLImageTargetRenderbufferStorageOES_defined
-GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glEGLImageTargetTexture2DOES, (target, image), (GLenum target, GLeglImageOES image))
-#define glEGLImageTargetTexture2DOES_defined
-#endif // defined(GL_OES_EGL_image)
 #ifndef glAccum_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, GLAPIENTRY, glAccum, (op, value), (GLenum op, GLfloat value))
 #define glAccum_defined

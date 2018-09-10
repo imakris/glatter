@@ -175,16 +175,6 @@ GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4svARB_debug(GLenum target, co
 #endif
 GLATTER_INLINE_OR_NOT void glatter_glBlendEquationSeparateATI_debug(GLenum modeRGB, GLenum modeA, const char* file, int line);
 #endif // defined(GL_ATI_blend_equation_separate)
-#if defined(GL_OES_EGL_image)
-#ifndef glEGLImageTargetRenderbufferStorageOES
-#define glEGLImageTargetRenderbufferStorageOES(target, image) glatter_glEGLImageTargetRenderbufferStorageOES_debug((target), (image), __FILE__, __LINE__)
-#endif
-GLATTER_INLINE_OR_NOT void glatter_glEGLImageTargetRenderbufferStorageOES_debug(GLenum target, GLeglImageOES image, const char* file, int line);
-#ifndef glEGLImageTargetTexture2DOES
-#define glEGLImageTargetTexture2DOES(target, image) glatter_glEGLImageTargetTexture2DOES_debug((target), (image), __FILE__, __LINE__)
-#endif
-GLATTER_INLINE_OR_NOT void glatter_glEGLImageTargetTexture2DOES_debug(GLenum target, GLeglImageOES image, const char* file, int line);
-#endif // defined(GL_OES_EGL_image)
 #ifndef glAccum
 #define glAccum(op, value) glatter_glAccum_debug((op), (value), __FILE__, __LINE__)
 #endif

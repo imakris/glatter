@@ -84,6 +84,7 @@ import operator
 import string
 import copy
 import itertools
+import shutil
 
 ckwords = ['auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do', 'double', 'else',
     'enum', 'extern', 'float', 'for', 'goto', 'if', 'inline', 'int', 'long', 'register', 'restrict',
@@ -172,6 +173,8 @@ cconv_p = 'CALLBACK|WINAPIV?|APIENTRY|APIPRIVATE|PASCAL|CDECL|_cdecl|__cdecl|__s
 function_fine_pattern = re.compile(r'^((?P<expkw>extern|([A-Z0-9_]*API(CALL)?)?) +)? ?(?P<rt>[\w* ]*?) ?(?P<cconv>\w*('+cconv_p+'))?$')
 function_group_pattern = re.compile(r'\w*[a-z]+(?P<group>[A-Z0-9]{2,10})$')
 typedef_pattern = re.compile(r'^typedef(?P<type>.+?)(?P<name>'+fm_sbp+'\w+);$');
+
+hash_table_size = 0x4000
 
 
 class DataHolder(object):
@@ -271,20 +274,26 @@ class Function_declaration:
         # True at the same time
         return not(self == other)
 
-def validate_extension(ext_str):
-    if ext_str in all_extgroups:
-        return ext_str
+def validate_extension_group(ext_group_str):
+    if ext_group_str in all_extgroups:
+        return ext_group_str
     else:
-        es_trimmed = ext_str[1:]
-        while (len(es_trimmed) >= 2):
-            if es_trimmed in all_extgroups:
-                return es_trimmed
-            es_trimmed = es_trimmed[1:]
+        egs_trimmed = ext_group_str[1:]
+        while (len(egs_trimmed) >= 2):
+            if egs_trimmed in all_extgroups:
+                return egs_trimmed
+            egs_trimmed = egs_trimmed[1:]
     return ''
+
 
 def validate_enum(enum_str):
     return enum_str if not bool(re.match(validenum_pattern, enum_str)) else ''
 
+def hash_djb2(s):                                                                                                                                
+    hash = 5381
+    for x in s:
+        hash = (( hash << 5) + hash) + ord(x)
+    return hash & 0xFFFFFFFF
 
 def analyze_condition(ppline, former_condition = None):
     #if
@@ -441,6 +450,16 @@ def parse(filename):
                     indstack[-1].append('-defined('+mg_what+')')
                     if mg_as != None and mg_as != '1':
                         indstack[-1].append('('+m.group('what')+'=='+m.group('as')+')')
+            if mg_as == '1':
+                m = re.match('^(?P<family>[A-Z]+)_(?P<group>[A-Z0-9]+)_\w+$', mg_what)
+                if bool(m) and (m.group('family') in families) and (m.group('group') in all_extgroups) and bool(re.match('^# ?ifndef '+mg_what+'$', c3[i-1])):
+                    h = hash_djb2(mg_what)
+                    h_short = h & (hash_table_size-1)
+                    family = m.group('family')
+                    ext_name_to_hash[family][mg_what] = h_short
+                    if (h_short not in ext_hash_to_full_hash[family]):
+                        ext_hash_to_full_hash[family][h_short] = {}
+                    ext_hash_to_full_hash[family][h_short][h] = 0
 
     #===========#
     #   ENUMS   #
@@ -519,7 +538,7 @@ def parse(filename):
             group_match = re.match(function_group_pattern, tmp.name)
             group = group_match.group('group') if group_match != None else ''
 
-            egroup = validate_extension(group)
+            egroup = validate_extension_group(group)
             all_extgroups[egroup] += 1
             tmp.extension_group = egroup
 
@@ -900,6 +919,204 @@ const char* enum_to_string_''' + family  + '''(GLenum e)
 
 
 
+
+def get_ext_support_decl(v):
+    if v not in ext_names_sorted:
+        return
+
+    rv = '''
+
+typedef union glatter_extension_support_status_union_''' + v + '''
+{
+    int inexed_extensions[''' + str(len(ext_names_sorted[v])) + '''];
+    struct {
+''' + '\n'.join(['        int has_'+ x + ';' for x in ext_names_sorted[v]]) + '''
+    };
+} glatter_extension_support_status_''' + v + '''_t;
+
+
+''' + '\n'.join([('#define glatter_' + x + ' glatter_get_extension_support_'+ v +'().has_' + x) for x in ext_names_sorted[v]]) + '''
+'''
+    return rv
+
+
+
+
+def get_ext_support_def(v):
+    if v not in ext_names_sorted:
+        return
+
+    hts = ''
+    ht = ['0'] * hash_table_size;
+    for x in ext_hash_to_full_hash[v]:
+        ht[x] = 'e' + '{:x}'.format(x)
+    for idx, val in enumerate(ht):
+        hts += str(val) + ',' + ('\n        ' if (((idx+1) % 30) == 0) else '')
+
+    rv = '''
+GLATTER_INLINE_OR_NOT
+glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_''' + v + '''()
+{
+    static glatter_extension_support_status_''' + v + '''_t ess;
+
+    typedef glatter_es_record_t rt;
+''' + '\n'.join(['    static rt e' +   '{: <4x}'.format(x)  + '[] = {{' + '}, {'.join(
+        str([y, ext_hash_to_full_hash[v][x][y]]).translate({ord(c): None for c in '[]'}) \
+            for y in ext_hash_to_full_hash[v][x]) + '}};' for x in ext_hash_to_full_hash[v]]) + '''
+
+
+    static glatter_es_record_t* es_dispatch[GLATTER_LOOKUP_SIZE] = {
+        ''' + hts[:-1] + '''
+    };
+
+
+    static int initialized = 0;
+    if (!initialized) {
+'''
+    if (v == 'GL'):
+        rv += '''
+        const uint8_t* glv = (const uint8_t*)glGetString(GL_VERSION);
+        int new_way = 0;
+        if (glv) {
+            // if this fails, something might be wrong with the implementation
+            assert((int)glv[0] > 48 && (int)glv[0] < 58);
+            new_way = (int)glv[0] > 50; // i.e. gl version is 3 or higher
+        }
+
+#ifdef GL_NUM_EXTENSIONS
+    	if (new_way && glatter_get_proc_address_GL("glGetStringi") ) {
+    		GLint n = 0; 
+    		glGetIntegerv(GL_NUM_EXTENSIONS, &n); 
+    		for (GLint i=0; i<n; i++)  { 
+    			uint32_t hash = glatter_djb2( (const uint8_t*)glGetStringi(GL_EXTENSIONS, i) );
+    			int index = -1;
+    			rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+    			for ( ; drecord; drecord++ ) {
+    				if (drecord->hash == hash) {
+    					index = drecord->index;
+    					ess.inexed_extensions[index] = 1;
+                        break;
+    				}
+    			}
+                if (index == -1) {
+                    // (1) This scope will be reached if the implementation supports an extension
+                    // not listed in the headers. This may happen if the headers are old or the
+                    // extension is deprecated. The same condition repeats two more times below.
+                    // It is not an error, thus there is nothing to do.
+                    // The statement is left for debug purposes.
+                }
+    		}
+    	}
+    	else {
+#endif
+    		uint32_t hash = 5381;
+    		const uint8_t* ext_str = (const uint8_t*)glGetString(GL_EXTENSIONS);
+    		for ( ; *ext_str; ext_str++) {
+    			if (*ext_str == ' ') {
+    				int index = -1;
+    				rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+    				for ( ; drecord; drecord++ ) {
+    					if (drecord->hash == hash) {
+    						index = drecord->index;
+    						ess.inexed_extensions[index] = 1;
+                            break;
+    					}
+    				}
+
+                    if (index == -1) {
+                        // (2)
+                    }
+
+    				// reset
+    				hash = 5381;
+    				continue;
+    			}
+
+    			hash = ((hash << 5) + hash) + (int)(*ext_str);
+
+    		}
+    		if (hash != 5381) {
+    			int index = -1;
+    			rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+    			for ( ; drecord; drecord++ ) {
+    				if (drecord->hash == hash) {
+    					index = drecord->index;
+    					ess.inexed_extensions[index] = 1;
+                        break;
+    				}
+    			}
+                if (index == -1) {
+                    // (3)
+                }
+    		}
+#ifdef GL_NUM_EXTENSIONS
+    	}
+#endif
+'''
+    else:
+        if (v == 'GLX'):
+            estring_acquisition = '''
+        Display* d = glXGetCurrentDisplay();
+	    const uint8_t* ext_str = (const uint8_t*)glXQueryExtensionsString(d, DefaultScreen(d));'''
+        elif (v == 'WGL'):
+            estring_acquisition = '''
+        const uint8_t* ext_str = (const uint8_t*)glatter_wglGetExtensionsStringEXT();'''
+        elif (v == 'EGL'):
+            estring_acquisition = '''
+        const uint8_t* ext_str = (const uint8_t*)eglQueryString(eglGetCurrentDisplay(), EGL_EXTENSIONS);'''
+
+        rv += '''
+        uint32_t hash = 5381;''' + estring_acquisition + '''
+    	for ( ; *ext_str; ext_str++) {
+    		if (*ext_str == ' ') {
+    			int index = -1;
+    			rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+    			for ( ; drecord; drecord++ ) {
+    				if (drecord->hash == hash) {
+    					index = drecord->index;
+    					ess.inexed_extensions[index] = 1;
+                        break;
+    				}
+    			}
+
+                if (index == -1) {
+                    // (2)
+                }
+
+    			// reset
+    			hash = 5381;
+    			continue;
+    		}
+
+    		hash = ((hash << 5) + hash) + (int)(*ext_str);
+
+    	}
+    	if (hash != 5381) {
+    		int index = -1;
+    		rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+    		for ( ; drecord; drecord++ ) {
+    			if (drecord->hash == hash) {
+    				index = drecord->index;
+    				ess.inexed_extensions[index] = 1;
+                    break;
+    			}
+    		}
+            if (index == -1) {
+                // (3)
+            }
+    	}'''
+
+    rv += '''
+        initialized = 1;
+    }
+
+    return ess;
+}
+'''
+    return rv
+
+
+
 #================================================#
 # MAIN                                           #
 #================================================#
@@ -924,15 +1141,29 @@ for platform in platform_headers:
 platform_headers = platform_headers_filtered
 
 
+# remove previous output
+shutil.rmtree(output_dir, ignore_errors=True)
+
+
 # PARSE
 for platform in platform_headers:
 
     # containers populated during parsing phase
     enum_to_string = {}
     function_definitions = {key: set() for key in families}
+    ext_hash_to_full_hash = {key: {} for key in families}
+    ext_name_to_hash = {key: {} for key in families}
+    ext_names_sorted = {}
 
     for header in platform[1:]:    
         parse(header)
+
+    for x in families:
+        if (bool(ext_name_to_hash[x])):
+            ext_names_sorted[x] = sorted(ext_name_to_hash[x])
+            for idx, val in enumerate(ext_names_sorted[x]):
+                h = hash_djb2(val)
+                ext_hash_to_full_hash[x][ext_name_to_hash[x][val]][h] = idx
 
 
     # GENERATE OUTPUT FILES
@@ -943,10 +1174,12 @@ for platform in platform_headers:
     mndn = {}
     for v in families:
         mndn[v] = get_function_mdnd(v)
+        write_to_file(platform_output_dir + '/glatter_' + v + '_ges_decl.h', get_ext_support_decl(v))
         write_to_file(platform_output_dir + '/glatter_' + v + '_d.h', mndn[v][0])
         write_to_file(platform_output_dir + '/glatter_' + v + '_r.h', mndn[v][1])
 
     for v in families:
         write_to_file(platform_output_dir + '/glatter_' + v + '_e2s_def.h', get_enum_to_string(v))
+        write_to_file(platform_output_dir + '/glatter_' + v + '_ges_def.h', get_ext_support_def(v))
         write_to_file(platform_output_dir + '/glatter_' + v + '_d_def.h', mndn[v][2])
         write_to_file(platform_output_dir + '/glatter_' + v + '_r_def.h', mndn[v][3])

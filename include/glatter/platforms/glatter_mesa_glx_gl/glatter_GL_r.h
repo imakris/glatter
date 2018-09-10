@@ -175,16 +175,6 @@ GLATTER_UBLOCK(void, GLAPIENTRY, glMultiTexCoord4svARB, (GLenum target, const GL
 #endif
 GLATTER_UBLOCK(void, GLAPIENTRY, glBlendEquationSeparateATI, (GLenum modeRGB, GLenum modeA))
 #endif // defined(GL_ATI_blend_equation_separate)
-#if defined(GL_OES_EGL_image)
-#ifndef glEGLImageTargetRenderbufferStorageOES
-#define glEGLImageTargetRenderbufferStorageOES(target, image) glatter_glEGLImageTargetRenderbufferStorageOES((target), (image))
-#endif
-GLATTER_UBLOCK(void, APIENTRY, glEGLImageTargetRenderbufferStorageOES, (GLenum target, GLeglImageOES image))
-#ifndef glEGLImageTargetTexture2DOES
-#define glEGLImageTargetTexture2DOES(target, image) glatter_glEGLImageTargetTexture2DOES((target), (image))
-#endif
-GLATTER_UBLOCK(void, APIENTRY, glEGLImageTargetTexture2DOES, (GLenum target, GLeglImageOES image))
-#endif // defined(GL_OES_EGL_image)
 #ifndef glAccum
 #define glAccum(op, value) glatter_glAccum((op), (value))
 #endif

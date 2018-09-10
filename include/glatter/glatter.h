@@ -40,9 +40,33 @@ extern "C" {
 #endif //__cplusplus
 
 
+
+#define GLATTER_str(s) #s
+#define GLATTER_xstr(s) GLATTER_str(s)
+#define GLATTER_PDIR(pd) platforms/pd
+
+
+
+#if defined(GLATTER_GL)
+	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_ges_decl.h)
+#endif
+
+#if defined(GLATTER_GLX)
+	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_ges_decl.h)
+#endif
+
+#if defined(GLATTER_EGL)
+	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_ges_decl.h)
+#endif
+
+#if defined(GLATTER_WGL)
+	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_ges_decl.h)
+#endif
+
+
+
 #ifdef GLATTER_HEADER_ONLY
 
-    #define GLATTER_INCLUDED_FROM_HEADER
     #include "glatter_def.h"
 
     #if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_ERRORS)
@@ -67,61 +91,73 @@ extern "C" {
 #endif
 
 
-GLATTER_INLINE_OR_NOT const char* enum_to_string_GL(GLenum e);
-GLATTER_INLINE_OR_NOT const char* enum_to_string_GLX(GLenum e);
-GLATTER_INLINE_OR_NOT const char* enum_to_string_WGL(GLenum e);
-GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLenum e);
+#if defined(GLATTER_GL)
+    GLATTER_INLINE_OR_NOT glatter_extension_support_status_GL_t  glatter_get_extension_support_GL();
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_GL(GLenum e);
+#endif
 
+#if defined(GLATTER_GLX)
+    GLATTER_INLINE_OR_NOT glatter_extension_support_status_GLX_t glatter_get_extension_support_GLX();
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_GLX(GLenum e);
+#endif
 
-#ifndef GLATTER_str
-#define GLATTER_str(s) #s
-#define GLATTER_xstr(s) GLATTER_str(s)
-#define GLATTER_PDIR(pd) platforms/pd
+#if defined(GLATTER_EGL)
+    GLATTER_INLINE_OR_NOT glatter_extension_support_status_EGL_t glatter_get_extension_support_EGL();
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_WGL(GLenum e);
+#endif
+
+#if defined(GLATTER_WGL)
+    GLATTER_INLINE_OR_NOT glatter_extension_support_status_WGL_t glatter_get_extension_support_WGL();
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLenum e);
+#endif
+    
+#if defined (GLATTER_GLU)
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_GLU(GLenum e);
 #endif
 
 
 #if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_CALLS)
 
     #if defined(GLATTER_GL)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_d.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_d.h)
     #endif
 
     #if defined(GLATTER_GLX)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_d.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_d.h)
     #endif
 
     #if defined(GLATTER_EGL)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_d.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_d.h)
     #endif
 
     #if defined(GLATTER_WGL)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_d.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_d.h)
     #endif
 
     #if defined(GLATTER_GLU)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_d.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_d.h)
     #endif
 
 #else
 
     #if defined(GLATTER_GL)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_r.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_r.h)
     #endif
 
     #if defined(GLATTER_GLX)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_r.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_r.h)
     #endif
 
     #if defined(GLATTER_EGL)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_r.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_r.h)
     #endif
 
     #if defined(GLATTER_WGL)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_r.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_r.h)
     #endif
 
     #if defined(GLATTER_GLU)
-		#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_r.h)
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_r.h)
     #endif
 
 #endif

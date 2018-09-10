@@ -1808,7 +1808,6 @@ GLATTER_INLINE_OR_NOT GLboolean glatter_glTestFenceNV_debug(GLuint fence, const 
 #endif
 #endif // defined(GL_NV_fence)
 #if defined(GL_OES_EGL_image)
-#ifndef glEGLImageTargetRenderbufferStorageOES_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glEGLImageTargetRenderbufferStorageOES, (target, image), (GLenum target, GLeglImageOES image))
 GLATTER_INLINE_OR_NOT void glatter_glEGLImageTargetRenderbufferStorageOES_debug(GLenum target, GLeglImageOES image, const char* file, int line)
 {
@@ -1817,8 +1816,6 @@ GLATTER_INLINE_OR_NOT void glatter_glEGLImageTargetRenderbufferStorageOES_debug(
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glEGLImageTargetRenderbufferStorageOES_defined
-#endif
-#ifndef glEGLImageTargetTexture2DOES_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glEGLImageTargetTexture2DOES, (target, image), (GLenum target, GLeglImageOES image))
 GLATTER_INLINE_OR_NOT void glatter_glEGLImageTargetTexture2DOES_debug(GLenum target, GLeglImageOES image, const char* file, int line)
 {
@@ -1827,7 +1824,6 @@ GLATTER_INLINE_OR_NOT void glatter_glEGLImageTargetTexture2DOES_debug(GLenum tar
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glEGLImageTargetTexture2DOES_defined
-#endif
 #endif // defined(GL_OES_EGL_image)
 #if defined(GL_OES_blend_equation_separate)
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glBlendEquationSeparateOES, (modeRGB, modeAlpha), (GLenum modeRGB, GLenum modeAlpha))
