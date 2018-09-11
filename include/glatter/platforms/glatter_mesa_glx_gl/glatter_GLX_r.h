@@ -78,11 +78,19 @@ GLATTER_UBLOCK(int, , glXGetFrameUsageMESA, (Display *dpy, GLXDrawable drawable,
 GLATTER_UBLOCK(int, , glXQueryFrameTrackingMESA, (Display *dpy, GLXDrawable drawable, int64_t *swapCount, int64_t *missedFrames, float *lastMissedUsage))
 #endif // defined(GLX_MESA_swap_frame_usage)
 #if defined(GLX_NV_vertex_array_range)
+#ifndef glXAllocateMemoryNV
+#define glXAllocateMemoryNV(size, readfreq, writefreq, priority) glatter_glXAllocateMemoryNV((size), (readfreq), (writefreq), (priority))
+#endif
+GLATTER_UBLOCK(void *, , glXAllocateMemoryNV, (GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority))
 #ifndef glXFreeMemoryNV
 #define glXFreeMemoryNV(pointer) glatter_glXFreeMemoryNV((pointer))
 #endif
 GLATTER_UBLOCK(void, , glXFreeMemoryNV, (GLvoid *pointer))
 #endif // defined(GLX_NV_vertex_array_range)
+#ifndef glXChooseFBConfig
+#define glXChooseFBConfig(dpy, screen, attribList, nitems) glatter_glXChooseFBConfig((dpy), (screen), (attribList), (nitems))
+#endif
+GLATTER_UBLOCK(GLXFBConfig *, , glXChooseFBConfig, (Display *dpy, int screen, const int *attribList, int *nitems))
 #ifndef glXChooseVisual
 #define glXChooseVisual(dpy, screen, attribList) glatter_glXChooseVisual((dpy), (screen), (attribList))
 #endif
@@ -135,6 +143,10 @@ GLATTER_UBLOCK(void, , glXDestroyPixmap, (Display *dpy, GLXPixmap pixmap))
 #define glXDestroyWindow(dpy, window) glatter_glXDestroyWindow((dpy), (window))
 #endif
 GLATTER_UBLOCK(void, , glXDestroyWindow, (Display *dpy, GLXWindow window))
+#ifndef glXGetClientString
+#define glXGetClientString(dpy, name) glatter_glXGetClientString((dpy), (name))
+#endif
+GLATTER_UBLOCK(const char *, , glXGetClientString, (Display *dpy, int name))
 #ifndef glXGetConfig
 #define glXGetConfig(dpy, visual, attrib, value) glatter_glXGetConfig((dpy), (visual), (attrib), (value))
 #endif
@@ -143,6 +155,10 @@ GLATTER_UBLOCK(int, , glXGetConfig, (Display *dpy, XVisualInfo *visual, int attr
 #define glXGetCurrentContext() glatter_glXGetCurrentContext()
 #endif
 GLATTER_UBLOCK(GLXContext, , glXGetCurrentContext, (void))
+#ifndef glXGetCurrentDisplay
+#define glXGetCurrentDisplay() glatter_glXGetCurrentDisplay()
+#endif
+GLATTER_UBLOCK(Display *, , glXGetCurrentDisplay, (void))
 #ifndef glXGetCurrentDrawable
 #define glXGetCurrentDrawable() glatter_glXGetCurrentDrawable()
 #endif
@@ -155,10 +171,18 @@ GLATTER_UBLOCK(GLXDrawable, , glXGetCurrentReadDrawable, (void))
 #define glXGetFBConfigAttrib(dpy, config, attribute, value) glatter_glXGetFBConfigAttrib((dpy), (config), (attribute), (value))
 #endif
 GLATTER_UBLOCK(int, , glXGetFBConfigAttrib, (Display *dpy, GLXFBConfig config, int attribute, int *value))
+#ifndef glXGetFBConfigs
+#define glXGetFBConfigs(dpy, screen, nelements) glatter_glXGetFBConfigs((dpy), (screen), (nelements))
+#endif
+GLATTER_UBLOCK(GLXFBConfig *, , glXGetFBConfigs, (Display *dpy, int screen, int *nelements))
 #ifndef glXGetSelectedEvent
 #define glXGetSelectedEvent(dpy, drawable, mask) glatter_glXGetSelectedEvent((dpy), (drawable), (mask))
 #endif
 GLATTER_UBLOCK(void, , glXGetSelectedEvent, (Display *dpy, GLXDrawable drawable, unsigned long *mask))
+#ifndef glXGetVisualFromFBConfig
+#define glXGetVisualFromFBConfig(dpy, config) glatter_glXGetVisualFromFBConfig((dpy), (config))
+#endif
+GLATTER_UBLOCK(XVisualInfo *, , glXGetVisualFromFBConfig, (Display *dpy, GLXFBConfig config))
 #ifndef glXIsDirect
 #define glXIsDirect(dpy, ctx) glatter_glXIsDirect((dpy), (ctx))
 #endif
@@ -183,6 +207,14 @@ GLATTER_UBLOCK(void, , glXQueryDrawable, (Display *dpy, GLXDrawable draw, int at
 #define glXQueryExtension(dpy, errorb, event) glatter_glXQueryExtension((dpy), (errorb), (event))
 #endif
 GLATTER_UBLOCK(Bool, , glXQueryExtension, (Display *dpy, int *errorb, int *event))
+#ifndef glXQueryExtensionsString
+#define glXQueryExtensionsString(dpy, screen) glatter_glXQueryExtensionsString((dpy), (screen))
+#endif
+GLATTER_UBLOCK(const char *, , glXQueryExtensionsString, (Display *dpy, int screen))
+#ifndef glXQueryServerString
+#define glXQueryServerString(dpy, screen, name) glatter_glXQueryServerString((dpy), (screen), (name))
+#endif
+GLATTER_UBLOCK(const char *, , glXQueryServerString, (Display *dpy, int screen, int name))
 #ifndef glXQueryVersion
 #define glXQueryVersion(dpy, maj, min) glatter_glXQueryVersion((dpy), (maj), (min))
 #endif
@@ -268,6 +300,10 @@ GLATTER_UBLOCK(void, , glXFreeContextEXT, (Display *dpy, GLXContext context))
 #define glXGetContextIDEXT(context) glatter_glXGetContextIDEXT((context))
 #endif
 GLATTER_UBLOCK(GLXContextID, , glXGetContextIDEXT, (const GLXContext context))
+#ifndef glXGetCurrentDisplayEXT
+#define glXGetCurrentDisplayEXT() glatter_glXGetCurrentDisplayEXT()
+#endif
+GLATTER_UBLOCK(Display *, , glXGetCurrentDisplayEXT, (void))
 #ifndef glXImportContextEXT
 #define glXImportContextEXT(dpy, contextID) glatter_glXImportContextEXT((dpy), (contextID))
 #endif
@@ -316,10 +352,18 @@ GLATTER_UBLOCK(GLXPixmap, , glXCreateGLXPixmapMESA, (Display *dpy, XVisualInfo *
 #define glXQueryCurrentRendererIntegerMESA(attribute, value) glatter_glXQueryCurrentRendererIntegerMESA((attribute), (value))
 #endif
 GLATTER_UBLOCK(Bool, , glXQueryCurrentRendererIntegerMESA, (int attribute, unsigned int *value))
+#ifndef glXQueryCurrentRendererStringMESA
+#define glXQueryCurrentRendererStringMESA(attribute) glatter_glXQueryCurrentRendererStringMESA((attribute))
+#endif
+GLATTER_UBLOCK(const char *, , glXQueryCurrentRendererStringMESA, (int attribute))
 #ifndef glXQueryRendererIntegerMESA
 #define glXQueryRendererIntegerMESA(dpy, screen, renderer, attribute, value) glatter_glXQueryRendererIntegerMESA((dpy), (screen), (renderer), (attribute), (value))
 #endif
 GLATTER_UBLOCK(Bool, , glXQueryRendererIntegerMESA, (Display *dpy, int screen, int renderer, int attribute, unsigned int *value))
+#ifndef glXQueryRendererStringMESA
+#define glXQueryRendererStringMESA(dpy, screen, renderer, attribute) glatter_glXQueryRendererStringMESA((dpy), (screen), (renderer), (attribute))
+#endif
+GLATTER_UBLOCK(const char *, , glXQueryRendererStringMESA, (Display *dpy, int screen, int renderer, int attribute))
 #endif // defined(GLX_MESA_query_renderer)
 #if defined(GLX_MESA_release_buffers)
 #ifndef glXReleaseBuffersMESA
@@ -370,6 +414,10 @@ GLATTER_UBLOCK(Bool, , glXDelayBeforeSwapNV, (Display *dpy, GLXDrawable drawable
 #define glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list) glatter_glXBindVideoDeviceNV((dpy), (video_slot), (video_device), (attrib_list))
 #endif
 GLATTER_UBLOCK(int, , glXBindVideoDeviceNV, (Display *dpy, unsigned int video_slot, unsigned int video_device, const int *attrib_list))
+#ifndef glXEnumerateVideoDevicesNV
+#define glXEnumerateVideoDevicesNV(dpy, screen, nelements) glatter_glXEnumerateVideoDevicesNV((dpy), (screen), (nelements))
+#endif
+GLATTER_UBLOCK(unsigned int *, , glXEnumerateVideoDevicesNV, (Display *dpy, int screen, int *nelements))
 #endif // defined(GLX_NV_present_video)
 #if defined(GLX_NV_swap_group)
 #ifndef glXBindSwapBarrierNV
@@ -402,6 +450,10 @@ GLATTER_UBLOCK(Bool, , glXResetFrameCountNV, (Display *dpy, int screen))
 #define glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device) glatter_glXBindVideoCaptureDeviceNV((dpy), (video_capture_slot), (device))
 #endif
 GLATTER_UBLOCK(int, , glXBindVideoCaptureDeviceNV, (Display *dpy, unsigned int video_capture_slot, GLXVideoCaptureDeviceNV device))
+#ifndef glXEnumerateVideoCaptureDevicesNV
+#define glXEnumerateVideoCaptureDevicesNV(dpy, screen, nelements) glatter_glXEnumerateVideoCaptureDevicesNV((dpy), (screen), (nelements))
+#endif
+GLATTER_UBLOCK(GLXVideoCaptureDeviceNV *, , glXEnumerateVideoCaptureDevicesNV, (Display *dpy, int screen, int *nelements))
 #ifndef glXLockVideoCaptureDeviceNV
 #define glXLockVideoCaptureDeviceNV(dpy, device) glatter_glXLockVideoCaptureDeviceNV((dpy), (device))
 #endif
@@ -472,6 +524,10 @@ GLATTER_UBLOCK(Bool, , glXAssociateDMPbufferSGIX, (Display *dpy, GLXPbufferSGIX 
 #endif // defined(_DM_BUFFER_H_)
 #endif // defined(GLX_SGIX_dmbuffer)
 #if defined(GLX_SGIX_fbconfig)
+#ifndef glXChooseFBConfigSGIX
+#define glXChooseFBConfigSGIX(dpy, screen, attrib_list, nelements) glatter_glXChooseFBConfigSGIX((dpy), (screen), (attrib_list), (nelements))
+#endif
+GLATTER_UBLOCK(GLXFBConfigSGIX *, , glXChooseFBConfigSGIX, (Display *dpy, int screen, int *attrib_list, int *nelements))
 #ifndef glXCreateContextWithConfigSGIX
 #define glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct) glatter_glXCreateContextWithConfigSGIX((dpy), (config), (render_type), (share_list), (direct))
 #endif
@@ -488,6 +544,10 @@ GLATTER_UBLOCK(int, , glXGetFBConfigAttribSGIX, (Display *dpy, GLXFBConfigSGIX c
 #define glXGetFBConfigFromVisualSGIX(dpy, vis) glatter_glXGetFBConfigFromVisualSGIX((dpy), (vis))
 #endif
 GLATTER_UBLOCK(GLXFBConfigSGIX, , glXGetFBConfigFromVisualSGIX, (Display *dpy, XVisualInfo *vis))
+#ifndef glXGetVisualFromFBConfigSGIX
+#define glXGetVisualFromFBConfigSGIX(dpy, config) glatter_glXGetVisualFromFBConfigSGIX((dpy), (config))
+#endif
+GLATTER_UBLOCK(XVisualInfo *, , glXGetVisualFromFBConfigSGIX, (Display *dpy, GLXFBConfigSGIX config))
 #endif // defined(GLX_SGIX_fbconfig)
 #if defined(GLX_SGIX_hyperpipe)
 #ifndef glXBindHyperpipeSGIX
@@ -514,6 +574,14 @@ GLATTER_UBLOCK(int, , glXQueryHyperpipeAttribSGIX, (Display *dpy, int timeSlice,
 #define glXQueryHyperpipeBestAttribSGIX(dpy, timeSlice, attrib, size, attribList, returnAttribList) glatter_glXQueryHyperpipeBestAttribSGIX((dpy), (timeSlice), (attrib), (size), (attribList), (returnAttribList))
 #endif
 GLATTER_UBLOCK(int, , glXQueryHyperpipeBestAttribSGIX, (Display *dpy, int timeSlice, int attrib, int size, void *attribList, void *returnAttribList))
+#ifndef glXQueryHyperpipeConfigSGIX
+#define glXQueryHyperpipeConfigSGIX(dpy, hpId, npipes) glatter_glXQueryHyperpipeConfigSGIX((dpy), (hpId), (npipes))
+#endif
+GLATTER_UBLOCK(GLXHyperpipeConfigSGIX *, , glXQueryHyperpipeConfigSGIX, (Display *dpy, int hpId, int *npipes))
+#ifndef glXQueryHyperpipeNetworkSGIX
+#define glXQueryHyperpipeNetworkSGIX(dpy, npipes) glatter_glXQueryHyperpipeNetworkSGIX((dpy), (npipes))
+#endif
+GLATTER_UBLOCK(GLXHyperpipeNetworkSGIX *, , glXQueryHyperpipeNetworkSGIX, (Display *dpy, int *npipes))
 #endif // defined(GLX_SGIX_hyperpipe)
 #if defined(GLX_SGIX_pbuffer)
 #ifndef glXCreateGLXPbufferSGIX
@@ -626,6 +694,10 @@ GLATTER_UBLOCK(int, , glXWaitVideoSyncSGI, (int divisor, int remainder, unsigned
 GLATTER_UBLOCK(Status, , glXGetTransparentIndexSUN, (Display *dpy, Window overlay, Window underlay, long *pTransparentIndex))
 #endif // defined(GLX_SUN_get_transparent_index)
 #if defined(GLX_VERSION_1_3)
+#ifndef glXChooseFBConfig
+#define glXChooseFBConfig(dpy, screen, attrib_list, nelements) glatter_glXChooseFBConfig((dpy), (screen), (attrib_list), (nelements))
+#endif
+GLATTER_UBLOCK(GLXFBConfig *, , glXChooseFBConfig, (Display *dpy, int screen, const int *attrib_list, int *nelements))
 #ifndef glXCreateNewContext
 #define glXCreateNewContext(dpy, config, render_type, share_list, direct) glatter_glXCreateNewContext((dpy), (config), (render_type), (share_list), (direct))
 #endif
@@ -662,10 +734,18 @@ GLATTER_UBLOCK(GLXDrawable, , glXGetCurrentReadDrawable, (void))
 #define glXGetFBConfigAttrib(dpy, config, attribute, value) glatter_glXGetFBConfigAttrib((dpy), (config), (attribute), (value))
 #endif
 GLATTER_UBLOCK(int, , glXGetFBConfigAttrib, (Display *dpy, GLXFBConfig config, int attribute, int *value))
+#ifndef glXGetFBConfigs
+#define glXGetFBConfigs(dpy, screen, nelements) glatter_glXGetFBConfigs((dpy), (screen), (nelements))
+#endif
+GLATTER_UBLOCK(GLXFBConfig *, , glXGetFBConfigs, (Display *dpy, int screen, int *nelements))
 #ifndef glXGetSelectedEvent
 #define glXGetSelectedEvent(dpy, draw, event_mask) glatter_glXGetSelectedEvent((dpy), (draw), (event_mask))
 #endif
 GLATTER_UBLOCK(void, , glXGetSelectedEvent, (Display *dpy, GLXDrawable draw, unsigned long *event_mask))
+#ifndef glXGetVisualFromFBConfig
+#define glXGetVisualFromFBConfig(dpy, config) glatter_glXGetVisualFromFBConfig((dpy), (config))
+#endif
+GLATTER_UBLOCK(XVisualInfo *, , glXGetVisualFromFBConfig, (Display *dpy, GLXFBConfig config))
 #ifndef glXMakeContextCurrent
 #define glXMakeContextCurrent(dpy, draw, read, ctx) glatter_glXMakeContextCurrent((dpy), (draw), (read), (ctx))
 #endif

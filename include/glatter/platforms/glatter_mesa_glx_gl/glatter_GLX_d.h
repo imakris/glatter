@@ -78,11 +78,19 @@ GLATTER_INLINE_OR_NOT int glatter_glXGetFrameUsageMESA_debug(Display *dpy, GLXDr
 GLATTER_INLINE_OR_NOT int glatter_glXQueryFrameTrackingMESA_debug(Display *dpy, GLXDrawable drawable, int64_t *swapCount, int64_t *missedFrames, float *lastMissedUsage, const char* file, int line);
 #endif // defined(GLX_MESA_swap_frame_usage)
 #if defined(GLX_NV_vertex_array_range)
+#ifndef glXAllocateMemoryNV
+#define glXAllocateMemoryNV(size, readfreq, writefreq, priority) glatter_glXAllocateMemoryNV_debug((size), (readfreq), (writefreq), (priority), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void * glatter_glXAllocateMemoryNV_debug(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority, const char* file, int line);
 #ifndef glXFreeMemoryNV
 #define glXFreeMemoryNV(pointer) glatter_glXFreeMemoryNV_debug((pointer), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT void glatter_glXFreeMemoryNV_debug(GLvoid *pointer, const char* file, int line);
 #endif // defined(GLX_NV_vertex_array_range)
+#ifndef glXChooseFBConfig
+#define glXChooseFBConfig(dpy, screen, attribList, nitems) glatter_glXChooseFBConfig_debug((dpy), (screen), (attribList), (nitems), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLXFBConfig * glatter_glXChooseFBConfig_debug(Display *dpy, int screen, const int *attribList, int *nitems, const char* file, int line);
 #ifndef glXChooseVisual
 #define glXChooseVisual(dpy, screen, attribList) glatter_glXChooseVisual_debug((dpy), (screen), (attribList), __FILE__, __LINE__)
 #endif
@@ -135,6 +143,10 @@ GLATTER_INLINE_OR_NOT void glatter_glXDestroyPixmap_debug(Display *dpy, GLXPixma
 #define glXDestroyWindow(dpy, window) glatter_glXDestroyWindow_debug((dpy), (window), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT void glatter_glXDestroyWindow_debug(Display *dpy, GLXWindow window, const char* file, int line);
+#ifndef glXGetClientString
+#define glXGetClientString(dpy, name) glatter_glXGetClientString_debug((dpy), (name), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT const char * glatter_glXGetClientString_debug(Display *dpy, int name, const char* file, int line);
 #ifndef glXGetConfig
 #define glXGetConfig(dpy, visual, attrib, value) glatter_glXGetConfig_debug((dpy), (visual), (attrib), (value), __FILE__, __LINE__)
 #endif
@@ -143,6 +155,10 @@ GLATTER_INLINE_OR_NOT int glatter_glXGetConfig_debug(Display *dpy, XVisualInfo *
 #define glXGetCurrentContext() glatter_glXGetCurrentContext_debug(__FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT GLXContext glatter_glXGetCurrentContext_debug(const char* file, int line);
+#ifndef glXGetCurrentDisplay
+#define glXGetCurrentDisplay() glatter_glXGetCurrentDisplay_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT Display * glatter_glXGetCurrentDisplay_debug(const char* file, int line);
 #ifndef glXGetCurrentDrawable
 #define glXGetCurrentDrawable() glatter_glXGetCurrentDrawable_debug(__FILE__, __LINE__)
 #endif
@@ -155,10 +171,18 @@ GLATTER_INLINE_OR_NOT GLXDrawable glatter_glXGetCurrentReadDrawable_debug(const 
 #define glXGetFBConfigAttrib(dpy, config, attribute, value) glatter_glXGetFBConfigAttrib_debug((dpy), (config), (attribute), (value), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT int glatter_glXGetFBConfigAttrib_debug(Display *dpy, GLXFBConfig config, int attribute, int *value, const char* file, int line);
+#ifndef glXGetFBConfigs
+#define glXGetFBConfigs(dpy, screen, nelements) glatter_glXGetFBConfigs_debug((dpy), (screen), (nelements), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLXFBConfig * glatter_glXGetFBConfigs_debug(Display *dpy, int screen, int *nelements, const char* file, int line);
 #ifndef glXGetSelectedEvent
 #define glXGetSelectedEvent(dpy, drawable, mask) glatter_glXGetSelectedEvent_debug((dpy), (drawable), (mask), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT void glatter_glXGetSelectedEvent_debug(Display *dpy, GLXDrawable drawable, unsigned long *mask, const char* file, int line);
+#ifndef glXGetVisualFromFBConfig
+#define glXGetVisualFromFBConfig(dpy, config) glatter_glXGetVisualFromFBConfig_debug((dpy), (config), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT XVisualInfo * glatter_glXGetVisualFromFBConfig_debug(Display *dpy, GLXFBConfig config, const char* file, int line);
 #ifndef glXIsDirect
 #define glXIsDirect(dpy, ctx) glatter_glXIsDirect_debug((dpy), (ctx), __FILE__, __LINE__)
 #endif
@@ -183,6 +207,14 @@ GLATTER_INLINE_OR_NOT void glatter_glXQueryDrawable_debug(Display *dpy, GLXDrawa
 #define glXQueryExtension(dpy, errorb, event) glatter_glXQueryExtension_debug((dpy), (errorb), (event), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT Bool glatter_glXQueryExtension_debug(Display *dpy, int *errorb, int *event, const char* file, int line);
+#ifndef glXQueryExtensionsString
+#define glXQueryExtensionsString(dpy, screen) glatter_glXQueryExtensionsString_debug((dpy), (screen), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT const char * glatter_glXQueryExtensionsString_debug(Display *dpy, int screen, const char* file, int line);
+#ifndef glXQueryServerString
+#define glXQueryServerString(dpy, screen, name) glatter_glXQueryServerString_debug((dpy), (screen), (name), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT const char * glatter_glXQueryServerString_debug(Display *dpy, int screen, int name, const char* file, int line);
 #ifndef glXQueryVersion
 #define glXQueryVersion(dpy, maj, min) glatter_glXQueryVersion_debug((dpy), (maj), (min), __FILE__, __LINE__)
 #endif
@@ -268,6 +300,10 @@ GLATTER_INLINE_OR_NOT void glatter_glXFreeContextEXT_debug(Display *dpy, GLXCont
 #define glXGetContextIDEXT(context) glatter_glXGetContextIDEXT_debug((context), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT GLXContextID glatter_glXGetContextIDEXT_debug(const GLXContext context, const char* file, int line);
+#ifndef glXGetCurrentDisplayEXT
+#define glXGetCurrentDisplayEXT() glatter_glXGetCurrentDisplayEXT_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT Display * glatter_glXGetCurrentDisplayEXT_debug(const char* file, int line);
 #ifndef glXImportContextEXT
 #define glXImportContextEXT(dpy, contextID) glatter_glXImportContextEXT_debug((dpy), (contextID), __FILE__, __LINE__)
 #endif
@@ -316,10 +352,18 @@ GLATTER_INLINE_OR_NOT GLXPixmap glatter_glXCreateGLXPixmapMESA_debug(Display *dp
 #define glXQueryCurrentRendererIntegerMESA(attribute, value) glatter_glXQueryCurrentRendererIntegerMESA_debug((attribute), (value), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT Bool glatter_glXQueryCurrentRendererIntegerMESA_debug(int attribute, unsigned int *value, const char* file, int line);
+#ifndef glXQueryCurrentRendererStringMESA
+#define glXQueryCurrentRendererStringMESA(attribute) glatter_glXQueryCurrentRendererStringMESA_debug((attribute), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT const char * glatter_glXQueryCurrentRendererStringMESA_debug(int attribute, const char* file, int line);
 #ifndef glXQueryRendererIntegerMESA
 #define glXQueryRendererIntegerMESA(dpy, screen, renderer, attribute, value) glatter_glXQueryRendererIntegerMESA_debug((dpy), (screen), (renderer), (attribute), (value), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT Bool glatter_glXQueryRendererIntegerMESA_debug(Display *dpy, int screen, int renderer, int attribute, unsigned int *value, const char* file, int line);
+#ifndef glXQueryRendererStringMESA
+#define glXQueryRendererStringMESA(dpy, screen, renderer, attribute) glatter_glXQueryRendererStringMESA_debug((dpy), (screen), (renderer), (attribute), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT const char * glatter_glXQueryRendererStringMESA_debug(Display *dpy, int screen, int renderer, int attribute, const char* file, int line);
 #endif // defined(GLX_MESA_query_renderer)
 #if defined(GLX_MESA_release_buffers)
 #ifndef glXReleaseBuffersMESA
@@ -370,6 +414,10 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXDelayBeforeSwapNV_debug(Display *dpy, GLXD
 #define glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list) glatter_glXBindVideoDeviceNV_debug((dpy), (video_slot), (video_device), (attrib_list), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT int glatter_glXBindVideoDeviceNV_debug(Display *dpy, unsigned int video_slot, unsigned int video_device, const int *attrib_list, const char* file, int line);
+#ifndef glXEnumerateVideoDevicesNV
+#define glXEnumerateVideoDevicesNV(dpy, screen, nelements) glatter_glXEnumerateVideoDevicesNV_debug((dpy), (screen), (nelements), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT unsigned int * glatter_glXEnumerateVideoDevicesNV_debug(Display *dpy, int screen, int *nelements, const char* file, int line);
 #endif // defined(GLX_NV_present_video)
 #if defined(GLX_NV_swap_group)
 #ifndef glXBindSwapBarrierNV
@@ -402,6 +450,10 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXResetFrameCountNV_debug(Display *dpy, int 
 #define glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device) glatter_glXBindVideoCaptureDeviceNV_debug((dpy), (video_capture_slot), (device), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT int glatter_glXBindVideoCaptureDeviceNV_debug(Display *dpy, unsigned int video_capture_slot, GLXVideoCaptureDeviceNV device, const char* file, int line);
+#ifndef glXEnumerateVideoCaptureDevicesNV
+#define glXEnumerateVideoCaptureDevicesNV(dpy, screen, nelements) glatter_glXEnumerateVideoCaptureDevicesNV_debug((dpy), (screen), (nelements), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLXVideoCaptureDeviceNV * glatter_glXEnumerateVideoCaptureDevicesNV_debug(Display *dpy, int screen, int *nelements, const char* file, int line);
 #ifndef glXLockVideoCaptureDeviceNV
 #define glXLockVideoCaptureDeviceNV(dpy, device) glatter_glXLockVideoCaptureDeviceNV_debug((dpy), (device), __FILE__, __LINE__)
 #endif
@@ -472,6 +524,10 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXAssociateDMPbufferSGIX_debug(Display *dpy,
 #endif // defined(_DM_BUFFER_H_)
 #endif // defined(GLX_SGIX_dmbuffer)
 #if defined(GLX_SGIX_fbconfig)
+#ifndef glXChooseFBConfigSGIX
+#define glXChooseFBConfigSGIX(dpy, screen, attrib_list, nelements) glatter_glXChooseFBConfigSGIX_debug((dpy), (screen), (attrib_list), (nelements), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLXFBConfigSGIX * glatter_glXChooseFBConfigSGIX_debug(Display *dpy, int screen, int *attrib_list, int *nelements, const char* file, int line);
 #ifndef glXCreateContextWithConfigSGIX
 #define glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct) glatter_glXCreateContextWithConfigSGIX_debug((dpy), (config), (render_type), (share_list), (direct), __FILE__, __LINE__)
 #endif
@@ -488,6 +544,10 @@ GLATTER_INLINE_OR_NOT int glatter_glXGetFBConfigAttribSGIX_debug(Display *dpy, G
 #define glXGetFBConfigFromVisualSGIX(dpy, vis) glatter_glXGetFBConfigFromVisualSGIX_debug((dpy), (vis), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT GLXFBConfigSGIX glatter_glXGetFBConfigFromVisualSGIX_debug(Display *dpy, XVisualInfo *vis, const char* file, int line);
+#ifndef glXGetVisualFromFBConfigSGIX
+#define glXGetVisualFromFBConfigSGIX(dpy, config) glatter_glXGetVisualFromFBConfigSGIX_debug((dpy), (config), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT XVisualInfo * glatter_glXGetVisualFromFBConfigSGIX_debug(Display *dpy, GLXFBConfigSGIX config, const char* file, int line);
 #endif // defined(GLX_SGIX_fbconfig)
 #if defined(GLX_SGIX_hyperpipe)
 #ifndef glXBindHyperpipeSGIX
@@ -514,6 +574,14 @@ GLATTER_INLINE_OR_NOT int glatter_glXQueryHyperpipeAttribSGIX_debug(Display *dpy
 #define glXQueryHyperpipeBestAttribSGIX(dpy, timeSlice, attrib, size, attribList, returnAttribList) glatter_glXQueryHyperpipeBestAttribSGIX_debug((dpy), (timeSlice), (attrib), (size), (attribList), (returnAttribList), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT int glatter_glXQueryHyperpipeBestAttribSGIX_debug(Display *dpy, int timeSlice, int attrib, int size, void *attribList, void *returnAttribList, const char* file, int line);
+#ifndef glXQueryHyperpipeConfigSGIX
+#define glXQueryHyperpipeConfigSGIX(dpy, hpId, npipes) glatter_glXQueryHyperpipeConfigSGIX_debug((dpy), (hpId), (npipes), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLXHyperpipeConfigSGIX * glatter_glXQueryHyperpipeConfigSGIX_debug(Display *dpy, int hpId, int *npipes, const char* file, int line);
+#ifndef glXQueryHyperpipeNetworkSGIX
+#define glXQueryHyperpipeNetworkSGIX(dpy, npipes) glatter_glXQueryHyperpipeNetworkSGIX_debug((dpy), (npipes), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLXHyperpipeNetworkSGIX * glatter_glXQueryHyperpipeNetworkSGIX_debug(Display *dpy, int *npipes, const char* file, int line);
 #endif // defined(GLX_SGIX_hyperpipe)
 #if defined(GLX_SGIX_pbuffer)
 #ifndef glXCreateGLXPbufferSGIX
@@ -626,6 +694,10 @@ GLATTER_INLINE_OR_NOT int glatter_glXWaitVideoSyncSGI_debug(int divisor, int rem
 GLATTER_INLINE_OR_NOT Status glatter_glXGetTransparentIndexSUN_debug(Display *dpy, Window overlay, Window underlay, long *pTransparentIndex, const char* file, int line);
 #endif // defined(GLX_SUN_get_transparent_index)
 #if defined(GLX_VERSION_1_3)
+#ifndef glXChooseFBConfig
+#define glXChooseFBConfig(dpy, screen, attrib_list, nelements) glatter_glXChooseFBConfig_debug((dpy), (screen), (attrib_list), (nelements), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLXFBConfig * glatter_glXChooseFBConfig_debug(Display *dpy, int screen, const int *attrib_list, int *nelements, const char* file, int line);
 #ifndef glXCreateNewContext
 #define glXCreateNewContext(dpy, config, render_type, share_list, direct) glatter_glXCreateNewContext_debug((dpy), (config), (render_type), (share_list), (direct), __FILE__, __LINE__)
 #endif
@@ -662,10 +734,18 @@ GLATTER_INLINE_OR_NOT GLXDrawable glatter_glXGetCurrentReadDrawable_debug(const 
 #define glXGetFBConfigAttrib(dpy, config, attribute, value) glatter_glXGetFBConfigAttrib_debug((dpy), (config), (attribute), (value), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT int glatter_glXGetFBConfigAttrib_debug(Display *dpy, GLXFBConfig config, int attribute, int *value, const char* file, int line);
+#ifndef glXGetFBConfigs
+#define glXGetFBConfigs(dpy, screen, nelements) glatter_glXGetFBConfigs_debug((dpy), (screen), (nelements), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLXFBConfig * glatter_glXGetFBConfigs_debug(Display *dpy, int screen, int *nelements, const char* file, int line);
 #ifndef glXGetSelectedEvent
 #define glXGetSelectedEvent(dpy, draw, event_mask) glatter_glXGetSelectedEvent_debug((dpy), (draw), (event_mask), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT void glatter_glXGetSelectedEvent_debug(Display *dpy, GLXDrawable draw, unsigned long *event_mask, const char* file, int line);
+#ifndef glXGetVisualFromFBConfig
+#define glXGetVisualFromFBConfig(dpy, config) glatter_glXGetVisualFromFBConfig_debug((dpy), (config), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT XVisualInfo * glatter_glXGetVisualFromFBConfig_debug(Display *dpy, GLXFBConfig config, const char* file, int line);
 #ifndef glXMakeContextCurrent
 #define glXMakeContextCurrent(dpy, draw, read, ctx) glatter_glXMakeContextCurrent_debug((dpy), (draw), (read), (ctx), __FILE__, __LINE__)
 #endif

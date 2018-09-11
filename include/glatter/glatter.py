@@ -168,7 +168,7 @@ condblock_any_ifstar = re.compile('^# ?if')
 condblock_any_ifndef = re.compile('^# ?ifndef (?P<dname>\w+)')
 
 enum_pattern = re.compile('^# ?define ('+fm_sbp+'_\w*) ?(\w*)$')
-function_coarse_pattern = re.compile(r'(.*?) +('+fm_sbl+'[A-Z]\w+?) ?\( ?(.*?) ?\) ?;')
+function_coarse_pattern = re.compile(r'(.*?[ *]+)('+fm_sbl+'[A-Z]\w+?) ?\( ?(.*?) ?\) ?;')
 cconv_p = 'CALLBACK|WINAPIV?|APIENTRY|APIPRIVATE|PASCAL|CDECL|_cdecl|__cdecl|__stdcall|__pascal'
 function_fine_pattern = re.compile(r'^((?P<expkw>extern|([A-Z0-9_]*API(CALL)?)?) +)? ?(?P<rt>[\w* ]*?) ?(?P<cconv>\w*('+cconv_p+'))?$')
 function_group_pattern = re.compile(r'\w*[a-z]+(?P<group>[A-Z0-9]{2,10})$')
@@ -512,10 +512,10 @@ def parse(filename):
         if (bool(m)):
 
             # and this is a finer match
-            rt_match = re.match(function_fine_pattern, m.group(1))
+            rt_match = re.match(function_fine_pattern, m.group(1).rstrip())
             
             if (not bool(rt_match)):
-                raise
+                continue
 
             tmp = Function_declaration()
 
@@ -962,7 +962,7 @@ glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_'
     typedef glatter_es_record_t rt;
 ''' + '\n'.join(['    static rt e' +   '{: <4x}'.format(x)  + '[] = {{' + '}, {'.join(
         str([y, ext_hash_to_full_hash[v][x][y]]).translate({ord(c): None for c in '[]'}) \
-            for y in ext_hash_to_full_hash[v][x]) + '}};' for x in ext_hash_to_full_hash[v]]) + '''
+            for y in ext_hash_to_full_hash[v][x]) + '}, 0};' for x in ext_hash_to_full_hash[v]]) + '''
 
 
     static glatter_es_record_t* es_dispatch[GLATTER_LOOKUP_SIZE] = {
@@ -975,7 +975,7 @@ glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_'
 '''
     if (v == 'GL'):
         rv += '''
-        const uint8_t* glv = (const uint8_t*)glGetString(GL_VERSION);
+        const uint8_t* glv = (const uint8_t*)glatter_glGetString(GL_VERSION);
         int new_way = 0;
         if (glv) {
             // if this fails, something might be wrong with the implementation
@@ -984,20 +984,20 @@ glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_'
         }
 
 #ifdef GL_NUM_EXTENSIONS
-    	if (new_way && glatter_get_proc_address_GL("glGetStringi") ) {
-    		GLint n = 0; 
-    		glGetIntegerv(GL_NUM_EXTENSIONS, &n); 
-    		for (GLint i=0; i<n; i++)  { 
-    			uint32_t hash = glatter_djb2( (const uint8_t*)glGetStringi(GL_EXTENSIONS, i) );
-    			int index = -1;
-    			rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    			for ( ; drecord; drecord++ ) {
-    				if (drecord->hash == hash) {
-    					index = drecord->index;
-    					ess.inexed_extensions[index] = 1;
+        if (new_way && glatter_get_proc_address_GL("glGetStringi") ) {
+            GLint n = 0; 
+            glGetIntegerv(GL_NUM_EXTENSIONS, &n); 
+            for (GLint i=0; i<n; i++)  { 
+                uint32_t hash = glatter_djb2( (const uint8_t*)glatter_glGetStringi(GL_EXTENSIONS, i) );
+                int index = -1;
+                rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+                for ( ; r && (r->hash | r->index); r++ ) {
+                    if (r->hash == hash) {
+                        index = r->index;
+                        ess.inexed_extensions[index] = 1;
                         break;
-    				}
-    			}
+                    }
+                }
                 if (index == -1) {
                     // (1) This scope will be reached if the implementation supports an extension
                     // not listed in the headers. This may happen if the headers are old or the
@@ -1005,106 +1005,106 @@ glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_'
                     // It is not an error, thus there is nothing to do.
                     // The statement is left for debug purposes.
                 }
-    		}
-    	}
-    	else {
+            }
+        }
+        else {
 #endif
-    		uint32_t hash = 5381;
-    		const uint8_t* ext_str = (const uint8_t*)glGetString(GL_EXTENSIONS);
-    		for ( ; *ext_str; ext_str++) {
-    			if (*ext_str == ' ') {
-    				int index = -1;
-    				rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    				for ( ; drecord; drecord++ ) {
-    					if (drecord->hash == hash) {
-    						index = drecord->index;
-    						ess.inexed_extensions[index] = 1;
+            uint32_t hash = 5381;
+            const uint8_t* ext_str = (const uint8_t*)glatter_glGetString(GL_EXTENSIONS);
+            for ( ; *ext_str; ext_str++) {
+                if (*ext_str == ' ') {
+                    int index = -1;
+                    rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+                    for ( ; r && (r->hash | r->index); r++ ) {
+                        if (r->hash == hash) {
+                            index = r->index;
+                            ess.inexed_extensions[index] = 1;
                             break;
-    					}
-    				}
+                        }
+                    }
 
                     if (index == -1) {
                         // (2)
                     }
 
-    				// reset
-    				hash = 5381;
-    				continue;
-    			}
+                    // reset
+                    hash = 5381;
+                    continue;
+                }
 
-    			hash = ((hash << 5) + hash) + (int)(*ext_str);
+                hash = ((hash << 5) + hash) + (int)(*ext_str);
 
-    		}
-    		if (hash != 5381) {
-    			int index = -1;
-    			rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    			for ( ; drecord; drecord++ ) {
-    				if (drecord->hash == hash) {
-    					index = drecord->index;
-    					ess.inexed_extensions[index] = 1;
+            }
+            if (hash != 5381) {
+                int index = -1;
+                rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+                for ( ; r && (r->hash | r->index); r++ ) {
+                    if (r->hash == hash) {
+                        index = r->index;
+                        ess.inexed_extensions[index] = 1;
                         break;
-    				}
-    			}
+                    }
+                }
                 if (index == -1) {
                     // (3)
                 }
-    		}
+            }
 #ifdef GL_NUM_EXTENSIONS
-    	}
+        }
 #endif
 '''
     else:
         if (v == 'GLX'):
             estring_acquisition = '''
         Display* d = glXGetCurrentDisplay();
-	    const uint8_t* ext_str = (const uint8_t*)glXQueryExtensionsString(d, DefaultScreen(d));'''
+        const uint8_t* ext_str = (const uint8_t*)glatter_glXQueryExtensionsString(d, DefaultScreen(d));'''
         elif (v == 'WGL'):
             estring_acquisition = '''
         const uint8_t* ext_str = (const uint8_t*)glatter_wglGetExtensionsStringEXT();'''
         elif (v == 'EGL'):
             estring_acquisition = '''
-        const uint8_t* ext_str = (const uint8_t*)eglQueryString(eglGetCurrentDisplay(), EGL_EXTENSIONS);'''
+        const uint8_t* ext_str = (const uint8_t*)glatter_eglQueryString(eglGetCurrentDisplay(), EGL_EXTENSIONS);'''
 
         rv += '''
         uint32_t hash = 5381;''' + estring_acquisition + '''
-    	for ( ; *ext_str; ext_str++) {
-    		if (*ext_str == ' ') {
-    			int index = -1;
-    			rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    			for ( ; drecord; drecord++ ) {
-    				if (drecord->hash == hash) {
-    					index = drecord->index;
-    					ess.inexed_extensions[index] = 1;
+        for ( ; *ext_str; ext_str++) {
+            if (*ext_str == ' ') {
+                int index = -1;
+                rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+                for ( ; r && (r->hash | r->index); r++ ) {
+                    if (r->hash == hash) {
+                        index = r->index;
+                        ess.inexed_extensions[index] = 1;
                         break;
-    				}
-    			}
+                    }
+                }
 
                 if (index == -1) {
                     // (2)
                 }
 
-    			// reset
-    			hash = 5381;
-    			continue;
-    		}
+                // reset
+                hash = 5381;
+                continue;
+            }
 
-    		hash = ((hash << 5) + hash) + (int)(*ext_str);
+            hash = ((hash << 5) + hash) + (int)(*ext_str);
 
-    	}
-    	if (hash != 5381) {
-    		int index = -1;
-    		rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    		for ( ; drecord; drecord++ ) {
-    			if (drecord->hash == hash) {
-    				index = drecord->index;
-    				ess.inexed_extensions[index] = 1;
+        }
+        if (hash != 5381) {
+            int index = -1;
+            rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+            for ( ; r && (r->hash | r->index); r++ ) {
+                if (r->hash == hash) {
+                    index = r->index;
+                    ess.inexed_extensions[index] = 1;
                     break;
-    			}
-    		}
+                }
+            }
             if (index == -1) {
                 // (3)
             }
-    	}'''
+        }'''
 
     rv += '''
         initialized = 1;

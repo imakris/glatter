@@ -329,7 +329,7 @@ uint32_t glatter_djb2(const uint8_t *str)
 {
     uint32_t hash = 5381;
 
-    for (int c = *str; c; c = *str++)
+    for (int c = *str; c; c = *++str)
         hash = ((hash << 5) + hash) + c;
 
     return hash;

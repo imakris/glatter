@@ -64,9 +64,15 @@ GLATTER_FBLOCK(return, GLX, extern, int, , glXQueryFrameTrackingMESA, (dpy, draw
 #define glXQueryFrameTrackingMESA_defined
 #endif // defined(GLX_MESA_swap_frame_usage)
 #if defined(GLX_NV_vertex_array_range)
+GLATTER_FBLOCK(return, GLX, extern, void *, , glXAllocateMemoryNV, (size, readfreq, writefreq, priority), (GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority))
+#define glXAllocateMemoryNV_defined
 GLATTER_FBLOCK(, GLX, extern, void, , glXFreeMemoryNV, (pointer), (GLvoid *pointer))
 #define glXFreeMemoryNV_defined
 #endif // defined(GLX_NV_vertex_array_range)
+#ifndef glXChooseFBConfig_defined
+GLATTER_FBLOCK(return, GLX, extern, GLXFBConfig *, , glXChooseFBConfig, (dpy, screen, attribList, nitems), (Display *dpy, int screen, const int *attribList, int *nitems))
+#define glXChooseFBConfig_defined
+#endif
 GLATTER_FBLOCK(return, GLX, extern, XVisualInfo*, , glXChooseVisual, (dpy, screen, attribList), (Display *dpy, int screen, int *attribList))
 #define glXChooseVisual_defined
 GLATTER_FBLOCK(, GLX, extern, void, , glXCopyContext, (dpy, src, dst, mask), (Display *dpy, GLXContext src, GLXContext dst, unsigned long mask))
@@ -107,10 +113,14 @@ GLATTER_FBLOCK(, GLX, extern, void, , glXDestroyPixmap, (dpy, pixmap), (Display 
 GLATTER_FBLOCK(, GLX, extern, void, , glXDestroyWindow, (dpy, window), (Display *dpy, GLXWindow window))
 #define glXDestroyWindow_defined
 #endif
+GLATTER_FBLOCK(return, GLX, extern, const char *, , glXGetClientString, (dpy, name), (Display *dpy, int name))
+#define glXGetClientString_defined
 GLATTER_FBLOCK(return, GLX, extern, int, , glXGetConfig, (dpy, visual, attrib, value), (Display *dpy, XVisualInfo *visual, int attrib, int *value))
 #define glXGetConfig_defined
 GLATTER_FBLOCK(return, GLX, extern, GLXContext, , glXGetCurrentContext, (), (void))
 #define glXGetCurrentContext_defined
+GLATTER_FBLOCK(return, GLX, extern, Display *, , glXGetCurrentDisplay, (), (void))
+#define glXGetCurrentDisplay_defined
 GLATTER_FBLOCK(return, GLX, extern, GLXDrawable, , glXGetCurrentDrawable, (), (void))
 #define glXGetCurrentDrawable_defined
 #ifndef glXGetCurrentReadDrawable_defined
@@ -121,9 +131,17 @@ GLATTER_FBLOCK(return, GLX, extern, GLXDrawable, , glXGetCurrentReadDrawable, ()
 GLATTER_FBLOCK(return, GLX, extern, int, , glXGetFBConfigAttrib, (dpy, config, attribute, value), (Display *dpy, GLXFBConfig config, int attribute, int *value))
 #define glXGetFBConfigAttrib_defined
 #endif
+#ifndef glXGetFBConfigs_defined
+GLATTER_FBLOCK(return, GLX, extern, GLXFBConfig *, , glXGetFBConfigs, (dpy, screen, nelements), (Display *dpy, int screen, int *nelements))
+#define glXGetFBConfigs_defined
+#endif
 #ifndef glXGetSelectedEvent_defined
 GLATTER_FBLOCK(, GLX, extern, void, , glXGetSelectedEvent, (dpy, drawable, mask), (Display *dpy, GLXDrawable drawable, unsigned long *mask))
 #define glXGetSelectedEvent_defined
+#endif
+#ifndef glXGetVisualFromFBConfig_defined
+GLATTER_FBLOCK(return, GLX, extern, XVisualInfo *, , glXGetVisualFromFBConfig, (dpy, config), (Display *dpy, GLXFBConfig config))
+#define glXGetVisualFromFBConfig_defined
 #endif
 GLATTER_FBLOCK(return, GLX, extern, Bool, , glXIsDirect, (dpy, ctx), (Display *dpy, GLXContext ctx))
 #define glXIsDirect_defined
@@ -143,6 +161,10 @@ GLATTER_FBLOCK(, GLX, extern, void, , glXQueryDrawable, (dpy, draw, attribute, v
 #endif
 GLATTER_FBLOCK(return, GLX, extern, Bool, , glXQueryExtension, (dpy, errorb, event), (Display *dpy, int *errorb, int *event))
 #define glXQueryExtension_defined
+GLATTER_FBLOCK(return, GLX, extern, const char *, , glXQueryExtensionsString, (dpy, screen), (Display *dpy, int screen))
+#define glXQueryExtensionsString_defined
+GLATTER_FBLOCK(return, GLX, extern, const char *, , glXQueryServerString, (dpy, screen, name), (Display *dpy, int screen, int name))
+#define glXQueryServerString_defined
 GLATTER_FBLOCK(return, GLX, extern, Bool, , glXQueryVersion, (dpy, maj, min), (Display *dpy, int *maj, int *min))
 #define glXQueryVersion_defined
 #ifndef glXSelectEvent_defined
@@ -194,6 +216,8 @@ GLATTER_FBLOCK(, GLX, , void, , glXFreeContextEXT, (dpy, context), (Display *dpy
 #define glXFreeContextEXT_defined
 GLATTER_FBLOCK(return, GLX, , GLXContextID, , glXGetContextIDEXT, (context), (const GLXContext context))
 #define glXGetContextIDEXT_defined
+GLATTER_FBLOCK(return, GLX, , Display *, , glXGetCurrentDisplayEXT, (), (void))
+#define glXGetCurrentDisplayEXT_defined
 GLATTER_FBLOCK(return, GLX, , GLXContext, , glXImportContextEXT, (dpy, contextID), (Display *dpy, GLXContextID contextID))
 #define glXImportContextEXT_defined
 GLATTER_FBLOCK(return, GLX, , int, , glXQueryContextInfoEXT, (dpy, context, attribute, value), (Display *dpy, GLXContext context, int attribute, int *value))
@@ -224,8 +248,12 @@ GLATTER_FBLOCK(return, GLX, , GLXPixmap, , glXCreateGLXPixmapMESA, (dpy, visual,
 #if defined(GLX_MESA_query_renderer)
 GLATTER_FBLOCK(return, GLX, , Bool, , glXQueryCurrentRendererIntegerMESA, (attribute, value), (int attribute, unsigned int *value))
 #define glXQueryCurrentRendererIntegerMESA_defined
+GLATTER_FBLOCK(return, GLX, , const char *, , glXQueryCurrentRendererStringMESA, (attribute), (int attribute))
+#define glXQueryCurrentRendererStringMESA_defined
 GLATTER_FBLOCK(return, GLX, , Bool, , glXQueryRendererIntegerMESA, (dpy, screen, renderer, attribute, value), (Display *dpy, int screen, int renderer, int attribute, unsigned int *value))
 #define glXQueryRendererIntegerMESA_defined
+GLATTER_FBLOCK(return, GLX, , const char *, , glXQueryRendererStringMESA, (dpy, screen, renderer, attribute), (Display *dpy, int screen, int renderer, int attribute))
+#define glXQueryRendererStringMESA_defined
 #endif // defined(GLX_MESA_query_renderer)
 #if defined(GLX_MESA_release_buffers)
 GLATTER_FBLOCK(return, GLX, , Bool, , glXReleaseBuffersMESA, (dpy, drawable), (Display *dpy, GLXDrawable drawable))
@@ -262,6 +290,8 @@ GLATTER_FBLOCK(return, GLX, , Bool, , glXDelayBeforeSwapNV, (dpy, drawable, seco
 #if defined(GLX_NV_present_video)
 GLATTER_FBLOCK(return, GLX, , int, , glXBindVideoDeviceNV, (dpy, video_slot, video_device, attrib_list), (Display *dpy, unsigned int video_slot, unsigned int video_device, const int *attrib_list))
 #define glXBindVideoDeviceNV_defined
+GLATTER_FBLOCK(return, GLX, , unsigned int *, , glXEnumerateVideoDevicesNV, (dpy, screen, nelements), (Display *dpy, int screen, int *nelements))
+#define glXEnumerateVideoDevicesNV_defined
 #endif // defined(GLX_NV_present_video)
 #if defined(GLX_NV_swap_group)
 GLATTER_FBLOCK(return, GLX, , Bool, , glXBindSwapBarrierNV, (dpy, group, barrier), (Display *dpy, GLuint group, GLuint barrier))
@@ -280,6 +310,8 @@ GLATTER_FBLOCK(return, GLX, , Bool, , glXResetFrameCountNV, (dpy, screen), (Disp
 #if defined(GLX_NV_video_capture)
 GLATTER_FBLOCK(return, GLX, , int, , glXBindVideoCaptureDeviceNV, (dpy, video_capture_slot, device), (Display *dpy, unsigned int video_capture_slot, GLXVideoCaptureDeviceNV device))
 #define glXBindVideoCaptureDeviceNV_defined
+GLATTER_FBLOCK(return, GLX, , GLXVideoCaptureDeviceNV *, , glXEnumerateVideoCaptureDevicesNV, (dpy, screen, nelements), (Display *dpy, int screen, int *nelements))
+#define glXEnumerateVideoCaptureDevicesNV_defined
 GLATTER_FBLOCK(, GLX, , void, , glXLockVideoCaptureDeviceNV, (dpy, device), (Display *dpy, GLXVideoCaptureDeviceNV device))
 #define glXLockVideoCaptureDeviceNV_defined
 GLATTER_FBLOCK(return, GLX, , int, , glXQueryVideoCaptureDeviceNV, (dpy, device, attribute, value), (Display *dpy, GLXVideoCaptureDeviceNV device, int attribute, int *value))
@@ -320,6 +352,8 @@ GLATTER_FBLOCK(return, GLX, , Bool, , glXAssociateDMPbufferSGIX, (dpy, pbuffer, 
 #endif // defined(_DM_BUFFER_H_)
 #endif // defined(GLX_SGIX_dmbuffer)
 #if defined(GLX_SGIX_fbconfig)
+GLATTER_FBLOCK(return, GLX, , GLXFBConfigSGIX *, , glXChooseFBConfigSGIX, (dpy, screen, attrib_list, nelements), (Display *dpy, int screen, int *attrib_list, int *nelements))
+#define glXChooseFBConfigSGIX_defined
 GLATTER_FBLOCK(return, GLX, , GLXContext, , glXCreateContextWithConfigSGIX, (dpy, config, render_type, share_list, direct), (Display *dpy, GLXFBConfigSGIX config, int render_type, GLXContext share_list, Bool direct))
 #define glXCreateContextWithConfigSGIX_defined
 GLATTER_FBLOCK(return, GLX, , GLXPixmap, , glXCreateGLXPixmapWithConfigSGIX, (dpy, config, pixmap), (Display *dpy, GLXFBConfigSGIX config, Pixmap pixmap))
@@ -328,6 +362,8 @@ GLATTER_FBLOCK(return, GLX, , int, , glXGetFBConfigAttribSGIX, (dpy, config, att
 #define glXGetFBConfigAttribSGIX_defined
 GLATTER_FBLOCK(return, GLX, , GLXFBConfigSGIX, , glXGetFBConfigFromVisualSGIX, (dpy, vis), (Display *dpy, XVisualInfo *vis))
 #define glXGetFBConfigFromVisualSGIX_defined
+GLATTER_FBLOCK(return, GLX, , XVisualInfo *, , glXGetVisualFromFBConfigSGIX, (dpy, config), (Display *dpy, GLXFBConfigSGIX config))
+#define glXGetVisualFromFBConfigSGIX_defined
 #endif // defined(GLX_SGIX_fbconfig)
 #if defined(GLX_SGIX_hyperpipe)
 GLATTER_FBLOCK(return, GLX, , int, , glXBindHyperpipeSGIX, (dpy, hpId), (Display *dpy, int hpId))
@@ -342,6 +378,10 @@ GLATTER_FBLOCK(return, GLX, , int, , glXQueryHyperpipeAttribSGIX, (dpy, timeSlic
 #define glXQueryHyperpipeAttribSGIX_defined
 GLATTER_FBLOCK(return, GLX, , int, , glXQueryHyperpipeBestAttribSGIX, (dpy, timeSlice, attrib, size, attribList, returnAttribList), (Display *dpy, int timeSlice, int attrib, int size, void *attribList, void *returnAttribList))
 #define glXQueryHyperpipeBestAttribSGIX_defined
+GLATTER_FBLOCK(return, GLX, , GLXHyperpipeConfigSGIX *, , glXQueryHyperpipeConfigSGIX, (dpy, hpId, npipes), (Display *dpy, int hpId, int *npipes))
+#define glXQueryHyperpipeConfigSGIX_defined
+GLATTER_FBLOCK(return, GLX, , GLXHyperpipeNetworkSGIX *, , glXQueryHyperpipeNetworkSGIX, (dpy, npipes), (Display *dpy, int *npipes))
+#define glXQueryHyperpipeNetworkSGIX_defined
 #endif // defined(GLX_SGIX_hyperpipe)
 #if defined(GLX_SGIX_pbuffer)
 GLATTER_FBLOCK(return, GLX, , GLXPbufferSGIX, , glXCreateGLXPbufferSGIX, (dpy, config, width, height, attrib_list), (Display *dpy, GLXFBConfigSGIX config, unsigned int width, unsigned int height, int *attrib_list))
@@ -410,6 +450,10 @@ GLATTER_FBLOCK(return, GLX, , Status, , glXGetTransparentIndexSUN, (dpy, overlay
 #define glXGetTransparentIndexSUN_defined
 #endif // defined(GLX_SUN_get_transparent_index)
 #if defined(GLX_VERSION_1_3)
+#ifndef glXChooseFBConfig_defined
+GLATTER_FBLOCK(return, GLX, , GLXFBConfig *, , glXChooseFBConfig, (dpy, screen, attrib_list, nelements), (Display *dpy, int screen, const int *attrib_list, int *nelements))
+#define glXChooseFBConfig_defined
+#endif
 #ifndef glXCreateNewContext_defined
 GLATTER_FBLOCK(return, GLX, , GLXContext, , glXCreateNewContext, (dpy, config, render_type, share_list, direct), (Display *dpy, GLXFBConfig config, int render_type, GLXContext share_list, Bool direct))
 #define glXCreateNewContext_defined
@@ -446,9 +490,17 @@ GLATTER_FBLOCK(return, GLX, , GLXDrawable, , glXGetCurrentReadDrawable, (), (voi
 GLATTER_FBLOCK(return, GLX, , int, , glXGetFBConfigAttrib, (dpy, config, attribute, value), (Display *dpy, GLXFBConfig config, int attribute, int *value))
 #define glXGetFBConfigAttrib_defined
 #endif
+#ifndef glXGetFBConfigs_defined
+GLATTER_FBLOCK(return, GLX, , GLXFBConfig *, , glXGetFBConfigs, (dpy, screen, nelements), (Display *dpy, int screen, int *nelements))
+#define glXGetFBConfigs_defined
+#endif
 #ifndef glXGetSelectedEvent_defined
 GLATTER_FBLOCK(, GLX, , void, , glXGetSelectedEvent, (dpy, draw, event_mask), (Display *dpy, GLXDrawable draw, unsigned long *event_mask))
 #define glXGetSelectedEvent_defined
+#endif
+#ifndef glXGetVisualFromFBConfig_defined
+GLATTER_FBLOCK(return, GLX, , XVisualInfo *, , glXGetVisualFromFBConfig, (dpy, config), (Display *dpy, GLXFBConfig config))
+#define glXGetVisualFromFBConfig_defined
 #endif
 #ifndef glXMakeContextCurrent_defined
 GLATTER_FBLOCK(return, GLX, , Bool, , glXMakeContextCurrent, (dpy, draw, read, ctx), (Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx))

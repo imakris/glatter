@@ -33,73 +33,73 @@ glatter_extension_support_status_GLX_t glatter_get_extension_support_GLX()
     static glatter_extension_support_status_GLX_t ess;
 
     typedef glatter_es_record_t rt;
-    static rt e33db[] = {{229618651, 9}};
-    static rt e353 [] = {{58065747, 11}};
-    static rt e64d [] = {{2793817677, 37}};
-    static rt e3c4f[] = {{1990163535, 36}};
-    static rt e1e49[] = {{1226513993, 2}};
-    static rt ef5b [] = {{2519650139, 3}};
-    static rt e3b00[] = {{1761557248, 4}};
-    static rt e18b [] = {{1471218059, 5}};
-    static rt e2f72[] = {{1288056690, 6}};
-    static rt e1776[] = {{3757758326, 7}};
-    static rt e3a95[] = {{218200725, 8}};
-    static rt eef0 [] = {{2071547632, 10}};
-    static rt e1e7f[] = {{1910808191, 12}};
-    static rt e2b0a[] = {{3907349258, 13}};
-    static rt e470 [] = {{3891119216, 14}};
-    static rt e3370[] = {{162624368, 0}};
-    static rt e3a8 [] = {{1556202408, 1}};
-    static rt e545 [] = {{573916485, 15}};
-    static rt ed10 [] = {{3112307984, 16}};
-    static rt e3d1e[] = {{1751989534, 17}};
-    static rt e579 [] = {{1515128185, 18}};
-    static rt e3ff1[] = {{541786097, 19}};
-    static rt e217e[] = {{2730615166, 20}};
-    static rt e14b1[] = {{767120561, 21}};
-    static rt e34b5[] = {{854357173, 22}};
-    static rt e1020[] = {{3617591328, 23}};
-    static rt e3fda[] = {{1647738842, 24}};
-    static rt e2685[] = {{1989863045, 25}};
-    static rt e37d1[] = {{4290820049, 26}};
-    static rt e1a3e[] = {{602348094, 27}};
-    static rt e3337[] = {{3459347255, 28}};
-    static rt e2486[] = {{1077879942, 29}};
-    static rt e1c12[] = {{188423186, 30}};
-    static rt e3b91[] = {{3995057041, 31}};
-    static rt e371f[] = {{3549050655, 32}};
-    static rt e1b60[] = {{3989887840, 33}};
-    static rt e1be1[] = {{782998497, 34}};
-    static rt e2118[] = {{3263652120, 35}};
-    static rt e1986[] = {{503454086, 38}};
-    static rt e39ef[] = {{3277027823, 39}};
-    static rt e100d[] = {{2417250317, 40}};
-    static rt e841 [] = {{1082738753, 41}};
-    static rt e222a[] = {{4155662890, 42}};
-    static rt e909 [] = {{3761686793, 43}};
-    static rt e3eda[] = {{3300064986, 44}};
-    static rt e259 [] = {{454509145, 45}};
-    static rt ecfc [] = {{3801681148, 46}};
-    static rt e27e0[] = {{1091626976, 47}};
-    static rt e551 [] = {{3242100049, 48}};
-    static rt e273 [] = {{1395098227, 49}};
-    static rt e1fb3[] = {{621043635, 50}};
-    static rt e3631[] = {{2668754481, 51}};
-    static rt ef07 [] = {{1280052999, 52}};
-    static rt e1b74[] = {{3770506100, 53}};
-    static rt e2207[] = {{1819107847, 54}};
-    static rt e3ff [] = {{4004250623, 55}};
-    static rt e34b3[] = {{3229529267, 56}};
-    static rt e242a[] = {{2227479594, 57}};
-    static rt ee90 [] = {{1369247376, 58}};
-    static rt e611 [] = {{3678357009, 59}};
-    static rt e1fd0[] = {{3729432528, 60}};
-    static rt e1568[] = {{3951121768, 61}};
-    static rt ee0a [] = {{167038474, 62}};
-    static rt e24ac[] = {{576922796, 63}};
-    static rt ee6c [] = {{2845691500, 64}};
-    static rt eea4 [] = {{3413839524, 65}};
-    static rt e2d2c[] = {{2477911340, 66}};
+    static rt e33db[] = {{229618651, 9}, 0};
+    static rt e353 [] = {{58065747, 11}, 0};
+    static rt e64d [] = {{2793817677, 37}, 0};
+    static rt e3c4f[] = {{1990163535, 36}, 0};
+    static rt e1e49[] = {{1226513993, 2}, 0};
+    static rt ef5b [] = {{2519650139, 3}, 0};
+    static rt e3b00[] = {{1761557248, 4}, 0};
+    static rt e18b [] = {{1471218059, 5}, 0};
+    static rt e2f72[] = {{1288056690, 6}, 0};
+    static rt e1776[] = {{3757758326, 7}, 0};
+    static rt e3a95[] = {{218200725, 8}, 0};
+    static rt eef0 [] = {{2071547632, 10}, 0};
+    static rt e1e7f[] = {{1910808191, 12}, 0};
+    static rt e2b0a[] = {{3907349258, 13}, 0};
+    static rt e470 [] = {{3891119216, 14}, 0};
+    static rt e3370[] = {{162624368, 0}, 0};
+    static rt e3a8 [] = {{1556202408, 1}, 0};
+    static rt e545 [] = {{573916485, 15}, 0};
+    static rt ed10 [] = {{3112307984, 16}, 0};
+    static rt e3d1e[] = {{1751989534, 17}, 0};
+    static rt e579 [] = {{1515128185, 18}, 0};
+    static rt e3ff1[] = {{541786097, 19}, 0};
+    static rt e217e[] = {{2730615166, 20}, 0};
+    static rt e14b1[] = {{767120561, 21}, 0};
+    static rt e34b5[] = {{854357173, 22}, 0};
+    static rt e1020[] = {{3617591328, 23}, 0};
+    static rt e3fda[] = {{1647738842, 24}, 0};
+    static rt e2685[] = {{1989863045, 25}, 0};
+    static rt e37d1[] = {{4290820049, 26}, 0};
+    static rt e1a3e[] = {{602348094, 27}, 0};
+    static rt e3337[] = {{3459347255, 28}, 0};
+    static rt e2486[] = {{1077879942, 29}, 0};
+    static rt e1c12[] = {{188423186, 30}, 0};
+    static rt e3b91[] = {{3995057041, 31}, 0};
+    static rt e371f[] = {{3549050655, 32}, 0};
+    static rt e1b60[] = {{3989887840, 33}, 0};
+    static rt e1be1[] = {{782998497, 34}, 0};
+    static rt e2118[] = {{3263652120, 35}, 0};
+    static rt e1986[] = {{503454086, 38}, 0};
+    static rt e39ef[] = {{3277027823, 39}, 0};
+    static rt e100d[] = {{2417250317, 40}, 0};
+    static rt e841 [] = {{1082738753, 41}, 0};
+    static rt e222a[] = {{4155662890, 42}, 0};
+    static rt e909 [] = {{3761686793, 43}, 0};
+    static rt e3eda[] = {{3300064986, 44}, 0};
+    static rt e259 [] = {{454509145, 45}, 0};
+    static rt ecfc [] = {{3801681148, 46}, 0};
+    static rt e27e0[] = {{1091626976, 47}, 0};
+    static rt e551 [] = {{3242100049, 48}, 0};
+    static rt e273 [] = {{1395098227, 49}, 0};
+    static rt e1fb3[] = {{621043635, 50}, 0};
+    static rt e3631[] = {{2668754481, 51}, 0};
+    static rt ef07 [] = {{1280052999, 52}, 0};
+    static rt e1b74[] = {{3770506100, 53}, 0};
+    static rt e2207[] = {{1819107847, 54}, 0};
+    static rt e3ff [] = {{4004250623, 55}, 0};
+    static rt e34b3[] = {{3229529267, 56}, 0};
+    static rt e242a[] = {{2227479594, 57}, 0};
+    static rt ee90 [] = {{1369247376, 58}, 0};
+    static rt e611 [] = {{3678357009, 59}, 0};
+    static rt e1fd0[] = {{3729432528, 60}, 0};
+    static rt e1568[] = {{3951121768, 61}, 0};
+    static rt ee0a [] = {{167038474, 62}, 0};
+    static rt e24ac[] = {{576922796, 63}, 0};
+    static rt ee6c [] = {{2845691500, 64}, 0};
+    static rt eea4 [] = {{3413839524, 65}, 0};
+    static rt e2d2c[] = {{2477911340, 66}, 0};
 
 
     static glatter_es_record_t* es_dispatch[GLATTER_LOOKUP_SIZE] = {
@@ -658,45 +658,45 @@ glatter_extension_support_status_GLX_t glatter_get_extension_support_GLX()
 
         uint32_t hash = 5381;
         Display* d = glXGetCurrentDisplay();
-	    const uint8_t* ext_str = (const uint8_t*)glXQueryExtensionsString(d, DefaultScreen(d));
-    	for ( ; *ext_str; ext_str++) {
-    		if (*ext_str == ' ') {
-    			int index = -1;
-    			rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    			for ( ; drecord; drecord++ ) {
-    				if (drecord->hash == hash) {
-    					index = drecord->index;
-    					ess.inexed_extensions[index] = 1;
+        const uint8_t* ext_str = (const uint8_t*)glatter_glXQueryExtensionsString(d, DefaultScreen(d));
+        for ( ; *ext_str; ext_str++) {
+            if (*ext_str == ' ') {
+                int index = -1;
+                rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+                for ( ; r && (r->hash | r->index); r++ ) {
+                    if (r->hash == hash) {
+                        index = r->index;
+                        ess.inexed_extensions[index] = 1;
                         break;
-    				}
-    			}
+                    }
+                }
 
                 if (index == -1) {
                     // (2)
                 }
 
-    			// reset
-    			hash = 5381;
-    			continue;
-    		}
+                // reset
+                hash = 5381;
+                continue;
+            }
 
-    		hash = ((hash << 5) + hash) + (int)(*ext_str);
+            hash = ((hash << 5) + hash) + (int)(*ext_str);
 
-    	}
-    	if (hash != 5381) {
-    		int index = -1;
-    		rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    		for ( ; drecord; drecord++ ) {
-    			if (drecord->hash == hash) {
-    				index = drecord->index;
-    				ess.inexed_extensions[index] = 1;
+        }
+        if (hash != 5381) {
+            int index = -1;
+            rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+            for ( ; r && (r->hash | r->index); r++ ) {
+                if (r->hash == hash) {
+                    index = r->index;
+                    ess.inexed_extensions[index] = 1;
                     break;
-    			}
-    		}
+                }
+            }
             if (index == -1) {
                 // (3)
             }
-    	}
+        }
         initialized = 1;
     }
 

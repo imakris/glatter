@@ -33,131 +33,131 @@ glatter_extension_support_status_EGL_t glatter_get_extension_support_EGL()
     static glatter_extension_support_status_EGL_t ess;
 
     typedef glatter_es_record_t rt;
-    static rt e2d90[] = {{2000334224, 48}};
-    static rt e1fc2[] = {{1586520002, 49}};
-    static rt e1f06[] = {{3361873670, 50}};
-    static rt e3e2e[] = {{1901215278, 51}};
-    static rt e38a6[] = {{1297660070, 52}};
-    static rt e858 [] = {{3714844760, 53}};
-    static rt e209d[] = {{1930223773, 54}};
-    static rt e1e87[] = {{2626592391, 55}};
-    static rt e99d [] = {{589990301, 56}};
-    static rt e1788[] = {{4278540168, 57}};
-    static rt e281d[] = {{3025299485, 58}};
-    static rt ebee [] = {{1091161070, 59}};
-    static rt e281a[] = {{99395610, 60}};
-    static rt e3cfb[] = {{4063132923, 61}};
-    static rt e61  [] = {{1994653793, 62}};
-    static rt e3603[] = {{2632807939, 63}};
-    static rt e30bd[] = {{129315005, 64}};
-    static rt e3db1[] = {{3942661553, 65}};
-    static rt e3e71[] = {{3906928241, 66}};
-    static rt ecc3 [] = {{79613123, 67}};
-    static rt ecc4 [] = {{79613124, 68}};
-    static rt e942 [] = {{928139586, 69}};
-    static rt e37b6[] = {{802109366, 70}};
-    static rt e2ecf[] = {{3619663567, 71}};
-    static rt ed45 [] = {{1370557765, 72}};
-    static rt e187a[] = {{1734826106, 73}};
-    static rt e3314[] = {{3528962836, 74}};
-    static rt e1a3e[] = {{1734842942, 75}};
-    static rt e5ef [] = {{3713451503, 76}};
-    static rt e20c [] = {{1383580172, 77}};
-    static rt e1671[] = {{2023036529, 78}};
-    static rt e20ba[] = {{1320034490, 79}};
-    static rt ef1c [] = {{3960393500, 80}};
-    static rt e3c4f[] = {{546290767, 81}};
-    static rt ee9  [] = {{1709572329, 82}};
-    static rt e20af[] = {{4076298415, 83}};
-    static rt e16e4[] = {{2916767460, 84}};
-    static rt e3120[] = {{3853201696, 85}};
-    static rt e35a8[] = {{2903078312, 86}};
-    static rt e3711[] = {{1956673297, 87}};
-    static rt e64e [] = {{2457060942, 0}};
-    static rt e1bad[] = {{2311773101, 1}};
-    static rt e17a7[] = {{3764885415, 2}};
-    static rt e37e4[] = {{3710433252, 3}};
-    static rt eb1e [] = {{2799586078, 4}};
-    static rt e181f[] = {{837113887, 5}};
-    static rt e2726[] = {{483600166, 6}};
-    static rt e354f[] = {{2780362063, 7}};
-    static rt e20f1[] = {{2027118833, 8}};
-    static rt e1bac[] = {{1579228076, 9}};
-    static rt e2ec0[] = {{413855424, 10}};
-    static rt e3e7 [] = {{907215847, 11}};
-    static rt e3bc3[] = {{422837187, 12}};
-    static rt e2bd4[] = {{1273490388, 13}};
-    static rt e3cef[] = {{3964517615, 14}};
-    static rt e1072[] = {{3578384498, 15}};
-    static rt e31da[] = {{2805428698, 16}};
-    static rt e29bb[] = {{2909301179, 17}};
-    static rt efdb [] = {{1558073307, 18}};
-    static rt e3136[] = {{2631512374, 19}};
-    static rt e255e[] = {{990799198, 20}};
-    static rt e202 [] = {{1748320770, 21}};
-    static rt e1f2a[] = {{1499848490, 22}};
-    static rt e5b1 [] = {{959055281, 23}};
-    static rt e17c [] = {{3579724156, 24}};
-    static rt eac2 [] = {{4284091074, 25}};
-    static rt e30d3[] = {{4185878739, 26}};
-    static rt ea16 [] = {{1798097430, 27}};
-    static rt e1d37[] = {{2260376887, 28}};
-    static rt e3269[] = {{2834100841, 29}};
-    static rt e2437[] = {{2984780855, 30}};
-    static rt e3c3f[] = {{480902207, 31}};
-    static rt e166b[] = {{3957134955, 32}};
-    static rt e24ab[] = {{3709854891, 33}};
-    static rt e144b[] = {{3977614411, 34}};
-    static rt e9a0 [] = {{2378189216, 35}};
-    static rt e520 [] = {{4081009952, 36}};
-    static rt e64a [] = {{3374319178, 37}};
-    static rt e1f30[] = {{2231230256, 38}};
-    static rt e13e [] = {{1658929470, 39}};
-    static rt e7cb [] = {{3284273099, 40}};
-    static rt e4cd [] = {{1584612557, 41}};
-    static rt ef2c [] = {{1809452844, 42}};
-    static rt e27f8[] = {{2312873976, 43}};
-    static rt ebda [] = {{2381122522, 44}};
-    static rt e527 [] = {{815711527, 45}};
-    static rt ee9e [] = {{717868702, 46}};
-    static rt e19a2[] = {{3298761122, 47}};
-    static rt e1a46[] = {{1348311622, 88}};
-    static rt e432 [] = {{2489893938, 89}};
-    static rt ee9b [] = {{705302171, 90}};
-    static rt e20e5[] = {{4168818917, 91}};
-    static rt e20a1[] = {{1717641377, 92}};
-    static rt e34f3[] = {{847590643, 93}};
-    static rt ec35 [] = {{73157685, 94}};
-    static rt e1a96[] = {{290151062, 95}};
-    static rt e326c[] = {{3041407596, 96}};
-    static rt e2e6b[] = {{3618614891, 97}};
-    static rt e2c3d[] = {{693660733, 98}};
-    static rt e23b9[] = {{2839634873, 99}};
-    static rt e32eb[] = {{1580200683, 100}};
-    static rt e297b[] = {{2047355259, 101}};
-    static rt e2bea[] = {{2558405610, 102}};
-    static rt e6a7 [] = {{3333539495, 103}};
-    static rt e347 [] = {{3769647943, 104}};
-    static rt e1e7c[] = {{2575163004, 105}};
-    static rt e5a9 [] = {{1197376937, 106}};
-    static rt e134a[] = {{2670695242, 107}};
-    static rt eb0d [] = {{1762364173, 108}};
-    static rt e2df2[] = {{4157091314, 109}};
-    static rt e18d8[] = {{2854852824, 110}};
-    static rt e38ec[] = {{719534316, 111}};
-    static rt e2ab8[] = {{3872877240, 112}};
-    static rt e1b46[] = {{1282562886, 113}};
-    static rt e12cb[] = {{3090371275, 114}};
-    static rt e2016[] = {{2753962006, 115}};
-    static rt e5cd [] = {{2165867981, 116}};
-    static rt e2f13[] = {{2804592403, 117}};
-    static rt e2002[] = {{460627970, 118}};
-    static rt e3516[] = {{461059350, 119}};
-    static rt e1f07[] = {{1627496199, 120}};
-    static rt effc [] = {{2173095932, 121}};
-    static rt e1a12[] = {{4118256146, 122}};
-    static rt e3b87[] = {{52067207, 123}};
-    static rt e8b6 [] = {{2212563126, 124}};
+    static rt e2d90[] = {{2000334224, 48}, 0};
+    static rt e1fc2[] = {{1586520002, 49}, 0};
+    static rt e1f06[] = {{3361873670, 50}, 0};
+    static rt e3e2e[] = {{1901215278, 51}, 0};
+    static rt e38a6[] = {{1297660070, 52}, 0};
+    static rt e858 [] = {{3714844760, 53}, 0};
+    static rt e209d[] = {{1930223773, 54}, 0};
+    static rt e1e87[] = {{2626592391, 55}, 0};
+    static rt e99d [] = {{589990301, 56}, 0};
+    static rt e1788[] = {{4278540168, 57}, 0};
+    static rt e281d[] = {{3025299485, 58}, 0};
+    static rt ebee [] = {{1091161070, 59}, 0};
+    static rt e281a[] = {{99395610, 60}, 0};
+    static rt e3cfb[] = {{4063132923, 61}, 0};
+    static rt e61  [] = {{1994653793, 62}, 0};
+    static rt e3603[] = {{2632807939, 63}, 0};
+    static rt e30bd[] = {{129315005, 64}, 0};
+    static rt e3db1[] = {{3942661553, 65}, 0};
+    static rt e3e71[] = {{3906928241, 66}, 0};
+    static rt ecc3 [] = {{79613123, 67}, 0};
+    static rt ecc4 [] = {{79613124, 68}, 0};
+    static rt e942 [] = {{928139586, 69}, 0};
+    static rt e37b6[] = {{802109366, 70}, 0};
+    static rt e2ecf[] = {{3619663567, 71}, 0};
+    static rt ed45 [] = {{1370557765, 72}, 0};
+    static rt e187a[] = {{1734826106, 73}, 0};
+    static rt e3314[] = {{3528962836, 74}, 0};
+    static rt e1a3e[] = {{1734842942, 75}, 0};
+    static rt e5ef [] = {{3713451503, 76}, 0};
+    static rt e20c [] = {{1383580172, 77}, 0};
+    static rt e1671[] = {{2023036529, 78}, 0};
+    static rt e20ba[] = {{1320034490, 79}, 0};
+    static rt ef1c [] = {{3960393500, 80}, 0};
+    static rt e3c4f[] = {{546290767, 81}, 0};
+    static rt ee9  [] = {{1709572329, 82}, 0};
+    static rt e20af[] = {{4076298415, 83}, 0};
+    static rt e16e4[] = {{2916767460, 84}, 0};
+    static rt e3120[] = {{3853201696, 85}, 0};
+    static rt e35a8[] = {{2903078312, 86}, 0};
+    static rt e3711[] = {{1956673297, 87}, 0};
+    static rt e64e [] = {{2457060942, 0}, 0};
+    static rt e1bad[] = {{2311773101, 1}, 0};
+    static rt e17a7[] = {{3764885415, 2}, 0};
+    static rt e37e4[] = {{3710433252, 3}, 0};
+    static rt eb1e [] = {{2799586078, 4}, 0};
+    static rt e181f[] = {{837113887, 5}, 0};
+    static rt e2726[] = {{483600166, 6}, 0};
+    static rt e354f[] = {{2780362063, 7}, 0};
+    static rt e20f1[] = {{2027118833, 8}, 0};
+    static rt e1bac[] = {{1579228076, 9}, 0};
+    static rt e2ec0[] = {{413855424, 10}, 0};
+    static rt e3e7 [] = {{907215847, 11}, 0};
+    static rt e3bc3[] = {{422837187, 12}, 0};
+    static rt e2bd4[] = {{1273490388, 13}, 0};
+    static rt e3cef[] = {{3964517615, 14}, 0};
+    static rt e1072[] = {{3578384498, 15}, 0};
+    static rt e31da[] = {{2805428698, 16}, 0};
+    static rt e29bb[] = {{2909301179, 17}, 0};
+    static rt efdb [] = {{1558073307, 18}, 0};
+    static rt e3136[] = {{2631512374, 19}, 0};
+    static rt e255e[] = {{990799198, 20}, 0};
+    static rt e202 [] = {{1748320770, 21}, 0};
+    static rt e1f2a[] = {{1499848490, 22}, 0};
+    static rt e5b1 [] = {{959055281, 23}, 0};
+    static rt e17c [] = {{3579724156, 24}, 0};
+    static rt eac2 [] = {{4284091074, 25}, 0};
+    static rt e30d3[] = {{4185878739, 26}, 0};
+    static rt ea16 [] = {{1798097430, 27}, 0};
+    static rt e1d37[] = {{2260376887, 28}, 0};
+    static rt e3269[] = {{2834100841, 29}, 0};
+    static rt e2437[] = {{2984780855, 30}, 0};
+    static rt e3c3f[] = {{480902207, 31}, 0};
+    static rt e166b[] = {{3957134955, 32}, 0};
+    static rt e24ab[] = {{3709854891, 33}, 0};
+    static rt e144b[] = {{3977614411, 34}, 0};
+    static rt e9a0 [] = {{2378189216, 35}, 0};
+    static rt e520 [] = {{4081009952, 36}, 0};
+    static rt e64a [] = {{3374319178, 37}, 0};
+    static rt e1f30[] = {{2231230256, 38}, 0};
+    static rt e13e [] = {{1658929470, 39}, 0};
+    static rt e7cb [] = {{3284273099, 40}, 0};
+    static rt e4cd [] = {{1584612557, 41}, 0};
+    static rt ef2c [] = {{1809452844, 42}, 0};
+    static rt e27f8[] = {{2312873976, 43}, 0};
+    static rt ebda [] = {{2381122522, 44}, 0};
+    static rt e527 [] = {{815711527, 45}, 0};
+    static rt ee9e [] = {{717868702, 46}, 0};
+    static rt e19a2[] = {{3298761122, 47}, 0};
+    static rt e1a46[] = {{1348311622, 88}, 0};
+    static rt e432 [] = {{2489893938, 89}, 0};
+    static rt ee9b [] = {{705302171, 90}, 0};
+    static rt e20e5[] = {{4168818917, 91}, 0};
+    static rt e20a1[] = {{1717641377, 92}, 0};
+    static rt e34f3[] = {{847590643, 93}, 0};
+    static rt ec35 [] = {{73157685, 94}, 0};
+    static rt e1a96[] = {{290151062, 95}, 0};
+    static rt e326c[] = {{3041407596, 96}, 0};
+    static rt e2e6b[] = {{3618614891, 97}, 0};
+    static rt e2c3d[] = {{693660733, 98}, 0};
+    static rt e23b9[] = {{2839634873, 99}, 0};
+    static rt e32eb[] = {{1580200683, 100}, 0};
+    static rt e297b[] = {{2047355259, 101}, 0};
+    static rt e2bea[] = {{2558405610, 102}, 0};
+    static rt e6a7 [] = {{3333539495, 103}, 0};
+    static rt e347 [] = {{3769647943, 104}, 0};
+    static rt e1e7c[] = {{2575163004, 105}, 0};
+    static rt e5a9 [] = {{1197376937, 106}, 0};
+    static rt e134a[] = {{2670695242, 107}, 0};
+    static rt eb0d [] = {{1762364173, 108}, 0};
+    static rt e2df2[] = {{4157091314, 109}, 0};
+    static rt e18d8[] = {{2854852824, 110}, 0};
+    static rt e38ec[] = {{719534316, 111}, 0};
+    static rt e2ab8[] = {{3872877240, 112}, 0};
+    static rt e1b46[] = {{1282562886, 113}, 0};
+    static rt e12cb[] = {{3090371275, 114}, 0};
+    static rt e2016[] = {{2753962006, 115}, 0};
+    static rt e5cd [] = {{2165867981, 116}, 0};
+    static rt e2f13[] = {{2804592403, 117}, 0};
+    static rt e2002[] = {{460627970, 118}, 0};
+    static rt e3516[] = {{461059350, 119}, 0};
+    static rt e1f07[] = {{1627496199, 120}, 0};
+    static rt effc [] = {{2173095932, 121}, 0};
+    static rt e1a12[] = {{4118256146, 122}, 0};
+    static rt e3b87[] = {{52067207, 123}, 0};
+    static rt e8b6 [] = {{2212563126, 124}, 0};
 
 
     static glatter_es_record_t* es_dispatch[GLATTER_LOOKUP_SIZE] = {
@@ -715,45 +715,45 @@ glatter_extension_support_status_EGL_t glatter_get_extension_support_EGL()
     if (!initialized) {
 
         uint32_t hash = 5381;
-        const uint8_t* ext_str = (const uint8_t*)eglQueryString(eglGetCurrentDisplay(), EGL_EXTENSIONS);
-    	for ( ; *ext_str; ext_str++) {
-    		if (*ext_str == ' ') {
-    			int index = -1;
-    			rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    			for ( ; drecord; drecord++ ) {
-    				if (drecord->hash == hash) {
-    					index = drecord->index;
-    					ess.inexed_extensions[index] = 1;
+        const uint8_t* ext_str = (const uint8_t*)glatter_eglQueryString(eglGetCurrentDisplay(), EGL_EXTENSIONS);
+        for ( ; *ext_str; ext_str++) {
+            if (*ext_str == ' ') {
+                int index = -1;
+                rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+                for ( ; r && (r->hash | r->index); r++ ) {
+                    if (r->hash == hash) {
+                        index = r->index;
+                        ess.inexed_extensions[index] = 1;
                         break;
-    				}
-    			}
+                    }
+                }
 
                 if (index == -1) {
                     // (2)
                 }
 
-    			// reset
-    			hash = 5381;
-    			continue;
-    		}
+                // reset
+                hash = 5381;
+                continue;
+            }
 
-    		hash = ((hash << 5) + hash) + (int)(*ext_str);
+            hash = ((hash << 5) + hash) + (int)(*ext_str);
 
-    	}
-    	if (hash != 5381) {
-    		int index = -1;
-    		rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    		for ( ; drecord; drecord++ ) {
-    			if (drecord->hash == hash) {
-    				index = drecord->index;
-    				ess.inexed_extensions[index] = 1;
+        }
+        if (hash != 5381) {
+            int index = -1;
+            rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+            for ( ; r && (r->hash | r->index); r++ ) {
+                if (r->hash == hash) {
+                    index = r->index;
+                    ess.inexed_extensions[index] = 1;
                     break;
-    			}
-    		}
+                }
+            }
             if (index == -1) {
                 // (3)
             }
-    	}
+        }
         initialized = 1;
     }
 

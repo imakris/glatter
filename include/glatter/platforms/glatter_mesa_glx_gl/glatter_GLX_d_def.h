@@ -144,6 +144,16 @@ GLATTER_INLINE_OR_NOT int glatter_glXQueryFrameTrackingMESA_debug(Display *dpy, 
 #define glXQueryFrameTrackingMESA_defined
 #endif // defined(GLX_MESA_swap_frame_usage)
 #if defined(GLX_NV_vertex_array_range)
+GLATTER_FBLOCK(return, GLX, extern, void *, , glXAllocateMemoryNV, (size, readfreq, writefreq, priority), (GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority))
+GLATTER_INLINE_OR_NOT void * glatter_glXAllocateMemoryNV_debug(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXAllocateMemoryNV, "(%d, %f, %f, %f)", (int)size, (float)readfreq, (float)writefreq, (float)priority)
+    void * rval = glatter_glXAllocateMemoryNV(size, readfreq, writefreq, priority);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXAllocateMemoryNV_defined
 GLATTER_FBLOCK(, GLX, extern, void, , glXFreeMemoryNV, (pointer), (GLvoid *pointer))
 GLATTER_INLINE_OR_NOT void glatter_glXFreeMemoryNV_debug(GLvoid *pointer, const char* file, int line)
 {
@@ -153,6 +163,18 @@ GLATTER_INLINE_OR_NOT void glatter_glXFreeMemoryNV_debug(GLvoid *pointer, const 
 }
 #define glXFreeMemoryNV_defined
 #endif // defined(GLX_NV_vertex_array_range)
+#ifndef glXChooseFBConfig_defined
+GLATTER_FBLOCK(return, GLX, extern, GLXFBConfig *, , glXChooseFBConfig, (dpy, screen, attribList, nitems), (Display *dpy, int screen, const int *attribList, int *nitems))
+GLATTER_INLINE_OR_NOT GLXFBConfig * glatter_glXChooseFBConfig_debug(Display *dpy, int screen, const int *attribList, int *nitems, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXChooseFBConfig, "(%p, %d, %p, %p)", (void*)dpy, (int)screen, (void*)attribList, (void*)nitems)
+    GLXFBConfig * rval = glatter_glXChooseFBConfig(dpy, screen, attribList, nitems);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXChooseFBConfig_defined
+#endif
 GLATTER_FBLOCK(return, GLX, extern, XVisualInfo*, , glXChooseVisual, (dpy, screen, attribList), (Display *dpy, int screen, int *attribList))
 GLATTER_INLINE_OR_NOT XVisualInfo* glatter_glXChooseVisual_debug(Display *dpy, int screen, int *attribList, const char* file, int line)
 {
@@ -285,6 +307,16 @@ GLATTER_INLINE_OR_NOT void glatter_glXDestroyWindow_debug(Display *dpy, GLXWindo
 }
 #define glXDestroyWindow_defined
 #endif
+GLATTER_FBLOCK(return, GLX, extern, const char *, , glXGetClientString, (dpy, name), (Display *dpy, int name))
+GLATTER_INLINE_OR_NOT const char * glatter_glXGetClientString_debug(Display *dpy, int name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXGetClientString, "(%p, %d)", (void*)dpy, (int)name)
+    const char * rval = glatter_glXGetClientString(dpy, name);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXGetClientString_defined
 GLATTER_FBLOCK(return, GLX, extern, int, , glXGetConfig, (dpy, visual, attrib, value), (Display *dpy, XVisualInfo *visual, int attrib, int *value))
 GLATTER_INLINE_OR_NOT int glatter_glXGetConfig_debug(Display *dpy, XVisualInfo *visual, int attrib, int *value, const char* file, int line)
 {
@@ -305,6 +337,16 @@ GLATTER_INLINE_OR_NOT GLXContext glatter_glXGetCurrentContext_debug(const char* 
     return rval;
 }
 #define glXGetCurrentContext_defined
+GLATTER_FBLOCK(return, GLX, extern, Display *, , glXGetCurrentDisplay, (), (void))
+GLATTER_INLINE_OR_NOT Display * glatter_glXGetCurrentDisplay_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXGetCurrentDisplay, "()")
+    Display * rval = glatter_glXGetCurrentDisplay();
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXGetCurrentDisplay_defined
 GLATTER_FBLOCK(return, GLX, extern, GLXDrawable, , glXGetCurrentDrawable, (), (void))
 GLATTER_INLINE_OR_NOT GLXDrawable glatter_glXGetCurrentDrawable_debug(const char* file, int line)
 {
@@ -339,6 +381,18 @@ GLATTER_INLINE_OR_NOT int glatter_glXGetFBConfigAttrib_debug(Display *dpy, GLXFB
 }
 #define glXGetFBConfigAttrib_defined
 #endif
+#ifndef glXGetFBConfigs_defined
+GLATTER_FBLOCK(return, GLX, extern, GLXFBConfig *, , glXGetFBConfigs, (dpy, screen, nelements), (Display *dpy, int screen, int *nelements))
+GLATTER_INLINE_OR_NOT GLXFBConfig * glatter_glXGetFBConfigs_debug(Display *dpy, int screen, int *nelements, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXGetFBConfigs, "(%p, %d, %p)", (void*)dpy, (int)screen, (void*)nelements)
+    GLXFBConfig * rval = glatter_glXGetFBConfigs(dpy, screen, nelements);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXGetFBConfigs_defined
+#endif
 #ifndef glXGetSelectedEvent_defined
 GLATTER_FBLOCK(, GLX, extern, void, , glXGetSelectedEvent, (dpy, drawable, mask), (Display *dpy, GLXDrawable drawable, unsigned long *mask))
 GLATTER_INLINE_OR_NOT void glatter_glXGetSelectedEvent_debug(Display *dpy, GLXDrawable drawable, unsigned long *mask, const char* file, int line)
@@ -348,6 +402,18 @@ GLATTER_INLINE_OR_NOT void glatter_glXGetSelectedEvent_debug(Display *dpy, GLXDr
     GLATTER_CHECK_ERROR(GLX, file, line)
 }
 #define glXGetSelectedEvent_defined
+#endif
+#ifndef glXGetVisualFromFBConfig_defined
+GLATTER_FBLOCK(return, GLX, extern, XVisualInfo *, , glXGetVisualFromFBConfig, (dpy, config), (Display *dpy, GLXFBConfig config))
+GLATTER_INLINE_OR_NOT XVisualInfo * glatter_glXGetVisualFromFBConfig_debug(Display *dpy, GLXFBConfig config, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXGetVisualFromFBConfig, "(%p, %p)", (void*)dpy, (void*)config)
+    XVisualInfo * rval = glatter_glXGetVisualFromFBConfig(dpy, config);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXGetVisualFromFBConfig_defined
 #endif
 GLATTER_FBLOCK(return, GLX, extern, Bool, , glXIsDirect, (dpy, ctx), (Display *dpy, GLXContext ctx))
 GLATTER_INLINE_OR_NOT Bool glatter_glXIsDirect_debug(Display *dpy, GLXContext ctx, const char* file, int line)
@@ -413,6 +479,26 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXQueryExtension_debug(Display *dpy, int *er
     return rval;
 }
 #define glXQueryExtension_defined
+GLATTER_FBLOCK(return, GLX, extern, const char *, , glXQueryExtensionsString, (dpy, screen), (Display *dpy, int screen))
+GLATTER_INLINE_OR_NOT const char * glatter_glXQueryExtensionsString_debug(Display *dpy, int screen, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXQueryExtensionsString, "(%p, %d)", (void*)dpy, (int)screen)
+    const char * rval = glatter_glXQueryExtensionsString(dpy, screen);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXQueryExtensionsString_defined
+GLATTER_FBLOCK(return, GLX, extern, const char *, , glXQueryServerString, (dpy, screen, name), (Display *dpy, int screen, int name))
+GLATTER_INLINE_OR_NOT const char * glatter_glXQueryServerString_debug(Display *dpy, int screen, int name, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXQueryServerString, "(%p, %d, %d)", (void*)dpy, (int)screen, (int)name)
+    const char * rval = glatter_glXQueryServerString(dpy, screen, name);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXQueryServerString_defined
 GLATTER_FBLOCK(return, GLX, extern, Bool, , glXQueryVersion, (dpy, maj, min), (Display *dpy, int *maj, int *min))
 GLATTER_INLINE_OR_NOT Bool glatter_glXQueryVersion_debug(Display *dpy, int *maj, int *min, const char* file, int line)
 {
@@ -602,6 +688,16 @@ GLATTER_INLINE_OR_NOT GLXContextID glatter_glXGetContextIDEXT_debug(const GLXCon
     return rval;
 }
 #define glXGetContextIDEXT_defined
+GLATTER_FBLOCK(return, GLX, , Display *, , glXGetCurrentDisplayEXT, (), (void))
+GLATTER_INLINE_OR_NOT Display * glatter_glXGetCurrentDisplayEXT_debug(const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXGetCurrentDisplayEXT, "()")
+    Display * rval = glatter_glXGetCurrentDisplayEXT();
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXGetCurrentDisplayEXT_defined
 GLATTER_FBLOCK(return, GLX, , GLXContext, , glXImportContextEXT, (dpy, contextID), (Display *dpy, GLXContextID contextID))
 GLATTER_INLINE_OR_NOT GLXContext glatter_glXImportContextEXT_debug(Display *dpy, GLXContextID contextID, const char* file, int line)
 {
@@ -696,6 +792,16 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXQueryCurrentRendererIntegerMESA_debug(int 
     return rval;
 }
 #define glXQueryCurrentRendererIntegerMESA_defined
+GLATTER_FBLOCK(return, GLX, , const char *, , glXQueryCurrentRendererStringMESA, (attribute), (int attribute))
+GLATTER_INLINE_OR_NOT const char * glatter_glXQueryCurrentRendererStringMESA_debug(int attribute, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXQueryCurrentRendererStringMESA, "(%d)", (int)attribute)
+    const char * rval = glatter_glXQueryCurrentRendererStringMESA(attribute);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXQueryCurrentRendererStringMESA_defined
 GLATTER_FBLOCK(return, GLX, , Bool, , glXQueryRendererIntegerMESA, (dpy, screen, renderer, attribute, value), (Display *dpy, int screen, int renderer, int attribute, unsigned int *value))
 GLATTER_INLINE_OR_NOT Bool glatter_glXQueryRendererIntegerMESA_debug(Display *dpy, int screen, int renderer, int attribute, unsigned int *value, const char* file, int line)
 {
@@ -706,6 +812,16 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXQueryRendererIntegerMESA_debug(Display *dp
     return rval;
 }
 #define glXQueryRendererIntegerMESA_defined
+GLATTER_FBLOCK(return, GLX, , const char *, , glXQueryRendererStringMESA, (dpy, screen, renderer, attribute), (Display *dpy, int screen, int renderer, int attribute))
+GLATTER_INLINE_OR_NOT const char * glatter_glXQueryRendererStringMESA_debug(Display *dpy, int screen, int renderer, int attribute, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXQueryRendererStringMESA, "(%p, %d, %d, %d)", (void*)dpy, (int)screen, (int)renderer, (int)attribute)
+    const char * rval = glatter_glXQueryRendererStringMESA(dpy, screen, renderer, attribute);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXQueryRendererStringMESA_defined
 #endif // defined(GLX_MESA_query_renderer)
 #if defined(GLX_MESA_release_buffers)
 GLATTER_FBLOCK(return, GLX, , Bool, , glXReleaseBuffersMESA, (dpy, drawable), (Display *dpy, GLXDrawable drawable))
@@ -808,6 +924,16 @@ GLATTER_INLINE_OR_NOT int glatter_glXBindVideoDeviceNV_debug(Display *dpy, unsig
     return rval;
 }
 #define glXBindVideoDeviceNV_defined
+GLATTER_FBLOCK(return, GLX, , unsigned int *, , glXEnumerateVideoDevicesNV, (dpy, screen, nelements), (Display *dpy, int screen, int *nelements))
+GLATTER_INLINE_OR_NOT unsigned int * glatter_glXEnumerateVideoDevicesNV_debug(Display *dpy, int screen, int *nelements, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXEnumerateVideoDevicesNV, "(%p, %d, %p)", (void*)dpy, (int)screen, (void*)nelements)
+    unsigned int * rval = glatter_glXEnumerateVideoDevicesNV(dpy, screen, nelements);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXEnumerateVideoDevicesNV_defined
 #endif // defined(GLX_NV_present_video)
 #if defined(GLX_NV_swap_group)
 GLATTER_FBLOCK(return, GLX, , Bool, , glXBindSwapBarrierNV, (dpy, group, barrier), (Display *dpy, GLuint group, GLuint barrier))
@@ -882,6 +1008,16 @@ GLATTER_INLINE_OR_NOT int glatter_glXBindVideoCaptureDeviceNV_debug(Display *dpy
     return rval;
 }
 #define glXBindVideoCaptureDeviceNV_defined
+GLATTER_FBLOCK(return, GLX, , GLXVideoCaptureDeviceNV *, , glXEnumerateVideoCaptureDevicesNV, (dpy, screen, nelements), (Display *dpy, int screen, int *nelements))
+GLATTER_INLINE_OR_NOT GLXVideoCaptureDeviceNV * glatter_glXEnumerateVideoCaptureDevicesNV_debug(Display *dpy, int screen, int *nelements, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXEnumerateVideoCaptureDevicesNV, "(%p, %d, %p)", (void*)dpy, (int)screen, (void*)nelements)
+    GLXVideoCaptureDeviceNV * rval = glatter_glXEnumerateVideoCaptureDevicesNV(dpy, screen, nelements);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXEnumerateVideoCaptureDevicesNV_defined
 GLATTER_FBLOCK(, GLX, , void, , glXLockVideoCaptureDeviceNV, (dpy, device), (Display *dpy, GLXVideoCaptureDeviceNV device))
 GLATTER_INLINE_OR_NOT void glatter_glXLockVideoCaptureDeviceNV_debug(Display *dpy, GLXVideoCaptureDeviceNV device, const char* file, int line)
 {
@@ -1038,6 +1174,16 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXAssociateDMPbufferSGIX_debug(Display *dpy,
 #endif // defined(_DM_BUFFER_H_)
 #endif // defined(GLX_SGIX_dmbuffer)
 #if defined(GLX_SGIX_fbconfig)
+GLATTER_FBLOCK(return, GLX, , GLXFBConfigSGIX *, , glXChooseFBConfigSGIX, (dpy, screen, attrib_list, nelements), (Display *dpy, int screen, int *attrib_list, int *nelements))
+GLATTER_INLINE_OR_NOT GLXFBConfigSGIX * glatter_glXChooseFBConfigSGIX_debug(Display *dpy, int screen, int *attrib_list, int *nelements, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXChooseFBConfigSGIX, "(%p, %d, %p, %p)", (void*)dpy, (int)screen, (void*)attrib_list, (void*)nelements)
+    GLXFBConfigSGIX * rval = glatter_glXChooseFBConfigSGIX(dpy, screen, attrib_list, nelements);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXChooseFBConfigSGIX_defined
 GLATTER_FBLOCK(return, GLX, , GLXContext, , glXCreateContextWithConfigSGIX, (dpy, config, render_type, share_list, direct), (Display *dpy, GLXFBConfigSGIX config, int render_type, GLXContext share_list, Bool direct))
 GLATTER_INLINE_OR_NOT GLXContext glatter_glXCreateContextWithConfigSGIX_debug(Display *dpy, GLXFBConfigSGIX config, int render_type, GLXContext share_list, Bool direct, const char* file, int line)
 {
@@ -1078,6 +1224,16 @@ GLATTER_INLINE_OR_NOT GLXFBConfigSGIX glatter_glXGetFBConfigFromVisualSGIX_debug
     return rval;
 }
 #define glXGetFBConfigFromVisualSGIX_defined
+GLATTER_FBLOCK(return, GLX, , XVisualInfo *, , glXGetVisualFromFBConfigSGIX, (dpy, config), (Display *dpy, GLXFBConfigSGIX config))
+GLATTER_INLINE_OR_NOT XVisualInfo * glatter_glXGetVisualFromFBConfigSGIX_debug(Display *dpy, GLXFBConfigSGIX config, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXGetVisualFromFBConfigSGIX, "(%p, %p)", (void*)dpy, (void*)config)
+    XVisualInfo * rval = glatter_glXGetVisualFromFBConfigSGIX(dpy, config);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXGetVisualFromFBConfigSGIX_defined
 #endif // defined(GLX_SGIX_fbconfig)
 #if defined(GLX_SGIX_hyperpipe)
 GLATTER_FBLOCK(return, GLX, , int, , glXBindHyperpipeSGIX, (dpy, hpId), (Display *dpy, int hpId))
@@ -1140,6 +1296,26 @@ GLATTER_INLINE_OR_NOT int glatter_glXQueryHyperpipeBestAttribSGIX_debug(Display 
     return rval;
 }
 #define glXQueryHyperpipeBestAttribSGIX_defined
+GLATTER_FBLOCK(return, GLX, , GLXHyperpipeConfigSGIX *, , glXQueryHyperpipeConfigSGIX, (dpy, hpId, npipes), (Display *dpy, int hpId, int *npipes))
+GLATTER_INLINE_OR_NOT GLXHyperpipeConfigSGIX * glatter_glXQueryHyperpipeConfigSGIX_debug(Display *dpy, int hpId, int *npipes, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXQueryHyperpipeConfigSGIX, "(%p, %d, %p)", (void*)dpy, (int)hpId, (void*)npipes)
+    GLXHyperpipeConfigSGIX * rval = glatter_glXQueryHyperpipeConfigSGIX(dpy, hpId, npipes);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXQueryHyperpipeConfigSGIX_defined
+GLATTER_FBLOCK(return, GLX, , GLXHyperpipeNetworkSGIX *, , glXQueryHyperpipeNetworkSGIX, (dpy, npipes), (Display *dpy, int *npipes))
+GLATTER_INLINE_OR_NOT GLXHyperpipeNetworkSGIX * glatter_glXQueryHyperpipeNetworkSGIX_debug(Display *dpy, int *npipes, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXQueryHyperpipeNetworkSGIX, "(%p, %p)", (void*)dpy, (void*)npipes)
+    GLXHyperpipeNetworkSGIX * rval = glatter_glXQueryHyperpipeNetworkSGIX(dpy, npipes);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXQueryHyperpipeNetworkSGIX_defined
 #endif // defined(GLX_SGIX_hyperpipe)
 #if defined(GLX_SGIX_pbuffer)
 GLATTER_FBLOCK(return, GLX, , GLXPbufferSGIX, , glXCreateGLXPbufferSGIX, (dpy, config, width, height, attrib_list), (Display *dpy, GLXFBConfigSGIX config, unsigned int width, unsigned int height, int *attrib_list))
@@ -1370,6 +1546,18 @@ GLATTER_INLINE_OR_NOT Status glatter_glXGetTransparentIndexSUN_debug(Display *dp
 #define glXGetTransparentIndexSUN_defined
 #endif // defined(GLX_SUN_get_transparent_index)
 #if defined(GLX_VERSION_1_3)
+#ifndef glXChooseFBConfig_defined
+GLATTER_FBLOCK(return, GLX, , GLXFBConfig *, , glXChooseFBConfig, (dpy, screen, attrib_list, nelements), (Display *dpy, int screen, const int *attrib_list, int *nelements))
+GLATTER_INLINE_OR_NOT GLXFBConfig * glatter_glXChooseFBConfig_debug(Display *dpy, int screen, const int *attrib_list, int *nelements, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXChooseFBConfig, "(%p, %d, %p, %p)", (void*)dpy, (int)screen, (void*)attrib_list, (void*)nelements)
+    GLXFBConfig * rval = glatter_glXChooseFBConfig(dpy, screen, attrib_list, nelements);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXChooseFBConfig_defined
+#endif
 #ifndef glXCreateNewContext_defined
 GLATTER_FBLOCK(return, GLX, , GLXContext, , glXCreateNewContext, (dpy, config, render_type, share_list, direct), (Display *dpy, GLXFBConfig config, int render_type, GLXContext share_list, Bool direct))
 GLATTER_INLINE_OR_NOT GLXContext glatter_glXCreateNewContext_debug(Display *dpy, GLXFBConfig config, int render_type, GLXContext share_list, Bool direct, const char* file, int line)
@@ -1472,6 +1660,18 @@ GLATTER_INLINE_OR_NOT int glatter_glXGetFBConfigAttrib_debug(Display *dpy, GLXFB
 }
 #define glXGetFBConfigAttrib_defined
 #endif
+#ifndef glXGetFBConfigs_defined
+GLATTER_FBLOCK(return, GLX, , GLXFBConfig *, , glXGetFBConfigs, (dpy, screen, nelements), (Display *dpy, int screen, int *nelements))
+GLATTER_INLINE_OR_NOT GLXFBConfig * glatter_glXGetFBConfigs_debug(Display *dpy, int screen, int *nelements, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXGetFBConfigs, "(%p, %d, %p)", (void*)dpy, (int)screen, (void*)nelements)
+    GLXFBConfig * rval = glatter_glXGetFBConfigs(dpy, screen, nelements);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXGetFBConfigs_defined
+#endif
 #ifndef glXGetSelectedEvent_defined
 GLATTER_FBLOCK(, GLX, , void, , glXGetSelectedEvent, (dpy, draw, event_mask), (Display *dpy, GLXDrawable draw, unsigned long *event_mask))
 GLATTER_INLINE_OR_NOT void glatter_glXGetSelectedEvent_debug(Display *dpy, GLXDrawable draw, unsigned long *event_mask, const char* file, int line)
@@ -1481,6 +1681,18 @@ GLATTER_INLINE_OR_NOT void glatter_glXGetSelectedEvent_debug(Display *dpy, GLXDr
     GLATTER_CHECK_ERROR(GLX, file, line)
 }
 #define glXGetSelectedEvent_defined
+#endif
+#ifndef glXGetVisualFromFBConfig_defined
+GLATTER_FBLOCK(return, GLX, , XVisualInfo *, , glXGetVisualFromFBConfig, (dpy, config), (Display *dpy, GLXFBConfig config))
+GLATTER_INLINE_OR_NOT XVisualInfo * glatter_glXGetVisualFromFBConfig_debug(Display *dpy, GLXFBConfig config, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glXGetVisualFromFBConfig, "(%p, %p)", (void*)dpy, (void*)config)
+    XVisualInfo * rval = glatter_glXGetVisualFromFBConfig(dpy, config);
+    GLATTER_RBLOCK("%p\n", (void*)rval);
+    GLATTER_CHECK_ERROR(GLX, file, line)
+    return rval;
+}
+#define glXGetVisualFromFBConfig_defined
 #endif
 #ifndef glXMakeContextCurrent_defined
 GLATTER_FBLOCK(return, GLX, , Bool, , glXMakeContextCurrent, (dpy, draw, read, ctx), (Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx))

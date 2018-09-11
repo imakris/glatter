@@ -33,61 +33,61 @@ glatter_extension_support_status_WGL_t glatter_get_extension_support_WGL()
     static glatter_extension_support_status_WGL_t ess;
 
     typedef glatter_es_record_t rt;
-    static rt e353f[] = {{4189730111, 3}};
-    static rt e268 [] = {{874562152, 4}};
-    static rt e285a[] = {{2581358682, 5}};
-    static rt e22df[] = {{738091743, 6}};
-    static rt e298a[] = {{2741709194, 7}};
-    static rt eb11 [] = {{3425618705, 8}};
-    static rt e968 [] = {{4069575016, 9}};
-    static rt ef54 [] = {{2994294612, 10}};
-    static rt e269d[] = {{3013748381, 11}};
-    static rt e304f[] = {{8024143, 12}};
-    static rt e1acc[] = {{3066337996, 13}};
-    static rt e1a6c[] = {{2357598828, 14}};
-    static rt e30a1[] = {{567292065, 15}};
-    static rt e1c52[] = {{119774290, 16}};
-    static rt e113e[] = {{622072126, 17}};
-    static rt e1dc9[] = {{2618613193, 18}};
-    static rt eaf  [] = {{785825967, 0}};
-    static rt e3ee2[] = {{2230812386, 1}};
-    static rt e3c87[] = {{3592584327, 2}};
-    static rt e2a4a[] = {{1492937290, 19}};
-    static rt e3c89[] = {{951958665, 20}};
-    static rt e1c8f[] = {{637410447, 21}};
-    static rt e18bd[] = {{3889551549, 22}};
-    static rt e3e08[] = {{3951492616, 23}};
-    static rt e1059[] = {{3410006105, 24}};
-    static rt e3a44[] = {{1862990404, 25}};
-    static rt e14b0[] = {{3317879984, 26}};
-    static rt e1779[] = {{807163769, 27}};
-    static rt e2c2b[] = {{2244488235, 28}};
-    static rt e8a8 [] = {{355911848, 29}};
-    static rt e11c8[] = {{3146469832, 30}};
-    static rt ee44 [] = {{1435569732, 31}};
-    static rt ed19 [] = {{2270940441, 32}};
-    static rt e1324[] = {{3406648100, 33}};
-    static rt e1a61[] = {{1958926945, 34}};
-    static rt e2450[] = {{2976048208, 35}};
-    static rt e2fb0[] = {{2668867504, 36}};
-    static rt e3e49[] = {{1797193289, 37}};
-    static rt e77a [] = {{3665676154, 38}};
-    static rt e3c26[] = {{719043622, 39}};
-    static rt e23cd[] = {{3151389645, 40}};
-    static rt e1d9f[] = {{916643231, 41}};
-    static rt e378e[] = {{210679694, 42}};
-    static rt e24cc[] = {{898376908, 43}};
-    static rt e29a0[] = {{3314182560, 44}};
-    static rt e2b96[] = {{3584813974, 45}};
-    static rt e3289[] = {{846361225, 46}};
-    static rt e1648[] = {{89921096, 47}};
-    static rt e2b5 [] = {{3031696053, 48}};
-    static rt e2815[] = {{822142997, 49}};
-    static rt e3ff8[] = {{1683128312, 50}};
-    static rt e3779[] = {{1680177017, 51}};
-    static rt e1a3b[] = {{129915451, 52}};
-    static rt e2938[] = {{1798924600, 53}};
-    static rt efb2 [] = {{2018299826, 54}};
+    static rt e353f[] = {{4189730111, 3}, 0};
+    static rt e268 [] = {{874562152, 4}, 0};
+    static rt e285a[] = {{2581358682, 5}, 0};
+    static rt e22df[] = {{738091743, 6}, 0};
+    static rt e298a[] = {{2741709194, 7}, 0};
+    static rt eb11 [] = {{3425618705, 8}, 0};
+    static rt e968 [] = {{4069575016, 9}, 0};
+    static rt ef54 [] = {{2994294612, 10}, 0};
+    static rt e269d[] = {{3013748381, 11}, 0};
+    static rt e304f[] = {{8024143, 12}, 0};
+    static rt e1acc[] = {{3066337996, 13}, 0};
+    static rt e1a6c[] = {{2357598828, 14}, 0};
+    static rt e30a1[] = {{567292065, 15}, 0};
+    static rt e1c52[] = {{119774290, 16}, 0};
+    static rt e113e[] = {{622072126, 17}, 0};
+    static rt e1dc9[] = {{2618613193, 18}, 0};
+    static rt eaf  [] = {{785825967, 0}, 0};
+    static rt e3ee2[] = {{2230812386, 1}, 0};
+    static rt e3c87[] = {{3592584327, 2}, 0};
+    static rt e2a4a[] = {{1492937290, 19}, 0};
+    static rt e3c89[] = {{951958665, 20}, 0};
+    static rt e1c8f[] = {{637410447, 21}, 0};
+    static rt e18bd[] = {{3889551549, 22}, 0};
+    static rt e3e08[] = {{3951492616, 23}, 0};
+    static rt e1059[] = {{3410006105, 24}, 0};
+    static rt e3a44[] = {{1862990404, 25}, 0};
+    static rt e14b0[] = {{3317879984, 26}, 0};
+    static rt e1779[] = {{807163769, 27}, 0};
+    static rt e2c2b[] = {{2244488235, 28}, 0};
+    static rt e8a8 [] = {{355911848, 29}, 0};
+    static rt e11c8[] = {{3146469832, 30}, 0};
+    static rt ee44 [] = {{1435569732, 31}, 0};
+    static rt ed19 [] = {{2270940441, 32}, 0};
+    static rt e1324[] = {{3406648100, 33}, 0};
+    static rt e1a61[] = {{1958926945, 34}, 0};
+    static rt e2450[] = {{2976048208, 35}, 0};
+    static rt e2fb0[] = {{2668867504, 36}, 0};
+    static rt e3e49[] = {{1797193289, 37}, 0};
+    static rt e77a [] = {{3665676154, 38}, 0};
+    static rt e3c26[] = {{719043622, 39}, 0};
+    static rt e23cd[] = {{3151389645, 40}, 0};
+    static rt e1d9f[] = {{916643231, 41}, 0};
+    static rt e378e[] = {{210679694, 42}, 0};
+    static rt e24cc[] = {{898376908, 43}, 0};
+    static rt e29a0[] = {{3314182560, 44}, 0};
+    static rt e2b96[] = {{3584813974, 45}, 0};
+    static rt e3289[] = {{846361225, 46}, 0};
+    static rt e1648[] = {{89921096, 47}, 0};
+    static rt e2b5 [] = {{3031696053, 48}, 0};
+    static rt e2815[] = {{822142997, 49}, 0};
+    static rt e3ff8[] = {{1683128312, 50}, 0};
+    static rt e3779[] = {{1680177017, 51}, 0};
+    static rt e1a3b[] = {{129915451, 52}, 0};
+    static rt e2938[] = {{1798924600, 53}, 0};
+    static rt efb2 [] = {{2018299826, 54}, 0};
 
 
     static glatter_es_record_t* es_dispatch[GLATTER_LOOKUP_SIZE] = {
@@ -646,44 +646,44 @@ glatter_extension_support_status_WGL_t glatter_get_extension_support_WGL()
 
         uint32_t hash = 5381;
         const uint8_t* ext_str = (const uint8_t*)glatter_wglGetExtensionsStringEXT();
-    	for ( ; *ext_str; ext_str++) {
-    		if (*ext_str == ' ') {
-    			int index = -1;
-    			rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    			for ( ; drecord; drecord++ ) {
-    				if (drecord->hash == hash) {
-    					index = drecord->index;
-    					ess.inexed_extensions[index] = 1;
+        for ( ; *ext_str; ext_str++) {
+            if (*ext_str == ' ') {
+                int index = -1;
+                rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+                for ( ; r && (r->hash | r->index); r++ ) {
+                    if (r->hash == hash) {
+                        index = r->index;
+                        ess.inexed_extensions[index] = 1;
                         break;
-    				}
-    			}
+                    }
+                }
 
                 if (index == -1) {
                     // (2)
                 }
 
-    			// reset
-    			hash = 5381;
-    			continue;
-    		}
+                // reset
+                hash = 5381;
+                continue;
+            }
 
-    		hash = ((hash << 5) + hash) + (int)(*ext_str);
+            hash = ((hash << 5) + hash) + (int)(*ext_str);
 
-    	}
-    	if (hash != 5381) {
-    		int index = -1;
-    		rt* drecord = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
-    		for ( ; drecord; drecord++ ) {
-    			if (drecord->hash == hash) {
-    				index = drecord->index;
-    				ess.inexed_extensions[index] = 1;
+        }
+        if (hash != 5381) {
+            int index = -1;
+            rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
+            for ( ; r && (r->hash | r->index); r++ ) {
+                if (r->hash == hash) {
+                    index = r->index;
+                    ess.inexed_extensions[index] = 1;
                     break;
-    			}
-    		}
+                }
+            }
             if (index == -1) {
                 // (3)
             }
-    	}
+        }
         initialized = 1;
     }
 
