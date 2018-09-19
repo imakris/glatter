@@ -353,7 +353,6 @@ typedef struct glatter_es_record_struct
 
 
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
-    cder rtype cconv name dargs;\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
     inline rtype cconv glatter_##name dargs\
     {\
