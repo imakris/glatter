@@ -54,8 +54,8 @@
     #else // GLES
         #define GLATTER_EGL
     #endif
-	
-	// #define GLATTER_GLU  // GLU is not enabled by default
+    
+    // #define GLATTER_GLU  // GLU is not enabled by default
     
 #endif
 
