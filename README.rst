@@ -8,35 +8,29 @@ Glatter is an OpenGL loading library, with support for GL, GLES, GLU, EGL, GLX, 
 In addition to extension loading, it facilitates logging and error checking.
 
 
-Building
---------
+Usage
+-----
 
-The library can be built in one of two ways:
+Glatter requires that the main header ``glatter.h`` is included, wherever its functionality is meant to be used.
+As ``glatter.h`` pulls its own API headers, the system's API headers should not be included at all.
 
-1. by compiling src/glatter.c into the project, or
-2. if used in c++ code, as a header-only library, by specifying ``GLATTER_HEADER_ONLY`` in ``glatter_config.h``, and then including ``glatter.h`` where necessary.
+In C++ code, glatter may be used as a header-only library, by specifying ``GLATTER_HEADER_ONLY`` in ``glatter_config.h``.
+Alternatively, src/glatter.c may be compiled into the project.
 
-There are two Glatter headers that might need to be configured/modified, according to the needs of the user:
+There are two Glatter headers used for configuration:
 
 - ``glatter_config.h``:
   It contains a set of macro declarations, that mostly enable or disable parts of the library or functionality.
 - ``glatter_platform_headers.h``: 
-  This is where OpenGL platforms are defined and their corresponding headers included. Changing this file will require re-running glatter.py.
+  This is where OpenGL platforms are defined and their corresponding headers included. Changing this file will require that the headers are re-generated, by running glatter.py.
 
-
-
-Usage
------
-
-Glatter does not require initialization.
-It only requires that the main header ``glatter.h`` is included, wherever its functionality is meant to be used.
-As ``glatter.h`` pulls its own API headers, the system's API headers should not be included at all.
+Glatter does not require explicit loading or initialization calls, and its startup cost is minimal.
 
 
 Checking for extensions
 -----------------------
 
-Extensions can be checked as follows:
+Support for extensions in the current context can be queried as follows:
 
   .. code-block:: c
 
@@ -44,6 +38,8 @@ Extensions can be checked as follows:
             // do stuff...
         }
 
+The first extension support query in the program, triggers an initialization call, with negligible overhead.
+As extension strings are pre-hashed during header generation, its complexity is O(n), where n is the length of the extension strings. There are no string comparisons involved.
 
 
 Tracing calls, checking errors
