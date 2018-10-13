@@ -11,16 +11,17 @@ In addition to extension loading, it facilitates logging and error checking.
 Usage
 -----
 
+Glatter may be used either as a header-only library, or it could alternatively be compiled into the project.
+Header-only usage is only available in C++, and may be enabled by defining ``GLATTER_HEADER_ONLY``.
+Alternatively, ``src/glatter.c`` may be compiled into the project.
+
 Glatter requires that the main header ``glatter.h`` is included, wherever its functionality is meant to be used.
-As ``glatter.h`` pulls its own API headers, the system's API headers should not be included at all.
+As it pulls its own API headers, the system's API headers should not be included.
 
-In C++ code, glatter may be used as a header-only library, by specifying ``GLATTER_HEADER_ONLY`` in ``glatter_config.h``.
-Alternatively, src/glatter.c may be compiled into the project.
-
-There are two Glatter headers used for configuration:
+There are two Glatter headers files which may be modified by the user, to customize the behaviour of the library, if required:
 
 - ``glatter_config.h``:
-  It contains a set of macro declarations, that mostly enable or disable parts of the library or functionality.
+  It contains a set of macro declarations, that mostly enable or disable parts of the library's functionality.
 - ``glatter_platform_headers.h``: 
   This is where OpenGL platforms are defined and their corresponding headers included. Changing this file will require that the headers are re-generated, by running glatter.py.
 
