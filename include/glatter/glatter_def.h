@@ -276,7 +276,13 @@ void glatter_pre_callback(const char* file, int line)
 {
     static int initialized = 0;
 #if defined(_WIN32)
+
+#if defined(__MINGW32__)
+    static __thread DWORD thread_id;
+#else
     static __declspec(thread) DWORD thread_id;
+#endif
+
     if (!initialized) {
         thread_id = GetCurrentThreadId();
         initialized = 1;
