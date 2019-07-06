@@ -960,9 +960,10 @@ glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_'
     static glatter_extension_support_status_''' + v + '''_t ess;
 
     typedef glatter_es_record_t rt;
+    static rt zrt = {0, 0};
 ''' + '\n'.join(['    static rt e' +   '{: <4x}'.format(x)  + '[] = {{' + '}, {'.join(
         str([y, ext_hash_to_full_hash[v][x][y]]).translate({ord(c): None for c in '[]'}) \
-            for y in ext_hash_to_full_hash[v][x]) + '}, 0};' for x in ext_hash_to_full_hash[v]]) + '''
+            for y in ext_hash_to_full_hash[v][x]) + '}, zrt};' for x in ext_hash_to_full_hash[v]]) + '''
 
 
     static glatter_es_record_t* es_dispatch[GLATTER_LOOKUP_SIZE] = {

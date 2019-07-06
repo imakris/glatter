@@ -28,8 +28,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #ifdef GLATTER_GL
-#if defined(__GL_H__)
 #if !defined(GL_VERSION_ES_CM_1_0)
+#if defined(__GL_H__)
 #if defined(__gl_h_)
 #ifndef glAccum
 #define glAccum(op, value) glatter_glAccum_debug((op), (value), __FILE__, __LINE__)
@@ -1376,8 +1376,8 @@ GLATTER_INLINE_OR_NOT void glatter_glVertexPointer_debug(GLint size, GLenum type
 #endif
 GLATTER_INLINE_OR_NOT void glatter_glViewport_debug(GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
 #endif // defined(__gl_h_)
-#endif // !defined(GL_VERSION_ES_CM_1_0)
 #endif // defined(__GL_H__)
+#endif // !defined(GL_VERSION_ES_CM_1_0)
 #if defined(__gl_glext_h_)
 #if defined(GL_3DFX_tbuffer)
 #ifndef glTbufferMask3DFX
