@@ -1,5 +1,5 @@
-#ifndef __GLATTER_CONFIG_H__
-#define __GLATTER_CONFIG_H__
+#ifndef GLATTER_CONFIG_H_DEFINED
+#define GLATTER_CONFIG_H_DEFINED
 
 
 
@@ -18,17 +18,20 @@
 // #define GLATTER_EGL_GLES_3_2
 
 // If no platform is defined, it will be set according to the operating system.
-#if !defined(GLATTER_WINDOWS_WGL_GL) && !defined(GLATTER_MESA_GLX_GL)   &&\
-    !defined(GLATTER_EGL_GLES_1_1)   && !defined(GLATTER_EGL_GLES2_2_0) &&\
-    !defined(GLATTER_EGL_GLES_3_0)   && !defined(GLATTER_EGL_GLES_3_1)  &&\
+#if !defined(GLATTER_WINDOWS_WGL_GL) &&\
+    !defined(GLATTER_MESA_GLX_GL)    &&\
+    !defined(GLATTER_EGL_GLES_1_1)   &&\
+    !defined(GLATTER_EGL_GLES2_2_0)  &&\
+    !defined(GLATTER_EGL_GLES_3_0)   &&\
+    !defined(GLATTER_EGL_GLES_3_1)   &&\
     !defined(GLATTER_EGL_GLES_3_2)
-    
+
 #if defined(_WIN32)
     #define GLATTER_WINDOWS_WGL_GL
 #elif defined(__linux__)
     #define GLATTER_MESA_GLX_GL
 #endif
-    
+
 #endif
 
 
@@ -45,7 +48,7 @@
 // If no wrapper is defined, GL is set, and one of ELG/GLX/WGL depending on the platform
 #if !defined(GLATTER_GL) && !defined(GLATTER_EGL) && !defined(GLATTER_WGL) &&\
     !defined(GLATTER_GLX) && !defined(GLATTER_GLU)
-    
+
     #define GLATTER_GL
     #if defined(GLATTER_WINDOWS_WGL_GL)
         #define GLATTER_WGL
@@ -54,9 +57,9 @@
     #else // GLES
         #define GLATTER_EGL
     #endif
-    
+
     // #define GLATTER_GLU  // GLU is not enabled by default
-    
+
 #endif
 
 
