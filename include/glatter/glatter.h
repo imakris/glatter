@@ -35,6 +35,7 @@ extern "C" {
 
 #elif defined (GLATTER_HEADER_ONLY)
 
+	// this can be modified in glatter_config.h
     #error GLATTER_HEADER_ONLY can only be used in C++
 
 #endif //__cplusplus

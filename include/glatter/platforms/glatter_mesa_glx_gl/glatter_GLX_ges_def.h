@@ -33,7 +33,11 @@ glatter_extension_support_status_GLX_t glatter_get_extension_support_GLX()
     static glatter_extension_support_status_GLX_t ess;
 
     typedef glatter_es_record_t rt;
-    static rt zrt = {0, 0};
+#ifdef __cplusplus
+    static const rt zrt = {0, 0};
+#else
+#define zrt {0, 0}
+#endif
     static rt e33db[] = {{229618651, 9}, zrt};
     static rt e353 [] = {{58065747, 11}, zrt};
     static rt e64d [] = {{2793817677, 37}, zrt};
@@ -102,6 +106,9 @@ glatter_extension_support_status_GLX_t glatter_get_extension_support_GLX()
     static rt eea4 [] = {{3413839524, 65}, zrt};
     static rt e2d2c[] = {{2477911340, 66}, zrt};
 
+#ifndef __cplusplus
+#undef zrt
+#endif
 
     static glatter_es_record_t* es_dispatch[GLATTER_LOOKUP_SIZE] = {
         0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

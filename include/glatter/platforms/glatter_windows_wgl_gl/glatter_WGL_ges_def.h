@@ -33,7 +33,11 @@ glatter_extension_support_status_WGL_t glatter_get_extension_support_WGL()
     static glatter_extension_support_status_WGL_t ess;
 
     typedef glatter_es_record_t rt;
-    static rt zrt = {0, 0};
+#ifdef __cplusplus
+    static const rt zrt = {0, 0};
+#else
+#define zrt {0, 0}
+#endif
     static rt e353f[] = {{4189730111, 3}, zrt};
     static rt e268 [] = {{874562152, 4}, zrt};
     static rt e285a[] = {{2581358682, 5}, zrt};
@@ -90,6 +94,9 @@ glatter_extension_support_status_WGL_t glatter_get_extension_support_WGL()
     static rt e2938[] = {{1798924600, 53}, zrt};
     static rt efb2 [] = {{2018299826, 54}, zrt};
 
+#ifndef __cplusplus
+#undef zrt
+#endif
 
     static glatter_es_record_t* es_dispatch[GLATTER_LOOKUP_SIZE] = {
         0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

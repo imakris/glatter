@@ -28,8 +28,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #ifdef GLATTER_GL
-#if !defined(GL_VERSION_ES_CM_1_0)
 #if !defined(__GL_H__)
+#if !defined(GL_VERSION_ES_CM_1_0)
 #if defined(__gl_h_)
 #if defined(GL_ARB_multitexture)
 #ifndef glActiveTextureARB_defined
@@ -4600,8 +4600,8 @@ GLATTER_INLINE_OR_NOT void glatter_glViewport_debug(GLint x, GLint y, GLsizei wi
 #define glViewport_defined
 #endif
 #endif // defined(__gl_h_)
-#endif // !defined(__GL_H__)
 #endif // !defined(GL_VERSION_ES_CM_1_0)
+#endif // !defined(__GL_H__)
 #if defined(__gl_glext_h_)
 #if defined(GL_3DFX_tbuffer)
 #ifndef glTbufferMask3DFX_defined
