@@ -46,7 +46,7 @@ Tracing calls, checking errors
 ------------------------------
 
 For error checking, the extensions ``ARB_debug_output`` and ``KHR_debug`` offer similar functionality, when ``GL_DEBUG_OUTPUT_SYNCHRONOUS`` is enabled.
-However they require a debug context, i.e. {GLX|WGL}_CONTEXT_DEBUG_BIT would have to be specified in the attribute list when calling {GLX|WGL}_ARB_create_context.
+However they require a debug context, i.e. ``{GLX|WGL}_CONTEXT_DEBUG_BIT`` would have to be specified in the attribute list when calling ``{GLX|WGL}_ARB_create_context``.
 
 Glatter performs this task by wrapping all library calls inside debug versions of each call.
 There are two modes of debug operation, which can be switched on and off independently:
