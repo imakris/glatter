@@ -38,6 +38,24 @@
     #error This platform is not supported
 #endif
 
+#include <inttypes.h>
+
+#ifndef PRId64
+    #if defined(_MSC_VER)
+        #define PRId64 "I64d"
+    #else
+        #define PRId64 "lld"
+    #endif
+#endif
+
+#ifndef PRIu64
+    #if defined(_MSC_VER)
+        #define PRIu64 "I64u"
+    #else
+        #define PRIu64 "llu"
+    #endif
+#endif
+
 
 #if defined(GLATTER_WINDOWS_WGL_GL)
 

@@ -23,38 +23,43 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <inttypes.h>
-#ifndef PRId64
-#define PRId64 "ll"
-#endif
-#ifndef PRIu64
-#define PRIu64 "llu"
-#endif
-
-#include "glatter_config.h"
-#include "glatter_platform_headers.h"
-#include "glatter_masprintf.h"
+#include <glatter/glatter_config.h>
+#include <glatter/glatter_platform_headers.h>
+#include <glatter/glatter_masprintf.h>
 
 
 #include <assert.h>
-#include <inttypes.h>
 #include <stdio.h>
 
+/*
+ * In non header-only builds, include this header only from glatter.c so the
+ * non-inline definitions remain unique.
+ */
 
-#ifdef __cplusplus
-extern "C" {
+
+#ifndef GLATTER_EXTERN_C_BEGIN
+    #ifdef __cplusplus
+        #define GLATTER_EXTERN_C_BEGIN extern "C" {
+        #define GLATTER_EXTERN_C_END }
+    #else
+        #define GLATTER_EXTERN_C_BEGIN
+        #define GLATTER_EXTERN_C_END
+    #endif
 #endif
+
+GLATTER_EXTERN_C_BEGIN
 
 
 #ifdef GLATTER_HEADER_ONLY
     #define GLATTER_INLINE_OR_NOT inline
-
-    #ifndef GLATTER_PDIR
-        #error When GLATTER_HEADER_ONLY is defined, glatter.c should not be compiled.
-    #endif
-
 #else
     #define GLATTER_INLINE_OR_NOT
+#endif
+
+#if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
+    #if __cplusplus < 201103L && !defined(_MSC_VER)
+        #error "Header-only mode requires C++11 for thread-safe local statics."
+    #endif
 #endif
 
 
@@ -362,15 +367,48 @@ void glatter_check_error_GLU(const char* file, int line)
 }
 
 
+#if defined(__linux__)
+static pthread_once_t* glatter_glu_once_slot(void)
+{
+    static pthread_once_t once = PTHREAD_ONCE_INIT;
+    return &once;
+}
+
+static void** glatter_glu_handle_slot(void)
+{
+    static void* handle = NULL;
+    return &handle;
+}
+
+/*
+ * The GLU handle intentionally stays open for the lifetime of the process to
+ * avoid any dlclose side effects with driver-managed resources.
+ */
+static void glatter_open_glu_handle(void)
+{
+    void** handle = glatter_glu_handle_slot();
+    *handle = dlopen("libGLU.so", RTLD_LAZY | RTLD_LOCAL);
+    if (*handle == NULL) {
+        *handle = dlopen("libGLU.so.1", RTLD_LAZY | RTLD_LOCAL);
+    }
+}
+#endif
+
 GLATTER_INLINE_OR_NOT
 void* glatter_get_proc_address_GLU(const char* function_name)
 {
-    void* ptr = 0;
+    void* ptr = NULL;
 
-#if defined(_WIN32)
-    ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("glu32.dll")), function_name);
-#elif defined (__linux__)
-    ptr = (void*) dlsym(dlopen("libGLU.so", RTLD_LAZY), function_name);
+#if defined(__linux__)
+    pthread_once(glatter_glu_once_slot(), glatter_open_glu_handle);
+    void* handle = *glatter_glu_handle_slot();
+    ptr = handle ? dlsym(handle, function_name) : NULL;
+#elif defined(_WIN32)
+    HMODULE module = GetModuleHandleA("glu32.dll");
+    if (module == NULL) {
+        module = LoadLibraryA("glu32.dll");
+    }
+    ptr = module ? (void*)GetProcAddress(module, function_name) : NULL;
 #else
     #error There is no implementation for your platform. Your contribution would be greatly appreciated!
 #endif
@@ -383,40 +421,148 @@ void* glatter_get_proc_address_GLU(const char* function_name)
 //////////////////////////////////
 
 
+// --- begin owner/thread block ---
+
+GLATTER_EXTERN_C_END
+
+/*
+ * For header-only (C++) consumers we keep the thread ownership state inside a
+ * function-local static so every translation unit observes the same cached
+ * owner without needing an explicit instantiation macro.
+ */
+#if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
+
+namespace glatter { namespace detail {
+
+#if defined(_WIN32)
+    using thread_id_t = DWORD;
+
+    inline thread_id_t current_thread_id()
+    {
+        return GetCurrentThreadId();
+    }
+
+    inline bool thread_ids_equal(thread_id_t a, thread_id_t b)
+    {
+        return a == b;
+    }
+#elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
+    using thread_id_t = pthread_t;
+
+    inline thread_id_t current_thread_id()
+    {
+        return pthread_self();
+    }
+
+    inline bool thread_ids_equal(thread_id_t a, thread_id_t b)
+    {
+        return pthread_equal(a, b) != 0;
+    }
+#else
+    #error "Unsupported platform"
+#endif
+
+    inline thread_id_t& owner_thread_id()
+    {
+        static thread_id_t tid = current_thread_id();
+        return tid;
+    }
+
+    inline bool is_owner_thread()
+    {
+        return thread_ids_equal(current_thread_id(), owner_thread_id());
+    }
+
+    inline void bind_owner_to_current_thread()
+    {
+        owner_thread_id() = current_thread_id();
+    }
+
+}} // namespace glatter::detail
+
+#else  // !header-only C++
+
+GLATTER_EXTERN_C_BEGIN
+
+#if defined(_WIN32)
+    extern INIT_ONCE glatter_thread_once;
+    extern DWORD     glatter_thread_id;
+
+    static BOOL CALLBACK glatter_set_owner_thread(PINIT_ONCE once, PVOID param, PVOID* context)
+    {
+        (void)once;
+        (void)param;
+        (void)context;
+        glatter_thread_id = GetCurrentThreadId();
+        return TRUE;
+    }
+#elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
+    extern pthread_once_t glatter_thread_once;
+    extern pthread_t      glatter_thread_id;
+
+    static void glatter_set_owner_thread(void)
+    {
+        glatter_thread_id = pthread_self();
+    }
+#else
+    #error "Unsupported platform"
+#endif
+
+GLATTER_EXTERN_C_END
+
+#endif // header-only switch
+
+// Re-enter C linkage for the remainder of the C API.
+GLATTER_EXTERN_C_BEGIN
+
 GLATTER_INLINE_OR_NOT
 void glatter_pre_callback(const char* file, int line)
 {
-#if defined(_WIN32)
+#if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
+    if (!glatter::detail::is_owner_thread()) {
+        char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
+        glatter_log(m);
+        free(m);
+    }
 
-#if defined(__MINGW32__)
-    static __thread int initialized = 0;
-    static __thread DWORD thread_id;
-#else
-    static __declspec(thread) int initialized = 0;
-    static __declspec(thread) DWORD thread_id;
-#endif
-
-    if (!initialized) {
-        thread_id = GetCurrentThreadId();
-        initialized = 1;
+#elif defined(_WIN32)
+    if (!InitOnceExecuteOnce(&glatter_thread_once, glatter_set_owner_thread, NULL, NULL)) {
+        return;
     }
     DWORD current_thread = GetCurrentThreadId();
-#elif defined(__linux__)
-    static __thread int initialized = 0;
-    static __thread pthread_t thread_id;
-    if (!initialized) {
-        thread_id = pthread_self();
-        initialized = 1;
+    if (current_thread != glatter_thread_id) {
+        char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
+        glatter_log(m);
+        free(m);
     }
-    pthread_t current_thread = pthread_self();
-#endif
-    if (current_thread != thread_id) {
-        free((void*)glatter_log(glatter_masprintf(
-            "GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line
-        )));
 
+#elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
+    pthread_once(&glatter_thread_once, glatter_set_owner_thread);
+    pthread_t current_thread = pthread_self();
+    if (!pthread_equal(current_thread, glatter_thread_id)) {
+        char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
+        glatter_log(m);
+        free(m);
     }
+#else
+    #error "Unsupported platform"
+#endif
 }
+
+
+GLATTER_INLINE_OR_NOT
+void glatter_bind_owner_to_current_thread(void)
+{
+#if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
+    glatter::detail::bind_owner_to_current_thread();
+#elif defined(_WIN32)
+    glatter_thread_id = GetCurrentThreadId();
+#elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
+    glatter_thread_id = pthread_self();
+#endif
+}
+
+// --- end owner/thread block ---
 
 
 typedef struct
@@ -679,6 +825,4 @@ typedef struct glatter_es_record_struct
 #endif
 
 
-#ifdef __cplusplus
-}
-#endif
+GLATTER_EXTERN_C_END
