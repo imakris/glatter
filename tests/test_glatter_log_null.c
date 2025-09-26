@@ -55,5 +55,15 @@ int main(void)
         return 1;
     }
 
+    glatter_set_log_handler(NULL);
+
+    if (glatter_log_handler() != glatter_default_log_handler) {
+        fprintf(stderr, "NULL handler did not reset to default handler\n");
+        return 1;
+    }
+
+    /* Smoke test to ensure the default handler can be invoked safely. */
+    glatter_log("GLATTER: default handler smoke test.\n");
+
     return 0;
 }
