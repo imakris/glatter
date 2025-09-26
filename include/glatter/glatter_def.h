@@ -84,7 +84,12 @@ void (*glatter_log_handler())(const char*)
 GLATTER_INLINE_OR_NOT
 const char* glatter_log(const char* str)
 {
-    (*(glatter_log_handler_ptr_ptr()))(str);
+    const char* message = str;
+    if (message == NULL) {
+        static const char fallback[] = "GLATTER: message formatting failed.\n";
+        message = fallback;
+    }
+    (*(glatter_log_handler_ptr_ptr()))(message);
     return str;
 }
 
