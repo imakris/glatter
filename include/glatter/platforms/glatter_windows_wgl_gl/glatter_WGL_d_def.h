@@ -110,8 +110,8 @@ GLATTER_INLINE_OR_NOT UINT glatter_wglGetGPUIDsAMD_debug(UINT maxCount, UINT *id
     return rval;
 }
 #define wglGetGPUIDsAMD_defined
-GLATTER_FBLOCK(return, WGL, , INT, WINAPI, wglGetGPUInfoAMD, (id, property, dataType, size, data), (UINT id, int property, GLenum dataType, UINT size, void *data))
-GLATTER_INLINE_OR_NOT INT glatter_wglGetGPUInfoAMD_debug(UINT id, int property, GLenum dataType, UINT size, void *data, const char* file, int line)
+GLATTER_FBLOCK(return, WGL, , INT, WINAPI, wglGetGPUInfoAMD, (id, property, dataType, size, data), (UINT id, INT property, GLenum dataType, UINT size, void *data))
+GLATTER_INLINE_OR_NOT INT glatter_wglGetGPUInfoAMD_debug(UINT id, INT property, GLenum dataType, UINT size, void *data, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglGetGPUInfoAMD, "(%u, %d, %s, %u, %p)", (unsigned int)id, (int)property, enum_to_string_GL(dataType), (unsigned int)size, (void*)data)
     INT rval = glatter_wglGetGPUInfoAMD(id, property, dataType, size, data);
@@ -984,21 +984,21 @@ GLATTER_INLINE_OR_NOT BOOL glatter_wglEnumGpusNV_debug(UINT iGpuIndex, HGPUNV *p
 #define wglEnumGpusNV_defined
 #endif // defined(WGL_NV_gpu_affinity)
 #if defined(WGL_NV_present_video)
-GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglBindVideoDeviceNV, (hDC, uVideoSlot, hVideoDevice, piAttribList), (HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList))
-GLATTER_INLINE_OR_NOT BOOL glatter_wglBindVideoDeviceNV_debug(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList, const char* file, int line)
+GLATTER_FBLOCK(return, WGL, , BOOL, WINAPI, wglBindVideoDeviceNV, (hDc, uVideoSlot, hVideoDevice, piAttribList), (HDC hDc, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList))
+GLATTER_INLINE_OR_NOT BOOL glatter_wglBindVideoDeviceNV_debug(HDC hDc, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, wglBindVideoDeviceNV, "(%s, %u, %s, %p)", GET_PRS(hDC), (unsigned int)uVideoSlot, GET_PRS(hVideoDevice), (void*)piAttribList)
-    BOOL rval = glatter_wglBindVideoDeviceNV(hDC, uVideoSlot, hVideoDevice, piAttribList);
+    GLATTER_DBLOCK(file, line, wglBindVideoDeviceNV, "(%s, %u, %s, %p)", GET_PRS(hDc), (unsigned int)uVideoSlot, GET_PRS(hVideoDevice), (void*)piAttribList)
+    BOOL rval = glatter_wglBindVideoDeviceNV(hDc, uVideoSlot, hVideoDevice, piAttribList);
     GLATTER_RBLOCK("%li\n", (long)rval);
     GLATTER_CHECK_ERROR(WGL, file, line)
     return rval;
 }
 #define wglBindVideoDeviceNV_defined
-GLATTER_FBLOCK(return, WGL, , int, WINAPI, wglEnumerateVideoDevicesNV, (hDC, phDeviceList), (HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList))
-GLATTER_INLINE_OR_NOT int glatter_wglEnumerateVideoDevicesNV_debug(HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList, const char* file, int line)
+GLATTER_FBLOCK(return, WGL, , int, WINAPI, wglEnumerateVideoDevicesNV, (hDc, phDeviceList), (HDC hDc, HVIDEOOUTPUTDEVICENV *phDeviceList))
+GLATTER_INLINE_OR_NOT int glatter_wglEnumerateVideoDevicesNV_debug(HDC hDc, HVIDEOOUTPUTDEVICENV *phDeviceList, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, wglEnumerateVideoDevicesNV, "(%s, %p)", GET_PRS(hDC), (void*)phDeviceList)
-    int rval = glatter_wglEnumerateVideoDevicesNV(hDC, phDeviceList);
+    GLATTER_DBLOCK(file, line, wglEnumerateVideoDevicesNV, "(%s, %p)", GET_PRS(hDc), (void*)phDeviceList)
+    int rval = glatter_wglEnumerateVideoDevicesNV(hDc, phDeviceList);
     GLATTER_RBLOCK("%d\n", (int)rval);
     GLATTER_CHECK_ERROR(WGL, file, line)
     return rval;
@@ -1242,8 +1242,8 @@ GLATTER_INLINE_OR_NOT INT64 glatter_wglSwapBuffersMscOML_debug(HDC hdc, INT64 ta
     return rval;
 }
 #define wglSwapBuffersMscOML_defined
-GLATTER_FBLOCK(return, WGL, , INT64, WINAPI, wglSwapLayerBuffersMscOML, (hdc, fuPlanes, target_msc, divisor, remainder), (HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder))
-GLATTER_INLINE_OR_NOT INT64 glatter_wglSwapLayerBuffersMscOML_debug(HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder, const char* file, int line)
+GLATTER_FBLOCK(return, WGL, , INT64, WINAPI, wglSwapLayerBuffersMscOML, (hdc, fuPlanes, target_msc, divisor, remainder), (HDC hdc, INT fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder))
+GLATTER_INLINE_OR_NOT INT64 glatter_wglSwapLayerBuffersMscOML_debug(HDC hdc, INT fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, wglSwapLayerBuffersMscOML, "(%s, %d, %s, %s, %s)", GET_PRS(hdc), (int)fuPlanes, GET_PRS(target_msc), GET_PRS(divisor), GET_PRS(remainder))
     INT64 rval = glatter_wglSwapLayerBuffersMscOML(hdc, fuPlanes, target_msc, divisor, remainder);

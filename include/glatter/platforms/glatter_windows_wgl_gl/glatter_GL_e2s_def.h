@@ -850,7 +850,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x800f: return "GL_UNPACK_CMYK_HINT_EXT";
 #endif
         case 0x8010:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_CONVOLUTION_1D";
 #endif
 #if defined(GL_EXT_convolution)
@@ -858,7 +858,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8011:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_CONVOLUTION_2D";
 #endif
 #if defined(GL_EXT_convolution)
@@ -866,7 +866,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8012:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_SEPARABLE_2D";
 #endif
 #if defined(GL_EXT_convolution)
@@ -1010,7 +1010,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8024:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_HISTOGRAM";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1018,7 +1018,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x8025:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_PROXY_HISTOGRAM";
 #endif
 #if defined(GL_EXT_histogram)
@@ -1090,7 +1090,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x802e:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_MINMAX";
 #endif
 #if defined(GL_EXT_histogram)
@@ -2192,7 +2192,7 @@ const char* enum_to_string_GL(GLenum e)
         case 0x80cf: return "GL_422_REV_AVERAGE_EXT";
 #endif
         case 0x80d0:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2200,7 +2200,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d1:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_POST_CONVOLUTION_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2208,7 +2208,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d2:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_POST_COLOR_MATRIX_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2216,7 +2216,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d3:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_PROXY_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2224,7 +2224,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d4:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_PROXY_POST_CONVOLUTION_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2232,7 +2232,7 @@ const char* enum_to_string_GL(GLenum e)
 #endif
             break;
         case 0x80d5:
-#if defined(GL_ARB_imaging)
+#if defined(GL_VERSION_4_5)
                     return "GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE";
 #endif
 #if defined(GL_SGI_color_table)
@@ -2878,14 +2878,62 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8226: return "GL_COMPRESSED_RG";
         case 0x8227: return "GL_RG";
         case 0x8228: return "GL_RG_INTEGER";
-        case 0x8229: return "GL_R8";
+#endif
+        case 0x8229:
+#if defined(GL_VERSION_3_0)
+                    return "GL_R8";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_R8_EXT";
+#endif
+            break;
+#if defined(GL_VERSION_3_0)
         case 0x822a: return "GL_R16";
-        case 0x822b: return "GL_RG8";
+#endif
+        case 0x822b:
+#if defined(GL_VERSION_3_0)
+                    return "GL_RG8";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_RG8_EXT";
+#endif
+            break;
+#if defined(GL_VERSION_3_0)
         case 0x822c: return "GL_RG16";
-        case 0x822d: return "GL_R16F";
-        case 0x822e: return "GL_R32F";
-        case 0x822f: return "GL_RG16F";
-        case 0x8230: return "GL_RG32F";
+#endif
+        case 0x822d:
+#if defined(GL_VERSION_3_0)
+                    return "GL_R16F";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_R16F_EXT";
+#endif
+            break;
+        case 0x822e:
+#if defined(GL_VERSION_3_0)
+                    return "GL_R32F";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_R32F_EXT";
+#endif
+            break;
+        case 0x822f:
+#if defined(GL_VERSION_3_0)
+                    return "GL_RG16F";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_RG16F_EXT";
+#endif
+            break;
+        case 0x8230:
+#if defined(GL_VERSION_3_0)
+                    return "GL_RG32F";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_RG32F_EXT";
+#endif
+            break;
+#if defined(GL_VERSION_3_0)
         case 0x8231: return "GL_R8I";
         case 0x8232: return "GL_R8UI";
         case 0x8233: return "GL_R16I";
@@ -5643,6 +5691,9 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_texture_float)
                     return "GL_RGBA32F_ARB";
 #endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_RGBA32F_EXT";
+#endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_RGBA_FLOAT32_APPLE";
 #endif
@@ -5657,6 +5708,9 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_texture_float)
                     return "GL_RGB32F_ARB";
 #endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_RGB32F_EXT";
+#endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_RGB_FLOAT32_APPLE";
 #endif
@@ -5667,6 +5721,9 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8816:
 #if defined(GL_ARB_texture_float)
                     return "GL_ALPHA32F_ARB";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_ALPHA32F_EXT";
 #endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_ALPHA_FLOAT32_APPLE";
@@ -5690,6 +5747,9 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_texture_float)
                     return "GL_LUMINANCE32F_ARB";
 #endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_LUMINANCE32F_EXT";
+#endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_LUMINANCE_FLOAT32_APPLE";
 #endif
@@ -5700,6 +5760,9 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8819:
 #if defined(GL_ARB_texture_float)
                     return "GL_LUMINANCE_ALPHA32F_ARB";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_LUMINANCE_ALPHA32F_EXT";
 #endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_LUMINANCE_ALPHA_FLOAT32_APPLE";
@@ -5715,6 +5778,9 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_texture_float)
                     return "GL_RGBA16F_ARB";
 #endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_RGBA16F_EXT";
+#endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_RGBA_FLOAT16_APPLE";
 #endif
@@ -5729,6 +5795,9 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_texture_float)
                     return "GL_RGB16F_ARB";
 #endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_RGB16F_EXT";
+#endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_RGB_FLOAT16_APPLE";
 #endif
@@ -5739,6 +5808,9 @@ const char* enum_to_string_GL(GLenum e)
         case 0x881c:
 #if defined(GL_ARB_texture_float)
                     return "GL_ALPHA16F_ARB";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_ALPHA16F_EXT";
 #endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_ALPHA_FLOAT16_APPLE";
@@ -5762,6 +5834,9 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_ARB_texture_float)
                     return "GL_LUMINANCE16F_ARB";
 #endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_LUMINANCE16F_EXT";
+#endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_LUMINANCE_FLOAT16_APPLE";
 #endif
@@ -5772,6 +5847,9 @@ const char* enum_to_string_GL(GLenum e)
         case 0x881f:
 #if defined(GL_ARB_texture_float)
                     return "GL_LUMINANCE_ALPHA16F_ARB";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_LUMINANCE_ALPHA16F_EXT";
 #endif
 #if defined(GL_APPLE_float_pixels)
                     return "GL_LUMINANCE_ALPHA_FLOAT16_APPLE";
@@ -7342,6 +7420,18 @@ const char* enum_to_string_GL(GLenum e)
         case 0x8bb8: return "GL_TILE_RASTER_ORDER_FIXED_MESA";
         case 0x8bb9: return "GL_TILE_RASTER_ORDER_INCREASING_X_MESA";
         case 0x8bba: return "GL_TILE_RASTER_ORDER_INCREASING_Y_MESA";
+#endif
+#if defined(GL_MESA_framebuffer_flip_y)
+        case 0x8bbb: return "GL_FRAMEBUFFER_FLIP_Y_MESA";
+#endif
+#if defined(GL_MESA_framebuffer_flip_x)
+        case 0x8bbc: return "GL_FRAMEBUFFER_FLIP_X_MESA";
+#endif
+#if defined(GL_MESA_framebuffer_swap_xy)
+        case 0x8bbd: return "GL_FRAMEBUFFER_SWAP_XY_MESA";
+#endif
+#if defined(GL_MESA_texture_const_bandwidth)
+        case 0x8bbe: return "GL_CONST_BW_TILING_MESA";
 #endif
 #if defined(GL_AMD_performance_monitor)
         case 0x8bc0: return "GL_COUNTER_TYPE_AMD";
@@ -9282,6 +9372,24 @@ const char* enum_to_string_GL(GLenum e)
                     return "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_NV";
 #endif
             break;
+#if defined(GL_NV_mesh_shader)
+        case 0x8e60: return "GL_MAX_MESH_UNIFORM_BLOCKS_NV";
+        case 0x8e61: return "GL_MAX_MESH_TEXTURE_IMAGE_UNITS_NV";
+        case 0x8e62: return "GL_MAX_MESH_IMAGE_UNIFORMS_NV";
+        case 0x8e63: return "GL_MAX_MESH_UNIFORM_COMPONENTS_NV";
+        case 0x8e64: return "GL_MAX_MESH_ATOMIC_COUNTER_BUFFERS_NV";
+        case 0x8e65: return "GL_MAX_MESH_ATOMIC_COUNTERS_NV";
+        case 0x8e66: return "GL_MAX_MESH_SHADER_STORAGE_BLOCKS_NV";
+        case 0x8e67: return "GL_MAX_COMBINED_MESH_UNIFORM_COMPONENTS_NV";
+        case 0x8e68: return "GL_MAX_TASK_UNIFORM_BLOCKS_NV";
+        case 0x8e69: return "GL_MAX_TASK_TEXTURE_IMAGE_UNITS_NV";
+        case 0x8e6a: return "GL_MAX_TASK_IMAGE_UNIFORMS_NV";
+        case 0x8e6b: return "GL_MAX_TASK_UNIFORM_COMPONENTS_NV";
+        case 0x8e6c: return "GL_MAX_TASK_ATOMIC_COUNTER_BUFFERS_NV";
+        case 0x8e6d: return "GL_MAX_TASK_ATOMIC_COUNTERS_NV";
+        case 0x8e6e: return "GL_MAX_TASK_SHADER_STORAGE_BLOCKS_NV";
+        case 0x8e6f: return "GL_MAX_COMBINED_TASK_UNIFORM_COMPONENTS_NV";
+#endif
 #if defined(GL_VERSION_4_0)
         case 0x8e70: return "GL_MAX_TRANSFORM_FEEDBACK_BUFFERS";
         case 0x8e71: return "GL_MAX_VERTEX_STREAMS";
@@ -9568,6 +9676,12 @@ const char* enum_to_string_GL(GLenum e)
 #endif
 #if defined(GL_ARB_texture_gather)
         case 0x8f9f: return "GL_MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB";
+#endif
+#if defined(GL_EXT_texture_sRGB_R8)
+        case 0x8fbd: return "GL_SR8_EXT";
+#endif
+#if defined(GL_EXT_texture_sRGB_RG8)
+        case 0x8fbe: return "GL_SRG8_EXT";
 #endif
 #if defined(GL_AMD_gpu_shader_int64)
         case 0x8fe0: return "GL_INT8_NV";
@@ -10270,8 +10384,15 @@ const char* enum_to_string_GL(GLenum e)
         case 0x912c: return "GL_PACK_COMPRESSED_BLOCK_HEIGHT";
         case 0x912d: return "GL_PACK_COMPRESSED_BLOCK_DEPTH";
         case 0x912e: return "GL_PACK_COMPRESSED_BLOCK_SIZE";
-        case 0x912f: return "GL_TEXTURE_IMMUTABLE_FORMAT";
 #endif
+        case 0x912f:
+#if defined(GL_VERSION_4_2)
+                    return "GL_TEXTURE_IMMUTABLE_FORMAT";
+#endif
+#if defined(GL_EXT_texture_storage)
+                    return "GL_TEXTURE_IMMUTABLE_FORMAT_EXT";
+#endif
+            break;
         case 0x9143:
 #if defined(GL_VERSION_4_3)
                     return "GL_MAX_DEBUG_MESSAGE_LENGTH";
@@ -10762,6 +10883,9 @@ const char* enum_to_string_GL(GLenum e)
         case 0x92dd: return "GL_FRAGMENT_COVERAGE_TO_COLOR_NV";
         case 0x92de: return "GL_FRAGMENT_COVERAGE_COLOR_NV";
 #endif
+#if defined(GL_NV_mesh_shader)
+        case 0x92df: return "GL_MESH_OUTPUT_PER_VERTEX_GRANULARITY_NV";
+#endif
 #if defined(GL_VERSION_4_3)
         case 0x92e0: return "GL_DEBUG_OUTPUT";
         case 0x92e1: return "GL_UNIFORM";
@@ -10979,12 +11103,39 @@ const char* enum_to_string_GL(GLenum e)
         case 0x937d: return "GL_VIEWPORT_POSITION_W_SCALE_X_COEFF_NV";
         case 0x937e: return "GL_VIEWPORT_POSITION_W_SCALE_Y_COEFF_NV";
 #endif
+#if defined(GL_NV_representative_fragment_test)
+        case 0x937f: return "GL_REPRESENTATIVE_FRAGMENT_TEST_NV";
+#endif
 #if defined(GL_VERSION_4_2)
         case 0x9380: return "GL_NUM_SAMPLE_COUNTS";
 #endif
 #if defined(GL_ARB_ES3_2_compatibility)
         case 0x9381: return "GL_MULTISAMPLE_LINE_WIDTH_RANGE_ARB";
         case 0x9382: return "GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB";
+#endif
+#if defined(GL_ARB_internalformat_query2)
+        case 0x9383: return "GL_VIEW_CLASS_EAC_R11";
+        case 0x9384: return "GL_VIEW_CLASS_EAC_RG11";
+        case 0x9385: return "GL_VIEW_CLASS_ETC2_RGB";
+        case 0x9386: return "GL_VIEW_CLASS_ETC2_RGBA";
+        case 0x9387: return "GL_VIEW_CLASS_ETC2_EAC_RGBA";
+        case 0x9388: return "GL_VIEW_CLASS_ASTC_4x4_RGBA";
+        case 0x9389: return "GL_VIEW_CLASS_ASTC_5x4_RGBA";
+        case 0x938a: return "GL_VIEW_CLASS_ASTC_5x5_RGBA";
+        case 0x938b: return "GL_VIEW_CLASS_ASTC_6x5_RGBA";
+        case 0x938c: return "GL_VIEW_CLASS_ASTC_6x6_RGBA";
+        case 0x938d: return "GL_VIEW_CLASS_ASTC_8x5_RGBA";
+        case 0x938e: return "GL_VIEW_CLASS_ASTC_8x6_RGBA";
+        case 0x938f: return "GL_VIEW_CLASS_ASTC_8x8_RGBA";
+        case 0x9390: return "GL_VIEW_CLASS_ASTC_10x5_RGBA";
+        case 0x9391: return "GL_VIEW_CLASS_ASTC_10x6_RGBA";
+        case 0x9392: return "GL_VIEW_CLASS_ASTC_10x8_RGBA";
+        case 0x9393: return "GL_VIEW_CLASS_ASTC_10x10_RGBA";
+        case 0x9394: return "GL_VIEW_CLASS_ASTC_12x10_RGBA";
+        case 0x9395: return "GL_VIEW_CLASS_ASTC_12x12_RGBA";
+#endif
+#if defined(GL_EXT_texture_storage)
+        case 0x93a1: return "GL_BGRA8_EXT";
 #endif
 #if defined(GL_KHR_texture_compression_astc_hdr)
         case 0x93b0: return "GL_COMPRESSED_RGBA_ASTC_4x4_KHR";
@@ -11037,9 +11188,32 @@ const char* enum_to_string_GL(GLenum e)
         case 0x9530: return "GL_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_EXT";
         case 0x9531: return "GL_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_EXT";
 #endif
+#if defined(GL_KHR_shader_subgroup)
+        case 0x9532: return "GL_SUBGROUP_SIZE_KHR";
+        case 0x9533: return "GL_SUBGROUP_SUPPORTED_STAGES_KHR";
+        case 0x9534: return "GL_SUBGROUP_SUPPORTED_FEATURES_KHR";
+        case 0x9535: return "GL_SUBGROUP_QUAD_ALL_STAGES_KHR";
+#endif
+#if defined(GL_NV_mesh_shader)
+        case 0x9536: return "GL_MAX_MESH_TOTAL_MEMORY_SIZE_NV";
+        case 0x9537: return "GL_MAX_TASK_TOTAL_MEMORY_SIZE_NV";
+        case 0x9538: return "GL_MAX_MESH_OUTPUT_VERTICES_NV";
+        case 0x9539: return "GL_MAX_MESH_OUTPUT_PRIMITIVES_NV";
+        case 0x953a: return "GL_MAX_TASK_OUTPUT_COUNT_NV";
+        case 0x953b: return "GL_MAX_MESH_WORK_GROUP_SIZE_NV";
+        case 0x953c: return "GL_MAX_TASK_WORK_GROUP_SIZE_NV";
+        case 0x953d: return "GL_MAX_DRAW_MESH_TASKS_COUNT_NV";
+        case 0x953e: return "GL_MESH_WORK_GROUP_SIZE_NV";
+        case 0x953f: return "GL_TASK_WORK_GROUP_SIZE_NV";
+#endif
 #if defined(GL_NV_query_resource)
         case 0x9540: return "GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV";
         case 0x9542: return "GL_QUERY_RESOURCE_MEMTYPE_VIDMEM_NV";
+#endif
+#if defined(GL_NV_mesh_shader)
+        case 0x9543: return "GL_MESH_OUTPUT_PER_PRIMITIVE_GRANULARITY_NV";
+#endif
+#if defined(GL_NV_query_resource)
         case 0x9544: return "GL_QUERY_RESOURCE_SYS_RESERVED_NV";
         case 0x9545: return "GL_QUERY_RESOURCE_TEXTURE_NV";
         case 0x9546: return "GL_QUERY_RESOURCE_RENDERBUFFER_NV";
@@ -11048,6 +11222,9 @@ const char* enum_to_string_GL(GLenum e)
 #if defined(GL_NV_gpu_multicast)
         case 0x9548: return "GL_PER_GPU_STORAGE_NV";
         case 0x9549: return "GL_MULTICAST_PROGRAMMABLE_SAMPLE_LOCATION_NV";
+#endif
+#if defined(GL_NVX_gpu_multicast2)
+        case 0x954a: return "GL_UPLOAD_GPU_MASK_NVX";
 #endif
 #if defined(GL_NV_conservative_raster_pre_snap_triangles)
         case 0x954d: return "GL_CONSERVATIVE_RASTER_MODE_NV";
@@ -11077,8 +11254,48 @@ const char* enum_to_string_GL(GLenum e)
         case 0x9553: return "GL_SPIR_V_EXTENSIONS";
         case 0x9554: return "GL_NUM_SPIR_V_EXTENSIONS";
 #endif
+#if defined(GL_NV_scissor_exclusive)
+        case 0x9555: return "GL_SCISSOR_TEST_EXCLUSIVE_NV";
+        case 0x9556: return "GL_SCISSOR_BOX_EXCLUSIVE_NV";
+#endif
+#if defined(GL_NV_mesh_shader)
+        case 0x9557: return "GL_MAX_MESH_VIEWS_NV";
+#endif
 #if defined(GL_NV_gpu_multicast)
         case 0x9558: return "GL_RENDER_GPU_MASK_NV";
+#endif
+#if defined(GL_NV_mesh_shader)
+        case 0x9559: return "GL_MESH_SHADER_NV";
+        case 0x955a: return "GL_TASK_SHADER_NV";
+#endif
+#if defined(GL_NV_shading_rate_image)
+        case 0x955b: return "GL_SHADING_RATE_IMAGE_BINDING_NV";
+        case 0x955c: return "GL_SHADING_RATE_IMAGE_TEXEL_WIDTH_NV";
+        case 0x955d: return "GL_SHADING_RATE_IMAGE_TEXEL_HEIGHT_NV";
+        case 0x955e: return "GL_SHADING_RATE_IMAGE_PALETTE_SIZE_NV";
+        case 0x955f: return "GL_MAX_COARSE_FRAGMENT_SAMPLES_NV";
+        case 0x9563: return "GL_SHADING_RATE_IMAGE_NV";
+        case 0x9564: return "GL_SHADING_RATE_NO_INVOCATIONS_NV";
+        case 0x9565: return "GL_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV";
+        case 0x9566: return "GL_SHADING_RATE_1_INVOCATION_PER_1X2_PIXELS_NV";
+        case 0x9567: return "GL_SHADING_RATE_1_INVOCATION_PER_2X1_PIXELS_NV";
+        case 0x9568: return "GL_SHADING_RATE_1_INVOCATION_PER_2X2_PIXELS_NV";
+        case 0x9569: return "GL_SHADING_RATE_1_INVOCATION_PER_2X4_PIXELS_NV";
+        case 0x956a: return "GL_SHADING_RATE_1_INVOCATION_PER_4X2_PIXELS_NV";
+        case 0x956b: return "GL_SHADING_RATE_1_INVOCATION_PER_4X4_PIXELS_NV";
+        case 0x956c: return "GL_SHADING_RATE_2_INVOCATIONS_PER_PIXEL_NV";
+        case 0x956d: return "GL_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV";
+        case 0x956e: return "GL_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV";
+        case 0x956f: return "GL_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV";
+#endif
+#if defined(GL_NV_mesh_shader)
+        case 0x9579: return "GL_MESH_VERTICES_OUT_NV";
+        case 0x957a: return "GL_MESH_PRIMITIVES_OUT_NV";
+        case 0x957b: return "GL_MESH_OUTPUT_TYPE_NV";
+        case 0x957c: return "GL_MESH_SUBROUTINE_NV";
+        case 0x957d: return "GL_TASK_SUBROUTINE_NV";
+        case 0x957e: return "GL_MESH_SUBROUTINE_UNIFORM_NV";
+        case 0x957f: return "GL_TASK_SUBROUTINE_UNIFORM_NV";
 #endif
 #if defined(GL_EXT_memory_object)
         case 0x9580: return "GL_TEXTURE_TILING_EXT";
@@ -11110,8 +11327,15 @@ const char* enum_to_string_GL(GLenum e)
 #endif
 #if defined(GL_EXT_semaphore_win32)
         case 0x9594: return "GL_HANDLE_TYPE_D3D12_FENCE_EXT";
-        case 0x9595: return "GL_D3D12_FENCE_VALUE_EXT";
 #endif
+        case 0x9595:
+#if defined(GL_EXT_semaphore_win32)
+                    return "GL_D3D12_FENCE_VALUE_EXT";
+#endif
+#if defined(GL_NV_timeline_semaphore)
+                    return "GL_TIMELINE_SEMAPHORE_VALUE_NV";
+#endif
+            break;
 #if defined(GL_EXT_memory_object)
         case 0x9596: return "GL_NUM_DEVICE_UUIDS_EXT";
         case 0x9597: return "GL_DEVICE_UUID_EXT";
@@ -11123,6 +11347,43 @@ const char* enum_to_string_GL(GLenum e)
 #endif
 #if defined(GL_EXT_memory_object)
         case 0x959b: return "GL_PROTECTED_MEMORY_OBJECT_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+        case 0x959c: return "GL_UNIFORM_BLOCK_REFERENCED_BY_MESH_SHADER_NV";
+        case 0x959d: return "GL_UNIFORM_BLOCK_REFERENCED_BY_TASK_SHADER_NV";
+        case 0x959e: return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_MESH_SHADER_NV";
+        case 0x959f: return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TASK_SHADER_NV";
+        case 0x95a0: return "GL_REFERENCED_BY_MESH_SHADER_NV";
+        case 0x95a1: return "GL_REFERENCED_BY_TASK_SHADER_NV";
+        case 0x95a2: return "GL_MAX_MESH_WORK_GROUP_INVOCATIONS_NV";
+        case 0x95a3: return "GL_MAX_TASK_WORK_GROUP_INVOCATIONS_NV";
+#endif
+#if defined(GL_NV_memory_attachment)
+        case 0x95a4: return "GL_ATTACHED_MEMORY_OBJECT_NV";
+        case 0x95a5: return "GL_ATTACHED_MEMORY_OFFSET_NV";
+        case 0x95a6: return "GL_MEMORY_ATTACHABLE_ALIGNMENT_NV";
+        case 0x95a7: return "GL_MEMORY_ATTACHABLE_SIZE_NV";
+        case 0x95a8: return "GL_MEMORY_ATTACHABLE_NV";
+        case 0x95a9: return "GL_DETACHED_MEMORY_INCARNATION_NV";
+        case 0x95aa: return "GL_DETACHED_TEXTURES_NV";
+        case 0x95ab: return "GL_DETACHED_BUFFERS_NV";
+        case 0x95ac: return "GL_MAX_DETACHED_TEXTURES_NV";
+        case 0x95ad: return "GL_MAX_DETACHED_BUFFERS_NV";
+#endif
+#if defined(GL_NV_shading_rate_image)
+        case 0x95ae: return "GL_SHADING_RATE_SAMPLE_ORDER_DEFAULT_NV";
+        case 0x95af: return "GL_SHADING_RATE_SAMPLE_ORDER_PIXEL_MAJOR_NV";
+        case 0x95b0: return "GL_SHADING_RATE_SAMPLE_ORDER_SAMPLE_MAJOR_NV";
+#endif
+#if defined(GL_NV_primitive_shading_rate)
+        case 0x95b1: return "GL_SHADING_RATE_IMAGE_PER_PRIMITIVE_NV";
+        case 0x95b2: return "GL_SHADING_RATE_IMAGE_PALETTE_COUNT_NV";
+#endif
+#if defined(GL_NV_timeline_semaphore)
+        case 0x95b3: return "GL_SEMAPHORE_TYPE_NV";
+        case 0x95b4: return "GL_SEMAPHORE_TYPE_BINARY_NV";
+        case 0x95b5: return "GL_SEMAPHORE_TYPE_TIMELINE_NV";
+        case 0x95b6: return "GL_MAX_TIMELINE_SEMAPHORE_VALUE_DIFFERENCE_NV";
 #endif
 #if defined(GL_OVR_multiview)
         case 0x9630: return "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR";

@@ -606,12 +606,18 @@ GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glReadnPixelsEXT, (x, y, width, 
 #define glReadnPixelsEXT_defined
 #endif // defined(GL_EXT_robustness)
 #if defined(GL_EXT_texture_storage)
+#ifndef glTexStorage1DEXT_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glTexStorage1DEXT, (target, levels, internalformat, width), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
 #define glTexStorage1DEXT_defined
+#endif
+#ifndef glTexStorage2DEXT_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glTexStorage2DEXT, (target, levels, internalformat, width, height), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height))
 #define glTexStorage2DEXT_defined
+#endif
+#ifndef glTexStorage3DEXT_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glTexStorage3DEXT, (target, levels, internalformat, width, height, depth), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
 #define glTexStorage3DEXT_defined
+#endif
 #ifndef glTextureStorage1DEXT_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glTextureStorage1DEXT, (texture, target, levels, internalformat, width), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
 #define glTextureStorage1DEXT_defined

@@ -1640,6 +1640,7 @@ GLATTER_INLINE_OR_NOT void glatter_glReadnPixelsEXT_debug(GLint x, GLint y, GLsi
 #define glReadnPixelsEXT_defined
 #endif // defined(GL_EXT_robustness)
 #if defined(GL_EXT_texture_storage)
+#ifndef glTexStorage1DEXT_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glTexStorage1DEXT, (target, levels, internalformat, width), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
 GLATTER_INLINE_OR_NOT void glatter_glTexStorage1DEXT_debug(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, const char* file, int line)
 {
@@ -1648,6 +1649,8 @@ GLATTER_INLINE_OR_NOT void glatter_glTexStorage1DEXT_debug(GLenum target, GLsize
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTexStorage1DEXT_defined
+#endif
+#ifndef glTexStorage2DEXT_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glTexStorage2DEXT, (target, levels, internalformat, width, height), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height))
 GLATTER_INLINE_OR_NOT void glatter_glTexStorage2DEXT_debug(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, const char* file, int line)
 {
@@ -1656,6 +1659,8 @@ GLATTER_INLINE_OR_NOT void glatter_glTexStorage2DEXT_debug(GLenum target, GLsize
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTexStorage2DEXT_defined
+#endif
+#ifndef glTexStorage3DEXT_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glTexStorage3DEXT, (target, levels, internalformat, width, height, depth), (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth))
 GLATTER_INLINE_OR_NOT void glatter_glTexStorage3DEXT_debug(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, const char* file, int line)
 {
@@ -1664,6 +1669,7 @@ GLATTER_INLINE_OR_NOT void glatter_glTexStorage3DEXT_debug(GLenum target, GLsize
     GLATTER_CHECK_ERROR(GL, file, line)
 }
 #define glTexStorage3DEXT_defined
+#endif
 #ifndef glTextureStorage1DEXT_defined
 GLATTER_FBLOCK(, GL, GL_API, void, GL_APIENTRY, glTextureStorage1DEXT, (texture, target, levels, internalformat, width), (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width))
 GLATTER_INLINE_OR_NOT void glatter_glTextureStorage1DEXT_debug(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, const char* file, int line)

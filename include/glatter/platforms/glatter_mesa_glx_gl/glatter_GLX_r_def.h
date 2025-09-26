@@ -260,7 +260,7 @@ GLATTER_FBLOCK(return, GLX, , Bool, , glXReleaseBuffersMESA, (dpy, drawable), (D
 #define glXReleaseBuffersMESA_defined
 #endif // defined(GLX_MESA_release_buffers)
 #if defined(GLX_MESA_set_3dfx_mode)
-GLATTER_FBLOCK(return, GLX, , Bool, , glXSet3DfxModeMESA, (mode), (int mode))
+GLATTER_FBLOCK(return, GLX, , GLboolean, , glXSet3DfxModeMESA, (mode), (GLint mode))
 #define glXSet3DfxModeMESA_defined
 #endif // defined(GLX_MESA_set_3dfx_mode)
 #if defined(GLX_MESA_swap_control)
@@ -390,7 +390,7 @@ GLATTER_FBLOCK(, GLX, , void, , glXDestroyGLXPbufferSGIX, (dpy, pbuf), (Display 
 #define glXDestroyGLXPbufferSGIX_defined
 GLATTER_FBLOCK(, GLX, , void, , glXGetSelectedEventSGIX, (dpy, drawable, mask), (Display *dpy, GLXDrawable drawable, unsigned long *mask))
 #define glXGetSelectedEventSGIX_defined
-GLATTER_FBLOCK(return, GLX, , int, , glXQueryGLXPbufferSGIX, (dpy, pbuf, attribute, value), (Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value))
+GLATTER_FBLOCK(, GLX, , void, , glXQueryGLXPbufferSGIX, (dpy, pbuf, attribute, value), (Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value))
 #define glXQueryGLXPbufferSGIX_defined
 GLATTER_FBLOCK(, GLX, , void, , glXSelectEventSGIX, (dpy, drawable, mask), (Display *dpy, GLXDrawable drawable, unsigned long mask))
 #define glXSelectEventSGIX_defined
@@ -446,7 +446,7 @@ GLATTER_FBLOCK(return, GLX, , int, , glXWaitVideoSyncSGI, (divisor, remainder, c
 #define glXWaitVideoSyncSGI_defined
 #endif // defined(GLX_SGI_video_sync)
 #if defined(GLX_SUN_get_transparent_index)
-GLATTER_FBLOCK(return, GLX, , Status, , glXGetTransparentIndexSUN, (dpy, overlay, underlay, pTransparentIndex), (Display *dpy, Window overlay, Window underlay, long *pTransparentIndex))
+GLATTER_FBLOCK(return, GLX, , Status, , glXGetTransparentIndexSUN, (dpy, overlay, underlay, pTransparentIndex), (Display *dpy, Window overlay, Window underlay, unsigned long *pTransparentIndex))
 #define glXGetTransparentIndexSUN_defined
 #endif // defined(GLX_SUN_get_transparent_index)
 #if defined(GLX_VERSION_1_3)

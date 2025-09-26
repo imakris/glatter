@@ -375,7 +375,7 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXReleaseBuffersMESA_debug(Display *dpy, GLX
 #ifndef glXSet3DfxModeMESA
 #define glXSet3DfxModeMESA(mode) glatter_glXSet3DfxModeMESA_debug((mode), __FILE__, __LINE__)
 #endif
-GLATTER_INLINE_OR_NOT Bool glatter_glXSet3DfxModeMESA_debug(int mode, const char* file, int line);
+GLATTER_INLINE_OR_NOT GLboolean glatter_glXSet3DfxModeMESA_debug(GLint mode, const char* file, int line);
 #endif // defined(GLX_MESA_set_3dfx_mode)
 #if defined(GLX_MESA_swap_control)
 #ifndef glXGetSwapIntervalMESA
@@ -599,7 +599,7 @@ GLATTER_INLINE_OR_NOT void glatter_glXGetSelectedEventSGIX_debug(Display *dpy, G
 #ifndef glXQueryGLXPbufferSGIX
 #define glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value) glatter_glXQueryGLXPbufferSGIX_debug((dpy), (pbuf), (attribute), (value), __FILE__, __LINE__)
 #endif
-GLATTER_INLINE_OR_NOT int glatter_glXQueryGLXPbufferSGIX_debug(Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value, const char* file, int line);
+GLATTER_INLINE_OR_NOT void glatter_glXQueryGLXPbufferSGIX_debug(Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value, const char* file, int line);
 #ifndef glXSelectEventSGIX
 #define glXSelectEventSGIX(dpy, drawable, mask) glatter_glXSelectEventSGIX_debug((dpy), (drawable), (mask), __FILE__, __LINE__)
 #endif
@@ -691,7 +691,7 @@ GLATTER_INLINE_OR_NOT int glatter_glXWaitVideoSyncSGI_debug(int divisor, int rem
 #ifndef glXGetTransparentIndexSUN
 #define glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex) glatter_glXGetTransparentIndexSUN_debug((dpy), (overlay), (underlay), (pTransparentIndex), __FILE__, __LINE__)
 #endif
-GLATTER_INLINE_OR_NOT Status glatter_glXGetTransparentIndexSUN_debug(Display *dpy, Window overlay, Window underlay, long *pTransparentIndex, const char* file, int line);
+GLATTER_INLINE_OR_NOT Status glatter_glXGetTransparentIndexSUN_debug(Display *dpy, Window overlay, Window underlay, unsigned long *pTransparentIndex, const char* file, int line);
 #endif // defined(GLX_SUN_get_transparent_index)
 #if defined(GLX_VERSION_1_3)
 #ifndef glXChooseFBConfig

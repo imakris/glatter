@@ -375,7 +375,7 @@ GLATTER_UBLOCK(Bool, , glXReleaseBuffersMESA, (Display *dpy, GLXDrawable drawabl
 #ifndef glXSet3DfxModeMESA
 #define glXSet3DfxModeMESA(mode) glatter_glXSet3DfxModeMESA((mode))
 #endif
-GLATTER_UBLOCK(Bool, , glXSet3DfxModeMESA, (int mode))
+GLATTER_UBLOCK(GLboolean, , glXSet3DfxModeMESA, (GLint mode))
 #endif // defined(GLX_MESA_set_3dfx_mode)
 #if defined(GLX_MESA_swap_control)
 #ifndef glXGetSwapIntervalMESA
@@ -599,7 +599,7 @@ GLATTER_UBLOCK(void, , glXGetSelectedEventSGIX, (Display *dpy, GLXDrawable drawa
 #ifndef glXQueryGLXPbufferSGIX
 #define glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value) glatter_glXQueryGLXPbufferSGIX((dpy), (pbuf), (attribute), (value))
 #endif
-GLATTER_UBLOCK(int, , glXQueryGLXPbufferSGIX, (Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value))
+GLATTER_UBLOCK(void, , glXQueryGLXPbufferSGIX, (Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value))
 #ifndef glXSelectEventSGIX
 #define glXSelectEventSGIX(dpy, drawable, mask) glatter_glXSelectEventSGIX((dpy), (drawable), (mask))
 #endif
@@ -691,7 +691,7 @@ GLATTER_UBLOCK(int, , glXWaitVideoSyncSGI, (int divisor, int remainder, unsigned
 #ifndef glXGetTransparentIndexSUN
 #define glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex) glatter_glXGetTransparentIndexSUN((dpy), (overlay), (underlay), (pTransparentIndex))
 #endif
-GLATTER_UBLOCK(Status, , glXGetTransparentIndexSUN, (Display *dpy, Window overlay, Window underlay, long *pTransparentIndex))
+GLATTER_UBLOCK(Status, , glXGetTransparentIndexSUN, (Display *dpy, Window overlay, Window underlay, unsigned long *pTransparentIndex))
 #endif // defined(GLX_SUN_get_transparent_index)
 #if defined(GLX_VERSION_1_3)
 #ifndef glXChooseFBConfig

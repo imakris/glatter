@@ -26,6 +26,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef GLATTER_H_DEFINED
 #define GLATTER_H_DEFINED
 
+#include <inttypes.h>
+#ifndef PRId64
+#define PRId64 "ll"
+#endif
+
 #include "glatter_config.h"
 #include "glatter_platform_headers.h"
 
@@ -83,6 +88,8 @@ extern "C" {
 #define GLATTER_UBLOCK(rtype, cconv, name, dargs)\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
     extern glatter_##name##_t glatter_##name;
+
+void glatter_set_log_handler(void(*handler_ptr)(const char*));
 
 #endif
 

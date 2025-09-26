@@ -85,15 +85,6 @@
 #endif
 
 
-////////////////////
-// Console output //
-////////////////////
-
-// Unless defined otherwise, printf will be used for output to the console
-#if !defined(GLATTER_PRINTF)
-    #define GLATTER_PRINTF printf
-#endif
-
 
 ///////////////////////////////////////////////////
 // X error handler switch (only relevant to GLX) //

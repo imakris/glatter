@@ -836,12 +836,12 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXReleaseBuffersMESA_debug(Display *dpy, GLX
 #define glXReleaseBuffersMESA_defined
 #endif // defined(GLX_MESA_release_buffers)
 #if defined(GLX_MESA_set_3dfx_mode)
-GLATTER_FBLOCK(return, GLX, , Bool, , glXSet3DfxModeMESA, (mode), (int mode))
-GLATTER_INLINE_OR_NOT Bool glatter_glXSet3DfxModeMESA_debug(int mode, const char* file, int line)
+GLATTER_FBLOCK(return, GLX, , GLboolean, , glXSet3DfxModeMESA, (mode), (GLint mode))
+GLATTER_INLINE_OR_NOT GLboolean glatter_glXSet3DfxModeMESA_debug(GLint mode, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, glXSet3DfxModeMESA, "(%d)", (int)mode)
-    Bool rval = glatter_glXSet3DfxModeMESA(mode);
-    GLATTER_RBLOCK("%s\n", GET_PRS(rval));
+    GLboolean rval = glatter_glXSet3DfxModeMESA(mode);
+    GLATTER_RBLOCK("%u\n", (unsigned char)rval);
     GLATTER_CHECK_ERROR(GLX, file, line)
     return rval;
 }
@@ -1344,14 +1344,12 @@ GLATTER_INLINE_OR_NOT void glatter_glXGetSelectedEventSGIX_debug(Display *dpy, G
     GLATTER_CHECK_ERROR(GLX, file, line)
 }
 #define glXGetSelectedEventSGIX_defined
-GLATTER_FBLOCK(return, GLX, , int, , glXQueryGLXPbufferSGIX, (dpy, pbuf, attribute, value), (Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value))
-GLATTER_INLINE_OR_NOT int glatter_glXQueryGLXPbufferSGIX_debug(Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value, const char* file, int line)
+GLATTER_FBLOCK(, GLX, , void, , glXQueryGLXPbufferSGIX, (dpy, pbuf, attribute, value), (Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value))
+GLATTER_INLINE_OR_NOT void glatter_glXQueryGLXPbufferSGIX_debug(Display *dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int *value, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, glXQueryGLXPbufferSGIX, "(%p, %s, %d, %p)", (void*)dpy, GET_PRS(pbuf), (int)attribute, (void*)value)
-    int rval = glatter_glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value);
-    GLATTER_RBLOCK("%d\n", (int)rval);
+    glatter_glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value);
     GLATTER_CHECK_ERROR(GLX, file, line)
-    return rval;
 }
 #define glXQueryGLXPbufferSGIX_defined
 GLATTER_FBLOCK(, GLX, , void, , glXSelectEventSGIX, (dpy, drawable, mask), (Display *dpy, GLXDrawable drawable, unsigned long mask))
@@ -1534,8 +1532,8 @@ GLATTER_INLINE_OR_NOT int glatter_glXWaitVideoSyncSGI_debug(int divisor, int rem
 #define glXWaitVideoSyncSGI_defined
 #endif // defined(GLX_SGI_video_sync)
 #if defined(GLX_SUN_get_transparent_index)
-GLATTER_FBLOCK(return, GLX, , Status, , glXGetTransparentIndexSUN, (dpy, overlay, underlay, pTransparentIndex), (Display *dpy, Window overlay, Window underlay, long *pTransparentIndex))
-GLATTER_INLINE_OR_NOT Status glatter_glXGetTransparentIndexSUN_debug(Display *dpy, Window overlay, Window underlay, long *pTransparentIndex, const char* file, int line)
+GLATTER_FBLOCK(return, GLX, , Status, , glXGetTransparentIndexSUN, (dpy, overlay, underlay, pTransparentIndex), (Display *dpy, Window overlay, Window underlay, unsigned long *pTransparentIndex))
+GLATTER_INLINE_OR_NOT Status glatter_glXGetTransparentIndexSUN_debug(Display *dpy, Window overlay, Window underlay, unsigned long *pTransparentIndex, const char* file, int line)
 {
     GLATTER_DBLOCK(file, line, glXGetTransparentIndexSUN, "(%p, %s, %s, %p)", (void*)dpy, GET_PRS(overlay), GET_PRS(underlay), (void*)pTransparentIndex)
     Status rval = glatter_glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex);
