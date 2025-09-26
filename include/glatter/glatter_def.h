@@ -97,6 +97,9 @@ const char* glatter_log(const char* str)
 GLATTER_INLINE_OR_NOT
 void glatter_set_log_handler(void(*handler_ptr)(const char*))
 {
+    if (handler_ptr == NULL) {
+        handler_ptr = glatter_default_log_handler;
+    }
     *(glatter_log_handler_ptr_ptr()) = handler_ptr;
 }
 
