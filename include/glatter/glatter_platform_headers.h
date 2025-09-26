@@ -115,6 +115,8 @@
     #elif defined(GLATTER_EGL_GLES_3_2)
 
         #define GLATTER_PLATFORM_DIR glatter_egl_gles_3_2
+        #include "headers/khronos_egl/egl.h"
+        #include "headers/khronos_egl/eglext.h"
         #include "headers/khronos_gles3/gl3platform.h"
         #include "headers/khronos_gles3/gl32.h"
         #include "headers/khronos_gles2/gl2ext.h"
