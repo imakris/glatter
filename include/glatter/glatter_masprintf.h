@@ -15,8 +15,27 @@
 #define vscprintf _vscprintf
 #endif
 
+#ifndef GLATTER_MASPRINTF_INLINE
+# ifdef GLATTER_INLINE_OR_NOT
+#  define GLATTER_MASPRINTF_INLINE static GLATTER_INLINE_OR_NOT
+# elif defined(_MSC_VER)
+#  define GLATTER_MASPRINTF_INLINE static __inline
+# elif defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+#  define GLATTER_MASPRINTF_INLINE static inline
+# else
+#  define GLATTER_MASPRINTF_INLINE static
+# endif
+#endif
+
 #ifdef __GNUC__
-int vscprintf(const char* format, va_list ap)
+GLATTER_MASPRINTF_INLINE int vscprintf(const char* format, va_list ap);
+#endif
+
+GLATTER_MASPRINTF_INLINE char* glatter_mvasprintf(const char* format, va_list ap);
+GLATTER_MASPRINTF_INLINE char* glatter_masprintf(const char* format, ...);
+
+#ifdef __GNUC__
+GLATTER_MASPRINTF_INLINE int vscprintf(const char* format, va_list ap)
 {
     va_list ap_copy;
     va_copy(ap_copy, ap);
@@ -28,7 +47,7 @@ int vscprintf(const char* format, va_list ap)
 
 
 
-char* glatter_mvasprintf(const char* format, va_list ap)
+GLATTER_MASPRINTF_INLINE char* glatter_mvasprintf(const char* format, va_list ap)
 {
     int len = vscprintf(format, ap);
     if (len == -1)
@@ -45,7 +64,7 @@ char* glatter_mvasprintf(const char* format, va_list ap)
 }
 
 
-char* glatter_masprintf(const char* format, ...)
+GLATTER_MASPRINTF_INLINE char* glatter_masprintf(const char* format, ...)
 {
     va_list ap;
     va_start(ap, format);
