@@ -30,7 +30,7 @@
     #ifndef WIN32_LEAN_AND_MEAN
     #define WIN32_LEAN_AND_MEAN
     #endif
-    #include <Windows.h>
+    #include <windows.h>
 #elif defined (__linux__)
     #include <pthread.h>
     #include <dlfcn.h>
