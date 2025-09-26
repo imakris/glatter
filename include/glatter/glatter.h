@@ -75,7 +75,7 @@ extern "C" {
 
     #include "glatter_def.h"
 
-    #if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_ERRORS)
+    #if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_CALLS)
         #define GLATTER_UBLOCK(rtype, cconv, name, dargs)\
             typedef rtype (cconv *glatter_##name##_t) dargs;\
             extern glatter_##name##_t glatter_##name;
@@ -111,12 +111,12 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*));
 
 #if defined(GLATTER_EGL)
     GLATTER_INLINE_OR_NOT glatter_extension_support_status_EGL_t glatter_get_extension_support_EGL();
-    GLATTER_INLINE_OR_NOT const char* enum_to_string_WGL(GLenum e);
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLenum e);
 #endif
 
 #if defined(GLATTER_WGL)
     GLATTER_INLINE_OR_NOT glatter_extension_support_status_WGL_t glatter_get_extension_support_WGL();
-    GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLenum e);
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_WGL(GLenum e);
 #endif
     
 #if defined (GLATTER_GLU)
