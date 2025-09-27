@@ -28,6 +28,1836 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #ifdef GLATTER_GL
+#if !defined(__GL_H__)
+#if !defined(GL_VERSION_ES_CM_1_0)
+#if defined(__gl_h_)
+#if defined(GL_ARB_multitexture)
+#ifndef glActiveTextureARB
+#define glActiveTextureARB(texture) glatter_glActiveTextureARB_debug((texture), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glActiveTextureARB_debug(GLenum texture, const char* file, int line);
+#ifndef glClientActiveTextureARB
+#define glClientActiveTextureARB(texture) glatter_glClientActiveTextureARB_debug((texture), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glClientActiveTextureARB_debug(GLenum texture, const char* file, int line);
+#ifndef glMultiTexCoord1dARB
+#define glMultiTexCoord1dARB(target, s) glatter_glMultiTexCoord1dARB_debug((target), (s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1dARB_debug(GLenum target, GLdouble s, const char* file, int line);
+#ifndef glMultiTexCoord1dvARB
+#define glMultiTexCoord1dvARB(target, v) glatter_glMultiTexCoord1dvARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1dvARB_debug(GLenum target, const GLdouble *v, const char* file, int line);
+#ifndef glMultiTexCoord1fARB
+#define glMultiTexCoord1fARB(target, s) glatter_glMultiTexCoord1fARB_debug((target), (s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1fARB_debug(GLenum target, GLfloat s, const char* file, int line);
+#ifndef glMultiTexCoord1fvARB
+#define glMultiTexCoord1fvARB(target, v) glatter_glMultiTexCoord1fvARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1fvARB_debug(GLenum target, const GLfloat *v, const char* file, int line);
+#ifndef glMultiTexCoord1iARB
+#define glMultiTexCoord1iARB(target, s) glatter_glMultiTexCoord1iARB_debug((target), (s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1iARB_debug(GLenum target, GLint s, const char* file, int line);
+#ifndef glMultiTexCoord1ivARB
+#define glMultiTexCoord1ivARB(target, v) glatter_glMultiTexCoord1ivARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1ivARB_debug(GLenum target, const GLint *v, const char* file, int line);
+#ifndef glMultiTexCoord1sARB
+#define glMultiTexCoord1sARB(target, s) glatter_glMultiTexCoord1sARB_debug((target), (s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1sARB_debug(GLenum target, GLshort s, const char* file, int line);
+#ifndef glMultiTexCoord1svARB
+#define glMultiTexCoord1svARB(target, v) glatter_glMultiTexCoord1svARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1svARB_debug(GLenum target, const GLshort *v, const char* file, int line);
+#ifndef glMultiTexCoord2dARB
+#define glMultiTexCoord2dARB(target, s, t) glatter_glMultiTexCoord2dARB_debug((target), (s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2dARB_debug(GLenum target, GLdouble s, GLdouble t, const char* file, int line);
+#ifndef glMultiTexCoord2dvARB
+#define glMultiTexCoord2dvARB(target, v) glatter_glMultiTexCoord2dvARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2dvARB_debug(GLenum target, const GLdouble *v, const char* file, int line);
+#ifndef glMultiTexCoord2fARB
+#define glMultiTexCoord2fARB(target, s, t) glatter_glMultiTexCoord2fARB_debug((target), (s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2fARB_debug(GLenum target, GLfloat s, GLfloat t, const char* file, int line);
+#ifndef glMultiTexCoord2fvARB
+#define glMultiTexCoord2fvARB(target, v) glatter_glMultiTexCoord2fvARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2fvARB_debug(GLenum target, const GLfloat *v, const char* file, int line);
+#ifndef glMultiTexCoord2iARB
+#define glMultiTexCoord2iARB(target, s, t) glatter_glMultiTexCoord2iARB_debug((target), (s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2iARB_debug(GLenum target, GLint s, GLint t, const char* file, int line);
+#ifndef glMultiTexCoord2ivARB
+#define glMultiTexCoord2ivARB(target, v) glatter_glMultiTexCoord2ivARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2ivARB_debug(GLenum target, const GLint *v, const char* file, int line);
+#ifndef glMultiTexCoord2sARB
+#define glMultiTexCoord2sARB(target, s, t) glatter_glMultiTexCoord2sARB_debug((target), (s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2sARB_debug(GLenum target, GLshort s, GLshort t, const char* file, int line);
+#ifndef glMultiTexCoord2svARB
+#define glMultiTexCoord2svARB(target, v) glatter_glMultiTexCoord2svARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2svARB_debug(GLenum target, const GLshort *v, const char* file, int line);
+#ifndef glMultiTexCoord3dARB
+#define glMultiTexCoord3dARB(target, s, t, r) glatter_glMultiTexCoord3dARB_debug((target), (s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3dARB_debug(GLenum target, GLdouble s, GLdouble t, GLdouble r, const char* file, int line);
+#ifndef glMultiTexCoord3dvARB
+#define glMultiTexCoord3dvARB(target, v) glatter_glMultiTexCoord3dvARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3dvARB_debug(GLenum target, const GLdouble *v, const char* file, int line);
+#ifndef glMultiTexCoord3fARB
+#define glMultiTexCoord3fARB(target, s, t, r) glatter_glMultiTexCoord3fARB_debug((target), (s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3fARB_debug(GLenum target, GLfloat s, GLfloat t, GLfloat r, const char* file, int line);
+#ifndef glMultiTexCoord3fvARB
+#define glMultiTexCoord3fvARB(target, v) glatter_glMultiTexCoord3fvARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3fvARB_debug(GLenum target, const GLfloat *v, const char* file, int line);
+#ifndef glMultiTexCoord3iARB
+#define glMultiTexCoord3iARB(target, s, t, r) glatter_glMultiTexCoord3iARB_debug((target), (s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3iARB_debug(GLenum target, GLint s, GLint t, GLint r, const char* file, int line);
+#ifndef glMultiTexCoord3ivARB
+#define glMultiTexCoord3ivARB(target, v) glatter_glMultiTexCoord3ivARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3ivARB_debug(GLenum target, const GLint *v, const char* file, int line);
+#ifndef glMultiTexCoord3sARB
+#define glMultiTexCoord3sARB(target, s, t, r) glatter_glMultiTexCoord3sARB_debug((target), (s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3sARB_debug(GLenum target, GLshort s, GLshort t, GLshort r, const char* file, int line);
+#ifndef glMultiTexCoord3svARB
+#define glMultiTexCoord3svARB(target, v) glatter_glMultiTexCoord3svARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3svARB_debug(GLenum target, const GLshort *v, const char* file, int line);
+#ifndef glMultiTexCoord4dARB
+#define glMultiTexCoord4dARB(target, s, t, r, q) glatter_glMultiTexCoord4dARB_debug((target), (s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4dARB_debug(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q, const char* file, int line);
+#ifndef glMultiTexCoord4dvARB
+#define glMultiTexCoord4dvARB(target, v) glatter_glMultiTexCoord4dvARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4dvARB_debug(GLenum target, const GLdouble *v, const char* file, int line);
+#ifndef glMultiTexCoord4fARB
+#define glMultiTexCoord4fARB(target, s, t, r, q) glatter_glMultiTexCoord4fARB_debug((target), (s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4fARB_debug(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q, const char* file, int line);
+#ifndef glMultiTexCoord4fvARB
+#define glMultiTexCoord4fvARB(target, v) glatter_glMultiTexCoord4fvARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4fvARB_debug(GLenum target, const GLfloat *v, const char* file, int line);
+#ifndef glMultiTexCoord4iARB
+#define glMultiTexCoord4iARB(target, s, t, r, q) glatter_glMultiTexCoord4iARB_debug((target), (s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4iARB_debug(GLenum target, GLint s, GLint t, GLint r, GLint q, const char* file, int line);
+#ifndef glMultiTexCoord4ivARB
+#define glMultiTexCoord4ivARB(target, v) glatter_glMultiTexCoord4ivARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4ivARB_debug(GLenum target, const GLint *v, const char* file, int line);
+#ifndef glMultiTexCoord4sARB
+#define glMultiTexCoord4sARB(target, s, t, r, q) glatter_glMultiTexCoord4sARB_debug((target), (s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4sARB_debug(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q, const char* file, int line);
+#ifndef glMultiTexCoord4svARB
+#define glMultiTexCoord4svARB(target, v) glatter_glMultiTexCoord4svARB_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4svARB_debug(GLenum target, const GLshort *v, const char* file, int line);
+#endif // defined(GL_ARB_multitexture)
+#if defined(GL_ATI_blend_equation_separate)
+#ifndef glBlendEquationSeparateATI
+#define glBlendEquationSeparateATI(modeRGB, modeA) glatter_glBlendEquationSeparateATI_debug((modeRGB), (modeA), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glBlendEquationSeparateATI_debug(GLenum modeRGB, GLenum modeA, const char* file, int line);
+#endif // defined(GL_ATI_blend_equation_separate)
+#ifndef glAccum
+#define glAccum(op, value) glatter_glAccum_debug((op), (value), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glAccum_debug(GLenum op, GLfloat value, const char* file, int line);
+#ifndef glActiveTexture
+#define glActiveTexture(texture) glatter_glActiveTexture_debug((texture), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glActiveTexture_debug(GLenum texture, const char* file, int line);
+#ifndef glAlphaFunc
+#define glAlphaFunc(func, ref) glatter_glAlphaFunc_debug((func), (ref), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glAlphaFunc_debug(GLenum func, GLclampf ref, const char* file, int line);
+#ifndef glAreTexturesResident
+#define glAreTexturesResident(n, textures, residences) glatter_glAreTexturesResident_debug((n), (textures), (residences), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLboolean glatter_glAreTexturesResident_debug(GLsizei n, const GLuint *textures, GLboolean *residences, const char* file, int line);
+#ifndef glArrayElement
+#define glArrayElement(i) glatter_glArrayElement_debug((i), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glArrayElement_debug(GLint i, const char* file, int line);
+#ifndef glBegin
+#define glBegin(mode) glatter_glBegin_debug((mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glBegin_debug(GLenum mode, const char* file, int line);
+#ifndef glBindTexture
+#define glBindTexture(target, texture) glatter_glBindTexture_debug((target), (texture), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glBindTexture_debug(GLenum target, GLuint texture, const char* file, int line);
+#ifndef glBitmap
+#define glBitmap(width, height, xorig, yorig, xmove, ymove, bitmap) glatter_glBitmap_debug((width), (height), (xorig), (yorig), (xmove), (ymove), (bitmap), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glBitmap_debug(GLsizei width, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat xmove, GLfloat ymove, const GLubyte *bitmap, const char* file, int line);
+#ifndef glBlendColor
+#define glBlendColor(red, green, blue, alpha) glatter_glBlendColor_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glBlendColor_debug(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha, const char* file, int line);
+#ifndef glBlendEquation
+#define glBlendEquation(mode) glatter_glBlendEquation_debug((mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glBlendEquation_debug(GLenum mode, const char* file, int line);
+#ifndef glBlendFunc
+#define glBlendFunc(sfactor, dfactor) glatter_glBlendFunc_debug((sfactor), (dfactor), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glBlendFunc_debug(GLenum sfactor, GLenum dfactor, const char* file, int line);
+#ifndef glCallList
+#define glCallList(list) glatter_glCallList_debug((list), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCallList_debug(GLuint list, const char* file, int line);
+#ifndef glCallLists
+#define glCallLists(n, type, lists) glatter_glCallLists_debug((n), (type), (lists), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCallLists_debug(GLsizei n, GLenum type, const GLvoid *lists, const char* file, int line);
+#ifndef glClear
+#define glClear(mask) glatter_glClear_debug((mask), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glClear_debug(GLbitfield mask, const char* file, int line);
+#ifndef glClearAccum
+#define glClearAccum(red, green, blue, alpha) glatter_glClearAccum_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glClearAccum_debug(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha, const char* file, int line);
+#ifndef glClearColor
+#define glClearColor(red, green, blue, alpha) glatter_glClearColor_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glClearColor_debug(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha, const char* file, int line);
+#ifndef glClearDepth
+#define glClearDepth(depth) glatter_glClearDepth_debug((depth), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glClearDepth_debug(GLclampd depth, const char* file, int line);
+#ifndef glClearIndex
+#define glClearIndex(c) glatter_glClearIndex_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glClearIndex_debug(GLfloat c, const char* file, int line);
+#ifndef glClearStencil
+#define glClearStencil(s) glatter_glClearStencil_debug((s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glClearStencil_debug(GLint s, const char* file, int line);
+#ifndef glClientActiveTexture
+#define glClientActiveTexture(texture) glatter_glClientActiveTexture_debug((texture), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glClientActiveTexture_debug(GLenum texture, const char* file, int line);
+#ifndef glClipPlane
+#define glClipPlane(plane, equation) glatter_glClipPlane_debug((plane), (equation), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glClipPlane_debug(GLenum plane, const GLdouble *equation, const char* file, int line);
+#ifndef glColor3b
+#define glColor3b(red, green, blue) glatter_glColor3b_debug((red), (green), (blue), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3b_debug(GLbyte red, GLbyte green, GLbyte blue, const char* file, int line);
+#ifndef glColor3bv
+#define glColor3bv(v) glatter_glColor3bv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3bv_debug(const GLbyte *v, const char* file, int line);
+#ifndef glColor3d
+#define glColor3d(red, green, blue) glatter_glColor3d_debug((red), (green), (blue), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3d_debug(GLdouble red, GLdouble green, GLdouble blue, const char* file, int line);
+#ifndef glColor3dv
+#define glColor3dv(v) glatter_glColor3dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glColor3f
+#define glColor3f(red, green, blue) glatter_glColor3f_debug((red), (green), (blue), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3f_debug(GLfloat red, GLfloat green, GLfloat blue, const char* file, int line);
+#ifndef glColor3fv
+#define glColor3fv(v) glatter_glColor3fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glColor3i
+#define glColor3i(red, green, blue) glatter_glColor3i_debug((red), (green), (blue), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3i_debug(GLint red, GLint green, GLint blue, const char* file, int line);
+#ifndef glColor3iv
+#define glColor3iv(v) glatter_glColor3iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3iv_debug(const GLint *v, const char* file, int line);
+#ifndef glColor3s
+#define glColor3s(red, green, blue) glatter_glColor3s_debug((red), (green), (blue), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3s_debug(GLshort red, GLshort green, GLshort blue, const char* file, int line);
+#ifndef glColor3sv
+#define glColor3sv(v) glatter_glColor3sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glColor3ub
+#define glColor3ub(red, green, blue) glatter_glColor3ub_debug((red), (green), (blue), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3ub_debug(GLubyte red, GLubyte green, GLubyte blue, const char* file, int line);
+#ifndef glColor3ubv
+#define glColor3ubv(v) glatter_glColor3ubv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3ubv_debug(const GLubyte *v, const char* file, int line);
+#ifndef glColor3ui
+#define glColor3ui(red, green, blue) glatter_glColor3ui_debug((red), (green), (blue), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3ui_debug(GLuint red, GLuint green, GLuint blue, const char* file, int line);
+#ifndef glColor3uiv
+#define glColor3uiv(v) glatter_glColor3uiv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3uiv_debug(const GLuint *v, const char* file, int line);
+#ifndef glColor3us
+#define glColor3us(red, green, blue) glatter_glColor3us_debug((red), (green), (blue), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3us_debug(GLushort red, GLushort green, GLushort blue, const char* file, int line);
+#ifndef glColor3usv
+#define glColor3usv(v) glatter_glColor3usv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor3usv_debug(const GLushort *v, const char* file, int line);
+#ifndef glColor4b
+#define glColor4b(red, green, blue, alpha) glatter_glColor4b_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4b_debug(GLbyte red, GLbyte green, GLbyte blue, GLbyte alpha, const char* file, int line);
+#ifndef glColor4bv
+#define glColor4bv(v) glatter_glColor4bv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4bv_debug(const GLbyte *v, const char* file, int line);
+#ifndef glColor4d
+#define glColor4d(red, green, blue, alpha) glatter_glColor4d_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4d_debug(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha, const char* file, int line);
+#ifndef glColor4dv
+#define glColor4dv(v) glatter_glColor4dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glColor4f
+#define glColor4f(red, green, blue, alpha) glatter_glColor4f_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4f_debug(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha, const char* file, int line);
+#ifndef glColor4fv
+#define glColor4fv(v) glatter_glColor4fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glColor4i
+#define glColor4i(red, green, blue, alpha) glatter_glColor4i_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4i_debug(GLint red, GLint green, GLint blue, GLint alpha, const char* file, int line);
+#ifndef glColor4iv
+#define glColor4iv(v) glatter_glColor4iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4iv_debug(const GLint *v, const char* file, int line);
+#ifndef glColor4s
+#define glColor4s(red, green, blue, alpha) glatter_glColor4s_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4s_debug(GLshort red, GLshort green, GLshort blue, GLshort alpha, const char* file, int line);
+#ifndef glColor4sv
+#define glColor4sv(v) glatter_glColor4sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glColor4ub
+#define glColor4ub(red, green, blue, alpha) glatter_glColor4ub_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4ub_debug(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha, const char* file, int line);
+#ifndef glColor4ubv
+#define glColor4ubv(v) glatter_glColor4ubv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4ubv_debug(const GLubyte *v, const char* file, int line);
+#ifndef glColor4ui
+#define glColor4ui(red, green, blue, alpha) glatter_glColor4ui_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4ui_debug(GLuint red, GLuint green, GLuint blue, GLuint alpha, const char* file, int line);
+#ifndef glColor4uiv
+#define glColor4uiv(v) glatter_glColor4uiv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4uiv_debug(const GLuint *v, const char* file, int line);
+#ifndef glColor4us
+#define glColor4us(red, green, blue, alpha) glatter_glColor4us_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4us_debug(GLushort red, GLushort green, GLushort blue, GLushort alpha, const char* file, int line);
+#ifndef glColor4usv
+#define glColor4usv(v) glatter_glColor4usv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColor4usv_debug(const GLushort *v, const char* file, int line);
+#ifndef glColorMask
+#define glColorMask(red, green, blue, alpha) glatter_glColorMask_debug((red), (green), (blue), (alpha), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColorMask_debug(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha, const char* file, int line);
+#ifndef glColorMaterial
+#define glColorMaterial(face, mode) glatter_glColorMaterial_debug((face), (mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColorMaterial_debug(GLenum face, GLenum mode, const char* file, int line);
+#ifndef glColorPointer
+#define glColorPointer(size, type, stride, ptr) glatter_glColorPointer_debug((size), (type), (stride), (ptr), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColorPointer_debug(GLint size, GLenum type, GLsizei stride, const GLvoid *ptr, const char* file, int line);
+#ifndef glColorSubTable
+#define glColorSubTable(target, start, count, format, type, data) glatter_glColorSubTable_debug((target), (start), (count), (format), (type), (data), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColorSubTable_debug(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *data, const char* file, int line);
+#ifndef glColorTable
+#define glColorTable(target, internalformat, width, format, type, table) glatter_glColorTable_debug((target), (internalformat), (width), (format), (type), (table), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColorTable_debug(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table, const char* file, int line);
+#ifndef glColorTableParameterfv
+#define glColorTableParameterfv(target, pname, params) glatter_glColorTableParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColorTableParameterfv_debug(GLenum target, GLenum pname, const GLfloat *params, const char* file, int line);
+#ifndef glColorTableParameteriv
+#define glColorTableParameteriv(target, pname, params) glatter_glColorTableParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glColorTableParameteriv_debug(GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#ifndef glCompressedTexImage1D
+#define glCompressedTexImage1D(target, level, internalformat, width, border, imageSize, data) glatter_glCompressedTexImage1D_debug((target), (level), (internalformat), (width), (border), (imageSize), (data), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCompressedTexImage1D_debug(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data, const char* file, int line);
+#ifndef glCompressedTexImage2D
+#define glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data) glatter_glCompressedTexImage2D_debug((target), (level), (internalformat), (width), (height), (border), (imageSize), (data), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCompressedTexImage2D_debug(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data, const char* file, int line);
+#ifndef glCompressedTexImage3D
+#define glCompressedTexImage3D(target, level, internalformat, width, height, depth, border, imageSize, data) glatter_glCompressedTexImage3D_debug((target), (level), (internalformat), (width), (height), (depth), (border), (imageSize), (data), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCompressedTexImage3D_debug(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data, const char* file, int line);
+#ifndef glCompressedTexSubImage1D
+#define glCompressedTexSubImage1D(target, level, xoffset, width, format, imageSize, data) glatter_glCompressedTexSubImage1D_debug((target), (level), (xoffset), (width), (format), (imageSize), (data), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCompressedTexSubImage1D_debug(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data, const char* file, int line);
+#ifndef glCompressedTexSubImage2D
+#define glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) glatter_glCompressedTexSubImage2D_debug((target), (level), (xoffset), (yoffset), (width), (height), (format), (imageSize), (data), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCompressedTexSubImage2D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data, const char* file, int line);
+#ifndef glCompressedTexSubImage3D
+#define glCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) glatter_glCompressedTexSubImage3D_debug((target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (imageSize), (data), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCompressedTexSubImage3D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data, const char* file, int line);
+#ifndef glConvolutionFilter1D
+#define glConvolutionFilter1D(target, internalformat, width, format, type, image) glatter_glConvolutionFilter1D_debug((target), (internalformat), (width), (format), (type), (image), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glConvolutionFilter1D_debug(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image, const char* file, int line);
+#ifndef glConvolutionFilter2D
+#define glConvolutionFilter2D(target, internalformat, width, height, format, type, image) glatter_glConvolutionFilter2D_debug((target), (internalformat), (width), (height), (format), (type), (image), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glConvolutionFilter2D_debug(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image, const char* file, int line);
+#ifndef glConvolutionParameterf
+#define glConvolutionParameterf(target, pname, params) glatter_glConvolutionParameterf_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glConvolutionParameterf_debug(GLenum target, GLenum pname, GLfloat params, const char* file, int line);
+#ifndef glConvolutionParameterfv
+#define glConvolutionParameterfv(target, pname, params) glatter_glConvolutionParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glConvolutionParameterfv_debug(GLenum target, GLenum pname, const GLfloat *params, const char* file, int line);
+#ifndef glConvolutionParameteri
+#define glConvolutionParameteri(target, pname, params) glatter_glConvolutionParameteri_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glConvolutionParameteri_debug(GLenum target, GLenum pname, GLint params, const char* file, int line);
+#ifndef glConvolutionParameteriv
+#define glConvolutionParameteriv(target, pname, params) glatter_glConvolutionParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glConvolutionParameteriv_debug(GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#ifndef glCopyColorSubTable
+#define glCopyColorSubTable(target, start, x, y, width) glatter_glCopyColorSubTable_debug((target), (start), (x), (y), (width), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyColorSubTable_debug(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width, const char* file, int line);
+#ifndef glCopyColorTable
+#define glCopyColorTable(target, internalformat, x, y, width) glatter_glCopyColorTable_debug((target), (internalformat), (x), (y), (width), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyColorTable_debug(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, const char* file, int line);
+#ifndef glCopyConvolutionFilter1D
+#define glCopyConvolutionFilter1D(target, internalformat, x, y, width) glatter_glCopyConvolutionFilter1D_debug((target), (internalformat), (x), (y), (width), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyConvolutionFilter1D_debug(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, const char* file, int line);
+#ifndef glCopyConvolutionFilter2D
+#define glCopyConvolutionFilter2D(target, internalformat, x, y, width, height) glatter_glCopyConvolutionFilter2D_debug((target), (internalformat), (x), (y), (width), (height), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyConvolutionFilter2D_debug(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#ifndef glCopyPixels
+#define glCopyPixels(x, y, width, height, type) glatter_glCopyPixels_debug((x), (y), (width), (height), (type), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyPixels_debug(GLint x, GLint y, GLsizei width, GLsizei height, GLenum type, const char* file, int line);
+#ifndef glCopyTexImage1D
+#define glCopyTexImage1D(target, level, internalformat, x, y, width, border) glatter_glCopyTexImage1D_debug((target), (level), (internalformat), (x), (y), (width), (border), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyTexImage1D_debug(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border, const char* file, int line);
+#ifndef glCopyTexImage2D
+#define glCopyTexImage2D(target, level, internalformat, x, y, width, height, border) glatter_glCopyTexImage2D_debug((target), (level), (internalformat), (x), (y), (width), (height), (border), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyTexImage2D_debug(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border, const char* file, int line);
+#ifndef glCopyTexSubImage1D
+#define glCopyTexSubImage1D(target, level, xoffset, x, y, width) glatter_glCopyTexSubImage1D_debug((target), (level), (xoffset), (x), (y), (width), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyTexSubImage1D_debug(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width, const char* file, int line);
+#ifndef glCopyTexSubImage2D
+#define glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) glatter_glCopyTexSubImage2D_debug((target), (level), (xoffset), (yoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyTexSubImage2D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#ifndef glCopyTexSubImage3D
+#define glCopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height) glatter_glCopyTexSubImage3D_debug((target), (level), (xoffset), (yoffset), (zoffset), (x), (y), (width), (height), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCopyTexSubImage3D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#ifndef glCullFace
+#define glCullFace(mode) glatter_glCullFace_debug((mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glCullFace_debug(GLenum mode, const char* file, int line);
+#ifndef glDeleteLists
+#define glDeleteLists(list, range) glatter_glDeleteLists_debug((list), (range), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDeleteLists_debug(GLuint list, GLsizei range, const char* file, int line);
+#ifndef glDeleteTextures
+#define glDeleteTextures(n, textures) glatter_glDeleteTextures_debug((n), (textures), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDeleteTextures_debug(GLsizei n, const GLuint *textures, const char* file, int line);
+#ifndef glDepthFunc
+#define glDepthFunc(func) glatter_glDepthFunc_debug((func), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDepthFunc_debug(GLenum func, const char* file, int line);
+#ifndef glDepthMask
+#define glDepthMask(flag) glatter_glDepthMask_debug((flag), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDepthMask_debug(GLboolean flag, const char* file, int line);
+#ifndef glDepthRange
+#define glDepthRange(near_val, far_val) glatter_glDepthRange_debug((near_val), (far_val), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDepthRange_debug(GLclampd near_val, GLclampd far_val, const char* file, int line);
+#ifndef glDisable
+#define glDisable(cap) glatter_glDisable_debug((cap), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDisable_debug(GLenum cap, const char* file, int line);
+#ifndef glDisableClientState
+#define glDisableClientState(cap) glatter_glDisableClientState_debug((cap), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDisableClientState_debug(GLenum cap, const char* file, int line);
+#ifndef glDrawArrays
+#define glDrawArrays(mode, first, count) glatter_glDrawArrays_debug((mode), (first), (count), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDrawArrays_debug(GLenum mode, GLint first, GLsizei count, const char* file, int line);
+#ifndef glDrawBuffer
+#define glDrawBuffer(mode) glatter_glDrawBuffer_debug((mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDrawBuffer_debug(GLenum mode, const char* file, int line);
+#ifndef glDrawElements
+#define glDrawElements(mode, count, type, indices) glatter_glDrawElements_debug((mode), (count), (type), (indices), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDrawElements_debug(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, const char* file, int line);
+#ifndef glDrawPixels
+#define glDrawPixels(width, height, format, type, pixels) glatter_glDrawPixels_debug((width), (height), (format), (type), (pixels), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDrawPixels_debug(GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels, const char* file, int line);
+#ifndef glDrawRangeElements
+#define glDrawRangeElements(mode, start, end, count, type, indices) glatter_glDrawRangeElements_debug((mode), (start), (end), (count), (type), (indices), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDrawRangeElements_debug(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, const char* file, int line);
+#ifndef glEdgeFlag
+#define glEdgeFlag(flag) glatter_glEdgeFlag_debug((flag), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEdgeFlag_debug(GLboolean flag, const char* file, int line);
+#ifndef glEdgeFlagPointer
+#define glEdgeFlagPointer(stride, ptr) glatter_glEdgeFlagPointer_debug((stride), (ptr), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEdgeFlagPointer_debug(GLsizei stride, const GLvoid *ptr, const char* file, int line);
+#ifndef glEdgeFlagv
+#define glEdgeFlagv(flag) glatter_glEdgeFlagv_debug((flag), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEdgeFlagv_debug(const GLboolean *flag, const char* file, int line);
+#ifndef glEnable
+#define glEnable(cap) glatter_glEnable_debug((cap), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEnable_debug(GLenum cap, const char* file, int line);
+#ifndef glEnableClientState
+#define glEnableClientState(cap) glatter_glEnableClientState_debug((cap), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEnableClientState_debug(GLenum cap, const char* file, int line);
+#ifndef glEnd
+#define glEnd() glatter_glEnd_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEnd_debug(const char* file, int line);
+#ifndef glEndList
+#define glEndList() glatter_glEndList_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEndList_debug(const char* file, int line);
+#ifndef glEvalCoord1d
+#define glEvalCoord1d(u) glatter_glEvalCoord1d_debug((u), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalCoord1d_debug(GLdouble u, const char* file, int line);
+#ifndef glEvalCoord1dv
+#define glEvalCoord1dv(u) glatter_glEvalCoord1dv_debug((u), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalCoord1dv_debug(const GLdouble *u, const char* file, int line);
+#ifndef glEvalCoord1f
+#define glEvalCoord1f(u) glatter_glEvalCoord1f_debug((u), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalCoord1f_debug(GLfloat u, const char* file, int line);
+#ifndef glEvalCoord1fv
+#define glEvalCoord1fv(u) glatter_glEvalCoord1fv_debug((u), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalCoord1fv_debug(const GLfloat *u, const char* file, int line);
+#ifndef glEvalCoord2d
+#define glEvalCoord2d(u, v) glatter_glEvalCoord2d_debug((u), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalCoord2d_debug(GLdouble u, GLdouble v, const char* file, int line);
+#ifndef glEvalCoord2dv
+#define glEvalCoord2dv(u) glatter_glEvalCoord2dv_debug((u), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalCoord2dv_debug(const GLdouble *u, const char* file, int line);
+#ifndef glEvalCoord2f
+#define glEvalCoord2f(u, v) glatter_glEvalCoord2f_debug((u), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalCoord2f_debug(GLfloat u, GLfloat v, const char* file, int line);
+#ifndef glEvalCoord2fv
+#define glEvalCoord2fv(u) glatter_glEvalCoord2fv_debug((u), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalCoord2fv_debug(const GLfloat *u, const char* file, int line);
+#ifndef glEvalMesh1
+#define glEvalMesh1(mode, i1, i2) glatter_glEvalMesh1_debug((mode), (i1), (i2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalMesh1_debug(GLenum mode, GLint i1, GLint i2, const char* file, int line);
+#ifndef glEvalMesh2
+#define glEvalMesh2(mode, i1, i2, j1, j2) glatter_glEvalMesh2_debug((mode), (i1), (i2), (j1), (j2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalMesh2_debug(GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2, const char* file, int line);
+#ifndef glEvalPoint1
+#define glEvalPoint1(i) glatter_glEvalPoint1_debug((i), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalPoint1_debug(GLint i, const char* file, int line);
+#ifndef glEvalPoint2
+#define glEvalPoint2(i, j) glatter_glEvalPoint2_debug((i), (j), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glEvalPoint2_debug(GLint i, GLint j, const char* file, int line);
+#ifndef glFeedbackBuffer
+#define glFeedbackBuffer(size, type, buffer) glatter_glFeedbackBuffer_debug((size), (type), (buffer), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFeedbackBuffer_debug(GLsizei size, GLenum type, GLfloat *buffer, const char* file, int line);
+#ifndef glFinish
+#define glFinish() glatter_glFinish_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFinish_debug(const char* file, int line);
+#ifndef glFlush
+#define glFlush() glatter_glFlush_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFlush_debug(const char* file, int line);
+#ifndef glFogf
+#define glFogf(pname, param) glatter_glFogf_debug((pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFogf_debug(GLenum pname, GLfloat param, const char* file, int line);
+#ifndef glFogfv
+#define glFogfv(pname, params) glatter_glFogfv_debug((pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFogfv_debug(GLenum pname, const GLfloat *params, const char* file, int line);
+#ifndef glFogi
+#define glFogi(pname, param) glatter_glFogi_debug((pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFogi_debug(GLenum pname, GLint param, const char* file, int line);
+#ifndef glFogiv
+#define glFogiv(pname, params) glatter_glFogiv_debug((pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFogiv_debug(GLenum pname, const GLint *params, const char* file, int line);
+#ifndef glFrontFace
+#define glFrontFace(mode) glatter_glFrontFace_debug((mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFrontFace_debug(GLenum mode, const char* file, int line);
+#ifndef glFrustum
+#define glFrustum(left, right, bottom, top, near_val, far_val) glatter_glFrustum_debug((left), (right), (bottom), (top), (near_val), (far_val), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFrustum_debug(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble near_val, GLdouble far_val, const char* file, int line);
+#ifndef glGenLists
+#define glGenLists(range) glatter_glGenLists_debug((range), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLuint glatter_glGenLists_debug(GLsizei range, const char* file, int line);
+#ifndef glGenTextures
+#define glGenTextures(n, textures) glatter_glGenTextures_debug((n), (textures), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGenTextures_debug(GLsizei n, GLuint *textures, const char* file, int line);
+#ifndef glGetBooleanv
+#define glGetBooleanv(pname, params) glatter_glGetBooleanv_debug((pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetBooleanv_debug(GLenum pname, GLboolean *params, const char* file, int line);
+#ifndef glGetClipPlane
+#define glGetClipPlane(plane, equation) glatter_glGetClipPlane_debug((plane), (equation), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetClipPlane_debug(GLenum plane, GLdouble *equation, const char* file, int line);
+#ifndef glGetColorTable
+#define glGetColorTable(target, format, type, table) glatter_glGetColorTable_debug((target), (format), (type), (table), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetColorTable_debug(GLenum target, GLenum format, GLenum type, GLvoid *table, const char* file, int line);
+#ifndef glGetColorTableParameterfv
+#define glGetColorTableParameterfv(target, pname, params) glatter_glGetColorTableParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetColorTableParameterfv_debug(GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetColorTableParameteriv
+#define glGetColorTableParameteriv(target, pname, params) glatter_glGetColorTableParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetColorTableParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetCompressedTexImage
+#define glGetCompressedTexImage(target, lod, img) glatter_glGetCompressedTexImage_debug((target), (lod), (img), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetCompressedTexImage_debug(GLenum target, GLint lod, GLvoid *img, const char* file, int line);
+#ifndef glGetConvolutionFilter
+#define glGetConvolutionFilter(target, format, type, image) glatter_glGetConvolutionFilter_debug((target), (format), (type), (image), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetConvolutionFilter_debug(GLenum target, GLenum format, GLenum type, GLvoid *image, const char* file, int line);
+#ifndef glGetConvolutionParameterfv
+#define glGetConvolutionParameterfv(target, pname, params) glatter_glGetConvolutionParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetConvolutionParameterfv_debug(GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetConvolutionParameteriv
+#define glGetConvolutionParameteriv(target, pname, params) glatter_glGetConvolutionParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetConvolutionParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetDoublev
+#define glGetDoublev(pname, params) glatter_glGetDoublev_debug((pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetDoublev_debug(GLenum pname, GLdouble *params, const char* file, int line);
+#ifndef glGetError
+#define glGetError() glatter_glGetError_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLenum glatter_glGetError_debug(const char* file, int line);
+#ifndef glGetFloatv
+#define glGetFloatv(pname, params) glatter_glGetFloatv_debug((pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetFloatv_debug(GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetHistogram
+#define glGetHistogram(target, reset, format, type, values) glatter_glGetHistogram_debug((target), (reset), (format), (type), (values), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetHistogram_debug(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values, const char* file, int line);
+#ifndef glGetHistogramParameterfv
+#define glGetHistogramParameterfv(target, pname, params) glatter_glGetHistogramParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetHistogramParameterfv_debug(GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetHistogramParameteriv
+#define glGetHistogramParameteriv(target, pname, params) glatter_glGetHistogramParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetHistogramParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetIntegerv
+#define glGetIntegerv(pname, params) glatter_glGetIntegerv_debug((pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetIntegerv_debug(GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetLightfv
+#define glGetLightfv(light, pname, params) glatter_glGetLightfv_debug((light), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetLightfv_debug(GLenum light, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetLightiv
+#define glGetLightiv(light, pname, params) glatter_glGetLightiv_debug((light), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetLightiv_debug(GLenum light, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetMapdv
+#define glGetMapdv(target, query, v) glatter_glGetMapdv_debug((target), (query), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetMapdv_debug(GLenum target, GLenum query, GLdouble *v, const char* file, int line);
+#ifndef glGetMapfv
+#define glGetMapfv(target, query, v) glatter_glGetMapfv_debug((target), (query), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetMapfv_debug(GLenum target, GLenum query, GLfloat *v, const char* file, int line);
+#ifndef glGetMapiv
+#define glGetMapiv(target, query, v) glatter_glGetMapiv_debug((target), (query), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetMapiv_debug(GLenum target, GLenum query, GLint *v, const char* file, int line);
+#ifndef glGetMaterialfv
+#define glGetMaterialfv(face, pname, params) glatter_glGetMaterialfv_debug((face), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetMaterialfv_debug(GLenum face, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetMaterialiv
+#define glGetMaterialiv(face, pname, params) glatter_glGetMaterialiv_debug((face), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetMaterialiv_debug(GLenum face, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetMinmax
+#define glGetMinmax(target, reset, format, types, values) glatter_glGetMinmax_debug((target), (reset), (format), (types), (values), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetMinmax_debug(GLenum target, GLboolean reset, GLenum format, GLenum types, GLvoid *values, const char* file, int line);
+#ifndef glGetMinmaxParameterfv
+#define glGetMinmaxParameterfv(target, pname, params) glatter_glGetMinmaxParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetMinmaxParameterfv_debug(GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetMinmaxParameteriv
+#define glGetMinmaxParameteriv(target, pname, params) glatter_glGetMinmaxParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetMinmaxParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetPixelMapfv
+#define glGetPixelMapfv(map, values) glatter_glGetPixelMapfv_debug((map), (values), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetPixelMapfv_debug(GLenum map, GLfloat *values, const char* file, int line);
+#ifndef glGetPixelMapuiv
+#define glGetPixelMapuiv(map, values) glatter_glGetPixelMapuiv_debug((map), (values), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetPixelMapuiv_debug(GLenum map, GLuint *values, const char* file, int line);
+#ifndef glGetPixelMapusv
+#define glGetPixelMapusv(map, values) glatter_glGetPixelMapusv_debug((map), (values), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetPixelMapusv_debug(GLenum map, GLushort *values, const char* file, int line);
+#ifndef glGetPointerv
+#define glGetPointerv(pname, params) glatter_glGetPointerv_debug((pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetPointerv_debug(GLenum pname, GLvoid **params, const char* file, int line);
+#ifndef glGetPolygonStipple
+#define glGetPolygonStipple(mask) glatter_glGetPolygonStipple_debug((mask), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetPolygonStipple_debug(GLubyte *mask, const char* file, int line);
+#ifndef glGetSeparableFilter
+#define glGetSeparableFilter(target, format, type, row, column, span) glatter_glGetSeparableFilter_debug((target), (format), (type), (row), (column), (span), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetSeparableFilter_debug(GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span, const char* file, int line);
+#ifndef glGetString
+#define glGetString(name) glatter_glGetString_debug((name), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT const GLubyte * glatter_glGetString_debug(GLenum name, const char* file, int line);
+#ifndef glGetTexEnvfv
+#define glGetTexEnvfv(target, pname, params) glatter_glGetTexEnvfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexEnvfv_debug(GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetTexEnviv
+#define glGetTexEnviv(target, pname, params) glatter_glGetTexEnviv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexEnviv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetTexGendv
+#define glGetTexGendv(coord, pname, params) glatter_glGetTexGendv_debug((coord), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexGendv_debug(GLenum coord, GLenum pname, GLdouble *params, const char* file, int line);
+#ifndef glGetTexGenfv
+#define glGetTexGenfv(coord, pname, params) glatter_glGetTexGenfv_debug((coord), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexGenfv_debug(GLenum coord, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetTexGeniv
+#define glGetTexGeniv(coord, pname, params) glatter_glGetTexGeniv_debug((coord), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexGeniv_debug(GLenum coord, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetTexImage
+#define glGetTexImage(target, level, format, type, pixels) glatter_glGetTexImage_debug((target), (level), (format), (type), (pixels), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexImage_debug(GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels, const char* file, int line);
+#ifndef glGetTexLevelParameterfv
+#define glGetTexLevelParameterfv(target, level, pname, params) glatter_glGetTexLevelParameterfv_debug((target), (level), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexLevelParameterfv_debug(GLenum target, GLint level, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetTexLevelParameteriv
+#define glGetTexLevelParameteriv(target, level, pname, params) glatter_glGetTexLevelParameteriv_debug((target), (level), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexLevelParameteriv_debug(GLenum target, GLint level, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glGetTexParameterfv
+#define glGetTexParameterfv(target, pname, params) glatter_glGetTexParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexParameterfv_debug(GLenum target, GLenum pname, GLfloat *params, const char* file, int line);
+#ifndef glGetTexParameteriv
+#define glGetTexParameteriv(target, pname, params) glatter_glGetTexParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetTexParameteriv_debug(GLenum target, GLenum pname, GLint *params, const char* file, int line);
+#ifndef glHint
+#define glHint(target, mode) glatter_glHint_debug((target), (mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glHint_debug(GLenum target, GLenum mode, const char* file, int line);
+#ifndef glHistogram
+#define glHistogram(target, width, internalformat, sink) glatter_glHistogram_debug((target), (width), (internalformat), (sink), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glHistogram_debug(GLenum target, GLsizei width, GLenum internalformat, GLboolean sink, const char* file, int line);
+#ifndef glIndexMask
+#define glIndexMask(mask) glatter_glIndexMask_debug((mask), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexMask_debug(GLuint mask, const char* file, int line);
+#ifndef glIndexPointer
+#define glIndexPointer(type, stride, ptr) glatter_glIndexPointer_debug((type), (stride), (ptr), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexPointer_debug(GLenum type, GLsizei stride, const GLvoid *ptr, const char* file, int line);
+#ifndef glIndexd
+#define glIndexd(c) glatter_glIndexd_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexd_debug(GLdouble c, const char* file, int line);
+#ifndef glIndexdv
+#define glIndexdv(c) glatter_glIndexdv_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexdv_debug(const GLdouble *c, const char* file, int line);
+#ifndef glIndexf
+#define glIndexf(c) glatter_glIndexf_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexf_debug(GLfloat c, const char* file, int line);
+#ifndef glIndexfv
+#define glIndexfv(c) glatter_glIndexfv_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexfv_debug(const GLfloat *c, const char* file, int line);
+#ifndef glIndexi
+#define glIndexi(c) glatter_glIndexi_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexi_debug(GLint c, const char* file, int line);
+#ifndef glIndexiv
+#define glIndexiv(c) glatter_glIndexiv_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexiv_debug(const GLint *c, const char* file, int line);
+#ifndef glIndexs
+#define glIndexs(c) glatter_glIndexs_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexs_debug(GLshort c, const char* file, int line);
+#ifndef glIndexsv
+#define glIndexsv(c) glatter_glIndexsv_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexsv_debug(const GLshort *c, const char* file, int line);
+#ifndef glIndexub
+#define glIndexub(c) glatter_glIndexub_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexub_debug(GLubyte c, const char* file, int line);
+#ifndef glIndexubv
+#define glIndexubv(c) glatter_glIndexubv_debug((c), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glIndexubv_debug(const GLubyte *c, const char* file, int line);
+#ifndef glInitNames
+#define glInitNames() glatter_glInitNames_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glInitNames_debug(const char* file, int line);
+#ifndef glInterleavedArrays
+#define glInterleavedArrays(format, stride, pointer) glatter_glInterleavedArrays_debug((format), (stride), (pointer), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glInterleavedArrays_debug(GLenum format, GLsizei stride, const GLvoid *pointer, const char* file, int line);
+#ifndef glIsEnabled
+#define glIsEnabled(cap) glatter_glIsEnabled_debug((cap), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLboolean glatter_glIsEnabled_debug(GLenum cap, const char* file, int line);
+#ifndef glIsList
+#define glIsList(list) glatter_glIsList_debug((list), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLboolean glatter_glIsList_debug(GLuint list, const char* file, int line);
+#ifndef glIsTexture
+#define glIsTexture(texture) glatter_glIsTexture_debug((texture), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLboolean glatter_glIsTexture_debug(GLuint texture, const char* file, int line);
+#ifndef glLightModelf
+#define glLightModelf(pname, param) glatter_glLightModelf_debug((pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLightModelf_debug(GLenum pname, GLfloat param, const char* file, int line);
+#ifndef glLightModelfv
+#define glLightModelfv(pname, params) glatter_glLightModelfv_debug((pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLightModelfv_debug(GLenum pname, const GLfloat *params, const char* file, int line);
+#ifndef glLightModeli
+#define glLightModeli(pname, param) glatter_glLightModeli_debug((pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLightModeli_debug(GLenum pname, GLint param, const char* file, int line);
+#ifndef glLightModeliv
+#define glLightModeliv(pname, params) glatter_glLightModeliv_debug((pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLightModeliv_debug(GLenum pname, const GLint *params, const char* file, int line);
+#ifndef glLightf
+#define glLightf(light, pname, param) glatter_glLightf_debug((light), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLightf_debug(GLenum light, GLenum pname, GLfloat param, const char* file, int line);
+#ifndef glLightfv
+#define glLightfv(light, pname, params) glatter_glLightfv_debug((light), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLightfv_debug(GLenum light, GLenum pname, const GLfloat *params, const char* file, int line);
+#ifndef glLighti
+#define glLighti(light, pname, param) glatter_glLighti_debug((light), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLighti_debug(GLenum light, GLenum pname, GLint param, const char* file, int line);
+#ifndef glLightiv
+#define glLightiv(light, pname, params) glatter_glLightiv_debug((light), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLightiv_debug(GLenum light, GLenum pname, const GLint *params, const char* file, int line);
+#ifndef glLineStipple
+#define glLineStipple(factor, pattern) glatter_glLineStipple_debug((factor), (pattern), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLineStipple_debug(GLint factor, GLushort pattern, const char* file, int line);
+#ifndef glLineWidth
+#define glLineWidth(width) glatter_glLineWidth_debug((width), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLineWidth_debug(GLfloat width, const char* file, int line);
+#ifndef glListBase
+#define glListBase(base) glatter_glListBase_debug((base), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glListBase_debug(GLuint base, const char* file, int line);
+#ifndef glLoadIdentity
+#define glLoadIdentity() glatter_glLoadIdentity_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLoadIdentity_debug(const char* file, int line);
+#ifndef glLoadMatrixd
+#define glLoadMatrixd(m) glatter_glLoadMatrixd_debug((m), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLoadMatrixd_debug(const GLdouble *m, const char* file, int line);
+#ifndef glLoadMatrixf
+#define glLoadMatrixf(m) glatter_glLoadMatrixf_debug((m), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLoadMatrixf_debug(const GLfloat *m, const char* file, int line);
+#ifndef glLoadName
+#define glLoadName(name) glatter_glLoadName_debug((name), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLoadName_debug(GLuint name, const char* file, int line);
+#ifndef glLoadTransposeMatrixd
+#define glLoadTransposeMatrixd(m) glatter_glLoadTransposeMatrixd_debug((m), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLoadTransposeMatrixd_debug(const GLdouble m[16], const char* file, int line);
+#ifndef glLoadTransposeMatrixf
+#define glLoadTransposeMatrixf(m) glatter_glLoadTransposeMatrixf_debug((m), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLoadTransposeMatrixf_debug(const GLfloat m[16], const char* file, int line);
+#ifndef glLogicOp
+#define glLogicOp(opcode) glatter_glLogicOp_debug((opcode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glLogicOp_debug(GLenum opcode, const char* file, int line);
+#ifndef glMap1d
+#define glMap1d(target, u1, u2, stride, order, points) glatter_glMap1d_debug((target), (u1), (u2), (stride), (order), (points), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMap1d_debug(GLenum target, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points, const char* file, int line);
+#ifndef glMap1f
+#define glMap1f(target, u1, u2, stride, order, points) glatter_glMap1f_debug((target), (u1), (u2), (stride), (order), (points), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMap1f_debug(GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points, const char* file, int line);
+#ifndef glMap2d
+#define glMap2d(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) glatter_glMap2d_debug((target), (u1), (u2), (ustride), (uorder), (v1), (v2), (vstride), (vorder), (points), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMap2d_debug(GLenum target, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points, const char* file, int line);
+#ifndef glMap2f
+#define glMap2f(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) glatter_glMap2f_debug((target), (u1), (u2), (ustride), (uorder), (v1), (v2), (vstride), (vorder), (points), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMap2f_debug(GLenum target, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points, const char* file, int line);
+#ifndef glMapGrid1d
+#define glMapGrid1d(un, u1, u2) glatter_glMapGrid1d_debug((un), (u1), (u2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMapGrid1d_debug(GLint un, GLdouble u1, GLdouble u2, const char* file, int line);
+#ifndef glMapGrid1f
+#define glMapGrid1f(un, u1, u2) glatter_glMapGrid1f_debug((un), (u1), (u2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMapGrid1f_debug(GLint un, GLfloat u1, GLfloat u2, const char* file, int line);
+#ifndef glMapGrid2d
+#define glMapGrid2d(un, u1, u2, vn, v1, v2) glatter_glMapGrid2d_debug((un), (u1), (u2), (vn), (v1), (v2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMapGrid2d_debug(GLint un, GLdouble u1, GLdouble u2, GLint vn, GLdouble v1, GLdouble v2, const char* file, int line);
+#ifndef glMapGrid2f
+#define glMapGrid2f(un, u1, u2, vn, v1, v2) glatter_glMapGrid2f_debug((un), (u1), (u2), (vn), (v1), (v2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMapGrid2f_debug(GLint un, GLfloat u1, GLfloat u2, GLint vn, GLfloat v1, GLfloat v2, const char* file, int line);
+#ifndef glMaterialf
+#define glMaterialf(face, pname, param) glatter_glMaterialf_debug((face), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMaterialf_debug(GLenum face, GLenum pname, GLfloat param, const char* file, int line);
+#ifndef glMaterialfv
+#define glMaterialfv(face, pname, params) glatter_glMaterialfv_debug((face), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMaterialfv_debug(GLenum face, GLenum pname, const GLfloat *params, const char* file, int line);
+#ifndef glMateriali
+#define glMateriali(face, pname, param) glatter_glMateriali_debug((face), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMateriali_debug(GLenum face, GLenum pname, GLint param, const char* file, int line);
+#ifndef glMaterialiv
+#define glMaterialiv(face, pname, params) glatter_glMaterialiv_debug((face), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMaterialiv_debug(GLenum face, GLenum pname, const GLint *params, const char* file, int line);
+#ifndef glMatrixMode
+#define glMatrixMode(mode) glatter_glMatrixMode_debug((mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMatrixMode_debug(GLenum mode, const char* file, int line);
+#ifndef glMinmax
+#define glMinmax(target, internalformat, sink) glatter_glMinmax_debug((target), (internalformat), (sink), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMinmax_debug(GLenum target, GLenum internalformat, GLboolean sink, const char* file, int line);
+#ifndef glMultMatrixd
+#define glMultMatrixd(m) glatter_glMultMatrixd_debug((m), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultMatrixd_debug(const GLdouble *m, const char* file, int line);
+#ifndef glMultMatrixf
+#define glMultMatrixf(m) glatter_glMultMatrixf_debug((m), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultMatrixf_debug(const GLfloat *m, const char* file, int line);
+#ifndef glMultTransposeMatrixd
+#define glMultTransposeMatrixd(m) glatter_glMultTransposeMatrixd_debug((m), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultTransposeMatrixd_debug(const GLdouble m[16], const char* file, int line);
+#ifndef glMultTransposeMatrixf
+#define glMultTransposeMatrixf(m) glatter_glMultTransposeMatrixf_debug((m), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultTransposeMatrixf_debug(const GLfloat m[16], const char* file, int line);
+#ifndef glMultiTexCoord1d
+#define glMultiTexCoord1d(target, s) glatter_glMultiTexCoord1d_debug((target), (s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1d_debug(GLenum target, GLdouble s, const char* file, int line);
+#ifndef glMultiTexCoord1dv
+#define glMultiTexCoord1dv(target, v) glatter_glMultiTexCoord1dv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1dv_debug(GLenum target, const GLdouble *v, const char* file, int line);
+#ifndef glMultiTexCoord1f
+#define glMultiTexCoord1f(target, s) glatter_glMultiTexCoord1f_debug((target), (s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1f_debug(GLenum target, GLfloat s, const char* file, int line);
+#ifndef glMultiTexCoord1fv
+#define glMultiTexCoord1fv(target, v) glatter_glMultiTexCoord1fv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1fv_debug(GLenum target, const GLfloat *v, const char* file, int line);
+#ifndef glMultiTexCoord1i
+#define glMultiTexCoord1i(target, s) glatter_glMultiTexCoord1i_debug((target), (s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1i_debug(GLenum target, GLint s, const char* file, int line);
+#ifndef glMultiTexCoord1iv
+#define glMultiTexCoord1iv(target, v) glatter_glMultiTexCoord1iv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1iv_debug(GLenum target, const GLint *v, const char* file, int line);
+#ifndef glMultiTexCoord1s
+#define glMultiTexCoord1s(target, s) glatter_glMultiTexCoord1s_debug((target), (s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1s_debug(GLenum target, GLshort s, const char* file, int line);
+#ifndef glMultiTexCoord1sv
+#define glMultiTexCoord1sv(target, v) glatter_glMultiTexCoord1sv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord1sv_debug(GLenum target, const GLshort *v, const char* file, int line);
+#ifndef glMultiTexCoord2d
+#define glMultiTexCoord2d(target, s, t) glatter_glMultiTexCoord2d_debug((target), (s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2d_debug(GLenum target, GLdouble s, GLdouble t, const char* file, int line);
+#ifndef glMultiTexCoord2dv
+#define glMultiTexCoord2dv(target, v) glatter_glMultiTexCoord2dv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2dv_debug(GLenum target, const GLdouble *v, const char* file, int line);
+#ifndef glMultiTexCoord2f
+#define glMultiTexCoord2f(target, s, t) glatter_glMultiTexCoord2f_debug((target), (s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2f_debug(GLenum target, GLfloat s, GLfloat t, const char* file, int line);
+#ifndef glMultiTexCoord2fv
+#define glMultiTexCoord2fv(target, v) glatter_glMultiTexCoord2fv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2fv_debug(GLenum target, const GLfloat *v, const char* file, int line);
+#ifndef glMultiTexCoord2i
+#define glMultiTexCoord2i(target, s, t) glatter_glMultiTexCoord2i_debug((target), (s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2i_debug(GLenum target, GLint s, GLint t, const char* file, int line);
+#ifndef glMultiTexCoord2iv
+#define glMultiTexCoord2iv(target, v) glatter_glMultiTexCoord2iv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2iv_debug(GLenum target, const GLint *v, const char* file, int line);
+#ifndef glMultiTexCoord2s
+#define glMultiTexCoord2s(target, s, t) glatter_glMultiTexCoord2s_debug((target), (s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2s_debug(GLenum target, GLshort s, GLshort t, const char* file, int line);
+#ifndef glMultiTexCoord2sv
+#define glMultiTexCoord2sv(target, v) glatter_glMultiTexCoord2sv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord2sv_debug(GLenum target, const GLshort *v, const char* file, int line);
+#ifndef glMultiTexCoord3d
+#define glMultiTexCoord3d(target, s, t, r) glatter_glMultiTexCoord3d_debug((target), (s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3d_debug(GLenum target, GLdouble s, GLdouble t, GLdouble r, const char* file, int line);
+#ifndef glMultiTexCoord3dv
+#define glMultiTexCoord3dv(target, v) glatter_glMultiTexCoord3dv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3dv_debug(GLenum target, const GLdouble *v, const char* file, int line);
+#ifndef glMultiTexCoord3f
+#define glMultiTexCoord3f(target, s, t, r) glatter_glMultiTexCoord3f_debug((target), (s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3f_debug(GLenum target, GLfloat s, GLfloat t, GLfloat r, const char* file, int line);
+#ifndef glMultiTexCoord3fv
+#define glMultiTexCoord3fv(target, v) glatter_glMultiTexCoord3fv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3fv_debug(GLenum target, const GLfloat *v, const char* file, int line);
+#ifndef glMultiTexCoord3i
+#define glMultiTexCoord3i(target, s, t, r) glatter_glMultiTexCoord3i_debug((target), (s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3i_debug(GLenum target, GLint s, GLint t, GLint r, const char* file, int line);
+#ifndef glMultiTexCoord3iv
+#define glMultiTexCoord3iv(target, v) glatter_glMultiTexCoord3iv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3iv_debug(GLenum target, const GLint *v, const char* file, int line);
+#ifndef glMultiTexCoord3s
+#define glMultiTexCoord3s(target, s, t, r) glatter_glMultiTexCoord3s_debug((target), (s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3s_debug(GLenum target, GLshort s, GLshort t, GLshort r, const char* file, int line);
+#ifndef glMultiTexCoord3sv
+#define glMultiTexCoord3sv(target, v) glatter_glMultiTexCoord3sv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord3sv_debug(GLenum target, const GLshort *v, const char* file, int line);
+#ifndef glMultiTexCoord4d
+#define glMultiTexCoord4d(target, s, t, r, q) glatter_glMultiTexCoord4d_debug((target), (s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4d_debug(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q, const char* file, int line);
+#ifndef glMultiTexCoord4dv
+#define glMultiTexCoord4dv(target, v) glatter_glMultiTexCoord4dv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4dv_debug(GLenum target, const GLdouble *v, const char* file, int line);
+#ifndef glMultiTexCoord4f
+#define glMultiTexCoord4f(target, s, t, r, q) glatter_glMultiTexCoord4f_debug((target), (s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4f_debug(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q, const char* file, int line);
+#ifndef glMultiTexCoord4fv
+#define glMultiTexCoord4fv(target, v) glatter_glMultiTexCoord4fv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4fv_debug(GLenum target, const GLfloat *v, const char* file, int line);
+#ifndef glMultiTexCoord4i
+#define glMultiTexCoord4i(target, s, t, r, q) glatter_glMultiTexCoord4i_debug((target), (s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4i_debug(GLenum target, GLint s, GLint t, GLint r, GLint q, const char* file, int line);
+#ifndef glMultiTexCoord4iv
+#define glMultiTexCoord4iv(target, v) glatter_glMultiTexCoord4iv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4iv_debug(GLenum target, const GLint *v, const char* file, int line);
+#ifndef glMultiTexCoord4s
+#define glMultiTexCoord4s(target, s, t, r, q) glatter_glMultiTexCoord4s_debug((target), (s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4s_debug(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q, const char* file, int line);
+#ifndef glMultiTexCoord4sv
+#define glMultiTexCoord4sv(target, v) glatter_glMultiTexCoord4sv_debug((target), (v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiTexCoord4sv_debug(GLenum target, const GLshort *v, const char* file, int line);
+#ifndef glNewList
+#define glNewList(list, mode) glatter_glNewList_debug((list), (mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNewList_debug(GLuint list, GLenum mode, const char* file, int line);
+#ifndef glNormal3b
+#define glNormal3b(nx, ny, nz) glatter_glNormal3b_debug((nx), (ny), (nz), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3b_debug(GLbyte nx, GLbyte ny, GLbyte nz, const char* file, int line);
+#ifndef glNormal3bv
+#define glNormal3bv(v) glatter_glNormal3bv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3bv_debug(const GLbyte *v, const char* file, int line);
+#ifndef glNormal3d
+#define glNormal3d(nx, ny, nz) glatter_glNormal3d_debug((nx), (ny), (nz), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3d_debug(GLdouble nx, GLdouble ny, GLdouble nz, const char* file, int line);
+#ifndef glNormal3dv
+#define glNormal3dv(v) glatter_glNormal3dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glNormal3f
+#define glNormal3f(nx, ny, nz) glatter_glNormal3f_debug((nx), (ny), (nz), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3f_debug(GLfloat nx, GLfloat ny, GLfloat nz, const char* file, int line);
+#ifndef glNormal3fv
+#define glNormal3fv(v) glatter_glNormal3fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glNormal3i
+#define glNormal3i(nx, ny, nz) glatter_glNormal3i_debug((nx), (ny), (nz), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3i_debug(GLint nx, GLint ny, GLint nz, const char* file, int line);
+#ifndef glNormal3iv
+#define glNormal3iv(v) glatter_glNormal3iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3iv_debug(const GLint *v, const char* file, int line);
+#ifndef glNormal3s
+#define glNormal3s(nx, ny, nz) glatter_glNormal3s_debug((nx), (ny), (nz), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3s_debug(GLshort nx, GLshort ny, GLshort nz, const char* file, int line);
+#ifndef glNormal3sv
+#define glNormal3sv(v) glatter_glNormal3sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormal3sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glNormalPointer
+#define glNormalPointer(type, stride, ptr) glatter_glNormalPointer_debug((type), (stride), (ptr), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glNormalPointer_debug(GLenum type, GLsizei stride, const GLvoid *ptr, const char* file, int line);
+#ifndef glOrtho
+#define glOrtho(left, right, bottom, top, near_val, far_val) glatter_glOrtho_debug((left), (right), (bottom), (top), (near_val), (far_val), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glOrtho_debug(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble near_val, GLdouble far_val, const char* file, int line);
+#ifndef glPassThrough
+#define glPassThrough(token) glatter_glPassThrough_debug((token), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPassThrough_debug(GLfloat token, const char* file, int line);
+#ifndef glPixelMapfv
+#define glPixelMapfv(map, mapsize, values) glatter_glPixelMapfv_debug((map), (mapsize), (values), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPixelMapfv_debug(GLenum map, GLsizei mapsize, const GLfloat *values, const char* file, int line);
+#ifndef glPixelMapuiv
+#define glPixelMapuiv(map, mapsize, values) glatter_glPixelMapuiv_debug((map), (mapsize), (values), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPixelMapuiv_debug(GLenum map, GLsizei mapsize, const GLuint *values, const char* file, int line);
+#ifndef glPixelMapusv
+#define glPixelMapusv(map, mapsize, values) glatter_glPixelMapusv_debug((map), (mapsize), (values), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPixelMapusv_debug(GLenum map, GLsizei mapsize, const GLushort *values, const char* file, int line);
+#ifndef glPixelStoref
+#define glPixelStoref(pname, param) glatter_glPixelStoref_debug((pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPixelStoref_debug(GLenum pname, GLfloat param, const char* file, int line);
+#ifndef glPixelStorei
+#define glPixelStorei(pname, param) glatter_glPixelStorei_debug((pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPixelStorei_debug(GLenum pname, GLint param, const char* file, int line);
+#ifndef glPixelTransferf
+#define glPixelTransferf(pname, param) glatter_glPixelTransferf_debug((pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPixelTransferf_debug(GLenum pname, GLfloat param, const char* file, int line);
+#ifndef glPixelTransferi
+#define glPixelTransferi(pname, param) glatter_glPixelTransferi_debug((pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPixelTransferi_debug(GLenum pname, GLint param, const char* file, int line);
+#ifndef glPixelZoom
+#define glPixelZoom(xfactor, yfactor) glatter_glPixelZoom_debug((xfactor), (yfactor), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPixelZoom_debug(GLfloat xfactor, GLfloat yfactor, const char* file, int line);
+#ifndef glPointSize
+#define glPointSize(size) glatter_glPointSize_debug((size), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPointSize_debug(GLfloat size, const char* file, int line);
+#ifndef glPolygonMode
+#define glPolygonMode(face, mode) glatter_glPolygonMode_debug((face), (mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPolygonMode_debug(GLenum face, GLenum mode, const char* file, int line);
+#ifndef glPolygonOffset
+#define glPolygonOffset(factor, units) glatter_glPolygonOffset_debug((factor), (units), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPolygonOffset_debug(GLfloat factor, GLfloat units, const char* file, int line);
+#ifndef glPolygonStipple
+#define glPolygonStipple(mask) glatter_glPolygonStipple_debug((mask), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPolygonStipple_debug(const GLubyte *mask, const char* file, int line);
+#ifndef glPopAttrib
+#define glPopAttrib() glatter_glPopAttrib_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPopAttrib_debug(const char* file, int line);
+#ifndef glPopClientAttrib
+#define glPopClientAttrib() glatter_glPopClientAttrib_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPopClientAttrib_debug(const char* file, int line);
+#ifndef glPopMatrix
+#define glPopMatrix() glatter_glPopMatrix_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPopMatrix_debug(const char* file, int line);
+#ifndef glPopName
+#define glPopName() glatter_glPopName_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPopName_debug(const char* file, int line);
+#ifndef glPrioritizeTextures
+#define glPrioritizeTextures(n, textures, priorities) glatter_glPrioritizeTextures_debug((n), (textures), (priorities), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPrioritizeTextures_debug(GLsizei n, const GLuint *textures, const GLclampf *priorities, const char* file, int line);
+#ifndef glPushAttrib
+#define glPushAttrib(mask) glatter_glPushAttrib_debug((mask), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPushAttrib_debug(GLbitfield mask, const char* file, int line);
+#ifndef glPushClientAttrib
+#define glPushClientAttrib(mask) glatter_glPushClientAttrib_debug((mask), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPushClientAttrib_debug(GLbitfield mask, const char* file, int line);
+#ifndef glPushMatrix
+#define glPushMatrix() glatter_glPushMatrix_debug(__FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPushMatrix_debug(const char* file, int line);
+#ifndef glPushName
+#define glPushName(name) glatter_glPushName_debug((name), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glPushName_debug(GLuint name, const char* file, int line);
+#ifndef glRasterPos2d
+#define glRasterPos2d(x, y) glatter_glRasterPos2d_debug((x), (y), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos2d_debug(GLdouble x, GLdouble y, const char* file, int line);
+#ifndef glRasterPos2dv
+#define glRasterPos2dv(v) glatter_glRasterPos2dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos2dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glRasterPos2f
+#define glRasterPos2f(x, y) glatter_glRasterPos2f_debug((x), (y), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos2f_debug(GLfloat x, GLfloat y, const char* file, int line);
+#ifndef glRasterPos2fv
+#define glRasterPos2fv(v) glatter_glRasterPos2fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos2fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glRasterPos2i
+#define glRasterPos2i(x, y) glatter_glRasterPos2i_debug((x), (y), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos2i_debug(GLint x, GLint y, const char* file, int line);
+#ifndef glRasterPos2iv
+#define glRasterPos2iv(v) glatter_glRasterPos2iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos2iv_debug(const GLint *v, const char* file, int line);
+#ifndef glRasterPos2s
+#define glRasterPos2s(x, y) glatter_glRasterPos2s_debug((x), (y), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos2s_debug(GLshort x, GLshort y, const char* file, int line);
+#ifndef glRasterPos2sv
+#define glRasterPos2sv(v) glatter_glRasterPos2sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos2sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glRasterPos3d
+#define glRasterPos3d(x, y, z) glatter_glRasterPos3d_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos3d_debug(GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#ifndef glRasterPos3dv
+#define glRasterPos3dv(v) glatter_glRasterPos3dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos3dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glRasterPos3f
+#define glRasterPos3f(x, y, z) glatter_glRasterPos3f_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos3f_debug(GLfloat x, GLfloat y, GLfloat z, const char* file, int line);
+#ifndef glRasterPos3fv
+#define glRasterPos3fv(v) glatter_glRasterPos3fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos3fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glRasterPos3i
+#define glRasterPos3i(x, y, z) glatter_glRasterPos3i_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos3i_debug(GLint x, GLint y, GLint z, const char* file, int line);
+#ifndef glRasterPos3iv
+#define glRasterPos3iv(v) glatter_glRasterPos3iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos3iv_debug(const GLint *v, const char* file, int line);
+#ifndef glRasterPos3s
+#define glRasterPos3s(x, y, z) glatter_glRasterPos3s_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos3s_debug(GLshort x, GLshort y, GLshort z, const char* file, int line);
+#ifndef glRasterPos3sv
+#define glRasterPos3sv(v) glatter_glRasterPos3sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos3sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glRasterPos4d
+#define glRasterPos4d(x, y, z, w) glatter_glRasterPos4d_debug((x), (y), (z), (w), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos4d_debug(GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line);
+#ifndef glRasterPos4dv
+#define glRasterPos4dv(v) glatter_glRasterPos4dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos4dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glRasterPos4f
+#define glRasterPos4f(x, y, z, w) glatter_glRasterPos4f_debug((x), (y), (z), (w), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos4f_debug(GLfloat x, GLfloat y, GLfloat z, GLfloat w, const char* file, int line);
+#ifndef glRasterPos4fv
+#define glRasterPos4fv(v) glatter_glRasterPos4fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos4fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glRasterPos4i
+#define glRasterPos4i(x, y, z, w) glatter_glRasterPos4i_debug((x), (y), (z), (w), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos4i_debug(GLint x, GLint y, GLint z, GLint w, const char* file, int line);
+#ifndef glRasterPos4iv
+#define glRasterPos4iv(v) glatter_glRasterPos4iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos4iv_debug(const GLint *v, const char* file, int line);
+#ifndef glRasterPos4s
+#define glRasterPos4s(x, y, z, w) glatter_glRasterPos4s_debug((x), (y), (z), (w), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos4s_debug(GLshort x, GLshort y, GLshort z, GLshort w, const char* file, int line);
+#ifndef glRasterPos4sv
+#define glRasterPos4sv(v) glatter_glRasterPos4sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRasterPos4sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glReadBuffer
+#define glReadBuffer(mode) glatter_glReadBuffer_debug((mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glReadBuffer_debug(GLenum mode, const char* file, int line);
+#ifndef glReadPixels
+#define glReadPixels(x, y, width, height, format, type, pixels) glatter_glReadPixels_debug((x), (y), (width), (height), (format), (type), (pixels), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glReadPixels_debug(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels, const char* file, int line);
+#ifndef glRectd
+#define glRectd(x1, y1, x2, y2) glatter_glRectd_debug((x1), (y1), (x2), (y2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRectd_debug(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2, const char* file, int line);
+#ifndef glRectdv
+#define glRectdv(v1, v2) glatter_glRectdv_debug((v1), (v2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRectdv_debug(const GLdouble *v1, const GLdouble *v2, const char* file, int line);
+#ifndef glRectf
+#define glRectf(x1, y1, x2, y2) glatter_glRectf_debug((x1), (y1), (x2), (y2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRectf_debug(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, const char* file, int line);
+#ifndef glRectfv
+#define glRectfv(v1, v2) glatter_glRectfv_debug((v1), (v2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRectfv_debug(const GLfloat *v1, const GLfloat *v2, const char* file, int line);
+#ifndef glRecti
+#define glRecti(x1, y1, x2, y2) glatter_glRecti_debug((x1), (y1), (x2), (y2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRecti_debug(GLint x1, GLint y1, GLint x2, GLint y2, const char* file, int line);
+#ifndef glRectiv
+#define glRectiv(v1, v2) glatter_glRectiv_debug((v1), (v2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRectiv_debug(const GLint *v1, const GLint *v2, const char* file, int line);
+#ifndef glRects
+#define glRects(x1, y1, x2, y2) glatter_glRects_debug((x1), (y1), (x2), (y2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRects_debug(GLshort x1, GLshort y1, GLshort x2, GLshort y2, const char* file, int line);
+#ifndef glRectsv
+#define glRectsv(v1, v2) glatter_glRectsv_debug((v1), (v2), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRectsv_debug(const GLshort *v1, const GLshort *v2, const char* file, int line);
+#ifndef glRenderMode
+#define glRenderMode(mode) glatter_glRenderMode_debug((mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT GLint glatter_glRenderMode_debug(GLenum mode, const char* file, int line);
+#ifndef glResetHistogram
+#define glResetHistogram(target) glatter_glResetHistogram_debug((target), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glResetHistogram_debug(GLenum target, const char* file, int line);
+#ifndef glResetMinmax
+#define glResetMinmax(target) glatter_glResetMinmax_debug((target), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glResetMinmax_debug(GLenum target, const char* file, int line);
+#ifndef glRotated
+#define glRotated(angle, x, y, z) glatter_glRotated_debug((angle), (x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRotated_debug(GLdouble angle, GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#ifndef glRotatef
+#define glRotatef(angle, x, y, z) glatter_glRotatef_debug((angle), (x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glRotatef_debug(GLfloat angle, GLfloat x, GLfloat y, GLfloat z, const char* file, int line);
+#ifndef glSampleCoverage
+#define glSampleCoverage(value, invert) glatter_glSampleCoverage_debug((value), (invert), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glSampleCoverage_debug(GLclampf value, GLboolean invert, const char* file, int line);
+#ifndef glScaled
+#define glScaled(x, y, z) glatter_glScaled_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glScaled_debug(GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#ifndef glScalef
+#define glScalef(x, y, z) glatter_glScalef_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glScalef_debug(GLfloat x, GLfloat y, GLfloat z, const char* file, int line);
+#ifndef glScissor
+#define glScissor(x, y, width, height) glatter_glScissor_debug((x), (y), (width), (height), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glScissor_debug(GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#ifndef glSelectBuffer
+#define glSelectBuffer(size, buffer) glatter_glSelectBuffer_debug((size), (buffer), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glSelectBuffer_debug(GLsizei size, GLuint *buffer, const char* file, int line);
+#ifndef glSeparableFilter2D
+#define glSeparableFilter2D(target, internalformat, width, height, format, type, row, column) glatter_glSeparableFilter2D_debug((target), (internalformat), (width), (height), (format), (type), (row), (column), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glSeparableFilter2D_debug(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column, const char* file, int line);
+#ifndef glShadeModel
+#define glShadeModel(mode) glatter_glShadeModel_debug((mode), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glShadeModel_debug(GLenum mode, const char* file, int line);
+#ifndef glStencilFunc
+#define glStencilFunc(func, ref, mask) glatter_glStencilFunc_debug((func), (ref), (mask), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glStencilFunc_debug(GLenum func, GLint ref, GLuint mask, const char* file, int line);
+#ifndef glStencilMask
+#define glStencilMask(mask) glatter_glStencilMask_debug((mask), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glStencilMask_debug(GLuint mask, const char* file, int line);
+#ifndef glStencilOp
+#define glStencilOp(fail, zfail, zpass) glatter_glStencilOp_debug((fail), (zfail), (zpass), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glStencilOp_debug(GLenum fail, GLenum zfail, GLenum zpass, const char* file, int line);
+#ifndef glTexCoord1d
+#define glTexCoord1d(s) glatter_glTexCoord1d_debug((s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord1d_debug(GLdouble s, const char* file, int line);
+#ifndef glTexCoord1dv
+#define glTexCoord1dv(v) glatter_glTexCoord1dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord1dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glTexCoord1f
+#define glTexCoord1f(s) glatter_glTexCoord1f_debug((s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord1f_debug(GLfloat s, const char* file, int line);
+#ifndef glTexCoord1fv
+#define glTexCoord1fv(v) glatter_glTexCoord1fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord1fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glTexCoord1i
+#define glTexCoord1i(s) glatter_glTexCoord1i_debug((s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord1i_debug(GLint s, const char* file, int line);
+#ifndef glTexCoord1iv
+#define glTexCoord1iv(v) glatter_glTexCoord1iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord1iv_debug(const GLint *v, const char* file, int line);
+#ifndef glTexCoord1s
+#define glTexCoord1s(s) glatter_glTexCoord1s_debug((s), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord1s_debug(GLshort s, const char* file, int line);
+#ifndef glTexCoord1sv
+#define glTexCoord1sv(v) glatter_glTexCoord1sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord1sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glTexCoord2d
+#define glTexCoord2d(s, t) glatter_glTexCoord2d_debug((s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord2d_debug(GLdouble s, GLdouble t, const char* file, int line);
+#ifndef glTexCoord2dv
+#define glTexCoord2dv(v) glatter_glTexCoord2dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord2dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glTexCoord2f
+#define glTexCoord2f(s, t) glatter_glTexCoord2f_debug((s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord2f_debug(GLfloat s, GLfloat t, const char* file, int line);
+#ifndef glTexCoord2fv
+#define glTexCoord2fv(v) glatter_glTexCoord2fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord2fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glTexCoord2i
+#define glTexCoord2i(s, t) glatter_glTexCoord2i_debug((s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord2i_debug(GLint s, GLint t, const char* file, int line);
+#ifndef glTexCoord2iv
+#define glTexCoord2iv(v) glatter_glTexCoord2iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord2iv_debug(const GLint *v, const char* file, int line);
+#ifndef glTexCoord2s
+#define glTexCoord2s(s, t) glatter_glTexCoord2s_debug((s), (t), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord2s_debug(GLshort s, GLshort t, const char* file, int line);
+#ifndef glTexCoord2sv
+#define glTexCoord2sv(v) glatter_glTexCoord2sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord2sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glTexCoord3d
+#define glTexCoord3d(s, t, r) glatter_glTexCoord3d_debug((s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord3d_debug(GLdouble s, GLdouble t, GLdouble r, const char* file, int line);
+#ifndef glTexCoord3dv
+#define glTexCoord3dv(v) glatter_glTexCoord3dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord3dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glTexCoord3f
+#define glTexCoord3f(s, t, r) glatter_glTexCoord3f_debug((s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord3f_debug(GLfloat s, GLfloat t, GLfloat r, const char* file, int line);
+#ifndef glTexCoord3fv
+#define glTexCoord3fv(v) glatter_glTexCoord3fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord3fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glTexCoord3i
+#define glTexCoord3i(s, t, r) glatter_glTexCoord3i_debug((s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord3i_debug(GLint s, GLint t, GLint r, const char* file, int line);
+#ifndef glTexCoord3iv
+#define glTexCoord3iv(v) glatter_glTexCoord3iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord3iv_debug(const GLint *v, const char* file, int line);
+#ifndef glTexCoord3s
+#define glTexCoord3s(s, t, r) glatter_glTexCoord3s_debug((s), (t), (r), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord3s_debug(GLshort s, GLshort t, GLshort r, const char* file, int line);
+#ifndef glTexCoord3sv
+#define glTexCoord3sv(v) glatter_glTexCoord3sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord3sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glTexCoord4d
+#define glTexCoord4d(s, t, r, q) glatter_glTexCoord4d_debug((s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord4d_debug(GLdouble s, GLdouble t, GLdouble r, GLdouble q, const char* file, int line);
+#ifndef glTexCoord4dv
+#define glTexCoord4dv(v) glatter_glTexCoord4dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord4dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glTexCoord4f
+#define glTexCoord4f(s, t, r, q) glatter_glTexCoord4f_debug((s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord4f_debug(GLfloat s, GLfloat t, GLfloat r, GLfloat q, const char* file, int line);
+#ifndef glTexCoord4fv
+#define glTexCoord4fv(v) glatter_glTexCoord4fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord4fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glTexCoord4i
+#define glTexCoord4i(s, t, r, q) glatter_glTexCoord4i_debug((s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord4i_debug(GLint s, GLint t, GLint r, GLint q, const char* file, int line);
+#ifndef glTexCoord4iv
+#define glTexCoord4iv(v) glatter_glTexCoord4iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord4iv_debug(const GLint *v, const char* file, int line);
+#ifndef glTexCoord4s
+#define glTexCoord4s(s, t, r, q) glatter_glTexCoord4s_debug((s), (t), (r), (q), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord4s_debug(GLshort s, GLshort t, GLshort r, GLshort q, const char* file, int line);
+#ifndef glTexCoord4sv
+#define glTexCoord4sv(v) glatter_glTexCoord4sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoord4sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glTexCoordPointer
+#define glTexCoordPointer(size, type, stride, ptr) glatter_glTexCoordPointer_debug((size), (type), (stride), (ptr), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexCoordPointer_debug(GLint size, GLenum type, GLsizei stride, const GLvoid *ptr, const char* file, int line);
+#ifndef glTexEnvf
+#define glTexEnvf(target, pname, param) glatter_glTexEnvf_debug((target), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexEnvf_debug(GLenum target, GLenum pname, GLfloat param, const char* file, int line);
+#ifndef glTexEnvfv
+#define glTexEnvfv(target, pname, params) glatter_glTexEnvfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexEnvfv_debug(GLenum target, GLenum pname, const GLfloat *params, const char* file, int line);
+#ifndef glTexEnvi
+#define glTexEnvi(target, pname, param) glatter_glTexEnvi_debug((target), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexEnvi_debug(GLenum target, GLenum pname, GLint param, const char* file, int line);
+#ifndef glTexEnviv
+#define glTexEnviv(target, pname, params) glatter_glTexEnviv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexEnviv_debug(GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#ifndef glTexGend
+#define glTexGend(coord, pname, param) glatter_glTexGend_debug((coord), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexGend_debug(GLenum coord, GLenum pname, GLdouble param, const char* file, int line);
+#ifndef glTexGendv
+#define glTexGendv(coord, pname, params) glatter_glTexGendv_debug((coord), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexGendv_debug(GLenum coord, GLenum pname, const GLdouble *params, const char* file, int line);
+#ifndef glTexGenf
+#define glTexGenf(coord, pname, param) glatter_glTexGenf_debug((coord), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexGenf_debug(GLenum coord, GLenum pname, GLfloat param, const char* file, int line);
+#ifndef glTexGenfv
+#define glTexGenfv(coord, pname, params) glatter_glTexGenfv_debug((coord), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexGenfv_debug(GLenum coord, GLenum pname, const GLfloat *params, const char* file, int line);
+#ifndef glTexGeni
+#define glTexGeni(coord, pname, param) glatter_glTexGeni_debug((coord), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexGeni_debug(GLenum coord, GLenum pname, GLint param, const char* file, int line);
+#ifndef glTexGeniv
+#define glTexGeniv(coord, pname, params) glatter_glTexGeniv_debug((coord), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexGeniv_debug(GLenum coord, GLenum pname, const GLint *params, const char* file, int line);
+#ifndef glTexImage1D
+#define glTexImage1D(target, level, internalFormat, width, border, format, type, pixels) glatter_glTexImage1D_debug((target), (level), (internalFormat), (width), (border), (format), (type), (pixels), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexImage1D_debug(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels, const char* file, int line);
+#ifndef glTexImage2D
+#define glTexImage2D(target, level, internalFormat, width, height, border, format, type, pixels) glatter_glTexImage2D_debug((target), (level), (internalFormat), (width), (height), (border), (format), (type), (pixels), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexImage2D_debug(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels, const char* file, int line);
+#ifndef glTexImage3D
+#define glTexImage3D(target, level, internalFormat, width, height, depth, border, format, type, pixels) glatter_glTexImage3D_debug((target), (level), (internalFormat), (width), (height), (depth), (border), (format), (type), (pixels), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexImage3D_debug(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels, const char* file, int line);
+#ifndef glTexParameterf
+#define glTexParameterf(target, pname, param) glatter_glTexParameterf_debug((target), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexParameterf_debug(GLenum target, GLenum pname, GLfloat param, const char* file, int line);
+#ifndef glTexParameterfv
+#define glTexParameterfv(target, pname, params) glatter_glTexParameterfv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexParameterfv_debug(GLenum target, GLenum pname, const GLfloat *params, const char* file, int line);
+#ifndef glTexParameteri
+#define glTexParameteri(target, pname, param) glatter_glTexParameteri_debug((target), (pname), (param), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexParameteri_debug(GLenum target, GLenum pname, GLint param, const char* file, int line);
+#ifndef glTexParameteriv
+#define glTexParameteriv(target, pname, params) glatter_glTexParameteriv_debug((target), (pname), (params), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexParameteriv_debug(GLenum target, GLenum pname, const GLint *params, const char* file, int line);
+#ifndef glTexSubImage1D
+#define glTexSubImage1D(target, level, xoffset, width, format, type, pixels) glatter_glTexSubImage1D_debug((target), (level), (xoffset), (width), (format), (type), (pixels), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexSubImage1D_debug(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels, const char* file, int line);
+#ifndef glTexSubImage2D
+#define glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) glatter_glTexSubImage2D_debug((target), (level), (xoffset), (yoffset), (width), (height), (format), (type), (pixels), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexSubImage2D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels, const char* file, int line);
+#ifndef glTexSubImage3D
+#define glTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) glatter_glTexSubImage3D_debug((target), (level), (xoffset), (yoffset), (zoffset), (width), (height), (depth), (format), (type), (pixels), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTexSubImage3D_debug(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels, const char* file, int line);
+#ifndef glTranslated
+#define glTranslated(x, y, z) glatter_glTranslated_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTranslated_debug(GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#ifndef glTranslatef
+#define glTranslatef(x, y, z) glatter_glTranslatef_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glTranslatef_debug(GLfloat x, GLfloat y, GLfloat z, const char* file, int line);
+#ifndef glVertex2d
+#define glVertex2d(x, y) glatter_glVertex2d_debug((x), (y), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex2d_debug(GLdouble x, GLdouble y, const char* file, int line);
+#ifndef glVertex2dv
+#define glVertex2dv(v) glatter_glVertex2dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex2dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glVertex2f
+#define glVertex2f(x, y) glatter_glVertex2f_debug((x), (y), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex2f_debug(GLfloat x, GLfloat y, const char* file, int line);
+#ifndef glVertex2fv
+#define glVertex2fv(v) glatter_glVertex2fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex2fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glVertex2i
+#define glVertex2i(x, y) glatter_glVertex2i_debug((x), (y), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex2i_debug(GLint x, GLint y, const char* file, int line);
+#ifndef glVertex2iv
+#define glVertex2iv(v) glatter_glVertex2iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex2iv_debug(const GLint *v, const char* file, int line);
+#ifndef glVertex2s
+#define glVertex2s(x, y) glatter_glVertex2s_debug((x), (y), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex2s_debug(GLshort x, GLshort y, const char* file, int line);
+#ifndef glVertex2sv
+#define glVertex2sv(v) glatter_glVertex2sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex2sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glVertex3d
+#define glVertex3d(x, y, z) glatter_glVertex3d_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex3d_debug(GLdouble x, GLdouble y, GLdouble z, const char* file, int line);
+#ifndef glVertex3dv
+#define glVertex3dv(v) glatter_glVertex3dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex3dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glVertex3f
+#define glVertex3f(x, y, z) glatter_glVertex3f_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex3f_debug(GLfloat x, GLfloat y, GLfloat z, const char* file, int line);
+#ifndef glVertex3fv
+#define glVertex3fv(v) glatter_glVertex3fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex3fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glVertex3i
+#define glVertex3i(x, y, z) glatter_glVertex3i_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex3i_debug(GLint x, GLint y, GLint z, const char* file, int line);
+#ifndef glVertex3iv
+#define glVertex3iv(v) glatter_glVertex3iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex3iv_debug(const GLint *v, const char* file, int line);
+#ifndef glVertex3s
+#define glVertex3s(x, y, z) glatter_glVertex3s_debug((x), (y), (z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex3s_debug(GLshort x, GLshort y, GLshort z, const char* file, int line);
+#ifndef glVertex3sv
+#define glVertex3sv(v) glatter_glVertex3sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex3sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glVertex4d
+#define glVertex4d(x, y, z, w) glatter_glVertex4d_debug((x), (y), (z), (w), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex4d_debug(GLdouble x, GLdouble y, GLdouble z, GLdouble w, const char* file, int line);
+#ifndef glVertex4dv
+#define glVertex4dv(v) glatter_glVertex4dv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex4dv_debug(const GLdouble *v, const char* file, int line);
+#ifndef glVertex4f
+#define glVertex4f(x, y, z, w) glatter_glVertex4f_debug((x), (y), (z), (w), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex4f_debug(GLfloat x, GLfloat y, GLfloat z, GLfloat w, const char* file, int line);
+#ifndef glVertex4fv
+#define glVertex4fv(v) glatter_glVertex4fv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex4fv_debug(const GLfloat *v, const char* file, int line);
+#ifndef glVertex4i
+#define glVertex4i(x, y, z, w) glatter_glVertex4i_debug((x), (y), (z), (w), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex4i_debug(GLint x, GLint y, GLint z, GLint w, const char* file, int line);
+#ifndef glVertex4iv
+#define glVertex4iv(v) glatter_glVertex4iv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex4iv_debug(const GLint *v, const char* file, int line);
+#ifndef glVertex4s
+#define glVertex4s(x, y, z, w) glatter_glVertex4s_debug((x), (y), (z), (w), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex4s_debug(GLshort x, GLshort y, GLshort z, GLshort w, const char* file, int line);
+#ifndef glVertex4sv
+#define glVertex4sv(v) glatter_glVertex4sv_debug((v), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertex4sv_debug(const GLshort *v, const char* file, int line);
+#ifndef glVertexPointer
+#define glVertexPointer(size, type, stride, ptr) glatter_glVertexPointer_debug((size), (type), (stride), (ptr), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glVertexPointer_debug(GLint size, GLenum type, GLsizei stride, const GLvoid *ptr, const char* file, int line);
+#ifndef glViewport
+#define glViewport(x, y, width, height) glatter_glViewport_debug((x), (y), (width), (height), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glViewport_debug(GLint x, GLint y, GLsizei width, GLsizei height, const char* file, int line);
+#endif // defined(__gl_h_)
+#endif // !defined(GL_VERSION_ES_CM_1_0)
+#endif // !defined(__GL_H__)
 #if defined(__gl_glext_h_)
 #if defined(GL_3DFX_tbuffer)
 #ifndef glTbufferMask3DFX

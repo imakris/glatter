@@ -1,4 +1,4 @@
-# NEW 1
+# NEW 2
 license = '''
 Copyright 2018 Ioannis Makris
 
@@ -160,20 +160,20 @@ comment_pattern = re.compile(
 fm_sbp = '(?P<family>'+ '|'.join(families) + ')'
 fm_sbl = '(?P<fprefix>'+ '|'.join(list(reversed(sorted(families.values())))) + ')'
 familyenum = re.compile(fm_sbp + 'enum$')
-validenum_pattern = re.compile('\w*_BIT[0-9S]?(_[0-9A-Z]+)?$')
-condblock_define_pattern = re.compile('^# ?define (?P<dname>'+fm_sbp+'_\w*) 1')
-condblock_ifndef_pattern = re.compile('^# ?ifndef (?P<dname>'+fm_sbp+'_\w*)')
+validenum_pattern = re.compile(r'\w*_BIT[0-9S]?(?:_[0-9A-Z]+)?$')
+condblock_define_pattern = re.compile(r'^# ?define (?P<dname>' + fm_sbp + r'_\w*) 1')
+condblock_ifndef_pattern = re.compile(r'^# ?ifndef (?P<dname>' + fm_sbp + r'_\w*)')
 headerversion_pattern = re.compile(r'[A-Z0-9]+_VERSION_[0-9]{1,2}_[0-9]{1,2}')
 endif_pattern = re.compile('^ ?# ?endif')
 condblock_any_ifstar = re.compile('^# ?if')
-condblock_any_ifndef = re.compile('^# ?ifndef (?P<dname>\w+)')
+condblock_any_ifndef = re.compile(r'^# ?ifndef (?P<dname>\w+)')
 
-enum_pattern = re.compile('^# ?define ('+fm_sbp+'_\w*) ?(\w*)$')
-function_coarse_pattern = re.compile(r'(.*?[ *]+)('+fm_sbl+'[A-Z]\w+?) ?\( ?(.*?) ?\) ?;')
+enum_pattern = re.compile(r'^# ?define (' + fm_sbp + r'_\w*) ?(\w*)$')
+function_coarse_pattern = re.compile(r'(.*?[ *]+)(' + fm_sbl + r'[A-Z]\w+?) ?\( ?(.*?) ?\) ?;')
 cconv_p = 'CALLBACK|WINAPIV?|APIENTRY|APIPRIVATE|PASCAL|CDECL|_cdecl|__cdecl|__stdcall|__pascal'
 function_fine_pattern = re.compile(r'^((?P<expkw>extern|([A-Z0-9_]*API(CALL)?)?) +)? ?(?P<rt>[\w* ]*?) ?(?P<cconv>\w*('+cconv_p+'))?$')
 function_group_pattern = re.compile(r'\w*[a-z]+(?P<group>[A-Z0-9]{2,10})$')
-typedef_pattern = re.compile(r'^typedef(?P<type>.+?)(?P<name>'+fm_sbp+'\w+);$');
+typedef_pattern = re.compile(r'^typedef(?P<type>.+?)(?P<name>' + fm_sbp + r'\w+);$');
 
 hash_table_size = 0x4000
 
@@ -302,7 +302,7 @@ def analyze_condition(ppline, former_condition = None):
     if (bool(m)):
         return ['('+m.group('condition')+')']
     #ifdef / #ifndef
-    m = re.match('^# ?if(?P<n>n)?def (?P<dname>\w+)$', ppline)
+    m = re.match(r'^# ?if(?P<n>n)?def (?P<dname>\w+)$', ppline)
     if (bool(m)):
         rlist = []
         mgd = m.group('dname')
@@ -352,7 +352,7 @@ def copystack(st):
 def preprocess(file_string):
 
     # remove split lines and comments
-    c0 = re.sub(r'\\\n', '', file_string, re.S | re.M)
+    c0 = re.sub(r'\\\n', '', file_string, flags=re.S | re.M)
     c1 = comment_remover(c0)
 
     # collapse multiple spaces and tabs to single spaces, remove trailing and leading spaces
@@ -403,15 +403,17 @@ def parse_platform_headers_file():
             if platform_block_depth == block_depth:
                 platform_block_depth = -1
 
-        elif (bool(holder.set(re.match('^# ?define GLATTER_PLATFORM_DIR (?P<platform_name>\w+)$', v)))):
+        elif (bool(holder.set(re.match(r'^# ?define GLATTER_PLATFORM_DIR (?P<platform_name>\w+)$', v)))):
             if platform_block_depth != -1:
                 print("Nested platform blocks are not supported.")
                 sys.exit()
             platform_headers.append([holder.get().group('platform_name')])
             platform_block_depth = block_depth
 
-        elif ((platform_block_depth != -1) and bool(holder.set(re.match('^# ?include ["<] ?(?P<file_path>[\w\s\-(.)/ ]+) ?[">]$', v)))):
-            platform_headers[-1].append(holder.get().group('file_path'))
+        elif ((platform_block_depth != -1)
+              and bool(holder.set(re.match(r'^# ?include (?P<delim>["<]) ?(?P<file_path>[\w\s\-(.)/ ]+) ?[">]$', v)))):
+            if holder.get().group('delim') == '"':   # only keep project-relative includes
+                platform_headers[-1].append(holder.get().group('file_path'))
 
     return platform_headers
 
@@ -443,7 +445,7 @@ def parse(filename):
             indstack[-1] = analyze_condition(v, indstack[-1][0])
 
         elif (bool(re.match('^# ?define ', v))):
-            m = re.match('^# ?define (?P<what>\w+)( (?P<as>\w+)$)?', v)
+            m = re.match(r'^# ?define (?P<what>\w+)( (?P<as>\w+)$)?', v)
             mg_what = m.group('what')
             mg_as = m.group('as')
             for k in indstack:
@@ -452,7 +454,7 @@ def parse(filename):
                     if mg_as != None and mg_as != '1':
                         indstack[-1].append('('+m.group('what')+'=='+m.group('as')+')')
             if mg_as == '1':
-                m = re.match('^(?P<family>[A-Z]+)_(?P<group>[A-Z0-9]+)_\w+$', mg_what)
+                m = re.match(r'^(?P<family>[A-Z]+)_(?P<group>[A-Z0-9]+)_\w+$', mg_what)
                 if bool(m) and (m.group('family') in families) and (m.group('group') in all_extgroups) and bool(re.match('^# ?ifndef '+mg_what+'$', c3[i-1])):
                     h = hash_djb2(mg_what)
                     h_short = h & (hash_table_size-1)

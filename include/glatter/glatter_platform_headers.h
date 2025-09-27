@@ -1,20 +1,16 @@
-//NEW 1
-
+//NEW 2
 #ifndef GLATTER_PLATFORM_HEADERS_H_DEFINED
 #define GLATTER_PLATFORM_HEADERS_H_DEFINED
 
-// When introducing a new platform, this file needs to be modified.
-
-// WARNING: This file is processed by glatter.py, which makes certain
-// assumptions about its format.
-// A platform's header set must be contained within a single #if/ifdef block which
-// begins with #define GLATTER_PLATFORM_DIR the_name_of_the_platform_directory
-// It is OK to have other/irrelevant statements inside that block.
+// WARNING: This file is parsed by glatter.py. Keep the structure simple:
+// - Each platform lives in a single #if / #elif block.
+// - Inside that block there must be a line:
+//     #define GLATTER_PLATFORM_DIR <platform_dir_name>
+// - Put one #include per line, without trailing comments.
 
 /* -----------------------------------------------------------
    Platform selection
-   One of the following platform macros must be defined
-   in glatter_config.h:
+   One of the following platform macros must be defined in glatter_config.h:
      - GLATTER_WINDOWS_WGL_GL
      - GLATTER_MESA_GLX_GL
      - GLATTER_MESA_EGL_GLES
@@ -53,19 +49,19 @@
 /* ---------------- Linux/BSD: GLX + desktop GL -------------- */
 #define GLATTER_PLATFORM_DIR glatter_mesa_glx_gl
 
-/* Core desktop GL for Mesa */
-#include "headers/mesa_gl_basic/GL/gl.h"
+/* Core desktop GL for Mesa (paths corrected for your tree) */
+#include "headers/mesa_gl_basic/gl.h"
 
 /* GLX core + extensions */
-#include "headers/mesa_gl_basic/GL/glx.h"
+#include "headers/mesa_gl_basic/glx.h"
 #include "headers/khronos_gl/glxext.h"
 
 /* Desktop GL extensions */
 #include "headers/khronos_gl/glext.h"
 
-/* Optional GLU */
+/* Optional GLU (your GLU lives under sgi_glu) */
 #if defined(GLATTER_GLU)
-#include "headers/mesa_gl_basic/GL/glu.h"
+#include "headers/sgi_glu/glu.h"
 #endif
 
 /* Sanity: no incompatible wrappers with this platform */
@@ -82,9 +78,20 @@
 #include "headers/khronos_egl/egl.h"
 #include "headers/khronos_egl/eglext.h"
 
-/* GLES2 core + extensions (adjust if you also ship GLES1/3) */
-#include "headers/khronos_gles2/gles2.h"
-#include "headers/khronos_gles2/gles2ext.h"
+/* GLES2 core + extensions (filenames corrected for your tree) */
+#include "headers/khronos_gles2/gl2.h"
+#include "headers/khronos_gles2/gl2ext.h"
+
+/* (Optional) GLES3 core headers if you enable them in glatter_config.h */
+#if defined(GLATTER_EGL_GLES_3_0) || defined(GLATTER_EGL_GLES_3_1) || defined(GLATTER_EGL_GLES_3_2)
+#include "headers/khronos_gles3/gl3.h"
+#endif
+#if defined(GLATTER_EGL_GLES_3_1) || defined(GLATTER_EGL_GLES_3_2)
+#include "headers/khronos_gles3/gl31.h"
+#endif
+#if defined(GLATTER_EGL_GLES_3_2)
+#include "headers/khronos_gles3/gl32.h"
+#endif
 
 /* Sanity: no incompatible wrappers with this platform */
 #if defined(GLATTER_WGL) || defined(GLATTER_GLX)

@@ -28,6 +28,218 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #ifdef GLATTER_GLX
+#if defined(GLX_H)
+#if defined(GLX_ARB_get_proc_address)
+#ifndef glXGetProcAddressARB
+#define glXGetProcAddressARB(a0) glatter_glXGetProcAddressARB((a0))
+#endif
+GLATTER_UBLOCK(__GLXextFuncPtr, , glXGetProcAddressARB, (const GLubyte *a0))
+#endif // defined(GLX_ARB_get_proc_address)
+#if defined(GLX_ARB_render_texture)
+#ifndef glXBindTexImageARB
+#define glXBindTexImageARB(dpy, pbuffer, buffer) glatter_glXBindTexImageARB((dpy), (pbuffer), (buffer))
+#endif
+GLATTER_UBLOCK(Bool, , glXBindTexImageARB, (Display *dpy, GLXPbuffer pbuffer, int buffer))
+#ifndef glXDrawableAttribARB
+#define glXDrawableAttribARB(dpy, draw, attribList) glatter_glXDrawableAttribARB((dpy), (draw), (attribList))
+#endif
+GLATTER_UBLOCK(Bool, , glXDrawableAttribARB, (Display *dpy, GLXDrawable draw, const int *attribList))
+#ifndef glXReleaseTexImageARB
+#define glXReleaseTexImageARB(dpy, pbuffer, buffer) glatter_glXReleaseTexImageARB((dpy), (pbuffer), (buffer))
+#endif
+GLATTER_UBLOCK(Bool, , glXReleaseTexImageARB, (Display *dpy, GLXPbuffer pbuffer, int buffer))
+#endif // defined(GLX_ARB_render_texture)
+#if defined(GLX_MESA_swap_control)
+#ifndef glXGetSwapIntervalMESA
+#define glXGetSwapIntervalMESA() glatter_glXGetSwapIntervalMESA()
+#endif
+GLATTER_UBLOCK(int, , glXGetSwapIntervalMESA, (void))
+#ifndef glXSwapIntervalMESA
+#define glXSwapIntervalMESA(interval) glatter_glXSwapIntervalMESA((interval))
+#endif
+GLATTER_UBLOCK(int, , glXSwapIntervalMESA, (unsigned int interval))
+#endif // defined(GLX_MESA_swap_control)
+#if defined(GLX_MESA_swap_frame_usage)
+#ifndef glXBeginFrameTrackingMESA
+#define glXBeginFrameTrackingMESA(dpy, drawable) glatter_glXBeginFrameTrackingMESA((dpy), (drawable))
+#endif
+GLATTER_UBLOCK(int, , glXBeginFrameTrackingMESA, (Display *dpy, GLXDrawable drawable))
+#ifndef glXEndFrameTrackingMESA
+#define glXEndFrameTrackingMESA(dpy, drawable) glatter_glXEndFrameTrackingMESA((dpy), (drawable))
+#endif
+GLATTER_UBLOCK(int, , glXEndFrameTrackingMESA, (Display *dpy, GLXDrawable drawable))
+#ifndef glXGetFrameUsageMESA
+#define glXGetFrameUsageMESA(dpy, drawable, usage) glatter_glXGetFrameUsageMESA((dpy), (drawable), (usage))
+#endif
+GLATTER_UBLOCK(int, , glXGetFrameUsageMESA, (Display *dpy, GLXDrawable drawable, float *usage))
+#ifndef glXQueryFrameTrackingMESA
+#define glXQueryFrameTrackingMESA(dpy, drawable, swapCount, missedFrames, lastMissedUsage) glatter_glXQueryFrameTrackingMESA((dpy), (drawable), (swapCount), (missedFrames), (lastMissedUsage))
+#endif
+GLATTER_UBLOCK(int, , glXQueryFrameTrackingMESA, (Display *dpy, GLXDrawable drawable, int64_t *swapCount, int64_t *missedFrames, float *lastMissedUsage))
+#endif // defined(GLX_MESA_swap_frame_usage)
+#if defined(GLX_NV_vertex_array_range)
+#ifndef glXAllocateMemoryNV
+#define glXAllocateMemoryNV(size, readfreq, writefreq, priority) glatter_glXAllocateMemoryNV((size), (readfreq), (writefreq), (priority))
+#endif
+GLATTER_UBLOCK(void *, , glXAllocateMemoryNV, (GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority))
+#ifndef glXFreeMemoryNV
+#define glXFreeMemoryNV(pointer) glatter_glXFreeMemoryNV((pointer))
+#endif
+GLATTER_UBLOCK(void, , glXFreeMemoryNV, (GLvoid *pointer))
+#endif // defined(GLX_NV_vertex_array_range)
+#ifndef glXChooseFBConfig
+#define glXChooseFBConfig(dpy, screen, attribList, nitems) glatter_glXChooseFBConfig((dpy), (screen), (attribList), (nitems))
+#endif
+GLATTER_UBLOCK(GLXFBConfig *, , glXChooseFBConfig, (Display *dpy, int screen, const int *attribList, int *nitems))
+#ifndef glXChooseVisual
+#define glXChooseVisual(dpy, screen, attribList) glatter_glXChooseVisual((dpy), (screen), (attribList))
+#endif
+GLATTER_UBLOCK(XVisualInfo*, , glXChooseVisual, (Display *dpy, int screen, int *attribList))
+#ifndef glXCopyContext
+#define glXCopyContext(dpy, src, dst, mask) glatter_glXCopyContext((dpy), (src), (dst), (mask))
+#endif
+GLATTER_UBLOCK(void, , glXCopyContext, (Display *dpy, GLXContext src, GLXContext dst, unsigned long mask))
+#ifndef glXCreateContext
+#define glXCreateContext(dpy, vis, shareList, direct) glatter_glXCreateContext((dpy), (vis), (shareList), (direct))
+#endif
+GLATTER_UBLOCK(GLXContext, , glXCreateContext, (Display *dpy, XVisualInfo *vis, GLXContext shareList, Bool direct))
+#ifndef glXCreateGLXPixmap
+#define glXCreateGLXPixmap(dpy, visual, pixmap) glatter_glXCreateGLXPixmap((dpy), (visual), (pixmap))
+#endif
+GLATTER_UBLOCK(GLXPixmap, , glXCreateGLXPixmap, (Display *dpy, XVisualInfo *visual, Pixmap pixmap))
+#ifndef glXCreateNewContext
+#define glXCreateNewContext(dpy, config, renderType, shareList, direct) glatter_glXCreateNewContext((dpy), (config), (renderType), (shareList), (direct))
+#endif
+GLATTER_UBLOCK(GLXContext, , glXCreateNewContext, (Display *dpy, GLXFBConfig config, int renderType, GLXContext shareList, Bool direct))
+#ifndef glXCreatePbuffer
+#define glXCreatePbuffer(dpy, config, attribList) glatter_glXCreatePbuffer((dpy), (config), (attribList))
+#endif
+GLATTER_UBLOCK(GLXPbuffer, , glXCreatePbuffer, (Display *dpy, GLXFBConfig config, const int *attribList))
+#ifndef glXCreatePixmap
+#define glXCreatePixmap(dpy, config, pixmap, attribList) glatter_glXCreatePixmap((dpy), (config), (pixmap), (attribList))
+#endif
+GLATTER_UBLOCK(GLXPixmap, , glXCreatePixmap, (Display *dpy, GLXFBConfig config, Pixmap pixmap, const int *attribList))
+#ifndef glXCreateWindow
+#define glXCreateWindow(dpy, config, win, attribList) glatter_glXCreateWindow((dpy), (config), (win), (attribList))
+#endif
+GLATTER_UBLOCK(GLXWindow, , glXCreateWindow, (Display *dpy, GLXFBConfig config, Window win, const int *attribList))
+#ifndef glXDestroyContext
+#define glXDestroyContext(dpy, ctx) glatter_glXDestroyContext((dpy), (ctx))
+#endif
+GLATTER_UBLOCK(void, , glXDestroyContext, (Display *dpy, GLXContext ctx))
+#ifndef glXDestroyGLXPixmap
+#define glXDestroyGLXPixmap(dpy, pixmap) glatter_glXDestroyGLXPixmap((dpy), (pixmap))
+#endif
+GLATTER_UBLOCK(void, , glXDestroyGLXPixmap, (Display *dpy, GLXPixmap pixmap))
+#ifndef glXDestroyPbuffer
+#define glXDestroyPbuffer(dpy, pbuf) glatter_glXDestroyPbuffer((dpy), (pbuf))
+#endif
+GLATTER_UBLOCK(void, , glXDestroyPbuffer, (Display *dpy, GLXPbuffer pbuf))
+#ifndef glXDestroyPixmap
+#define glXDestroyPixmap(dpy, pixmap) glatter_glXDestroyPixmap((dpy), (pixmap))
+#endif
+GLATTER_UBLOCK(void, , glXDestroyPixmap, (Display *dpy, GLXPixmap pixmap))
+#ifndef glXDestroyWindow
+#define glXDestroyWindow(dpy, window) glatter_glXDestroyWindow((dpy), (window))
+#endif
+GLATTER_UBLOCK(void, , glXDestroyWindow, (Display *dpy, GLXWindow window))
+#ifndef glXGetClientString
+#define glXGetClientString(dpy, name) glatter_glXGetClientString((dpy), (name))
+#endif
+GLATTER_UBLOCK(const char *, , glXGetClientString, (Display *dpy, int name))
+#ifndef glXGetConfig
+#define glXGetConfig(dpy, visual, attrib, value) glatter_glXGetConfig((dpy), (visual), (attrib), (value))
+#endif
+GLATTER_UBLOCK(int, , glXGetConfig, (Display *dpy, XVisualInfo *visual, int attrib, int *value))
+#ifndef glXGetCurrentContext
+#define glXGetCurrentContext() glatter_glXGetCurrentContext()
+#endif
+GLATTER_UBLOCK(GLXContext, , glXGetCurrentContext, (void))
+#ifndef glXGetCurrentDisplay
+#define glXGetCurrentDisplay() glatter_glXGetCurrentDisplay()
+#endif
+GLATTER_UBLOCK(Display *, , glXGetCurrentDisplay, (void))
+#ifndef glXGetCurrentDrawable
+#define glXGetCurrentDrawable() glatter_glXGetCurrentDrawable()
+#endif
+GLATTER_UBLOCK(GLXDrawable, , glXGetCurrentDrawable, (void))
+#ifndef glXGetCurrentReadDrawable
+#define glXGetCurrentReadDrawable() glatter_glXGetCurrentReadDrawable()
+#endif
+GLATTER_UBLOCK(GLXDrawable, , glXGetCurrentReadDrawable, (void))
+#ifndef glXGetFBConfigAttrib
+#define glXGetFBConfigAttrib(dpy, config, attribute, value) glatter_glXGetFBConfigAttrib((dpy), (config), (attribute), (value))
+#endif
+GLATTER_UBLOCK(int, , glXGetFBConfigAttrib, (Display *dpy, GLXFBConfig config, int attribute, int *value))
+#ifndef glXGetFBConfigs
+#define glXGetFBConfigs(dpy, screen, nelements) glatter_glXGetFBConfigs((dpy), (screen), (nelements))
+#endif
+GLATTER_UBLOCK(GLXFBConfig *, , glXGetFBConfigs, (Display *dpy, int screen, int *nelements))
+#ifndef glXGetSelectedEvent
+#define glXGetSelectedEvent(dpy, drawable, mask) glatter_glXGetSelectedEvent((dpy), (drawable), (mask))
+#endif
+GLATTER_UBLOCK(void, , glXGetSelectedEvent, (Display *dpy, GLXDrawable drawable, unsigned long *mask))
+#ifndef glXGetVisualFromFBConfig
+#define glXGetVisualFromFBConfig(dpy, config) glatter_glXGetVisualFromFBConfig((dpy), (config))
+#endif
+GLATTER_UBLOCK(XVisualInfo *, , glXGetVisualFromFBConfig, (Display *dpy, GLXFBConfig config))
+#ifndef glXIsDirect
+#define glXIsDirect(dpy, ctx) glatter_glXIsDirect((dpy), (ctx))
+#endif
+GLATTER_UBLOCK(Bool, , glXIsDirect, (Display *dpy, GLXContext ctx))
+#ifndef glXMakeContextCurrent
+#define glXMakeContextCurrent(dpy, draw, read, ctx) glatter_glXMakeContextCurrent((dpy), (draw), (read), (ctx))
+#endif
+GLATTER_UBLOCK(Bool, , glXMakeContextCurrent, (Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx))
+#ifndef glXMakeCurrent
+#define glXMakeCurrent(dpy, drawable, ctx) glatter_glXMakeCurrent((dpy), (drawable), (ctx))
+#endif
+GLATTER_UBLOCK(Bool, , glXMakeCurrent, (Display *dpy, GLXDrawable drawable, GLXContext ctx))
+#ifndef glXQueryContext
+#define glXQueryContext(dpy, ctx, attribute, value) glatter_glXQueryContext((dpy), (ctx), (attribute), (value))
+#endif
+GLATTER_UBLOCK(int, , glXQueryContext, (Display *dpy, GLXContext ctx, int attribute, int *value))
+#ifndef glXQueryDrawable
+#define glXQueryDrawable(dpy, draw, attribute, value) glatter_glXQueryDrawable((dpy), (draw), (attribute), (value))
+#endif
+GLATTER_UBLOCK(void, , glXQueryDrawable, (Display *dpy, GLXDrawable draw, int attribute, unsigned int *value))
+#ifndef glXQueryExtension
+#define glXQueryExtension(dpy, errorb, event) glatter_glXQueryExtension((dpy), (errorb), (event))
+#endif
+GLATTER_UBLOCK(Bool, , glXQueryExtension, (Display *dpy, int *errorb, int *event))
+#ifndef glXQueryExtensionsString
+#define glXQueryExtensionsString(dpy, screen) glatter_glXQueryExtensionsString((dpy), (screen))
+#endif
+GLATTER_UBLOCK(const char *, , glXQueryExtensionsString, (Display *dpy, int screen))
+#ifndef glXQueryServerString
+#define glXQueryServerString(dpy, screen, name) glatter_glXQueryServerString((dpy), (screen), (name))
+#endif
+GLATTER_UBLOCK(const char *, , glXQueryServerString, (Display *dpy, int screen, int name))
+#ifndef glXQueryVersion
+#define glXQueryVersion(dpy, maj, min) glatter_glXQueryVersion((dpy), (maj), (min))
+#endif
+GLATTER_UBLOCK(Bool, , glXQueryVersion, (Display *dpy, int *maj, int *min))
+#ifndef glXSelectEvent
+#define glXSelectEvent(dpy, drawable, mask) glatter_glXSelectEvent((dpy), (drawable), (mask))
+#endif
+GLATTER_UBLOCK(void, , glXSelectEvent, (Display *dpy, GLXDrawable drawable, unsigned long mask))
+#ifndef glXSwapBuffers
+#define glXSwapBuffers(dpy, drawable) glatter_glXSwapBuffers((dpy), (drawable))
+#endif
+GLATTER_UBLOCK(void, , glXSwapBuffers, (Display *dpy, GLXDrawable drawable))
+#ifndef glXUseXFont
+#define glXUseXFont(font, first, count, list) glatter_glXUseXFont((font), (first), (count), (list))
+#endif
+GLATTER_UBLOCK(void, , glXUseXFont, (Font font, int first, int count, int list))
+#ifndef glXWaitGL
+#define glXWaitGL() glatter_glXWaitGL()
+#endif
+GLATTER_UBLOCK(void, , glXWaitGL, (void))
+#ifndef glXWaitX
+#define glXWaitX() glatter_glXWaitX()
+#endif
+GLATTER_UBLOCK(void, , glXWaitX, (void))
+#endif // defined(GLX_H)
 #if defined(__glx_glxext_h_)
 #if defined(GLX_AMD_gpu_association)
 #ifndef glXBlitContextFramebufferAMD

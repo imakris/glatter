@@ -264,6 +264,7 @@ typedef struct glatter_extension_support_status_GL
         int has_GL_ARB_vertex_type_2_10_10_10_rev;
         int has_GL_ARB_viewport_array;
         int has_GL_ARB_window_pos;
+        int has_GL_ATI_blend_equation_separate;
         int has_GL_ATI_draw_buffers;
         int has_GL_ATI_element_array;
         int has_GL_ATI_envmap_bumpmap;
@@ -442,6 +443,7 @@ typedef struct glatter_extension_support_status_GL
         int has_GL_MESA_framebuffer_flip_y;
         int has_GL_MESA_framebuffer_swap_xy;
         int has_GL_MESA_pack_invert;
+        int has_GL_MESA_packed_depth_stencil;
         int has_GL_MESA_program_binary_formats;
         int has_GL_MESA_resize_buffers;
         int has_GL_MESA_shader_integer_functions;
@@ -892,6 +894,7 @@ typedef struct glatter_extension_support_status_GL
 #define glatter_GL_ARB_vertex_type_2_10_10_10_rev glatter_get_extension_support_GL().has_GL_ARB_vertex_type_2_10_10_10_rev
 #define glatter_GL_ARB_viewport_array glatter_get_extension_support_GL().has_GL_ARB_viewport_array
 #define glatter_GL_ARB_window_pos glatter_get_extension_support_GL().has_GL_ARB_window_pos
+#define glatter_GL_ATI_blend_equation_separate glatter_get_extension_support_GL().has_GL_ATI_blend_equation_separate
 #define glatter_GL_ATI_draw_buffers glatter_get_extension_support_GL().has_GL_ATI_draw_buffers
 #define glatter_GL_ATI_element_array glatter_get_extension_support_GL().has_GL_ATI_element_array
 #define glatter_GL_ATI_envmap_bumpmap glatter_get_extension_support_GL().has_GL_ATI_envmap_bumpmap
@@ -1070,6 +1073,7 @@ typedef struct glatter_extension_support_status_GL
 #define glatter_GL_MESA_framebuffer_flip_y glatter_get_extension_support_GL().has_GL_MESA_framebuffer_flip_y
 #define glatter_GL_MESA_framebuffer_swap_xy glatter_get_extension_support_GL().has_GL_MESA_framebuffer_swap_xy
 #define glatter_GL_MESA_pack_invert glatter_get_extension_support_GL().has_GL_MESA_pack_invert
+#define glatter_GL_MESA_packed_depth_stencil glatter_get_extension_support_GL().has_GL_MESA_packed_depth_stencil
 #define glatter_GL_MESA_program_binary_formats glatter_get_extension_support_GL().has_GL_MESA_program_binary_formats
 #define glatter_GL_MESA_resize_buffers glatter_get_extension_support_GL().has_GL_MESA_resize_buffers
 #define glatter_GL_MESA_shader_integer_functions glatter_get_extension_support_GL().has_GL_MESA_shader_integer_functions

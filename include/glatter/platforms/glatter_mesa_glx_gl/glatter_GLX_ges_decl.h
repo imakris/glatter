@@ -49,6 +49,7 @@ typedef struct glatter_extension_support_status_GLX
         int has_GLX_ARB_framebuffer_sRGB;
         int has_GLX_ARB_get_proc_address;
         int has_GLX_ARB_multisample;
+        int has_GLX_ARB_render_texture;
         int has_GLX_ARB_robustness_application_isolation;
         int has_GLX_ARB_robustness_share_group_isolation;
         int has_GLX_ARB_vertex_buffer_object;
@@ -76,6 +77,7 @@ typedef struct glatter_extension_support_status_GLX
         int has_GLX_MESA_release_buffers;
         int has_GLX_MESA_set_3dfx_mode;
         int has_GLX_MESA_swap_control;
+        int has_GLX_MESA_swap_frame_usage;
         int has_GLX_NV_copy_buffer;
         int has_GLX_NV_copy_image;
         int has_GLX_NV_delay_before_swap;
@@ -125,6 +127,7 @@ typedef struct glatter_extension_support_status_GLX
 #define glatter_GLX_ARB_framebuffer_sRGB glatter_get_extension_support_GLX().has_GLX_ARB_framebuffer_sRGB
 #define glatter_GLX_ARB_get_proc_address glatter_get_extension_support_GLX().has_GLX_ARB_get_proc_address
 #define glatter_GLX_ARB_multisample glatter_get_extension_support_GLX().has_GLX_ARB_multisample
+#define glatter_GLX_ARB_render_texture glatter_get_extension_support_GLX().has_GLX_ARB_render_texture
 #define glatter_GLX_ARB_robustness_application_isolation glatter_get_extension_support_GLX().has_GLX_ARB_robustness_application_isolation
 #define glatter_GLX_ARB_robustness_share_group_isolation glatter_get_extension_support_GLX().has_GLX_ARB_robustness_share_group_isolation
 #define glatter_GLX_ARB_vertex_buffer_object glatter_get_extension_support_GLX().has_GLX_ARB_vertex_buffer_object
@@ -152,6 +155,7 @@ typedef struct glatter_extension_support_status_GLX
 #define glatter_GLX_MESA_release_buffers glatter_get_extension_support_GLX().has_GLX_MESA_release_buffers
 #define glatter_GLX_MESA_set_3dfx_mode glatter_get_extension_support_GLX().has_GLX_MESA_set_3dfx_mode
 #define glatter_GLX_MESA_swap_control glatter_get_extension_support_GLX().has_GLX_MESA_swap_control
+#define glatter_GLX_MESA_swap_frame_usage glatter_get_extension_support_GLX().has_GLX_MESA_swap_frame_usage
 #define glatter_GLX_NV_copy_buffer glatter_get_extension_support_GLX().has_GLX_NV_copy_buffer
 #define glatter_GLX_NV_copy_image glatter_get_extension_support_GLX().has_GLX_NV_copy_image
 #define glatter_GLX_NV_delay_before_swap glatter_get_extension_support_GLX().has_GLX_NV_delay_before_swap
