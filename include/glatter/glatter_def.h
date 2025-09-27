@@ -150,50 +150,48 @@ void* glatter_get_proc_address(const char* function_name)
     if (ptr == 0) {
 #if defined(_WIN32)
         ptr = (void*) GetProcAddress(GetModuleHandleA("libEGL.dll"), function_name);
-    }
-    if (ptr == 0) {
-        ptr = (void*) GetProcAddress(GetModuleHandleA("libGLES_CM.dll"), function_name);
+        if (ptr == 0) {
+            ptr = (void*) GetProcAddress(GetModuleHandleA("libGLES_CM.dll"), function_name);
+        }
 #elif defined (__linux__)
         static void* egl_handle = NULL;
         static int egl_tried = 0;
-        if (ptr == 0) {
-            if (!egl_tried) {
-                static const char* egl_sonames[] = {
-                    "libEGL.so",
-                    "libEGL.so.1",
-                    NULL
-                };
-                for (int i = 0; egl_sonames[i] != NULL && egl_handle == NULL; ++i) {
-                    egl_handle = dlopen(egl_sonames[i], RTLD_LAZY);
-                }
-                egl_tried = 1;
-            }
-            if (egl_handle != NULL) {
-                ptr = (void*) dlsym(egl_handle, function_name);
-            }
-        }
-    }
-    if (ptr == 0) {
-        static void* gles_handle = NULL;
-        static int gles_tried = 0;
-        if (!gles_tried) {
-            static const char* gles_sonames[] = {
-                "libGLES_CM.so",
-                "libGLESv1_CM.so",
-                "libGLESv1_CM.so.1",
-                "libGLESv2.so",
-                "libGLESv2.so.1",
-                "libGLESv2.so.2",
-                "libGLESv3.so",
+        if (!egl_tried) {
+            static const char* egl_sonames[] = {
+                "libEGL.so",
+                "libEGL.so.1",
                 NULL
             };
-            for (int i = 0; gles_sonames[i] != NULL && gles_handle == NULL; ++i) {
-                gles_handle = dlopen(gles_sonames[i], RTLD_LAZY);
+            for (int i = 0; egl_sonames[i] != NULL && egl_handle == NULL; ++i) {
+                egl_handle = dlopen(egl_sonames[i], RTLD_LAZY);
             }
-            gles_tried = 1;
+            egl_tried = 1;
         }
-        if (gles_handle != NULL) {
-            ptr = (void*) dlsym(gles_handle, function_name);
+        if (egl_handle != NULL) {
+            ptr = (void*) dlsym(egl_handle, function_name);
+        }
+        if (ptr == 0) {
+            static void* gles_handle = NULL;
+            static int gles_tried = 0;
+            if (!gles_tried) {
+                static const char* gles_sonames[] = {
+                    "libGLES_CM.so",
+                    "libGLESv1_CM.so",
+                    "libGLESv1_CM.so.1",
+                    "libGLESv2.so",
+                    "libGLESv2.so.1",
+                    "libGLESv2.so.2",
+                    "libGLESv3.so",
+                    NULL
+                };
+                for (int i = 0; gles_sonames[i] != NULL && gles_handle == NULL; ++i) {
+                    gles_handle = dlopen(gles_sonames[i], RTLD_LAZY);
+                }
+                gles_tried = 1;
+            }
+            if (gles_handle != NULL) {
+                ptr = (void*) dlsym(gles_handle, function_name);
+            }
         }
 #else
 #error There is no implementation for your platform. Your contribution would be greatly appreciated!
