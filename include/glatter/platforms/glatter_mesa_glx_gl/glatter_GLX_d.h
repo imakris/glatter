@@ -29,12 +29,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifdef GLATTER_GLX
 #if defined(GLX_H)
-#if defined(GLX_ARB_get_proc_address)
-#ifndef glXGetProcAddressARB
-#define glXGetProcAddressARB(*) glatter_glXGetProcAddressARB_debug((*), __FILE__, __LINE__)
-#endif
-GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddressARB_debug(const GLubyte *, const char* file, int line);
-#endif // defined(GLX_ARB_get_proc_address)
 #if defined(GLX_ARB_render_texture)
 #ifndef glXBindTexImageARB
 #define glXBindTexImageARB(dpy, pbuffer, buffer) glatter_glXBindTexImageARB_debug((dpy), (pbuffer), (buffer), __FILE__, __LINE__)
@@ -285,12 +279,6 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXMakeAssociatedContextCurrentAMD_debug(GLXC
 #endif
 GLATTER_INLINE_OR_NOT GLXContext glatter_glXCreateContextAttribsARB_debug(Display *dpy, GLXFBConfig config, GLXContext share_context, Bool direct, const int *attrib_list, const char* file, int line);
 #endif // defined(GLX_ARB_create_context)
-#if defined(GLX_ARB_get_proc_address)
-#ifndef glXGetProcAddressARB
-#define glXGetProcAddressARB(procName) glatter_glXGetProcAddressARB_debug((procName), __FILE__, __LINE__)
-#endif
-GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddressARB_debug(const GLubyte *procName, const char* file, int line);
-#endif // defined(GLX_ARB_get_proc_address)
 #if defined(GLX_EXT_import_context)
 #ifndef glXFreeContextEXT
 #define glXFreeContextEXT(dpy, context) glatter_glXFreeContextEXT_debug((dpy), (context), __FILE__, __LINE__)
@@ -762,13 +750,7 @@ GLATTER_INLINE_OR_NOT void glatter_glXQueryDrawable_debug(Display *dpy, GLXDrawa
 #define glXSelectEvent(dpy, draw, event_mask) glatter_glXSelectEvent_debug((dpy), (draw), (event_mask), __FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT void glatter_glXSelectEvent_debug(Display *dpy, GLXDrawable draw, unsigned long event_mask, const char* file, int line);
-#endif // defined(GLX_VERSION_1_3)
-#if defined(GLX_VERSION_1_4)
-#ifndef glXGetProcAddress
-#define glXGetProcAddress(procName) glatter_glXGetProcAddress_debug((procName), __FILE__, __LINE__)
-#endif
-GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddress_debug(const GLubyte *procName, const char* file, int line);
 #endif // defined(__glx_glxext_h_)
-#endif // defined(GLX_VERSION_1_4)
+#endif // defined(GLX_VERSION_1_3)
 #endif // GLATTER_GLX
 

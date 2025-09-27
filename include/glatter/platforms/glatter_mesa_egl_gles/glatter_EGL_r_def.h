@@ -58,8 +58,6 @@ GLATTER_FBLOCK(return, EGL, EGLAPI, EGLDisplay, EGLAPIENTRY, eglGetDisplay, (dis
 #define eglGetDisplay_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglGetError, (), (void))
 #define eglGetError_defined
-GLATTER_FBLOCK(return, EGL, EGLAPI, __eglMustCastToProperFunctionPointerType, EGLAPIENTRY, eglGetProcAddress, (procname), (const char *procname))
-#define eglGetProcAddress_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglInitialize, (dpy, major, minor), (EGLDisplay dpy, EGLint *major, EGLint *minor))
 #define eglInitialize_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglMakeCurrent, (dpy, draw, read, ctx), (EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLContext ctx))

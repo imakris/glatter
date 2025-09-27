@@ -86,10 +86,6 @@ GLATTER_UBLOCK(EGLDisplay, EGLAPIENTRY, eglGetDisplay, (EGLNativeDisplayType dis
 #define eglGetError() glatter_eglGetError()
 #endif
 GLATTER_UBLOCK(EGLint, EGLAPIENTRY, eglGetError, (void))
-#ifndef eglGetProcAddress
-#define eglGetProcAddress(procname) glatter_eglGetProcAddress((procname))
-#endif
-GLATTER_UBLOCK(__eglMustCastToProperFunctionPointerType, EGLAPIENTRY, eglGetProcAddress, (const char *procname))
 #ifndef eglInitialize
 #define eglInitialize(dpy, major, minor) glatter_eglInitialize((dpy), (major), (minor))
 #endif

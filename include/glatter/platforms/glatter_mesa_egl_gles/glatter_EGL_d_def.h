@@ -170,16 +170,6 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglGetError_debug(const char* file, int lin
     return rval;
 }
 #define eglGetError_defined
-GLATTER_FBLOCK(return, EGL, EGLAPI, __eglMustCastToProperFunctionPointerType, EGLAPIENTRY, eglGetProcAddress, (procname), (const char *procname))
-GLATTER_INLINE_OR_NOT __eglMustCastToProperFunctionPointerType glatter_eglGetProcAddress_debug(const char *procname, const char* file, int line)
-{
-    GLATTER_DBLOCK(file, line, eglGetProcAddress, "(%p)", (void*)procname)
-    __eglMustCastToProperFunctionPointerType rval = glatter_eglGetProcAddress(procname);
-    GLATTER_RBLOCK("%s\n", GET_PRS(rval));
-    GLATTER_CHECK_ERROR(EGL, file, line)
-    return rval;
-}
-#define eglGetProcAddress_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglInitialize, (dpy, major, minor), (EGLDisplay dpy, EGLint *major, EGLint *minor))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglInitialize_debug(EGLDisplay dpy, EGLint *major, EGLint *minor, const char* file, int line)
 {

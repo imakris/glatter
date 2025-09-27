@@ -29,12 +29,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifdef GLATTER_GLX
 #if defined(GLX_H)
-#if defined(GLX_ARB_get_proc_address)
-#ifndef glXGetProcAddressARB
-#define glXGetProcAddressARB(*) glatter_glXGetProcAddressARB((*))
-#endif
-GLATTER_UBLOCK(__GLXextFuncPtr, , glXGetProcAddressARB, (const GLubyte *))
-#endif // defined(GLX_ARB_get_proc_address)
 #if defined(GLX_ARB_render_texture)
 #ifndef glXBindTexImageARB
 #define glXBindTexImageARB(dpy, pbuffer, buffer) glatter_glXBindTexImageARB((dpy), (pbuffer), (buffer))
@@ -285,12 +279,6 @@ GLATTER_UBLOCK(Bool, , glXMakeAssociatedContextCurrentAMD, (GLXContext ctx))
 #endif
 GLATTER_UBLOCK(GLXContext, , glXCreateContextAttribsARB, (Display *dpy, GLXFBConfig config, GLXContext share_context, Bool direct, const int *attrib_list))
 #endif // defined(GLX_ARB_create_context)
-#if defined(GLX_ARB_get_proc_address)
-#ifndef glXGetProcAddressARB
-#define glXGetProcAddressARB(procName) glatter_glXGetProcAddressARB((procName))
-#endif
-GLATTER_UBLOCK(__GLXextFuncPtr, , glXGetProcAddressARB, (const GLubyte *procName))
-#endif // defined(GLX_ARB_get_proc_address)
 #if defined(GLX_EXT_import_context)
 #ifndef glXFreeContextEXT
 #define glXFreeContextEXT(dpy, context) glatter_glXFreeContextEXT((dpy), (context))
@@ -762,13 +750,7 @@ GLATTER_UBLOCK(void, , glXQueryDrawable, (Display *dpy, GLXDrawable draw, int at
 #define glXSelectEvent(dpy, draw, event_mask) glatter_glXSelectEvent((dpy), (draw), (event_mask))
 #endif
 GLATTER_UBLOCK(void, , glXSelectEvent, (Display *dpy, GLXDrawable draw, unsigned long event_mask))
-#endif // defined(GLX_VERSION_1_3)
-#if defined(GLX_VERSION_1_4)
-#ifndef glXGetProcAddress
-#define glXGetProcAddress(procName) glatter_glXGetProcAddress((procName))
-#endif
-GLATTER_UBLOCK(__GLXextFuncPtr, , glXGetProcAddress, (const GLubyte *procName))
 #endif // defined(__glx_glxext_h_)
-#endif // defined(GLX_VERSION_1_4)
+#endif // defined(GLX_VERSION_1_3)
 #endif // GLATTER_GLX
 

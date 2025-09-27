@@ -86,10 +86,6 @@ GLATTER_INLINE_OR_NOT EGLDisplay glatter_eglGetDisplay_debug(EGLNativeDisplayTyp
 #define eglGetError() glatter_eglGetError_debug(__FILE__, __LINE__)
 #endif
 GLATTER_INLINE_OR_NOT EGLint glatter_eglGetError_debug(const char* file, int line);
-#ifndef eglGetProcAddress
-#define eglGetProcAddress(procname) glatter_eglGetProcAddress_debug((procname), __FILE__, __LINE__)
-#endif
-GLATTER_INLINE_OR_NOT __eglMustCastToProperFunctionPointerType glatter_eglGetProcAddress_debug(const char *procname, const char* file, int line);
 #ifndef eglInitialize
 #define eglInitialize(dpy, major, minor) glatter_eglInitialize_debug((dpy), (major), (minor), __FILE__, __LINE__)
 #endif

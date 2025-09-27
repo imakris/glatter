@@ -626,7 +626,7 @@ def parse(filename):
                     arg.type = arg.declaration[0:lindex].strip()
 
                 #if the argument has no name, we assign a name to it
-                if rindex - lindex < 1:
+                if not arg.declaration[lindex:rindex].strip():
                     arg.name = 'a'+str(i)
                     dfinal = arg.declaration[:lindex] + arg.name + arg.declaration[rindex:]
                     rindex += len(arg.name)
@@ -750,6 +750,16 @@ def get_function_mdnd(family): #macros, declarations and definitions
 // header guard ''' + v.block[0][8:-1] + ''' was found to be potentially conflicting,
 // thus was omitted.'''
         else:
+            # Skip wrapping resolver entry points to avoid macro recursion and
+            # standards-incompatible signatures (e.g., unnamed params in headers).
+            resolver_denylist = {
+                'glXGetProcAddressARB',
+                'glXGetProcAddress',
+                'eglGetProcAddress',
+                'wglGetProcAddress',
+            }
+            if v.name in resolver_denylist:
+                continue
             sfd.append(v)
 
 

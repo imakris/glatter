@@ -29,20 +29,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifdef GLATTER_GLX
 #if defined(GLX_H)
-#if defined(GLX_ARB_get_proc_address)
-#ifndef glXGetProcAddressARB_defined
-GLATTER_FBLOCK(return, GLX, extern, __GLXextFuncPtr, , glXGetProcAddressARB, (*), (const GLubyte *))
-GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddressARB_debug(const GLubyte *, const char* file, int line)
-{
-    GLATTER_DBLOCK(file, line, glXGetProcAddressARB, "(%p)", (void*)*)
-    __GLXextFuncPtr rval = glatter_glXGetProcAddressARB(*);
-    GLATTER_RBLOCK("%s\n", GET_PRS(rval));
-    GLATTER_CHECK_ERROR(GLX, file, line)
-    return rval;
-}
-#define glXGetProcAddressARB_defined
-#endif
-#endif // defined(GLX_ARB_get_proc_address)
 #if defined(GLX_ARB_render_texture)
 GLATTER_FBLOCK(return, GLX, extern, Bool, , glXBindTexImageARB, (dpy, pbuffer, buffer), (Display *dpy, GLXPbuffer pbuffer, int buffer))
 GLATTER_INLINE_OR_NOT Bool glatter_glXBindTexImageARB_debug(Display *dpy, GLXPbuffer pbuffer, int buffer, const char* file, int line)
@@ -655,20 +641,6 @@ GLATTER_INLINE_OR_NOT GLXContext glatter_glXCreateContextAttribsARB_debug(Displa
 }
 #define glXCreateContextAttribsARB_defined
 #endif // defined(GLX_ARB_create_context)
-#if defined(GLX_ARB_get_proc_address)
-#ifndef glXGetProcAddressARB_defined
-GLATTER_FBLOCK(return, GLX, , __GLXextFuncPtr, , glXGetProcAddressARB, (procName), (const GLubyte *procName))
-GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddressARB_debug(const GLubyte *procName, const char* file, int line)
-{
-    GLATTER_DBLOCK(file, line, glXGetProcAddressARB, "(%p)", (void*)procName)
-    __GLXextFuncPtr rval = glatter_glXGetProcAddressARB(procName);
-    GLATTER_RBLOCK("%s\n", GET_PRS(rval));
-    GLATTER_CHECK_ERROR(GLX, file, line)
-    return rval;
-}
-#define glXGetProcAddressARB_defined
-#endif
-#endif // defined(GLX_ARB_get_proc_address)
 #if defined(GLX_EXT_import_context)
 GLATTER_FBLOCK(, GLX, , void, , glXFreeContextEXT, (dpy, context), (Display *dpy, GLXContext context))
 GLATTER_INLINE_OR_NOT void glatter_glXFreeContextEXT_debug(Display *dpy, GLXContext context, const char* file, int line)
@@ -1736,19 +1708,7 @@ GLATTER_INLINE_OR_NOT void glatter_glXSelectEvent_debug(Display *dpy, GLXDrawabl
 }
 #define glXSelectEvent_defined
 #endif
-#endif // defined(GLX_VERSION_1_3)
-#if defined(GLX_VERSION_1_4)
-GLATTER_FBLOCK(return, GLX, , __GLXextFuncPtr, , glXGetProcAddress, (procName), (const GLubyte *procName))
-GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddress_debug(const GLubyte *procName, const char* file, int line)
-{
-    GLATTER_DBLOCK(file, line, glXGetProcAddress, "(%p)", (void*)procName)
-    __GLXextFuncPtr rval = glatter_glXGetProcAddress(procName);
-    GLATTER_RBLOCK("%s\n", GET_PRS(rval));
-    GLATTER_CHECK_ERROR(GLX, file, line)
-    return rval;
-}
-#define glXGetProcAddress_defined
 #endif // defined(__glx_glxext_h_)
-#endif // defined(GLX_VERSION_1_4)
+#endif // defined(GLX_VERSION_1_3)
 #endif // GLATTER_GLX
 
