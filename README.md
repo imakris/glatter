@@ -1,68 +1,113 @@
-# glatter — OpenGL‑family loader & tracer (zero‑config)
+# glatter — OpenGL‑family loader & tracer
 
-**glatter** is a lightweight loader and tracer for OpenGL‑family APIs (GL, GLX, WGL, EGL, GLES, optional GLU). It resolves function pointers on demand and, when enabled, logs calls, checks for errors, and warns on cross‑thread usage. Works in C and C++ with sensible defaults.
+A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, optional GLU). Resolves symbols on first use, lets you log calls or just errors, and warns on cross‑thread usage. Works in C and C++ with sensible defaults.
 
 ---
 
-## 1) Zero‑config quick start
+## Technical summary
 
-### C++ (header‑only)
+* **Integration:** header‑only (C++) or compiled translation unit (C/C++).
+* **WSI detection:** auto‑detects WGL/GLX/EGL with optional runtime override.
+* **On‑demand symbols:** function pointers are resolved on first use to minimize startup work.
+* **Diagnostics:** opt‑in call/error logging; in debug builds (when `NDEBUG` is not defined) errors are logged by default. Messages go to stdout/stderr; install a custom handler only if you want to redirect.
+* **Utilities:** generated extension flags (e.g., `glatter_GL_ARB_vertex_array_object`) and `enum_to_string_*()` helpers.
+
+---
+
+## Choose your integration mode
+
+Pick **one** of the two ways to use glatter:
+
+### 1) Header‑only (C++ only)
+
 ```cpp
 #include <glatter/glatter_solo.h>
 // Use GL entry points as usual
 glClear(GL_COLOR_BUFFER_BIT);
 ```
 
-### C (compiled translation unit)
+### 2) Compiled C translation unit (C or C++)
+
 ```c
 #include <glatter/glatter.h>
-/* add src/glatter/glatter.c to your build */
+/* Add src/glatter/glatter.c to your build */
 
 // Use GL entry points as usual
 glClear(GL_COLOR_BUFFER_BIT);
 ```
 
-**Do not include the system GL headers** (e.g., `GL/gl.h`, `EGL/egl.h`) yourself; glatter pulls the right headers for you.
-
-Including `glatter_solo.h` in C++ enables header-only mode automatically (it is equivalent to defining `GLATTER_HEADER_ONLY` before including `glatter.h`). Including `glatter.h` directly uses the compiled translation unit path; add `src/glatter/glatter.c` to your build for both C and C++ in that case.
+**Note:** Do not include system GL headers yourself (e.g., `GL/gl.h`, `EGL/egl.h`). Glatter chooses the right ones for you.
 
 ---
 
-## 2) What “auto” config does
+## Quick start
 
-Glatter auto‑selects wrappers and a provider based on the host OS, and it can try multiple backends at runtime if needed:
+1. Add the `include/` directory to your compiler’s include paths.
+2. Choose either **header‑only** (C++) or **compiled TU** (C/C++), as shown above.
+3. Link platform libraries (see Integration notes).
+4. Optional: install a custom log sink only if you want to redirect messages away from stdout/stderr.
 
-- **Windows:** WGL + GL
-- **Linux/BSD:** GLX + GL (with transparent fallback to EGL + GLES)
-- **Android/Emscripten:** EGL + GLES (defaults to GLES 3.2 when headers support it)
+---
 
-You can steer resolution when necessary:
+## Window system interface (WSI) selection (auto and overrides)
+
+Glatter auto‑selects the appropriate WSI for your platform.
+
+Optional WSI override (function call or env var):
+
 ```c
-/* C or C++ */
-glatter_set_provider(GLATTER_PROVIDER_EGL);  /* or GLATTER_PROVIDER_GLX, GLATTER_PROVIDER_WGL */
-/* or via environment: GLATTER_PROVIDER=egl|glx|wgl */
+/* Optional WSI override (defaults are auto‑detected).
+   Alternatively set: GLATTER_PROVIDER=egl|glx|wgl */
+
+glatter_set_provider(GLATTER_PROVIDER_EGL); /* or WGL, GLX, AUTO */
 ```
 
----
+## Typical single‑context app
 
-## 3) Public API (practical summary)
+```cpp
+#include <glatter/glatter_solo.h> // header‑only C++ header; for C/C++ compiled TU use <glatter/glatter.h> and compile src/glatter/glatter.c
 
-- `void glatter_bind_owner_to_current_thread(void);`  — Bind the diagnostic “owner thread”. Header‑only mode binds on first use; calling this early yields clearer warnings.
-- `void glatter_set_log_handler(void (*handler)(const char*));`  — Install a custom logger. On platforms without atomics, set this during single‑threaded init.
-- `void* glatter_get_proc_address(const char* name);`  — Unified proc resolver; you rarely need it directly.
-- `void glatter_set_provider(int provider);` / `int glatter_get_provider(void);`  — Override or inspect the runtime provider (`AUTO`, `WGL`, `GLX`, `EGL`).
-- `glatter_get_extension_support_*()` — Return a struct of per‑extension booleans for GL/GLX/EGL/WGL (see §6).
-- `const char* enum_to_string_*()` — Human‑readable names for error/status enums across GL, GLX, WGL, EGL, GLU.
+int main() {
+    // Create and make a GL context current here
+    // ...
 
----
+    // Gate once on a requirement (example: VAOs)
+    if (!glatter_GL_ARB_vertex_array_object) {
+        // Extension not available → bail out or use a fallback
+        return 1;
+    }
 
-## 4) Tracing & error reporting
+    // Safe to use the corresponding functions
+    GLuint vao = 0;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    return 0;
+}
+```
+
+## API summary (essentials)
+
+* **WSI override/inspect**: `glatter_set_provider(GLATTER_PROVIDER_*)`, `glatter_get_provider()` (APIs use the term "provider").
+* **Extension flags**: test generated flags like `glatter_GL_ARB_vertex_array_object` once the context is current.
+* **Enum names**: `enum_to_string_*()` for readable GL/GLX/WGL/EGL/GLU enums.
+
+Notes: Diagnostics and multi‑context thread checks are covered under **Tracing & diagnostics**. Low‑level entry‑point helpers are documented under **Advanced** and are rarely needed.
+
+## Tracing & error logging
+
+By default, messages go to stdout/stderr. Install a custom log handler only to redirect or integrate with your own logging.
 
 Two independent, opt‑in layers:
-- `GLATTER_LOG_CALLS` — log every wrapped call (name, arguments, return value).
-- `GLATTER_LOG_ERRORS` — log only API errors.
 
-If neither is defined, **debug builds default to error‑only logging** (i.e., when `NDEBUG` is not defined). You can direct logs to your sink:
+* `GLATTER_LOG_CALLS` Log every wrapped call (name, args, return).
+* `GLATTER_LOG_ERRORS` Log only API errors.
+
+If neither is defined, **debug builds default to error‑only logging** (i.e., when `NDEBUG` is not defined).
+
+Redirect output to your sink:
+
 ```c
 void my_log_sink(const char* msg) { /* route to your logger */ }
 int main() {
@@ -70,86 +115,64 @@ int main() {
 }
 ```
 
-Note: ARB/KHR debug output still requires a debug context and `GL_DEBUG_OUTPUT_SYNCHRONOUS`; glatter’s error checks work independently of those.
+> Note: ARB/KHR debug output still needs a debug context; glatter’s error checks work independently.
 
 ---
 
-## 5) Thread ownership checks
+## Thread ownership checks
 
-Glatter tracks an “owner thread” and warns when a different thread makes GL calls.
-- **Header‑only C++:** the first touching thread becomes owner. Optionally call `glatter_bind_owner_to_current_thread()` during init. If you define `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND`, the library aborts if you forget to bind before first use.
-- **Compiled C/C++:** the owner is captured once on first use; later calls from other threads are reported.
+Glatter tracks an "owner thread" and warns when calls come from a different thread.
 
-This is diagnostic only; glatter does not serialize or block.
+* **Header‑only C++:** first touching thread becomes owner. Call `glatter_bind_owner_to_current_thread()` early if you want explicit control. Define `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND` to require an explicit bind, otherwise the library aborts on first use without binding.
+* **Compiled C/C++:** the owner is captured on first use; later calls from other threads are reported.
+
+This is diagnostic only. Glatter does not serialize or block.
 
 ---
 
-## 6) Checking extension support
+## Extension requirements
 
-Query support once and then use fast, per‑extension booleans:
+Use the generated boolean flags `glatter_<EXTENSION_NAME>` after a context is current. Example (VAOs):
+
 ```c
-/* Example for core GL */
-auto s = glatter_get_extension_support_GL();
-/* Inspect the field matching your extension (see generated *_ges_decl.h): */
-/* if (s.GL_ARB_debug_output) { ... } */
+if (!glatter_GL_ARB_vertex_array_object) {
+    /* Report and exit early or use a fallback */
+    return 1;
+}
+
+GLuint vao = 0;
+glGenVertexArrays(1, &vao);
+glBindVertexArray(vao);
 ```
-The first call performs the underlying string queries and caches the result for subsequent checks.
 
 ---
 
-## 7) GLX Xlib error handler
+## GLX Xlib error handler
 
-When using the GLX provider, glatter installs a tiny X error handler the first time GLX is touched, to surface common GLX/Xlib issues. If you already manage your own handler (or need to install one after `XInitThreads()`), define:
+When using the GLX WSI, glatter installs a small X error handler the first time GLX is touched, to surface common GLX/Xlib issues. To opt out and install your own handler (for example after `XInitThreads()`), define:
+
 ```c
 #define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER
 ```
 
 ---
 
-## 8) Windows UNICODE vs MBCS
+## Integration notes
 
-No special switches required. The generator assumes UNICODE; non‑UNICODE (`MBCS`) builds are detected and `TCHAR` is mapped accordingly for generated prototypes where relevant.
+* Include only headers under `<glatter/...>`.
+* **C++ header‑only:** include `glatter/glatter_solo.h`.
+* **C or C++ compiled TU:** include `glatter/glatter.h` and add `src/glatter/glatter.c` to your build.
+* **Linking**
 
----
-
-## 9) Symbol resolution details (for the curious)
-
-Each function is resolved once and cached.
-- **WGL:** `wglGetProcAddress`, then `GetProcAddress(opengl32.dll)`
-- **GLX:** `glXGetProcAddress(ARB)`, then `dlsym(libGL.so.1|libGL.so)`
-- **EGL/GLES:** `eglGetProcAddress`, then `dlsym(libEGL.so.1|.so)`, then GLES sonames (`libGLESv3|v2|v1_CM`)
-- **GLU (optional):** `glu32.dll` on Windows, `libGLU.so.1|libGLU.so` on Linux
+  * Windows: link against `opengl32` (plus `EGL`/`GLES` DLLs if you use them).
+  * Linux/BSD: link against `GL`, `X11`, `pthread`, `dl` (plus `EGL`/`GLES` if you use them).
 
 ---
 
-## 10) Advanced configuration
-
-Two headers are meant for power users:
-- **`glatter_config.h`** — feature/platform switches. Define `GLATTER_USER_CONFIGURED` before including glatter to opt out of the zero‑config defaults and set your own `GLATTER_*` macros.
-- **`glatter_platform_headers.h`** — lists the API headers glatter should use. If you edit this, re‑run the generator (`python include/glatter/glatter.py`).
-
-### Regenerating headers (optional)
-1) Place target API headers under `include/glatter/headers/`.
-2) Add the bundle to `glatter_platform_headers.h` (one `#include` per line, no trailing comments).
-3) Run: `python include/glatter/glatter.py`.
-
-If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for your target, EGL/GLES helpers are unavailable until you generate the headers; the library still builds.
-
----
-
-## 11) Integration notes
-
-- Include only `<glatter/...>` in your sources.
-- **C++:** include `glatter/glatter_solo.h` for header-only, or include `glatter/glatter.h` and add `src/glatter/glatter.c` to use the compiled library path.
-- **Linking:**
-  - Windows: link `opengl32` (and `EGL`/`GLES` DLLs if you use them).
-  - Linux/BSD: link `GL`, `X11`, `pthread`, `dl` (and `EGL`/`GLES` if you use them).
-
----
-
-## 12) CMake examples
+## CMake snippets
 
 **C app (compiled TU):**
+
 ```cmake
 add_library(glatter src/glatter/glatter.c)
 target_include_directories(glatter PUBLIC include)
@@ -166,6 +189,7 @@ target_link_libraries(my_app PRIVATE glatter)
 ```
 
 **C++ app (header‑only):**
+
 ```cmake
 add_executable(my_app src/main.cpp)
 target_include_directories(my_app PRIVATE include)
@@ -178,16 +202,38 @@ endif()
 
 ---
 
-## 13) Troubleshooting
+## Advanced configuration
 
-- **“Failed to resolve …”** — ensure a current context and that GL/EGL/GLES libraries are visible on your platform.
-- **Cross‑thread warnings** — call `glatter_bind_owner_to_current_thread()` on the render thread, or enable strict binding with `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND`.
-- **GLX error spam** — define `GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` and install your own after X threading init.
-- **Missing EGL/GLES generated headers** — builds still succeed; EGL/GLES helpers are unavailable until you generate headers.
+### Windows character encoding
+
+Handles UNICODE and MBCS builds. The generator assumes UNICODE by default; on non-UNICODE builds, the `GLATTER_WINDOWS_MBCS` switch is automatically set unless you define it yourself. This keeps TCHAR handling correct without extra setup.
+
+### Regenerating headers (optional)
+
+Two headers are meant for power users:
+
+* `glatter_config.h` Feature/platform switches. Define `GLATTER_USER_CONFIGURED` and set your own `GLATTER_*` macros to opt out of the defaults.
+* `glatter_platform_headers.h` The list of API headers glatter should use. If you edit this, re‑run the generator.
+
+### Regenerating headers (optional)
+
+1. Place target API headers under `include/glatter/headers/`.
+2. Add the bundle to `glatter_platform_headers.h` (one `#include` per line, no trailing comments).
+3. Run: `python include/glatter/glatter.py`.
+
+If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for your target, EGL/GLES helpers are unavailable until you generate the headers; the library still builds.
 
 ---
 
-## 14) License
+## Troubleshooting
 
-BSD‑2‑Clause (Simplified). See the header prologs for the full text.
+* **“Failed to resolve …”** Ensure a current context and that GL/EGL/GLES libraries are visible on your platform.
+* **Cross‑thread warnings** Call `glatter_bind_owner_to_current_thread()` on the render thread, or enable strict binding with `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND`.
+* **GLX error spam** Define `GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` and install your own after X threading init.
+* **Missing EGL/GLES generated headers** Builds still succeed; EGL/GLES helpers are unavailable until you generate headers.
 
+---
+
+## License
+
+BSD‑2‑Clause (Simplified). See header prologs for the full text.
