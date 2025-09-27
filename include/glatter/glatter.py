@@ -25,7 +25,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 
 
-from unittest import case
 input_root = r'./headers'
 output_dir = r'./platforms'
 platform_headers_file = r'./glatter_platform_headers.h'
@@ -104,7 +103,7 @@ printable_c_types =  {
     'unsigned short int': '%hu',
     'int': '%d',
     'signed': '%d',
-    'signed int    ': '%d',
+    'signed int': '%d',
     'unsigned': '%u',
     'unsigned int': '%u',
     'long': '%li',
@@ -473,10 +472,10 @@ def parse(filename):
         if (bool(m) and validate_enum(m.group(1)) != ''):
             try:
                 value = int(m.group(3), 0)
-                
+
                 if ((value >= 0x100 and value < 0x20000) or m.group(1) in out_of_range_enums):
                     name = m.group(1)
-                    family = m.group(2)
+                    family = m.group('family')
                     eblock = d[1][-1] #if d[1] != None else hcr(header_guard)
                     
                     if (family not in enum_to_string):
@@ -573,9 +572,9 @@ def parse(filename):
                 s1 = arg.declaration[lindex:rindex]
                 s1 = s1.rstrip()
 
-                for mm in re.finditer(r'([A-Za-z]+\w*)', s1):
-                    pass
-                lindex += mm.start()
+                matches = list(re.finditer(r'([A-Za-z]+\w*)', s1))
+                if matches:
+                    lindex += matches[-1].start()
 
                 arg.name = arg.declaration[lindex:rindex]
                 
