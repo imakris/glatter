@@ -1,8 +1,8 @@
 #ifndef GLATTER_SOLO_H
 #define GLATTER_SOLO_H
 
-/* Enable header-only mode by default for C++ consumers unless explicitly disabled. */
-#if defined(__cplusplus) && !defined(GLATTER_HEADER_ONLY) && !defined(GLATTER_NO_HEADER_ONLY)
+/* Enable header-only mode explicitly for C++ consumers. */
+#if defined(__cplusplus) && !defined(GLATTER_HEADER_ONLY)
 #  define GLATTER_HEADER_ONLY 1
 #endif
 

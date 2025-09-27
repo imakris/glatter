@@ -230,15 +230,15 @@ def test_header_only_cpp_compiles_across_translation_units(tmp_path: Path) -> No
     )
 
 
-def test_header_only_cpp_compiles_without_manual_macros(tmp_path: Path) -> None:
-    """Verify that C++ translation units build without defining config macros."""
+def test_header_only_cpp_compiles_via_glatter_solo(tmp_path: Path) -> None:
+    """Verify that header-only mode works out of the box via glatter_solo.h."""
 
     cxx = _require_tool("c++")
 
     sources = {
         "main.cpp": textwrap.dedent(
             """
-            #include <glatter/glatter.h>
+            #include <glatter/glatter_solo.h>
 
             int helper();
 
@@ -254,7 +254,7 @@ def test_header_only_cpp_compiles_without_manual_macros(tmp_path: Path) -> None:
         + "\n",
         "helper.cpp": textwrap.dedent(
             """
-            #include <glatter/glatter.h>
+            #include <glatter/glatter_solo.h>
 
             int helper() {
                 return glatter_get_proc_address("glGetString") != nullptr;

@@ -24,7 +24,7 @@ glClear(GL_COLOR_BUFFER_BIT);
 
 **Do not include the system GL headers** (e.g., `GL/gl.h`, `EGL/egl.h`) yourself; glatter pulls the right headers for you.
 
-Header‑only is enabled automatically for C++ when including `glatter_solo.h` or `glatter.h`. To use the compiled TU from C++ as well, define `GLATTER_NO_HEADER_ONLY` **before** including the header and add `src/glatter/glatter.c` to your build.
+Including `glatter_solo.h` in C++ enables header-only mode automatically (it is equivalent to defining `GLATTER_HEADER_ONLY` before including `glatter.h`). Including `glatter.h` directly uses the compiled translation unit path; add `src/glatter/glatter.c` to your build for both C and C++ in that case.
 
 ---
 
@@ -140,7 +140,7 @@ If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for your target, EGL/GLES helpers 
 ## 11) Integration notes
 
 - Include only `<glatter/...>` in your sources.
-- **C++:** header‑only by default; to use compiled mode define `GLATTER_NO_HEADER_ONLY` and add `src/glatter/glatter.c`.
+- **C++:** include `glatter/glatter_solo.h` for header-only, or include `glatter/glatter.h` and add `src/glatter/glatter.c` to use the compiled library path.
 - **Linking:**
   - Windows: link `opengl32` (and `EGL`/`GLES` DLLs if you use them).
   - Linux/BSD: link `GL`, `X11`, `pthread`, `dl` (and `EGL`/`GLES` if you use them).
