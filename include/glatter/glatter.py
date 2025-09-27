@@ -155,7 +155,7 @@ printable_c_types =  {
     'uint_least64_t': '"%" PRIuLEAST64',
     'intptr_t': '"%" PRIxPTR',
     'uintptr_t': '"%" PRIxPTR',
-    'size_t': '%zu',
+    'size_t': '"%" GLATTER_FMT_ZU',
     'wchar_t': '%lc',
     'ptrdiff_t': '%td'
 }
@@ -1033,9 +1033,11 @@ glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_'
             memcpy((void*)&ess, indexed_extensions, sizeof(ess));
             return ess;
         }
-        // if this fails, something might be wrong with the implementation
-        assert((int)glv[0] > 48 && (int)glv[0] < 58);
-        new_way = (int)glv[0] > 50; // i.e. gl version is 3 or higher
+        if (glv[0] < '0' || glv[0] > '9') {
+            new_way = 0;
+        } else {
+            new_way = glv[0] > '2'; // i.e. gl version is 3 or higher
+        }
 
 #ifdef GL_NUM_EXTENSIONS
         if (new_way && glatter_get_proc_address_GL("glGetStringi") ) {
@@ -1114,7 +1116,14 @@ glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_'
         const uint8_t* ext_str = d ? (const uint8_t*)glatter_glXQueryExtensionsString(d, DefaultScreen(d)) : NULL;'''
         elif (v == 'WGL'):
             estring_acquisition = '''
-        const uint8_t* ext_str = (const uint8_t*)glatter_wglGetExtensionsStringEXT();'''
+        const uint8_t* ext_str = NULL;
+        if (glatter_wglGetExtensionsStringEXT) {
+            ext_str = (const uint8_t*)glatter_wglGetExtensionsStringEXT();
+        }
+        if (!ext_str && glatter_wglGetExtensionsStringARB) {
+            HDC dc = wglGetCurrentDC();
+            ext_str = dc ? (const uint8_t*)glatter_wglGetExtensionsStringARB(dc) : NULL;
+        }'''
         elif (v == 'EGL'):
             estring_acquisition = '''
         const uint8_t* ext_str = (const uint8_t*)glatter_eglQueryString(eglGetCurrentDisplay(), EGL_EXTENSIONS);'''
@@ -1223,6 +1232,16 @@ for platform in platform_headers:
             for idx, val in enumerate(ext_names_sorted[x]):
                 h = hash_djb2(val)
                 ext_hash_to_full_hash[x][ext_name_to_hash[x][val]][h] = idx
+
+    seen_hashes = {}
+    for fam, names in ext_names_sorted.items():
+        for nm in names:
+            h = hash_djb2(nm)
+            if h in seen_hashes and seen_hashes[h] != nm:
+                print("WARNING: full djb2 hash collision between %s and %s in %s" % (
+                    seen_hashes[h], nm, fam))
+            else:
+                seen_hashes[h] = nm
 
 
     # GENERATE OUTPUT FILES
