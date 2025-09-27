@@ -11,7 +11,9 @@ from __future__ import annotations
 import os
 import shutil
 import subprocess
+import sys
 import textwrap
+from dataclasses import dataclass
 from pathlib import Path
 
 import pytest
@@ -82,6 +84,55 @@ def _write_egl_stub(directory: Path) -> Path:
         + "\n"
     )
     return stub_path
+
+
+@dataclass(frozen=True)
+class ExampleProgram:
+    """Description of an example program that should compile."""
+
+    name: str
+    source: Path
+    defines: tuple[str, ...]
+    platform: str | None = None
+
+
+EXAMPLE_PROGRAMS: tuple[ExampleProgram, ...] = (
+    ExampleProgram(
+        name="glxgears",
+        source=Path("example/glatter/glxgears.c"),
+        defines=(
+            "-D_DEFAULT_SOURCE",
+            "-DGLATTER_CONFIG_H_DEFINED",
+            "-DGLATTER_GL=1",
+            "-DGLATTER_GLX=1",
+            "-DGLATTER_MESA_GLX_GL=1",
+        ),
+        platform="linux",
+    ),
+    ExampleProgram(
+        name="eglgears",
+        source=Path("example/glatter/eglgears.c"),
+        defines=(
+            "-DGLATTER_CONFIG_H_DEFINED",
+            "-DGLATTER_GL=1",
+            "-DGLATTER_EGL=1",
+            "-DGLATTER_MESA_EGL_GLES=1",
+            "-DGLATTER_EGL_GLES2_2_0=1",
+        ),
+        platform="win32",
+    ),
+    ExampleProgram(
+        name="wglgears",
+        source=Path("example/glatter/wglgears.c"),
+        defines=(
+            "-DGLATTER_CONFIG_H_DEFINED",
+            "-DGLATTER_GL=1",
+            "-DGLATTER_WGL=1",
+            "-DGLATTER_WINDOWS_WGL_GL=1",
+        ),
+        platform="win32",
+    ),
+)
 
 
 def test_c_program_compiles_with_glatter_c(tmp_path: Path) -> None:
@@ -408,3 +459,33 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
             str(tmp_path / "linked_consumer"),
         ]
     )
+
+
+@pytest.mark.parametrize("example", EXAMPLE_PROGRAMS, ids=lambda example: example.name)
+def test_examples_compile(example: ExampleProgram, tmp_path: Path) -> None:
+    """Compile shipped example programs to ensure they stay buildable."""
+
+    if example.platform is not None:
+        if example.platform == "linux" and not sys.platform.startswith("linux"):
+            pytest.skip("GLX example only builds on Linux")
+        if example.platform == "win32" and os.name != "nt":
+            pytest.skip("WGL example only builds on Windows")
+
+    cc = _require_tool("cc")
+
+    output = tmp_path / f"{example.name}.o"
+    command = [
+        cc,
+        "-std=c11",
+        *example.defines,
+        "-I",
+        str(REPO_ROOT / "include"),
+        "-I",
+        str(REPO_ROOT / "tests" / "include"),
+        "-c",
+        str(REPO_ROOT / example.source),
+        "-o",
+        str(output),
+    ]
+
+    _run_command(command)
