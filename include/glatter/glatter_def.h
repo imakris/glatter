@@ -234,13 +234,13 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*))
 }
 
 
-typedef int glatter_provider_t;
+typedef int glatter_wsi_t;
 
-#ifndef GLATTER_PROVIDER_AUTO_VALUE
-#define GLATTER_PROVIDER_AUTO_VALUE 0
-#define GLATTER_PROVIDER_WGL_VALUE  1
-#define GLATTER_PROVIDER_GLX_VALUE  2
-#define GLATTER_PROVIDER_EGL_VALUE  3
+#ifndef GLATTER_WSI_AUTO_VALUE
+#define GLATTER_WSI_AUTO_VALUE 0
+#define GLATTER_WSI_WGL_VALUE  1
+#define GLATTER_WSI_GLX_VALUE  2
+#define GLATTER_WSI_EGL_VALUE  3
 #endif
 
 #if defined(_WIN32)
@@ -281,9 +281,9 @@ static const char* const glatter_gles_sonames[GLATTER_GLES_SONAME_COUNT] = {
 #endif
 
 typedef struct glatter_loader_state {
-    glatter_provider_t requested;
-    glatter_provider_t active;
-    int provider_explicit;
+    glatter_wsi_t requested;
+    glatter_wsi_t active;
+    int wsi_explicit;
     int env_checked;
 #if defined(_WIN32)
     HMODULE opengl32_module;
@@ -310,15 +310,15 @@ static glatter_loader_state* glatter_loader_state_get(void)
 {
     static glatter_loader_state state = {
 #if defined(GLATTER_WGL) && !defined(GLATTER_GLX) && !defined(GLATTER_EGL)
-        GLATTER_PROVIDER_WGL_VALUE,
+        GLATTER_WSI_WGL_VALUE,
 #elif defined(GLATTER_GLX) && !defined(GLATTER_EGL) && !defined(GLATTER_WGL)
-        GLATTER_PROVIDER_GLX_VALUE,
+        GLATTER_WSI_GLX_VALUE,
 #elif defined(GLATTER_EGL) && !defined(GLATTER_GLX) && !defined(GLATTER_WGL)
-        GLATTER_PROVIDER_EGL_VALUE,
+        GLATTER_WSI_EGL_VALUE,
 #else
-        GLATTER_PROVIDER_AUTO_VALUE,
+        GLATTER_WSI_AUTO_VALUE,
 #endif
-        GLATTER_PROVIDER_AUTO_VALUE,
+        GLATTER_WSI_AUTO_VALUE,
         0,
         0
     };
@@ -340,25 +340,25 @@ static int glatter_equals_ignore_case(const char* a, const char* b)
     return *a == '\0' && *b == '\0';
 }
 
-static void glatter_detect_provider_from_env(glatter_loader_state* state)
+static void glatter_detect_wsi_from_env(glatter_loader_state* state)
 {
-    if (state->env_checked || state->provider_explicit) {
+    if (state->env_checked || state->wsi_explicit) {
         state->env_checked = 1;
         return;
     }
 
     state->env_checked = 1;
-    const char* env = getenv("GLATTER_PROVIDER");
+    const char* env = getenv("GLATTER_WSI");
     if (!env || !*env) {
         return;
     }
 
     if (glatter_equals_ignore_case(env, "wgl")) {
-        state->requested = GLATTER_PROVIDER_WGL_VALUE;
+        state->requested = GLATTER_WSI_WGL_VALUE;
     } else if (glatter_equals_ignore_case(env, "glx")) {
-        state->requested = GLATTER_PROVIDER_GLX_VALUE;
+        state->requested = GLATTER_WSI_GLX_VALUE;
     } else if (glatter_equals_ignore_case(env, "egl")) {
-        state->requested = GLATTER_PROVIDER_EGL_VALUE;
+        state->requested = GLATTER_WSI_EGL_VALUE;
     }
 }
 
@@ -536,31 +536,31 @@ static void* glatter_linux_lookup_egl(glatter_loader_state* state, const char* n
 #endif
 
 GLATTER_INLINE_OR_NOT
-void glatter_set_provider(int provider)
+void glatter_set_wsi(int wsi)
 {
     glatter_loader_state* state = glatter_loader_state_get();
-    glatter_provider_t value = (glatter_provider_t)provider;
+    glatter_wsi_t value = (glatter_wsi_t)wsi;
     switch (value) {
-        case GLATTER_PROVIDER_WGL_VALUE:
-        case GLATTER_PROVIDER_GLX_VALUE:
-        case GLATTER_PROVIDER_EGL_VALUE:
-        case GLATTER_PROVIDER_AUTO_VALUE:
+        case GLATTER_WSI_WGL_VALUE:
+        case GLATTER_WSI_GLX_VALUE:
+        case GLATTER_WSI_EGL_VALUE:
+        case GLATTER_WSI_AUTO_VALUE:
             break;
         default:
-            value = GLATTER_PROVIDER_AUTO_VALUE;
+            value = GLATTER_WSI_AUTO_VALUE;
             break;
     }
     state->requested = value;
-    state->provider_explicit = 1;
-    state->active = GLATTER_PROVIDER_AUTO_VALUE;
+    state->wsi_explicit = 1;
+    state->active = GLATTER_WSI_AUTO_VALUE;
 }
 
 GLATTER_INLINE_OR_NOT
-int glatter_get_provider(void)
+int glatter_get_wsi(void)
 {
     glatter_loader_state* state = glatter_loader_state_get();
-    glatter_detect_provider_from_env(state);
-    if (state->active != GLATTER_PROVIDER_AUTO_VALUE) {
+    glatter_detect_wsi_from_env(state);
+    if (state->active != GLATTER_WSI_AUTO_VALUE) {
         return state->active;
     }
     return state->requested;
@@ -570,64 +570,64 @@ GLATTER_INLINE_OR_NOT
 void* glatter_get_proc_address(const char* function_name)
 {
     glatter_loader_state* state = glatter_loader_state_get();
-    glatter_detect_provider_from_env(state);
+    glatter_detect_wsi_from_env(state);
 
 #if defined(_WIN32)
-    if (state->requested == GLATTER_PROVIDER_WGL_VALUE) {
+    if (state->requested == GLATTER_WSI_WGL_VALUE) {
         void* ptr = glatter_windows_resolve_wgl(state, function_name);
         if (ptr) {
-            state->active = GLATTER_PROVIDER_WGL_VALUE;
+            state->active = GLATTER_WSI_WGL_VALUE;
         }
         return ptr;
     }
 
-    if (state->requested == GLATTER_PROVIDER_EGL_VALUE) {
+    if (state->requested == GLATTER_WSI_EGL_VALUE) {
         void* ptr = glatter_windows_resolve_egl(state, function_name);
         if (ptr) {
-            state->active = GLATTER_PROVIDER_EGL_VALUE;
+            state->active = GLATTER_WSI_EGL_VALUE;
         }
         return ptr;
     }
 
     void* ptr = glatter_windows_resolve_wgl(state, function_name);
     if (ptr) {
-        state->active = GLATTER_PROVIDER_WGL_VALUE;
+        state->active = GLATTER_WSI_WGL_VALUE;
         return ptr;
     }
 
     ptr = glatter_windows_resolve_egl(state, function_name);
     if (ptr) {
-        state->active = GLATTER_PROVIDER_EGL_VALUE;
+        state->active = GLATTER_WSI_EGL_VALUE;
         return ptr;
     }
 
     return NULL;
 #else
-    if (state->requested == GLATTER_PROVIDER_GLX_VALUE) {
+    if (state->requested == GLATTER_WSI_GLX_VALUE) {
         void* ptr = glatter_linux_lookup_glx(state, function_name);
         if (ptr) {
-            state->active = GLATTER_PROVIDER_GLX_VALUE;
+            state->active = GLATTER_WSI_GLX_VALUE;
         }
         return ptr;
     }
 
-    if (state->requested == GLATTER_PROVIDER_EGL_VALUE) {
+    if (state->requested == GLATTER_WSI_EGL_VALUE) {
         void* ptr = glatter_linux_lookup_egl(state, function_name);
         if (ptr) {
-            state->active = GLATTER_PROVIDER_EGL_VALUE;
+            state->active = GLATTER_WSI_EGL_VALUE;
         }
         return ptr;
     }
 
     void* ptr = glatter_linux_lookup_glx(state, function_name);
     if (ptr) {
-        state->active = GLATTER_PROVIDER_GLX_VALUE;
+        state->active = GLATTER_WSI_GLX_VALUE;
         return ptr;
     }
 
     ptr = glatter_linux_lookup_egl(state, function_name);
     if (ptr) {
-        state->active = GLATTER_PROVIDER_EGL_VALUE;
+        state->active = GLATTER_WSI_EGL_VALUE;
         return ptr;
     }
 
@@ -709,7 +709,7 @@ void* glatter_get_proc_address_GLX(const char* function_name)
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
     if (ptr) {
         glatter_loader_state* state = glatter_loader_state_get();
-        if (!state->glx_error_handler_installed && state->active == GLATTER_PROVIDER_GLX_VALUE) {
+        if (!state->glx_error_handler_installed && state->active == GLATTER_WSI_GLX_VALUE) {
             /* Xlib error handlers are process-global. Installing this handler
                replaces any handler the application has already installed. If the
                application needs a custom handler or performs multi-threaded Xlib

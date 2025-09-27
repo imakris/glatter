@@ -49,17 +49,17 @@ glClear(GL_COLOR_BUFFER_BIT);
 
 ---
 
-## Window system interface (WSI) selection (auto and overrides)
+## Window System Interface (WSI) selection (auto and overrides)
 
-Glatter auto‑selects the appropriate WSI for your platform.
+Glatter auto‑selects the appropriate Window System Interface (WSI) for your platform.
 
 Optional WSI override (function call or env var):
 
 ```c
 /* Optional WSI override (defaults are auto‑detected).
-   Alternatively set: GLATTER_PROVIDER=egl|glx|wgl */
+   Alternatively set: GLATTER_WSI=egl|glx|wgl */
 
-glatter_set_provider(GLATTER_PROVIDER_EGL); /* or WGL, GLX, AUTO */
+glatter_set_wsi(GLATTER_WSI_EGL); /* or WGL, GLX, AUTO */
 ```
 
 ## Typical single‑context app
@@ -89,7 +89,7 @@ int main() {
 
 ## API summary (essentials)
 
-* **WSI override/inspect**: `glatter_set_provider(GLATTER_PROVIDER_*)`, `glatter_get_provider()` (APIs use the term "provider").
+* **WSI override/inspect**: `glatter_set_wsi(GLATTER_WSI_*)`, `glatter_get_wsi()` (APIs use the term "Window System Interface (WSI)").
 * **Extension flags**: test generated flags like `glatter_GL_ARB_vertex_array_object` once the context is current.
 * **Enum names**: `enum_to_string_*()` for readable GL/GLX/WGL/EGL/GLU enums.
 

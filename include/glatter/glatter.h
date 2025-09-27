@@ -47,18 +47,18 @@ extern "C" {
 
 #endif //__cplusplus
 
-#ifndef GLATTER_PROVIDER_AUTO_VALUE
-#define GLATTER_PROVIDER_AUTO_VALUE 0
-#define GLATTER_PROVIDER_WGL_VALUE  1
-#define GLATTER_PROVIDER_GLX_VALUE  2
-#define GLATTER_PROVIDER_EGL_VALUE  3
+#ifndef GLATTER_WSI_AUTO_VALUE
+#define GLATTER_WSI_AUTO_VALUE 0
+#define GLATTER_WSI_WGL_VALUE  1
+#define GLATTER_WSI_GLX_VALUE  2
+#define GLATTER_WSI_EGL_VALUE  3
 #endif
 
 enum {
-    GLATTER_PROVIDER_AUTO = GLATTER_PROVIDER_AUTO_VALUE,
-    GLATTER_PROVIDER_WGL  = GLATTER_PROVIDER_WGL_VALUE,
-    GLATTER_PROVIDER_GLX  = GLATTER_PROVIDER_GLX_VALUE,
-    GLATTER_PROVIDER_EGL  = GLATTER_PROVIDER_EGL_VALUE
+    GLATTER_WSI_AUTO = GLATTER_WSI_AUTO_VALUE,
+    GLATTER_WSI_WGL  = GLATTER_WSI_WGL_VALUE,
+    GLATTER_WSI_GLX  = GLATTER_WSI_GLX_VALUE,
+    GLATTER_WSI_EGL  = GLATTER_WSI_EGL_VALUE
 };
 
 
@@ -116,8 +116,8 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*));
 #define GLATTER_INLINE_OR_NOT
 #endif
 
-GLATTER_INLINE_OR_NOT void glatter_set_provider(int provider);
-GLATTER_INLINE_OR_NOT int  glatter_get_provider(void);
+GLATTER_INLINE_OR_NOT void glatter_set_wsi(int wsi);
+GLATTER_INLINE_OR_NOT int  glatter_get_wsi(void);
 GLATTER_INLINE_OR_NOT void* glatter_get_proc_address(const char* function_name);
 GLATTER_INLINE_OR_NOT void  glatter_bind_owner_to_current_thread(void);
 
