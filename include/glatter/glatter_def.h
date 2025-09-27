@@ -654,6 +654,12 @@ typedef struct glatter_es_record_struct
 
 //==================
 
+#define GLATTER_RETURN_VALUE(return_or_not, rtype, value) \
+    GLATTER_RETURN_VALUE_##return_or_not(rtype, value)
+
+#define GLATTER_RETURN_VALUE_return(rtype, value) return (value)
+#define GLATTER_RETURN_VALUE_(rtype, value)       return
+
 #ifdef GLATTER_HEADER_ONLY
 
 
@@ -663,6 +669,12 @@ typedef struct glatter_es_record_struct
     {\
         static glatter_##name##_t s_f_ptr =\
             (glatter_##name##_t) glatter_get_proc_address_##family(#name);\
+        if (s_f_ptr == NULL) {\
+            glatter_log_printf(\
+                "GLATTER: failed to resolve '%s'\n", #name\
+            );\
+            GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
+        }\
         return_or_not s_f_ptr cargs;\
     }
 
@@ -677,7 +689,15 @@ typedef struct glatter_es_record_struct
     extern rtype cconv glatter_##name##_init dargs;\
     rtype cconv glatter_##name##_init dargs\
     {\
-        glatter_##name = (glatter_##name##_t) glatter_get_proc_address_##family(#name);\
+        glatter_##name##_t resolved = (glatter_##name##_t)\
+            glatter_get_proc_address_##family(#name);\
+        if (resolved == NULL) {\
+            glatter_log_printf(\
+                "GLATTER: failed to resolve '%s'\n", #name\
+            );\
+            GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
+        }\
+        glatter_##name = resolved;\
         return_or_not glatter_##name cargs;\
     }\
     glatter_##name##_t glatter_##name = glatter_##name##_init;
