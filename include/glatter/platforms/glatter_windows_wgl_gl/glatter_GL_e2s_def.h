@@ -1633,7 +1633,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_VERTEX_ARRAY";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_VERTEX_ARRAY_EXT";
 #endif
             break;
@@ -1641,7 +1641,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_NORMAL_ARRAY";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_NORMAL_ARRAY_EXT";
 #endif
             break;
@@ -1649,7 +1649,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_COLOR_ARRAY";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_COLOR_ARRAY_EXT";
 #endif
             break;
@@ -1657,7 +1657,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_INDEX_ARRAY";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_INDEX_ARRAY_EXT";
 #endif
             break;
@@ -1665,7 +1665,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY_EXT";
 #endif
             break;
@@ -1673,7 +1673,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_EXT";
 #endif
             break;
@@ -1681,7 +1681,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_VERTEX_ARRAY_SIZE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_VERTEX_ARRAY_SIZE_EXT";
 #endif
             break;
@@ -1689,7 +1689,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_VERTEX_ARRAY_TYPE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_VERTEX_ARRAY_TYPE_EXT";
 #endif
             break;
@@ -1697,18 +1697,18 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_VERTEX_ARRAY_STRIDE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_VERTEX_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x807d: return "GL_VERTEX_ARRAY_COUNT_EXT";
 #endif
         case 0x807e:
 #if defined(__gl_h_)
                     return "GL_NORMAL_ARRAY_TYPE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_NORMAL_ARRAY_TYPE_EXT";
 #endif
             break;
@@ -1716,18 +1716,18 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_NORMAL_ARRAY_STRIDE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_NORMAL_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x8080: return "GL_NORMAL_ARRAY_COUNT_EXT";
 #endif
         case 0x8081:
 #if defined(__gl_h_)
                     return "GL_COLOR_ARRAY_SIZE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_COLOR_ARRAY_SIZE_EXT";
 #endif
             break;
@@ -1735,7 +1735,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_COLOR_ARRAY_TYPE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_COLOR_ARRAY_TYPE_EXT";
 #endif
             break;
@@ -1743,18 +1743,18 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_COLOR_ARRAY_STRIDE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_COLOR_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x8084: return "GL_COLOR_ARRAY_COUNT_EXT";
 #endif
         case 0x8085:
 #if defined(__gl_h_)
                     return "GL_INDEX_ARRAY_TYPE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_INDEX_ARRAY_TYPE_EXT";
 #endif
             break;
@@ -1762,18 +1762,18 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_INDEX_ARRAY_STRIDE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_INDEX_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x8087: return "GL_INDEX_ARRAY_COUNT_EXT";
 #endif
         case 0x8088:
 #if defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY_SIZE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY_SIZE_EXT";
 #endif
             break;
@@ -1781,7 +1781,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY_TYPE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY_TYPE_EXT";
 #endif
             break;
@@ -1789,29 +1789,29 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY_STRIDE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x808b: return "GL_TEXTURE_COORD_ARRAY_COUNT_EXT";
 #endif
         case 0x808c:
 #if defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_STRIDE";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_STRIDE_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
         case 0x808d: return "GL_EDGE_FLAG_ARRAY_COUNT_EXT";
 #endif
         case 0x808e:
 #if defined(__gl_h_)
                     return "GL_VERTEX_ARRAY_POINTER";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_VERTEX_ARRAY_POINTER_EXT";
 #endif
             break;
@@ -1819,7 +1819,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_NORMAL_ARRAY_POINTER";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_NORMAL_ARRAY_POINTER_EXT";
 #endif
             break;
@@ -1827,7 +1827,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_COLOR_ARRAY_POINTER";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_COLOR_ARRAY_POINTER_EXT";
 #endif
             break;
@@ -1835,7 +1835,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_INDEX_ARRAY_POINTER";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_INDEX_ARRAY_POINTER_EXT";
 #endif
             break;
@@ -1843,7 +1843,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY_POINTER";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_TEXTURE_COORD_ARRAY_POINTER_EXT";
 #endif
             break;
@@ -1851,7 +1851,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_POINTER";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_vertex_array)
+#if defined(GL_EXT_vertex_array) || defined(__gl_h_)
                     return "GL_EDGE_FLAG_ARRAY_POINTER_EXT";
 #endif
             break;
@@ -2347,7 +2347,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(GL_VERSION_1_2)
                     return "GL_BGR";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_bgra)
+#if defined(GL_EXT_bgra) || defined(__gl_h_)
                     return "GL_BGR_EXT";
 #endif
             break;
@@ -2355,11 +2355,11 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(GL_VERSION_1_2)
                     return "GL_BGRA";
 #endif
-#if defined(__gl_h_) || defined(GL_EXT_bgra)
+#if defined(GL_EXT_bgra) || defined(__gl_h_)
                     return "GL_BGRA_EXT";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_EXT_paletted_texture)
+#if defined(GL_EXT_paletted_texture) || defined(__gl_h_)
         case 0x80e2: return "GL_COLOR_INDEX1_EXT";
         case 0x80e3: return "GL_COLOR_INDEX2_EXT";
         case 0x80e4: return "GL_COLOR_INDEX4_EXT";
@@ -2389,11 +2389,11 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
                     return "GL_MAX_ELEMENTS_INDICES_WIN";
 #endif
             break;
-#if defined(__gl_h_) || defined(GL_WIN_phong_shading)
+#if defined(GL_WIN_phong_shading) || defined(__gl_h_)
         case 0x80ea: return "GL_PHONG_WIN";
         case 0x80eb: return "GL_PHONG_HINT_WIN";
 #endif
-#if defined(__gl_h_) || defined(GL_WIN_specular_fog)
+#if defined(GL_WIN_specular_fog) || defined(__gl_h_)
         case 0x80ec: return "GL_FOG_SPECULAR_TEXTURE_WIN";
 #endif
 #if defined(GL_EXT_paletted_texture)

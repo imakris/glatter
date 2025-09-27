@@ -41,62 +41,62 @@ glatter_extension_support_status_WGL_t glatter_get_extension_support_WGL()
 #else
 #define zrt {0, 0}
 #endif
-    static rt e353f[] = {{4189730111, 3}, zrt};
-    static rt e268 [] = {{874562152, 4}, zrt};
-    static rt e285a[] = {{2581358682, 5}, zrt};
-    static rt e22df[] = {{738091743, 6}, zrt};
-    static rt e298a[] = {{2741709194, 7}, zrt};
-    static rt eb11 [] = {{3425618705, 8}, zrt};
-    static rt e968 [] = {{4069575016, 9}, zrt};
-    static rt ef54 [] = {{2994294612, 10}, zrt};
-    static rt e269d[] = {{3013748381, 11}, zrt};
-    static rt e304f[] = {{8024143, 12}, {2779918415, 20}, zrt};
-    static rt e1acc[] = {{3066337996, 13}, zrt};
-    static rt e1a6c[] = {{2357598828, 14}, zrt};
-    static rt e30a1[] = {{567292065, 15}, zrt};
-    static rt e1c52[] = {{119774290, 16}, zrt};
-    static rt e113e[] = {{622072126, 17}, zrt};
-    static rt e1dc9[] = {{2618613193, 18}, zrt};
     static rt eaf  [] = {{785825967, 0}, zrt};
-    static rt e3ee2[] = {{2230812386, 1}, zrt};
-    static rt e3c87[] = {{3592584327, 2}, zrt};
-    static rt e2a4a[] = {{1492937290, 19}, zrt};
-    static rt e3c89[] = {{951958665, 21}, zrt};
-    static rt e1c8f[] = {{637410447, 22}, zrt};
-    static rt e18bd[] = {{3889551549, 23}, zrt};
-    static rt e3e08[] = {{3951492616, 24}, zrt};
-    static rt e1059[] = {{3410006105, 25}, zrt};
-    static rt e3a44[] = {{1862990404, 26}, zrt};
-    static rt e14b0[] = {{3317879984, 27}, zrt};
-    static rt e1779[] = {{807163769, 28}, zrt};
-    static rt e2c2b[] = {{2244488235, 29}, zrt};
-    static rt e8a8 [] = {{355911848, 30}, zrt};
-    static rt e11c8[] = {{3146469832, 31}, zrt};
-    static rt ee44 [] = {{1435569732, 32}, zrt};
-    static rt ed19 [] = {{2270940441, 33}, zrt};
-    static rt e1324[] = {{3406648100, 34}, zrt};
-    static rt e1a61[] = {{1958926945, 35}, zrt};
-    static rt e2450[] = {{2976048208, 36}, zrt};
-    static rt e2fb0[] = {{2668867504, 37}, zrt};
-    static rt e3e49[] = {{1797193289, 38}, zrt};
-    static rt e77a [] = {{3665676154, 39}, zrt};
-    static rt e3c26[] = {{719043622, 40}, zrt};
-    static rt e23cd[] = {{3151389645, 41}, zrt};
-    static rt e1d9f[] = {{916643231, 42}, zrt};
-    static rt e378e[] = {{210679694, 43}, zrt};
-    static rt e24cc[] = {{898376908, 44}, zrt};
-    static rt e29a0[] = {{3314182560, 45}, zrt};
-    static rt e2b96[] = {{3584813974, 46}, zrt};
     static rt e24c [] = {{985645644, 47}, zrt};
-    static rt e3289[] = {{846361225, 48}, zrt};
-    static rt e1648[] = {{89921096, 49}, zrt};
+    static rt e268 [] = {{874562152, 4}, zrt};
     static rt e2b5 [] = {{3031696053, 50}, zrt};
-    static rt e2815[] = {{822142997, 51}, zrt};
-    static rt e3ff8[] = {{1683128312, 52}, zrt};
-    static rt e3779[] = {{1680177017, 53}, zrt};
-    static rt e1a3b[] = {{129915451, 54}, zrt};
-    static rt e2938[] = {{1798924600, 55}, zrt};
+    static rt e77a [] = {{3665676154, 39}, zrt};
+    static rt e8a8 [] = {{355911848, 30}, zrt};
+    static rt e968 [] = {{4069575016, 9}, zrt};
+    static rt eb11 [] = {{3425618705, 8}, zrt};
+    static rt ed19 [] = {{2270940441, 33}, zrt};
+    static rt ee44 [] = {{1435569732, 32}, zrt};
+    static rt ef54 [] = {{2994294612, 10}, zrt};
     static rt efb2 [] = {{2018299826, 56}, zrt};
+    static rt e1059[] = {{3410006105, 25}, zrt};
+    static rt e113e[] = {{622072126, 17}, zrt};
+    static rt e11c8[] = {{3146469832, 31}, zrt};
+    static rt e1324[] = {{3406648100, 34}, zrt};
+    static rt e14b0[] = {{3317879984, 27}, zrt};
+    static rt e1648[] = {{89921096, 49}, zrt};
+    static rt e1779[] = {{807163769, 28}, zrt};
+    static rt e18bd[] = {{3889551549, 23}, zrt};
+    static rt e1a3b[] = {{129915451, 54}, zrt};
+    static rt e1a61[] = {{1958926945, 35}, zrt};
+    static rt e1a6c[] = {{2357598828, 14}, zrt};
+    static rt e1acc[] = {{3066337996, 13}, zrt};
+    static rt e1c52[] = {{119774290, 16}, zrt};
+    static rt e1c8f[] = {{637410447, 22}, zrt};
+    static rt e1d9f[] = {{916643231, 42}, zrt};
+    static rt e1dc9[] = {{2618613193, 18}, zrt};
+    static rt e22df[] = {{738091743, 6}, zrt};
+    static rt e23cd[] = {{3151389645, 41}, zrt};
+    static rt e2450[] = {{2976048208, 36}, zrt};
+    static rt e24cc[] = {{898376908, 44}, zrt};
+    static rt e269d[] = {{3013748381, 11}, zrt};
+    static rt e2815[] = {{822142997, 51}, zrt};
+    static rt e285a[] = {{2581358682, 5}, zrt};
+    static rt e2938[] = {{1798924600, 55}, zrt};
+    static rt e298a[] = {{2741709194, 7}, zrt};
+    static rt e29a0[] = {{3314182560, 45}, zrt};
+    static rt e2a4a[] = {{1492937290, 19}, zrt};
+    static rt e2b96[] = {{3584813974, 46}, zrt};
+    static rt e2c2b[] = {{2244488235, 29}, zrt};
+    static rt e2fb0[] = {{2668867504, 37}, zrt};
+    static rt e304f[] = {{8024143, 12}, {2779918415, 20}, zrt};
+    static rt e30a1[] = {{567292065, 15}, zrt};
+    static rt e3289[] = {{846361225, 48}, zrt};
+    static rt e353f[] = {{4189730111, 3}, zrt};
+    static rt e3779[] = {{1680177017, 53}, zrt};
+    static rt e378e[] = {{210679694, 43}, zrt};
+    static rt e3a44[] = {{1862990404, 26}, zrt};
+    static rt e3c26[] = {{719043622, 40}, zrt};
+    static rt e3c87[] = {{3592584327, 2}, zrt};
+    static rt e3c89[] = {{951958665, 21}, zrt};
+    static rt e3e08[] = {{3951492616, 24}, zrt};
+    static rt e3e49[] = {{1797193289, 38}, zrt};
+    static rt e3ee2[] = {{2230812386, 1}, zrt};
+    static rt e3ff8[] = {{1683128312, 52}, zrt};
 
 #ifndef __cplusplus
 #undef zrt
@@ -657,7 +657,14 @@ glatter_extension_support_status_WGL_t glatter_get_extension_support_WGL()
     if (!initialized) {
 
         uint32_t hash = 5381;
-        const uint8_t* ext_str = (const uint8_t*)glatter_wglGetExtensionsStringEXT();
+        const uint8_t* ext_str = NULL;
+        if (glatter_wglGetExtensionsStringEXT) {
+            ext_str = (const uint8_t*)glatter_wglGetExtensionsStringEXT();
+        }
+        if (!ext_str && glatter_wglGetExtensionsStringARB) {
+            HDC dc = wglGetCurrentDC();
+            ext_str = dc ? (const uint8_t*)glatter_wglGetExtensionsStringARB(dc) : NULL;
+        }
         for ( ; ext_str && *ext_str; ext_str++) {
             if (*ext_str == ' ') {
                 int index = -1;

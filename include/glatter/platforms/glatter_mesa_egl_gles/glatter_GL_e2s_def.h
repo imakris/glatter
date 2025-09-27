@@ -454,7 +454,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
         case 0x8006: return "GL_FUNC_ADD";
 #endif
         case 0x8007:
-#if defined(GL_OES_draw_buffers_indexed) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_OES_draw_buffers_indexed)
                     return "GL_MIN";
 #endif
 #if defined(GL_EXT_blend_minmax)
@@ -462,7 +462,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #endif
             break;
         case 0x8008:
-#if defined(GL_OES_draw_buffers_indexed) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_OES_draw_buffers_indexed)
                     return "GL_MAX";
 #endif
 #if defined(GL_EXT_blend_minmax)
@@ -583,7 +583,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
         case 0x806e: return "GL_UNPACK_IMAGE_HEIGHT";
 #endif
         case 0x806f:
-#if defined(GL_EXT_sparse_texture) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_EXT_sparse_texture)
                     return "GL_TEXTURE_3D";
 #endif
 #if defined(GL_OES_texture_3D)
@@ -748,7 +748,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
         case 0x8220: return "GL_BUFFER_STORAGE_FLAGS_EXT";
 #endif
         case 0x8221:
-#if defined(GL_EXT_tessellation_shader) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_EXT_tessellation_shader)
                     return "GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED";
 #endif
 #if defined(GL_OES_tessellation_shader)
@@ -1199,7 +1199,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
                     return "GL_TEXTURE_VIEW_NUM_LAYERS_OES";
 #endif
             break;
-#if defined(GL_OES_texture_view) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_OES_texture_view)
         case 0x82df: return "GL_TEXTURE_IMMUTABLE_LEVELS";
 #endif
         case 0x82e0:
@@ -1246,7 +1246,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
         case 0x82e5: return "GL_MAX_VERTEX_ATTRIB_STRIDE";
 #endif
         case 0x82e6:
-#if defined(GL_KHR_debug) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_KHR_debug)
                     return "GL_SAMPLER";
 #endif
 #if defined(GL_KHR_debug)
@@ -2274,7 +2274,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
                     return "GL_UNSIGNED_NORMALIZED_EXT";
 #endif
             break;
-#if defined(GL_EXT_sparse_texture) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_EXT_sparse_texture)
         case 0x8c1a: return "GL_TEXTURE_2D_ARRAY";
 #endif
 #if defined(GL_ES_VERSION_3_0)
@@ -3138,7 +3138,7 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(GL_NV_framebuffer_mixed_samples)
         case 0x8e20: return "GL_COLOR_SAMPLES_NV";
 #endif
-#if defined(GL_EXT_debug_label) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_EXT_debug_label)
         case 0x8e22: return "GL_TRANSFORM_FEEDBACK";
 #endif
 #if defined(GL_ES_VERSION_3_0)
@@ -3555,14 +3555,14 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(GL_EXT_texture_compression_astc_decode_mode)
         case 0x8f69: return "GL_TEXTURE_ASTC_DECODE_PRECISION_EXT";
 #endif
-#if defined(GL_EXT_render_snorm) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_EXT_render_snorm)
         case 0x8f94: return "GL_R8_SNORM";
         case 0x8f95: return "GL_RG8_SNORM";
 #endif
 #if defined(GL_ES_VERSION_3_0)
         case 0x8f96: return "GL_RGB8_SNORM";
 #endif
-#if defined(GL_EXT_render_snorm) || defined(GL_ES_VERSION_3_0)
+#if defined(GL_ES_VERSION_3_0) || defined(GL_EXT_render_snorm)
         case 0x8f97: return "GL_RGBA8_SNORM";
 #endif
 #if defined(GL_EXT_render_snorm)
@@ -3971,11 +3971,11 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
                     return "GL_CONTEXT_ROBUST_ACCESS_KHR";
 #endif
             break;
-#if defined(GL_NV_internalformat_sample_query) || defined(GL_ES_VERSION_3_1)
+#if defined(GL_ES_VERSION_3_1) || defined(GL_NV_internalformat_sample_query)
         case 0x9100: return "GL_TEXTURE_2D_MULTISAMPLE";
 #endif
         case 0x9102:
-#if defined(GL_NV_internalformat_sample_query) || defined(GL_ES_VERSION_3_2)
+#if defined(GL_ES_VERSION_3_2) || defined(GL_NV_internalformat_sample_query)
                     return "GL_TEXTURE_2D_MULTISAMPLE_ARRAY";
 #endif
 #if defined(GL_OES_texture_storage_multisample_2d_array)

@@ -149,15 +149,33 @@ void* glatter_get_proc_address(const char* function_name)
     ptr = (void*) eglGetProcAddress(function_name);
     if (ptr == 0) {
 #if defined(_WIN32)
-        ptr = (void*) GetProcAddress(GetModuleHandleA("libEGL.dll"), function_name);
-        if (ptr == 0) {
-            ptr = (void*) GetProcAddress(GetModuleHandleA("libGLES_CM.dll"), function_name);
-            if (ptr == 0) {
-                ptr = (void*) GetProcAddress(GetModuleHandleA("libGLESv2.dll"), function_name);
-                if (ptr == 0) {
-                    ptr = (void*) GetProcAddress(GetModuleHandleA("libGLESv3.dll"), function_name);
-                }
+        static HMODULE hEGL = NULL;
+        static HMODULE hGLES1 = NULL;
+        static HMODULE hGLES2 = NULL;
+        static HMODULE hGLES3 = NULL;
+        if (!ptr) {
+            if (!hEGL) hEGL = GetModuleHandleA("libEGL.dll");
+            if (!hEGL) hEGL = LoadLibraryA("libEGL.dll");
+            if (hEGL) ptr = (void*) GetProcAddress(hEGL, function_name);
+        }
+        if (!ptr) {
+            if (!hGLES1) {
+                hGLES1 = GetModuleHandleA("libGLESv1_CM.dll");
+                if (!hGLES1) hGLES1 = GetModuleHandleA("libGLES_CM.dll");
+                if (!hGLES1) hGLES1 = LoadLibraryA("libGLESv1_CM.dll");
+                if (!hGLES1) hGLES1 = LoadLibraryA("libGLES_CM.dll");
             }
+            if (hGLES1) ptr = (void*) GetProcAddress(hGLES1, function_name);
+        }
+        if (!ptr) {
+            if (!hGLES2) hGLES2 = GetModuleHandleA("libGLESv2.dll");
+            if (!hGLES2) hGLES2 = LoadLibraryA("libGLESv2.dll");
+            if (hGLES2) ptr = (void*) GetProcAddress(hGLES2, function_name);
+        }
+        if (!ptr) {
+            if (!hGLES3) hGLES3 = GetModuleHandleA("libGLESv3.dll");
+            if (!hGLES3) hGLES3 = LoadLibraryA("libGLESv3.dll");
+            if (hGLES3) ptr = (void*) GetProcAddress(hGLES3, function_name);
         }
 #elif defined (__linux__)
         static void* egl_handle = NULL;

@@ -32,7 +32,8 @@
 
 #if !defined(GLATTER_HAS_EGL_GENERATED_HEADERS)
 #if defined(__has_include)
-#if __has_include("glatter/platforms/glatter_mesa_egl_gles/glatter_EGL_ges_decl.h")
+#if __has_include("platforms/glatter_mesa_egl_gles/glatter_EGL_ges_decl.h") || \
+    __has_include("glatter/platforms/glatter_mesa_egl_gles/glatter_EGL_ges_decl.h")
 #define GLATTER_HAS_EGL_GENERATED_HEADERS 1
 #else
 #define GLATTER_HAS_EGL_GENERATED_HEADERS 0
@@ -150,6 +151,14 @@ typedef struct glatter_extension_support_status_EGL
     #define PRId64 "lld"
     #define PRIu64 "llu"
     #define PRIx64 "llx"
+  #endif
+#endif
+
+#ifndef GLATTER_FMT_ZU
+  #ifdef _MSC_VER
+    #define GLATTER_FMT_ZU "Iu"
+  #else
+    #define GLATTER_FMT_ZU "zu"
   #endif
 #endif
 
