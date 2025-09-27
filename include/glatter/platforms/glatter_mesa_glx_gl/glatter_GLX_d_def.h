@@ -31,11 +31,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(GLX_H)
 #if defined(GLX_ARB_get_proc_address)
 #ifndef glXGetProcAddressARB_defined
-GLATTER_FBLOCK(return, GLX, extern, __GLXextFuncPtr, , glXGetProcAddressARB, (a0), (const GLubyte *a0))
-GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddressARB_debug(const GLubyte *a0, const char* file, int line)
+GLATTER_FBLOCK(return, GLX, extern, __GLXextFuncPtr, , glXGetProcAddressARB, (*), (const GLubyte *))
+GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddressARB_debug(const GLubyte *, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glXGetProcAddressARB, "(%p)", (void*)a0)
-    __GLXextFuncPtr rval = glatter_glXGetProcAddressARB(a0);
+    GLATTER_DBLOCK(file, line, glXGetProcAddressARB, "(%p)", (void*)*)
+    __GLXextFuncPtr rval = glatter_glXGetProcAddressARB(*);
     GLATTER_RBLOCK("%s\n", GET_PRS(rval));
     GLATTER_CHECK_ERROR(GLX, file, line)
     return rval;

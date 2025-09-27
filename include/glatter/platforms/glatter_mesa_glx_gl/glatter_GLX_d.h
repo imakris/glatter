@@ -31,9 +31,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(GLX_H)
 #if defined(GLX_ARB_get_proc_address)
 #ifndef glXGetProcAddressARB
-#define glXGetProcAddressARB(a0) glatter_glXGetProcAddressARB_debug((a0), __FILE__, __LINE__)
+#define glXGetProcAddressARB(*) glatter_glXGetProcAddressARB_debug((*), __FILE__, __LINE__)
 #endif
-GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddressARB_debug(const GLubyte *a0, const char* file, int line);
+GLATTER_INLINE_OR_NOT __GLXextFuncPtr glatter_glXGetProcAddressARB_debug(const GLubyte *, const char* file, int line);
 #endif // defined(GLX_ARB_get_proc_address)
 #if defined(GLX_ARB_render_texture)
 #ifndef glXBindTexImageARB
