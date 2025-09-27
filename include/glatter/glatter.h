@@ -32,6 +32,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "glatter_config.h"
 #include "glatter_platform_headers.h"
 
+#if defined(__cplusplus) && __cplusplus >= 201103L
+#include <atomic>
+#endif
+
 #ifdef __cplusplus
 
 extern "C" {
