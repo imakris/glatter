@@ -198,9 +198,11 @@ void* glatter_get_proc_address(const char* function_name)
 #endif
     }
 #elif defined(GLATTER_WGL)
-    ptr = (void*) wglGetProcAddress(function_name);
-    if (ptr == 0)
-        ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("opengl32.dll")), function_name);
+    PROC a = wglGetProcAddress(function_name);
+    if (!a || a == (PROC)1 || a == (PROC)2 || a == (PROC)3 || a == (PROC)4) {
+        a = (PROC) GetProcAddress(GetModuleHandleA("opengl32.dll"), function_name);
+    }
+    ptr = (void*) a;
 #elif defined(GLATTER_GLX)
     ptr = (void*) glXGetProcAddress((const GLubyte*)function_name);
     if (ptr == 0) {
