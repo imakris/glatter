@@ -16,7 +16,7 @@ glClear(GL_COLOR_BUFFER_BIT);
 ### C (compiled translation unit)
 ```c
 #include <glatter/glatter.h>
-/* add src/glatter.c to your build */
+/* add src/glatter/glatter.c to your build */
 
 // Use GL entry points as usual
 glClear(GL_COLOR_BUFFER_BIT);
@@ -24,7 +24,7 @@ glClear(GL_COLOR_BUFFER_BIT);
 
 **Do not include the system GL headers** (e.g., `GL/gl.h`, `EGL/egl.h`) yourself; glatter pulls the right headers for you.
 
-Header‑only is enabled automatically for C++ when including `glatter_solo.h` or `glatter.h`. To use the compiled TU from C++ as well, define `GLATTER_NO_HEADER_ONLY` **before** including the header and add `src/glatter.c` to your build.
+Header‑only is enabled automatically for C++ when including `glatter_solo.h` or `glatter.h`. To use the compiled TU from C++ as well, define `GLATTER_NO_HEADER_ONLY` **before** including the header and add `src/glatter/glatter.c` to your build.
 
 ---
 
@@ -140,7 +140,7 @@ If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for your target, EGL/GLES helpers 
 ## 11) Integration notes
 
 - Include only `<glatter/...>` in your sources.
-- **C++:** header‑only by default; to use compiled mode define `GLATTER_NO_HEADER_ONLY` and add `src/glatter.c`.
+- **C++:** header‑only by default; to use compiled mode define `GLATTER_NO_HEADER_ONLY` and add `src/glatter/glatter.c`.
 - **Linking:**
   - Windows: link `opengl32` (and `EGL`/`GLES` DLLs if you use them).
   - Linux/BSD: link `GL`, `X11`, `pthread`, `dl` (and `EGL`/`GLES` if you use them).
@@ -151,7 +151,7 @@ If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for your target, EGL/GLES helpers 
 
 **C app (compiled TU):**
 ```cmake
-add_library(glatter src/glatter.c)
+add_library(glatter src/glatter/glatter.c)
 target_include_directories(glatter PUBLIC include)
 if(WIN32)
   target_link_libraries(glatter PUBLIC opengl32)
