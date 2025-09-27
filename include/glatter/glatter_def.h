@@ -34,6 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdarg.h>
 
 /*
  * In non header-only builds, include this header only from glatter.c so the
@@ -102,6 +103,23 @@ const char* glatter_log(const char* str)
     }
     (*(glatter_log_handler_ptr_ptr()))(message);
     return str;
+}
+
+
+GLATTER_INLINE_OR_NOT
+void glatter_log_printf(const char* fmt, ...)
+{
+    char buffer[2048];
+    va_list args;
+    va_start(args, fmt);
+    int written = vsnprintf(buffer, sizeof(buffer), fmt, args);
+    va_end(args);
+
+    if (written < 0) {
+        glatter_log(NULL);
+    } else {
+        glatter_log(buffer);
+    }
 }
 
 
@@ -208,16 +226,16 @@ void glatter_check_error_GL(const char* file, int line)
     if (err != GL_NO_ERROR) {
         //printf("GLATTER: in '%s'(%d):\n", file, line);
 
-        free((void*)glatter_log(glatter_masprintf(
+        glatter_log_printf(
             "GLATTER: in '%s'(%d):\n", file, line
-        )));
+        );
 
 
 
         //printf("GLATTER: OpenGL call produced %s error.\n", enum_to_string_GL(err));
-        free((void*)glatter_log(glatter_masprintf(
+        glatter_log_printf(
             "GLATTER: OpenGL call produced %s error.\n", enum_to_string_GL(err)
-        )));
+        );
 
     }
 }
@@ -251,9 +269,9 @@ int x_error_handler(Display *dsp, XErrorEvent *error)
     XGetErrorText(dsp, error->error_code, error_string, 128);
     //printf("X Error: %s\n", error_string);
 
-    free((void*)glatter_log(glatter_masprintf(
+    glatter_log_printf(
         "X Error: %s\n", error_string
-    )));
+    );
 
     return 0;
 }
@@ -322,9 +340,9 @@ void glatter_check_error_WGL(const char* file, int line)
 
     //printf("GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, buffer);
 
-    free((void*)glatter_log(glatter_masprintf(
+    glatter_log_printf(
         "GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, buffer
-    )));
+    );
 
     LocalFree(buffer);
 }
@@ -357,9 +375,9 @@ void glatter_check_error_EGL(const char* file, int line)
         //printf("GLATTER: EGL call produced %s error in %s(%d)\n",
         //    enum_to_string_EGL(err), file, line);
 
-        free((void*)glatter_log(glatter_masprintf(
+        glatter_log_printf(
             "GLATTER: EGL call produced %s error in %s(%d)\n", enum_to_string_EGL(err), file, line
-        )));
+        );
     }
 }
 
@@ -673,17 +691,17 @@ typedef struct glatter_es_record_struct
 
     #define GLATTER_DBLOCK(file, line, name, printf_fmt, ...) \
         glatter_pre_callback(file, line);                     \
-        free((void*)glatter_log(glatter_masprintf(            \
+        glatter_log_printf(                                   \
             "GLATTER: in '%s'(%d):\n", file, line             \
-        )));                                                  \
-        free((void*)glatter_log(glatter_masprintf(            \
+        );                                                    \
+        glatter_log_printf(                                   \
             "GLATTER: " #name printf_fmt "\n", ##__VA_ARGS__  \
-        )));
+        );
 
     #define GLATTER_RBLOCK(...)                               \
-        free((void*)glatter_log(glatter_masprintf(            \
+        glatter_log_printf(                                   \
             "GLATTER: returned " __VA_ARGS__                  \
-        )));
+        );
 
 
 #else
