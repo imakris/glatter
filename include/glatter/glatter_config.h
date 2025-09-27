@@ -37,6 +37,18 @@
 #endif
 
 
+#if defined(GLATTER_EGL_GLES_1_1)  ||\
+    defined(GLATTER_EGL_GLES2_2_0) ||\
+    defined(GLATTER_EGL_GLES_3_0)  ||\
+    defined(GLATTER_EGL_GLES_3_1)  ||\
+    defined(GLATTER_EGL_GLES_3_2)
+
+    #ifndef GLATTER_MESA_EGL_GLES
+        #define GLATTER_MESA_EGL_GLES
+    #endif
+
+#endif
+
 
 ////////////////////////////////
 // Explicit wrapper selection //
