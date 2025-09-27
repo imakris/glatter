@@ -1147,7 +1147,7 @@ typedef struct glatter_es_record_struct
 
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
-    inline rtype cconv glatter_##name dargs\
+    static inline rtype cconv glatter_##name dargs\
     {\
         static glatter_##name##_t s_f_ptr = NULL;\
         if (!s_f_ptr) {\
