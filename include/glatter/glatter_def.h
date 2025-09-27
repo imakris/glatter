@@ -36,6 +36,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
 #undef GLATTER_HAS_ATOMIC_LOG_HANDLER
 #if defined(__cplusplus)
@@ -91,7 +93,7 @@ GLATTER_EXTERN_C_BEGIN
 
  #ifdef GLATTER_HEADER_ONLY
     #undef GLATTER_INLINE_OR_NOT
-    #define GLATTER_INLINE_OR_NOT inline
+    #define GLATTER_INLINE_OR_NOT static inline
  #else
     #undef GLATTER_INLINE_OR_NOT
     #define GLATTER_INLINE_OR_NOT
@@ -232,119 +234,405 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*))
 }
 
 
+typedef int glatter_provider_t;
+
+#ifndef GLATTER_PROVIDER_AUTO_VALUE
+#define GLATTER_PROVIDER_AUTO_VALUE 0
+#define GLATTER_PROVIDER_WGL_VALUE  1
+#define GLATTER_PROVIDER_GLX_VALUE  2
+#define GLATTER_PROVIDER_EGL_VALUE  3
+#endif
+
+#if defined(_WIN32)
+typedef void* (WINAPI *glatter_egl_get_proc_fn)(const char*);
+static const char* const glatter_windows_egl_names[] = {
+    "libEGL.dll",
+    "EGL.dll"
+};
+
+#define GLATTER_WINDOWS_GLES_MODULE_COUNT 3
+static const char* const glatter_windows_gles_names[GLATTER_WINDOWS_GLES_MODULE_COUNT][4] = {
+    { "libGLESv3.dll", "GLESv3.dll", NULL, NULL },
+    { "libGLESv2.dll", "GLESv2.dll", NULL, NULL },
+    { "libGLESv1_CM.dll", "GLESv1_CM.dll", "libGLES_CM.dll", "GLES_CM.dll" }
+};
+#else
+#define GLATTER_GL_SONAME_COUNT 2
+#define GLATTER_EGL_SONAME_COUNT 2
+#define GLATTER_GLES_SONAME_COUNT 8
+static const char* const glatter_gl_sonames[GLATTER_GL_SONAME_COUNT] = {
+    "libGL.so.1",
+    "libGL.so"
+};
+static const char* const glatter_egl_sonames[GLATTER_EGL_SONAME_COUNT] = {
+    "libEGL.so.1",
+    "libEGL.so"
+};
+static const char* const glatter_gles_sonames[GLATTER_GLES_SONAME_COUNT] = {
+    "libGLESv3.so.3",
+    "libGLESv3.so",
+    "libGLESv2.so.2",
+    "libGLESv2.so",
+    "libGLESv1_CM.so.1",
+    "libGLESv1_CM.so",
+    "libGLES_CM.so.1",
+    "libGLES_CM.so"
+};
+#endif
+
+typedef struct glatter_loader_state {
+    glatter_provider_t requested;
+    glatter_provider_t active;
+    int provider_explicit;
+    int env_checked;
+#if defined(_WIN32)
+    HMODULE opengl32_module;
+    HMODULE egl_module;
+    HMODULE gles_modules[GLATTER_WINDOWS_GLES_MODULE_COUNT];
+    PROC (WINAPI *wgl_get_proc)(LPCSTR);
+    glatter_egl_get_proc_fn egl_get_proc;
+#else
+    void* gl_handles[GLATTER_GL_SONAME_COUNT];
+    unsigned char gl_tried[GLATTER_GL_SONAME_COUNT];
+    void* egl_handles[GLATTER_EGL_SONAME_COUNT];
+    unsigned char egl_tried[GLATTER_EGL_SONAME_COUNT];
+    void* gles_handles[GLATTER_GLES_SONAME_COUNT];
+    unsigned char gles_tried[GLATTER_GLES_SONAME_COUNT];
+    void* (*glx_get_proc)(const GLubyte*);
+    void* (*egl_get_proc)(const char*);
+#endif
+#if defined(GLATTER_GLX) && !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
+    int glx_error_handler_installed;
+#endif
+} glatter_loader_state;
+
+static glatter_loader_state* glatter_loader_state_get(void)
+{
+    static glatter_loader_state state = {
+#if defined(GLATTER_WGL) && !defined(GLATTER_GLX) && !defined(GLATTER_EGL)
+        GLATTER_PROVIDER_WGL_VALUE,
+#elif defined(GLATTER_GLX) && !defined(GLATTER_EGL) && !defined(GLATTER_WGL)
+        GLATTER_PROVIDER_GLX_VALUE,
+#elif defined(GLATTER_EGL) && !defined(GLATTER_GLX) && !defined(GLATTER_WGL)
+        GLATTER_PROVIDER_EGL_VALUE,
+#else
+        GLATTER_PROVIDER_AUTO_VALUE,
+#endif
+        GLATTER_PROVIDER_AUTO_VALUE,
+        0,
+        0
+    };
+    return &state;
+}
+
+static int glatter_equals_ignore_case(const char* a, const char* b)
+{
+    if (!a || !b) {
+        return 0;
+    }
+    while (*a && *b) {
+        if (tolower((unsigned char)*a) != tolower((unsigned char)*b)) {
+            return 0;
+        }
+        ++a;
+        ++b;
+    }
+    return *a == '\0' && *b == '\0';
+}
+
+static void glatter_detect_provider_from_env(glatter_loader_state* state)
+{
+    if (state->env_checked || state->provider_explicit) {
+        state->env_checked = 1;
+        return;
+    }
+
+    state->env_checked = 1;
+    const char* env = getenv("GLATTER_PROVIDER");
+    if (!env || !*env) {
+        return;
+    }
+
+    if (glatter_equals_ignore_case(env, "wgl")) {
+        state->requested = GLATTER_PROVIDER_WGL_VALUE;
+    } else if (glatter_equals_ignore_case(env, "glx")) {
+        state->requested = GLATTER_PROVIDER_GLX_VALUE;
+    } else if (glatter_equals_ignore_case(env, "egl")) {
+        state->requested = GLATTER_PROVIDER_EGL_VALUE;
+    }
+}
+
+#if defined(_WIN32)
+static HMODULE glatter_windows_load_module(HMODULE* cache, const char* const* names, size_t count)
+{
+    if (*cache) {
+        return *cache;
+    }
+    for (size_t i = 0; i < count; ++i) {
+        const char* name = names[i];
+        if (!name || !*name) {
+            continue;
+        }
+        HMODULE module = GetModuleHandleA(name);
+        if (!module) {
+            module = LoadLibraryA(name);
+        }
+        if (module) {
+            *cache = module;
+            return module;
+        }
+    }
+    return NULL;
+}
+
+static void* glatter_windows_resolve_wgl(glatter_loader_state* state, const char* name)
+{
+    static const char* const opengl_names[] = { "opengl32.dll" };
+    glatter_windows_load_module(&state->opengl32_module, opengl_names, sizeof(opengl_names) / sizeof(opengl_names[0]));
+
+    if (state->opengl32_module && !state->wgl_get_proc) {
+        state->wgl_get_proc = (PROC (WINAPI*)(LPCSTR))GetProcAddress(state->opengl32_module, "wglGetProcAddress");
+    }
+
+    if (state->wgl_get_proc) {
+        PROC proc = state->wgl_get_proc(name);
+        if (proc && proc != (PROC)1 && proc != (PROC)2 && proc != (PROC)3 && proc != (PROC)4 && proc != (PROC)-1) {
+            return (void*)proc;
+        }
+    }
+
+    if (state->opengl32_module) {
+        PROC proc = (PROC)GetProcAddress(state->opengl32_module, name);
+        if (proc) {
+            return (void*)proc;
+        }
+    }
+
+    return NULL;
+}
+
+static void* glatter_windows_resolve_egl(glatter_loader_state* state, const char* name)
+{
+    glatter_windows_load_module(&state->egl_module, glatter_windows_egl_names, sizeof(glatter_windows_egl_names) / sizeof(glatter_windows_egl_names[0]));
+
+    if (state->egl_module && !state->egl_get_proc) {
+        state->egl_get_proc = (glatter_egl_get_proc_fn)GetProcAddress(state->egl_module, "eglGetProcAddress");
+    }
+
+    if (state->egl_get_proc) {
+        void* sym = state->egl_get_proc(name);
+        if (sym) {
+            return sym;
+        }
+    }
+
+    if (state->egl_module) {
+        void* sym = (void*)GetProcAddress(state->egl_module, name);
+        if (sym) {
+            return sym;
+        }
+    }
+
+    if (name && name[0] == 'g' && name[1] == 'l') {
+        for (size_t i = 0; i < GLATTER_WINDOWS_GLES_MODULE_COUNT; ++i) {
+            glatter_windows_load_module(&state->gles_modules[i], glatter_windows_gles_names[i], sizeof(glatter_windows_gles_names[i]) / sizeof(glatter_windows_gles_names[i][0]));
+            if (state->gles_modules[i]) {
+                void* sym = (void*)GetProcAddress(state->gles_modules[i], name);
+                if (sym) {
+                    return sym;
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+#else
+static void glatter_linux_load_handles(void** handles, unsigned char* tried, size_t count, const char* const* names)
+{
+    for (size_t i = 0; i < count; ++i) {
+        if (!tried[i]) {
+            handles[i] = dlopen(names[i], RTLD_LAZY | RTLD_LOCAL);
+            tried[i] = 1;
+        }
+    }
+}
+
+static void* glatter_linux_lookup_in_handles(void** handles, size_t count, const char* name)
+{
+    for (size_t i = 0; i < count; ++i) {
+        if (handles[i]) {
+            void* sym = dlsym(handles[i], name);
+            if (sym) {
+                return sym;
+            }
+        }
+    }
+    return NULL;
+}
+
+static void* glatter_linux_lookup_glx(glatter_loader_state* state, const char* name)
+{
+    glatter_linux_load_handles(state->gl_handles, state->gl_tried, GLATTER_GL_SONAME_COUNT, glatter_gl_sonames);
+
+    if (!state->glx_get_proc) {
+        for (size_t i = 0; i < GLATTER_GL_SONAME_COUNT; ++i) {
+            if (state->gl_handles[i]) {
+                state->glx_get_proc = (void* (*)(const GLubyte*))dlsym(state->gl_handles[i], "glXGetProcAddressARB");
+                if (!state->glx_get_proc) {
+                    state->glx_get_proc = (void* (*)(const GLubyte*))dlsym(state->gl_handles[i], "glXGetProcAddress");
+                }
+                if (state->glx_get_proc) {
+                    break;
+                }
+            }
+        }
+    }
+
+    if (state->glx_get_proc) {
+        void* sym = state->glx_get_proc((const GLubyte*)name);
+        if (sym) {
+            return sym;
+        }
+    }
+
+    return glatter_linux_lookup_in_handles(state->gl_handles, GLATTER_GL_SONAME_COUNT, name);
+}
+
+static void* glatter_linux_lookup_egl(glatter_loader_state* state, const char* name)
+{
+    glatter_linux_load_handles(state->egl_handles, state->egl_tried, GLATTER_EGL_SONAME_COUNT, glatter_egl_sonames);
+
+    if (!state->egl_get_proc) {
+        for (size_t i = 0; i < GLATTER_EGL_SONAME_COUNT; ++i) {
+            if (state->egl_handles[i]) {
+                state->egl_get_proc = (void* (*)(const char*))dlsym(state->egl_handles[i], "eglGetProcAddress");
+                if (state->egl_get_proc) {
+                    break;
+                }
+            }
+        }
+    }
+
+    if (state->egl_get_proc) {
+        void* sym = state->egl_get_proc(name);
+        if (sym) {
+            return sym;
+        }
+    }
+
+    void* sym = glatter_linux_lookup_in_handles(state->egl_handles, GLATTER_EGL_SONAME_COUNT, name);
+    if (sym) {
+        return sym;
+    }
+
+    if (name && name[0] == 'g' && name[1] == 'l') {
+        glatter_linux_load_handles(state->gles_handles, state->gles_tried, GLATTER_GLES_SONAME_COUNT, glatter_gles_sonames);
+        return glatter_linux_lookup_in_handles(state->gles_handles, GLATTER_GLES_SONAME_COUNT, name);
+    }
+
+    return NULL;
+}
+#endif
+
+GLATTER_INLINE_OR_NOT
+void glatter_set_provider(int provider)
+{
+    glatter_loader_state* state = glatter_loader_state_get();
+    glatter_provider_t value = (glatter_provider_t)provider;
+    switch (value) {
+        case GLATTER_PROVIDER_WGL_VALUE:
+        case GLATTER_PROVIDER_GLX_VALUE:
+        case GLATTER_PROVIDER_EGL_VALUE:
+        case GLATTER_PROVIDER_AUTO_VALUE:
+            break;
+        default:
+            value = GLATTER_PROVIDER_AUTO_VALUE;
+            break;
+    }
+    state->requested = value;
+    state->provider_explicit = 1;
+    state->active = GLATTER_PROVIDER_AUTO_VALUE;
+}
+
+GLATTER_INLINE_OR_NOT
+int glatter_get_provider(void)
+{
+    glatter_loader_state* state = glatter_loader_state_get();
+    glatter_detect_provider_from_env(state);
+    if (state->active != GLATTER_PROVIDER_AUTO_VALUE) {
+        return state->active;
+    }
+    return state->requested;
+}
+
 GLATTER_INLINE_OR_NOT
 void* glatter_get_proc_address(const char* function_name)
 {
-    void* ptr = 0;
-#if defined(GLATTER_EGL)
-    ptr = (void*) eglGetProcAddress(function_name);
-    if (ptr == 0) {
+    glatter_loader_state* state = glatter_loader_state_get();
+    glatter_detect_provider_from_env(state);
+
 #if defined(_WIN32)
-        static HMODULE hEGL = NULL;
-        static HMODULE hGLES1 = NULL;
-        static HMODULE hGLES2 = NULL;
-        static HMODULE hGLES3 = NULL;
-        if (!ptr) {
-            if (!hEGL) hEGL = GetModuleHandleA("libEGL.dll");
-            if (!hEGL) hEGL = GetModuleHandleA("EGL.dll");
-            if (!hEGL) hEGL = LoadLibraryA("libEGL.dll");
-            if (!hEGL) hEGL = LoadLibraryA("EGL.dll");
-            if (hEGL) ptr = (void*) GetProcAddress(hEGL, function_name);
+    if (state->requested == GLATTER_PROVIDER_WGL_VALUE) {
+        void* ptr = glatter_windows_resolve_wgl(state, function_name);
+        if (ptr) {
+            state->active = GLATTER_PROVIDER_WGL_VALUE;
         }
-        if (!ptr) {
-            if (!hGLES1) {
-                hGLES1 = GetModuleHandleA("libGLESv1_CM.dll");
-                if (!hGLES1) hGLES1 = GetModuleHandleA("libGLES_CM.dll");
-                if (!hGLES1) hGLES1 = GetModuleHandleA("GLESv1_CM.dll");
-                if (!hGLES1) hGLES1 = GetModuleHandleA("GLES_CM.dll");
-                if (!hGLES1) hGLES1 = LoadLibraryA("libGLESv1_CM.dll");
-                if (!hGLES1) hGLES1 = LoadLibraryA("libGLES_CM.dll");
-                if (!hGLES1) hGLES1 = LoadLibraryA("GLESv1_CM.dll");
-                if (!hGLES1) hGLES1 = LoadLibraryA("GLES_CM.dll");
-            }
-            if (hGLES1) ptr = (void*) GetProcAddress(hGLES1, function_name);
+        return ptr;
+    }
+
+    if (state->requested == GLATTER_PROVIDER_EGL_VALUE) {
+        void* ptr = glatter_windows_resolve_egl(state, function_name);
+        if (ptr) {
+            state->active = GLATTER_PROVIDER_EGL_VALUE;
         }
-        if (!ptr) {
-            if (!hGLES2) hGLES2 = GetModuleHandleA("libGLESv2.dll");
-            if (!hGLES2) hGLES2 = GetModuleHandleA("GLESv2.dll");
-            if (!hGLES2) hGLES2 = LoadLibraryA("libGLESv2.dll");
-            if (!hGLES2) hGLES2 = LoadLibraryA("GLESv2.dll");
-            if (hGLES2) ptr = (void*) GetProcAddress(hGLES2, function_name);
-        }
-        if (!ptr) {
-            if (!hGLES3) hGLES3 = GetModuleHandleA("libGLESv3.dll");
-            if (!hGLES3) hGLES3 = GetModuleHandleA("GLESv3.dll");
-            if (!hGLES3) hGLES3 = LoadLibraryA("libGLESv3.dll");
-            if (!hGLES3) hGLES3 = LoadLibraryA("GLESv3.dll");
-            if (hGLES3) ptr = (void*) GetProcAddress(hGLES3, function_name);
-        }
-#elif defined (__linux__)
-        static void* egl_handle = NULL;
-        static int egl_tried = 0;
-        if (!egl_tried) {
-            static const char* egl_sonames[] = {
-                "libEGL.so",
-                "libEGL.so.1",
-                NULL
-            };
-            for (int i = 0; egl_sonames[i] != NULL && egl_handle == NULL; ++i) {
-                egl_handle = dlopen(egl_sonames[i], RTLD_LAZY);
-            }
-            egl_tried = 1;
-        }
-        if (egl_handle != NULL) {
-            ptr = (void*) dlsym(egl_handle, function_name);
-        }
-        if (ptr == 0) {
-            static void* gles_handle = NULL;
-            static int gles_tried = 0;
-            if (!gles_tried) {
-                static const char* gles_sonames[] = {
-                    "libGLES_CM.so",
-                    "libGLESv1_CM.so",
-                    "libGLESv1_CM.so.1",
-                    "libGLESv1_CM.so.2",
-                    "libGLESv2.so",
-                    "libGLESv2.so.1",
-                    "libGLESv2.so.2",
-                    "libGLESv3.so",
-                    NULL
-                };
-                for (int i = 0; gles_sonames[i] != NULL && gles_handle == NULL; ++i) {
-                    gles_handle = dlopen(gles_sonames[i], RTLD_LAZY);
-                }
-                gles_tried = 1;
-            }
-            if (gles_handle != NULL) {
-                ptr = (void*) dlsym(gles_handle, function_name);
-            }
-        }
+        return ptr;
+    }
+
+    void* ptr = glatter_windows_resolve_wgl(state, function_name);
+    if (ptr) {
+        state->active = GLATTER_PROVIDER_WGL_VALUE;
+        return ptr;
+    }
+
+    ptr = glatter_windows_resolve_egl(state, function_name);
+    if (ptr) {
+        state->active = GLATTER_PROVIDER_EGL_VALUE;
+        return ptr;
+    }
+
+    return NULL;
 #else
-#error There is no implementation for your platform. Your contribution would be greatly appreciated!
-#endif
-    }
-#elif defined(GLATTER_WGL)
-    PROC a = wglGetProcAddress(function_name);
-    if (!a || a == (PROC)1 || a == (PROC)2 || a == (PROC)3 || a == (PROC)4 || a == (PROC)-1) {
-        HMODULE h = GetModuleHandleA("opengl32.dll");
-        if (!h) h = LoadLibraryA("opengl32.dll");
-        if (h) a = (PROC) GetProcAddress(h, function_name);
-    }
-    ptr = (void*) a;
-#elif defined(GLATTER_GLX)
-    ptr = (void*) glXGetProcAddress((const GLubyte*)function_name);
-    if (ptr == 0) {
-        static void* gl_handle = NULL;
-        static int gl_tried = 0;
-        if (!gl_tried) {
-            static const char* sons[] = { "libGL.so.1", "libGL.so", NULL };
-            for (int i = 0; !gl_handle && sons[i]; ++i) gl_handle = dlopen(sons[i], RTLD_LAZY);
-            gl_tried = 1;
+    if (state->requested == GLATTER_PROVIDER_GLX_VALUE) {
+        void* ptr = glatter_linux_lookup_glx(state, function_name);
+        if (ptr) {
+            state->active = GLATTER_PROVIDER_GLX_VALUE;
         }
-        if (gl_handle) ptr = (void*) dlsym(gl_handle, function_name);
+        return ptr;
     }
+
+    if (state->requested == GLATTER_PROVIDER_EGL_VALUE) {
+        void* ptr = glatter_linux_lookup_egl(state, function_name);
+        if (ptr) {
+            state->active = GLATTER_PROVIDER_EGL_VALUE;
+        }
+        return ptr;
+    }
+
+    void* ptr = glatter_linux_lookup_glx(state, function_name);
+    if (ptr) {
+        state->active = GLATTER_PROVIDER_GLX_VALUE;
+        return ptr;
+    }
+
+    ptr = glatter_linux_lookup_egl(state, function_name);
+    if (ptr) {
+        state->active = GLATTER_PROVIDER_EGL_VALUE;
+        return ptr;
+    }
+
+    return NULL;
 #endif
-    return ptr;
 }
 
 
@@ -416,22 +704,26 @@ void* glatter_get_proc_address_GLX_init(const char* function_name);
 GLATTER_INLINE_OR_NOT
 void* glatter_get_proc_address_GLX(const char* function_name)
 {
+    void* ptr = glatter_get_proc_address(function_name);
+
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
-    static int initialized = 0;
-    if (!initialized) {
-        /* Xlib error handlers are process-global. Installing this handler
-           replaces any handler the application has already installed. If the
-           application needs a custom handler or performs multi-threaded Xlib
-           work without calling XInitThreads() early, define
-           GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER and install a handler
-           manually. */
-        XSetErrorHandler(x_error_handler);
-        glatter_log("GLATTER: installed default X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
-        initialized = 1;
+    if (ptr) {
+        glatter_loader_state* state = glatter_loader_state_get();
+        if (!state->glx_error_handler_installed && state->active == GLATTER_PROVIDER_GLX_VALUE) {
+            /* Xlib error handlers are process-global. Installing this handler
+               replaces any handler the application has already installed. If the
+               application needs a custom handler or performs multi-threaded Xlib
+               work without calling XInitThreads() early, define
+               GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER and install a handler
+               manually. */
+            XSetErrorHandler(x_error_handler);
+            glatter_log("GLATTER: installed default X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
+            state->glx_error_handler_installed = 1;
+        }
     }
 #endif //!defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
 
-    return glatter_get_proc_address(function_name);
+    return ptr;
 }
 
 
@@ -855,7 +1147,7 @@ typedef struct glatter_es_record_struct
 
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
-    inline rtype cconv glatter_##name dargs\
+    static inline rtype cconv glatter_##name dargs\
     {\
         static glatter_##name##_t s_f_ptr = NULL;\
         if (!s_f_ptr) {\

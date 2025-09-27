@@ -2,11 +2,33 @@
 #ifndef GLATTER_PLATFORM_HEADERS_H_DEFINED
 #define GLATTER_PLATFORM_HEADERS_H_DEFINED
 
+/* Auto-select a platform bundle unless the user specifies one. */
+#ifndef GLATTER_PLATFORM_DIR
+# if defined(GLATTER_WINDOWS_WGL_GL)
+#   define GLATTER_PLATFORM_DIR glatter_windows_wgl_gl
+# elif defined(GLATTER_MESA_EGL_GLES)
+#   define GLATTER_PLATFORM_DIR glatter_mesa_egl_gles
+# elif defined(GLATTER_MESA_GLX_GL)
+#   define GLATTER_PLATFORM_DIR glatter_mesa_glx_gl
+# elif defined(_WIN32)
+#   define GLATTER_PLATFORM_DIR glatter_windows_wgl_gl
+# elif defined(__ANDROID__) || defined(__EMSCRIPTEN__)
+#   define GLATTER_PLATFORM_DIR glatter_mesa_egl_gles
+# else
+#   define GLATTER_PLATFORM_DIR glatter_mesa_glx_gl
+# endif
+#endif
+
 // WARNING: This file is parsed by glatter.py. Keep the structure simple:
 // - Each platform lives in a single #if / #elif block.
 // - Inside that block there must be a line:
 //     #define GLATTER_PLATFORM_DIR <platform_dir_name>
 // - Put one #include per line, without trailing comments.
+
+/* Ensure Mesa-supplied gl.h headers use our packaged extension headers. */
+#if !defined(GL_GLEXT_LEGACY)
+#define GL_GLEXT_LEGACY 1
+#endif
 
 /* -----------------------------------------------------------
    Platform selection
@@ -46,6 +68,7 @@
 #if defined(GLATTER_WINDOWS_WGL_GL)
 
 /* ---------------- Windows: WGL + desktop GL ---------------- */
+#undef GLATTER_PLATFORM_DIR
 #define GLATTER_PLATFORM_DIR glatter_windows_wgl_gl
 
 /* Windows macros (WINGDIAPI, APIENTRY) come from <windows.h> */
@@ -74,17 +97,18 @@
 #elif defined(GLATTER_MESA_GLX_GL)
 
 /* ---------------- Linux/BSD: GLX + desktop GL -------------- */
+#undef GLATTER_PLATFORM_DIR
 #define GLATTER_PLATFORM_DIR glatter_mesa_glx_gl
 
 /* Core desktop GL for Mesa (paths corrected for your tree) */
 #include "headers/mesa_gl_basic/gl.h"
 
+/* Desktop GL extensions */
+#include "headers/khronos_gl/glext.h"
+
 /* GLX core + extensions */
 #include "headers/mesa_gl_basic/glx.h"
 #include "headers/khronos_gl/glxext.h"
-
-/* Desktop GL extensions */
-#include "headers/khronos_gl/glext.h"
 
 /* Optional GLU (your GLU lives under sgi_glu) */
 #if defined(GLATTER_GLU)
@@ -99,6 +123,7 @@
 #elif defined(GLATTER_MESA_EGL_GLES)
 
 /* ---------------- Any: EGL + OpenGL ES --------------------- */
+#undef GLATTER_PLATFORM_DIR
 #define GLATTER_PLATFORM_DIR glatter_mesa_egl_gles
 
 #if !GLATTER_HAS_EGL_GENERATED_HEADERS
