@@ -1,3 +1,4 @@
+// NEW 3
 #ifndef GLATTER_MASPRINTF_H
 #define GLATTER_MASPRINTF_H
 
@@ -7,14 +8,8 @@
 #include <stdarg.h> /* needed for va_*         */
 
 /*
- * vscprintf:
- * MSVC implements this as _vscprintf, thus we just 'symlink' it here
- * GNU-C-compatible compilers do not implement this, thus we implement it here
+ * Configure inline keyword usage
  */
-#ifdef _MSC_VER
-#define vscprintf _vscprintf
-#endif
-
 #ifndef GLATTER_MASPRINTF_INLINE
 # ifdef GLATTER_INLINE_OR_NOT
 #  define GLATTER_MASPRINTF_INLINE static GLATTER_INLINE_OR_NOT
@@ -26,6 +21,25 @@
 #  define GLATTER_MASPRINTF_INLINE static
 # endif
 #endif
+
+/*
+ * vscprintf:
+ * MSVC implements this as _vscprintf, thus we just 'symlink' it here
+ * GNU-C-compatible compilers do not implement this, thus we implement it here
+ */
+#ifdef _MSC_VER
+#define vscprintf _vscprintf
+#elif !defined(__GNUC__)
+GLATTER_MASPRINTF_INLINE int vscprintf(const char* format, va_list ap)
+{
+    va_list ap_copy;
+    va_copy(ap_copy, ap);
+    int retval = vsnprintf(NULL, 0, format, ap_copy);
+    va_end(ap_copy);
+    return retval;
+}
+#endif
+
 
 #ifdef __GNUC__
 GLATTER_MASPRINTF_INLINE int vscprintf(const char* format, va_list ap);

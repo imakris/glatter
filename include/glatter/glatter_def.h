@@ -1,4 +1,4 @@
-//NEW 2
+//NEW 3
 
 /*
 Copyright 2018 Ioannis Makris
@@ -33,8 +33,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <glatter/glatter_masprintf.h>
 
 #include <assert.h>
-#include <stdio.h>
 #include <stdarg.h>
+#include <stdio.h>
+
+#if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
+    #include <dlfcn.h>
+    #include <pthread.h>
+#endif
 
 /*
  * In non header-only builds, include this header only from glatter.c so the
@@ -66,6 +71,9 @@ GLATTER_EXTERN_C_BEGIN
 #if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
     #if __cplusplus < 201103L && !defined(_MSC_VER)
         #error "Header-only mode requires C++11 for thread-safe local statics."
+    #endif
+    #if defined(_MSC_VER) && _MSC_VER < 1900
+        #error "Header-only mode requires MSVC 2015 (19.0) or newer."
     #endif
 #endif
 
@@ -141,10 +149,10 @@ void* glatter_get_proc_address(const char* function_name)
     ptr = (void*) eglGetProcAddress(function_name);
     if (ptr == 0) {
 #if defined(_WIN32)
-        ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("libEGL.dll")), function_name);
+        ptr = (void*) GetProcAddress(GetModuleHandleA("libEGL.dll"), function_name);
     }
     if (ptr == 0) {
-        ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("libGLES_CM.dll")), function_name);
+        ptr = (void*) GetProcAddress(GetModuleHandleA("libGLES_CM.dll"), function_name);
 #elif defined (__linux__)
         static void* egl_handle = NULL;
         static int egl_tried = 0;
@@ -174,6 +182,7 @@ void* glatter_get_proc_address(const char* function_name)
                 "libGLESv1_CM.so",
                 "libGLESv1_CM.so.1",
                 "libGLESv2.so",
+                "libGLESv2.so.1",
                 "libGLESv2.so.2",
                 "libGLESv3.so",
                 NULL
@@ -331,17 +340,17 @@ void glatter_check_error_WGL(const char* file, int line)
     if(eid == 0)
         return;
 
-    LPSTR buffer = 0;
+    LPVOID buffer = NULL;
     FormatMessageA(
         FORMAT_MESSAGE_ALLOCATE_BUFFER |
         FORMAT_MESSAGE_FROM_SYSTEM |
         FORMAT_MESSAGE_IGNORE_INSERTS, NULL,
-        eid, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR*)&buffer, 0, NULL);
+        eid, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&buffer, 0, NULL);
 
     //printf("GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, buffer);
 
     glatter_log_printf(
-        "GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, buffer
+        "GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, (char*)buffer
     );
 
     LocalFree(buffer);
