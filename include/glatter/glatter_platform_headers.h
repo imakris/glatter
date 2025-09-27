@@ -14,7 +14,33 @@
      - GLATTER_WINDOWS_WGL_GL
      - GLATTER_MESA_GLX_GL
      - GLATTER_MESA_EGL_GLES
+
+   When consumers bypass glatter_config.h (e.g., by defining
+   GLATTER_CONFIG_H_DEFINED and providing configuration flags via the
+   compiler command line) we still want the convenience macros that
+   glatter_config.h would normally emit.  In particular the GLES
+   profiles imply the use of the Mesa EGL + GLES platform.  Mirror that
+   logic here so that the public headers can be used without pulling in
+   glatter_config.h while still getting the correct platform selection.
    ----------------------------------------------------------- */
+
+#if (defined(GLATTER_EGL_GLES_1_1) || defined(GLATTER_EGL_GLES2_2_0) || \
+     defined(GLATTER_EGL_GLES_3_0) || defined(GLATTER_EGL_GLES_3_1)  || \
+     defined(GLATTER_EGL_GLES_3_2)) && !defined(GLATTER_MESA_EGL_GLES)
+#define GLATTER_MESA_EGL_GLES
+#endif
+
+#if !defined(GLATTER_HAS_EGL_GENERATED_HEADERS)
+#if defined(__has_include)
+#if __has_include("glatter/platforms/glatter_mesa_egl_gles/glatter_EGL_ges_decl.h")
+#define GLATTER_HAS_EGL_GENERATED_HEADERS 1
+#else
+#define GLATTER_HAS_EGL_GENERATED_HEADERS 0
+#endif
+#else
+#define GLATTER_HAS_EGL_GENERATED_HEADERS 0
+#endif
+#endif
 
 #if defined(GLATTER_WINDOWS_WGL_GL)
 
@@ -73,6 +99,13 @@
 
 /* ---------------- Any: EGL + OpenGL ES --------------------- */
 #define GLATTER_PLATFORM_DIR glatter_mesa_egl_gles
+
+#if !GLATTER_HAS_EGL_GENERATED_HEADERS
+typedef struct glatter_extension_support_status_EGL
+{
+    int dummy;
+} glatter_extension_support_status_EGL_t;
+#endif
 
 /* EGL core + extensions */
 #include "headers/khronos_egl/egl.h"

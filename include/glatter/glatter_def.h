@@ -782,7 +782,7 @@ typedef struct glatter_es_record_struct
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_d_def.h)
     #endif
 
-    #if defined(GLATTER_EGL)
+    #if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_d_def.h)
     #endif
 
@@ -804,7 +804,7 @@ typedef struct glatter_es_record_struct
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_r_def.h)
     #endif
 
-    #if defined(GLATTER_EGL)
+    #if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_r_def.h)
     #endif
 
@@ -830,7 +830,7 @@ typedef struct glatter_es_record_struct
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_ges_decl.h)
 #endif
 
-#if defined(GLATTER_EGL)
+#if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_ges_decl.h)
 #endif
 
@@ -850,7 +850,7 @@ typedef struct glatter_es_record_struct
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_ges_def.h)
 #endif
 
-#if defined(GLATTER_EGL)
+#if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_ges_def.h)
 #endif
 
@@ -868,7 +868,7 @@ typedef struct glatter_es_record_struct
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_e2s_def.h)
 #endif
 
-#if defined(GLATTER_EGL)
+#if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_e2s_def.h)
 #endif
 
@@ -878,6 +878,22 @@ typedef struct glatter_es_record_struct
 
 #if defined(GLATTER_GLU)
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_e2s_def.h)
+#endif
+
+#if defined(GLATTER_EGL) && !GLATTER_HAS_EGL_GENERATED_HEADERS
+
+GLATTER_INLINE_OR_NOT glatter_extension_support_status_EGL_t glatter_get_extension_support_EGL(void)
+{
+    glatter_extension_support_status_EGL_t status = {0};
+    return status;
+}
+
+GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLATTER_ENUM_EGL e)
+{
+    (void)e;
+    return "EGL_UNKNOWN";
+}
+
 #endif
 
 

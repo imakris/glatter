@@ -60,7 +60,9 @@ extern "C" {
 #endif
 
 #if defined(GLATTER_EGL)
-	#include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_ges_decl.h)
+#if GLATTER_HAS_EGL_GENERATED_HEADERS
+        #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_ges_decl.h)
+#endif
 #endif
 
 #if defined(GLATTER_WGL)
@@ -132,7 +134,7 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*));
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_d.h)
     #endif
 
-    #if defined(GLATTER_EGL)
+    #if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_d.h)
     #endif
 
@@ -154,7 +156,7 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*));
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_r.h)
     #endif
 
-    #if defined(GLATTER_EGL)
+    #if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_r.h)
     #endif
 
