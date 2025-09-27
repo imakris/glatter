@@ -95,6 +95,24 @@ import copy
 import itertools
 import shutil
 
+
+def split_args_top_level(s):
+    args = []
+    current = []
+    depth = 0
+    for ch in s:
+        if ch == '(':
+            depth += 1
+        elif ch == ')':
+            depth -= 1
+        elif ch == ',' and depth == 0:
+            args.append(''.join(current).strip())
+            current = []
+            continue
+        current.append(ch)
+    args.append(''.join(current).strip())
+    return args
+
 config_path = os.path.join(os.path.dirname(__file__), 'glatter_config.h')
 try:
     with open(config_path, 'r', encoding='utf-8') as cfg_file:
@@ -563,7 +581,7 @@ def parse(filename):
             all_extgroups[egroup] += 1
             tmp.extension_group = egroup
 
-            arglist_coarse = m.group(4).split(",")
+            arglist_coarse = split_args_top_level(m.group(4))
             arglist_fine = []
             for i, y in enumerate(arglist_coarse):
                 arg = Function_argument()

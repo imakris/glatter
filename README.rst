@@ -88,11 +88,31 @@ In this case, Glatter could produce:
 
   .. code::
 
-	GLATTER: in 'c:\repositories\glatter\example\glatter\wglgears.cpp'(133):
-	GLATTER: glIsEnabled(GL_FRAMEBUFFER_RENDERABLE)
-	GLATTER: returned 0
-	GLATTER: in 'c:\repositories\glatter\example\glatter\wglgears.cpp'(133):
-	GLATTER: OpenGL call produced GL_INVALID_ENUM error.
+        GLATTER: in 'c:\repositories\glatter\example\glatter\wglgears.cpp'(133):
+        GLATTER: glIsEnabled(GL_FRAMEBUFFER_RENDERABLE)
+        GLATTER: returned 0
+        GLATTER: in 'c:\repositories\glatter\example\glatter\wglgears.cpp'(133):
+        GLATTER: OpenGL call produced GL_INVALID_ENUM error.
+
+
+Thread ownership & logging safety
+---------------------------------
+
+When using the header-only C++ wrapper, the first thread that calls into
+Glatter becomes the implicit "owner" for subsequent call-site diagnostics.
+Call ``glatter_bind_owner_to_current_thread()`` during application
+initialization on the intended render thread so cross-thread warnings point at
+unexpected usage instead of a worker thread that happened to initialize first.
+For projects that want to fail fast if the bind step is skipped, define
+``GLATTER_REQUIRE_EXPLICIT_OWNER_BIND`` and the library will abort if
+``glatter_bind_owner_to_current_thread()`` has not been invoked before the
+first wrapped GL call.
+
+On platforms where C11/C++11 atomics are not available Glatter emits a
+compile-time warning reminding you to install a log handler before any worker
+threads start issuing GL calls. In that configuration make sure
+``glatter_set_log_handler`` runs during single-threaded initialization so the
+pointer never races between threads.
 
 
 Header generation
