@@ -336,7 +336,7 @@ void glatter_check_error_WGL(const char* file, int line)
         FORMAT_MESSAGE_ALLOCATE_BUFFER |
         FORMAT_MESSAGE_FROM_SYSTEM |
         FORMAT_MESSAGE_IGNORE_INSERTS, NULL,
-        eid, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&buffer, 0, NULL);
+        eid, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR*)&buffer, 0, NULL);
 
     //printf("GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, buffer);
 
