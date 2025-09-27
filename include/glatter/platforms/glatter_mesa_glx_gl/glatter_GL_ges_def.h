@@ -1209,13 +1209,19 @@ glatter_extension_support_status_GL_t glatter_get_extension_support_GL()
     static int initialized = 0;
     if (!initialized) {
 
-        const uint8_t* glv = (const uint8_t*)glatter_glGetString(GL_VERSION);
-        int new_way = 0;
-        if (glv) {
-            // if this fails, something might be wrong with the implementation
-            assert((int)glv[0] > 48 && (int)glv[0] < 58);
-            new_way = (int)glv[0] > 50; // i.e. gl version is 3 or higher
+        const uint8_t* glv = NULL;
+        if (glatter_get_proc_address_GL("glGetString")) {
+            glv = (const uint8_t*)glatter_glGetString(GL_VERSION);
         }
+        int new_way = 0;
+        if (!glv) {
+            initialized = 1;
+            memcpy((void*)&ess, indexed_extensions, sizeof(ess));
+            return ess;
+        }
+        // if this fails, something might be wrong with the implementation
+        assert((int)glv[0] > 48 && (int)glv[0] < 58);
+        new_way = (int)glv[0] > 50; // i.e. gl version is 3 or higher
 
 #ifdef GL_NUM_EXTENSIONS
         if (new_way && glatter_get_proc_address_GL("glGetStringi") ) {
