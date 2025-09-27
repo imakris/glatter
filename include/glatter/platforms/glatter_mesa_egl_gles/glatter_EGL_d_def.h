@@ -699,7 +699,7 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetOutputPortsEXT_debug(EGLDisplay d
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglOutputLayerAttribEXT, (dpy, layer, attribute, value), (EGLDisplay dpy, EGLOutputLayerEXT layer, EGLint attribute, EGLAttrib value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglOutputLayerAttribEXT_debug(EGLDisplay dpy, EGLOutputLayerEXT layer, EGLint attribute, EGLAttrib value, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, eglOutputLayerAttribEXT, "(%p, %p, %s, %" PRIxPTR ")", (void*)dpy, (void*)layer, GET_PRS(attribute), (intptr_t)value)
+    GLATTER_DBLOCK(file, line, eglOutputLayerAttribEXT, "(%p, %p, %s, "%" PRIxPTR)", (void*)dpy, (void*)layer, GET_PRS(attribute), (intptr_t)value)
     EGLBoolean rval = glatter_eglOutputLayerAttribEXT(dpy, layer, attribute, value);
     GLATTER_RBLOCK("%u\n", (unsigned int)rval);
     GLATTER_CHECK_ERROR(EGL, file, line)
@@ -709,7 +709,7 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglOutputLayerAttribEXT_debug(EGLDispla
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglOutputPortAttribEXT, (dpy, port, attribute, value), (EGLDisplay dpy, EGLOutputPortEXT port, EGLint attribute, EGLAttrib value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglOutputPortAttribEXT_debug(EGLDisplay dpy, EGLOutputPortEXT port, EGLint attribute, EGLAttrib value, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, eglOutputPortAttribEXT, "(%p, %p, %s, %" PRIxPTR ")", (void*)dpy, (void*)port, GET_PRS(attribute), (intptr_t)value)
+    GLATTER_DBLOCK(file, line, eglOutputPortAttribEXT, "(%p, %p, %s, "%" PRIxPTR)", (void*)dpy, (void*)port, GET_PRS(attribute), (intptr_t)value)
     EGLBoolean rval = glatter_eglOutputPortAttribEXT(dpy, port, attribute, value);
     GLATTER_RBLOCK("%u\n", (unsigned int)rval);
     GLATTER_CHECK_ERROR(EGL, file, line)
@@ -1074,7 +1074,7 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamAttribKHR_debug(EGLDispla
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSetStreamAttribKHR, (dpy, stream, attribute, value), (EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLAttrib value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSetStreamAttribKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLAttrib value, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, eglSetStreamAttribKHR, "(%p, %p, %s, %" PRIxPTR ")", (void*)dpy, (void*)stream, enum_to_string_EGL(attribute), (intptr_t)value)
+    GLATTER_DBLOCK(file, line, eglSetStreamAttribKHR, "(%p, %p, %s, "%" PRIxPTR)", (void*)dpy, (void*)stream, enum_to_string_EGL(attribute), (intptr_t)value)
     EGLBoolean rval = glatter_eglSetStreamAttribKHR(dpy, stream, attribute, value);
     GLATTER_RBLOCK("%u\n", (unsigned int)rval);
     GLATTER_CHECK_ERROR(EGL, file, line)

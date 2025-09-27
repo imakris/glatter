@@ -28,8 +28,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #ifdef GLATTER_GL
-#if !defined(__GL_H__)
 #if !defined(GL_VERSION_ES_CM_1_0)
+#if !defined(__GL_H__)
 #if defined(__gl_h_)
 #if defined(GL_ARB_multitexture)
 #ifndef glActiveTextureARB
@@ -1856,8 +1856,8 @@ GLATTER_UBLOCK(void, GLAPIENTRY, glVertexPointer, (GLint size, GLenum type, GLsi
 #endif
 GLATTER_UBLOCK(void, GLAPIENTRY, glViewport, (GLint x, GLint y, GLsizei width, GLsizei height))
 #endif // defined(__gl_h_)
-#endif // !defined(GL_VERSION_ES_CM_1_0)
 #endif // !defined(__GL_H__)
+#endif // !defined(GL_VERSION_ES_CM_1_0)
 #if defined(__gl_glext_h_)
 #if defined(GL_3DFX_tbuffer)
 #ifndef glTbufferMask3DFX

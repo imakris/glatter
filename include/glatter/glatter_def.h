@@ -152,6 +152,12 @@ void* glatter_get_proc_address(const char* function_name)
         ptr = (void*) GetProcAddress(GetModuleHandleA("libEGL.dll"), function_name);
         if (ptr == 0) {
             ptr = (void*) GetProcAddress(GetModuleHandleA("libGLES_CM.dll"), function_name);
+            if (ptr == 0) {
+                ptr = (void*) GetProcAddress(GetModuleHandleA("libGLESv2.dll"), function_name);
+                if (ptr == 0) {
+                    ptr = (void*) GetProcAddress(GetModuleHandleA("libGLESv3.dll"), function_name);
+                }
+            }
         }
 #elif defined (__linux__)
         static void* egl_handle = NULL;
@@ -231,8 +237,8 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e);
 GLATTER_INLINE_OR_NOT
 void glatter_check_error_GL(const char* file, int line)
 {
-    GLenum err = glGetError();
-    if (err != GL_NO_ERROR) {
+    GLenum err;
+    while ((err = glGetError()) != GL_NO_ERROR) {
         //printf("GLATTER: in '%s'(%d):\n", file, line);
 
         glatter_log_printf(

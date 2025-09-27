@@ -1131,9 +1131,9 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXGetSyncValuesOML_debug(Display *dpy, GLXDr
 GLATTER_FBLOCK(return, GLX, , int64_t, , glXSwapBuffersMscOML, (dpy, drawable, target_msc, divisor, remainder), (Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder))
 GLATTER_INLINE_OR_NOT int64_t glatter_glXSwapBuffersMscOML_debug(Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glXSwapBuffersMscOML, "(%p, %s, %" PRId64 ", %" PRId64 ", %" PRId64 ")", (void*)dpy, GET_PRS(drawable), (int64_t)target_msc, (int64_t)divisor, (int64_t)remainder)
+    GLATTER_DBLOCK(file, line, glXSwapBuffersMscOML, "(%p, %s, "%" PRId64, "%" PRId64, "%" PRId64)", (void*)dpy, GET_PRS(drawable), (int64_t)target_msc, (int64_t)divisor, (int64_t)remainder)
     int64_t rval = glatter_glXSwapBuffersMscOML(dpy, drawable, target_msc, divisor, remainder);
-    GLATTER_RBLOCK("%" PRId64 "\n", (int64_t)rval);
+    GLATTER_RBLOCK(""%" PRId64\n", (int64_t)rval);
     GLATTER_CHECK_ERROR(GLX, file, line)
     return rval;
 }
@@ -1141,7 +1141,7 @@ GLATTER_INLINE_OR_NOT int64_t glatter_glXSwapBuffersMscOML_debug(Display *dpy, G
 GLATTER_FBLOCK(return, GLX, , Bool, , glXWaitForMscOML, (dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc), (Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder, int64_t *ust, int64_t *msc, int64_t *sbc))
 GLATTER_INLINE_OR_NOT Bool glatter_glXWaitForMscOML_debug(Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder, int64_t *ust, int64_t *msc, int64_t *sbc, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glXWaitForMscOML, "(%p, %s, %" PRId64 ", %" PRId64 ", %" PRId64 ", %p, %p, %p)", (void*)dpy, GET_PRS(drawable), (int64_t)target_msc, (int64_t)divisor, (int64_t)remainder, (void*)ust, (void*)msc, (void*)sbc)
+    GLATTER_DBLOCK(file, line, glXWaitForMscOML, "(%p, %s, "%" PRId64, "%" PRId64, "%" PRId64, %p, %p, %p)", (void*)dpy, GET_PRS(drawable), (int64_t)target_msc, (int64_t)divisor, (int64_t)remainder, (void*)ust, (void*)msc, (void*)sbc)
     Bool rval = glatter_glXWaitForMscOML(dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc);
     GLATTER_RBLOCK("%s\n", GET_PRS(rval));
     GLATTER_CHECK_ERROR(GLX, file, line)
@@ -1151,7 +1151,7 @@ GLATTER_INLINE_OR_NOT Bool glatter_glXWaitForMscOML_debug(Display *dpy, GLXDrawa
 GLATTER_FBLOCK(return, GLX, , Bool, , glXWaitForSbcOML, (dpy, drawable, target_sbc, ust, msc, sbc), (Display *dpy, GLXDrawable drawable, int64_t target_sbc, int64_t *ust, int64_t *msc, int64_t *sbc))
 GLATTER_INLINE_OR_NOT Bool glatter_glXWaitForSbcOML_debug(Display *dpy, GLXDrawable drawable, int64_t target_sbc, int64_t *ust, int64_t *msc, int64_t *sbc, const char* file, int line)
 {
-    GLATTER_DBLOCK(file, line, glXWaitForSbcOML, "(%p, %s, %" PRId64 ", %p, %p, %p)", (void*)dpy, GET_PRS(drawable), (int64_t)target_sbc, (void*)ust, (void*)msc, (void*)sbc)
+    GLATTER_DBLOCK(file, line, glXWaitForSbcOML, "(%p, %s, "%" PRId64, %p, %p, %p)", (void*)dpy, GET_PRS(drawable), (int64_t)target_sbc, (void*)ust, (void*)msc, (void*)sbc)
     Bool rval = glatter_glXWaitForSbcOML(dpy, drawable, target_sbc, ust, msc, sbc);
     GLATTER_RBLOCK("%s\n", GET_PRS(rval));
     GLATTER_CHECK_ERROR(GLX, file, line)
