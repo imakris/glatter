@@ -35,6 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assert.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #undef GLATTER_HAS_ATOMIC_LOG_HANDLER
 #if defined(__cplusplus)
@@ -52,6 +53,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #       include <stdatomic.h>
 #   else
 #       define GLATTER_HAS_ATOMIC_LOG_HANDLER 0
+#   endif
+#endif
+
+#if !GLATTER_HAS_ATOMIC_LOG_HANDLER && !defined(GLATTER_LOG_HANDLER_INIT_WARNING)
+#   define GLATTER_LOG_HANDLER_INIT_WARNING 1
+#   if defined(_MSC_VER)
+#       pragma message("GLATTER: Atomics unavailable; call glatter_set_log_handler() during single-threaded initialization.")
+#   else
+#       warning "GLATTER: Atomics unavailable; call glatter_set_log_handler() during single-threaded initialization."
 #   endif
 #endif
 
@@ -236,26 +246,36 @@ void* glatter_get_proc_address(const char* function_name)
         static HMODULE hGLES3 = NULL;
         if (!ptr) {
             if (!hEGL) hEGL = GetModuleHandleA("libEGL.dll");
+            if (!hEGL) hEGL = GetModuleHandleA("EGL.dll");
             if (!hEGL) hEGL = LoadLibraryA("libEGL.dll");
+            if (!hEGL) hEGL = LoadLibraryA("EGL.dll");
             if (hEGL) ptr = (void*) GetProcAddress(hEGL, function_name);
         }
         if (!ptr) {
             if (!hGLES1) {
                 hGLES1 = GetModuleHandleA("libGLESv1_CM.dll");
                 if (!hGLES1) hGLES1 = GetModuleHandleA("libGLES_CM.dll");
+                if (!hGLES1) hGLES1 = GetModuleHandleA("GLESv1_CM.dll");
+                if (!hGLES1) hGLES1 = GetModuleHandleA("GLES_CM.dll");
                 if (!hGLES1) hGLES1 = LoadLibraryA("libGLESv1_CM.dll");
                 if (!hGLES1) hGLES1 = LoadLibraryA("libGLES_CM.dll");
+                if (!hGLES1) hGLES1 = LoadLibraryA("GLESv1_CM.dll");
+                if (!hGLES1) hGLES1 = LoadLibraryA("GLES_CM.dll");
             }
             if (hGLES1) ptr = (void*) GetProcAddress(hGLES1, function_name);
         }
         if (!ptr) {
             if (!hGLES2) hGLES2 = GetModuleHandleA("libGLESv2.dll");
+            if (!hGLES2) hGLES2 = GetModuleHandleA("GLESv2.dll");
             if (!hGLES2) hGLES2 = LoadLibraryA("libGLESv2.dll");
+            if (!hGLES2) hGLES2 = LoadLibraryA("GLESv2.dll");
             if (hGLES2) ptr = (void*) GetProcAddress(hGLES2, function_name);
         }
         if (!ptr) {
             if (!hGLES3) hGLES3 = GetModuleHandleA("libGLESv3.dll");
+            if (!hGLES3) hGLES3 = GetModuleHandleA("GLESv3.dll");
             if (!hGLES3) hGLES3 = LoadLibraryA("libGLESv3.dll");
+            if (!hGLES3) hGLES3 = LoadLibraryA("GLESv3.dll");
             if (hGLES3) ptr = (void*) GetProcAddress(hGLES3, function_name);
         }
 #elif defined (__linux__)
@@ -406,6 +426,7 @@ void* glatter_get_proc_address_GLX(const char* function_name)
            GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER and install a handler
            manually. */
         XSetErrorHandler(x_error_handler);
+        glatter_log("GLATTER: installed default X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
         initialized = 1;
     }
 #endif //!defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
@@ -619,18 +640,39 @@ namespace glatter { namespace detail {
 
     inline thread_id_t& owner_thread_id()
     {
+#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND)
+        static thread_id_t tid = thread_id_t();
+#else
         static thread_id_t tid = current_thread_id();
+#endif
         return tid;
     }
 
+#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND)
+    inline bool& owner_thread_bound()
+    {
+        static bool bound = false;
+        return bound;
+    }
+#endif
+
     inline bool is_owner_thread()
     {
+#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND)
+        if (!owner_thread_bound()) {
+            ::glatter_log("GLATTER: owner thread not bound. Call glatter_bind_owner_to_current_thread() on the intended render thread.\n");
+            abort();
+        }
+#endif
         return thread_ids_equal(current_thread_id(), owner_thread_id());
     }
 
     inline void bind_owner_to_current_thread()
     {
         owner_thread_id() = current_thread_id();
+#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND)
+        owner_thread_bound() = true;
+#endif
     }
 
 }} // namespace glatter::detail
@@ -815,8 +857,10 @@ typedef struct glatter_es_record_struct
     typedef rtype (cconv *glatter_##name##_t) dargs;\
     inline rtype cconv glatter_##name dargs\
     {\
-        static glatter_##name##_t s_f_ptr =\
-            (glatter_##name##_t) glatter_get_proc_address_##family(#name);\
+        static glatter_##name##_t s_f_ptr = NULL;\
+        if (!s_f_ptr) {\
+            s_f_ptr = (glatter_##name##_t) glatter_get_proc_address_##family(#name);\
+        }\
         if (s_f_ptr == NULL) {\
             glatter_log_printf(\
                 "GLATTER: failed to resolve '%s'\n", #name\

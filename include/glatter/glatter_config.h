@@ -101,6 +101,17 @@
 // install your own (for example after calling XInitThreads()).
 //#define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER
 
+////////////////////////////////////////////////////////
+// Thread ownership enforcement (header-only C++) switch //
+////////////////////////////////////////////////////////
+// Define GLATTER_REQUIRE_EXPLICIT_OWNER_BIND to disable the automatic
+// owner-thread binding performed the first time a wrapped call executes in
+// header-only builds. When set, applications must call
+// glatter_bind_owner_to_current_thread() on the intended render thread before
+// making GL calls; otherwise the library aborts to signal the configuration
+// error.
+//#define GLATTER_REQUIRE_EXPLICIT_OWNER_BIND
+
 /////////////////////////////////////
 // Windows character encoding switch //
 /////////////////////////////////////
