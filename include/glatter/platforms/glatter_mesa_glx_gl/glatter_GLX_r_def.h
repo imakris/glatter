@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(GLX_H)
 #if defined(GLX_ARB_get_proc_address)
 #ifndef glXGetProcAddressARB_defined
-GLATTER_FBLOCK(return, GLX, extern, __GLXextFuncPtr, , glXGetProcAddressARB, (procName), (const GLubyte *procName))
+GLATTER_FBLOCK(return, GLX, extern, __GLXextFuncPtr, , glXGetProcAddressARB, (*), (const GLubyte *))
 #define glXGetProcAddressARB_defined
 #endif
 #endif // defined(GLX_ARB_get_proc_address)

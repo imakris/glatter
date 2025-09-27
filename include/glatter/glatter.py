@@ -1,4 +1,3 @@
-# NEW 3
 license = '''
 Copyright 2018 Ioannis Makris
 
@@ -1074,7 +1073,8 @@ glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_'
         }
         if (glv[0] < '0' || glv[0] > '9') {
             new_way = 0;
-        } else {
+        }
+        else {
             new_way = glv[0] > '2'; // i.e. gl version is 3 or higher
         }
 

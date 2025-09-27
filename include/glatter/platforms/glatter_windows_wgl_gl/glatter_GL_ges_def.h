@@ -1219,7 +1219,8 @@ glatter_extension_support_status_GL_t glatter_get_extension_support_GL()
         }
         if (glv[0] < '0' || glv[0] > '9') {
             new_way = 0;
-        } else {
+        }
+        else {
             new_way = glv[0] > '2'; // i.e. gl version is 3 or higher
         }
 

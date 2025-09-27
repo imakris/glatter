@@ -1,4 +1,3 @@
-//NEW 3
 /*
 Copyright 2018 Ioannis Makris
 
@@ -116,8 +115,8 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*));
 #define GLATTER_INLINE_OR_NOT
 #endif
 
-GLATTER_INLINE_OR_NOT void glatter_set_wsi(int wsi);
-GLATTER_INLINE_OR_NOT int  glatter_get_wsi(void);
+GLATTER_INLINE_OR_NOT void  glatter_set_wsi(int wsi);
+GLATTER_INLINE_OR_NOT int   glatter_get_wsi(void);
 GLATTER_INLINE_OR_NOT void* glatter_get_proc_address(const char* function_name);
 GLATTER_INLINE_OR_NOT void  glatter_bind_owner_to_current_thread(void);
 

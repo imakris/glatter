@@ -1,5 +1,3 @@
-//NEW 3
-
 /*
 Copyright 2018 Ioannis Makris
 
@@ -218,7 +216,8 @@ void glatter_log_printf(const char* fmt, ...)
 
     if (written < 0) {
         glatter_log(NULL);
-    } else {
+    }
+    else {
         glatter_log(buffer);
     }
 }
@@ -355,9 +354,13 @@ static void glatter_detect_wsi_from_env(glatter_loader_state* state)
 
     if (glatter_equals_ignore_case(env, "wgl")) {
         state->requested = GLATTER_WSI_WGL_VALUE;
-    } else if (glatter_equals_ignore_case(env, "glx")) {
+    }
+    else
+    if (glatter_equals_ignore_case(env, "glx")) {
         state->requested = GLATTER_WSI_GLX_VALUE;
-    } else if (glatter_equals_ignore_case(env, "egl")) {
+    }
+    else
+    if (glatter_equals_ignore_case(env, "egl")) {
         state->requested = GLATTER_WSI_EGL_VALUE;
     }
 }
@@ -653,11 +656,9 @@ void glatter_check_error_GL(const char* file, int line)
             "GLATTER: in '%s'(%d):\n", file, line
         );
 
-
         glatter_log_printf(
             "GLATTER: OpenGL call produced %s error.\n", enum_to_string_GL(err)
         );
-
     }
 }
 
@@ -1086,7 +1087,8 @@ Printable get_prs(size_t sz, void* obj)
         }
         if ((size_t)n >= cap - pos) {
             pos = cap - 1;
-        } else {
+        }
+        else {
             pos += (size_t)n;
             for (size_t i = 1; i < sz && pos < cap; ++i) {
                 n = snprintf(ret.data + pos, cap - pos, " %02x", bytes[i]);
@@ -1104,7 +1106,9 @@ Printable get_prs(size_t sz, void* obj)
 
     if (pos < cap - 1) {
         ret.data[pos++] = ']';
-    } else if (cap >= 2) {
+    }
+    else
+    if (cap >= 2) {
         ret.data[cap - 2] = ']';
         pos = cap - 1;
     }
