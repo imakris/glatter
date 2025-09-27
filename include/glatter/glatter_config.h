@@ -98,6 +98,14 @@
 ///////////////////////////////////////////////////
 //#define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER
 
+/////////////////////////////////////
+// Windows character encoding switch //
+/////////////////////////////////////
+// Define GLATTER_WINDOWS_MBCS to treat TCHAR as CHAR when generating bindings
+// for non-UNICODE builds. The generator assumes UNICODE (TCHAR -> WCHAR) by
+// default.
+
+
 
 
 #endif

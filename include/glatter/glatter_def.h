@@ -202,6 +202,7 @@ void* glatter_get_proc_address(const char* function_name)
                     "libGLES_CM.so",
                     "libGLESv1_CM.so",
                     "libGLESv1_CM.so.1",
+                    "libGLESv1_CM.so.2",
                     "libGLESv2.so",
                     "libGLESv2.so.1",
                     "libGLESv2.so.2",
@@ -224,7 +225,9 @@ void* glatter_get_proc_address(const char* function_name)
 #elif defined(GLATTER_WGL)
     PROC a = wglGetProcAddress(function_name);
     if (!a || a == (PROC)1 || a == (PROC)2 || a == (PROC)3 || a == (PROC)4) {
-        a = (PROC) GetProcAddress(GetModuleHandleA("opengl32.dll"), function_name);
+        HMODULE h = GetModuleHandleA("opengl32.dll");
+        if (!h) h = LoadLibraryA("opengl32.dll");
+        if (h) a = (PROC) GetProcAddress(h, function_name);
     }
     ptr = (void*) a;
 #elif defined(GLATTER_GLX)
@@ -257,15 +260,11 @@ void glatter_check_error_GL(const char* file, int line)
 {
     GLenum err;
     while ((err = glGetError()) != GL_NO_ERROR) {
-        //printf("GLATTER: in '%s'(%d):\n", file, line);
-
         glatter_log_printf(
             "GLATTER: in '%s'(%d):\n", file, line
         );
 
 
-
-        //printf("GLATTER: OpenGL call produced %s error.\n", enum_to_string_GL(err));
         glatter_log_printf(
             "GLATTER: OpenGL call produced %s error.\n", enum_to_string_GL(err)
         );
@@ -300,8 +299,6 @@ int x_error_handler(Display *dsp, XErrorEvent *error)
 {
     char error_string[128];
     XGetErrorText(dsp, error->error_code, error_string, 128);
-    //printf("X Error: %s\n", error_string);
-
     glatter_log_printf(
         "X Error: %s\n", error_string
     );
@@ -370,8 +367,6 @@ void glatter_check_error_WGL(const char* file, int line)
         FORMAT_MESSAGE_FROM_SYSTEM |
         FORMAT_MESSAGE_IGNORE_INSERTS, NULL,
         eid, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&buffer, 0, NULL);
-
-    //printf("GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, buffer);
 
     glatter_log_printf(
         "GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, (char*)buffer
@@ -649,18 +644,51 @@ GLATTER_INLINE_OR_NOT
 Printable get_prs(size_t sz, void* obj)
 {
     Printable ret;
-    
-    if (sz > 16)
-        sz = 16;
+    const unsigned char *bytes = (const unsigned char*)obj;
+    size_t cap = sizeof(ret.data);
+    size_t pos = 0;
 
-    for (size_t i=0; i<sz; i++) {
-        snprintf(&ret.data[i*3], sizeof(ret)-3*i-1," %02x", (unsigned char) *(((char*)obj)+i) );
+    if (cap == 0) {
+        return ret;
     }
-    
-    ret.data[0     ] = '[';
-    ret.data[3*sz  ] = ']';
-    ret.data[3*sz+1] =  0 ;
 
+    ret.data[pos++] = '[';
+
+    if (sz > 16) {
+        sz = 16;
+    }
+
+    if (sz > 0) {
+        int n = snprintf(ret.data + pos, cap - pos, "%02x", bytes[0]);
+        if (n < 0) {
+            n = 0;
+        }
+        if ((size_t)n >= cap - pos) {
+            pos = cap - 1;
+        } else {
+            pos += (size_t)n;
+            for (size_t i = 1; i < sz && pos < cap; ++i) {
+                n = snprintf(ret.data + pos, cap - pos, " %02x", bytes[i]);
+                if (n < 0) {
+                    break;
+                }
+                if ((size_t)n >= cap - pos) {
+                    pos = cap - 1;
+                    break;
+                }
+                pos += (size_t)n;
+            }
+        }
+    }
+
+    if (pos < cap - 1) {
+        ret.data[pos++] = ']';
+    } else if (cap >= 2) {
+        ret.data[cap - 2] = ']';
+        pos = cap - 1;
+    }
+
+    ret.data[pos] = '\0';
     return ret;
 }
 
