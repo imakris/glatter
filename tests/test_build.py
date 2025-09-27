@@ -355,7 +355,7 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
             int helper();
 
             int main() {
-                (void)glatter_get_provider();
+                (void)glatter_get_wsi();
                 return helper();
             }
             """
