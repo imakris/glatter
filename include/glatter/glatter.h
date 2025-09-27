@@ -27,10 +27,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef GLATTER_H_DEFINED
 #define GLATTER_H_DEFINED
 
-#if defined(__cplusplus) && !defined(GLATTER_HEADER_ONLY) && !defined(GLATTER_NO_HEADER_ONLY)
-#define GLATTER_HEADER_ONLY 1
-#endif
-
 #include <inttypes.h>
 
 #include "glatter_config.h"
@@ -122,6 +118,8 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*));
 
 GLATTER_INLINE_OR_NOT void glatter_set_provider(int provider);
 GLATTER_INLINE_OR_NOT int  glatter_get_provider(void);
+GLATTER_INLINE_OR_NOT void* glatter_get_proc_address(const char* function_name);
+GLATTER_INLINE_OR_NOT void  glatter_bind_owner_to_current_thread(void);
 
 
 #if defined(GLATTER_GL)
