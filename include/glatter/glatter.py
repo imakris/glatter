@@ -95,6 +95,16 @@ import copy
 import itertools
 import shutil
 
+config_path = os.path.join(os.path.dirname(__file__), 'glatter_config.h')
+try:
+    with open(config_path, 'r', encoding='utf-8') as cfg_file:
+        config_data = cfg_file.read()
+except OSError:
+    config_data = ''
+
+if re.search(r'^\s*#\s*define\s+GLATTER_WINDOWS_MBCS\b', config_data, re.MULTILINE):
+    windows_typedefs['TCHAR'] = 'CHAR'
+
 ckwords = ['auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do', 'double', 'else',
     'enum', 'extern', 'float', 'for', 'goto', 'if', 'inline', 'int', 'long', 'register', 'restrict',
     'return', 'short', 'signed', 'sizeof', 'static', 'struct', 'switch', 'typedef', 'union',
@@ -560,6 +570,13 @@ def parse(filename):
                 arg.declaration = y.strip()
                 if arg.declaration in ['void', 'VOID']:
                     continue
+                fp_name = None
+                first_paren = arg.declaration.find(')')
+                ptr_paren = arg.declaration.find('(*')
+                if ptr_paren != -1 and (first_paren == -1 or ptr_paren < first_paren):
+                    m = re.search(r'\(\*\s*([A-Za-z_]\w*)\s*\)', arg.declaration)
+                    if m:
+                        fp_name = m.group(1)
                 arg.is_pointer = '*' in arg.declaration
 
                 # place lindex, rindex at the beginning and at the end of the string accordingly.
@@ -586,7 +603,7 @@ def parse(filename):
                     lindex += matches[-1].start()
 
                 arg.name = arg.declaration[lindex:rindex]
-                
+
                 arg.type = 'UNKNOWN TYPE'
                 if (len(arg.declaration) == rindex):
                     arg.type = arg.declaration[0:lindex].strip()
@@ -597,6 +614,10 @@ def parse(filename):
                     dfinal = arg.declaration[:lindex] + arg.name + arg.declaration[rindex:]
                     rindex += len(arg.name)
                     arg.declaration = dfinal
+
+                if fp_name:
+                    arg.name = fp_name
+                    arg.is_pointer = True
 
                 #arg.name_range = (lindex, rindex)
                 arglist_fine.append(arg)
