@@ -297,7 +297,6 @@ def test_header_only_cpp_compiles_without_manual_macros(tmp_path: Path) -> None:
         ]
     )
 
-
 def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
     """Ensure linking succeeds when a consumer uses the compiled C library."""
 
