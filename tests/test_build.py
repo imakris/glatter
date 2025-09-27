@@ -228,3 +228,71 @@ def test_header_only_cpp_compiles_across_translation_units(tmp_path: Path) -> No
             str(tmp_path / "header_only"),
         ]
     )
+
+
+def test_header_only_cpp_compiles_without_manual_macros(tmp_path: Path) -> None:
+    """Verify that C++ translation units build without defining config macros."""
+
+    cxx = _require_tool("c++")
+
+    sources = {
+        "main.cpp": textwrap.dedent(
+            """
+            #include <glatter/glatter.h>
+
+            int helper();
+
+            static void noop_logger(const char*) {}
+
+            int main() {
+                glatter_set_log_handler(noop_logger);
+                glatter_set_log_handler(nullptr);
+                return helper();
+            }
+            """
+        ).strip()
+        + "\n",
+        "helper.cpp": textwrap.dedent(
+            """
+            #include <glatter/glatter.h>
+
+            int helper() {
+                return glatter_get_proc_address("glGetString") != nullptr;
+            }
+            """
+        ).strip()
+        + "\n",
+    }
+
+    for name, content in sources.items():
+        (tmp_path / name).write_text(content)
+
+    compile_args = [
+        cxx,
+        "-std=c++17",
+        "-I",
+        str(REPO_ROOT / "include"),
+        "-I",
+        str(REPO_ROOT / "tests" / "include"),
+        "-pthread",
+    ]
+
+    objects: list[Path] = []
+    for source_name in sources:
+        object_path = tmp_path / (Path(source_name).stem + ".o")
+        _run_command(
+            compile_args
+            + ["-c", str(tmp_path / source_name), "-o", str(object_path)],
+        )
+        objects.append(object_path)
+
+    _run_command(
+        [
+            cxx,
+            "-pthread",
+            "-ldl",
+            *map(str, objects),
+            "-o",
+            str(tmp_path / "header_only_zeroconfig"),
+        ]
+    )

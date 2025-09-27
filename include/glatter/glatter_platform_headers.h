@@ -25,6 +25,11 @@
 //     #define GLATTER_PLATFORM_DIR <platform_dir_name>
 // - Put one #include per line, without trailing comments.
 
+/* Ensure Mesa-supplied gl.h headers use our packaged extension headers. */
+#if !defined(GL_GLEXT_LEGACY)
+#define GL_GLEXT_LEGACY 1
+#endif
+
 /* -----------------------------------------------------------
    Platform selection
    One of the following platform macros must be defined in glatter_config.h:
@@ -98,12 +103,12 @@
 /* Core desktop GL for Mesa (paths corrected for your tree) */
 #include "headers/mesa_gl_basic/gl.h"
 
+/* Desktop GL extensions */
+#include "headers/khronos_gl/glext.h"
+
 /* GLX core + extensions */
 #include "headers/mesa_gl_basic/glx.h"
 #include "headers/khronos_gl/glxext.h"
-
-/* Desktop GL extensions */
-#include "headers/khronos_gl/glext.h"
 
 /* Optional GLU (your GLU lives under sgi_glu) */
 #if defined(GLATTER_GLU)

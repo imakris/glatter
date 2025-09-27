@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(GLX_H)
 #if defined(GLX_ARB_get_proc_address)
 #ifndef glXGetProcAddressARB
-#define glXGetProcAddressARB(*) glatter_glXGetProcAddressARB((*))
+#define glXGetProcAddressARB(procName) glatter_glXGetProcAddressARB((procName))
 #endif
 GLATTER_UBLOCK(__GLXextFuncPtr, , glXGetProcAddressARB, (const GLubyte *))
 #endif // defined(GLX_ARB_get_proc_address)

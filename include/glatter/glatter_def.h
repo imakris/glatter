@@ -93,7 +93,7 @@ GLATTER_EXTERN_C_BEGIN
 
  #ifdef GLATTER_HEADER_ONLY
     #undef GLATTER_INLINE_OR_NOT
-    #define GLATTER_INLINE_OR_NOT inline
+    #define GLATTER_INLINE_OR_NOT static inline
  #else
     #undef GLATTER_INLINE_OR_NOT
     #define GLATTER_INLINE_OR_NOT
