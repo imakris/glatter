@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 GLATTER_INLINE_OR_NOT
-const char* enum_to_string_GLX(GLenum e)
+const char* enum_to_string_GLX(GLATTER_ENUM_GLX e)
 {
     switch (e) {
 #if defined(GLX_AMD_gpu_association)
@@ -186,7 +186,7 @@ const char* enum_to_string_GLX(GLenum e)
         case 0x31b3: return "GLX_CONTEXT_OPENGL_NO_ERROR_ARB";
 #endif
         case 0x8000:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_NONE";
 #endif
 #if defined(GLX_EXT_visual_info)
@@ -194,7 +194,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8001:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_SLOW_CONFIG";
 #endif
 #if defined(GLX_EXT_visual_rating)
@@ -202,7 +202,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8002:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_TRUE_COLOR";
 #endif
 #if defined(GLX_EXT_visual_info)
@@ -210,7 +210,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8003:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_DIRECT_COLOR";
 #endif
 #if defined(GLX_EXT_visual_info)
@@ -218,7 +218,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8004:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_PSEUDO_COLOR";
 #endif
 #if defined(GLX_EXT_visual_info)
@@ -226,7 +226,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8005:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_STATIC_COLOR";
 #endif
 #if defined(GLX_EXT_visual_info)
@@ -234,7 +234,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8006:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_GRAY_SCALE";
 #endif
 #if defined(GLX_EXT_visual_info)
@@ -242,7 +242,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8007:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_STATIC_GRAY";
 #endif
 #if defined(GLX_EXT_visual_info)
@@ -250,7 +250,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8008:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_TRANSPARENT_RGB";
 #endif
 #if defined(GLX_EXT_visual_info)
@@ -258,7 +258,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8009:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_TRANSPARENT_INDEX";
 #endif
 #if defined(GLX_EXT_visual_info)
@@ -269,7 +269,7 @@ const char* enum_to_string_GLX(GLenum e)
         case 0x800a: return "GLX_SHARE_CONTEXT_EXT";
 #endif
         case 0x800b:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_VISUAL_ID";
 #endif
 #if defined(GLX_EXT_import_context)
@@ -277,7 +277,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x800c:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_SCREEN";
 #endif
 #if defined(GLX_EXT_import_context)
@@ -285,7 +285,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x800d:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_NON_CONFORMANT_CONFIG";
 #endif
 #if defined(GLX_EXT_visual_rating)
@@ -293,7 +293,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8010:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_DRAWABLE_TYPE";
 #endif
 #if defined(GLX_SGIX_fbconfig)
@@ -301,7 +301,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8011:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_RENDER_TYPE";
 #endif
 #if defined(GLX_SGIX_fbconfig)
@@ -309,7 +309,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8012:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_X_RENDERABLE";
 #endif
 #if defined(GLX_SGIX_fbconfig)
@@ -317,7 +317,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8013:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_FBCONFIG_ID";
 #endif
 #if defined(GLX_SGIX_fbconfig)
@@ -325,7 +325,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8014:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_RGBA_TYPE";
 #endif
 #if defined(GLX_SGIX_fbconfig)
@@ -333,7 +333,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8015:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_COLOR_INDEX_TYPE";
 #endif
 #if defined(GLX_SGIX_fbconfig)
@@ -341,7 +341,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8016:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_MAX_PBUFFER_WIDTH";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -349,7 +349,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8017:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_MAX_PBUFFER_HEIGHT";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -357,7 +357,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8018:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_MAX_PBUFFER_PIXELS";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -369,7 +369,7 @@ const char* enum_to_string_GLX(GLenum e)
         case 0x801a: return "GLX_OPTIMAL_PBUFFER_HEIGHT_SGIX";
 #endif
         case 0x801b:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_PRESERVED_CONTENTS";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -377,7 +377,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x801c:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_LARGEST_PBUFFER";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -385,7 +385,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x801d:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_WIDTH";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -393,7 +393,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x801e:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_HEIGHT";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -401,7 +401,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x801f:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_EVENT_MASK";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -409,7 +409,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8020:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_DAMAGED";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -417,7 +417,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8021:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_SAVED";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -425,7 +425,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8022:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_WINDOW";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -433,7 +433,7 @@ const char* enum_to_string_GLX(GLenum e)
 #endif
             break;
         case 0x8023:
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
                     return "GLX_PBUFFER";
 #endif
 #if defined(GLX_SGIX_pbuffer)
@@ -456,7 +456,7 @@ const char* enum_to_string_GLX(GLenum e)
 #if defined(GLX_SGIX_hyperpipe)
         case 0x8030: return "GLX_HYPERPIPE_ID_SGIX";
 #endif
-#if defined(GLX_H) || defined(GLX_VERSION_1_3)
+#if defined(GLX_VERSION_1_3)
         case 0x8040: return "GLX_PBUFFER_HEIGHT";
         case 0x8041: return "GLX_PBUFFER_WIDTH";
 #endif
@@ -497,7 +497,7 @@ const char* enum_to_string_GLX(GLenum e)
         case 0x9126: return "GLX_CONTEXT_PROFILE_MASK_ARB";
 #endif
         case 0x186a0:
-#if defined(GLX_H) || defined(GLX_VERSION_1_4)
+#if defined(GLX_VERSION_1_4)
                     return "GLX_SAMPLE_BUFFERS";
 #endif
 #if defined(GLX_ARB_multisample)
@@ -511,7 +511,7 @@ const char* enum_to_string_GLX(GLenum e)
 #if defined(GLX_NV_multisample_coverage)
                     return "GLX_COVERAGE_SAMPLES_NV";
 #endif
-#if defined(GLX_H) || defined(GLX_VERSION_1_4)
+#if defined(GLX_VERSION_1_4)
                     return "GLX_SAMPLES";
 #endif
 #if defined(GLX_ARB_multisample)

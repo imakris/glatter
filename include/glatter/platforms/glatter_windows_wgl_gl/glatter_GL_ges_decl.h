@@ -27,6 +27,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
+#ifndef GLATTER_LOOKUP_SIZE
+#define GLATTER_LOOKUP_SIZE 0x4000
+#endif
 
 #ifdef _MSC_VER
 #pragma warning(push)

@@ -1,3 +1,5 @@
+//NEW 1
+
 /*
 Copyright 2018 Ioannis Makris
 
@@ -23,10 +25,12 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
+#include <inttypes.h>
+
 #include <glatter/glatter_config.h>
 #include <glatter/glatter_platform_headers.h>
 #include <glatter/glatter_masprintf.h>
-
 
 #include <assert.h>
 #include <stdio.h>
@@ -50,11 +54,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 GLATTER_EXTERN_C_BEGIN
 
 
-#ifdef GLATTER_HEADER_ONLY
+ #ifdef GLATTER_HEADER_ONLY
+    #undef GLATTER_INLINE_OR_NOT
     #define GLATTER_INLINE_OR_NOT inline
-#else
+ #else
+    #undef GLATTER_INLINE_OR_NOT
     #define GLATTER_INLINE_OR_NOT
-#endif
+ #endif
 
 #if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
     #if __cplusplus < 201103L && !defined(_MSC_VER)
@@ -172,8 +178,16 @@ void* glatter_get_proc_address(const char* function_name)
         ptr = (void*) GetProcAddress(GetModuleHandle(TEXT("opengl32.dll")), function_name);
 #elif defined(GLATTER_GLX)
     ptr = (void*) glXGetProcAddress((const GLubyte*)function_name);
-    if (ptr == 0)
-        ptr = (void*) dlsym(dlopen("libGL.so", RTLD_LAZY), function_name);
+    if (ptr == 0) {
+        static void* gl_handle = NULL;
+        static int gl_tried = 0;
+        if (!gl_tried) {
+            static const char* sons[] = { "libGL.so.1", "libGL.so", NULL };
+            for (int i = 0; !gl_handle && sons[i]; ++i) gl_handle = dlopen(sons[i], RTLD_LAZY);
+            gl_tried = 1;
+        }
+        if (gl_handle) ptr = (void*) dlsym(gl_handle, function_name);
+    }
 #endif
     return ptr;
 }
@@ -185,7 +199,7 @@ void* glatter_get_proc_address(const char* function_name)
 ///////////////////////////
 
 GLATTER_INLINE_OR_NOT
-const char* enum_to_string_GL(GLenum e);
+const char* enum_to_string_GL(GLATTER_ENUM_GL e);
 
 GLATTER_INLINE_OR_NOT
 void glatter_check_error_GL(const char* file, int line)
@@ -227,7 +241,7 @@ void* glatter_get_proc_address_GL(const char* function_name)
 ////////////////////////////
 
 GLATTER_INLINE_OR_NOT
-const char* enum_to_string_GLX(GLenum e);
+const char* enum_to_string_GLX(GLATTER_ENUM_GLX e);
 
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
 GLATTER_INLINE_OR_NOT
@@ -268,8 +282,16 @@ void* glatter_get_proc_address_GLX(const char* function_name)
 GLATTER_INLINE_OR_NOT
 void glatter_check_error_GLX(const char* file, int line)
 {
-    // TODO: decide if implementing further wrappers to be able
-    // to call XSync here, is within the scope of this library.
+#if defined(GLATTER_LOG_ERRORS)
+    /* X11/GLX errors are asynchronous. Force a round-trip so our
+       X error handler runs for any pending errors. */
+    Display* dpy = glXGetCurrentDisplay();
+    if (dpy) {
+        XSync(dpy, False);
+    }
+#else
+    (void)file; (void)line; /* unused */
+#endif
 }
 
 //////////////////////////////////
@@ -282,7 +304,7 @@ void glatter_check_error_GLX(const char* file, int line)
 ////////////////////////////
 
 GLATTER_INLINE_OR_NOT
-const char* enum_to_string_WGL(GLenum e);
+const char* enum_to_string_WGL(GLATTER_ENUM_WGL e);
 
 GLATTER_INLINE_OR_NOT
 void glatter_check_error_WGL(const char* file, int line)
@@ -324,7 +346,7 @@ void* glatter_get_proc_address_WGL(const char* function_name)
 ////////////////////////////
 
 GLATTER_INLINE_OR_NOT
-const char* enum_to_string_EGL(GLenum e);
+const char* enum_to_string_EGL(GLATTER_ENUM_EGL e);
 
 
 GLATTER_INLINE_OR_NOT
@@ -357,7 +379,7 @@ void* glatter_get_proc_address_EGL(const char* function_name)
 ////////////////////////////
 
 GLATTER_INLINE_OR_NOT
-const char* enum_to_string_GLU(GLenum e);
+const char* enum_to_string_GLU(GLATTER_ENUM_GLU e);
 
 
 GLATTER_INLINE_OR_NOT
@@ -610,10 +632,6 @@ typedef struct glatter_es_record_struct
     uint32_t hash;
     uint16_t index;
 } glatter_es_record_t;
-
-
-// This value is hardoded inside glatter.py. To change it, both must be changed.
-#define GLATTER_LOOKUP_SIZE 0x4000
 
 
 //==================

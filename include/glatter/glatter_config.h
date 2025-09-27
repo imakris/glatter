@@ -1,3 +1,5 @@
+//NEW 1
+
 #ifndef GLATTER_CONFIG_H_DEFINED
 #define GLATTER_CONFIG_H_DEFINED
 
@@ -61,13 +63,6 @@
     // #define GLATTER_GLU  // GLU is not enabled by default
 
 #endif
-
-
-
-////////////////////////////////////////
-// Header-only switch for the library //
-////////////////////////////////////////
-#define GLATTER_HEADER_ONLY
 
 
 

@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 GLATTER_INLINE_OR_NOT
-const char* enum_to_string_WGL(GLenum e)
+const char* enum_to_string_WGL(GLATTER_ENUM_WGL e)
 {
     switch (e) {
 #if defined(WGL_AMD_gpu_association)

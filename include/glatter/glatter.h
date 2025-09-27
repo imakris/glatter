@@ -1,3 +1,4 @@
+//NEW 1
 /*
 Copyright 2018 Ioannis Makris
 
@@ -27,9 +28,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GLATTER_H_DEFINED
 
 #include <inttypes.h>
-#ifndef PRId64
-#define PRId64 "ll"
-#endif
 
 #include "glatter_config.h"
 #include "glatter_platform_headers.h"
@@ -101,26 +99,26 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*));
 
 #if defined(GLATTER_GL)
     GLATTER_INLINE_OR_NOT glatter_extension_support_status_GL_t  glatter_get_extension_support_GL();
-    GLATTER_INLINE_OR_NOT const char* enum_to_string_GL(GLenum e);
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_GL(GLATTER_ENUM_GL e);
 #endif
 
 #if defined(GLATTER_GLX)
     GLATTER_INLINE_OR_NOT glatter_extension_support_status_GLX_t glatter_get_extension_support_GLX();
-    GLATTER_INLINE_OR_NOT const char* enum_to_string_GLX(GLenum e);
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_GLX(GLATTER_ENUM_GLX e);
 #endif
 
 #if defined(GLATTER_EGL)
     GLATTER_INLINE_OR_NOT glatter_extension_support_status_EGL_t glatter_get_extension_support_EGL();
-    GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLenum e);
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLATTER_ENUM_EGL e);
 #endif
 
 #if defined(GLATTER_WGL)
     GLATTER_INLINE_OR_NOT glatter_extension_support_status_WGL_t glatter_get_extension_support_WGL();
-    GLATTER_INLINE_OR_NOT const char* enum_to_string_WGL(GLenum e);
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_WGL(GLATTER_ENUM_WGL e);
 #endif
     
 #if defined (GLATTER_GLU)
-    GLATTER_INLINE_OR_NOT const char* enum_to_string_GLU(GLenum e);
+    GLATTER_INLINE_OR_NOT const char* enum_to_string_GLU(GLATTER_ENUM_GLU e);
 #endif
 
 

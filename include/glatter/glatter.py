@@ -1,3 +1,4 @@
+# NEW 1
 license = '''
 Copyright 2018 Ioannis Makris
 
@@ -857,6 +858,7 @@ def get_function_mdnd(family): #macros, declarations and definitions
 def get_enum_to_string(family):
     if family not in enum_to_string:
         return
+    enum_typedef = 'GLATTER_ENUM_' + family
     rv = '''
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -864,7 +866,7 @@ def get_enum_to_string(family):
 #endif
 
 GLATTER_INLINE_OR_NOT
-const char* enum_to_string_''' + family  + '''(GLenum e)
+const char* enum_to_string_''' + family  + '''(''' + '''%s''' % enum_typedef + ''' e)
 {
     switch (e) {\n'''
     sorted_ets = sorted(enum_to_string[family].items(), key=lambda x: x[0] )
@@ -934,6 +936,9 @@ def get_ext_support_decl(v):
         return
 
     rv = '''
+#ifndef GLATTER_LOOKUP_SIZE
+#define GLATTER_LOOKUP_SIZE ''' + hex(hash_table_size) + '''
+#endif
 
 #ifdef _MSC_VER
 #pragma warning(push)
