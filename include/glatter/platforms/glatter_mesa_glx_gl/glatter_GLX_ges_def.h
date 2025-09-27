@@ -670,8 +670,8 @@ glatter_extension_support_status_GLX_t glatter_get_extension_support_GLX()
 
         uint32_t hash = 5381;
         Display* d = glXGetCurrentDisplay();
-        const uint8_t* ext_str = (const uint8_t*)glatter_glXQueryExtensionsString(d, DefaultScreen(d));
-        for ( ; *ext_str; ext_str++) {
+        const uint8_t* ext_str = d ? (const uint8_t*)glatter_glXQueryExtensionsString(d, DefaultScreen(d)) : NULL;
+        for ( ; ext_str && *ext_str; ext_str++) {
             if (*ext_str == ' ') {
                 int index = -1;
                 rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
@@ -695,7 +695,7 @@ glatter_extension_support_status_GLX_t glatter_get_extension_support_GLX()
             hash = ((hash << 5) + hash) + (int)(*ext_str);
 
         }
-        if (hash != 5381) {
+        if (ext_str && hash != 5381) {
             int index = -1;
             rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
             for ( ; r && (r->hash | r->index); r++ ) {
@@ -709,6 +709,7 @@ glatter_extension_support_status_GLX_t glatter_get_extension_support_GLX()
                 // (3)
             }
         }
+        
         initialized = 1;
     }
     

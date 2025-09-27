@@ -1243,7 +1243,7 @@ glatter_extension_support_status_GL_t glatter_get_extension_support_GL()
 #endif
             uint32_t hash = 5381;
             const uint8_t* ext_str = (const uint8_t*)glatter_glGetString(GL_EXTENSIONS);
-            for ( ; *ext_str; ext_str++) {
+            for ( ; ext_str && *ext_str; ext_str++) {
                 if (*ext_str == ' ') {
                     int index = -1;
                     rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
@@ -1267,7 +1267,7 @@ glatter_extension_support_status_GL_t glatter_get_extension_support_GL()
                 hash = ((hash << 5) + hash) + (int)(*ext_str);
 
             }
-            if (hash != 5381) {
+            if (ext_str && hash != 5381) {
                 int index = -1;
                 rt* r = es_dispatch[ hash & (GLATTER_LOOKUP_SIZE-1) ];
                 for ( ; r && (r->hash | r->index); r++ ) {
