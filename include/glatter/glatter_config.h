@@ -96,6 +96,9 @@
 ///////////////////////////////////////////////////
 // X error handler switch (only relevant to GLX) //
 ///////////////////////////////////////////////////
+// Installing the GLATTER X error handler replaces the process-wide Xlib
+// handler. Define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to opt out and
+// install your own (for example after calling XInitThreads()).
 //#define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER
 
 /////////////////////////////////////

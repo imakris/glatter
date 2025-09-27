@@ -63,14 +63,22 @@ GLATTER_MASPRINTF_INLINE int vscprintf(const char* format, va_list ap)
 
 GLATTER_MASPRINTF_INLINE char* glatter_mvasprintf(const char* format, va_list ap)
 {
-    int len = vscprintf(format, ap);
-    if (len == -1)
+    va_list ap_len;
+    va_copy(ap_len, ap);
+    int len = vscprintf(format, ap_len);
+    va_end(ap_len);
+    if (len < 0)
         return 0;
+
     char* str = (char*)malloc((size_t)len + 1);
     if (!str)
         return 0;
-    int val = vsnprintf(str, len + 1, format, ap);
-    if (val == -1) {
+
+    va_list ap_copy;
+    va_copy(ap_copy, ap);
+    int val = vsnprintf(str, (size_t)len + 1, format, ap_copy);
+    va_end(ap_copy);
+    if (val < 0) {
         free(str);
         return 0;
     }

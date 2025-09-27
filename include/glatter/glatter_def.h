@@ -36,6 +36,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdarg.h>
 #include <stdio.h>
 
+#undef GLATTER_HAS_ATOMIC_LOG_HANDLER
+#if defined(__cplusplus)
+#   if __cplusplus >= 201103L
+#       define GLATTER_HAS_ATOMIC_LOG_HANDLER 1
+#       if !defined(GLATTER_HEADER_ONLY)
+#           include <atomic>
+#       endif
+#   else
+#       define GLATTER_HAS_ATOMIC_LOG_HANDLER 0
+#   endif
+#else
+#   if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L && !defined(__STDC_NO_ATOMICS__)
+#       define GLATTER_HAS_ATOMIC_LOG_HANDLER 1
+#       include <stdatomic.h>
+#   else
+#       define GLATTER_HAS_ATOMIC_LOG_HANDLER 0
+#   endif
+#endif
+
 #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
     #include <dlfcn.h>
     #include <pthread.h>
@@ -86,18 +105,79 @@ void glatter_default_log_handler(const char* str)
 }
 
 
+typedef void (*glatter_log_handler_fn)(const char*);
+
+#if GLATTER_HAS_ATOMIC_LOG_HANDLER
+#   if defined(__cplusplus)
+        using glatter_log_handler_atomic_t = std::atomic<glatter_log_handler_fn>;
+
 GLATTER_INLINE_OR_NOT
-void (**glatter_log_handler_ptr_ptr())(const char*)
+glatter_log_handler_atomic_t& glatter_log_handler_storage(void)
 {
-    static void(*handler_ptr)(const char*) = glatter_default_log_handler;
-    return &handler_ptr;
+    static glatter_log_handler_atomic_t handler(glatter_default_log_handler);
+    return handler;
 }
+
+GLATTER_INLINE_OR_NOT
+void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
+{
+    glatter_log_handler_storage().store(handler_ptr, std::memory_order_release);
+}
+
+GLATTER_INLINE_OR_NOT
+glatter_log_handler_fn glatter_log_handler_load(void)
+{
+    return glatter_log_handler_storage().load(std::memory_order_acquire);
+}
+#   else
+        typedef _Atomic(glatter_log_handler_fn) glatter_log_handler_atomic_t;
+
+GLATTER_INLINE_OR_NOT
+glatter_log_handler_atomic_t* glatter_log_handler_storage(void)
+{
+    static glatter_log_handler_atomic_t handler = glatter_default_log_handler;
+    return &handler;
+}
+
+GLATTER_INLINE_OR_NOT
+void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
+{
+    atomic_store_explicit(glatter_log_handler_storage(), handler_ptr, memory_order_release);
+}
+
+GLATTER_INLINE_OR_NOT
+glatter_log_handler_fn glatter_log_handler_load(void)
+{
+    return atomic_load_explicit(glatter_log_handler_storage(), memory_order_acquire);
+}
+#   endif
+#else
+
+GLATTER_INLINE_OR_NOT
+glatter_log_handler_fn* glatter_log_handler_storage(void)
+{
+    static glatter_log_handler_fn handler = glatter_default_log_handler;
+    return &handler;
+}
+
+GLATTER_INLINE_OR_NOT
+void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
+{
+    *glatter_log_handler_storage() = handler_ptr;
+}
+
+GLATTER_INLINE_OR_NOT
+glatter_log_handler_fn glatter_log_handler_load(void)
+{
+    return *glatter_log_handler_storage();
+}
+#endif
 
 
 GLATTER_INLINE_OR_NOT
 void (*glatter_log_handler())(const char*)
 {
-    return *(glatter_log_handler_ptr_ptr());
+    return glatter_log_handler_load();
 }
 
 
@@ -109,7 +189,8 @@ const char* glatter_log(const char* str)
         static const char fallback[] = "GLATTER: message formatting failed.\n";
         message = fallback;
     }
-    (*(glatter_log_handler_ptr_ptr()))(message);
+    glatter_log_handler_fn handler = glatter_log_handler_load();
+    handler(message);
     return str;
 }
 
@@ -137,7 +218,7 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*))
     if (handler_ptr == NULL) {
         handler_ptr = glatter_default_log_handler;
     }
-    *(glatter_log_handler_ptr_ptr()) = handler_ptr;
+    glatter_log_handler_store(handler_ptr);
 }
 
 
@@ -224,7 +305,7 @@ void* glatter_get_proc_address(const char* function_name)
     }
 #elif defined(GLATTER_WGL)
     PROC a = wglGetProcAddress(function_name);
-    if (!a || a == (PROC)1 || a == (PROC)2 || a == (PROC)3 || a == (PROC)4) {
+    if (!a || a == (PROC)1 || a == (PROC)2 || a == (PROC)3 || a == (PROC)4 || a == (PROC)-1) {
         HMODULE h = GetModuleHandleA("opengl32.dll");
         if (!h) h = LoadLibraryA("opengl32.dll");
         if (h) a = (PROC) GetProcAddress(h, function_name);
@@ -318,6 +399,12 @@ void* glatter_get_proc_address_GLX(const char* function_name)
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
     static int initialized = 0;
     if (!initialized) {
+        /* Xlib error handlers are process-global. Installing this handler
+           replaces any handler the application has already installed. If the
+           application needs a custom handler or performs multi-threaded Xlib
+           work without calling XInitThreads() early, define
+           GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER and install a handler
+           manually. */
         XSetErrorHandler(x_error_handler);
         initialized = 1;
     }
