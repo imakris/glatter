@@ -29,7 +29,16 @@ input_root = r'./headers'
 output_dir = r'./platforms'
 platform_headers_file = r'./glatter_platform_headers.h'
 
-families = {'GL':'gl', 'GLX':'glX', 'EGL':'egl', 'GLU':'glu', 'WGL':'wgl', 'khronos_':'khronos_'}
+from collections import OrderedDict
+
+families = OrderedDict([
+    ('GL', 'gl'),
+    ('GLX', 'glX'),
+    ('EGL', 'egl'),
+    ('GLU', 'glu'),
+    ('WGL', 'wgl'),
+    ('khronos_', 'khronos_'),
+])
 
 extension_groups = {key: {} for key in families}
 
@@ -307,7 +316,7 @@ def analyze_condition(ppline, former_condition = None):
         mgd = m.group('dname')
         ns = '!' if m.group('n') else ''
         if mgd in conflict_differentiators:
-            for v in conflict_differentiators[mgd]:
+            for v in sorted(conflict_differentiators[mgd]):
                 rlist.append(ns+'defined('+v+')')
         return rlist + [ns+'defined('+mgd+')']
     #else
@@ -690,7 +699,7 @@ def get_function_mdnd(family): #macros, declarations and definitions
             s1 = set(sfd0[w[1]].block)
             if s0 < s1:
                 ds = s1 - s0
-                for x in ds:
+                for x in sorted(ds):
                     sfd0[w[0]].block.append(('!'+x) if x[0]!='!' else x[1:])
             elif s0==s1:
                 indices_for_deletion.add(min(w[0], w[1]))
@@ -877,13 +886,15 @@ const char* enum_to_string_''' + family  + '''(''' + '''%s''' % enum_typedef + '
 
     for x in sorted_ets:
         inv_d = {}
-        for y in x[1]:
+        for y in sorted(x[1]):
             if y == '':
                 continue
-            for z in x[1][y]:
+            for z in sorted(x[1][y]):
                 if (not z in inv_d):
                     inv_d[z] = []
                 inv_d[z].append(y)
+        for key in inv_d:
+            inv_d[key].sort()
         if len(inv_d) == 1:
             ifb = '''\
 #if ''' + ' || '.join(map(str, next(iter(inv_d.values()))))
@@ -970,7 +981,7 @@ def get_ext_support_def(v):
 
     hts = ''
     ht = ['0'] * hash_table_size;
-    for x in ext_hash_to_full_hash[v]:
+    for x in sorted(ext_hash_to_full_hash[v]):
         ht[x] = 'e' + '{:x}'.format(x)
     for idx, val in enumerate(ht):
         hts += str(val) + ',' + ('\n        ' if (((idx+1) % 30) == 0) else '')
@@ -990,9 +1001,13 @@ glatter_extension_support_status_''' + v + '''_t glatter_get_extension_support_'
 #else
 #define zrt {0, 0}
 #endif
-''' + '\n'.join(['    static rt e' +   '{: <4x}'.format(x)  + '[] = {{' + '}, {'.join(
-        str([y, ext_hash_to_full_hash[v][x][y]]).translate({ord(c): None for c in '[]'}) \
-            for y in ext_hash_to_full_hash[v][x]) + '}, zrt};' for x in ext_hash_to_full_hash[v]]) + '''
+''' + '\n'.join([
+        '    static rt e' + '{: <4x}'.format(x) + '[] = {{' + '}, {'.join(
+            str([y, ext_hash_to_full_hash[v][x][y]]).translate({ord(c): None for c in '[]'})
+            for y in sorted(ext_hash_to_full_hash[v][x])
+        ) + '}, zrt};'
+        for x in sorted(ext_hash_to_full_hash[v])
+    ]) + '''
 
 #ifndef __cplusplus
 #undef zrt
