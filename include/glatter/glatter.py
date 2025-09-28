@@ -873,6 +873,8 @@ def get_function_mdnd(family): #macros, declarations and definitions
 {
     GLATTER_DBLOCK(file, line, ''' + x.name + ', "(' + a6s[0] + ')"' + printf_va_args + ')'
         if x.family == 'WGL':
+            # NOTE: We clear LastError *after* GLATTER_DBLOCK so any Windows calls made by logging
+            # cannot taint the error we attribute to the WGL call. Do not move this higher.
             df_def += '''
     SetLastError(0);'''
         if (x.rtype not in ['void', 'VOID']):
