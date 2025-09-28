@@ -57,6 +57,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #   endif
 #endif
 
+/* LOG HANDLER POLICY (no atomics):
+ * If atomics are unavailable, glatter_set_log_handler() must be called during
+ * single-threaded startup. After that, do not mutate it from multiple threads.
+ * This configuration is supported and guarded by this build-time warning.
+ */
 #if !GLATTER_HAS_ATOMIC_LOG_HANDLER && !defined(GLATTER_LOG_HANDLER_INIT_WARNING)
 #   define GLATTER_LOG_HANDLER_INIT_WARNING 1
 #   if defined(_MSC_VER)
@@ -292,6 +297,9 @@ typedef struct glatter_loader_state {
     PROC (WINAPI *wgl_get_proc)(LPCSTR);
     glatter_egl_get_proc_fn egl_get_proc;
 #else
+    /* Loader handles remain open for the process lifetime by design. We do not
+     * dlclose/FreeLibrary to avoid driver/layer teardown side effects.
+     */
     void* gl_handles[GLATTER_GL_SONAME_COUNT];
     unsigned char gl_tried[GLATTER_GL_SONAME_COUNT];
     void* egl_handles[GLATTER_EGL_SONAME_COUNT];
@@ -306,12 +314,13 @@ typedef struct glatter_loader_state {
 #endif
 } glatter_loader_state;
 
-/* THREADING:
-   loader_state is process-global and mutated on first use (WSI detection,
-   handle opens). Do not drive first use concurrently from multiple threads.
-   After initialization completes, resolved entry points are safe to call
-   from any thread.
-   This lock-free first-use scheme is intentional and not a correctness bug. */
+/* THREADING NOTE:
+ * First-use initialization of loader_state is intentionally lock-free.
+ * Do not call into glatter from multiple threads until the first glatter_*
+ * call has returned. After that, only read-mostly fields are touched and
+ * per-entry resolution is thread-safe (atomics or once-guards).
+ * This is a design choice, not a correctness bug.
+ */
 static glatter_loader_state* glatter_loader_state_get(void)
 {
     static glatter_loader_state state = {
@@ -354,6 +363,10 @@ static int glatter_equals_ignore_case(const char* a, const char* b)
     return *a == '\0' && *b == '\0';
 }
 
+/* Environment steering: we read GLATTER_WSI once per process unless the app
+ * has already called glatter_set_wsi(), in which case environment input is
+ * ignored. Explicit app choice takes precedence.
+ */
 static void glatter_detect_wsi_from_env(glatter_loader_state* state)
 {
     if (state->env_checked || state->wsi_explicit) {
@@ -472,7 +485,7 @@ static void* glatter_windows_resolve_egl(glatter_loader_state* state, const char
         }
     }
 
-    if (name && name[0] == 'g' && name[1] == 'l') {
+    if (name && strncmp(name, "gl", 2) == 0) {
         for (size_t i = 0; i < GLATTER_WINDOWS_GLES_MODULE_COUNT; ++i) {
             glatter_windows_load_module(&state->gles_modules[i], glatter_windows_gles_names[i], sizeof(glatter_windows_gles_names[i]) / sizeof(glatter_windows_gles_names[i][0]));
             if (state->gles_modules[i]) {
@@ -565,7 +578,7 @@ static void* glatter_linux_lookup_egl(glatter_loader_state* state, const char* n
         return sym;
     }
 
-    if (name && name[0] == 'g' && name[1] == 'l') {
+    if (name && strncmp(name, "gl", 2) == 0) {
         glatter_linux_load_handles(state->gles_handles, state->gles_tried, GLATTER_GLES_SONAME_COUNT, glatter_gles_sonames);
         return glatter_linux_lookup_in_handles(state->gles_handles, GLATTER_GLES_SONAME_COUNT, name);
     }
@@ -737,10 +750,6 @@ int x_error_handler(Display *dsp, XErrorEvent *error)
 
 
 GLATTER_INLINE_OR_NOT
-void* glatter_get_proc_address_GLX_init(const char* function_name);
-
-
-GLATTER_INLINE_OR_NOT
 void* glatter_get_proc_address_GLX(const char* function_name)
 {
     void* ptr = glatter_get_proc_address(function_name);
@@ -749,6 +758,10 @@ void* glatter_get_proc_address_GLX(const char* function_name)
     if (ptr) {
         glatter_loader_state* state = glatter_loader_state_get();
         if (!state->glx_error_handler_installed && state->active == GLATTER_WSI_GLX_VALUE) {
+            /* Process-global X error handler is installed once after GLX activation.
+             * Define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to opt out and install your
+             * own handler instead if desired.
+             */
             /* Xlib error handlers are process-global. Installing this handler
                replaces any handler the application has already installed. If the
                application needs a custom handler or performs multi-threaded Xlib
@@ -974,6 +987,11 @@ namespace glatter { namespace detail {
     #error "Unsupported platform"
 #endif
 
+    /* Ownership policy:
+     * - Default: first caller becomes owner (simple apps).
+     * - Define GLATTER_REQUIRE_EXPLICIT_OWNER_BIND to force explicit binding,
+     *   then call glatter_bind_owner_to_current_thread() on your render thread.
+     */
     inline thread_id_t& owner_thread_id()
     {
 #if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND)
@@ -1017,6 +1035,13 @@ namespace glatter { namespace detail {
 
 GLATTER_EXTERN_C_BEGIN
 
+#if !defined(GLATTER_HEADER_ONLY) || !defined(__cplusplus)
+    /* Ownership policy:
+     * - Default: first caller becomes owner (simple apps).
+     * - Define GLATTER_REQUIRE_EXPLICIT_OWNER_BIND to force explicit binding,
+     *   then call glatter_bind_owner_to_current_thread() on your render thread.
+     */
+#endif
 #if defined(_WIN32)
     extern INIT_ONCE glatter_thread_once;
     extern DWORD     glatter_thread_id;
@@ -1198,10 +1223,17 @@ typedef struct glatter_es_record_struct
     static inline rtype cconv glatter_##name dargs\
     {\
         static GLATTER_ATOMIC(glatter_##name##_t) s_f_ptr GLATTER_ATOMIC_LOCAL_INIT(NULL);\
+        /* Threading: atomic fast-path. Multiple threads may resolve concurrently on\
+         * first hit; the last store wins but all stores are the same function pointer.\
+         */\
         glatter_##name##_t fn = GLATTER_ATOMIC_LOAD(s_f_ptr);\
         if (!fn) {\
             glatter_##name##_t resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
             if (!resolved) {\
+                /* Note: this message routes through the user-installed log handler\
+                 * (default handler writes to stderr). Applications may replace it via\
+                 * glatter_set_log_handler(...).\
+                 */\
                 glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
                 GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
             }\
@@ -1220,8 +1252,13 @@ typedef struct glatter_es_record_struct
     GLATTER_ONCE_CB(glatter_##name##_resolve_once);\
     static inline rtype cconv glatter_##name dargs\
     {\
+        /* Threading: first-hit guarded by pthread_once/InitOnce. */\
         GLATTER_ONCE(glatter_##name##_resolve_once, glatter_##name##_once);\
         if (!glatter_##name##_resolved) {\
+            /* Note: this message routes through the user-installed log handler\
+             * (default handler writes to stderr). Applications may replace it via\
+             * glatter_set_log_handler(...).\
+             */\
             glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
             GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
         }\
@@ -1245,6 +1282,10 @@ typedef struct glatter_es_record_struct
             glatter_##name##_resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
         }\
         if (!glatter_##name##_resolved) {\
+            /* Note: this message routes through the user-installed log handler\
+             * (default handler writes to stderr). Applications may replace it via\
+             * glatter_set_log_handler(...).\
+             */\
             glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
             GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
         }\
@@ -1264,8 +1305,15 @@ typedef struct glatter_es_record_struct
     extern rtype cconv glatter_##name##_init dargs;\
     rtype cconv glatter_##name##_init dargs\
     {\
+        /* Threading: atomic fast-path. Multiple threads may resolve concurrently on\
+         * first hit; the last store wins but all stores are the same function pointer.\
+         */\
         glatter_##name##_t resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
         if (!resolved) {\
+            /* Note: this message routes through the user-installed log handler\
+             * (default handler writes to stderr). Applications may replace it via\
+             * glatter_set_log_handler(...).\
+             */\
             glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
             GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
         }\
@@ -1286,8 +1334,13 @@ typedef struct glatter_es_record_struct
     GLATTER_ONCE_CB(glatter_##name##_resolve_once);\
     rtype cconv glatter_##name##_init dargs\
     {\
+        /* Threading: first-hit guarded by pthread_once/InitOnce. */\
         GLATTER_ONCE(glatter_##name##_resolve_once, glatter_##name##_once);\
         if (!glatter_##name##_resolved) {\
+            /* Note: this message routes through the user-installed log handler\
+             * (default handler writes to stderr). Applications may replace it via\
+             * glatter_set_log_handler(...).\
+             */\
             glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
             GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
         }\
@@ -1315,6 +1368,10 @@ typedef struct glatter_es_record_struct
             glatter_##name##_resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
         }\
         if (!glatter_##name##_resolved) {\
+            /* Note: this message routes through the user-installed log handler\
+             * (default handler writes to stderr). Applications may replace it via\
+             * glatter_set_log_handler(...).\
+             */\
             glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
             GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
         }\
