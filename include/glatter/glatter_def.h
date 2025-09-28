@@ -51,6 +51,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #           define GLATTER_THREAD_LOCAL __thread
 #       else
 #           define GLATTER_THREAD_LOCAL
+#           if !defined(GLATTER_NO_TLS_WARNING)
+#               define GLATTER_NO_TLS_WARNING
+#               if defined(_MSC_VER)
+#                   pragma message("glatter: TLS not detected for this compiler; some logs may interleave across threads.")
+#               else
+#                   warning "glatter: TLS not detected for this compiler; some logs may interleave across threads."
+#               endif
+#           endif
 #       endif
 #   endif
 #else
@@ -61,6 +69,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #           define GLATTER_THREAD_LOCAL __thread
 #       else
 #           define GLATTER_THREAD_LOCAL
+#           if !defined(GLATTER_NO_TLS_WARNING)
+#               define GLATTER_NO_TLS_WARNING
+#               if defined(_MSC_VER)
+#                   pragma message("glatter: TLS not detected for this compiler; some logs may interleave across threads.")
+#               else
+#                   warning "glatter: TLS not detected for this compiler; some logs may interleave across threads."
+#               endif
+#           endif
 #       endif
 #   endif
 #endif
@@ -279,15 +295,21 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*))
 
 #if defined(_WIN32)
 /* -------- TCHAR* logging helper (Windows only) -------- */
+/* Prints TCHAR* as UTF-8 for logging.
+ * Uses a small TLS ring so multiple %s in one call do not alias.
+ */
 static const char* glatter_pr_tstr(const TCHAR* ts)
 {
     if (!ts) {
         return "(null)";
     }
 #if defined(UNICODE) || defined(_UNICODE)
+    enum { GLATTER_TSTR_SLOTS = 8, GLATTER_TSTR_CAP = 1024 };
+    static GLATTER_THREAD_LOCAL char  tbuf[GLATTER_TSTR_SLOTS][GLATTER_TSTR_CAP];
+    static GLATTER_THREAD_LOCAL unsigned tix;
+    char* buf = tbuf[tix++ % GLATTER_TSTR_SLOTS];
     /* Convert UTF-16 -> UTF-8 */
-    static GLATTER_THREAD_LOCAL char buf[1024];
-    int n = WideCharToMultiByte(CP_UTF8, 0, ts, -1, buf, (int)sizeof(buf), NULL, NULL);
+    int n = WideCharToMultiByte(CP_UTF8, 0, ts, -1, buf, (int)GLATTER_TSTR_CAP, NULL, NULL);
     if (n > 0) {
         return buf;
     }
@@ -378,11 +400,8 @@ typedef struct glatter_loader_state {
 } glatter_loader_state;
 
 /* THREADING NOTE:
- * First-use initialization of loader_state is intentionally lock-free.
- * Do not call into glatter from multiple threads until the first glatter_*
- * call has returned. After that, only read-mostly fields are touched and
- * per-entry resolution is thread-safe (atomics or once-guards).
- * This is a design choice, not a correctness bug.
+ * Per-entry resolution uses atomic CAS and is thread-safe.
+ * Loader state is static and updated in a read-mostly, idempotent way.
  */
 static glatter_loader_state* glatter_loader_state_get(void)
 {
@@ -868,12 +887,11 @@ void* glatter_get_proc_address_GLX(const char* function_name)
              * Define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to opt out and install your
              * own handler instead if desired.
              */
-            /* Xlib error handlers are process-global. Installing this handler
-               replaces any handler the application has already installed. If the
-               application needs a custom handler or performs multi-threaded Xlib
-               work without calling XInitThreads() early, define
-               GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER and install a handler
-               manually. */
+            /* GLX error handler:
+             * Process-global. Reinstalling the same function is benign.
+             * We intentionally avoid pthread_once here to keep header-only builds simple.
+             * Define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to opt out and set your own.
+             */
             XSetErrorHandler(x_error_handler);
             glatter_log("GLATTER: installed default X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
             state->glx_error_handler_installed = 1;
@@ -1216,6 +1234,7 @@ void glatter_pre_callback(const char* file, int line)
             char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
             glatter_log(m);
             free(m);
+            /* glatter_log does not take ownership; caller frees 'm'. */
         }
     }
 
@@ -1374,13 +1393,13 @@ typedef struct glatter_es_record_struct
 
 #ifdef GLATTER_HEADER_ONLY
 
+/* Thread-safe first use:
+ * Resolution uses a single atomic CAS on the function pointer.
+ * No locks / no call_once; safe in header-only and separate-TU builds.
+ */
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
     static glatter_atomic(glatter_##name##_t) glatter_##name##_resolved = (glatter_##name##_t)0;\
-    /* Thread-safe first use:\
-     * We resolve with a single atomic CAS on the function pointer.\
-     * No locks, no once, no single-threaded mode. Safe in header-only and TU builds.\
-     */\
     static inline rtype cconv glatter_##name dargs\
     {\
         glatter_##name##_t fn = GLATTER_ATOMIC_LOAD(glatter_##name##_resolved);\
@@ -1409,16 +1428,16 @@ typedef struct glatter_es_record_struct
 
 #else /* !GLATTER_HEADER_ONLY */
 
+/* Thread-safe first use:
+ * Resolution uses a single atomic CAS on the function pointer.
+ * No locks / no call_once; safe in header-only and separate-TU builds.
+ */
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     cder rtype cconv name dargs;\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
     static glatter_atomic(glatter_##name##_t) glatter_##name##_resolved = (glatter_##name##_t)0;\
     static rtype cconv glatter_##name##_dispatch dargs;\
     glatter_##name##_t glatter_##name = glatter_##name##_dispatch;\
-    /* Thread-safe first use:\
-     * We resolve with a single atomic CAS on the function pointer.\
-     * No locks, no once, no single-threaded mode. Safe in header-only and TU builds.\
-     */\
     static rtype cconv glatter_##name##_dispatch dargs\
     {\
         glatter_##name##_t fn = GLATTER_ATOMIC_LOAD(glatter_##name##_resolved);\
@@ -1457,6 +1476,7 @@ GLATTER_INLINE_OR_NOT
 void glatter_vlog_line_(const char* prefix, const char* fmt, va_list ap)
 {
     char buf[1024];
+    /* Diagnostic logging: truncation is acceptable; vsnprintf prevents overflow. */
     int n = vsnprintf(buf, sizeof(buf), fmt ? fmt : "", ap);
     (void)n; /* truncation ignored intentionally */
     if (prefix && *prefix) glatter_log(prefix);
