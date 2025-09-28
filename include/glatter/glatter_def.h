@@ -1303,6 +1303,7 @@ GLATTER_INLINE_OR_NOT
 Printable get_prs(size_t sz, void* obj)
 {
     Printable ret;
+    memset(&ret, 0, sizeof ret);
     const unsigned char *bytes = (const unsigned char*)obj;
     size_t cap = sizeof(ret.data);
     size_t pos = 0;
