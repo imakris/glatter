@@ -27,6 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <inttypes.h>
 
 #include <glatter/glatter_config.h>
+#include <glatter/glatter_threads_internal.h>
 #include <glatter/glatter_platform_headers.h>
 #include <glatter/glatter_masprintf.h>
 
@@ -305,6 +306,11 @@ typedef struct glatter_loader_state {
 #endif
 } glatter_loader_state;
 
+/* THREADING:
+   loader_state is process-global and mutated on first use (WSI detection,
+   handle opens). Do not drive first use concurrently from multiple threads.
+   After initialization completes, resolved entry points are safe to call
+   from any thread. */
 static glatter_loader_state* glatter_loader_state_get(void)
 {
     static glatter_loader_state state = {
@@ -1151,20 +1157,56 @@ typedef struct glatter_es_record_struct
 
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
+#if !GLATTER_USE_ATOMICS\
+    static glatter_##name##_t glatter_##name##_resolved = NULL;\
+#if !GLATTER_INTERNAL_SINGLE_THREADED\
+    static GLATTER_ONCE_TYPE glatter_##name##_once = GLATTER_ONCE_INIT;\
+    GLATTER_ONCE_CB(glatter_##name##_resolve_once);\
+#endif\
+#endif\
     static inline rtype cconv glatter_##name dargs\
     {\
-        static glatter_##name##_t s_f_ptr = NULL;\
-        if (!s_f_ptr) {\
-            s_f_ptr = (glatter_##name##_t) glatter_get_proc_address_##family(#name);\
+#if GLATTER_USE_ATOMICS\
+        static GLATTER_ATOMIC(glatter_##name##_t) s_f_ptr GLATTER_ATOMIC_LOCAL_INIT(NULL);\
+        glatter_##name##_t f = GLATTER_ATOMIC_LOAD(s_f_ptr);\
+        if (!f) {\
+            glatter_##name##_t resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
+            if (!resolved) {\
+                glatter_log_printf(\
+                    "GLATTER: failed to resolve '%s'\n", #name\
+                );\
+                GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
+            }\
+            GLATTER_ATOMIC_STORE(s_f_ptr, resolved);\
+            f = resolved;\
         }\
-        if (s_f_ptr == NULL) {\
+        return_or_not f cargs;\
+#else\
+#if !GLATTER_INTERNAL_SINGLE_THREADED\
+        GLATTER_ONCE(glatter_##name##_resolve_once, glatter_##name##_once);\
+#else\
+        if (!glatter_##name##_resolved) {\
+            glatter_##name##_resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
+        }\
+#endif\
+        if (!glatter_##name##_resolved) {\
             glatter_log_printf(\
                 "GLATTER: failed to resolve '%s'\n", #name\
             );\
             GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
         }\
-        return_or_not s_f_ptr cargs;\
-    }
+        return_or_not glatter_##name##_resolved cargs;\
+#endif\
+    }\
+#if !GLATTER_USE_ATOMICS && !GLATTER_INTERNAL_SINGLE_THREADED\
+    GLATTER_ONCE_CB(glatter_##name##_resolve_once)\
+    {\
+        glatter_##name##_resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
+#if defined(_WIN32)\
+        return glatter_##name##_resolved != NULL;\
+#endif\
+    }\
+#endif
 
 
 #else
@@ -1173,22 +1215,62 @@ typedef struct glatter_es_record_struct
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     cder rtype cconv name dargs;\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
-    extern glatter_##name##_t glatter_##name ;\
+#if GLATTER_USE_ATOMICS\
+    extern GLATTER_ATOMIC(glatter_##name##_t) glatter_##name;\
+#else\
+    extern glatter_##name##_t glatter_##name;\
+#endif\
     extern rtype cconv glatter_##name##_init dargs;\
+#if !GLATTER_USE_ATOMICS\
+    static glatter_##name##_t glatter_##name##_resolved = NULL;\
+#if !GLATTER_INTERNAL_SINGLE_THREADED\
+    static GLATTER_ONCE_TYPE glatter_##name##_once = GLATTER_ONCE_INIT;\
+    GLATTER_ONCE_CB(glatter_##name##_resolve_once);\
+#endif\
+#endif\
     rtype cconv glatter_##name##_init dargs\
     {\
-        glatter_##name##_t resolved = (glatter_##name##_t)\
-            glatter_get_proc_address_##family(#name);\
-        if (resolved == NULL) {\
+#if GLATTER_USE_ATOMICS\
+        glatter_##name##_t resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
+        if (!resolved) {\
             glatter_log_printf(\
                 "GLATTER: failed to resolve '%s'\n", #name\
             );\
             GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
         }\
-        glatter_##name = resolved;\
-        return_or_not glatter_##name cargs;\
+        GLATTER_ATOMIC_STORE(glatter_##name, resolved);\
+        return_or_not GLATTER_ATOMIC_LOAD(glatter_##name) cargs;\
+#else\
+#if !GLATTER_INTERNAL_SINGLE_THREADED\
+        GLATTER_ONCE(glatter_##name##_resolve_once, glatter_##name##_once);\
+#else\
+        if (!glatter_##name##_resolved) {\
+            glatter_##name##_resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
+        }\
+#endif\
+        if (!glatter_##name##_resolved) {\
+            glatter_log_printf(\
+                "GLATTER: failed to resolve '%s'\n", #name\
+            );\
+            GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
+        }\
+        return_or_not glatter_##name##_resolved cargs;\
+#endif\
     }\
-    glatter_##name##_t glatter_##name = glatter_##name##_init;
+#if GLATTER_USE_ATOMICS\
+    GLATTER_ATOMIC(glatter_##name##_t) glatter_##name GLATTER_ATOMIC_LOCAL_INIT(glatter_##name##_init);\
+#else\
+    glatter_##name##_t glatter_##name = glatter_##name##_init;\
+#endif\
+#if !GLATTER_USE_ATOMICS && !GLATTER_INTERNAL_SINGLE_THREADED\
+    GLATTER_ONCE_CB(glatter_##name##_resolve_once)\
+    {\
+        glatter_##name##_resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
+#if defined(_WIN32)\
+        return glatter_##name##_resolved != NULL;\
+#endif\
+    }\
+#endif
 
 
 #endif
