@@ -10,7 +10,7 @@
 /* GLES: one of {0, 11, 20, 30, 31, 32}. 0 disables GLES. */
 #define GLATTER_GLES_VERSION                 0
 
-/* Platform/WSI selection (use constants from glatter_config_choices.h) */
+/* Platform/WSI selection (use constants defined in glatter_config.h) */
 #ifndef GLATTER_PLATFORM
 #  define GLATTER_PLATFORM                   GLATTER_PLATFORM_AUTO
 #endif

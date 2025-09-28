@@ -219,7 +219,9 @@ Two headers are meant for power users:
 
 1. Place target API headers under `include/glatter/headers/`.
 2. Add the bundle to `glatter_platform_headers.h` (one `#include` per line, no trailing comments).
-3. Run: `python include/glatter/glatter.py`.
+3. Run either:
+   * `python include/glatter/glatter.py`
+   * `cd include/glatter && python glatter.py`
 
 If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for your target, EGL/GLES helpers are unavailable until you generate the headers; the library still builds.
 
