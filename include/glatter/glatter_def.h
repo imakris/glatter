@@ -137,7 +137,7 @@ static glatter_atomic(glatter_log_handler_fn) glatter_log_handler_state =
     GLATTER_ATOMIC_INIT_PTR(glatter_default_log_handler);
 
 /* Log handler is frozen after the first log to avoid races with late setters. */
-static glatter_atomic(int) glatter_log_handler_frozen = 0;
+static glatter_atomic_int glatter_log_handler_frozen = GLATTER_ATOMIC_INT_INIT(0);
 
 GLATTER_INLINE_OR_NOT
 void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
@@ -169,7 +169,7 @@ const char* glatter_log(const char* str)
     }
     /* Freeze the handler on first log, race-free. */
     int expected = 0;
-    (void)GLATTER_ATOMIC_CAS(glatter_log_handler_frozen, expected, 1);
+    (void)GLATTER_ATOMIC_INT_CAS(glatter_log_handler_frozen, expected, 1);
     glatter_log_handler_fn handler = glatter_log_handler_load();
     handler(message);
     return str;
@@ -198,7 +198,7 @@ GLATTER_INLINE_OR_NOT
 void glatter_set_log_handler(void(*handler_ptr)(const char*))
 {
     /* If already frozen by the first log, ignore late changes. */
-    if (GLATTER_ATOMIC_LOAD(glatter_log_handler_frozen)) {
+    if (GLATTER_ATOMIC_INT_LOAD(glatter_log_handler_frozen)) {
         return;
     }
     if (handler_ptr == NULL) {
@@ -321,7 +321,7 @@ typedef struct glatter_loader_state {
  * 0 = undecided, 1 = deciding, 2 = decided
  * In header-only builds this is per-TU; use separate-TU mode for process-wide single decision.
  */
-static glatter_atomic(int) glatter_wsi_gate = 0;
+static glatter_atomic_int glatter_wsi_gate = GLATTER_ATOMIC_INT_INIT(0);
 
 static glatter_loader_state* glatter_loader_state_get(void)
 {
@@ -789,14 +789,15 @@ void* glatter_get_proc_address(const char* function_name)
      * environment converge to the same WSI. Divergence would only occur if TUs were
      * compiled with different GLATTER_* configuration macros (build misconfiguration).
      */
-    if (GLATTER_ATOMIC_LOAD(glatter_wsi_gate) != 2) {
-        int expected = 0;
-        if (GLATTER_ATOMIC_CAS(glatter_wsi_gate, expected, 1)) {
+     if (GLATTER_ATOMIC_INT_LOAD(glatter_wsi_gate) != 2) {
+         int expected = 0;
+         if (GLATTER_ATOMIC_INT_CAS(glatter_wsi_gate, expected, 1)) {
             glatter_decide_wsi_once_(state);
-            GLATTER_ATOMIC_STORE(glatter_wsi_gate, 2);
-        } else {
+            GLATTER_ATOMIC_INT_STORE(glatter_wsi_gate, 2);
+        }
+        else {
             /* Another thread is deciding: wait until decided */
-            while (GLATTER_ATOMIC_LOAD(glatter_wsi_gate) != 2) { /* spin */ }
+            while (GLATTER_ATOMIC_INT_LOAD(glatter_wsi_gate) != 2) { /* spin */ }
         }
     }
 
