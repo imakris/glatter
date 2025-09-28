@@ -81,39 +81,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #   endif
 #endif
 
-#undef GLATTER_HAS_ATOMIC_LOG_HANDLER
-#if defined(__cplusplus)
-#   if __cplusplus >= 201103L
-#       define GLATTER_HAS_ATOMIC_LOG_HANDLER 1
-#       if !defined(GLATTER_HEADER_ONLY)
-#           include <atomic>
-#       endif
-#   else
-#       define GLATTER_HAS_ATOMIC_LOG_HANDLER 0
-#   endif
-#else
-#   if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L && !defined(__STDC_NO_ATOMICS__)
-#       define GLATTER_HAS_ATOMIC_LOG_HANDLER 1
-#       include <stdatomic.h>
-#   else
-#       define GLATTER_HAS_ATOMIC_LOG_HANDLER 0
-#   endif
-#endif
-
-/* LOG HANDLER POLICY (no atomics):
- * If atomics are unavailable, glatter_set_log_handler() must be called during
- * single-threaded startup. After that, do not mutate it from multiple threads.
- * This configuration is supported and guarded by this build-time warning.
- */
-#if !GLATTER_HAS_ATOMIC_LOG_HANDLER && !defined(GLATTER_LOG_HANDLER_INIT_WARNING)
-#   define GLATTER_LOG_HANDLER_INIT_WARNING 1
-#   if defined(_MSC_VER)
-#       pragma message("GLATTER: Atomics unavailable; call glatter_set_log_handler() during single-threaded initialization.")
-#   else
-#       warning "GLATTER: Atomics unavailable; call glatter_set_log_handler() during single-threaded initialization."
-#   endif
-#endif
-
 #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
     #include <dlfcn.h>
     #include <pthread.h>
@@ -166,74 +133,21 @@ void glatter_default_log_handler(const char* str)
 
 typedef void (*glatter_log_handler_fn)(const char*);
 
-#if GLATTER_HAS_ATOMIC_LOG_HANDLER
-#   if defined(__cplusplus)
-        using glatter_log_handler_atomic_t = std::atomic<glatter_log_handler_fn>;
-
-GLATTER_INLINE_OR_NOT
-glatter_log_handler_atomic_t& glatter_log_handler_storage(void)
-{
-    static glatter_log_handler_atomic_t handler(glatter_default_log_handler);
-    return handler;
-}
+static glatter_atomic(glatter_log_handler_fn) glatter_log_handler_state = glatter_default_log_handler;
+/* Log handler is frozen after the first log to avoid races with late setters. */
+static glatter_atomic(int) glatter_log_handler_frozen = 0;
 
 GLATTER_INLINE_OR_NOT
 void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
 {
-    glatter_log_handler_storage().store(handler_ptr, std::memory_order_release);
+    GLATTER_ATOMIC_STORE(glatter_log_handler_state, handler_ptr);
 }
 
 GLATTER_INLINE_OR_NOT
 glatter_log_handler_fn glatter_log_handler_load(void)
 {
-    return glatter_log_handler_storage().load(std::memory_order_acquire);
+    return (glatter_log_handler_fn)GLATTER_ATOMIC_LOAD(glatter_log_handler_state);
 }
-#   else
-        typedef _Atomic(glatter_log_handler_fn) glatter_log_handler_atomic_t;
-
-GLATTER_INLINE_OR_NOT
-glatter_log_handler_atomic_t* glatter_log_handler_storage(void)
-{
-    static glatter_log_handler_atomic_t handler = glatter_default_log_handler;
-    return &handler;
-}
-
-GLATTER_INLINE_OR_NOT
-void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
-{
-    atomic_store_explicit(glatter_log_handler_storage(), handler_ptr, memory_order_release);
-}
-
-GLATTER_INLINE_OR_NOT
-glatter_log_handler_fn glatter_log_handler_load(void)
-{
-    return atomic_load_explicit(glatter_log_handler_storage(), memory_order_acquire);
-}
-#   endif
-#else
-
-GLATTER_INLINE_OR_NOT
-glatter_log_handler_fn* glatter_log_handler_storage(void)
-{
-    static glatter_log_handler_fn handler = glatter_default_log_handler;
-    return &handler;
-}
-
-static int glatter_log_handler_frozen = 0;
-
-GLATTER_INLINE_OR_NOT
-void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
-{
-    *glatter_log_handler_storage() = handler_ptr;
-}
-
-GLATTER_INLINE_OR_NOT
-glatter_log_handler_fn glatter_log_handler_load(void)
-{
-    glatter_log_handler_frozen = 1;
-    return *glatter_log_handler_storage();
-}
-#endif
 
 
 GLATTER_INLINE_OR_NOT
@@ -251,6 +165,9 @@ const char* glatter_log(const char* str)
         static const char fallback[] = "GLATTER: message formatting failed.\n";
         message = fallback;
     }
+    /* Freeze the handler on first log, race-free. */
+    int expected = 0;
+    (void)GLATTER_ATOMIC_CAS(glatter_log_handler_frozen, expected, 1);
     glatter_log_handler_fn handler = glatter_log_handler_load();
     handler(message);
     return str;
@@ -278,15 +195,10 @@ void glatter_log_printf(const char* fmt, ...)
 GLATTER_INLINE_OR_NOT
 void glatter_set_log_handler(void(*handler_ptr)(const char*))
 {
-#if !GLATTER_HAS_ATOMIC_LOG_HANDLER
-    /* No-atomics build: handler may only be set before first log; later changes are ignored. */
-    if (glatter_log_handler_frozen) {
-#if defined(GLATTER_DEBUG)
-        glatter_log("GLATTER: ignoring log handler change after first use (no atomics).\n");
-#endif
+    /* If already frozen by the first log, ignore late changes. */
+    if (GLATTER_ATOMIC_LOAD(glatter_log_handler_frozen)) {
         return;
     }
-#endif
     if (handler_ptr == NULL) {
         handler_ptr = glatter_default_log_handler;
     }
@@ -886,6 +798,9 @@ void* glatter_get_proc_address_GL(const char* function_name)
 GLATTER_INLINE_OR_NOT
 const char* enum_to_string_GLX(GLATTER_ENUM_GLX e);
 
+/* Set by the X error handler when a GLX/X11 error is delivered on this thread. */
+static GLATTER_THREAD_LOCAL int glatter_glx_error_occurred = 0;
+
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
 GLATTER_INLINE_OR_NOT
 int x_error_handler(Display *dsp, XErrorEvent *error)
@@ -896,6 +811,7 @@ int x_error_handler(Display *dsp, XErrorEvent *error)
         "X Error: %s\n", error_string
     );
 
+    glatter_glx_error_occurred = 1;
     return 0;
 }
 #endif //!defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
@@ -924,15 +840,31 @@ void* glatter_get_proc_address_GLX(const char* function_name)
 }
 
 
+/* GLX error check:
+ * X errors are delivered via the process-global handler. We force a round-trip
+ * with XSync and use a TLS flag set by the handler to know if an error occurred
+ * during this window. The handler already emitted the diagnostic log.
+ */
 GLATTER_INLINE_OR_NOT
 void glatter_check_error_GLX(const char* file, int line)
 {
 #if defined(GLATTER_LOG_ERRORS)
-    /* X11/GLX errors are asynchronous. Force a round-trip so our
-       X error handler runs for any pending errors. */
+    glatter_glx_error_occurred = 0; /* reset before forcing delivery */
     Display* dpy = glXGetCurrentDisplay();
     if (dpy) {
-        XSync(dpy, False);
+        XSync(dpy, False); /* force any pending errors to be delivered */
+    }
+    if (glatter_glx_error_occurred) {
+        /* An error occurred and was already logged by x_error_handler.
+         * We keep behavior non-fatal; this path exists to make the check meaningful.
+         */
+        glatter_log_printf(
+            "GLATTER: GLX error detected after call at '%s'(%d); see prior X error log for details.\n",
+            file,
+            line
+        );
+    } else {
+        (void)file; (void)line;
     }
 #else
     (void)file; (void)line; /* unused */
