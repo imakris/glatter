@@ -1,3 +1,15 @@
+/* glatter_solo.h
+ * Header-only C++ convenience wrapper.
+ * Defines GLATTER_HEADER_ONLY and includes glatter.h.
+ *
+ * Note: In header-only builds the tiny loader state lives per translation unit.
+ * Detection is deterministic (e.g., WGL→EGL on Windows; GLX→EGL on POSIX), so
+ * all TUs converge to the same WSI under the same build and environment.
+ * You can still use the compiled C translation unit variant if you prefer having
+ * one shared state for the entire process or slightly smaller binaries,
+ * but not for correctness.
+ */
+
 #ifndef GLATTER_SOLO_H
 #define GLATTER_SOLO_H
 
