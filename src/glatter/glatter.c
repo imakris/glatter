@@ -17,6 +17,10 @@
 /* This will include platform headers in the correct, internal order. */
 #include <glatter/glatter_def.h>
 
+/* C/C++ compiled mode: globals are deliberate.
+ * Header-only C++ uses function-local statics; compiled mode centralizes state
+ * to one TU for consistent linkage and smaller object size.
+ */
 #if defined(_WIN32)
 INIT_ONCE glatter_thread_once = INIT_ONCE_STATIC_INIT;
 DWORD     glatter_thread_id   = 0;

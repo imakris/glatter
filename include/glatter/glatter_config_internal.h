@@ -139,6 +139,10 @@
 // #define GLATTER_EGL_GLES_3_2
 
 // If no platform is defined, it will be set according to the operating system.
+/* Two-stage defaults:
+ * Stage 1 normalizes user knobs, Stage 2 finalizes per-platform defaults.
+ * Split for readability; behavior is deterministic.
+ */
 #if !defined(GLATTER_WINDOWS_WGL_GL) &&\
     !defined(GLATTER_MESA_GLX_GL)    &&\
     !defined(GLATTER_MESA_EGL_GLES)  &&\

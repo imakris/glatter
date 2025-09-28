@@ -41,7 +41,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(_WIN32)
 #   include <windows.h>
 #   include <tchar.h>
-#   if defined(GLATTER_SECURE_DLL_SEARCH) && !defined(LOAD_LIBRARY_SEARCH_SYSTEM32)
+#   if !defined(LOAD_LIBRARY_SEARCH_SYSTEM32)
 #       define LOAD_LIBRARY_SEARCH_SYSTEM32 0x00000800
 #   endif
 #   if !defined(GLATTER_THREAD_LOCAL)
@@ -497,24 +497,41 @@ static void glatter_detect_wsi_from_env(glatter_loader_state* state)
 }
 
 #if defined(_WIN32)
-#if defined(GLATTER_SECURE_DLL_SEARCH)
-static HMODULE glatter_secure_load_system32(LPCWSTR nameW)
+/* Secure-by-default DLL load (Windows):
+ * - Prefer LOAD_LIBRARY_SEARCH_SYSTEM32 when available.
+ * - Fallback: build an absolute path to %SystemRoot%\System32.
+ * - Define GLATTER_UNSAFE_DLL_SEARCH to restore legacy, unsafe search.
+ */
+static HMODULE glatter_load_system32_dll_(const wchar_t* dll_w)
 {
-    HMODULE module = NULL;
-    HMODULE kernel = GetModuleHandleW(L"kernel32.dll");
-    if (kernel) {
-        typedef HMODULE (WINAPI *PFN_LoadLibraryExW)(LPCWSTR, HANDLE, DWORD);
-        PFN_LoadLibraryExW load_library_ex = (PFN_LoadLibraryExW)GetProcAddress(kernel, "LoadLibraryExW");
-        if (load_library_ex) {
-            module = load_library_ex(nameW, NULL, LOAD_LIBRARY_SEARCH_SYSTEM32);
+#if !defined(GLATTER_UNSAFE_DLL_SEARCH)
+    HMODULE h = LoadLibraryExW(dll_w, NULL, LOAD_LIBRARY_SEARCH_SYSTEM32);
+    if (h) {
+        return h;
+    }
+
+    wchar_t sysdir[MAX_PATH];
+    UINT n = GetSystemDirectoryW(sysdir, MAX_PATH);
+    if (n > 0 && n < MAX_PATH) {
+        wchar_t full[MAX_PATH];
+        if (swprintf(full, MAX_PATH, L"%s\\%s", sysdir, dll_w) > 0) {
+            h = LoadLibraryW(full);
+            if (h) {
+                return h;
+            }
         }
     }
-    return module;
+
+    return LoadLibraryW(dll_w);
+#else
+    return LoadLibraryW(dll_w);
+#endif
 }
+
+#ifdef GLATTER_SECURE_DLL_SEARCH
+/* Deprecated: secure loading is now always on. */
 #endif
 
-/* Security: when GLATTER_SECURE_DLL_SEARCH is defined, opengl32.dll is loaded
-   from System32 only to avoid DLL preloading issues. */
 static HMODULE glatter_windows_load_module(HMODULE* cache, const char* const* names, size_t count)
 {
     if (*cache) {
@@ -526,13 +543,16 @@ static HMODULE glatter_windows_load_module(HMODULE* cache, const char* const* na
             continue;
         }
         HMODULE module = GetModuleHandleA(name);
-#if defined(GLATTER_SECURE_DLL_SEARCH)
-        if (!module && glatter_equals_ignore_case(name, "opengl32.dll")) {
-            module = glatter_secure_load_system32(L"opengl32.dll");
-        }
-#endif
         if (!module) {
-            module = LoadLibraryA(name);
+            wchar_t dll_w[MAX_PATH];
+            size_t len = 0;
+            for (; len < (size_t)(MAX_PATH - 1) && name[len]; ++len) {
+                dll_w[len] = (wchar_t)(unsigned char)name[len];
+            }
+            dll_w[len] = L'\0';
+            if (name[len] == '\0') {
+                module = glatter_load_system32_dll_(dll_w);
+            }
         }
         if (module) {
             *cache = module;
@@ -883,14 +903,8 @@ void* glatter_get_proc_address_GLX(const char* function_name)
     if (ptr) {
         glatter_loader_state* state = glatter_loader_state_get();
         if (!state->glx_error_handler_installed && state->active == GLATTER_WSI_GLX_VALUE) {
-            /* Process-global X error handler is installed once after GLX activation.
-             * Define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to opt out and install your
-             * own handler instead if desired.
-             */
-            /* GLX error handler:
-             * Process-global. Reinstalling the same function is benign.
-             * We intentionally avoid pthread_once here to keep header-only builds simple.
-             * Define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to opt out and set your own.
+            /* GLX error handler is process-global; re-installing same function is benign.
+             * We avoid pthread_once to keep header-only simple; opt out via GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER.
              */
             XSetErrorHandler(x_error_handler);
             glatter_log("GLATTER: installed default X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
@@ -1055,7 +1069,7 @@ void* glatter_get_proc_address_GLU(const char* function_name)
 #elif defined(_WIN32)
     HMODULE module = GetModuleHandleA("glu32.dll");
     if (module == NULL) {
-        module = LoadLibraryA("glu32.dll");
+        module = glatter_load_system32_dll_(L"glu32.dll");
     }
     ptr = module ? (void*)GetProcAddress(module, function_name) : NULL;
 #else
