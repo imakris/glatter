@@ -315,6 +315,12 @@ typedef struct glatter_loader_state {
  * Per-entry resolution uses atomic CAS and is thread-safe.
  * Loader state is static and updated in a read-mostly, idempotent way.
  */
+/* WSI decision gate:
+ * 0 = undecided, 1 = deciding, 2 = decided
+ * In header-only builds this is per-TU; use separate-TU mode for process-wide single decision.
+ */
+static glatter_atomic(int) glatter_wsi_gate = 0;
+
 static glatter_loader_state* glatter_loader_state_get(void)
 {
     static glatter_loader_state state = {
@@ -486,6 +492,37 @@ static void* glatter_windows_resolve_egl(glatter_loader_state* state, const char
 
     return NULL;
 }
+
+static int glatter_windows_probe_wgl_(void)
+{
+    glatter_loader_state* state = glatter_loader_state_get();
+    static const char* const opengl_names[] = { "opengl32.dll" };
+    if (!glatter_windows_load_module(&state->opengl32_module, opengl_names, sizeof(opengl_names) / sizeof(opengl_names[0]))) {
+        return 0;
+    }
+    if (!state->wgl_get_proc) {
+        state->wgl_get_proc = (PROC (WINAPI*)(LPCSTR))GetProcAddress(state->opengl32_module, "wglGetProcAddress");
+    }
+    if (state->wgl_get_proc) {
+        return 1;
+    }
+    return GetProcAddress(state->opengl32_module, "wglCreateContext") != NULL;
+}
+
+static int glatter_windows_probe_egl_(void)
+{
+    glatter_loader_state* state = glatter_loader_state_get();
+    if (!glatter_windows_load_module(&state->egl_module, glatter_windows_egl_names, sizeof(glatter_windows_egl_names) / sizeof(glatter_windows_egl_names[0]))) {
+        return 0;
+    }
+    if (!state->egl_get_proc) {
+        state->egl_get_proc = (glatter_egl_get_proc_fn)GetProcAddress(state->egl_module, "eglGetProcAddress");
+    }
+    if (state->egl_get_proc) {
+        return 1;
+    }
+    return GetProcAddress(state->egl_module, "eglGetDisplay") != NULL;
+}
 #else
 /* POSIX (dlopen) helpers */
 static void glatter_linux_load_handles(void** handles, unsigned char* tried, size_t count, const char* const* names)
@@ -573,6 +610,39 @@ static void* glatter_linux_lookup_egl(glatter_loader_state* state, const char* n
 
     return NULL;
 }
+
+static int glatter_posix_probe_glx_(void)
+{
+    glatter_loader_state* state = glatter_loader_state_get();
+    glatter_linux_load_handles(state->gl_handles, state->gl_tried, GLATTER_GL_SONAME_COUNT, glatter_gl_sonames);
+    for (size_t i = 0; i < GLATTER_GL_SONAME_COUNT; ++i) {
+        if (!state->gl_handles[i]) {
+            continue;
+        }
+        if (dlsym(state->gl_handles[i], "glXGetProcAddressARB") ||
+            dlsym(state->gl_handles[i], "glXGetProcAddress") ||
+            dlsym(state->gl_handles[i], "glXCreateContext")) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static int glatter_posix_probe_egl_(void)
+{
+    glatter_loader_state* state = glatter_loader_state_get();
+    glatter_linux_load_handles(state->egl_handles, state->egl_tried, GLATTER_EGL_SONAME_COUNT, glatter_egl_sonames);
+    for (size_t i = 0; i < GLATTER_EGL_SONAME_COUNT; ++i) {
+        if (!state->egl_handles[i]) {
+            continue;
+        }
+        if (dlsym(state->egl_handles[i], "eglGetProcAddress") ||
+            dlsym(state->egl_handles[i], "eglGetDisplay")) {
+            return 1;
+        }
+    }
+    return 0;
+}
 #endif
 
 static int glatter_normalize_requested_wsi_(int requested)
@@ -597,6 +667,48 @@ static int glatter_normalize_requested_wsi_(int requested)
     }
 #endif
     return requested;
+}
+
+/* Decide WSI once when requested==AUTO and not explicit. */
+static void glatter_decide_wsi_once_(glatter_loader_state* state)
+{
+    /* Normalize any invalid requested value first (e.g., WGL on POSIX -> AUTO). */
+    state->requested = glatter_normalize_requested_wsi_(state->requested);
+
+    if (state->requested != GLATTER_WSI_AUTO_VALUE || state->wsi_explicit) {
+        return; /* already decided or explicitly set */
+    }
+
+#if defined(_WIN32)
+    /* Windows detection preference: WGL then EGL (adjust if you keep a different policy). */
+    if (!state->wsi_explicit) {
+        if (glatter_windows_probe_wgl_()) { /* resolves a canonical symbol cheaply */
+            state->requested = GLATTER_WSI_WGL_VALUE;
+            state->wsi_explicit = 1;
+        }
+    }
+    if (!state->wsi_explicit) {
+        if (glatter_windows_probe_egl_()) {
+            state->requested = GLATTER_WSI_EGL_VALUE;
+            state->wsi_explicit = 1;
+        }
+    }
+#else
+    /* POSIX detection preference: GLX then EGL (adjust to your policy). */
+    if (!state->wsi_explicit) {
+        if (glatter_posix_probe_glx_()) {
+            state->requested = GLATTER_WSI_GLX_VALUE;
+            state->wsi_explicit = 1;
+        }
+    }
+    if (!state->wsi_explicit) {
+        if (glatter_posix_probe_egl_()) {
+            state->requested = GLATTER_WSI_EGL_VALUE;
+            state->wsi_explicit = 1;
+        }
+    }
+#endif
+    /* If nothing matched, leave AUTO; resolution paths will still try backends in order. */
 }
 
 /* Environment steering: we read GLATTER_WSI once per process unless the app
@@ -667,6 +779,22 @@ void* glatter_get_proc_address(const char* function_name)
 {
     glatter_loader_state* state = glatter_loader_state_get();
     glatter_detect_wsi_from_env(state);
+
+    /* WSI auto-selection is synchronized:
+     * Only one thread performs detection and publishes state->requested / wsi_explicit.
+     * Others wait until glatter_wsi_gate==2. Prevents mixed backends under AUTO.
+     * Header-only builds: the gate is per-TU; for a single process-wide decision, use separate-TU mode.
+     */
+    if (GLATTER_ATOMIC_LOAD(glatter_wsi_gate) != 2) {
+        int expected = 0;
+        if (GLATTER_ATOMIC_CAS(glatter_wsi_gate, expected, 1)) {
+            glatter_decide_wsi_once_(state);
+            GLATTER_ATOMIC_STORE(glatter_wsi_gate, 2);
+        } else {
+            /* Another thread is deciding: wait until decided */
+            while (GLATTER_ATOMIC_LOAD(glatter_wsi_gate) != 2) { /* spin */ }
+        }
+    }
 
 #if defined(_WIN32)
     if (state->requested == GLATTER_WSI_WGL_VALUE) {
