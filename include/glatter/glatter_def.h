@@ -133,7 +133,9 @@ void glatter_default_log_handler(const char* str)
 
 typedef void (*glatter_log_handler_fn)(const char*);
 
-static glatter_atomic(glatter_log_handler_fn) glatter_log_handler_state = glatter_default_log_handler;
+static glatter_atomic(glatter_log_handler_fn) glatter_log_handler_state =
+    GLATTER_ATOMIC_INIT_PTR(glatter_default_log_handler);
+
 /* Log handler is frozen after the first log to avoid races with late setters. */
 static glatter_atomic(int) glatter_log_handler_frozen = 0;
 
@@ -780,10 +782,12 @@ void* glatter_get_proc_address(const char* function_name)
     glatter_loader_state* state = glatter_loader_state_get();
     glatter_detect_wsi_from_env(state);
 
-    /* WSI auto-selection is synchronized:
-     * Only one thread performs detection and publishes state->requested / wsi_explicit.
-     * Others wait until glatter_wsi_gate==2. Prevents mixed backends under AUTO.
-     * Header-only builds: the gate is per-TU; for a single process-wide decision, use separate-TU mode.
+     /* WSI auto-selection:
+     * Guarded by an atomic gate; only one thread per TU performs detection, others wait.
+     * Detection probes in a fixed, deterministic order (Windows: WGL→EGL; POSIX: GLX→EGL),
+     * so different TUs compiled with the same configuration and running in the same
+     * environment converge to the same WSI. Divergence would only occur if TUs were
+     * compiled with different GLATTER_* configuration macros (build misconfiguration).
      */
     if (GLATTER_ATOMIC_LOAD(glatter_wsi_gate) != 2) {
         int expected = 0;
