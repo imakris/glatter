@@ -310,7 +310,8 @@ typedef struct glatter_loader_state {
    loader_state is process-global and mutated on first use (WSI detection,
    handle opens). Do not drive first use concurrently from multiple threads.
    After initialization completes, resolved entry points are safe to call
-   from any thread. */
+   from any thread.
+   This lock-free first-use scheme is intentional and not a correctness bug. */
 static glatter_loader_state* glatter_loader_state_get(void)
 {
     static glatter_loader_state state = {
@@ -324,8 +325,16 @@ static glatter_loader_state* glatter_loader_state_get(void)
         GLATTER_WSI_AUTO_VALUE,
 #endif
         GLATTER_WSI_AUTO_VALUE,
+#if (defined(GLATTER_WGL) && !defined(GLATTER_GLX) && !defined(GLATTER_EGL)) || \
+    (defined(GLATTER_GLX) && !defined(GLATTER_EGL) && !defined(GLATTER_WGL)) || \
+    (defined(GLATTER_EGL) && !defined(GLATTER_GLX) && !defined(GLATTER_WGL))
+        /* wsi_explicit: exactly one WSI is compiled-in -> ignore GLATTER_WSI */
+        1,
+#else
+        /* wsi_explicit: multiple WSIs possible -> allow GLATTER_WSI to steer */
         0,
-        0
+#endif
+        /* env_checked */ 0
     };
     return &state;
 }
@@ -369,6 +378,27 @@ static void glatter_detect_wsi_from_env(glatter_loader_state* state)
     if (glatter_equals_ignore_case(env, "egl")) {
         state->requested = GLATTER_WSI_EGL_VALUE;
     }
+
+#if defined(_WIN32)
+    /* Windows has no GLX; ignore such requests to avoid confusing state. */
+    if (state->requested == GLATTER_WSI_GLX_VALUE) {
+        state->requested = GLATTER_WSI_AUTO_VALUE;
+    }
+#endif
+
+#if !defined(_WIN32)
+    /* If this POSIX build was compiled without GLX, normalize invalid requests. */
+#if !defined(GLATTER_GLX)
+    if (state->requested == GLATTER_WSI_GLX_VALUE) {
+        state->requested = GLATTER_WSI_AUTO_VALUE;
+    }
+#endif
+#if !defined(GLATTER_EGL)
+    if (state->requested == GLATTER_WSI_EGL_VALUE) {
+        state->requested = GLATTER_WSI_AUTO_VALUE;
+    }
+#endif
+#endif
 }
 
 #if defined(_WIN32)
@@ -598,6 +628,7 @@ void* glatter_get_proc_address(const char* function_name)
         return ptr;
     }
 
+    /* AUTO (Windows): try WGL first, then EGL. */
     void* ptr = glatter_windows_resolve_wgl(state, function_name);
     if (ptr) {
         state->active = GLATTER_WSI_WGL_VALUE;
@@ -628,6 +659,7 @@ void* glatter_get_proc_address(const char* function_name)
         return ptr;
     }
 
+    /* AUTO (POSIX): try GLX first, then EGL. */
     void* ptr = glatter_linux_lookup_glx(state, function_name);
     if (ptr) {
         state->active = GLATTER_WSI_GLX_VALUE;
@@ -764,6 +796,11 @@ const char* enum_to_string_WGL(GLATTER_ENUM_WGL e);
 GLATTER_INLINE_OR_NOT
 void glatter_check_error_WGL(const char* file, int line)
 {
+    /* Diagnostics note:
+       WGL entry points do not share a single failure contract. Here we only log
+       GetLastError() as best-effort diagnostics. We deliberately do NOT attempt to
+       interpret per-function return values (that would be brittle and often wrong).
+       Callers should interpret the return value according to the specific API they used. */
     DWORD eid = GetLastError();
     if(eid == 0)
         return;
