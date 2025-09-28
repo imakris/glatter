@@ -88,6 +88,16 @@
 #  define GLATTER_ONCE_RETURN(val)          ((void)0)
 #endif
 
+#if !GLATTER_USE_ATOMICS && !GLATTER_INTERNAL_SINGLE_THREADED
+#  ifdef _WIN32
+#    define GLATTER_ONCE_CB_TYPE BOOL (CALLBACK *)(PINIT_ONCE, PVOID, PVOID*)
+#  else
+#    define GLATTER_ONCE_CB_TYPE void (*)(void)
+#  endif
+#else
+#  define GLATTER_ONCE_CB_TYPE void (*)(void)
+#endif
+
 #ifndef GLATTER_ONCE_CB_UNUSED
 #  define GLATTER_ONCE_CB_UNUSED()          (void)0
 #endif
