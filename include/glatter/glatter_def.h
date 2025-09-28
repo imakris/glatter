@@ -38,6 +38,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string.h>
 #include <ctype.h>
 
+#if defined(_WIN32)
+#   include <windows.h>
+#   include <tchar.h>
+#   if !defined(GLATTER_THREAD_LOCAL)
+#       if defined(_MSC_VER)
+#           define GLATTER_THREAD_LOCAL __declspec(thread)
+#       elif defined(__GNUC__)
+#           define GLATTER_THREAD_LOCAL __thread
+#       else
+#           define GLATTER_THREAD_LOCAL
+#       endif
+#   endif
+#endif
+
 #undef GLATTER_HAS_ATOMIC_LOG_HANDLER
 #if defined(__cplusplus)
 #   if __cplusplus >= 201103L
@@ -237,6 +251,30 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*))
     }
     glatter_log_handler_store(handler_ptr);
 }
+
+#if defined(_WIN32)
+/* -------- TCHAR* logging helper (Windows only) -------- */
+static const char* glatter_pr_tstr(const TCHAR* ts)
+{
+    if (!ts) {
+        return "(null)";
+    }
+#if defined(UNICODE) || defined(_UNICODE)
+    /* Convert UTF-16 -> UTF-8 */
+    GLATTER_THREAD_LOCAL static char buf[1024];
+    int n = WideCharToMultiByte(CP_UTF8, 0, ts, -1, buf, (int)sizeof(buf), NULL, NULL);
+    if (n > 0) {
+        return buf;
+    }
+    /* Fallback on conversion failure */
+    buf[0] = '?';
+    buf[1] = '\0';
+    return buf;
+#else
+    return (const char*)ts;
+#endif
+}
+#endif /* _WIN32 */
 
 
 typedef int glatter_wsi_t;

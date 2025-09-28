@@ -75,11 +75,22 @@ windows_typedefs = {
     'DWORD': 'unsigned long',
     'CHAR': 'char',
     'WCHAR': 'wchar_t',
-    'TCHAR': 'WCHAR',
+    # Leave TCHAR unresolved; handle at compile/runtime.
+    'TCHAR': 'TCHAR',
     'FLOAT': 'float',
     'DOUBLE': 'double',
     'COLORREF': 'DWORD'
 }
+
+# Let the parser recognize common Windows string pointer aliases.
+windows_typedefs.update({
+    'LPSTR': 'char*',
+    'LPCSTR': 'const char*',
+    'LPWSTR': 'wchar_t*',
+    'LPCWSTR': 'const wchar_t*',
+    'LPTSTR': 'TCHAR*',
+    'LPCTSTR': 'const TCHAR*',
+})
 
 typedefs = windows_typedefs
 
@@ -119,6 +130,7 @@ try:
 except OSError:
     config_data = ''
 
+# Honor GLATTER_WINDOWS_MBCS only if explicitly requested before generation.
 if re.search(r'^\s*#\s*define\s+GLATTER_WINDOWS_MBCS\b', config_data, re.MULTILINE):
     windows_typedefs['TCHAR'] = 'CHAR'
 
@@ -261,7 +273,14 @@ class Function_argument:
 
         argtype = self.type
         while argtype in typedefs:
-            argtype = typedefs[argtype]
+            next_type = typedefs[argtype]
+            if next_type == argtype:
+                break
+            argtype = next_type
+
+        # Handle TCHAR* specially (UNICODE vs. MBCS decided at compile/run time)
+        if re.match(r'^(const\s+)?TCHAR\s*\*$', argtype):
+            return ['%s', 'glatter_pr_tstr(' + self.name + ')']
 
         if '*' in argtype:
             return ['%p', '(void*)'+self.name]
