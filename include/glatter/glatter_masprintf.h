@@ -1,4 +1,3 @@
-// NEW 3
 #ifndef GLATTER_MASPRINTF_H
 #define GLATTER_MASPRINTF_H
 
