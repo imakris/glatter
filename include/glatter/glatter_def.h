@@ -1385,21 +1385,58 @@ typedef struct glatter_es_record_struct
 
 //==================
 
+#include <stdarg.h>
+#include <stdio.h>
+
+/* Internal: format varargs and route to glatter_log(...) */
+GLATTER_INLINE_OR_NOT
+void glatter_vlog_line_(const char* prefix, const char* fmt, va_list ap)
+{
+    char buf[1024];
+    int n = vsnprintf(buf, sizeof(buf), fmt ? fmt : "", ap);
+    (void)n; /* truncation ignored intentionally */
+    if (prefix && *prefix) glatter_log(prefix);
+    glatter_log(buf);
+}
+
+GLATTER_INLINE_OR_NOT
+void glatter_dbg_enter(const char* file, int line, const char* apiname,
+                       const char* fmt, ...)
+{
+    glatter_pre_callback(file, line);
+    glatter_log_printf("GLATTER: in '%s'(%d):\n", file, line);
+    glatter_log_printf("GLATTER: %s", apiname);
+
+    if (fmt && *fmt) {
+        va_list ap; va_start(ap, fmt);
+        glatter_vlog_line_("", fmt, ap);
+        va_end(ap);
+    }
+
+    glatter_log("\n");
+}
+
+GLATTER_INLINE_OR_NOT
+void glatter_dbg_return(const char* fmt, ...)
+{
+    glatter_log("GLATTER: returned ");
+    if (fmt && *fmt) {
+        va_list ap; va_start(ap, fmt);
+        glatter_vlog_line_("", fmt, ap);
+        va_end(ap);
+    } else {
+        glatter_log("(void)\n");
+    }
+}
+
 #if defined(GLATTER_LOG_CALLS)
 
-    #define GLATTER_DBLOCK(file, line, name, printf_fmt, ...) \
-        glatter_pre_callback(file, line);                     \
-        glatter_log_printf(                                   \
-            "GLATTER: in '%s'(%d):\n", file, line             \
-        );                                                    \
-        glatter_log_printf(                                   \
-            "GLATTER: " #name printf_fmt "\n", ##__VA_ARGS__  \
-        );
+    /* Debug macros become thin function calls for debugger-friendly stepping */
+    #define GLATTER_DBLOCK(file,line,name,printf_fmt,...) \
+        glatter_dbg_enter((file),(line), #name, (printf_fmt), ##__VA_ARGS__)
 
-    #define GLATTER_RBLOCK(...)                               \
-        glatter_log_printf(                                   \
-            "GLATTER: returned " __VA_ARGS__                  \
-        );
+    #define GLATTER_RBLOCK(...) \
+        glatter_dbg_return(__VA_ARGS__)
 
 
 #else
