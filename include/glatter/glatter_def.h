@@ -309,7 +309,8 @@ typedef struct glatter_loader_state {
     void* (*egl_get_proc)(const char*);
 #endif
 #if defined(GLATTER_GLX) && !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
-    int glx_error_handler_installed;
+    /* Atomic to avoid redundant installs/logs when multiple threads first-touch GLX. */
+    glatter_atomic_int glx_error_handler_installed;
 #endif
 } glatter_loader_state;
 
@@ -345,7 +346,10 @@ static glatter_loader_state* glatter_loader_state_get(void)
         /* wsi_explicit: multiple WSIs possible -> allow GLATTER_WSI to steer */
         0,
 #endif
-        /* env_checked */ 0
+        /* env_checked */ 0,
+#if defined(GLATTER_GLX) && !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
+        /* glx_error_handler_installed */ GLATTER_ATOMIC_INT_INIT(0)
+#endif
     };
     return &state;
 }
@@ -958,13 +962,18 @@ void* glatter_get_proc_address_GLX(const char* function_name)
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
     if (ptr) {
         glatter_loader_state* state = glatter_loader_state_get();
-        if (!state->glx_error_handler_installed && state->active == GLATTER_WSI_GLX_VALUE) {
-            /* GLX error handler is process-global; re-installing same function is benign.
-             * We avoid pthread_once to keep header-only simple; opt out via GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER.
+        if (state->active == GLATTER_WSI_GLX_VALUE) {
+            int expected = 0;
+            /* Threading note: we CAS from 0->1 so only the first thread installs the handler.
+             * Re-installing would be benign, but this avoids duplicate logs.
              */
-            XSetErrorHandler(x_error_handler);
-            glatter_log("GLATTER: installed default X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
-            state->glx_error_handler_installed = 1;
+            if (GLATTER_ATOMIC_INT_CAS(state->glx_error_handler_installed, expected, 1)) {
+                /* GLX error handler is process-global; re-installing same function is benign.
+                 * We avoid pthread_once to keep header-only simple; opt out via GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER.
+                 */
+                XSetErrorHandler(x_error_handler);
+                glatter_log("GLATTER: installed default X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
+            }
         }
     }
 #endif //!defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
