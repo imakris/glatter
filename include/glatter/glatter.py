@@ -268,19 +268,18 @@ class Function_argument:
         # 1. is api-enum
         if (bool(mm)):
             return ['%s', 'enum_to_string_' + mm.group('family') + '(' + self.name + ')']
-        if self.is_pointer:
-            return ['%p', '(void*)'+self.name]
-
         argtype = self.type
         while argtype in typedefs:
             next_type = typedefs[argtype]
             if next_type == argtype:
                 break
             argtype = next_type
-
         # Handle TCHAR* specially (UNICODE vs. MBCS decided at compile/run time)
         if re.match(r'^(const\s+)?TCHAR\s*\*$', argtype):
             return ['%s', 'glatter_pr_tstr(' + self.name + ')']
+
+        if self.is_pointer:
+            return ['%p', '(void*)'+self.name]
 
         if '*' in argtype:
             return ['%p', '(void*)'+self.name]

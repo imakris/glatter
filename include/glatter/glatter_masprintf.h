@@ -22,42 +22,29 @@
 # endif
 #endif
 
-/*
- * vscprintf:
- * MSVC implements this as _vscprintf, thus we just 'symlink' it here
- * GNU-C-compatible compilers do not implement this, thus we implement it here
+/* Note: One definition per toolchain, marked GLATTER_MASPRINTF_INLINE (static inline),
+ * so no ODR/multiple-definition issues across TUs or header-only builds.
+ */
+
+/* vscprintf:
+ * MSVC provides _vscprintf; others use the C99 vsnprintf(NULL, 0, ...).
+ * Exactly one definition is included per toolchain, and it is inline.
  */
 #ifdef _MSC_VER
-#define vscprintf _vscprintf
-#elif !defined(__GNUC__)
+#  define vscprintf _vscprintf
+#else
 GLATTER_MASPRINTF_INLINE int vscprintf(const char* format, va_list ap)
 {
     va_list ap_copy;
     va_copy(ap_copy, ap);
-    int retval = vsnprintf(NULL, 0, format, ap_copy);
+    int n = vsnprintf(NULL, 0, format, ap_copy);
     va_end(ap_copy);
-    return retval;
+    return n;
 }
-#endif
-
-
-#ifdef __GNUC__
-GLATTER_MASPRINTF_INLINE int vscprintf(const char* format, va_list ap);
 #endif
 
 GLATTER_MASPRINTF_INLINE char* glatter_mvasprintf(const char* format, va_list ap);
 GLATTER_MASPRINTF_INLINE char* glatter_masprintf(const char* format, ...);
-
-#ifdef __GNUC__
-GLATTER_MASPRINTF_INLINE int vscprintf(const char* format, va_list ap)
-{
-    va_list ap_copy;
-    va_copy(ap_copy, ap);
-    int retval = vsnprintf(NULL, 0, format, ap_copy);
-    va_end(ap_copy);
-    return retval;
-}
-#endif
 
 
 
