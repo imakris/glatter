@@ -178,6 +178,10 @@ typedef struct glatter_extension_support_status_EGL
   #endif
 #endif
 
+/* MSVC note:
+   "%Iu" is the correct legacy printf format for size_t on MSVC (both 32/64-bit).
+   VS2015+ also accepts "%zu". If you only target VS2015+, you may define
+   GLATTER_FMT_ZU as "zu" before including this header. */
 #ifndef GLATTER_FMT_ZU
   #ifdef _MSC_VER
     #define GLATTER_FMT_ZU "Iu"
