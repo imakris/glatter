@@ -874,9 +874,7 @@ def get_function_mdnd(family): #macros, declarations and definitions
     GLATTER_DBLOCK(file, line, ''' + x.name + ', "(' + a6s[0] + ')"' + printf_va_args + ')'
         if x.family == 'WGL':
             df_def += '''
-#if defined(_WIN32)
-    SetLastError(0);
-#endif'''
+    SetLastError(0);'''
         if (x.rtype not in ['void', 'VOID']):
             rarg = Function_argument()
             rarg.name = 'rval'
