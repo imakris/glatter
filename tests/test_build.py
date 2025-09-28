@@ -461,7 +461,30 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
     )
 
 
-def test_wgl_headers_compile_with_stubs(tmp_path: Path) -> None:
+@pytest.mark.parametrize(
+    "config_flags",
+    (
+        pytest.param(
+            (
+                "-D_WIN32",
+                "-DGLATTER_CONFIG_H_DEFINED",
+                "-DGLATTER_GL=1",
+                "-DGLATTER_WGL=1",
+                "-DGLATTER_WINDOWS_WGL_GL=1",
+                "-D__STDC_NO_ATOMICS__=1",
+            ),
+            id="manual-config",
+        ),
+        pytest.param(
+            (
+                "-D_WIN32",
+                "-D__STDC_NO_ATOMICS__=1",
+            ),
+            id="default-config",
+        ),
+    ),
+)
+def test_wgl_headers_compile_with_stubs(config_flags: tuple[str, ...], tmp_path: Path) -> None:
     """Verify WGL-enabled builds compile when using stubbed Windows headers."""
 
     cc = _require_tool("cc")
@@ -486,15 +509,6 @@ def test_wgl_headers_compile_with_stubs(tmp_path: Path) -> None:
         ).strip()
         + "\n"
     )
-
-    config_flags = [
-        "-D_WIN32",
-        "-DGLATTER_CONFIG_H_DEFINED",
-        "-DGLATTER_GL=1",
-        "-DGLATTER_WGL=1",
-        "-DGLATTER_WINDOWS_WGL_GL=1",
-        "-D__STDC_NO_ATOMICS__=1",
-    ]
 
     _run_command(
         [

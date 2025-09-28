@@ -84,12 +84,12 @@
 #include "headers/khronos_gl/wglext.h"
 
 /* Optional GLU */
-#if defined(GLATTER_GLU)
+#if defined(GLATTER_GLU) && GLATTER_GLU
 #include "headers/windows_gl_basic/GLU.h"
 #endif
 
 /* Sanity: no incompatible wrappers with this platform */
-#if defined(GLATTER_GLX) || defined(GLATTER_EGL)
+#if (defined(GLATTER_GLX) && GLATTER_GLX) || (defined(GLATTER_EGL) && GLATTER_EGL)
 #error One of the wrappers defined is not relevant to the selected platform. Please review your glatter_config.h.
 #endif
 
@@ -110,12 +110,12 @@
 #include "headers/khronos_gl/glxext.h"
 
 /* Optional GLU (your GLU lives under sgi_glu) */
-#if defined(GLATTER_GLU)
+#if defined(GLATTER_GLU) && GLATTER_GLU
 #include "headers/sgi_glu/glu.h"
 #endif
 
 /* Sanity: no incompatible wrappers with this platform */
-#if defined(GLATTER_WGL) || defined(GLATTER_EGL)
+#if (defined(GLATTER_WGL) && GLATTER_WGL) || (defined(GLATTER_EGL) && GLATTER_EGL)
 #error One of the wrappers defined is not relevant to the selected platform. Please review your glatter_config.h.
 #endif
 
@@ -152,7 +152,7 @@ typedef struct glatter_extension_support_status_EGL
 #endif
 
 /* Sanity: no incompatible wrappers with this platform */
-#if defined(GLATTER_WGL) || defined(GLATTER_GLX)
+#if (defined(GLATTER_WGL) && GLATTER_WGL) || (defined(GLATTER_GLX) && GLATTER_GLX)
 #error One of the wrappers defined is not relevant to the selected platform. Please review your glatter_config.h.
 #endif
 
@@ -195,7 +195,7 @@ typedef struct glatter_extension_support_status_EGL
    These are always available, independent of platform branch.
    You can tighten them later (e.g., EGLint for EGL) and regenerate.
    ----------------------------------------------------------- */
-#ifdef GLATTER_GL
+#if defined(GLATTER_GL) && GLATTER_GL
 typedef GLenum GLATTER_ENUM_GL;
 #else
 typedef unsigned int GLATTER_ENUM_GL;
@@ -204,13 +204,13 @@ typedef unsigned int GLATTER_ENUM_GL;
 typedef unsigned int GLATTER_ENUM_GLX;
 typedef unsigned int GLATTER_ENUM_WGL;
 
-#ifdef GLATTER_GLU
+#if defined(GLATTER_GLU) && GLATTER_GLU
 typedef GLUenum GLATTER_ENUM_GLU;
 #else
 typedef unsigned int GLATTER_ENUM_GLU;
 #endif
 
-#ifdef GLATTER_EGL
+#if defined(GLATTER_EGL) && GLATTER_EGL
 typedef EGLint GLATTER_ENUM_EGL;
 #else
 typedef int GLATTER_ENUM_EGL;

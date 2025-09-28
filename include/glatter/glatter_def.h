@@ -229,6 +229,76 @@ void glatter_log_printf(const char* fmt, ...)
 }
 
 
+GLATTER_INLINE_OR_NOT void glatter_pre_callback(const char* file, int line);
+
+GLATTER_INLINE_OR_NOT
+void glatter_vlog_printf(const char* fmt, va_list ap)
+{
+    char buffer[2048];
+    int written = vsnprintf(buffer, sizeof(buffer), fmt, ap);
+
+    if (written < 0) {
+        glatter_log(NULL);
+    }
+    else {
+        glatter_log(buffer);
+    }
+}
+
+GLATTER_INLINE_OR_NOT
+int glatter_format_has_trailing_newline(const char* fmt)
+{
+    if (!fmt || !*fmt) {
+        return 0;
+    }
+    size_t len = strlen(fmt);
+    if (len == 0) {
+        return 0;
+    }
+    return fmt[len - 1] == '\n';
+}
+
+GLATTER_INLINE_OR_NOT
+void glatter_dbg_enter(const char* file, int line, const char* apiname,
+                       const char* fmt, ...)
+{
+    glatter_pre_callback(file, line);
+    glatter_log_printf("GLATTER: in '%s'(%d):\n", file, line);
+
+    if (fmt && *fmt) {
+        glatter_log_printf("GLATTER: %s", apiname);
+        va_list ap;
+        va_start(ap, fmt);
+        glatter_vlog_printf(fmt, ap);
+        va_end(ap);
+        if (!glatter_format_has_trailing_newline(fmt)) {
+            glatter_log_printf("\n");
+        }
+    }
+    else {
+        glatter_log_printf("GLATTER: %s()\n", apiname);
+    }
+}
+
+GLATTER_INLINE_OR_NOT
+void glatter_dbg_return(const char* fmt, ...)
+{
+    glatter_log_printf("GLATTER: returned ");
+    if (fmt && *fmt) {
+        va_list ap;
+        va_start(ap, fmt);
+        glatter_vlog_printf(fmt, ap);
+        va_end(ap);
+        if (!glatter_format_has_trailing_newline(fmt)) {
+            glatter_log_printf("\n");
+        }
+    }
+    else {
+        glatter_log_printf("(void)\n");
+    }
+}
+
+
 GLATTER_INLINE_OR_NOT
 void glatter_set_log_handler(void(*handler_ptr)(const char*))
 {
@@ -309,7 +379,7 @@ typedef struct glatter_loader_state {
     void* (*glx_get_proc)(const GLubyte*);
     void* (*egl_get_proc)(const char*);
 #endif
-#if defined(GLATTER_GLX) && !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
+#if defined(GLATTER_GLX) && GLATTER_GLX && !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
     int glx_error_handler_installed;
 #endif
 } glatter_loader_state;
@@ -324,7 +394,7 @@ typedef struct glatter_loader_state {
 static glatter_loader_state* glatter_loader_state_get(void)
 {
     static glatter_loader_state state = {
-#if defined(GLATTER_WGL) && !defined(GLATTER_GLX) && !defined(GLATTER_EGL)
+#if (defined(GLATTER_WGL) && GLATTER_WGL) && !(defined(GLATTER_GLX) && GLATTER_GLX) && !(defined(GLATTER_EGL) && GLATTER_EGL)
         GLATTER_WSI_WGL_VALUE,
 #elif defined(GLATTER_GLX) && !defined(GLATTER_EGL) && !defined(GLATTER_WGL)
         GLATTER_WSI_GLX_VALUE,
@@ -692,7 +762,7 @@ void* glatter_get_proc_address(const char* function_name)
 
 
 ///////////////////////////
-#if defined(GLATTER_GL)  //
+#if defined(GLATTER_GL) && GLATTER_GL  //
 ///////////////////////////
 
 GLATTER_INLINE_OR_NOT
@@ -728,7 +798,7 @@ void* glatter_get_proc_address_GL(const char* function_name)
 
 
 ////////////////////////////
-#if defined(GLATTER_GLX)  //
+#if defined(GLATTER_GLX) && GLATTER_GLX  //
 ////////////////////////////
 
 GLATTER_INLINE_OR_NOT
@@ -782,7 +852,7 @@ void* glatter_get_proc_address_GLX(const char* function_name)
 GLATTER_INLINE_OR_NOT
 void glatter_check_error_GLX(const char* file, int line)
 {
-#if defined(GLATTER_LOG_ERRORS)
+#if defined(GLATTER_LOG_ERRORS) && GLATTER_LOG_ERRORS
     /* X11/GLX errors are asynchronous. Force a round-trip so our
        X error handler runs for any pending errors. */
     Display* dpy = glXGetCurrentDisplay();
@@ -800,7 +870,7 @@ void glatter_check_error_GLX(const char* file, int line)
 
 
 ////////////////////////////
-#if defined(GLATTER_WGL)  //
+#if defined(GLATTER_WGL) && GLATTER_WGL  //
 ////////////////////////////
 
 GLATTER_INLINE_OR_NOT
@@ -845,7 +915,7 @@ void* glatter_get_proc_address_WGL(const char* function_name)
 
 
 ////////////////////////////
-#if defined(GLATTER_EGL)  //
+#if defined(GLATTER_EGL) && GLATTER_EGL  //
 ////////////////////////////
 
 GLATTER_INLINE_OR_NOT
@@ -878,7 +948,7 @@ void* glatter_get_proc_address_EGL(const char* function_name)
 //////////////////////////////////
 
 ////////////////////////////
-#if defined(GLATTER_GLU)  //
+#if defined(GLATTER_GLU) && GLATTER_GLU  //
 ////////////////////////////
 
 GLATTER_INLINE_OR_NOT
@@ -994,7 +1064,7 @@ namespace glatter { namespace detail {
      */
     inline thread_id_t& owner_thread_id()
     {
-#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND)
+#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND) && GLATTER_REQUIRE_EXPLICIT_OWNER_BIND
         static thread_id_t tid = thread_id_t();
 #else
         static thread_id_t tid = current_thread_id();
@@ -1002,7 +1072,7 @@ namespace glatter { namespace detail {
         return tid;
     }
 
-#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND)
+#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND) && GLATTER_REQUIRE_EXPLICIT_OWNER_BIND
     inline bool& owner_thread_bound()
     {
         static bool bound = false;
@@ -1012,7 +1082,7 @@ namespace glatter { namespace detail {
 
     inline bool is_owner_thread()
     {
-#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND)
+#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND) && GLATTER_REQUIRE_EXPLICIT_OWNER_BIND
         if (!owner_thread_bound()) {
             ::glatter_log("GLATTER: owner thread not bound. Call glatter_bind_owner_to_current_thread() on the intended render thread.\n");
             abort();
@@ -1024,7 +1094,7 @@ namespace glatter { namespace detail {
     inline void bind_owner_to_current_thread()
     {
         owner_thread_id() = current_thread_id();
-#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND)
+#if defined(GLATTER_REQUIRE_EXPLICIT_OWNER_BIND) && GLATTER_REQUIRE_EXPLICIT_OWNER_BIND
         owner_thread_bound() = true;
 #endif
     }
@@ -1214,32 +1284,86 @@ typedef struct glatter_es_record_struct
 #define GLATTER_RETURN_VALUE_return(rtype, value) return (value)
 #define GLATTER_RETURN_VALUE_(rtype, value)       return
 
+/* ---------- Shared low-level resolve helpers ---------- */
+
+#if GLATTER_USE_ATOMICS
+
+GLATTER_INLINE_OR_NOT
+void* glatter_resolve_or_log_atomic(GLATTER_ATOMIC(void*)* slot,
+                                    void* (*resolver)(const char*),
+                                    const char* sym)
+{
+    void* fn = GLATTER_ATOMIC_LOAD(*slot);
+    if (!fn) {
+        void* resolved = resolver(sym);
+        if (!resolved) {
+            glatter_log_printf("GLATTER: failed to resolve '%s'\n", sym);
+            return NULL;
+        }
+        GLATTER_ATOMIC_STORE(*slot, resolved);
+        fn = resolved;
+    }
+    return fn;
+}
+
+#elif !GLATTER_INTERNAL_SINGLE_THREADED
+
+GLATTER_INLINE_OR_NOT
+int glatter_once_body_set(void** slot,
+                          void* (*resolver)(const char*),
+                          const char* sym)
+{
+    *slot = resolver(sym);
+    GLATTER_ONCE_RETURN((*slot != NULL));
+    return (*slot != NULL);
+}
+
+GLATTER_INLINE_OR_NOT
+void* glatter_resolve_or_log_once(GLATTER_ONCE_TYPE* once,
+                                  void** slot,
+                                  GLATTER_ONCE_CB_TYPE once_cb,
+                                  const char* sym)
+{
+    GLATTER_ONCE(once_cb, *once);
+    if (!*slot) {
+        glatter_log_printf("GLATTER: failed to resolve '%s'\n", sym);
+        return NULL;
+    }
+    return *slot;
+}
+
+#else /* single-threaded fallback */
+
+GLATTER_INLINE_OR_NOT
+void* glatter_resolve_or_log_single(void** slot,
+                                    void* (*resolver)(const char*),
+                                    const char* sym)
+{
+    if (!*slot) {
+        *slot = resolver(sym);
+    }
+    if (!*slot) {
+        glatter_log_printf("GLATTER: failed to resolve '%s'\n", sym);
+        return NULL;
+    }
+    return *slot;
+}
+
+#endif /* GLATTER_USE_ATOMICS */
+
 #ifdef GLATTER_HEADER_ONLY
 
 #if GLATTER_USE_ATOMICS
 
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
+    static GLATTER_ATOMIC(void*) glatter_##name##_slot GLATTER_ATOMIC_LOCAL_INIT(NULL);\
     static inline rtype cconv glatter_##name dargs\
     {\
-        static GLATTER_ATOMIC(glatter_##name##_t) s_f_ptr GLATTER_ATOMIC_LOCAL_INIT(NULL);\
-        /* Threading: atomic fast-path. Multiple threads may resolve concurrently on\
-         * first hit; the last store wins but all stores are the same function pointer.\
-         */\
-        glatter_##name##_t fn = GLATTER_ATOMIC_LOAD(s_f_ptr);\
-        if (!fn) {\
-            glatter_##name##_t resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
-            if (!resolved) {\
-                /* Note: this message routes through the user-installed log handler\
-                 * (default handler writes to stderr). Applications may replace it via\
-                 * glatter_set_log_handler(...).\
-                 */\
-                glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
-                GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
-            }\
-            GLATTER_ATOMIC_STORE(s_f_ptr, resolved);\
-            fn = resolved;\
-        }\
+        glatter_##name##_t fn = (glatter_##name##_t)\
+            glatter_resolve_or_log_atomic(&glatter_##name##_slot,\
+                (void*(*)(const char*))glatter_get_proc_address_##family, #name);\
+        if (!fn) { GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0); }\
         return_or_not fn cargs;\
     }
 
@@ -1247,49 +1371,36 @@ typedef struct glatter_es_record_struct
 
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
-    static glatter_##name##_t glatter_##name##_resolved = NULL;\
+    static void* glatter_##name##_slot = NULL;\
     static GLATTER_ONCE_TYPE glatter_##name##_once = GLATTER_ONCE_INIT;\
-    GLATTER_ONCE_CB(glatter_##name##_resolve_once);\
+    GLATTER_ONCE_CB(glatter_##name##_once_cb);\
     static inline rtype cconv glatter_##name dargs\
     {\
-        /* Threading: first-hit guarded by pthread_once/InitOnce. */\
-        GLATTER_ONCE(glatter_##name##_resolve_once, glatter_##name##_once);\
-        if (!glatter_##name##_resolved) {\
-            /* Note: this message routes through the user-installed log handler\
-             * (default handler writes to stderr). Applications may replace it via\
-             * glatter_set_log_handler(...).\
-             */\
-            glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
-            GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
-        }\
-        return_or_not glatter_##name##_resolved cargs;\
+        glatter_##name##_t fn = (glatter_##name##_t)\
+            glatter_resolve_or_log_once(&glatter_##name##_once, &glatter_##name##_slot,\
+                glatter_##name##_once_cb, #name);\
+        if (!fn) { GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0); }\
+        return_or_not fn cargs;\
     }\
-    GLATTER_ONCE_CB(glatter_##name##_resolve_once)\
+    GLATTER_ONCE_CB(glatter_##name##_once_cb)\
     {\
         GLATTER_ONCE_CB_UNUSED();\
-        glatter_##name##_resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
-        GLATTER_ONCE_RETURN(glatter_##name##_resolved != NULL);\
+        (void)glatter_once_body_set(&glatter_##name##_slot,\
+            (void*(*)(const char*))glatter_get_proc_address_##family, #name);\
     }
 
 #else /* single-threaded fallback */
 
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
-    static glatter_##name##_t glatter_##name##_resolved = NULL;\
+    static void* glatter_##name##_slot = NULL;\
     static inline rtype cconv glatter_##name dargs\
     {\
-        if (!glatter_##name##_resolved) {\
-            glatter_##name##_resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
-        }\
-        if (!glatter_##name##_resolved) {\
-            /* Note: this message routes through the user-installed log handler\
-             * (default handler writes to stderr). Applications may replace it via\
-             * glatter_set_log_handler(...).\
-             */\
-            glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
-            GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
-        }\
-        return_or_not glatter_##name##_resolved cargs;\
+        glatter_##name##_t fn = (glatter_##name##_t)\
+            glatter_resolve_or_log_single(&glatter_##name##_slot,\
+                (void*(*)(const char*))glatter_get_proc_address_##family, #name);\
+        if (!fn) { GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0); }\
+        return_or_not fn cargs;\
     }
 
 #endif /* GLATTER_USE_ATOMICS */
@@ -1385,40 +1496,32 @@ typedef struct glatter_es_record_struct
 
 //==================
 
-#if defined(GLATTER_LOG_CALLS)
+#if defined(GLATTER_LOG_CALLS) && GLATTER_LOG_CALLS
 
-    #define GLATTER_DBLOCK(file, line, name, printf_fmt, ...) \
-        glatter_pre_callback(file, line);                     \
-        glatter_log_printf(                                   \
-            "GLATTER: in '%s'(%d):\n", file, line             \
-        );                                                    \
-        glatter_log_printf(                                   \
-            "GLATTER: " #name printf_fmt "\n", ##__VA_ARGS__  \
-        );
+#  define GLATTER_DBLOCK(file, line, name, printf_fmt, ...) \
+        glatter_dbg_enter((file), (line), #name, printf_fmt, ##__VA_ARGS__)
 
-    #define GLATTER_RBLOCK(...)                               \
-        glatter_log_printf(                                   \
-            "GLATTER: returned " __VA_ARGS__                  \
-        );
-
+#  define GLATTER_RBLOCK(...) \
+        glatter_dbg_return(__VA_ARGS__)
 
 #else
 
-    #define GLATTER_DBLOCK(file, line, name, printf_fmt, ...) \
-        glatter_pre_callback(file, line);
+#  define GLATTER_DBLOCK(file, line, name, printf_fmt, ...) \
+        glatter_pre_callback((file), (line))
 
-    #define GLATTER_RBLOCK(...)
+#  define GLATTER_RBLOCK(...)
 
 #endif
 
 
-#if defined (GLATTER_LOG_ERRORS)
+#if defined (GLATTER_LOG_ERRORS) && GLATTER_LOG_ERRORS
 
-    #define GLATTER_CHECK_ERROR(family, file, line) glatter_check_error_##family(file, line);
+#  define GLATTER_CHECK_ERROR(family, file, line) glatter_check_error_##family((file), (line))
 
 #else
 
-    #define GLATTER_CHECK_ERROR(...)
+GLATTER_INLINE_OR_NOT void glatter_check_error_noop(const char*, int) {}
+#  define GLATTER_CHECK_ERROR(family, file, line) glatter_check_error_noop((file), (line))
 
 #endif
 
@@ -1443,47 +1546,47 @@ typedef struct glatter_es_record_struct
 #endif
 
 
-#if defined(GLATTER_LOG_ERRORS) || defined(GLATTER_LOG_CALLS)
+#if (defined(GLATTER_LOG_ERRORS) && GLATTER_LOG_ERRORS) || (defined(GLATTER_LOG_CALLS) && GLATTER_LOG_CALLS)
 
-    #if defined(GLATTER_GL)
+    #if defined(GLATTER_GL) && GLATTER_GL
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_d_def.h)
     #endif
 
-    #if defined(GLATTER_GLX)
+    #if defined(GLATTER_GLX) && GLATTER_GLX
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_d_def.h)
     #endif
 
-    #if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
+    #if defined(GLATTER_EGL) && GLATTER_EGL && GLATTER_HAS_EGL_GENERATED_HEADERS
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_d_def.h)
     #endif
 
-    #if defined(GLATTER_WGL)
+    #if defined(GLATTER_WGL) && GLATTER_WGL
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_d_def.h)
     #endif
 
-    #if defined(GLATTER_GLU)
+    #if defined(GLATTER_GLU) && GLATTER_GLU
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_d_def.h)
     #endif
 
 #else
 
-    #if defined(GLATTER_GL)
+    #if defined(GLATTER_GL) && GLATTER_GL
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_r_def.h)
     #endif
 
-    #if defined(GLATTER_GLX)
+    #if defined(GLATTER_GLX) && GLATTER_GLX
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_r_def.h)
     #endif
 
-    #if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
+    #if defined(GLATTER_EGL) && GLATTER_EGL && GLATTER_HAS_EGL_GENERATED_HEADERS
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_r_def.h)
     #endif
 
-    #if defined(GLATTER_WGL)
+    #if defined(GLATTER_WGL) && GLATTER_WGL
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_r_def.h)
     #endif
 
-    #if defined(GLATTER_GLU)
+    #if defined(GLATTER_GLU) && GLATTER_GLU
         #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_r_def.h)
     #endif
 
@@ -1493,19 +1596,19 @@ typedef struct glatter_es_record_struct
 
 #ifndef GLATTER_HEADER_ONLY
 
-#if defined(GLATTER_GL)
+#if defined(GLATTER_GL) && GLATTER_GL
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_ges_decl.h)
 #endif
 
-#if defined(GLATTER_GLX)
+#if defined(GLATTER_GLX) && GLATTER_GLX
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_ges_decl.h)
 #endif
 
-#if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
+#if defined(GLATTER_EGL) && GLATTER_EGL && GLATTER_HAS_EGL_GENERATED_HEADERS
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_ges_decl.h)
 #endif
 
-#if defined(GLATTER_WGL)
+#if defined(GLATTER_WGL) && GLATTER_WGL
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_ges_decl.h)
 #endif
 
@@ -1513,45 +1616,45 @@ typedef struct glatter_es_record_struct
 
 
 
-#if defined(GLATTER_GL)
+#if defined(GLATTER_GL) && GLATTER_GL
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_ges_def.h)
 #endif
 
-#if defined(GLATTER_GLX)
+#if defined(GLATTER_GLX) && GLATTER_GLX
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_ges_def.h)
 #endif
 
-#if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
+#if defined(GLATTER_EGL) && GLATTER_EGL && GLATTER_HAS_EGL_GENERATED_HEADERS
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_ges_def.h)
 #endif
 
-#if defined(GLATTER_WGL)
+#if defined(GLATTER_WGL) && GLATTER_WGL
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_ges_def.h)
 #endif
 
 
 
-#if defined(GLATTER_GL)
+#if defined(GLATTER_GL) && GLATTER_GL
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_e2s_def.h)
 #endif
 
-#if defined(GLATTER_GLX)
+#if defined(GLATTER_GLX) && GLATTER_GLX
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLX_e2s_def.h)
 #endif
 
-#if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
+#if defined(GLATTER_EGL) && GLATTER_EGL && GLATTER_HAS_EGL_GENERATED_HEADERS
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_EGL_e2s_def.h)
 #endif
 
-#if defined(GLATTER_WGL)
+#if defined(GLATTER_WGL) && GLATTER_WGL
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_e2s_def.h)
 #endif
 
-#if defined(GLATTER_GLU)
+#if defined(GLATTER_GLU) && GLATTER_GLU
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GLU_e2s_def.h)
 #endif
 
-#if defined(GLATTER_EGL) && !GLATTER_HAS_EGL_GENERATED_HEADERS
+#if defined(GLATTER_EGL) && GLATTER_EGL && !GLATTER_HAS_EGL_GENERATED_HEADERS
 
 GLATTER_INLINE_OR_NOT glatter_extension_support_status_EGL_t glatter_get_extension_support_EGL(void)
 {

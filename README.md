@@ -212,7 +212,7 @@ Handles UNICODE and MBCS builds. The generator assumes UNICODE by default; on no
 
 Two headers are meant for power users:
 
-* `glatter_config.h` Feature/platform switches. Define `GLATTER_USER_CONFIGURED` and set your own `GLATTER_*` macros to opt out of the defaults.
+* `glatter_config_user.h` Feature/platform switches. Edit these simple knobs to choose APIs, platforms, and logging behaviour. `glatter_config.h` remains the public entry point and forwards to the user file plus internal defaults/validation.
 * `glatter_platform_headers.h` The list of API headers glatter should use. If you edit this, re‑run the generator.
 
 ### Regenerating headers (optional)
