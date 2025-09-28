@@ -89,6 +89,7 @@ enum {
 
 
 #ifdef GLATTER_HEADER_ONLY
+    /* Do not link libglatter (glatter.c) when GLATTER_HEADER_ONLY is used. */
 
     #include "glatter_def.h"
 

@@ -23,10 +23,14 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 
+import os
+import sys
 
-input_root = r'./headers'
-output_dir = r'./platforms'
-platform_headers_file = r'./glatter_platform_headers.h'
+script_dir = os.path.dirname(os.path.realpath(__file__))
+
+input_root = os.path.join(script_dir, 'headers')
+output_dir = os.path.join(script_dir, 'platforms')
+platform_headers_file = os.path.join(script_dir, 'glatter_platform_headers.h')
 
 from collections import OrderedDict
 
@@ -96,8 +100,6 @@ typedefs = windows_typedefs
 
 known_fnames = {}
 
-import os
-import sys
 import re
 import operator
 import string
@@ -123,7 +125,7 @@ def split_args_top_level(s):
     args.append(''.join(current).strip())
     return args
 
-config_path = os.path.join(os.path.dirname(__file__), 'glatter_config.h')
+config_path = os.path.join(script_dir, 'glatter_config.h')
 try:
     with open(config_path, 'r', encoding='utf-8') as cfg_file:
         config_data = cfg_file.read()
@@ -433,8 +435,8 @@ def preprocess(file_string):
 
 
 def parse_platform_headers_file():
-    f = open(platform_headers_file, 'r')
-    c3 = preprocess(f.read())
+    with open(platform_headers_file, 'r', encoding='utf-8') as f:
+        c3 = preprocess(f.read())
     c4 = []
 
     #========================#
@@ -1270,10 +1272,11 @@ for platform in platform_headers:
     print('Header list for platform ', platform[0], ':', sep='')
     for header in platform[1:]:
         print('   ', header)
-        if not os.path.exists(header):
+        abs_header = header if os.path.isabs(header) else os.path.join(script_dir, header)
+        if not os.path.exists(abs_header):
             sys.stderr.write(f"error: missing input header {header}\n")
             sys.exit(2)
-        platform_headers_filtered[-1].append(header)
+        platform_headers_filtered[-1].append(abs_header)
     print()
 platform_headers = platform_headers_filtered
 

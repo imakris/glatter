@@ -35,8 +35,3 @@ int            glatter_owner_thread_initialized = 0;
 #error "Unsupported platform"
 #endif
 
-#if defined(__GNUC__)
-__attribute__((visibility("default")))
-#endif
-const int glatter_build_mode_separate = 1;
-/* Link-time guard: fails the build if both header-only and separate-build are linked. */

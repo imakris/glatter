@@ -445,57 +445,7 @@ static int glatter_equals_ignore_case(const char* a, const char* b)
     return *a == '\0' && *b == '\0';
 }
 
-/* Environment steering: we read GLATTER_WSI once per process unless the app
- * has already called glatter_set_wsi(), in which case environment input is
- * ignored. Explicit app choice takes precedence.
- */
-static void glatter_detect_wsi_from_env(glatter_loader_state* state)
-{
-    if (state->env_checked || state->wsi_explicit) {
-        state->env_checked = 1;
-        return;
-    }
-
-    state->env_checked = 1;
-    const char* env = getenv("GLATTER_WSI");
-    if (!env || !*env) {
-        return;
-    }
-
-    if (glatter_equals_ignore_case(env, "wgl")) {
-        state->requested = GLATTER_WSI_WGL_VALUE;
-    }
-    else
-    if (glatter_equals_ignore_case(env, "glx")) {
-        state->requested = GLATTER_WSI_GLX_VALUE;
-    }
-    else
-    if (glatter_equals_ignore_case(env, "egl")) {
-        state->requested = GLATTER_WSI_EGL_VALUE;
-    }
-
-#if defined(_WIN32)
-    /* Windows has no GLX; ignore such requests to avoid confusing state. */
-    if (state->requested == GLATTER_WSI_GLX_VALUE) {
-        state->requested = GLATTER_WSI_AUTO_VALUE;
-    }
-#endif
-
-#if !defined(_WIN32)
-    /* If this POSIX build was compiled without GLX, normalize invalid requests. */
-#if !defined(GLATTER_GLX)
-    if (state->requested == GLATTER_WSI_GLX_VALUE) {
-        state->requested = GLATTER_WSI_AUTO_VALUE;
-    }
-#endif
-#if !defined(GLATTER_EGL)
-    if (state->requested == GLATTER_WSI_EGL_VALUE) {
-        state->requested = GLATTER_WSI_AUTO_VALUE;
-    }
-#endif
-#endif
-}
-
+/* Windows module loading helpers */
 #if defined(_WIN32)
 /* Secure-by-default DLL load (Windows):
  * - Prefer LOAD_LIBRARY_SEARCH_SYSTEM32 when available.
@@ -625,6 +575,7 @@ static void* glatter_windows_resolve_egl(glatter_loader_state* state, const char
     return NULL;
 }
 #else
+/* POSIX (dlopen) helpers */
 static void glatter_linux_load_handles(void** handles, unsigned char* tried, size_t count, const char* const* names)
 {
     for (size_t i = 0; i < count; ++i) {
@@ -712,6 +663,62 @@ static void* glatter_linux_lookup_egl(glatter_loader_state* state, const char* n
 }
 #endif
 
+static int glatter_normalize_requested_wsi_(int requested)
+{
+#if defined(_WIN32)
+    if (requested == GLATTER_WSI_GLX_VALUE) {
+        return GLATTER_WSI_AUTO_VALUE;
+    }
+#else
+    if (requested == GLATTER_WSI_WGL_VALUE) {
+        return GLATTER_WSI_AUTO_VALUE;
+    }
+#endif
+#if !defined(GLATTER_GLX)
+    if (requested == GLATTER_WSI_GLX_VALUE) {
+        return GLATTER_WSI_AUTO_VALUE;
+    }
+#endif
+#if !defined(GLATTER_EGL)
+    if (requested == GLATTER_WSI_EGL_VALUE) {
+        return GLATTER_WSI_AUTO_VALUE;
+    }
+#endif
+    return requested;
+}
+
+/* Environment steering: we read GLATTER_WSI once per process unless the app
+ * has already called glatter_set_wsi(), in which case environment input is
+ * ignored. Explicit app choice takes precedence.
+ */
+static void glatter_detect_wsi_from_env(glatter_loader_state* state)
+{
+    if (state->env_checked || state->wsi_explicit) {
+        state->env_checked = 1;
+        state->requested = glatter_normalize_requested_wsi_(state->requested);
+        return;
+    }
+
+    state->env_checked = 1;
+    const char* env = getenv("GLATTER_WSI");
+    if (!env || !*env) {
+        state->requested = glatter_normalize_requested_wsi_(state->requested);
+        return;
+    }
+
+    if (glatter_equals_ignore_case(env, "wgl")) {
+        state->requested = GLATTER_WSI_WGL_VALUE;
+    }
+    else if (glatter_equals_ignore_case(env, "glx")) {
+        state->requested = GLATTER_WSI_GLX_VALUE;
+    }
+    else if (glatter_equals_ignore_case(env, "egl")) {
+        state->requested = GLATTER_WSI_EGL_VALUE;
+    }
+
+    state->requested = glatter_normalize_requested_wsi_(state->requested);
+}
+
 GLATTER_INLINE_OR_NOT
 void glatter_set_wsi(int wsi)
 {
@@ -727,7 +734,7 @@ void glatter_set_wsi(int wsi)
             value = GLATTER_WSI_AUTO_VALUE;
             break;
     }
-    state->requested = value;
+    state->requested = glatter_normalize_requested_wsi_(value);
     state->wsi_explicit = 1;
     state->active = GLATTER_WSI_AUTO_VALUE;
 }
@@ -964,7 +971,7 @@ void glatter_check_error_WGL(const char* file, int line)
         eid, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&buffer, 0, NULL);
 
     glatter_log_printf(
-        "GLATTER: WGL call produced the following error in %s(%d):\n%s\t", file, line, (char*)buffer
+        "GLATTER: LastError after WGL call (may be stale) in %s(%d):\n%s\t", file, line, (char*)buffer
     );
 
     LocalFree(buffer);
@@ -1094,17 +1101,6 @@ GLATTER_EXTERN_C_END
  * owner without needing an explicit instantiation macro.
  */
 #if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
-
-GLATTER_EXTERN_C_BEGIN
-#if defined(_MSC_VER)
-__declspec(selectany) extern const int glatter_build_mode_separate = 2;
-#elif defined(__GNUC__)
-extern const int glatter_build_mode_separate __attribute__((weak, visibility("default"))) = 2;
-#else
-extern const int glatter_build_mode_separate = 2;
-#endif
-/* Link-time guard: fails the build if both header-only and separate-build are linked. */
-GLATTER_EXTERN_C_END
 
 namespace glatter { namespace detail {
 
@@ -1406,6 +1402,7 @@ typedef struct glatter_es_record_struct
 #define GLATTER_RETURN_VALUE_return(rtype, value) return (value)
 #define GLATTER_RETURN_VALUE_(rtype, value)       return
 
+/* Note: header-only vs TU variants differ only in storage/linkage; call flow is identical. */
 #ifdef GLATTER_HEADER_ONLY
 
 /* Thread-safe first use:
