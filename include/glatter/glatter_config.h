@@ -278,6 +278,19 @@
 #endif
 
 /* 3) Validation checks */
+
+#if defined(GLATTER_WGL) && GLATTER_WGL
+  #if !defined(_WIN32)
+    #error "GLATTER_WGL is enabled but this is not a Windows (_WIN32) build."
+  #endif
+#endif
+
+#if defined(GLATTER_GLX) && GLATTER_GLX
+  #if defined(_WIN32)
+    #error "GLATTER_GLX is enabled but this is a Windows build."
+  #endif
+#endif
+
 /* Ensure platform constants were not altered downstream */
 #if (GLATTER_PLATFORM_AUTO != 0) || (GLATTER_PLATFORM_WGL != 1) || \
     (GLATTER_PLATFORM_GLX  != 2) || (GLATTER_PLATFORM_EGL != 3)
