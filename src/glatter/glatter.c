@@ -20,9 +20,19 @@
 #if defined(_WIN32)
 INIT_ONCE glatter_thread_once = INIT_ONCE_STATIC_INIT;
 DWORD     glatter_thread_id   = 0;
+int       glatter_owner_bound_explicitly = 0;
+int       glatter_owner_thread_initialized = 0;
 #elif defined(__APPLE__) || defined(__unix__)
 pthread_once_t glatter_thread_once = PTHREAD_ONCE_INIT;
 pthread_t      glatter_thread_id;
+int            glatter_owner_bound_explicitly = 0;
+int            glatter_owner_thread_initialized = 0;
 #else
 #error "Unsupported platform"
 #endif
+
+#if defined(__GNUC__)
+__attribute__((visibility("default")))
+#endif
+const int glatter_build_mode_separate = 1;
+/* Link-time guard: fails the build if both header-only and separate-build are linked. */

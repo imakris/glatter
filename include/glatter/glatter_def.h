@@ -41,9 +41,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(_WIN32)
 #   include <windows.h>
 #   include <tchar.h>
+#   if defined(GLATTER_SECURE_DLL_SEARCH) && !defined(LOAD_LIBRARY_SEARCH_SYSTEM32)
+#       define LOAD_LIBRARY_SEARCH_SYSTEM32 0x00000800
+#   endif
 #   if !defined(GLATTER_THREAD_LOCAL)
 #       if defined(_MSC_VER)
 #           define GLATTER_THREAD_LOCAL __declspec(thread)
+#       elif defined(__GNUC__)
+#           define GLATTER_THREAD_LOCAL __thread
+#       else
+#           define GLATTER_THREAD_LOCAL
+#       endif
+#   endif
+#else
+#   if !defined(GLATTER_THREAD_LOCAL)
+#       if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+#           define GLATTER_THREAD_LOCAL _Thread_local
 #       elif defined(__GNUC__)
 #           define GLATTER_THREAD_LOCAL __thread
 #       else
@@ -190,6 +203,8 @@ glatter_log_handler_fn* glatter_log_handler_storage(void)
     return &handler;
 }
 
+static int glatter_log_handler_frozen = 0;
+
 GLATTER_INLINE_OR_NOT
 void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
 {
@@ -199,6 +214,7 @@ void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
 GLATTER_INLINE_OR_NOT
 glatter_log_handler_fn glatter_log_handler_load(void)
 {
+    glatter_log_handler_frozen = 1;
     return *glatter_log_handler_storage();
 }
 #endif
@@ -246,6 +262,15 @@ void glatter_log_printf(const char* fmt, ...)
 GLATTER_INLINE_OR_NOT
 void glatter_set_log_handler(void(*handler_ptr)(const char*))
 {
+#if !GLATTER_HAS_ATOMIC_LOG_HANDLER
+    /* No-atomics build: handler may only be set before first log; later changes are ignored. */
+    if (glatter_log_handler_frozen) {
+#if defined(GLATTER_DEBUG)
+        glatter_log("GLATTER: ignoring log handler change after first use (no atomics).\n");
+#endif
+        return;
+    }
+#endif
     if (handler_ptr == NULL) {
         handler_ptr = glatter_default_log_handler;
     }
@@ -261,7 +286,7 @@ static const char* glatter_pr_tstr(const TCHAR* ts)
     }
 #if defined(UNICODE) || defined(_UNICODE)
     /* Convert UTF-16 -> UTF-8 */
-    GLATTER_THREAD_LOCAL static char buf[1024];
+    static GLATTER_THREAD_LOCAL char buf[1024];
     int n = WideCharToMultiByte(CP_UTF8, 0, ts, -1, buf, (int)sizeof(buf), NULL, NULL);
     if (n > 0) {
         return buf;
@@ -453,6 +478,24 @@ static void glatter_detect_wsi_from_env(glatter_loader_state* state)
 }
 
 #if defined(_WIN32)
+#if defined(GLATTER_SECURE_DLL_SEARCH)
+static HMODULE glatter_secure_load_system32(LPCWSTR nameW)
+{
+    HMODULE module = NULL;
+    HMODULE kernel = GetModuleHandleW(L"kernel32.dll");
+    if (kernel) {
+        typedef HMODULE (WINAPI *PFN_LoadLibraryExW)(LPCWSTR, HANDLE, DWORD);
+        PFN_LoadLibraryExW load_library_ex = (PFN_LoadLibraryExW)GetProcAddress(kernel, "LoadLibraryExW");
+        if (load_library_ex) {
+            module = load_library_ex(nameW, NULL, LOAD_LIBRARY_SEARCH_SYSTEM32);
+        }
+    }
+    return module;
+}
+#endif
+
+/* Security: when GLATTER_SECURE_DLL_SEARCH is defined, opengl32.dll is loaded
+   from System32 only to avoid DLL preloading issues. */
 static HMODULE glatter_windows_load_module(HMODULE* cache, const char* const* names, size_t count)
 {
     if (*cache) {
@@ -464,6 +507,11 @@ static HMODULE glatter_windows_load_module(HMODULE* cache, const char* const* na
             continue;
         }
         HMODULE module = GetModuleHandleA(name);
+#if defined(GLATTER_SECURE_DLL_SEARCH)
+        if (!module && glatter_equals_ignore_case(name, "opengl32.dll")) {
+            module = glatter_secure_load_system32(L"opengl32.dll");
+        }
+#endif
         if (!module) {
             module = LoadLibraryA(name);
         }
@@ -683,12 +731,22 @@ void* glatter_get_proc_address(const char* function_name)
     void* ptr = glatter_windows_resolve_wgl(state, function_name);
     if (ptr) {
         state->active = GLATTER_WSI_WGL_VALUE;
+        if (state->requested == GLATTER_WSI_AUTO_VALUE && !state->wsi_explicit) {
+            /* Lock AUTO to the first successful WSI to avoid accidental WGL/EGL mixing. */
+            state->requested = state->active;
+            state->wsi_explicit = 1;
+        }
         return ptr;
     }
 
     ptr = glatter_windows_resolve_egl(state, function_name);
     if (ptr) {
         state->active = GLATTER_WSI_EGL_VALUE;
+        if (state->requested == GLATTER_WSI_AUTO_VALUE && !state->wsi_explicit) {
+            /* Lock AUTO to the first successful WSI to avoid accidental WGL/EGL mixing. */
+            state->requested = state->active;
+            state->wsi_explicit = 1;
+        }
         return ptr;
     }
 
@@ -714,12 +772,22 @@ void* glatter_get_proc_address(const char* function_name)
     void* ptr = glatter_linux_lookup_glx(state, function_name);
     if (ptr) {
         state->active = GLATTER_WSI_GLX_VALUE;
+        if (state->requested == GLATTER_WSI_AUTO_VALUE && !state->wsi_explicit) {
+            /* Lock AUTO to the first successful WSI to avoid accidental WGL/EGL mixing. */
+            state->requested = state->active;
+            state->wsi_explicit = 1;
+        }
         return ptr;
     }
 
     ptr = glatter_linux_lookup_egl(state, function_name);
     if (ptr) {
         state->active = GLATTER_WSI_EGL_VALUE;
+        if (state->requested == GLATTER_WSI_AUTO_VALUE && !state->wsi_explicit) {
+            /* Lock AUTO to the first successful WSI to avoid accidental WGL/EGL mixing. */
+            state->requested = state->active;
+            state->wsi_explicit = 1;
+        }
         return ptr;
     }
 
@@ -995,6 +1063,17 @@ GLATTER_EXTERN_C_END
  */
 #if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
 
+GLATTER_EXTERN_C_BEGIN
+#if defined(_MSC_VER)
+__declspec(selectany) extern const int glatter_build_mode_separate = 2;
+#elif defined(__GNUC__)
+extern const int glatter_build_mode_separate __attribute__((weak, visibility("default"))) = 2;
+#else
+extern const int glatter_build_mode_separate = 2;
+#endif
+/* Link-time guard: fails the build if both header-only and separate-build are linked. */
+GLATTER_EXTERN_C_END
+
 namespace glatter { namespace detail {
 
 #if defined(_WIN32)
@@ -1083,22 +1162,36 @@ GLATTER_EXTERN_C_BEGIN
 #if defined(_WIN32)
     extern INIT_ONCE glatter_thread_once;
     extern DWORD     glatter_thread_id;
+    extern int       glatter_owner_bound_explicitly;
+    extern int       glatter_owner_thread_initialized;
 
     static BOOL CALLBACK glatter_set_owner_thread(PINIT_ONCE once, PVOID param, PVOID* context)
     {
         (void)once;
         (void)param;
         (void)context;
+        /* Respect explicit owner binding: if the app already bound, do not overwrite. */
+        if (glatter_owner_bound_explicitly || glatter_owner_thread_initialized) {
+            return TRUE;
+        }
         glatter_thread_id = GetCurrentThreadId();
+        glatter_owner_thread_initialized = 1;
         return TRUE;
     }
 #elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
     extern pthread_once_t glatter_thread_once;
     extern pthread_t      glatter_thread_id;
+    extern int            glatter_owner_bound_explicitly;
+    extern int            glatter_owner_thread_initialized;
 
     static void glatter_set_owner_thread(void)
     {
+        /* Respect explicit owner binding: if the app already bound, do not overwrite. */
+        if (glatter_owner_bound_explicitly || glatter_owner_thread_initialized) {
+            return;
+        }
         glatter_thread_id = pthread_self();
+        glatter_owner_thread_initialized = 1;
     }
 #else
     #error "Unsupported platform"
@@ -1116,9 +1209,14 @@ void glatter_pre_callback(const char* file, int line)
 {
 #if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
     if (!glatter::detail::is_owner_thread()) {
-        char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
-        glatter_log(m);
-        free(m);
+        /* Throttle: log this cross-thread warning at most once per thread. */
+        static GLATTER_THREAD_LOCAL int glatter_warned_cross_thread = 0;
+        if (!glatter_warned_cross_thread) {
+            glatter_warned_cross_thread = 1;
+            char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
+            glatter_log(m);
+            free(m);
+        }
     }
 
 #elif defined(_WIN32)
@@ -1127,18 +1225,28 @@ void glatter_pre_callback(const char* file, int line)
     }
     DWORD current_thread = GetCurrentThreadId();
     if (current_thread != glatter_thread_id) {
-        char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
-        glatter_log(m);
-        free(m);
+        /* Throttle: log this cross-thread warning at most once per thread. */
+        static GLATTER_THREAD_LOCAL int glatter_warned_cross_thread = 0;
+        if (!glatter_warned_cross_thread) {
+            glatter_warned_cross_thread = 1;
+            char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
+            glatter_log(m);
+            free(m);
+        }
     }
 
 #elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
     pthread_once(&glatter_thread_once, glatter_set_owner_thread);
     pthread_t current_thread = pthread_self();
     if (!pthread_equal(current_thread, glatter_thread_id)) {
-        char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
-        glatter_log(m);
-        free(m);
+        /* Throttle: log this cross-thread warning at most once per thread. */
+        static GLATTER_THREAD_LOCAL int glatter_warned_cross_thread = 0;
+        if (!glatter_warned_cross_thread) {
+            glatter_warned_cross_thread = 1;
+            char* m = glatter_masprintf("GLATTER: Calling OpenGL from a different thread, in %s(%d)\n", file, line);
+            glatter_log(m);
+            free(m);
+        }
     }
 #else
     #error "Unsupported platform"
@@ -1153,8 +1261,12 @@ void glatter_bind_owner_to_current_thread(void)
     glatter::detail::bind_owner_to_current_thread();
 #elif defined(_WIN32)
     glatter_thread_id = GetCurrentThreadId();
+    glatter_owner_thread_initialized = 1;
+    glatter_owner_bound_explicitly = 1;
 #elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
     glatter_thread_id = pthread_self();
+    glatter_owner_thread_initialized = 1;
+    glatter_owner_bound_explicitly = 1;
 #endif
 }
 
@@ -1246,6 +1358,14 @@ typedef struct glatter_es_record_struct
 
 //==================
 
+#if defined(GLATTER_DEBUG) && !defined(GLATTER_RESOLVE_RETURNS_ZERO)
+#   define GLATTER_RESOLVE_ABORT_ON_MISSING 1
+#else
+#   define GLATTER_RESOLVE_ABORT_ON_MISSING 0
+#endif
+
+/* Missing-symbol policy: in debug, abort to surface configuration errors early. */
+
 #define GLATTER_RETURN_VALUE(return_or_not, rtype, value) \
     GLATTER_RETURN_VALUE_##return_or_not(rtype, value)
 
@@ -1271,6 +1391,10 @@ typedef struct glatter_es_record_struct
                  * (default handler writes to stderr). Applications may replace it via\
                  * glatter_set_log_handler(...).\
                  */\
+                if (GLATTER_RESOLVE_ABORT_ON_MISSING) {\
+                    glatter_log_printf("GLATTER: missing '%s' (aborting in debug)\n", #name);\
+                    abort();\
+                }\
                 glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
                 GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
             }\
@@ -1305,6 +1429,10 @@ typedef struct glatter_es_record_struct
                  * (default handler writes to stderr). Applications may replace it via\
                  * glatter_set_log_handler(...).\
                  */\
+                if (GLATTER_RESOLVE_ABORT_ON_MISSING) {\
+                    glatter_log_printf("GLATTER: missing '%s' (aborting in debug)\n", #name);\
+                    abort();\
+                }\
                 glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
                 GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
             }\
