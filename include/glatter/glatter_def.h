@@ -297,18 +297,25 @@ typedef struct glatter_loader_state {
     HMODULE gles_modules[GLATTER_WINDOWS_GLES_MODULE_COUNT];
     PROC (WINAPI *wgl_get_proc)(LPCSTR);
     glatter_egl_get_proc_fn egl_get_proc;
+    glatter_atomic_int wgl_resolve_gate;
+    glatter_atomic_int egl_resolve_gate;
 #else
     /* Loader handles remain open for the process lifetime by design. We do not
      * dlclose/FreeLibrary to avoid driver/layer teardown side effects.
      */
     void* gl_handles[GLATTER_GL_SONAME_COUNT];
-    unsigned char gl_tried[GLATTER_GL_SONAME_COUNT];
     void* egl_handles[GLATTER_EGL_SONAME_COUNT];
-    unsigned char egl_tried[GLATTER_EGL_SONAME_COUNT];
     void* gles_handles[GLATTER_GLES_SONAME_COUNT];
-    unsigned char gles_tried[GLATTER_GLES_SONAME_COUNT];
     void* (*glx_get_proc)(const GLubyte*);
     void* (*egl_get_proc)(const char*);
+#if defined(GLATTER_GLX)
+    glatter_atomic_int glx_resolve_gate;
+#endif
+#if defined(GLATTER_EGL)
+    glatter_atomic_int egl_resolve_gate;
+#endif
+    glatter_atomic_int posix_handles_gate;
+    glatter_atomic_int gles_handles_gate;
 #endif
 #if defined(GLATTER_GLX) && !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
     /* Atomic to avoid redundant installs/logs when multiple threads first-touch GLX. */
@@ -410,8 +417,9 @@ static HMODULE glatter_load_system32_dll_(const wchar_t* dll_w)
 
 static HMODULE glatter_windows_load_module(HMODULE* cache, const char* const* names, size_t count)
 {
-    if (*cache) {
-        return *cache;
+    HMODULE current = *cache;
+    if (current) {
+        return current;
     }
     for (size_t i = 0; i < count; ++i) {
         const char* name = names[i];
@@ -419,6 +427,7 @@ static HMODULE glatter_windows_load_module(HMODULE* cache, const char* const* na
             continue;
         }
         HMODULE module = GetModuleHandleA(name);
+        int loaded_module = 0;
         if (!module) {
             wchar_t dll_w[MAX_PATH];
             size_t len = 0;
@@ -428,24 +437,54 @@ static HMODULE glatter_windows_load_module(HMODULE* cache, const char* const* na
             dll_w[len] = L'\0';
             if (name[len] == '\0') {
                 module = glatter_load_system32_dll_(dll_w);
+                if (module) {
+                    loaded_module = 1;
+                }
             }
         }
         if (module) {
-            *cache = module;
-            return module;
+            HMODULE previous = (HMODULE)InterlockedCompareExchangePointer(
+                (volatile PVOID*)cache,
+                (PVOID)module,
+                NULL);
+            if (!previous) {
+                return module;
+            }
+            /* Another thread won the race; drop our reference and use the shared handle. */
+            if (loaded_module) {
+                FreeLibrary(module);
+            }
+            return previous;
         }
     }
     return NULL;
 }
 
+static inline void glatter_windows_ensure_wgl_loader(glatter_loader_state* state)
+{
+    if (GLATTER_ATOMIC_INT_LOAD(state->wgl_resolve_gate) == 2) {
+        return;
+    }
+
+    int expected = 0;
+    if (GLATTER_ATOMIC_INT_CAS(state->wgl_resolve_gate, expected, 1)) {
+        static const char* const opengl_names[] = { "opengl32.dll" };
+        HMODULE mod = glatter_windows_load_module(&state->opengl32_module, opengl_names,
+            sizeof(opengl_names) / sizeof(opengl_names[0]));
+        if (mod) {
+            state->wgl_get_proc = (PROC (WINAPI*)(LPCSTR))GetProcAddress(mod, "wglGetProcAddress");
+        }
+        GLATTER_ATOMIC_INT_STORE(state->wgl_resolve_gate, 2);
+    } else {
+        while (GLATTER_ATOMIC_INT_LOAD(state->wgl_resolve_gate) != 2) {
+            /* spin */
+        }
+    }
+}
+
 static void* glatter_windows_resolve_wgl(glatter_loader_state* state, const char* name)
 {
-    static const char* const opengl_names[] = { "opengl32.dll" };
-    glatter_windows_load_module(&state->opengl32_module, opengl_names, sizeof(opengl_names) / sizeof(opengl_names[0]));
-
-    if (state->opengl32_module && !state->wgl_get_proc) {
-        state->wgl_get_proc = (PROC (WINAPI*)(LPCSTR))GetProcAddress(state->opengl32_module, "wglGetProcAddress");
-    }
+    glatter_windows_ensure_wgl_loader(state);
 
     if (state->wgl_get_proc) {
         PROC proc = state->wgl_get_proc(name);
@@ -464,13 +503,30 @@ static void* glatter_windows_resolve_wgl(glatter_loader_state* state, const char
     return NULL;
 }
 
+static inline void glatter_windows_ensure_egl_loader(glatter_loader_state* state)
+{
+    if (GLATTER_ATOMIC_INT_LOAD(state->egl_resolve_gate) == 2) {
+        return;
+    }
+
+    int expected = 0;
+    if (GLATTER_ATOMIC_INT_CAS(state->egl_resolve_gate, expected, 1)) {
+        glatter_windows_load_module(&state->egl_module, glatter_windows_egl_names,
+            sizeof(glatter_windows_egl_names) / sizeof(glatter_windows_egl_names[0]));
+        if (state->egl_module) {
+            state->egl_get_proc = (glatter_egl_get_proc_fn)GetProcAddress(state->egl_module, "eglGetProcAddress");
+        }
+        GLATTER_ATOMIC_INT_STORE(state->egl_resolve_gate, 2);
+    } else {
+        while (GLATTER_ATOMIC_INT_LOAD(state->egl_resolve_gate) != 2) {
+            /* spin */
+        }
+    }
+}
+
 static void* glatter_windows_resolve_egl(glatter_loader_state* state, const char* name)
 {
-    glatter_windows_load_module(&state->egl_module, glatter_windows_egl_names, sizeof(glatter_windows_egl_names) / sizeof(glatter_windows_egl_names[0]));
-
-    if (state->egl_module && !state->egl_get_proc) {
-        state->egl_get_proc = (glatter_egl_get_proc_fn)GetProcAddress(state->egl_module, "eglGetProcAddress");
-    }
+    glatter_windows_ensure_egl_loader(state);
 
     if (state->egl_get_proc) {
         void* sym = state->egl_get_proc(name);
@@ -504,41 +560,67 @@ static void* glatter_windows_resolve_egl(glatter_loader_state* state, const char
 static int glatter_windows_probe_wgl_(void)
 {
     glatter_loader_state* state = glatter_loader_state_get();
-    static const char* const opengl_names[] = { "opengl32.dll" };
-    if (!glatter_windows_load_module(&state->opengl32_module, opengl_names, sizeof(opengl_names) / sizeof(opengl_names[0]))) {
-        return 0;
-    }
-    if (!state->wgl_get_proc) {
-        state->wgl_get_proc = (PROC (WINAPI*)(LPCSTR))GetProcAddress(state->opengl32_module, "wglGetProcAddress");
-    }
+    glatter_windows_ensure_wgl_loader(state);
     if (state->wgl_get_proc) {
         return 1;
     }
-    return GetProcAddress(state->opengl32_module, "wglCreateContext") != NULL;
+    return state->opengl32_module && GetProcAddress(state->opengl32_module, "wglCreateContext") != NULL;
 }
 
 static int glatter_windows_probe_egl_(void)
 {
     glatter_loader_state* state = glatter_loader_state_get();
-    if (!glatter_windows_load_module(&state->egl_module, glatter_windows_egl_names, sizeof(glatter_windows_egl_names) / sizeof(glatter_windows_egl_names[0]))) {
-        return 0;
-    }
-    if (!state->egl_get_proc) {
-        state->egl_get_proc = (glatter_egl_get_proc_fn)GetProcAddress(state->egl_module, "eglGetProcAddress");
-    }
+    glatter_windows_ensure_egl_loader(state);
     if (state->egl_get_proc) {
         return 1;
     }
-    return GetProcAddress(state->egl_module, "eglGetDisplay") != NULL;
+    return state->egl_module && GetProcAddress(state->egl_module, "eglGetDisplay") != NULL;
 }
 #else
 /* POSIX (dlopen) helpers */
-static void glatter_linux_load_handles(void** handles, unsigned char* tried, size_t count, const char* const* names)
+static inline void glatter_linux_load_handles(glatter_loader_state* state)
 {
-    for (size_t i = 0; i < count; ++i) {
-        if (!tried[i]) {
-            handles[i] = dlopen(names[i], RTLD_LAZY | RTLD_LOCAL);
-            tried[i] = 1;
+    if (GLATTER_ATOMIC_INT_LOAD(state->posix_handles_gate) == 2) {
+        return;
+    }
+
+    int expected = 0;
+    if (GLATTER_ATOMIC_INT_CAS(state->posix_handles_gate, expected, 1)) {
+        for (size_t i = 0; i < GLATTER_GL_SONAME_COUNT; ++i) {
+            if (!state->gl_handles[i]) {
+                state->gl_handles[i] = dlopen(glatter_gl_sonames[i], RTLD_LAZY | RTLD_LOCAL);
+            }
+        }
+        for (size_t i = 0; i < GLATTER_EGL_SONAME_COUNT; ++i) {
+            if (!state->egl_handles[i]) {
+                state->egl_handles[i] = dlopen(glatter_egl_sonames[i], RTLD_LAZY | RTLD_LOCAL);
+            }
+        }
+        GLATTER_ATOMIC_INT_STORE(state->posix_handles_gate, 2);
+    } else {
+        while (GLATTER_ATOMIC_INT_LOAD(state->posix_handles_gate) != 2) {
+            /* spin */
+        }
+    }
+}
+
+static inline void glatter_linux_load_gles_handles(glatter_loader_state* state)
+{
+    if (GLATTER_ATOMIC_INT_LOAD(state->gles_handles_gate) == 2) {
+        return;
+    }
+
+    int expected = 0;
+    if (GLATTER_ATOMIC_INT_CAS(state->gles_handles_gate, expected, 1)) {
+        for (size_t i = 0; i < GLATTER_GLES_SONAME_COUNT; ++i) {
+            if (!state->gles_handles[i]) {
+                state->gles_handles[i] = dlopen(glatter_gles_sonames[i], RTLD_LAZY | RTLD_LOCAL);
+            }
+        }
+        GLATTER_ATOMIC_INT_STORE(state->gles_handles_gate, 2);
+    } else {
+        while (GLATTER_ATOMIC_INT_LOAD(state->gles_handles_gate) != 2) {
+            /* spin */
         }
     }
 }
@@ -558,21 +640,32 @@ static void* glatter_linux_lookup_in_handles(void** handles, size_t count, const
 
 static void* glatter_linux_lookup_glx(glatter_loader_state* state, const char* name)
 {
-    glatter_linux_load_handles(state->gl_handles, state->gl_tried, GLATTER_GL_SONAME_COUNT, glatter_gl_sonames);
+    glatter_linux_load_handles(state);
 
-    if (!state->glx_get_proc) {
-        for (size_t i = 0; i < GLATTER_GL_SONAME_COUNT; ++i) {
-            if (state->gl_handles[i]) {
-                state->glx_get_proc = (void* (*)(const GLubyte*))dlsym(state->gl_handles[i], "glXGetProcAddressARB");
-                if (!state->glx_get_proc) {
-                    state->glx_get_proc = (void* (*)(const GLubyte*))dlsym(state->gl_handles[i], "glXGetProcAddress");
+#if defined(GLATTER_GLX)
+    if (GLATTER_ATOMIC_INT_LOAD(state->glx_resolve_gate) != 2) {
+        int expected = 0;
+        if (GLATTER_ATOMIC_INT_CAS(state->glx_resolve_gate, expected, 1)) {
+            for (size_t i = 0; i < GLATTER_GL_SONAME_COUNT; ++i) {
+                if (state->gl_handles[i]) {
+                    void* proc = dlsym(state->gl_handles[i], "glXGetProcAddressARB");
+                    if (!proc) {
+                        proc = dlsym(state->gl_handles[i], "glXGetProcAddress");
+                    }
+                    if (proc) {
+                        state->glx_get_proc = (void* (*)(const GLubyte*))proc;
+                        break;
+                    }
                 }
-                if (state->glx_get_proc) {
-                    break;
-                }
+            }
+            GLATTER_ATOMIC_INT_STORE(state->glx_resolve_gate, 2);
+        } else {
+            while (GLATTER_ATOMIC_INT_LOAD(state->glx_resolve_gate) != 2) {
+                /* spin */
             }
         }
     }
+#endif
 
     if (state->glx_get_proc) {
         void* sym = state->glx_get_proc((const GLubyte*)name);
@@ -586,18 +679,28 @@ static void* glatter_linux_lookup_glx(glatter_loader_state* state, const char* n
 
 static void* glatter_linux_lookup_egl(glatter_loader_state* state, const char* name)
 {
-    glatter_linux_load_handles(state->egl_handles, state->egl_tried, GLATTER_EGL_SONAME_COUNT, glatter_egl_sonames);
+    glatter_linux_load_handles(state);
 
-    if (!state->egl_get_proc) {
-        for (size_t i = 0; i < GLATTER_EGL_SONAME_COUNT; ++i) {
-            if (state->egl_handles[i]) {
-                state->egl_get_proc = (void* (*)(const char*))dlsym(state->egl_handles[i], "eglGetProcAddress");
-                if (state->egl_get_proc) {
-                    break;
+#if defined(GLATTER_EGL)
+    if (GLATTER_ATOMIC_INT_LOAD(state->egl_resolve_gate) != 2) {
+        int expected = 0;
+        if (GLATTER_ATOMIC_INT_CAS(state->egl_resolve_gate, expected, 1)) {
+            for (size_t i = 0; i < GLATTER_EGL_SONAME_COUNT; ++i) {
+                if (state->egl_handles[i]) {
+                    state->egl_get_proc = (void* (*)(const char*))dlsym(state->egl_handles[i], "eglGetProcAddress");
+                    if (state->egl_get_proc) {
+                        break;
+                    }
                 }
+            }
+            GLATTER_ATOMIC_INT_STORE(state->egl_resolve_gate, 2);
+        } else {
+            while (GLATTER_ATOMIC_INT_LOAD(state->egl_resolve_gate) != 2) {
+                /* spin */
             }
         }
     }
+#endif
 
     if (state->egl_get_proc) {
         void* sym = state->egl_get_proc(name);
@@ -612,7 +715,7 @@ static void* glatter_linux_lookup_egl(glatter_loader_state* state, const char* n
     }
 
     if (name && strncmp(name, "gl", 2) == 0) {
-        glatter_linux_load_handles(state->gles_handles, state->gles_tried, GLATTER_GLES_SONAME_COUNT, glatter_gles_sonames);
+        glatter_linux_load_gles_handles(state);
         return glatter_linux_lookup_in_handles(state->gles_handles, GLATTER_GLES_SONAME_COUNT, name);
     }
 
@@ -622,7 +725,7 @@ static void* glatter_linux_lookup_egl(glatter_loader_state* state, const char* n
 static int glatter_posix_probe_glx_(void)
 {
     glatter_loader_state* state = glatter_loader_state_get();
-    glatter_linux_load_handles(state->gl_handles, state->gl_tried, GLATTER_GL_SONAME_COUNT, glatter_gl_sonames);
+    glatter_linux_load_handles(state);
     for (size_t i = 0; i < GLATTER_GL_SONAME_COUNT; ++i) {
         if (!state->gl_handles[i]) {
             continue;
@@ -639,7 +742,7 @@ static int glatter_posix_probe_glx_(void)
 static int glatter_posix_probe_egl_(void)
 {
     glatter_loader_state* state = glatter_loader_state_get();
-    glatter_linux_load_handles(state->egl_handles, state->egl_tried, GLATTER_EGL_SONAME_COUNT, glatter_egl_sonames);
+    glatter_linux_load_handles(state);
     for (size_t i = 0; i < GLATTER_EGL_SONAME_COUNT; ++i) {
         if (!state->egl_handles[i]) {
             continue;
@@ -1290,20 +1393,39 @@ GLATTER_EXTERN_C_BEGIN
      * binding from another thread. Keep all access through GLATTER_ATOMIC_INT_* helpers. */
     extern glatter_atomic_int glatter_owner_bound_explicitly;
     extern glatter_atomic_int glatter_owner_thread_initialized;
+    /* Gate ensures a single writer updates glatter_thread_id. */
+    extern glatter_atomic_int glatter_owner_init_gate;
 
-    static BOOL CALLBACK glatter_set_owner_thread(PINIT_ONCE once, PVOID param, PVOID* context)
+    static BOOL CALLBACK glatter_init_owner_once_win(PINIT_ONCE once, PVOID param, PVOID* context)
     {
         (void)once;
         (void)param;
         (void)context;
-        /* Respect explicit owner binding: if the app already bound, do not overwrite. */
-        if (GLATTER_ATOMIC_INT_LOAD(glatter_owner_bound_explicitly) ||
-            GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
+
+        if (GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
             return TRUE;
         }
-        glatter_thread_id = GetCurrentThreadId();
-        GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
+
+        int expected = 0;
+        if (!GLATTER_ATOMIC_INT_CAS(glatter_owner_init_gate, expected, 1)) {
+            while (!GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
+                /* spin until the winner publishes the owner thread */
+            }
+            return TRUE;
+        }
+
+        if (!GLATTER_ATOMIC_INT_LOAD(glatter_owner_bound_explicitly)) {
+            glatter_thread_id = GetCurrentThreadId();
+            GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
+        }
+
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_init_gate, 2);
         return TRUE;
+    }
+
+    static inline void glatter_set_owner_thread(void)
+    {
+        InitOnceExecuteOnce(&glatter_thread_once, glatter_init_owner_once_win, NULL, NULL);
     }
 #elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
     extern pthread_once_t glatter_thread_once;
@@ -1312,16 +1434,34 @@ GLATTER_EXTERN_C_BEGIN
      * binding from another thread. Keep all access through GLATTER_ATOMIC_INT_* helpers. */
     extern glatter_atomic_int            glatter_owner_bound_explicitly;
     extern glatter_atomic_int            glatter_owner_thread_initialized;
+    /* Gate ensures a single writer updates glatter_thread_id. */
+    extern glatter_atomic_int            glatter_owner_init_gate;
 
-    static void glatter_set_owner_thread(void)
+    static void glatter_init_owner_once_posix(void)
     {
-        /* Respect explicit owner binding: if the app already bound, do not overwrite. */
-        if (GLATTER_ATOMIC_INT_LOAD(glatter_owner_bound_explicitly) ||
-            GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
+        if (GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
             return;
         }
-        glatter_thread_id = pthread_self();
-        GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
+
+        int expected = 0;
+        if (!GLATTER_ATOMIC_INT_CAS(glatter_owner_init_gate, expected, 1)) {
+            while (!GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
+                /* spin until the winner publishes the owner thread */
+            }
+            return;
+        }
+
+        if (!GLATTER_ATOMIC_INT_LOAD(glatter_owner_bound_explicitly)) {
+            glatter_thread_id = pthread_self();
+            GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
+        }
+
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_init_gate, 2);
+    }
+
+    static inline void glatter_set_owner_thread(void)
+    {
+        pthread_once(&glatter_thread_once, glatter_init_owner_once_posix);
     }
 #else
     #error "Unsupported platform"
@@ -1351,7 +1491,8 @@ void glatter_pre_callback(const char* file, int line)
     }
 
 #elif defined(_WIN32)
-    if (!InitOnceExecuteOnce(&glatter_thread_once, glatter_set_owner_thread, NULL, NULL)) {
+    glatter_set_owner_thread();
+    if (!GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
         return;
     }
     DWORD current_thread = GetCurrentThreadId();
@@ -1367,7 +1508,7 @@ void glatter_pre_callback(const char* file, int line)
     }
 
 #elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
-    pthread_once(&glatter_thread_once, glatter_set_owner_thread);
+    glatter_set_owner_thread();
     pthread_t current_thread = pthread_self();
     if (!pthread_equal(current_thread, glatter_thread_id)) {
         /* Throttle: log this cross-thread warning at most once per thread. */
@@ -1391,13 +1532,33 @@ void glatter_bind_owner_to_current_thread(void)
 #if defined(GLATTER_HEADER_ONLY) && defined(__cplusplus)
     glatter::detail::bind_owner_to_current_thread();
 #elif defined(_WIN32)
-    glatter_thread_id = GetCurrentThreadId();
-    GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
-    GLATTER_ATOMIC_INT_STORE(glatter_owner_bound_explicitly, 1);
+    int expected = 0;
+    if (GLATTER_ATOMIC_INT_CAS(glatter_owner_init_gate, expected, 1)) {
+        glatter_thread_id = GetCurrentThreadId();
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_bound_explicitly, 1);
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_init_gate, 2);
+    } else {
+        glatter_set_owner_thread();
+        while (!GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
+            /* wait until implicit init publishes the owner */
+        }
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_bound_explicitly, 1);
+    }
 #elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
-    glatter_thread_id = pthread_self();
-    GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
-    GLATTER_ATOMIC_INT_STORE(glatter_owner_bound_explicitly, 1);
+    int expected = 0;
+    if (GLATTER_ATOMIC_INT_CAS(glatter_owner_init_gate, expected, 1)) {
+        glatter_thread_id = pthread_self();
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_bound_explicitly, 1);
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_init_gate, 2);
+    } else {
+        glatter_set_owner_thread();
+        while (!GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
+            /* wait until implicit init publishes the owner */
+        }
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_bound_explicitly, 1);
+    }
 #endif
 }
 

@@ -40,12 +40,14 @@ DWORD     glatter_thread_id   = 0;
 /* Explicit INIT keeps intent clear; static zero-init would also work but is less obvious. */
 glatter_atomic_int glatter_owner_bound_explicitly   = GLATTER_ATOMIC_INT_INIT(0);
 glatter_atomic_int glatter_owner_thread_initialized = GLATTER_ATOMIC_INT_INIT(0);
+glatter_atomic_int glatter_owner_init_gate          = GLATTER_ATOMIC_INT_INIT(0);
 #elif defined(__APPLE__) || defined(__unix__)
 pthread_once_t glatter_thread_once = PTHREAD_ONCE_INIT;
 pthread_t      glatter_thread_id;
 /* Explicit INIT keeps intent clear; static zero-init would also work but is less obvious. */
 glatter_atomic_int            glatter_owner_bound_explicitly   = GLATTER_ATOMIC_INT_INIT(0);
 glatter_atomic_int            glatter_owner_thread_initialized = GLATTER_ATOMIC_INT_INIT(0);
+glatter_atomic_int            glatter_owner_init_gate          = GLATTER_ATOMIC_INT_INIT(0);
 #else
 #error "Unsupported platform"
 #endif
