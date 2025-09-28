@@ -1255,8 +1255,10 @@ GLATTER_EXTERN_C_BEGIN
 #if defined(_WIN32)
     extern INIT_ONCE glatter_thread_once;
     extern DWORD     glatter_thread_id;
-    extern int       glatter_owner_bound_explicitly;
-    extern int       glatter_owner_thread_initialized;
+    /* Atomicized to avoid data races between first-touch owner init and explicit
+     * binding from another thread. Keep all access through GLATTER_ATOMIC_INT_* helpers. */
+    extern glatter_atomic_int glatter_owner_bound_explicitly;
+    extern glatter_atomic_int glatter_owner_thread_initialized;
 
     static BOOL CALLBACK glatter_set_owner_thread(PINIT_ONCE once, PVOID param, PVOID* context)
     {
@@ -1264,27 +1266,31 @@ GLATTER_EXTERN_C_BEGIN
         (void)param;
         (void)context;
         /* Respect explicit owner binding: if the app already bound, do not overwrite. */
-        if (glatter_owner_bound_explicitly || glatter_owner_thread_initialized) {
+        if (GLATTER_ATOMIC_INT_LOAD(glatter_owner_bound_explicitly) ||
+            GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
             return TRUE;
         }
         glatter_thread_id = GetCurrentThreadId();
-        glatter_owner_thread_initialized = 1;
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
         return TRUE;
     }
 #elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
     extern pthread_once_t glatter_thread_once;
     extern pthread_t      glatter_thread_id;
-    extern int            glatter_owner_bound_explicitly;
-    extern int            glatter_owner_thread_initialized;
+    /* Atomicized to avoid data races between first-touch owner init and explicit
+     * binding from another thread. Keep all access through GLATTER_ATOMIC_INT_* helpers. */
+    extern glatter_atomic_int            glatter_owner_bound_explicitly;
+    extern glatter_atomic_int            glatter_owner_thread_initialized;
 
     static void glatter_set_owner_thread(void)
     {
         /* Respect explicit owner binding: if the app already bound, do not overwrite. */
-        if (glatter_owner_bound_explicitly || glatter_owner_thread_initialized) {
+        if (GLATTER_ATOMIC_INT_LOAD(glatter_owner_bound_explicitly) ||
+            GLATTER_ATOMIC_INT_LOAD(glatter_owner_thread_initialized)) {
             return;
         }
         glatter_thread_id = pthread_self();
-        glatter_owner_thread_initialized = 1;
+        GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
     }
 #else
     #error "Unsupported platform"
@@ -1355,12 +1361,12 @@ void glatter_bind_owner_to_current_thread(void)
     glatter::detail::bind_owner_to_current_thread();
 #elif defined(_WIN32)
     glatter_thread_id = GetCurrentThreadId();
-    glatter_owner_thread_initialized = 1;
-    glatter_owner_bound_explicitly = 1;
+    GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
+    GLATTER_ATOMIC_INT_STORE(glatter_owner_bound_explicitly, 1);
 #elif defined(__APPLE__) || defined(__unix__) || defined(__unix)
     glatter_thread_id = pthread_self();
-    glatter_owner_thread_initialized = 1;
-    glatter_owner_bound_explicitly = 1;
+    GLATTER_ATOMIC_INT_STORE(glatter_owner_thread_initialized, 1);
+    GLATTER_ATOMIC_INT_STORE(glatter_owner_bound_explicitly, 1);
 #endif
 }
 
