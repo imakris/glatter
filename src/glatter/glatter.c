@@ -5,6 +5,16 @@
 #error "Do not compile glatter.c when GLATTER_HEADER_ONLY is defined."
 #endif
 
+
+/* Tag this TU as the compiled build; headers will use this for fail-fast checks. */
+#ifndef GLATTER_SEPARATE_TU
+#define GLATTER_SEPARATE_TU 1
+#endif
+
+#if defined(_MSC_VER)
+#pragma detect_mismatch("glatter-build-mode", "separate")
+#endif
+
 #if defined(_WIN32)
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
@@ -12,6 +22,8 @@
 #include <windows.h>
 #elif defined(__APPLE__) || defined(__unix__)
 #include <pthread.h>
+#else
+#error "Unsupported platform"
 #endif
 
 /* This will include platform headers in the correct, internal order. */

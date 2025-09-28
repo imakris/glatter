@@ -26,8 +26,8 @@ Pick **one** of the two ways to use glatter:
 glClear(GL_COLOR_BUFFER_BIT);
 ```
 
-For header-only usage, include `glatter/glatter_solo.h`. This tiny wrapper defines
-`GLATTER_HEADER_ONLY` and then includes the main `glatter.h` for you.
+For header-only usage, include `<glatter/glatter_solo.h>`. This tiny wrapper defines
+`GLATTER_HEADER_ONLY` and includes the main header for you.
 
 ### 2) Compiled C translation unit (C or C++)
 
@@ -65,10 +65,16 @@ Optional WSI override (function call or env var):
 glatter_set_wsi(GLATTER_WSI_EGL); /* or WGL, GLX, AUTO */
 ```
 
-**Thread-safety:** When `GLATTER_WSI=AUTO`, glatter decides the WSI exactly once at first use.
-This decision is synchronized so concurrent first calls cannot pick different backends.
-In header-only builds the decision gate is per translation unit; use the compiled TU mode
-to enforce a single process-wide decision.
+WSI is latched at **first successful resolution** in the process. Changing the environment variable or calling
+`glatter_set_wsi()` after first use has no effect for the remainder of the process.
+
+**Thread-safety & determinism:** With `GLATTER_WSI=AUTO`, a tiny atomic gate ensures
+a single decision per TU, and detection proceeds in a fixed order
+(Windows: WGL→EGL; POSIX: GLX→EGL). Given the same build and environment, all TUs
+converge to the same WSI. Use the compiled C translation unit variant if you prefer
+a single shared loader state for the whole process or to reduce code duplication,
+but not for correctness.
+
 
 ## Typical single‑context app
 
@@ -126,7 +132,8 @@ int main() {
 > Note: ARB/KHR debug output still needs a debug context; glatter’s error checks work independently.
 
 For WGL wrappers, glatter sets `SetLastError(0)` immediately before the call so the subsequent
-`GetLastError()` check reflects that call. The log message indicates if the error code may be stale.
+`GetLastError()` check reflects that call. This avoids reporting a stale error from unrelated
+WinAPI calls; any `GetLastError()` observed right after the wrapper reflects that specific WGL call.
 
 ---
 
@@ -166,6 +173,11 @@ When using the GLX WSI, glatter installs a small X error handler the first time 
 #define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER
 ```
 
+**Xlib threading:** If your app uses Xlib from multiple threads, you must call `XInitThreads()` **before any Xlib call**.
+Glatter does not call it for you. In multi-threaded Xlib apps, call `XInitThreads()` early (e.g., at program start) and
+consider `#define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` to install your own handler under your threading model.
+
+
 ---
 
 ## Integration notes
@@ -177,6 +189,10 @@ When using the GLX WSI, glatter installs a small X error handler the first time 
 
   * Windows: link against `opengl32` (plus `EGL`/`GLES` DLLs if you use them).
   * Linux/BSD: link against `GL`, `X11`, `pthread`, `dl` (plus `EGL`/`GLES` if you use them).
+
+**Windows DLL search hardening:** Glatter loads system GL/EGL/GLES DLLs from `%SystemRoot%\System32` (e.g., via
+`LoadLibraryExW(..., LOAD_LIBRARY_SEARCH_SYSTEM32)`), which mitigates DLL preloading attacks and ensures the canonical
+system implementations are used.
 
 ---
 
@@ -242,7 +258,10 @@ If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for your target, EGL/GLES helpers 
 * **Cross‑thread warnings** Call `glatter_bind_owner_to_current_thread()` on the render thread, or enable strict binding with `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND`.
 * **GLX error spam** Define `GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` and install your own after X threading init.
 * **Missing EGL/GLES generated headers** Builds still succeed; EGL/GLES helpers are unavailable until you generate headers.
-
+* **Platform family mismatch** Ensure you didn’t enable a platform wrapper unavailable on your target (e.g., WGL on Linux,
+  GLX on Windows). Pick only the families that exist on the current platform.
+* **WSI override not taking effect** The WSI is latched at first use. Set `GLATTER_WSI` or call `glatter_set_wsi()` **before**
+  the first GL/WSI call.
 ---
 
 ## License

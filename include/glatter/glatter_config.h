@@ -89,6 +89,11 @@
 #  define GLATTER_MESA_EGL_GLES 1
 #endif
 
+/* Build-mode coherence */
+/* If a TU declares itself 'separate TU' (compiled mode), reject header-only in it. */
+#if defined(GLATTER_SEPARATE_TU) && defined(GLATTER_HEADER_ONLY)
+#error "glatter: This translation unit is marked as compiled mode (GLATTER_SEPARATE_TU) but also enables header-only. Pick one."
+#endif
 
 /* =========================
    Zero-config defaults
