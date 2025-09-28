@@ -263,6 +263,8 @@ class Function_argument:
     def __eq__(self, other): 
         return self.type == other.type
 
+    # Order matters: resolve typedefs, handle TCHAR* specially for UTF-8 logging,
+    # then fall back to generic pointer formatting.
     def get_printf_faa(self): ## faa = format and args
         mm = re.match(familyenum, self.type)
         # 1. is api-enum
@@ -1269,9 +1271,9 @@ for platform in platform_headers:
     for header in platform[1:]:
         print('   ', header)
         if not os.path.exists(header):
-            print('        ERROR: the file was not found')
-        else:    
-            platform_headers_filtered[-1].append(header)
+            sys.stderr.write(f"error: missing input header {header}\n")
+            sys.exit(2)
+        platform_headers_filtered[-1].append(header)
     print()
 platform_headers = platform_headers_filtered
 
