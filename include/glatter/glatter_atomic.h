@@ -23,12 +23,14 @@
 
 #elif defined(_MSC_VER)
 #  include <windows.h>
+#  include <stdint.h>
    typedef void* glatter_atomic_voidp;
-#  define glatter_atomic(T)          glatter_atomic_voidp
-#  define GLATTER_ATOMIC_LOAD(a)     (InterlockedCompareExchangePointer(&(a), NULL, NULL))
-#  define GLATTER_ATOMIC_STORE(a,v)  ((void)InterlockedExchangePointer(&(a),(PVOID)(v)))
+#  define GLATTER_ATOMIC_CAST_PTR(v)      ((PVOID)(uintptr_t)(v))
+#  define glatter_atomic(T)               glatter_atomic_voidp
+#  define GLATTER_ATOMIC_LOAD(a)          (InterlockedCompareExchangePointer(&(a), NULL, NULL))
+#  define GLATTER_ATOMIC_STORE(a,v)       ((void)InterlockedExchangePointer(&(a), GLATTER_ATOMIC_CAST_PTR(v)))
 #  define GLATTER_ATOMIC_CAS(a,exp,des) \
-      (InterlockedCompareExchangePointer(&(a),(PVOID)(des),(PVOID)(exp)) == (PVOID)(exp))
+      (InterlockedCompareExchangePointer(&(a), GLATTER_ATOMIC_CAST_PTR(des), GLATTER_ATOMIC_CAST_PTR(exp)) == GLATTER_ATOMIC_CAST_PTR(exp))
 
 #else
 #  define glatter_atomic(T)          T
