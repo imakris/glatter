@@ -26,3 +26,5 @@ pthread_t      glatter_thread_id;
 #else
 #error "Unsupported platform"
 #endif
+
+int glatter_owner_bound_explicitly = 0;

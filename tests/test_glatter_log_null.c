@@ -29,6 +29,7 @@ char* glatter_masprintf(const char* format, ...);
 
 pthread_once_t glatter_thread_once = PTHREAD_ONCE_INIT;
 pthread_t      glatter_thread_id;
+int            glatter_owner_bound_explicitly;
 
 static char        g_last_log_buffer[1024];
 static const char* g_last_log_message = NULL;
@@ -85,15 +86,14 @@ int main(void)
 
     glatter_set_log_handler(NULL);
 
-    if (glatter_log_handler() != glatter_default_log_handler) {
-        fprintf(stderr, "NULL handler did not reset to default handler\n");
+    if (glatter_log_handler() != test_log_handler) {
+        fprintf(stderr, "log handler change should be ignored after first use\n");
         return 1;
     }
 
     /* Smoke test to ensure the default handler can be invoked safely. */
-    glatter_log("GLATTER: default handler smoke test.\n");
+    glatter_default_log_handler("GLATTER: default handler smoke test.\n");
 
-    glatter_set_log_handler(test_log_handler);
     glatter_log_printf("GLATTER: printf test %d\n", 42);
 
     if (strcmp(g_last_log_message, "GLATTER: printf test 42\n") != 0) {
