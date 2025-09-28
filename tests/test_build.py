@@ -461,6 +461,58 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
     )
 
 
+def test_wgl_headers_compile_with_stubs(tmp_path: Path) -> None:
+    """Verify WGL-enabled builds compile when using stubbed Windows headers."""
+
+    cc = _require_tool("cc")
+
+    source = tmp_path / "wgl_headers.c"
+    source.write_text(
+        textwrap.dedent(
+            """
+            #include <stddef.h>
+            #include <glatter/glatter.h>
+
+            static void noop(const char* message) {
+                (void)message;
+            }
+
+            int main(void) {
+                glatter_set_log_handler(noop);
+                glatter_set_log_handler(NULL);
+                return glatter_get_wsi();
+            }
+            """
+        ).strip()
+        + "\n"
+    )
+
+    config_flags = [
+        "-D_WIN32",
+        "-DGLATTER_CONFIG_H_DEFINED",
+        "-DGLATTER_GL=1",
+        "-DGLATTER_WGL=1",
+        "-DGLATTER_WINDOWS_WGL_GL=1",
+        "-D__STDC_NO_ATOMICS__=1",
+    ]
+
+    _run_command(
+        [
+            cc,
+            "-std=c11",
+            *config_flags,
+            "-I",
+            str(REPO_ROOT / "include"),
+            "-I",
+            str(REPO_ROOT / "tests" / "include"),
+            "-c",
+            str(source),
+            "-o",
+            str(tmp_path / "wgl_headers.o"),
+        ]
+    )
+
+
 @pytest.mark.parametrize("example", EXAMPLE_PROGRAMS, ids=lambda example: example.name)
 def test_examples_compile(example: ExampleProgram, tmp_path: Path) -> None:
     """Compile shipped example programs to ensure they stay buildable."""
