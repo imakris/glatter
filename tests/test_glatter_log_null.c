@@ -29,8 +29,8 @@ char* glatter_masprintf(const char* format, ...);
 
 pthread_once_t glatter_thread_once = PTHREAD_ONCE_INIT;
 pthread_t      glatter_thread_id;
-int            glatter_owner_bound_explicitly = 0;
-int            glatter_owner_thread_initialized = 0;
+glatter_atomic_int            glatter_owner_bound_explicitly   = GLATTER_ATOMIC_INT_INIT(0);
+glatter_atomic_int            glatter_owner_thread_initialized = GLATTER_ATOMIC_INT_INIT(0);
 
 static char        g_last_log_buffer[1024];
 static const char* g_last_log_message = NULL;
