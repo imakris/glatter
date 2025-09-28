@@ -26,6 +26,9 @@ Pick **one** of the two ways to use glatter:
 glClear(GL_COLOR_BUFFER_BIT);
 ```
 
+For header-only usage, include `glatter/glatter_solo.h`. This tiny wrapper defines
+`GLATTER_HEADER_ONLY` and then includes the main `glatter.h` for you.
+
 ### 2) Compiled C translation unit (C or C++)
 
 ```c
@@ -61,6 +64,11 @@ Optional WSI override (function call or env var):
 
 glatter_set_wsi(GLATTER_WSI_EGL); /* or WGL, GLX, AUTO */
 ```
+
+**Thread-safety:** When `GLATTER_WSI=AUTO`, glatter decides the WSI exactly once at first use.
+This decision is synchronized so concurrent first calls cannot pick different backends.
+In header-only builds the decision gate is per translation unit; use the compiled TU mode
+to enforce a single process-wide decision.
 
 ## Typical single‑context app
 
@@ -116,6 +124,9 @@ int main() {
 ```
 
 > Note: ARB/KHR debug output still needs a debug context; glatter’s error checks work independently.
+
+For WGL wrappers, glatter sets `SetLastError(0)` immediately before the call so the subsequent
+`GetLastError()` check reflects that call. The log message indicates if the error code may be stale.
 
 ---
 
@@ -214,8 +225,6 @@ Two headers are meant for power users:
 
 * `glatter_config.h` Feature/platform switches. Define `GLATTER_USER_CONFIGURED` and set your own `GLATTER_*` macros to opt out of the defaults.
 * `glatter_platform_headers.h` The list of API headers glatter should use. If you edit this, re‑run the generator.
-
-### Regenerating headers (optional)
 
 1. Place target API headers under `include/glatter/headers/`.
 2. Add the bundle to `glatter_platform_headers.h` (one `#include` per line, no trailing comments).

@@ -1,9 +1,5 @@
 #pragma once
 
-#if defined(GLATTER_ASSUME_SINGLE_THREADED)
-#  error "GLATTER_ASSUME_SINGLE_THREADED was removed. Resolution is always thread-safe via atomic CAS."
-#endif
-
 /* Tiny atomic helpers used for first-use resolution. */
 #if defined(__cplusplus)
 #  include <atomic>

@@ -282,6 +282,9 @@ class Function_argument:
         if re.match(r'^(const\s+)?TCHAR\s*\*$', argtype):
             return ['%s', 'glatter_pr_tstr(' + self.name + ')']
 
+        if '(' in self.type and '(*' in self.declaration:
+            return ['%p', '(void*)' + self.name]
+
         if self.is_pointer:
             return ['%p', '(void*)'+self.name]
 
@@ -609,54 +612,52 @@ def parse(filename):
                 arg.declaration = y.strip()
                 if arg.declaration in ['void', 'VOID']:
                     continue
-                fp_name = None
-                first_paren = arg.declaration.find(')')
-                ptr_paren = arg.declaration.find('(*')
-                if ptr_paren != -1 and (first_paren == -1 or ptr_paren < first_paren):
-                    m = re.search(r'\(\*\s*([A-Za-z_]\w*)\s*\)', arg.declaration)
-                    if m:
-                        fp_name = m.group(1)
                 arg.is_pointer = '*' in arg.declaration
 
-                # place lindex, rindex at the beginning and at the end of the string accordingly.
-                lindex = 0
-                rindex = len(arg.declaration)
+                m_fp = re.search(r'\(\s*(?:\w+\s+)?\*+\s*([A-Za-z_]\w*)\s*\)', arg.declaration)
+                if m_fp:
+                    arg.name = m_fp.group(1)
+                    arg.type = arg.declaration.replace(arg.name, '', 1).strip()
+                    if not arg.type:
+                        arg.type = 'UNKNOWN TYPE'
+                else:
+                    # place lindex, rindex at the beginning and at the end of the string accordingly.
+                    lindex = 0
+                    rindex = len(arg.declaration)
 
-                # place rindex before the first closing parenthesis
-                if ')' in arg.declaration:
-                    rindex = arg.declaration.index(')')
+                    # place rindex before the first closing parenthesis
+                    if ')' in arg.declaration:
+                        rindex = arg.declaration.index(')')
 
-                # place rindex before the first opening angle bracket
-                if '[' in arg.declaration:
-                    rindex = arg.declaration.index('[')
+                    # place rindex before the first opening angle bracket
+                    if '[' in arg.declaration:
+                        rindex = arg.declaration.index('[')
 
-                # place lindex after the last *
-                if '*' in arg.declaration:
-                    lindex = arg.declaration.rindex('*')
+                    # place lindex after the last *
+                    if '*' in arg.declaration:
+                        lindex = arg.declaration.rindex('*')
 
-                s1 = arg.declaration[lindex:rindex]
-                s1 = s1.rstrip()
+                    s1 = arg.declaration[lindex:rindex]
+                    s1 = s1.rstrip()
 
-                matches = list(re.finditer(r'([A-Za-z]+\w*)', s1))
-                if matches:
-                    lindex += matches[-1].start()
+                    matches = list(re.finditer(r'([A-Za-z]+\w*)', s1))
+                    if matches:
+                        lindex += matches[-1].start()
 
-                arg.name = arg.declaration[lindex:rindex]
+                    arg.name = arg.declaration[lindex:rindex]
 
-                arg.type = 'UNKNOWN TYPE'
-                if (len(arg.declaration) == rindex):
-                    arg.type = arg.declaration[0:lindex].strip()
+                    arg.type = 'UNKNOWN TYPE'
+                    if (len(arg.declaration) == rindex):
+                        arg.type = arg.declaration[0:lindex].strip()
 
-                #if the argument has no name, we assign a name to it
-                if not arg.declaration[lindex:rindex].strip():
-                    arg.name = 'a'+str(i)
-                    dfinal = arg.declaration[:lindex] + arg.name + arg.declaration[rindex:]
-                    rindex += len(arg.name)
-                    arg.declaration = dfinal
-
-                if fp_name:
-                    arg.name = fp_name
-                    arg.is_pointer = True
+                    #if the argument has no name, we assign a name to it
+                    if not arg.declaration[lindex:rindex].strip():
+                        arg.name = 'a'+str(i)
+                        dfinal = arg.declaration[:lindex] + arg.name + arg.declaration[rindex:]
+                        rindex += len(arg.name)
+                        arg.declaration = dfinal
+                        if (len(arg.declaration) == rindex):
+                            arg.type = arg.declaration[0:lindex].strip()
 
                 #arg.name_range = (lindex, rindex)
                 arglist_fine.append(arg)
@@ -871,6 +872,11 @@ def get_function_mdnd(family): #macros, declarations and definitions
         df_def = df_dec[:-1] + '''
 {
     GLATTER_DBLOCK(file, line, ''' + x.name + ', "(' + a6s[0] + ')"' + printf_va_args + ')'
+        if x.family == 'WGL':
+            df_def += '''
+#if defined(_WIN32)
+    SetLastError(0);
+#endif'''
         if (x.rtype not in ['void', 'VOID']):
             rarg = Function_argument()
             rarg.name = 'rval'
