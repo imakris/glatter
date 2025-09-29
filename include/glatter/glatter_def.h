@@ -703,7 +703,7 @@ static int glatter_normalize_requested_wsi_(int requested)
 }
 
 /* Lock in WSI exactly once: AUTO -> {WGL,GLX,EGL}. Returns 1 if we won. */
-static GLATTER_INLINE int glatter_select_wsi_once_(glatter_loader_state* state, int chosen)
+static int glatter_select_wsi_once_(glatter_loader_state* state, int chosen)
 {
     int expected = GLATTER_WSI_AUTO_VALUE;
     if (GLATTER_ATOMIC_INT_CAS(state->requested, expected, chosen)) {
