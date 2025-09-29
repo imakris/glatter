@@ -1,4 +1,4 @@
-# glatter — OpenGL‑family loader & tracer
+# glatter - OpenGL‑family loader & tracer
 
 [![Build and Test Glatter](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml)
 
