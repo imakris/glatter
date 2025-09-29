@@ -182,15 +182,30 @@ void glatter_log_printf(const char* fmt, ...)
     char buffer[2048];
     va_list args;
     va_start(args, fmt);
+    va_list args_copy;
+    va_copy(args_copy, args);
     int written = vsnprintf(buffer, sizeof(buffer), fmt, args);
-    va_end(args);
-
-    if (written < 0) {
-        glatter_log(NULL);
-    }
-    else {
+    if (written >= 0 && written < (int)sizeof(buffer)) {
         glatter_log(buffer);
     }
+    else
+    if (written >= 0) {
+        /* need written+1 bytes */
+        char* heap = (char*)malloc((size_t)written + 1);
+        if (heap) {
+            vsnprintf(heap, (size_t)written + 1, fmt, args_copy);
+            glatter_log(heap);
+            free(heap);
+        }
+        else {
+            glatter_log(NULL);
+        }
+    }
+    else {
+        glatter_log(NULL);
+    }
+    va_end(args_copy);
+    va_end(args);
 }
 
 
@@ -286,7 +301,7 @@ static const char* const glatter_gles_sonames[GLATTER_GLES_SONAME_COUNT] = {
 
 typedef struct glatter_loader_state {
     /* Loader WSI fields are atomic to avoid UB when multiple threads first-touch AUTO.
-     * glatter_wsi_gate still serializes the “decide once” phase. */
+     * glatter_wsi_gate still serializes the ?decide once? phase. */
     glatter_atomic_int requested;    /* GLATTER_WSI_* enum values */
     glatter_atomic_int active;       /* GLATTER_WSI_* enum values */
     glatter_atomic_int wsi_explicit; /* 0/1 */
@@ -601,8 +616,10 @@ static void glatter_init_posix_loader_once(void)
     for (size_t i = 0; i < GLATTER_GL_SONAME_COUNT; ++i) {
         if (state->gl_handles[i]) {
             void* proc = dlsym(state->gl_handles[i], "glXGetProcAddressARB");
+            if (!proc)
+                proc = dlsym(state->gl_handles[i], "glXGetProcAddress");
             if (proc) {
-                state->glx_get_proc = (void* (*)(const GLubyte*))proc;
+               state->glx_get_proc = (void* (*)(const GLubyte*))proc;
                 break;
             }
         }
@@ -633,8 +650,13 @@ static int glatter_posix_probe_glx_(void)
     pthread_once(&glatter_posix_loader_once, glatter_init_posix_loader_once);
     glatter_loader_state* state = glatter_loader_state_get();
     for (size_t i = 0; i < GLATTER_GL_SONAME_COUNT; ++i) {
-        if (!state->gl_handles[i]) continue;
-        if (dlsym(state->gl_handles[i], "glXGetProcAddressARB") || dlsym(state->gl_handles[i], "glXCreateContext")) {
+        if (!state->gl_handles[i]) {
+            continue;
+        }
+        if (dlsym(state->gl_handles[i], "glXGetProcAddressARB") ||
+            dlsym(state->gl_handles[i], "glXGetProcAddress")    ||
+            dlsym(state->gl_handles[i], "glXCreateContext"))
+        {
             return 1;
         }
     }
@@ -1380,6 +1402,17 @@ static void* glatter_exchange_ptr_posix(void** slot, void* expected, void* desir
 }
 #endif
 
+
+/* Platform-specific one-shot pointer exchange used in non-header-only builds.
+   Keep conditionals OUT of the large GLATTER_FBLOCK() macro body to satisfy GCC/Clang. */
+#if defined(_WIN32)
+#   define GLATTER_EXCHANGE_PTR(slot, expected, desired) \
+        InterlockedCompareExchangePointer((volatile PVOID*)(slot), (PVOID)(desired), (PVOID)(expected))
+#else
+#   define GLATTER_EXCHANGE_PTR(slot, expected, desired) \
+        glatter_exchange_ptr_posix((void**)(slot), (void*)(expected), (void*)(desired))
+#endif
+
 #define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
     cder rtype cconv name dargs;\
     typedef rtype (cconv *glatter_##name##_t) dargs;\
@@ -1396,13 +1429,8 @@ static void* glatter_exchange_ptr_posix(void** slot, void* expected, void* desir
             glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
             GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
         }\
-        glatter_##name##_t previous = (glatter_##name##_t)(\
-        #if defined(_WIN32)\
-            InterlockedCompareExchangePointer((volatile PVOID*)&glatter_##name,(PVOID)resolved,(PVOID)glatter_##name##_resolver)\
-        #else\
-            glatter_exchange_ptr_posix((void**)&glatter_##name,(void*)glatter_##name##_resolver,(void*)resolved)\
-        #endif\
-        );\
+        glatter_##name##_t previous = (glatter_##name##_t) \
+            GLATTER_EXCHANGE_PTR(&glatter_##name, glatter_##name##_resolver, resolved); \
         if (previous != (glatter_##name##_t)glatter_##name##_resolver) {\
         }\
         return_or_not glatter_##name cargs;\
