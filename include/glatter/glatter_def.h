@@ -81,6 +81,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #   endif
 #endif
 
+#if defined(GLATTER_HEADER_ONLY)
+#   if defined(_MSC_VER)
+#       define GLATTER_LINKONCE_DECORATION __declspec(selectany)
+#   elif defined(__GNUC__) || defined(__clang__)
+#       define GLATTER_LINKONCE_DECORATION __attribute__((weak))
+#   else
+#       error "glatter: header-only mode requires selectany/weak support for globals."
+#   endif
+#   define GLATTER_LINKONCE_STORAGE
+#else
+#   define GLATTER_LINKONCE_DECORATION
+#   define GLATTER_LINKONCE_STORAGE static
+#endif
+
+#define GLATTER_LINKONCE GLATTER_LINKONCE_DECORATION GLATTER_LINKONCE_STORAGE
+
 #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
     #include <dlfcn.h>
     #include <pthread.h>
@@ -333,14 +349,12 @@ typedef struct glatter_loader_state {
  * Loader state is static and updated in a read-mostly, idempotent way.
  */
 /* WSI decision gate:
- * 0 = undecided, 1 = deciding, 2 = decided
- * In header-only builds this is per-TU; use separate-TU mode for process-wide single decision.
+ * 0 = undecided, 1 = deciding, 2 = decided.
+ * Header-only builds place this in link-once storage so every TU shares the same state.
  */
-static glatter_atomic_int glatter_wsi_gate = GLATTER_ATOMIC_INT_INIT(0);
+GLATTER_LINKONCE glatter_atomic_int glatter_wsi_gate = GLATTER_ATOMIC_INT_INIT(0);
 
-static glatter_loader_state* glatter_loader_state_get(void)
-{
-    static glatter_loader_state state = {
+GLATTER_LINKONCE glatter_loader_state glatter_loader_state_singleton = {
 #if defined(GLATTER_WGL) && !defined(GLATTER_GLX) && !defined(GLATTER_EGL)
         GLATTER_ATOMIC_INT_INIT(GLATTER_WSI_WGL_VALUE),
 #elif defined(GLATTER_GLX) && !defined(GLATTER_EGL) && !defined(GLATTER_WGL)
@@ -365,8 +379,15 @@ static glatter_loader_state* glatter_loader_state_get(void)
         /* glx_error_handler_installed */ GLATTER_ATOMIC_INT_INIT(0)
 #endif
     };
-    return &state;
+
+static glatter_loader_state* glatter_loader_state_get(void)
+{
+    return &glatter_loader_state_singleton;
 }
+
+#undef GLATTER_LINKONCE
+#undef GLATTER_LINKONCE_STORAGE
+#undef GLATTER_LINKONCE_DECORATION
 
 static int glatter_equals_ignore_case(const char* a, const char* b)
 {
