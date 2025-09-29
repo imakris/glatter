@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <glatter/glatter_atomic.h>
 #include <glatter/glatter_platform_headers.h>
 #include <glatter/glatter_masprintf.h>
-#include <glatter/gltr_once.h>
+#include <glatter/glatter_once.h>
 
 #include <assert.h>
 #include <stdarg.h>
