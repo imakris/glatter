@@ -1696,20 +1696,47 @@ void glatter_dbg_return(const char* fmt, ...)
 #endif
 #endif
 
-/* Unique-ish key for the *current* GL/WSI context, per platform. */
+/** Returns a stable cache key for the *current thread's* GL context+display/DC.
+ *  - 0 means no current context bound.
+ *  - Key is process-local and not intended for persistence or IPC.
+ *  - Safe on 32/64-bit; avoids out-of-range shifts; O(1).
+ */
+/* Unique-ish key for the *current* GL/WSI context, per platform.
+   Safe on 32- and 64-bit builds (no UB shifts), cheap, and stable within a process. */
 GLATTER_INLINE_OR_NOT uintptr_t glatter_current_gl_context_key_(void) {
+    uintptr_t a = (uintptr_t)0, b = (uintptr_t)0;
+
 #if defined(_WIN32)
-    /* WGL: combine context and DC. */
-    return (uintptr_t)wglGetCurrentContext() ^ (uintptr_t)wglGetCurrentDC();
+    /* WGL: combine context and DC */
+    a = (uintptr_t)wglGetCurrentContext();
+    b = (uintptr_t)wglGetCurrentDC();
 #elif defined(GLATTER_GLX)
-    /* GLX: combine context and Display*. */
-    return ((uintptr_t)glXGetCurrentContext() << 32) ^ (uintptr_t)glXGetCurrentDisplay();
+    /* GLX: combine context and Display* */
+    a = (uintptr_t)glXGetCurrentContext();
+    b = (uintptr_t)glXGetCurrentDisplay();
 #elif defined(GLATTER_EGL)
-    /* EGL: combine context and Display*. */
-    return ((uintptr_t)eglGetCurrentContext() << 32) ^ (uintptr_t)eglGetCurrentDisplay();
+    /* EGL: combine context and Display* */
+    a = (uintptr_t)eglGetCurrentContext();
+    b = (uintptr_t)eglGetCurrentDisplay();
 #else
-    return (uintptr_t)0; /* Unknown WSI -> treated as "no current context". */
+    return (uintptr_t)0; /* Unknown WSI → treat as "no current context". */
 #endif
+
+    /* If both are null, no current context is bound. */
+    if (((a | b) == (uintptr_t)0)) {
+        return (uintptr_t)0;
+    }
+
+    /* Rotate/mix b by half the pointer width to avoid out-of-range shifts.
+       HALF = (bits in uintptr_t) / 2  → 16 on 32-bit, 32 on 64-bit. */
+    const unsigned HALF = (unsigned)(sizeof(uintptr_t) * 4);
+    const unsigned BITS = (unsigned)(sizeof(uintptr_t) * 8);
+
+    /* Rotations are defined because 0 < HALF < BITS on all sane targets. */
+    uintptr_t brot = (uintptr_t)((b << HALF) | (b >> (BITS - HALF)));
+
+    /* Final mix: cheap, symmetric, and stable enough for a cache key. */
+    return a ^ brot;
 }
 
 #if defined(GLATTER_GL)
