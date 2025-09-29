@@ -25,14 +25,19 @@ elseif(APPLE)
     find_package(X11 REQUIRED)
     find_package(Threads REQUIRED)
     find_library(DL_LIBRARY dl)
+    
+    # Explicitly find the X11-compatible GL library from XQuartz.
+    find_library(X11_GL_LIBRARY GL NAMES GL.1 HINTS /opt/X11/lib)
+
     target_link_libraries(glatter PUBLIC
         OpenGL::GL
         X11::X11
         Threads::Threads
         ${DL_LIBRARY}
+        ${X11_GL_LIBRARY}
     )
 else()
-    # This is the Linux/BSD path, which was already correct.
+    # Linux/BSD
     find_package(OpenGL REQUIRED)
     find_package(X11 REQUIRED)
     find_package(Threads REQUIRED)

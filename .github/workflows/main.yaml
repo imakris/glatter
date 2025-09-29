@@ -31,17 +31,12 @@ jobs:
 
       - name: Configure CMake
         shell: bash
+        # We need to provide a hint to CMake to find the X11 package from XQuartz
         run: |
           if [ "$RUNNER_OS" == "Windows" ]; then
             cmake -B build -S . -A x64
-          elif [ "$RUNNER_OS" == "macOS" ]; then
-            # and the include path for the compiler (-I/opt/X11/include).
-            export CFLAGS="-I/opt/X11/include"
-            export CXXFLAGS="-I/opt/X11/include"
-            export LDFLAGS="-L/opt/X11/lib"
-            cmake -B build -S .
           else
-            cmake -B build -S .
+            cmake -B build -S . -DCMAKE_PREFIX_PATH=/opt/X11
           fi
 
       - name: Build with CMake
