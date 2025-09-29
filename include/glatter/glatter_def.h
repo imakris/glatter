@@ -653,14 +653,15 @@ static int glatter_posix_probe_glx_(void)
         if (!state->gl_handles[i]) {
             continue;
         }
+        // If any of the key symbols are found, we have GLX support. Return immediately.
         if (dlsym(state->gl_handles[i], "glXGetProcAddressARB") ||
             dlsym(state->gl_handles[i], "glXGetProcAddress")    ||
             dlsym(state->gl_handles[i], "glXCreateContext"))
         {
-            return 1;
+            return 1; // Found
         }
     }
-    return 0;
+    return 0; // Not found
 }
 
 static int glatter_posix_probe_egl_(void)
@@ -670,10 +671,10 @@ static int glatter_posix_probe_egl_(void)
     for (size_t i = 0; i < GLATTER_EGL_SONAME_COUNT; ++i) {
         if (!state->egl_handles[i]) continue;
         if (dlsym(state->egl_handles[i], "eglGetProcAddress") || dlsym(state->egl_handles[i], "eglGetDisplay")) {
-            return 1;
+            return 1; // Found
         }
     }
-    return 0;
+    return 0; // Not found
 }
 #endif
 
@@ -1092,6 +1093,10 @@ void* glatter_get_proc_address_GLU(const char* function_name)
         module = glatter_load_system32_dll_(L"glu32.dll");
     }
     ptr = module ? (void*)GetProcAddress(module, function_name) : NULL;
+#elif defined(__APPLE__)
+    // On macOS, GLU is part of the OpenGL framework, which is already loaded.
+    // RTLD_DEFAULT allows searching in the global symbol scope.
+    ptr = dlsym(RTLD_DEFAULT, function_name);
 #else
     #error There is no implementation for your platform. Your contribution would be greatly appreciated!
 #endif
