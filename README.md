@@ -1,5 +1,7 @@
 # glatter — OpenGL‑family loader & tracer
 
+[![Build and Test Glatter](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml)
+
 A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, optional GLU). Resolves symbols on first use, lets you log calls or just errors, and warns on cross‑thread usage. Works in C and C++ with sensible defaults.
 
 ---
@@ -13,6 +15,19 @@ A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, opt
 * **Utilities:** generated extension flags (e.g., `glatter_GL_ARB_vertex_array_object`) and `enum_to_string_*()` helpers.
 
 ---
+
+
+## Platform Support
+
+| Platform | Status | Notes |
+| :--- | :--- | :--- |
+| **Windows** | ✅ Supported | Tested via CI with WGL. |
+| **Linux** | ✅ Supported | Tested via CI with GLX. |
+| **macOS** | ⚠️ Experimental | Compiles via CI, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
+| **BSD** | 🛠️ Incomplete | The code is POSIX-friendly but is not expected to build without minor modifications. Contributions are welcome |
+
+---
+
 
 ## Choose your integration mode
 
@@ -80,18 +95,17 @@ glatter_set_wsi(GLATTER_WSI_EGL); /* or WGL, GLX, AUTO */
 WSI is latched at **first successful resolution** in the process. Changing the environment variable or calling
 `glatter_set_wsi()` after first use has no effect for the remainder of the process.
 
-**Thread-safety & determinism:** With `GLATTER_WSI=AUTO`, a tiny atomic gate ensures
-a single decision per TU, and detection proceeds in a fixed order
-(Windows: WGL→EGL; POSIX: GLX→EGL). Given the same build and environment, all TUs
-converge to the same WSI. Use the compiled C translation unit variant if you prefer
-a single shared loader state for the whole process or to reduce code duplication,
-but not for correctness.
+**Thread-safety & determinism:** In `AUTO` mode, WSI detection is fully thread-safe. A tiny atomic gate ensures the decision is made exactly once, proceeding in a fixed order (Windows: WGL→EGL; POSIX: GLX→EGL). Both header-only and compiled TU modes are functionally correct and thread-safe. The choice is one of project architecture:
+
+*   **Header-only (C++):** State is managed per translation unit. All TUs will deterministically converge to the same WSI.
+*   **Compiled TU (C/C++):** State is centralized in a single, shared object, which can reduce code size.
 
 
 ## Typical single‑context app
 
 ```cpp
-#include <glatter/glatter_solo.h> // header‑only C++ header; for C/C++ compiled TU use <glatter/glatter.h> and compile src/glatter/glatter.c
+#include <glatter/glatter_solo.h> // header‑only C++ header
+// for C/C++ compiled TU use <glatter/glatter.h> and compile src/glatter/glatter.c
 
 int main() {
     // Create and make a GL context current here
@@ -189,55 +203,51 @@ When using the GLX WSI, glatter installs a small X error handler the first time 
 Glatter does not call it for you. In multi-threaded Xlib apps, call `XInitThreads()` early (e.g., at program start) and
 consider `#define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` to install your own handler under your threading model.
 
-
 ---
 
-## Integration notes
+## Building & Integration
 
-* Include only headers under `<glatter/...>`.
-* **C++ header‑only:** include `glatter/glatter_solo.h`.
-* **C or C++ compiled TU:** include `glatter/glatter.h` and add `src/glatter/glatter.c` to your build.
-* **Linking**
+Glatter is a simple, dependency-light library designed for easy integration using CMake.
 
-  * Windows: link against `opengl32` (plus `EGL`/`GLES` DLLs if you use them).
-  * Linux/BSD: link against `GL`, `X11`, `pthread`, `dl` (plus `EGL`/`GLES` if you use them).
+### Using Glatter in Your Project (Consumer)
 
-**Windows DLL search hardening:** Glatter loads system GL/EGL/GLES DLLs from `%SystemRoot%\System32` (e.g., via
-`LoadLibraryExW(..., LOAD_LIBRARY_SEARCH_SYSTEM32)`), which mitigates DLL preloading attacks and ensures the canonical
-system implementations are used.
-
----
-
-## CMake snippets
-
-**C app (compiled TU):**
-
-```cmake
-add_library(glatter src/glatter/glatter.c)
-target_include_directories(glatter PUBLIC include)
-if(WIN32)
-  target_link_libraries(glatter PUBLIC opengl32)
-else()
-  find_package(X11 REQUIRED)
-  find_package(Threads REQUIRED)
-  target_link_libraries(glatter PUBLIC GL Threads::Threads X11::X11 dl)
-endif()
-
-add_executable(my_app src/main.c)
-target_link_libraries(my_app PRIVATE glatter)
-```
+To use `glatter` in your own CMake project, first build and install it. Then, you can link it as follows:
 
 **C++ app (header‑only):**
-
 ```cmake
-add_executable(my_app src/main.cpp)
-target_include_directories(my_app PRIVATE include)
+# Add the include directory
+target_include_directories(my_app PRIVATE path/to/glatter/include)
+
+# Link platform libraries
 if(WIN32)
   target_link_libraries(my_app PRIVATE opengl32)
 else()
+  # On POSIX, link against GL, Threads, X11, and dl
+  find_package(Threads REQUIRED)
   target_link_libraries(my_app PRIVATE GL Threads::Threads X11::X11 dl)
 endif()
-```
+````
+
+**C/C++ app (compiled TU):**
+````cmake
+# Find the installed glatter package
+find_package(glatter REQUIRED)
+
+# Link it to your application
+target_link_libraries(my_app PRIVATE glatter::glatter)
+````
+
+### Building Glatter from Source
+
+Building the compiled library is straightforward. You will need standard build tools (CMake, C/C++ compiler) and the development libraries for OpenGL on your system.
+
+````sh
+# Configure the project
+cmake -B build -S .
+
+# Build the library
+cmake --build build --config Release
+````
 
 ---
 
