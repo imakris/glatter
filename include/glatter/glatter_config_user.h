@@ -25,4 +25,10 @@
 /* X11 */
 #define GLATTER_INSTALL_X_ERROR_HANDLER      1
 
+/* Optional: override the number of per-thread extension-cache slots.
+   Raise only if your app rapidly swaps among >8 contexts on the same thread. */
+#ifndef GLATTER_ES_CACHE_SLOTS
+#define GLATTER_ES_CACHE_SLOTS               8
+#endif
+
 #endif /* GLATTER_CONFIG_USER_H */
