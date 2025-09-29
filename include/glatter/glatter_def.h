@@ -1696,6 +1696,22 @@ void glatter_dbg_return(const char* fmt, ...)
 #endif
 #endif
 
+/* Unique-ish key for the *current* GL/WSI context, per platform. */
+GLATTER_INLINE_OR_NOT uintptr_t glatter_current_gl_context_key_(void) {
+#if defined(_WIN32)
+    /* WGL: combine context and DC. */
+    return (uintptr_t)wglGetCurrentContext() ^ (uintptr_t)wglGetCurrentDC();
+#elif defined(GLATTER_GLX)
+    /* GLX: combine context and Display*. */
+    return ((uintptr_t)glXGetCurrentContext() << 32) ^ (uintptr_t)glXGetCurrentDisplay();
+#elif defined(GLATTER_EGL)
+    /* EGL: combine context and Display*. */
+    return ((uintptr_t)eglGetCurrentContext() << 32) ^ (uintptr_t)eglGetCurrentDisplay();
+#else
+    return (uintptr_t)0; /* Unknown WSI -> treated as "no current context". */
+#endif
+}
+
 #if defined(GLATTER_GL)
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_ges_def.h)
 #endif
@@ -1708,6 +1724,22 @@ void glatter_dbg_return(const char* fmt, ...)
 #if defined(GLATTER_WGL)
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_WGL_ges_def.h)
 #endif
+
+/* Optional convenience to invalidate all families' caches available in this build. */
+GLATTER_INLINE_OR_NOT void glatter_invalidate_all_extension_caches(void) {
+#if defined(GLATTER_GL)
+    glatter_invalidate_extension_cache_GL();
+#endif
+#if defined(GLATTER_GLX)
+    glatter_invalidate_extension_cache_GLX();
+#endif
+#if defined(GLATTER_WGL)
+    glatter_invalidate_extension_cache_WGL();
+#endif
+#if defined(GLATTER_EGL) && GLATTER_HAS_EGL_GENERATED_HEADERS
+    glatter_invalidate_extension_cache_EGL();
+#endif
+}
 
 #if defined(GLATTER_GL)
     #include GLATTER_xstr(GLATTER_PDIR(GLATTER_PLATFORM_DIR)/glatter_GL_e2s_def.h)
