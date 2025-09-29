@@ -1,6 +1,11 @@
-# Set the minimum required version of CMake and define the project.
-cmake_minimum_required(VERSION 3.10)
-project(glatter C CXX)
+cmake_minimum_required(VERSION 3.16)
+project(glatter LANGUAGES C CXX)
+
+# --- Project Standards ---
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # --- Option to build internal tests ---
 # This allows us to disable the problematic tests/cmake suite for CI builds.
@@ -40,6 +45,8 @@ target_link_libraries(glatter-test PRIVATE glatter)
 
 # --- Internal Test Suite (Optional) ---
 # Only add the subdirectory if the option is enabled.
+# This is disabled by default to fix the CI build.
 if(GLATTER_BUILD_INTERNAL_TESTS)
+    enable_testing()
     add_subdirectory(tests/cmake)
 endif()
