@@ -256,6 +256,10 @@ static const char* glatter_pr_tstr(const TCHAR* ts)
 
 typedef int glatter_wsi_t;
 
+#ifndef GLATTER_WSI_DECIDING_VALUE
+#define GLATTER_WSI_DECIDING_VALUE (-1)
+#endif
+
 #ifndef GLATTER_WSI_AUTO_VALUE
 #define GLATTER_WSI_AUTO_VALUE 0
 #define GLATTER_WSI_WGL_VALUE  1
@@ -703,7 +707,7 @@ static int glatter_normalize_requested_wsi_(int requested)
     return requested;
 }
 
-/* Lock in WSI exactly once: AUTO -> {WGL,GLX,EGL}. Returns 1 if we won. */
+/* Lock in WSI exactly once: {AUTO, DECIDING} -> {WGL,GLX,EGL}. Returns 1 if we won. */
 static int glatter_select_wsi_once_(glatter_loader_state* state, int chosen)
 {
     int expected = GLATTER_WSI_AUTO_VALUE;
@@ -711,6 +715,13 @@ static int glatter_select_wsi_once_(glatter_loader_state* state, int chosen)
         GLATTER_ATOMIC_INT_STORE(state->wsi_explicit, 1);
         return 1;
     }
+
+    expected = GLATTER_WSI_DECIDING_VALUE;
+    if (GLATTER_ATOMIC_INT_CAS(state->requested, expected, chosen)) {
+        GLATTER_ATOMIC_INT_STORE(state->wsi_explicit, 1);
+        return 1;
+    }
+
     return 0;
 }
 
@@ -836,71 +847,88 @@ void* glatter_get_proc_address(const char* function_name)
         }
     }
 
-    int requested = GLATTER_ATOMIC_INT_LOAD(state->requested);
+    for (;;) {
+        int requested = GLATTER_ATOMIC_INT_LOAD(state->requested);
+
+        if (requested == GLATTER_WSI_DECIDING_VALUE) {
+            while (GLATTER_ATOMIC_INT_LOAD(state->requested) == GLATTER_WSI_DECIDING_VALUE) { /* spin */ }
+            continue;
+        }
 
 #if defined(_WIN32)
-    if (requested == GLATTER_WSI_WGL_VALUE) {
-        void* ptr = glatter_windows_resolve_wgl(state, function_name);
-        if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_WGL_VALUE);
-        return ptr;
-    }
-    if (requested == GLATTER_WSI_EGL_VALUE) {
-        void* ptr = glatter_windows_resolve_egl(state, function_name);
-        if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
-        return ptr;
-    }
-
-    void* ptr = glatter_windows_resolve_wgl(state, function_name);
-    if (ptr) {
-        GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_WGL_VALUE);
-        if (requested == GLATTER_WSI_AUTO_VALUE) {
-            (void)glatter_select_wsi_once_(state, GLATTER_WSI_WGL_VALUE);
+        if (requested == GLATTER_WSI_WGL_VALUE) {
+            void* ptr = glatter_windows_resolve_wgl(state, function_name);
+            if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_WGL_VALUE);
+            return ptr;
         }
-        return ptr;
-    }
-
-    ptr = glatter_windows_resolve_egl(state, function_name);
-    if (ptr) {
-        GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
-        if (requested == GLATTER_WSI_AUTO_VALUE) {
-            (void)glatter_select_wsi_once_(state, GLATTER_WSI_EGL_VALUE);
+        if (requested == GLATTER_WSI_EGL_VALUE) {
+            void* ptr = glatter_windows_resolve_egl(state, function_name);
+            if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
+            return ptr;
         }
-        return ptr;
-    }
 
-    return NULL;
+        if (requested == GLATTER_WSI_AUTO_VALUE) {
+            int expected = GLATTER_WSI_AUTO_VALUE;
+            if (GLATTER_ATOMIC_INT_CAS(state->requested, expected, GLATTER_WSI_DECIDING_VALUE)) {
+                void* ptr = glatter_windows_resolve_wgl(state, function_name);
+                if (ptr) {
+                    GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_WGL_VALUE);
+                    (void)glatter_select_wsi_once_(state, GLATTER_WSI_WGL_VALUE);
+                    return ptr;
+                }
+
+                ptr = glatter_windows_resolve_egl(state, function_name);
+                if (ptr) {
+                    GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
+                    (void)glatter_select_wsi_once_(state, GLATTER_WSI_EGL_VALUE);
+                    return ptr;
+                }
+
+                GLATTER_ATOMIC_INT_STORE(state->requested, GLATTER_WSI_AUTO_VALUE);
+                return NULL;
+            }
+
+            continue;
+        }
 #else
-    if (requested == GLATTER_WSI_GLX_VALUE) {
-        void* ptr = glatter_linux_lookup_glx(state, function_name);
-        if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_GLX_VALUE);
-        return ptr;
-    }
-    if (requested == GLATTER_WSI_EGL_VALUE) {
-        void* ptr = glatter_linux_lookup_egl(state, function_name);
-        if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
-        return ptr;
-    }
-
-    void* ptr = glatter_linux_lookup_glx(state, function_name);
-    if (ptr) {
-        GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_GLX_VALUE);
-        if (requested == GLATTER_WSI_AUTO_VALUE) {
-            (void)glatter_select_wsi_once_(state, GLATTER_WSI_GLX_VALUE);
+        if (requested == GLATTER_WSI_GLX_VALUE) {
+            void* ptr = glatter_linux_lookup_glx(state, function_name);
+            if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_GLX_VALUE);
+            return ptr;
         }
-        return ptr;
-    }
-
-    ptr = glatter_linux_lookup_egl(state, function_name);
-    if (ptr) {
-        GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
-        if (requested == GLATTER_WSI_AUTO_VALUE) {
-            (void)glatter_select_wsi_once_(state, GLATTER_WSI_EGL_VALUE);
+        if (requested == GLATTER_WSI_EGL_VALUE) {
+            void* ptr = glatter_linux_lookup_egl(state, function_name);
+            if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
+            return ptr;
         }
-        return ptr;
-    }
 
-    return NULL;
+        if (requested == GLATTER_WSI_AUTO_VALUE) {
+            int expected = GLATTER_WSI_AUTO_VALUE;
+            if (GLATTER_ATOMIC_INT_CAS(state->requested, expected, GLATTER_WSI_DECIDING_VALUE)) {
+                void* ptr = glatter_linux_lookup_glx(state, function_name);
+                if (ptr) {
+                    GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_GLX_VALUE);
+                    (void)glatter_select_wsi_once_(state, GLATTER_WSI_GLX_VALUE);
+                    return ptr;
+                }
+
+                ptr = glatter_linux_lookup_egl(state, function_name);
+                if (ptr) {
+                    GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
+                    (void)glatter_select_wsi_once_(state, GLATTER_WSI_EGL_VALUE);
+                    return ptr;
+                }
+
+                GLATTER_ATOMIC_INT_STORE(state->requested, GLATTER_WSI_AUTO_VALUE);
+                return NULL;
+            }
+
+            continue;
+        }
 #endif
+
+        return NULL;
+    }
 }
 
 #if defined(GLATTER_GL)
