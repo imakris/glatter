@@ -931,7 +931,58 @@ void* glatter_get_proc_address_GL(const char* function_name)
 GLATTER_INLINE_OR_NOT
 const char* enum_to_string_GLX(GLATTER_ENUM_GLX e);
 
-static GLATTER_THREAD_LOCAL int glatter_glx_error_occurred = 0;
+/* ---- GLX error accounting across threads (per-Display) ---- */
+
+typedef struct {
+    glatter_atomic(void*) dpy;     /* slot key: Display* (atomically installed) */
+    glatter_atomic_int    count;   /* monotonic error counter for that Display */
+} glatter_glx_err_slot;
+
+/* Keep it small: most apps have 1 display; 8 covers unusual cases. */
+static glatter_glx_err_slot glatter_glx_err_table[8] = {
+    { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
+    { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
+    { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
+    { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
+    { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
+    { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
+    { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
+    { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
+};
+
+GLATTER_INLINE_OR_NOT
+glatter_glx_err_slot* glatter_glx_err_slot_for(Display* dpy)
+{
+    /* Linear probe with atomic install of the key. */
+    for (int i = 0; i < (int)(sizeof(glatter_glx_err_table)/sizeof(glatter_glx_err_table[0])); ++i) {
+        void* cur = GLATTER_ATOMIC_LOAD(glatter_glx_err_table[i].dpy);
+        if (cur == (void*)dpy) return &glatter_glx_err_table[i];
+        if (cur == NULL) {
+            void* expected = NULL;
+            if (GLATTER_ATOMIC_CAS(glatter_glx_err_table[i].dpy, expected, (void*)dpy)) {
+                return &glatter_glx_err_table[i];
+            }
+            /* someone else installed; re-check */
+            if (GLATTER_ATOMIC_LOAD(glatter_glx_err_table[i].dpy) == (void*)dpy) {
+                return &glatter_glx_err_table[i];
+            }
+        }
+    }
+    /* Fallback: coalesce into slot 0 if table is exhausted. */
+    return &glatter_glx_err_table[0];
+}
+
+GLATTER_INLINE_OR_NOT
+void glatter_glx_err_increment(Display* dpy)
+{
+    glatter_glx_err_slot* s = glatter_glx_err_slot_for(dpy);
+    int oldv = GLATTER_ATOMIC_INT_LOAD(s->count);
+    for (;;) {
+        int newv = oldv + 1;
+        if (GLATTER_ATOMIC_INT_CAS(s->count, oldv, newv)) break;
+        oldv = GLATTER_ATOMIC_INT_LOAD(s->count);
+    }
+}
 
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
 GLATTER_INLINE_OR_NOT
@@ -943,7 +994,9 @@ int x_error_handler(Display *dsp, XErrorEvent *error)
         "X Error: %s\n", error_string
     );
 
-    glatter_glx_error_occurred = 1;
+    /* count this error for the specific Display*;
+       works no matter which thread is currently reading X. */
+    glatter_glx_err_increment(dsp);
     return 0;
 }
 #endif
@@ -973,17 +1026,20 @@ GLATTER_INLINE_OR_NOT
 void glatter_check_error_GLX(const char* file, int line)
 {
 #if defined(GLATTER_LOG_ERRORS)
-    glatter_glx_error_occurred = 0;
     Display* dpy = glXGetCurrentDisplay();
     if (dpy) {
+        /* Snapshot -> force processing -> compare */
+        glatter_glx_err_slot* s = glatter_glx_err_slot_for(dpy);
+        int before = GLATTER_ATOMIC_INT_LOAD(s->count);
         XSync(dpy, False);
-    }
-    if (glatter_glx_error_occurred) {
-        glatter_log_printf(
-            "GLATTER: GLX error detected after call at '%s'(%d); see prior X error log for details.\n",
-            file,
-            line
-        );
+        int after  = GLATTER_ATOMIC_INT_LOAD(s->count);
+        if (after != before) {
+            glatter_log_printf(
+                "GLATTER: GLX error detected after call at '%s'(%d); see prior X error log for details.\n",
+                file,
+                line
+            );
+        }
     } else {
         (void)file; (void)line;
     }
