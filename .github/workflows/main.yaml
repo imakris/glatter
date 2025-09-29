@@ -1,0 +1,39 @@
+name: Build and Test Glatter
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  build-and-test:
+    # Give the job a descriptive name that includes the OS
+    name: Build on ${{ matrix.os }}
+    
+    strategy:
+      # Run a job for each OS in this list
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (Linux only)
+        # This step only runs on the Linux runner
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libx11-dev
+
+      - name: Configure CMake
+        # Creates a 'build' directory and prepares the build system
+        run: cmake -B build -S .
+
+      - name: Build with CMake
+        # This command builds ALL targets defined in CMakeLists.txt:
+        # 1. The 'glatter' library
+        # 2. The 'glatter-test' executable
+        # If either fails to build or link, this step will fail, failing the job.
+        run: cmake --build build --config Release```
