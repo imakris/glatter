@@ -934,6 +934,10 @@ const char* enum_to_string_GLX(GLATTER_ENUM_GLX e);
 
 /* ---- GLX error accounting across threads (per-Display) ---- */
 
+#if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
+static int (*glatter_prev_x_error_handler)(Display*, XErrorEvent*) = NULL;
+#endif
+
 typedef struct {
     glatter_atomic(void*) dpy;     /* slot key: Display* (atomically installed) */
     glatter_atomic_int    count;   /* monotonic error counter for that Display */
@@ -989,15 +993,25 @@ void glatter_glx_err_increment(Display* dpy)
 GLATTER_INLINE_OR_NOT
 int x_error_handler(Display *dsp, XErrorEvent *error)
 {
-    char error_string[128];
-    XGetErrorText(dsp, error->error_code, error_string, 128);
-    glatter_log_printf(
-        "X Error: %s\n", error_string
-    );
+    int glx_opcode = 0;
+    int first_event = 0;
+    int first_error = 0;
+    if (XQueryExtension(dsp, "GLX", &glx_opcode, &first_event, &first_error) &&
+        error->request_code == glx_opcode) {
+        char error_string[128];
+        XGetErrorText(dsp, error->error_code, error_string, (int)sizeof(error_string));
+        glatter_log_printf(
+            "GLATTER: GLX X Error: %s\n", error_string
+        );
 
-    /* count this error for the specific Display*;
-       works no matter which thread is currently reading X. */
-    glatter_glx_err_increment(dsp);
+        /* count this error for the specific Display*;
+           works no matter which thread is currently reading X. */
+        glatter_glx_err_increment(dsp);
+    }
+
+    if (glatter_prev_x_error_handler) {
+        return glatter_prev_x_error_handler(dsp, error);
+    }
     return 0;
 }
 #endif
@@ -1013,8 +1027,8 @@ void* glatter_get_proc_address_GLX(const char* function_name)
         if (GLATTER_ATOMIC_INT_LOAD(state->active) == GLATTER_WSI_GLX_VALUE) {
             int expected = 0;
             if (GLATTER_ATOMIC_INT_CAS(state->glx_error_handler_installed, expected, 1)) {
-                XSetErrorHandler(x_error_handler);
-                glatter_log("GLATTER: installed default X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
+                glatter_prev_x_error_handler = XSetErrorHandler(x_error_handler);
+                glatter_log("GLATTER: installed cooperative X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
             }
         }
     }
