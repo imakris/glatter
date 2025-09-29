@@ -30,6 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <glatter/glatter_atomic.h>
 #include <glatter/glatter_platform_headers.h>
 #include <glatter/glatter_masprintf.h>
+#include <glatter/gltr_once.h>
 
 #include <assert.h>
 #include <stdarg.h>
@@ -1456,53 +1457,55 @@ typedef struct glatter_es_record_struct
 
 #else /* !GLATTER_HEADER_ONLY */
 
-#if !defined(_WIN32)
-/* Minimal CAS shim for POSIX builds used only during first resolve. */
-static void* glatter_exchange_ptr_posix(void** slot, void* expected, void* desired)
-{
-    static pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
-    void* prev;
-    pthread_mutex_lock(&m);
-    prev = *slot;
-    if (prev == expected) *slot = desired;
-    pthread_mutex_unlock(&m);
-    return prev;
-}
-#endif
-
-
-/* Platform-specific one-shot pointer exchange used in non-header-only builds.
-   Keep conditionals OUT of the large GLATTER_FBLOCK() macro body to satisfy GCC/Clang. */
 #if defined(_WIN32)
-#   define GLATTER_EXCHANGE_PTR(slot, expected, desired) \
-        InterlockedCompareExchangePointer((volatile PVOID*)(slot), (PVOID)(desired), (PVOID)(expected))
-#else
-#   define GLATTER_EXCHANGE_PTR(slot, expected, desired) \
-        glatter_exchange_ptr_posix((void**)(slot), (void*)(expected), (void*)(desired))
-#endif
 
-#define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs)\
-    cder rtype cconv name dargs;\
-    typedef rtype (cconv *glatter_##name##_t) dargs;\
-    static rtype cconv glatter_##name##_resolver dargs;\
-    glatter_##name##_t glatter_##name = glatter_##name##_resolver;\
-    static rtype cconv glatter_##name##_resolver dargs\
-    {\
-        glatter_##name##_t resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name);\
-        if (!resolved) {\
-            if (GLATTER_RESOLVE_ABORT_ON_MISSING) {\
-                glatter_log_printf("GLATTER: missing '%s' (aborting in debug)\n", #name);\
-                abort();\
-            }\
-            glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name);\
-            GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0);\
-        }\
-        glatter_##name##_t previous = (glatter_##name##_t) \
-            GLATTER_EXCHANGE_PTR(&glatter_##name, glatter_##name##_resolver, resolved); \
-        if (previous != (glatter_##name##_t)glatter_##name##_resolver) {\
-        }\
-        return_or_not glatter_##name cargs;\
+#  define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs) \
+    cder rtype cconv name dargs; \
+    typedef rtype (cconv *glatter_##name##_t) dargs; \
+    static rtype cconv glatter_##name##_resolver dargs; \
+    glatter_##name##_t glatter_##name = glatter_##name##_resolver; \
+    static rtype cconv glatter_##name##_resolver dargs \
+    { \
+        glatter_##name##_t resolved = (glatter_##name##_t)glatter_get_proc_address_##family(#name); \
+        if (!resolved) { \
+            if (GLATTER_RESOLVE_ABORT_ON_MISSING) { \
+                glatter_log_printf("GLATTER: missing '%s' (aborting in debug)\n", #name); \
+                abort(); \
+            } \
+            glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name); \
+            GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0); \
+        } \
+        (void)InterlockedCompareExchangePointer((volatile PVOID*)&glatter_##name, (PVOID)resolved, (PVOID)glatter_##name##_resolver); \
+        return_or_not glatter_##name cargs; \
     }
+
+#else  /* POSIX: wrapper + call_once, no mutation of public pointer */
+
+#  define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs) \
+    cder rtype cconv name dargs; /* keep symbol available for debuggers if needed */ \
+    typedef rtype (cconv *glatter_##name##_t) dargs; \
+    static gltr_once_t        glatter_##name##_once = GLTR_ONCE_INIT; \
+    static glatter_##name##_t glatter_##name##_impl = (glatter_##name##_t)0; \
+    static void glatter_##name##_init(void) { \
+        glatter_##name##_impl = (glatter_##name##_t)glatter_get_proc_address_##family(#name); \
+        if (!glatter_##name##_impl) { \
+            if (GLATTER_RESOLVE_ABORT_ON_MISSING) { \
+                glatter_log_printf("GLATTER: missing '%s' (aborting in debug)\n", #name); \
+                abort(); \
+            } \
+            glatter_log_printf("GLATTER: failed to resolve '%s'\n", #name); \
+        } \
+    } \
+    static rtype cconv glatter_##name##_thunk dargs { \
+        gltr_call_once(&glatter_##name##_once, glatter_##name##_init); \
+        glatter_##name##_t fn = glatter_##name##_impl; \
+        if (!fn) { GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0); } \
+        return_or_not fn cargs; \
+    } \
+    /* Public variable keeps ABI, points permanently to the thunk (never mutated). */ \
+    glatter_##name##_t glatter_##name = glatter_##name##_thunk;
+
+#endif
 
 #endif /* GLATTER_HEADER_ONLY */
 
