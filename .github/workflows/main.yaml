@@ -34,6 +34,9 @@ jobs:
         run: |
           if [ "$RUNNER_OS" == "Windows" ]; then
             cmake -B build -S . -A x64
+          elif [ "$RUNNER_OS" == "macOS" ]; then
+            # This overcomes the "stale" environment issue after installation.
+            cmake -B build -S . -DCMAKE_C_FLAGS="-I/opt/X11/include" -DCMAKE_CXX_FLAGS="-I/opt/X11/include"
           else
             cmake -B build -S .
           fi
