@@ -19,14 +19,30 @@ target_include_directories(glatter PUBLIC include)
 if(WIN32)
     target_link_libraries(glatter PUBLIC opengl32)
 elseif(APPLE)
-    find_package(OpenGL REQUIRED)
-    target_link_libraries(glatter PUBLIC OpenGL::GL dl)
-else()
+    # On Apple, we explicitly find and link X11, just like on Linux,
+    # because our CI installs it via XQuartz.
     find_package(OpenGL REQUIRED)
     find_package(X11 REQUIRED)
     find_package(Threads REQUIRED)
     find_library(DL_LIBRARY dl)
-    target_link_libraries(glatter PUBLIC OpenGL::GL X11::X11 Threads::Threads ${DL_LIBRARY})
+    target_link_libraries(glatter PUBLIC
+        OpenGL::GL
+        X11::X11
+        Threads::Threads
+        ${DL_LIBRARY}
+    )
+else()
+    # This is the Linux/BSD path, which was already correct.
+    find_package(OpenGL REQUIRED)
+    find_package(X11 REQUIRED)
+    find_package(Threads REQUIRED)
+    find_library(DL_LIBRARY dl)
+    target_link_libraries(glatter PUBLIC
+        OpenGL::GL
+        X11::X11
+        Threads::Threads
+        ${DL_LIBRARY}
+    )
 endif()
 
 # --- Installation Rules ---
@@ -39,7 +55,7 @@ install(TARGETS glatter
 )
 install(DIRECTORY include/glatter DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-# --- Integration Test ---
+# --- Simple Integration Test ---
 add_executable(glatter-test tests/main.cpp)
 target_link_libraries(glatter-test PRIVATE glatter)
 
