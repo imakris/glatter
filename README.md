@@ -35,12 +35,26 @@ Pick **one** of the two ways to use glatter:
 
 ### 1) Header‑only (C++ only)
 
+This is the simplest way to get started in C++.
 ```cpp
 #include <glatter/glatter_solo.h>
-// Use GL entry points as usual
-glClear(GL_COLOR_BUFFER_BIT);
-```
 
+void setup_scene() {
+    // ...
+    // Window and OpenGL context creation happens here...
+    // ...
+
+    // glatter loads the function pointer on the first call.
+    // This would fail to link without a loader.
+    GLuint vao = 0;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    // ...
+    // Your main rendering loop would follow...
+    // ...
+}
+```
 For header-only usage, include `<glatter/glatter_solo.h>`. This tiny wrapper defines
 `GLATTER_HEADER_ONLY` and includes the main header for you.
 
@@ -48,10 +62,23 @@ For header-only usage, include `<glatter/glatter_solo.h>`. This tiny wrapper def
 
 ```c
 #include <glatter/glatter.h>
-/* Add src/glatter/glatter.c to your build */
+/* Remember to add src/glatter/glatter.c to your build */
 
-// Use GL entry points as usual
-glClear(GL_COLOR_BUFFER_BIT);
+void setup_scene() {
+    // ...
+    // Window and OpenGL context creation happens here...
+    // ...
+
+    // The usage is identical to header-only mode.
+    // This would fail to link without a loader.
+    GLuint vao = 0;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    // ...
+    // Your main rendering loop would follow...
+    // ...
+}
 ```
 
 **Note:** Do not include system GL headers yourself (e.g., `GL/gl.h`, `EGL/egl.h`). Glatter chooses the right ones for you.
@@ -226,28 +253,28 @@ else()
   find_package(Threads REQUIRED)
   target_link_libraries(my_app PRIVATE GL Threads::Threads X11::X11 dl)
 endif()
-````
+```
 
 **C/C++ app (compiled TU):**
-````cmake
+```cmake
 # Find the installed glatter package
 find_package(glatter REQUIRED)
 
 # Link it to your application
 target_link_libraries(my_app PRIVATE glatter::glatter)
-````
+```
 
 ### Building Glatter from Source
 
 Building the compiled library is straightforward. You will need standard build tools (CMake, C/C++ compiler) and the development libraries for OpenGL on your system.
 
-````sh
+```sh
 # Configure the project
 cmake -B build -S .
 
 # Build the library
 cmake --build build --config Release
-````
+```
 
 ---
 
