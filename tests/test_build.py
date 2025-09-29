@@ -348,6 +348,106 @@ def test_header_only_cpp_compiles_via_glatter_solo(tmp_path: Path) -> None:
         ]
     )
 
+
+def test_header_only_wsi_state_shared_across_tus(tmp_path: Path) -> None:
+    """Ensure glatter_set_wsi/glatter_get_wsi share state across TUs."""
+
+    cxx = _require_tool("c++")
+    cc = _require_tool("cc")
+
+    sources = {
+        "main.cpp": textwrap.dedent(
+            """
+            #include <glatter/glatter.h>
+
+            int read_wsi();
+
+            int main()
+            {
+                glatter_set_wsi(GLATTER_WSI_EGL);
+                int helper_value = read_wsi();
+                int local_value = glatter_get_wsi();
+                return helper_value == GLATTER_WSI_EGL &&
+                       local_value == GLATTER_WSI_EGL ? 0 : 1;
+            }
+            """
+        ).strip()
+        + "\n",
+        "helper.cpp": textwrap.dedent(
+            """
+            #include <glatter/glatter.h>
+
+            int read_wsi()
+            {
+                return glatter_get_wsi();
+            }
+            """
+        ).strip()
+        + "\n",
+    }
+
+    for name, content in sources.items():
+        (tmp_path / name).write_text(content)
+
+    config_flags = [
+        "-DGLATTER_CONFIG_H_DEFINED",
+        "-DGLATTER_HEADER_ONLY",
+        "-DGLATTER_EGL_GLES2_2_0",
+        "-DGLATTER_EGL",
+    ]
+
+    egl_stub = _write_egl_stub(tmp_path)
+    stub_object = tmp_path / "egl_stubs.o"
+    _run_command(
+        [
+            cc,
+            "-std=c11",
+            "-I",
+            str(REPO_ROOT / "include"),
+            "-I",
+            str(REPO_ROOT / "tests" / "include"),
+            "-c",
+            str(egl_stub),
+            "-o",
+            str(stub_object),
+        ]
+    )
+
+    compile_args = [
+        cxx,
+        "-std=c++17",
+        *config_flags,
+        "-I",
+        str(REPO_ROOT / "include"),
+        "-I",
+        str(REPO_ROOT / "tests" / "include"),
+        "-pthread",
+    ]
+
+    objects: list[Path] = []
+    for source_name in sources:
+        object_path = tmp_path / (Path(source_name).stem + ".o")
+        _run_command(
+            compile_args + ["-c", str(tmp_path / source_name), "-o", str(object_path)]
+        )
+        objects.append(object_path)
+
+    binary_path = tmp_path / "shared_wsi"
+    _run_command(
+        [
+            cxx,
+            "-pthread",
+            "-ldl",
+            *map(str, objects),
+            str(stub_object),
+            "-o",
+            str(binary_path),
+        ]
+    )
+
+    _run_command([binary_path])
+
+
 def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
     """Ensure linking succeeds when a consumer uses the compiled C library."""
 
