@@ -773,10 +773,12 @@ static void glatter_detect_wsi_from_env(glatter_loader_state* state)
     if (glatter_equals_ignore_case(env, "wgl")) {
         requested = GLATTER_WSI_WGL_VALUE;
     }
-    else if (glatter_equals_ignore_case(env, "glx")) {
+    else
+    if (glatter_equals_ignore_case(env, "glx")) {
         requested = GLATTER_WSI_GLX_VALUE;
     }
-    else if (glatter_equals_ignore_case(env, "egl")) {
+    else
+    if (glatter_equals_ignore_case(env, "egl")) {
         requested = GLATTER_WSI_EGL_VALUE;
     }
 
@@ -1055,7 +1057,8 @@ void glatter_check_error_GLX(const char* file, int line)
                 line
             );
         }
-    } else {
+    }
+    else {
         (void)file; (void)line;
     }
 #else
@@ -1498,7 +1501,7 @@ typedef struct glatter_es_record_struct
 #  define GLATTER_FBLOCK(return_or_not, family, cder, rtype, cconv, name, cargs, dargs) \
     cder rtype cconv name dargs; /* keep symbol available for debuggers if needed */ \
     typedef rtype (cconv *glatter_##name##_t) dargs; \
-    static gltr_once_t        glatter_##name##_once = GLTR_ONCE_INIT; \
+    static glatter_once_t        glatter_##name##_once = GLATTER_ONCE_INIT; \
     static glatter_##name##_t glatter_##name##_impl = (glatter_##name##_t)0; \
     static void glatter_##name##_init(void) { \
         glatter_##name##_impl = (glatter_##name##_t)glatter_get_proc_address_##family(#name); \
@@ -1511,7 +1514,7 @@ typedef struct glatter_es_record_struct
         } \
     } \
     static rtype cconv glatter_##name##_thunk dargs { \
-        gltr_call_once(&glatter_##name##_once, glatter_##name##_init); \
+        glatter_call_once(&glatter_##name##_once, glatter_##name##_init); \
         glatter_##name##_t fn = glatter_##name##_impl; \
         if (!fn) { GLATTER_RETURN_VALUE(return_or_not, rtype, (rtype)0); } \
         return_or_not fn cargs; \
@@ -1565,7 +1568,8 @@ void glatter_dbg_return(const char* fmt, ...)
         va_list ap; va_start(ap, fmt);
         glatter_vlog_line_("", fmt, ap);
         va_end(ap);
-    } else {
+    }
+    else {
         glatter_log("(void)\n");
     }
 }
