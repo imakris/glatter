@@ -60,6 +60,9 @@
 #  include <stdint.h>
    typedef PVOID glatter_atomic_voidp;
 /* On this branch, glatter_atomic(T) is a pointer-sized slot. Use glatter_atomic_int for integers. */
+/* NOTE: Casting function pointers through uintptr_t/PVOID is non-portable per ISO C.
+ * We intentionally rely on the Windows/MSVC guarantee that Interlocked*Pointer accepts
+ * any pointer representation (including function pointers) on this branch. */
 #  define glatter_atomic(T)             glatter_atomic_voidp
 #  define GLATTER_ATOMIC_CAST_PTR(v)    ((PVOID)(uintptr_t)(v))
 #  define GLATTER_ATOMIC_LOAD(a)        (InterlockedCompareExchangePointer((volatile PVOID*)&(a), NULL, NULL))

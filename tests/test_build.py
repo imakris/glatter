@@ -79,6 +79,11 @@ def _write_egl_stub(directory: Path) -> Path:
             {
                 return EGL_NO_DISPLAY;
             }
+
+            EGLContext eglGetCurrentContext(void)
+            {
+                return EGL_NO_CONTEXT;
+            }
             """
         ).strip()
         + "\n"
@@ -559,6 +564,119 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
             str(tmp_path / "linked_consumer"),
         ]
     )
+
+
+def test_context_key_mixer_behaves_with_stubbed_egl(tmp_path: Path) -> None:
+    """Exercise glatter_current_gl_context_key_() under controlled EGL stubs."""
+
+    cc = _require_tool("cc")
+
+    source = tmp_path / "context_key_test.c"
+    source.write_text(
+        textwrap.dedent(
+            """
+            #include <inttypes.h>
+            #include <stdint.h>
+            #include <stdio.h>
+            #include <EGL/egl.h>
+            #include <glatter/glatter.h>
+
+            #undef eglGetCurrentContext
+            #undef eglGetCurrentDisplay
+            #undef eglGetError
+            #undef glGetError
+
+            extern uintptr_t glatter_current_gl_context_key_(void);
+
+            static uintptr_t g_fake_context = (uintptr_t)0;
+            static uintptr_t g_fake_display = (uintptr_t)0;
+
+            EGLAPI EGLContext EGLAPIENTRY eglGetCurrentContext(void)
+            {
+                return (EGLContext)(uintptr_t)g_fake_context;
+            }
+
+            EGLAPI EGLDisplay EGLAPIENTRY eglGetCurrentDisplay(void)
+            {
+                return (EGLDisplay)(uintptr_t)g_fake_display;
+            }
+
+            EGLAPI EGLint EGLAPIENTRY eglGetError(void)
+            {
+                return EGL_SUCCESS;
+            }
+
+            unsigned int glGetError(void)
+            {
+                return 0u;
+            }
+
+            int main(void)
+            {
+                const uintptr_t ctx_value = (uintptr_t)0x13572468u;
+                const uintptr_t display_value = (uintptr_t)0xFDB97531u;
+
+                g_fake_context = (uintptr_t)0;
+                g_fake_display = (uintptr_t)0;
+
+                if (glatter_current_gl_context_key_() != (uintptr_t)0) {
+                    fprintf(stderr, "expected zero key when no context\\n");
+                    return 1;
+                }
+
+                g_fake_context = ctx_value;
+                g_fake_display = display_value;
+
+                const unsigned half = (unsigned)(sizeof(uintptr_t) * 4u);
+                const unsigned bits = (unsigned)(sizeof(uintptr_t) * 8u);
+                const uintptr_t expected_rotation =
+                    (uintptr_t)((display_value << half) | (display_value >> (bits - half)));
+                const uintptr_t expected = ctx_value ^ expected_rotation;
+
+                const uintptr_t observed = glatter_current_gl_context_key_();
+                if (observed != expected) {
+                    fprintf(
+                        stderr,
+                        "expected key %#" PRIxPTR " but got %#" PRIxPTR "\\n",
+                        expected,
+                        observed);
+                    return 2;
+                }
+
+                return 0;
+            }
+            """
+        ).strip()
+        + "\n"
+    )
+
+    config_flags = [
+        "-DGLATTER_CONFIG_H_DEFINED",
+        "-DGLATTER_GL=0",
+        "-DGLATTER_EGL=1",
+        "-DGLATTER_EGL_GLES2_2_0=1",
+    ]
+
+    output = tmp_path / "context_key_test"
+    _run_command(
+        [
+            cc,
+            "-std=c11",
+            *config_flags,
+            "-I",
+            str(REPO_ROOT / "include"),
+            "-I",
+            str(REPO_ROOT / "tests" / "include"),
+            "-pthread",
+            str(REPO_ROOT / "src" / "glatter" / "glatter.c"),
+            str(source),
+            "-ldl",
+            "-o",
+            str(output),
+        ]
+    )
+
+    _run_command([output])
 
 
 def test_wgl_headers_compile_with_stubs(tmp_path: Path) -> None:
