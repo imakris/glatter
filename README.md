@@ -50,6 +50,18 @@ glClear(GL_COLOR_BUFFER_BIT);
 3. Link platform libraries (see Integration notes).
 4. Optional: install a custom log sink only if you want to redirect messages away from stdout/stderr.
 
+### CMake smoke tests for CI/CD
+
+A companion CMake configuration replicates the build smoke-tests previously implemented in `tests/test_build.py`. It compiles representative consumers for both the compiled C translation unit and the header-only C++ modes, checks the static-library workflow, and exercises the internal EGL context-key helper using stubbed entry points.
+
+```bash
+cmake -S . -B build
+cmake --build build
+ctest --test-dir build
+```
+
+The default build also verifies that the WGL headers continue to compile when paired with the lightweight Windows stubs in `tests/include/`. These targets have no runtime dependencies and are meant purely as CI/CD guardrails.
+
 ---
 
 ## Window System Interface (WSI) selection (auto and overrides)
