@@ -29,11 +29,57 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <string.h> /* memcpy */
 
+/* ---- Per-context, per-thread extension support cache (generated) ---- */
+#ifndef GLATTER_ES_CACHE_SLOTS
+#define GLATTER_ES_CACHE_SLOTS 8
+#endif
+
+typedef struct {
+    uintptr_t key; /* context key from glatter_current_gl_context_key_() */
+    glatter_extension_support_status_GL_t ess;
+} glatter_es_cache_entry_GL_t;
+
+static GLATTER_THREAD_LOCAL glatter_es_cache_entry_GL_t
+    glatter_es_cache_GL[GLATTER_ES_CACHE_SLOTS];
+
+static GLATTER_THREAD_LOCAL unsigned glatter_es_cache_pos_GL = 0;
+
+/* Optional: public invalidation for this family. */
+GLATTER_INLINE_OR_NOT void glatter_invalidate_extension_cache_GL(void) {
+    for (unsigned i = 0; i < GLATTER_ES_CACHE_SLOTS; ++i) {
+        glatter_es_cache_GL[i].key = (uintptr_t)0;
+    }
+}
+
 GLATTER_INLINE_OR_NOT
 glatter_extension_support_status_GL_t glatter_get_extension_support_GL()
 {
-    static int indexed_extensions[276];
-    static glatter_extension_support_status_GL_t ess;
+    /* Per-thread scratch array to build the bitset before mapping into ess. */
+    static GLATTER_THREAD_LOCAL int indexed_extensions[276];
+
+    /* Local result object (returned by value). */
+    glatter_extension_support_status_GL_t ess; /* will be filled then returned */
+    memset(&ess, 0, sizeof(ess));
+
+    /* 1) Compute a key for the current context; 0 means "no current context". */
+    uintptr_t ctx_key = glatter_current_gl_context_key_();
+
+    /* 2) If no current context, return zeros without touching the cache. */
+    if (ctx_key == (uintptr_t)0) {
+        /* Leave ess zero-initialized to indicate "no extensions known". */
+        return ess;
+    }
+
+    /* 3) Cache lookup (TLS ring of 8 entries). */
+    for (unsigned i = 0; i < GLATTER_ES_CACHE_SLOTS; ++i) {
+        if (glatter_es_cache_GL[i].key == ctx_key) {
+            return glatter_es_cache_GL[i].ess; /* HIT */
+        }
+    }
+
+    /* 4) MISS: (re)build indexed_extensions[...] for the *current* context. */
+    /* Ensure scratch is cleared before probing. */
+    memset(indexed_extensions, 0, sizeof(indexed_extensions));
 
     typedef glatter_es_record_t rt;
 #ifdef __cplusplus
@@ -868,8 +914,6 @@ glatter_extension_support_status_GL_t glatter_get_extension_support_GL()
     };
 
 
-    static int initialized = 0;
-    if (!initialized) {
 
         const uint8_t* glv = NULL;
         if (glatter_get_proc_address_GL("glGetString")) {
@@ -877,8 +921,6 @@ glatter_extension_support_status_GL_t glatter_get_extension_support_GL()
         }
         int new_way = 0;
         if (!glv) {
-            initialized = 1;
-            memcpy((void*)&ess, indexed_extensions, sizeof(ess));
             return ess;
         }
         if (glv[0] < '0' || glv[0] > '9') {
@@ -958,12 +1000,13 @@ glatter_extension_support_status_GL_t glatter_get_extension_support_GL()
         }
 #endif
 
-        initialized = 1;
-    }
-    
     // Map array to a struct without undefined behaviour.
     // No actual copy is performed with even basic optimization e.g.: -Og
-    memcpy((void*)&ess, indexed_extensions, sizeof(ess)); 
+    memcpy((void*)&ess, indexed_extensions, sizeof(ess));
+
+    glatter_es_cache_GL[glatter_es_cache_pos_GL].key = ctx_key;
+    glatter_es_cache_GL[glatter_es_cache_pos_GL].ess = ess;
+    glatter_es_cache_pos_GL = (glatter_es_cache_pos_GL + 1) % GLATTER_ES_CACHE_SLOTS;
 
     return ess;
 }

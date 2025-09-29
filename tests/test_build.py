@@ -79,6 +79,11 @@ def _write_egl_stub(directory: Path) -> Path:
             {
                 return EGL_NO_DISPLAY;
             }
+
+            EGLContext eglGetCurrentContext(void)
+            {
+                return EGL_NO_CONTEXT;
+            }
             """
         ).strip()
         + "\n"
