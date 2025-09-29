@@ -21,12 +21,11 @@ jobs:
 
       - name: Install dependencies (Linux only)
         if: runner.os == 'Linux'
-        # FIX: Added libgl-dev, which provides the GL/gl.h header.
         run: sudo apt-get update && sudo apt-get install -y libgl-dev libx11-dev
+        # This step uses the default shell, which is bash on Linux.
 
       - name: Configure CMake
-        # FIX: For Windows, explicitly specify the 64-bit architecture (-A x64).
-        # This resolves the MSB8013 error.
+        shell: bash
         run: |
           if [ "$RUNNER_OS" == "Windows" ]; then
             cmake -B build -S . -A x64
