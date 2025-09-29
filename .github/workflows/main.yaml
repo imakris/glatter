@@ -10,6 +10,7 @@ jobs:
   build-and-test:
     name: Build on ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
@@ -19,10 +20,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install dependencies (Linux only)
+      - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y libgl-dev libx11-dev
-        # This step uses the default shell, which is bash on Linux.
+
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        # This will install XQuartz, which provides the missing X11 headers.
+        run: brew install --cask xquartz
 
       - name: Configure CMake
         shell: bash
