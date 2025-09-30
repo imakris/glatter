@@ -2,6 +2,8 @@
 
 [![Build and Test Glatter](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml)
 
+[![Build Status](https://api.cirrus-ci.com/github/imakris/glatter.svg)](https://cirrus-ci.com/github/imakris/glatter)
+
 A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, optional GLU). It resolves symbols on first use, allows logging calls or just errors, and warns on cross‑thread usage. It works in C and C++ with sensible defaults.
 
 ---
@@ -19,12 +21,13 @@ A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, opt
 
 ## Platform Support
 
-| Platform | Status | Notes |
-| :--- | :--- | :--- |
-| **Windows** | ✅ Supported | Tested via CI with WGL. |
-| **Linux** | ✅ Supported | Tested via CI with GLX. |
-| **macOS** | ⚠️ Experimental | Compiles via CI, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
-| **FreeBSD** | 🛠️ Incomplete | The code is POSIX-friendly but is not expected to build without minor modifications. Contributions are welcome. |
+| Platform    | Status | Notes |
+| :---        | :--- | :--- |
+| **Windows** | ![alt text](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg) | Tested with WGL via GitHub Actions. |
+| **Linux**   | ![alt text](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg) | Tested via CI with GLX. |
+| **FreeBSD** | ![alt text](https://api.cirrus-ci.com/github/imakris/glatter.svg)                     | Tested with GLX via GitHub Actions |
+| **macOS**   | ![alt text](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg) | Tested via GitHub Actions, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
+
 
 ---
 
