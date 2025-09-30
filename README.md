@@ -24,18 +24,18 @@ A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, opt
 | **Windows** | ✅ Supported | Tested via CI with WGL. |
 | **Linux** | ✅ Supported | Tested via CI with GLX. |
 | **macOS** | ⚠️ Experimental | Compiles via CI, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
-| **BSD** | 🛠️ Incomplete | The code is POSIX-friendly but is not expected to build without minor modifications. Contributions are welcome. |
+| **FreeBSD** | 🛠️ Incomplete | The code is POSIX-friendly but is not expected to build without minor modifications. Contributions are welcome. |
 
 ---
 
 
 ## Choosing an integration mode
 
-Pick **one** of the two ways to use glatter:
+Glatter supports two primary integration modes:
 
 ### 1) Header‑only (C++ only)
 
-This is the simplest way to get started in C++.
+This mode provides the simplest C++ integration.
 ```cpp
 #include <glatter/glatter_solo.h>
 
@@ -62,7 +62,7 @@ For header-only usage, include `<glatter/glatter_solo.h>`. This tiny wrapper def
 
 ```c
 #include <glatter/glatter.h>
-/* Remember to add src/glatter/glatter.c to the build */
+/* The build must include src/glatter/glatter.c */
 
 void setup_scene() {
     // ...
@@ -81,16 +81,16 @@ void setup_scene() {
 }
 ```
 
-**Note:** Do not include system GL headers (e.g., `GL/gl.h`, `EGL/egl.h`). Glatter chooses the right ones.
+**Note:** System GL headers (e.g., `GL/gl.h`, `EGL/egl.h`) should not be included directly. Glatter chooses the right ones.
 
 ---
 
 ## Quick start
 
-1. Add the `include/` directory to the compiler’s include paths.
-2. Choose either **header‑only** (C++) or **compiled TU** (C/C++), as shown above.
+1. The `include/` directory must be present in the compiler’s include paths.
+2. Select either **header‑only** (C++) or **compiled TU** (C/C++), as shown above.
 3. Link platform libraries (see Integration notes).
-4. Optional: A custom log sink can be installed to redirect messages away from stdout/stderr.
+4. Optional: install a custom log sink to redirect messages away from stdout/stderr.
 
 ### CMake smoke tests for CI/CD
 
@@ -119,8 +119,8 @@ Optional WSI override (function call or env var):
 glatter_set_wsi(GLATTER_WSI_EGL); /* or WGL, GLX, AUTO */
 ```
 
-WSI is latched at **first successful resolution** in the process. Changing the environment variable or calling
-`glatter_set_wsi()` after first use has no effect for the remainder of the process.
+WSI is latched at **first successful resolution** in the process. Changes to the environment variable or calls to
+`glatter_set_wsi()` after first use have no effect for the remainder of the process.
 
 **Thread-safety & determinism:** In `AUTO` mode, WSI detection is fully thread-safe. A tiny atomic gate ensures the decision is made exactly once, proceeding in a fixed order (Windows: WGL→EGL; POSIX: GLX→EGL). Both header-only and compiled TU modes are functionally correct and thread-safe. The choice is one of project architecture:
 
@@ -194,10 +194,10 @@ WinAPI calls; any `GetLastError()` observed right after the wrapper reflects tha
 
 Glatter tracks an "owner thread" and warns when calls come from a different thread.
 
-* **Header‑only C++:** first touching thread becomes owner. Call `glatter_bind_owner_to_current_thread()` early for explicit control. Define `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND` to require an explicit bind, otherwise the library aborts on first use without binding.
+* **Header‑only C++:** first touching thread becomes owner. Explicit control is available by calling `glatter_bind_owner_to_current_thread()` early. Defining `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND` requires an explicit bind; otherwise the library aborts on first use without binding.
 * **Compiled C/C++:** the owner is captured on first use; later calls from other threads are reported.
 
-This is diagnostic only. Glatter does not serialize or block.
+These checks are diagnostic only. Glatter does not serialize or block.
 
 ---
 
@@ -220,15 +220,15 @@ glBindVertexArray(vao);
 
 ## GLX Xlib error handler
 
-When using the GLX WSI, glatter installs a small X error handler the first time GLX is touched, to surface common GLX/Xlib issues. To opt out and install a custom handler (for example after `XInitThreads()`), define:
+When using the GLX WSI, glatter installs a small X error handler the first time GLX is touched, to surface common GLX/Xlib issues. Opting out and installing a custom handler (for example after `XInitThreads()`) requires defining:
 
 ```c
 #define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER
 ```
 
-**Xlib threading:** If an app uses Xlib from multiple threads, it must call `XInitThreads()` **before any Xlib call**.
-Glatter will not call it. In multi-threaded Xlib apps, call `XInitThreads()` early (e.g., at program start) and
-consider `#define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` to install a custom handler under a specific threading model.
+**Xlib threading:** Applications that use Xlib from multiple threads must call `XInitThreads()` **before any Xlib call**.
+Glatter does not call it. In multi-threaded Xlib apps, invoking `XInitThreads()` early (e.g., at program start) and
+defining `GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` enables installation of a custom handler under a specific threading model.
 
 ---
 
@@ -238,7 +238,7 @@ Glatter is a simple, dependency-light library designed for easy integration usin
 
 ### Using Glatter in a Project (Consumer)
 
-To use `glatter` in a CMake project, first build and install it. Then, it can be linked as follows:
+Projects that consume `glatter` via CMake typically build and install it before linking. Examples follow:
 
 **C++ app (header‑only):**
 ```cmake
@@ -303,12 +303,12 @@ If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for a target, EGL/GLES helpers are
 
 ## Troubleshooting
 
-* **“Failed to resolve …”** Ensure a current context and that GL/EGL/GLES libraries are visible on the platform.
-* **Cross‑thread warnings** Call `glatter_bind_owner_to_current_thread()` on the render thread, or enable strict binding with `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND`.
-* **GLX error spam** Define `GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` and install a custom after X threading init.
+* **“Failed to resolve …”** A current context is required, and GL/EGL/GLES libraries must be visible on the platform.
+* **Cross‑thread warnings** `glatter_bind_owner_to_current_thread()` on the render thread provides explicit ownership, and strict binding is available through `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND`.
+* **GLX error spam** Defining `GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` and installing a custom handler after X threading initialization suppresses the default handler.
 * **Missing EGL/GLES generated headers** Builds still succeed; EGL/GLES helpers are unavailable until the headers are generated.
-* **Platform family mismatch** Ensure a platform wrapper that is unavailable on the target was not enabled (e.g., WGL on Linux,
-  GLX on Windows). Pick only the families that exist on the current platform.
+* **Platform family mismatch** Enabling a platform wrapper that is unavailable on the target (e.g., WGL on Linux,
+  GLX on Windows) leads to failures. Enable only the families that exist on the current platform.
 * **WSI override not taking effect** The WSI is latched at first use. Set `GLATTER_WSI` or call `glatter_set_wsi()` **before**
   the first GL/WSI call.
 ---
