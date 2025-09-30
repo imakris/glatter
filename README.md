@@ -1,20 +1,7 @@
 # glatter - OpenGL‑family loader & tracer
 
-[![Build and Test Glatter](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml)
-
-[![Build Status](https://api.cirrus-ci.com/github/imakris/glatter.svg)](https://cirrus-ci.com/github/imakris/glatter)
 
 A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, optional GLU). It resolves symbols on first use, allows logging calls or just errors, and warns on cross‑thread usage. It works in C and C++ with sensible defaults.
-
----
-
-## Technical summary
-
-* **Integration:** header‑only (C++) or compiled translation unit (C/C++).
-* **WSI detection:** auto‑detects WGL/GLX/EGL with optional runtime override.
-* **On‑demand symbols:** function pointers are resolved on first use to minimize startup work.
-* **Diagnostics:** opt‑in call/error logging; in debug builds (when `NDEBUG` is not defined) errors are logged by default. Messages go to stdout/stderr; a custom handler can be installed for redirection.
-* **Utilities:** generated extension flags (e.g., `glatter_GL_ARB_vertex_array_object`) and `enum_to_string_*()` helpers.
 
 ---
 
@@ -27,6 +14,16 @@ A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, opt
 | **Linux**   | ![alt text](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg) | Tested via CI with GLX. |
 | **FreeBSD** | ![alt text](https://api.cirrus-ci.com/github/imakris/glatter.svg)                     | Tested with GLX via GitHub Actions |
 | **macOS**   | ![alt text](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg) | Tested via GitHub Actions, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
+
+---
+
+## Technical summary
+
+* **Integration:** header‑only (C++) or compiled translation unit (C/C++).
+* **WSI detection:** auto‑detects WGL/GLX/EGL with optional runtime override.
+* **On‑demand symbols:** function pointers are resolved on first use to minimize startup work.
+* **Diagnostics:** opt‑in call/error logging; in debug builds (when `NDEBUG` is not defined) errors are logged by default. Messages go to stdout/stderr; a custom handler can be installed for redirection.
+* **Utilities:** generated extension flags (e.g., `glatter_GL_ARB_vertex_array_object`) and `enum_to_string_*()` helpers.
 
 
 ---
