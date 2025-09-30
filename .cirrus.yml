@@ -4,7 +4,8 @@ freebsd_instance:
 task:
   name: "FreeBSD Build"
   install_script:
+    # No changes here
     - pkg install -y git mesa-libs pkgconf freeglut
   build_script:
-    # the correct paths discovered from the debug log.
-    - cc -I./include -o glgears example/glatter/glxgears.c src/glatter/glatter.c $(pkg-config --cflags --libs gl glut)
+    # Add -lX11 and -lm to the end of the command to link the required libraries
+    - cc -I./include -o glgears example/glatter/glxgears.c src/glatter/glatter.c $(pkg-config --cflags --libs gl glut) -lX11 -lm
