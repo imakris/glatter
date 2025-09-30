@@ -2,16 +2,9 @@ freebsd_instance:
   image_family: freebsd-14-2
 
 task:
-  name: "FreeBSD Build (Debug)"
+  name: "FreeBSD Build"
   install_script:
     - pkg install -y git mesa-libs pkgconf freeglut
   build_script:
-    # 1. Print the current working directory
-    - echo "Running in directory: $(pwd)"
-    # 2. List all files and directories recursively
-    - echo "File structure:"
-    - ls -R
-
-    # This will likely fail again, but the output from the commands above
-    # will tell us the correct path to use for the next attempt.
-    - cc -I./include -o glgears example/glgears.c src/glatter.c $(pkg-config --cflags --libs gl glut)
+    # the correct paths discovered from the debug log.
+    - cc -I./include -o glgears example/glatter/glxgears.c src/glatter/glatter.c $(pkg-config --cflags --libs gl glut)
