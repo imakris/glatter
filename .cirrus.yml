@@ -1,0 +1,11 @@
+freebsd_instance:
+  image_family: freebsd-14-2
+
+task:
+  name: "FreeBSD Build"
+  install_script:
+    - pkg install -y git mesa-libs pkgconf freeglut
+  build_script:
+    - git clone https://github.com/imakris/glatter.git /tmp/glatter
+    - cd /tmp/glatter
+    - cc -I./include -o glgears example/glatter/glgears.c src/glatter.c $(pkg-config --cflags --libs gl glut)
