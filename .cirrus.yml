@@ -2,10 +2,16 @@ freebsd_instance:
   image_family: freebsd-14-2
 
 task:
-  name: "FreeBSD Build"
+  name: "FreeBSD CMake Build & Test"
   install_script:
-    # No changes here
-    - pkg install -y git mesa-libs pkgconf freeglut
+    # Add 'cmake' to the list of dependencies to install
+    - pkg install -y git cmake mesa-libs pkgconf freeglut
   build_script:
-    # Add -lX11 and -lm to the end of the command to link the required libraries
-    - cc -I./include -o glgears example/glatter/glxgears.c src/glatter/glatter.c $(pkg-config --cflags --libs gl glut) -lX11 -lm
+    # 1. Create a build directory and configure the project using CMake
+    - cmake -S . -B build
+
+    # 2. Build the project (including all test executables)
+    - cmake --build build
+
+    # 3. Run the tests using CTest. --output-on-failure keeps logs clean
+    - ctest --test-dir build --output-on-failure
