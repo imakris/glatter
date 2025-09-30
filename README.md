@@ -24,7 +24,7 @@ A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, opt
 | **Windows** | ✅ Supported | Tested via CI with WGL. |
 | **Linux** | ✅ Supported | Tested via CI with GLX. |
 | **macOS** | ⚠️ Experimental | Compiles via CI, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
-| **BSD** | 🛠️ Incomplete | The code is POSIX-friendly but is not expected to build without minor modifications. Contributions are welcome. |
+| **FreeBSD** | 🛠️ Incomplete | The code is POSIX-friendly but is not expected to build without minor modifications. Contributions are welcome. |
 
 ---
 
