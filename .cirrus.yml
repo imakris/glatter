@@ -2,10 +2,16 @@ freebsd_instance:
   image_family: freebsd-14-2
 
 task:
-  name: "FreeBSD Build"
+  name: "FreeBSD Build (Debug)"
   install_script:
     - pkg install -y git mesa-libs pkgconf freeglut
   build_script:
-    # Cirrus CI automatically clones the repo, so we can build directly.
-    # The path to the example file is corrected here.
+    # 1. Print the current working directory
+    - echo "Running in directory: $(pwd)"
+    # 2. List all files and directories recursively
+    - echo "File structure:"
+    - ls -R
+
+    # This will likely fail again, but the output from the commands above
+    # will tell us the correct path to use for the next attempt.
     - cc -I./include -o glgears example/glgears.c src/glatter.c $(pkg-config --cflags --libs gl glut)
