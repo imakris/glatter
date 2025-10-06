@@ -303,6 +303,7 @@ If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for a target, EGL/GLES helpers are
 
 ## Troubleshooting
 
+* **Undefined references to X11 symbols (e.g., `XGetErrorText`)** Link against the platform libraries listed above for POSIX targets (`GL`, `Threads`, `X11`, `dl`). When consuming the installed CMake target (`glatter::glatter`), these usage requirements propagate automatically; manual build systems must add `-lX11` (and friends) explicitly.
 * **“Failed to resolve …”** A current context is required, and GL/EGL/GLES libraries must be visible on the platform.
 * **Cross‑thread warnings** `glatter_bind_owner_to_current_thread()` on the render thread provides explicit ownership, and strict binding is available through `GLATTER_REQUIRE_EXPLICIT_OWNER_BIND`.
 * **GLX error spam** Defining `GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER` and installing a custom handler after X threading initialization suppresses the default handler.
