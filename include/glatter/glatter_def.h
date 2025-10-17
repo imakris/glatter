@@ -182,19 +182,54 @@ void (*glatter_log_handler())(const char*)
 }
 
 
+static const char glatter_log_fallback_message[] = "GLATTER: message formatting failed.\n";
+
+static const char* glatter_log_stable_message(const char* message)
+{
+    enum { GLATTER_LOG_BUFFER_SLOTS = 8, GLATTER_LOG_BUFFER_CAP = 2048 };
+    static GLATTER_THREAD_LOCAL char glatter_log_buffer_slots[GLATTER_LOG_BUFFER_SLOTS][GLATTER_LOG_BUFFER_CAP];
+    static GLATTER_THREAD_LOCAL unsigned glatter_log_buffer_index;
+    static GLATTER_THREAD_LOCAL char* glatter_log_heap_buffer = NULL;
+    static GLATTER_THREAD_LOCAL size_t glatter_log_heap_capacity = 0;
+
+    size_t len = strlen(message);
+    if (len < GLATTER_LOG_BUFFER_CAP) {
+        char* slot = glatter_log_buffer_slots[glatter_log_buffer_index++ % GLATTER_LOG_BUFFER_SLOTS];
+        memcpy(slot, message, len + 1);
+        return slot;
+    }
+
+    size_t needed = len + 1;
+    if (glatter_log_heap_capacity < needed) {
+        char* new_heap = (char*)realloc(glatter_log_heap_buffer, needed);
+        if (!new_heap) {
+            return NULL;
+        }
+        glatter_log_heap_buffer = new_heap;
+        glatter_log_heap_capacity = needed;
+    }
+    memcpy(glatter_log_heap_buffer, message, needed);
+    return glatter_log_heap_buffer;
+}
+
 GLATTER_INLINE_OR_NOT
 const char* glatter_log(const char* str)
 {
-    const char* message = str;
-    if (message == NULL) {
-        static const char fallback[] = "GLATTER: message formatting failed.\n";
-        message = fallback;
+    const char* message = str ? str : glatter_log_fallback_message;
+    const char* stable = glatter_log_stable_message(message);
+    if (!stable) {
+        /* Allocation failed for a long message; fall back to a static string. */
+        message = glatter_log_fallback_message;
+        stable = glatter_log_stable_message(message);
+        if (!stable) {
+            stable = glatter_log_fallback_message;
+        }
     }
     /* Freeze the handler on first log, race-free. */
     int expected = 0;
     (void)GLATTER_ATOMIC_INT_CAS(glatter_log_handler_frozen, expected, 1);
     glatter_log_handler_fn handler = glatter_log_handler_load();
-    handler(message);
+    handler(stable);
     return str;
 }
 
