@@ -1433,34 +1433,34 @@ void glatter_bind_owner_to_current_thread(void)
 #endif
 }
 
-typedef struct
-{
-    char data[3*16+2];
-}
-Printable;
-
-
+/* Format up to 16 bytes of storage as a printable hex string.  The
+ * logging helpers pass the resulting pointer outside this helper, so we
+ * maintain a small TLS ring buffer to keep the string alive long enough
+ * for the log handler to consume it without dangling. */
 GLATTER_INLINE_OR_NOT
-Printable get_prs(size_t sz, void* obj)
+const char* get_prs(size_t sz, const void* obj)
 {
-    Printable ret;
-    memset(&ret, 0, sizeof ret);
-    const unsigned char *bytes = (const unsigned char*)obj;
-    size_t cap = sizeof(ret.data);
+    enum { GLATTER_PRS_SLOTS = 8, GLATTER_PRS_CAP = 3*16 + 4 };
+    static GLATTER_THREAD_LOCAL char glatter_prs_buf[GLATTER_PRS_SLOTS][GLATTER_PRS_CAP];
+    static GLATTER_THREAD_LOCAL unsigned glatter_prs_index;
+
+    char* out = glatter_prs_buf[glatter_prs_index++ % GLATTER_PRS_SLOTS];
+    size_t cap = GLATTER_PRS_CAP;
     size_t pos = 0;
 
     if (cap == 0) {
-        return ret;
+        return "";
     }
 
-    ret.data[pos++] = '[';
+    out[pos++] = '[';
 
+    const unsigned char* bytes = (const unsigned char*)obj;
     if (sz > 16) {
         sz = 16;
     }
 
-    if (sz > 0) {
-        int n = snprintf(ret.data + pos, cap - pos, "%02x", bytes[0]);
+    if (sz > 0 && pos < cap) {
+        int n = snprintf(out + pos, cap - pos, "%02x", bytes[0]);
         if (n < 0) {
             n = 0;
         }
@@ -1470,7 +1470,7 @@ Printable get_prs(size_t sz, void* obj)
         else {
             pos += (size_t)n;
             for (size_t i = 1; i < sz && pos < cap; ++i) {
-                n = snprintf(ret.data + pos, cap - pos, " %02x", bytes[i]);
+                n = snprintf(out + pos, cap - pos, " %02x", bytes[i]);
                 if (n < 0) {
                     break;
                 }
@@ -1484,16 +1484,15 @@ Printable get_prs(size_t sz, void* obj)
     }
 
     if (pos < cap - 1) {
-        ret.data[pos++] = ']';
+        out[pos++] = ']';
     }
-    else
-    if (cap >= 2) {
-        ret.data[cap - 2] = ']';
+    else if (cap >= 2) {
+        out[cap - 2] = ']';
         pos = cap - 1;
     }
 
-    ret.data[pos] = '\0';
-    return ret;
+    out[pos] = '\0';
+    return out;
 }
 
 
@@ -1684,7 +1683,7 @@ void glatter_dbg_return(const char* fmt, ...)
 #endif
 
 #define GET_PRS(v)\
-    (get_prs(sizeof(v), (void*)(&(v))).data)
+    (get_prs(sizeof(v), (const void*)(&(v))))
 
 
 #if defined(__llvm__) || defined (__clang__)
