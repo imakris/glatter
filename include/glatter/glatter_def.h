@@ -39,6 +39,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string.h>
 #include <ctype.h>
 
+#if defined(__GNUC__) || defined(__clang__)
+#   define GLATTER_UNUSED __attribute__((unused))
+#else
+#   define GLATTER_UNUSED
+#endif
+
 #if defined(_WIN32)
 #   include <windows.h>
 #   include <tchar.h>
@@ -244,6 +250,7 @@ void glatter_set_log_handler(void(*handler_ptr)(const char*))
 /* Prints TCHAR* as UTF-8 for logging.
  * Uses a small TLS ring so multiple %s in one call do not alias.
  */
+static const char* glatter_pr_tstr(const TCHAR* ts) GLATTER_UNUSED;
 static const char* glatter_pr_tstr(const TCHAR* ts)
 {
     if (!ts) {
@@ -386,6 +393,19 @@ GLATTER_LINKONCE glatter_loader_state glatter_loader_state_singleton = {
         GLATTER_ATOMIC_INT_INIT(0),
 #endif
         /* env_checked */ GLATTER_ATOMIC_INT_INIT(0),
+#if defined(_WIN32)
+        /* opengl32_module */ NULL,
+        /* egl_module */ NULL,
+        /* gles_modules */ { NULL },
+        /* wgl_get_proc */ NULL,
+        /* egl_get_proc */ NULL,
+#else
+        /* gl_handles */ { NULL },
+        /* egl_handles */ { NULL },
+        /* gles_handles */ { NULL },
+        /* glx_get_proc */ NULL,
+        /* egl_get_proc */ NULL,
+#endif
 #if defined(GLATTER_GLX) && !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
         /* glx_error_handler_installed */ GLATTER_ATOMIC_INT_INIT(0)
 #endif
@@ -518,7 +538,14 @@ static BOOL CALLBACK glatter_init_wgl_loader_once(PINIT_ONCE once, PVOID param, 
 
     if (mod) {
         state->opengl32_module = mod;
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-function-type"
+#endif
         state->wgl_get_proc = (PROC (WINAPI*)(LPCSTR))GetProcAddress(mod, "wglGetProcAddress");
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic pop
+#endif
     }
     return TRUE;
 }
@@ -534,7 +561,14 @@ static BOOL CALLBACK glatter_init_egl_loader_once(PINIT_ONCE once, PVOID param, 
         HMODULE mod = glatter_load_system32_dll_(dll_w);
         if (mod) {
             state->egl_module = mod;
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-function-type"
+#endif
             state->egl_get_proc = (glatter_egl_get_proc_fn)GetProcAddress(mod, "eglGetProcAddress");
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic pop
+#endif
             break;
         }
     }
