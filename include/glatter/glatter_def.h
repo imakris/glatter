@@ -573,12 +573,12 @@ static BOOL CALLBACK glatter_init_wgl_loader_once(PINIT_ONCE once, PVOID param, 
 
     if (mod) {
         state->opengl32_module = mod;
-#if defined(__GNUC__) || defined(__clang__)
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wcast-function-type"
 #endif
         state->wgl_get_proc = (PROC (WINAPI*)(LPCSTR))GetProcAddress(mod, "wglGetProcAddress");
-#if defined(__GNUC__) || defined(__clang__)
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic pop
 #endif
     }
@@ -596,12 +596,12 @@ static BOOL CALLBACK glatter_init_egl_loader_once(PINIT_ONCE once, PVOID param, 
         HMODULE mod = glatter_load_system32_dll_(dll_w);
         if (mod) {
             state->egl_module = mod;
-#if defined(__GNUC__) || defined(__clang__)
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wcast-function-type"
 #endif
             state->egl_get_proc = (glatter_egl_get_proc_fn)GetProcAddress(mod, "eglGetProcAddress");
-#if defined(__GNUC__) || defined(__clang__)
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic pop
 #endif
             break;
