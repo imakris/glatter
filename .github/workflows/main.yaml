@@ -2,9 +2,9 @@ name: Build and Test Glatter
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ main, master, dev ]
   pull_request:
-    branches: [ main, dev ]
+    branches: [ main, master, dev ]
 
 jobs:
   build-and-test:
