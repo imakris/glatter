@@ -1441,7 +1441,7 @@ Printable;
 
 
 GLATTER_INLINE_OR_NOT
-Printable get_prs(size_t sz, void* obj)
+Printable glatter_prs_format(size_t sz, const void* obj)
 {
     Printable ret;
     memset(&ret, 0, sizeof ret);
@@ -1494,6 +1494,18 @@ Printable get_prs(size_t sz, void* obj)
 
     ret.data[pos] = '\0';
     return ret;
+}
+
+GLATTER_INLINE_OR_NOT
+const char* glatter_prs_to_string(size_t sz, const void* obj)
+{
+    enum { GLATTER_PRS_SLOTS = 8 };
+    static GLATTER_THREAD_LOCAL Printable slots[GLATTER_PRS_SLOTS];
+    static GLATTER_THREAD_LOCAL unsigned slot_index;
+
+    Printable* slot = &slots[slot_index++ % GLATTER_PRS_SLOTS];
+    *slot = glatter_prs_format(sz, obj);
+    return slot->data;
 }
 
 
@@ -1684,7 +1696,7 @@ void glatter_dbg_return(const char* fmt, ...)
 #endif
 
 #define GET_PRS(v)\
-    (get_prs(sizeof(v), (void*)(&(v))).data)
+    (glatter_prs_to_string(sizeof(v), (const void*)(&(v))))
 
 
 #if defined(__llvm__) || defined (__clang__)
