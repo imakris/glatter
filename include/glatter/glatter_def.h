@@ -162,6 +162,34 @@ static glatter_atomic(glatter_log_handler_fn) glatter_log_handler_state =
 /* Log handler is frozen after the first log to avoid races with late setters. */
 static glatter_atomic_int glatter_log_handler_frozen = GLATTER_ATOMIC_INT_INIT(0);
 
+#ifndef GLATTER_LOG_RING_SLOTS
+#define GLATTER_LOG_RING_SLOTS 8
+#endif
+
+typedef struct {
+    char*  data;
+    size_t capacity;
+} glatter_log_slot_t;
+
+static GLATTER_THREAD_LOCAL glatter_log_slot_t glatter_log_ring_[GLATTER_LOG_RING_SLOTS];
+static GLATTER_THREAD_LOCAL unsigned glatter_log_ring_cursor_ = 0;
+
+static const char* glatter_log_copy_for_handler_(const char* message)
+{
+    glatter_log_slot_t* slot = &glatter_log_ring_[glatter_log_ring_cursor_++ % GLATTER_LOG_RING_SLOTS];
+    size_t needed = strlen(message) + 1;
+    if (slot->capacity < needed) {
+        char* new_data = (char*)realloc(slot->data, needed);
+        if (!new_data) {
+            return NULL;
+        }
+        slot->data = new_data;
+        slot->capacity = needed;
+    }
+    memcpy(slot->data, message, needed);
+    return slot->data;
+}
+
 GLATTER_INLINE_OR_NOT
 void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
 {
@@ -185,17 +213,23 @@ void (*glatter_log_handler())(const char*)
 GLATTER_INLINE_OR_NOT
 const char* glatter_log(const char* str)
 {
+    static const char fallback[] = "GLATTER: message formatting failed.\n";
     const char* message = str;
+    const char* delivered = NULL;
+
     if (message == NULL) {
-        static const char fallback[] = "GLATTER: message formatting failed.\n";
-        message = fallback;
+        delivered = fallback;
+    }
+    else {
+        const char* copied = glatter_log_copy_for_handler_(message);
+        delivered = copied ? copied : fallback;
     }
     /* Freeze the handler on first log, race-free. */
     int expected = 0;
     (void)GLATTER_ATOMIC_INT_CAS(glatter_log_handler_frozen, expected, 1);
     glatter_log_handler_fn handler = glatter_log_handler_load();
-    handler(message);
-    return str;
+    handler(delivered);
+    return str ? delivered : NULL;
 }
 
 
