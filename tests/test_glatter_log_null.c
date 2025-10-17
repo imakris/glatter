@@ -85,6 +85,35 @@ int main(void)
         return 1;
     }
 
+    static const char dynamic_message[] = "GLATTER: dynamic log copy test.\n";
+    char* dynamic = (char*)malloc(sizeof(dynamic_message));
+    if (!dynamic) {
+        fprintf(stderr, "failed to allocate dynamic log message buffer\n");
+        return 1;
+    }
+    memcpy(dynamic, dynamic_message, sizeof(dynamic_message));
+
+    const char* delivered_dynamic = glatter_log(dynamic);
+    if (delivered_dynamic == NULL) {
+        fprintf(stderr, "glatter_log returned NULL for dynamic message\n");
+        free(dynamic);
+        return 1;
+    }
+
+    if (delivered_dynamic == dynamic) {
+        fprintf(stderr, "glatter_log reused caller-owned buffer\n");
+        free(dynamic);
+        return 1;
+    }
+
+    if (strcmp(g_last_log_message, dynamic_message) != 0) {
+        fprintf(stderr, "dynamic log message was not preserved: %s\n", g_last_log_message);
+        free(dynamic);
+        return 1;
+    }
+
+    free(dynamic);
+
     glatter_set_log_handler(NULL);
 
     if (glatter_log_handler() != glatter_default_log_handler) {
