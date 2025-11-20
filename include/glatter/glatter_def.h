@@ -23,6 +23,10 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+#  pragma warning(disable:4996) // mbstowcs and friends: legacy WinAPI usage is intentional
+#endif
 
 #include <inttypes.h>
 
@@ -1897,5 +1901,9 @@ GLATTER_INLINE_OR_NOT const char* enum_to_string_EGL(GLATTER_ENUM_EGL e)
     #pragma GCC diagnostic pop
 #endif
 
+
+#if defined(_MSC_VER)
+#  pragma warning(pop)
+#endif
 
 GLATTER_EXTERN_C_END
