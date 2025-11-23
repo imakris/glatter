@@ -193,6 +193,8 @@ GLATTER_INLINE_OR_NOT void  glatter_bind_owner_to_current_thread(void);
 
 #endif
 
+#include "glatter_qt_compat.h"
+
 
 #ifdef __cplusplus
 }
