@@ -126,4 +126,7 @@
 #  if defined(MappingNotify)
 #    undef MappingNotify
 #  endif
+#  if defined(Unsorted)
+#    undef Unsorted
+#  endif
 #endif
