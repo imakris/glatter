@@ -86,6 +86,7 @@ def _write_egl_stub(directory: Path) -> Path:
     stub_path.write_text(
         textwrap.dedent(
             """
+            #include <stddef.h>
             #define KHRONOS_STATIC 1
             #include <EGL/egl.h>
 
@@ -174,6 +175,7 @@ def test_c_program_compiles_with_glatter_c(tmp_path: Path) -> None:
     c_source.write_text(
         textwrap.dedent(
             """
+            #include <stddef.h>
             #include <glatter/glatter.h>
 
             static void noop_logger(const char* message) {
@@ -816,6 +818,7 @@ def test_windows_egl_gl_compiles_with_glatter_c(tmp_path: Path) -> None:
     c_source.write_text(
         textwrap.dedent(
             """
+            #include <stddef.h>
             #include <glatter/glatter.h>
 
             static void noop_logger(const char* message) {
