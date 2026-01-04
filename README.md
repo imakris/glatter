@@ -57,6 +57,8 @@ void setup_scene() {
 ```
 For header-only usage, include `<glatter/glatter_solo.h>`. This tiny wrapper defines
 `GLATTER_HEADER_ONLY` and includes the main header.
+Note: On MinGW/Windows, header-only mode requires C++17 (inline variables) to
+avoid multiple-definition linker errors.
 
 ### 2) Compiled C translation unit (C or C++)
 

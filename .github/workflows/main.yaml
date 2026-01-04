@@ -29,6 +29,16 @@ jobs:
         # This will install XQuartz, which provides the missing X11 headers.
         run: brew install --cask xquartz
 
+      - name: Setup MSYS2 (Windows)
+        if: runner.os == 'Windows'
+        uses: msys2/setup-msys2@v2
+        with:
+          update: false
+          install: mingw-w64-x86_64-gcc
+
+      - name: Install pytest
+        run: python -m pip install pytest
+
       - name: Configure CMake
         shell: bash
         # We need to provide a hint to CMake to find the X11 package from XQuartz
@@ -41,3 +51,14 @@ jobs:
 
       - name: Build with CMake
         run: cmake --build build --config Release
+
+      - name: Run build smoke tests (Linux)
+        if: runner.os == 'Linux'
+        run: python -m pytest tests/test_build.py
+
+      - name: Run build smoke tests (Windows)
+        if: runner.os == 'Windows'
+        env:
+          CC: C:\msys64\mingw64\bin\gcc.exe
+          CXX: C:\msys64\mingw64\bin\g++.exe
+        run: python -m pytest tests/test_build.py

@@ -93,14 +93,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #if defined(GLATTER_HEADER_ONLY)
-#   if defined(_MSC_VER)
+#   if defined(__cplusplus) && __cplusplus >= 201703L
+#       define GLATTER_LINKONCE_DECORATION
+#       define GLATTER_LINKONCE_STORAGE inline
+#   elif defined(_MSC_VER)
 #       define GLATTER_LINKONCE_DECORATION __declspec(selectany)
+#       define GLATTER_LINKONCE_STORAGE
 #   elif defined(__GNUC__) || defined(__clang__)
 #       define GLATTER_LINKONCE_DECORATION __attribute__((weak))
+#       define GLATTER_LINKONCE_STORAGE
 #   else
-#       error "glatter: header-only mode requires selectany/weak support for globals."
+#       error "glatter: header-only mode requires inline variables (C++17) or selectany/weak support."
 #   endif
-#   define GLATTER_LINKONCE_STORAGE
 #else
 #   define GLATTER_LINKONCE_DECORATION
 #   define GLATTER_LINKONCE_STORAGE static

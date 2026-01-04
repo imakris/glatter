@@ -30,7 +30,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef GLATTER_EGL
 #if defined(__egl_h_)
 #if defined(EGL_VERSION_1_0)
-#ifndef eglChooseConfig_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglChooseConfig, (dpy, attrib_list, configs, config_size, num_config), (EGLDisplay dpy, const EGLint *attrib_list, EGLConfig *configs, EGLint config_size, EGLint *num_config))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglChooseConfig_debug(EGLDisplay dpy, const EGLint *attrib_list, EGLConfig *configs, EGLint config_size, EGLint *num_config, const char* file, int line)
 {
@@ -41,8 +40,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglChooseConfig_debug(EGLDisplay dpy, c
     return rval;
 }
 #define eglChooseConfig_defined
-#endif
-#ifndef eglCopyBuffers_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglCopyBuffers, (dpy, surface, target), (EGLDisplay dpy, EGLSurface surface, EGLNativePixmapType target))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCopyBuffers_debug(EGLDisplay dpy, EGLSurface surface, EGLNativePixmapType target, const char* file, int line)
 {
@@ -53,8 +50,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCopyBuffers_debug(EGLDisplay dpy, EG
     return rval;
 }
 #define eglCopyBuffers_defined
-#endif
-#ifndef eglCreateContext_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLContext, EGLAPIENTRY, eglCreateContext, (dpy, config, share_context, attrib_list), (EGLDisplay dpy, EGLConfig config, EGLContext share_context, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLContext glatter_eglCreateContext_debug(EGLDisplay dpy, EGLConfig config, EGLContext share_context, const EGLint *attrib_list, const char* file, int line)
 {
@@ -65,8 +60,6 @@ GLATTER_INLINE_OR_NOT EGLContext glatter_eglCreateContext_debug(EGLDisplay dpy, 
     return rval;
 }
 #define eglCreateContext_defined
-#endif
-#ifndef eglCreatePbufferSurface_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreatePbufferSurface, (dpy, config, attrib_list), (EGLDisplay dpy, EGLConfig config, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePbufferSurface_debug(EGLDisplay dpy, EGLConfig config, const EGLint *attrib_list, const char* file, int line)
 {
@@ -77,8 +70,6 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePbufferSurface_debug(EGLDispla
     return rval;
 }
 #define eglCreatePbufferSurface_defined
-#endif
-#ifndef eglCreatePixmapSurface_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreatePixmapSurface, (dpy, config, pixmap, attrib_list), (EGLDisplay dpy, EGLConfig config, EGLNativePixmapType pixmap, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePixmapSurface_debug(EGLDisplay dpy, EGLConfig config, EGLNativePixmapType pixmap, const EGLint *attrib_list, const char* file, int line)
 {
@@ -89,8 +80,6 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePixmapSurface_debug(EGLDisplay
     return rval;
 }
 #define eglCreatePixmapSurface_defined
-#endif
-#ifndef eglCreateWindowSurface_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreateWindowSurface, (dpy, config, win, attrib_list), (EGLDisplay dpy, EGLConfig config, EGLNativeWindowType win, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreateWindowSurface_debug(EGLDisplay dpy, EGLConfig config, EGLNativeWindowType win, const EGLint *attrib_list, const char* file, int line)
 {
@@ -101,8 +90,6 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreateWindowSurface_debug(EGLDisplay
     return rval;
 }
 #define eglCreateWindowSurface_defined
-#endif
-#ifndef eglDestroyContext_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglDestroyContext, (dpy, ctx), (EGLDisplay dpy, EGLContext ctx))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyContext_debug(EGLDisplay dpy, EGLContext ctx, const char* file, int line)
 {
@@ -113,8 +100,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyContext_debug(EGLDisplay dpy,
     return rval;
 }
 #define eglDestroyContext_defined
-#endif
-#ifndef eglDestroySurface_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglDestroySurface, (dpy, surface), (EGLDisplay dpy, EGLSurface surface))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroySurface_debug(EGLDisplay dpy, EGLSurface surface, const char* file, int line)
 {
@@ -125,8 +110,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroySurface_debug(EGLDisplay dpy,
     return rval;
 }
 #define eglDestroySurface_defined
-#endif
-#ifndef eglGetConfigAttrib_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetConfigAttrib, (dpy, config, attribute, value), (EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetConfigAttrib_debug(EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint *value, const char* file, int line)
 {
@@ -137,8 +120,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetConfigAttrib_debug(EGLDisplay dpy
     return rval;
 }
 #define eglGetConfigAttrib_defined
-#endif
-#ifndef eglGetConfigs_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetConfigs, (dpy, configs, config_size, num_config), (EGLDisplay dpy, EGLConfig *configs, EGLint config_size, EGLint *num_config))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetConfigs_debug(EGLDisplay dpy, EGLConfig *configs, EGLint config_size, EGLint *num_config, const char* file, int line)
 {
@@ -149,8 +130,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetConfigs_debug(EGLDisplay dpy, EGL
     return rval;
 }
 #define eglGetConfigs_defined
-#endif
-#ifndef eglGetCurrentDisplay_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLDisplay, EGLAPIENTRY, eglGetCurrentDisplay, (), (void))
 GLATTER_INLINE_OR_NOT EGLDisplay glatter_eglGetCurrentDisplay_debug(const char* file, int line)
 {
@@ -161,8 +140,6 @@ GLATTER_INLINE_OR_NOT EGLDisplay glatter_eglGetCurrentDisplay_debug(const char* 
     return rval;
 }
 #define eglGetCurrentDisplay_defined
-#endif
-#ifndef eglGetCurrentSurface_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglGetCurrentSurface, (readdraw), (EGLint readdraw))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglGetCurrentSurface_debug(EGLint readdraw, const char* file, int line)
 {
@@ -173,8 +150,6 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglGetCurrentSurface_debug(EGLint readd
     return rval;
 }
 #define eglGetCurrentSurface_defined
-#endif
-#ifndef eglGetDisplay_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLDisplay, EGLAPIENTRY, eglGetDisplay, (display_id), (EGLNativeDisplayType display_id))
 GLATTER_INLINE_OR_NOT EGLDisplay glatter_eglGetDisplay_debug(EGLNativeDisplayType display_id, const char* file, int line)
 {
@@ -185,8 +160,6 @@ GLATTER_INLINE_OR_NOT EGLDisplay glatter_eglGetDisplay_debug(EGLNativeDisplayTyp
     return rval;
 }
 #define eglGetDisplay_defined
-#endif
-#ifndef eglGetError_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglGetError, (), (void))
 GLATTER_INLINE_OR_NOT EGLint glatter_eglGetError_debug(const char* file, int line)
 {
@@ -197,8 +170,6 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglGetError_debug(const char* file, int lin
     return rval;
 }
 #define eglGetError_defined
-#endif
-#ifndef eglInitialize_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglInitialize, (dpy, major, minor), (EGLDisplay dpy, EGLint *major, EGLint *minor))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglInitialize_debug(EGLDisplay dpy, EGLint *major, EGLint *minor, const char* file, int line)
 {
@@ -209,8 +180,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglInitialize_debug(EGLDisplay dpy, EGL
     return rval;
 }
 #define eglInitialize_defined
-#endif
-#ifndef eglMakeCurrent_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglMakeCurrent, (dpy, draw, read, ctx), (EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLContext ctx))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglMakeCurrent_debug(EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLContext ctx, const char* file, int line)
 {
@@ -221,8 +190,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglMakeCurrent_debug(EGLDisplay dpy, EG
     return rval;
 }
 #define eglMakeCurrent_defined
-#endif
-#ifndef eglQueryContext_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryContext, (dpy, ctx, attribute, value), (EGLDisplay dpy, EGLContext ctx, EGLint attribute, EGLint *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryContext_debug(EGLDisplay dpy, EGLContext ctx, EGLint attribute, EGLint *value, const char* file, int line)
 {
@@ -233,8 +200,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryContext_debug(EGLDisplay dpy, E
     return rval;
 }
 #define eglQueryContext_defined
-#endif
-#ifndef eglQueryString_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, const char *, EGLAPIENTRY, eglQueryString, (dpy, name), (EGLDisplay dpy, EGLint name))
 GLATTER_INLINE_OR_NOT const char * glatter_eglQueryString_debug(EGLDisplay dpy, EGLint name, const char* file, int line)
 {
@@ -245,8 +210,6 @@ GLATTER_INLINE_OR_NOT const char * glatter_eglQueryString_debug(EGLDisplay dpy, 
     return rval;
 }
 #define eglQueryString_defined
-#endif
-#ifndef eglQuerySurface_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQuerySurface, (dpy, surface, attribute, value), (EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQuerySurface_debug(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint *value, const char* file, int line)
 {
@@ -257,8 +220,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQuerySurface_debug(EGLDisplay dpy, E
     return rval;
 }
 #define eglQuerySurface_defined
-#endif
-#ifndef eglSwapBuffers_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSwapBuffers, (dpy, surface), (EGLDisplay dpy, EGLSurface surface))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffers_debug(EGLDisplay dpy, EGLSurface surface, const char* file, int line)
 {
@@ -269,8 +230,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffers_debug(EGLDisplay dpy, EG
     return rval;
 }
 #define eglSwapBuffers_defined
-#endif
-#ifndef eglTerminate_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglTerminate, (dpy), (EGLDisplay dpy))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglTerminate_debug(EGLDisplay dpy, const char* file, int line)
 {
@@ -281,8 +240,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglTerminate_debug(EGLDisplay dpy, cons
     return rval;
 }
 #define eglTerminate_defined
-#endif
-#ifndef eglWaitGL_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglWaitGL, (), (void))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglWaitGL_debug(const char* file, int line)
 {
@@ -293,8 +250,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglWaitGL_debug(const char* file, int l
     return rval;
 }
 #define eglWaitGL_defined
-#endif
-#ifndef eglWaitNative_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglWaitNative, (engine), (EGLint engine))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglWaitNative_debug(EGLint engine, const char* file, int line)
 {
@@ -305,10 +260,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglWaitNative_debug(EGLint engine, cons
     return rval;
 }
 #define eglWaitNative_defined
-#endif
 #endif // defined(EGL_VERSION_1_0)
 #if defined(EGL_VERSION_1_1)
-#ifndef eglBindTexImage_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglBindTexImage, (dpy, surface, buffer), (EGLDisplay dpy, EGLSurface surface, EGLint buffer))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglBindTexImage_debug(EGLDisplay dpy, EGLSurface surface, EGLint buffer, const char* file, int line)
 {
@@ -319,8 +272,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglBindTexImage_debug(EGLDisplay dpy, E
     return rval;
 }
 #define eglBindTexImage_defined
-#endif
-#ifndef eglReleaseTexImage_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglReleaseTexImage, (dpy, surface, buffer), (EGLDisplay dpy, EGLSurface surface, EGLint buffer))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglReleaseTexImage_debug(EGLDisplay dpy, EGLSurface surface, EGLint buffer, const char* file, int line)
 {
@@ -331,8 +282,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglReleaseTexImage_debug(EGLDisplay dpy
     return rval;
 }
 #define eglReleaseTexImage_defined
-#endif
-#ifndef eglSurfaceAttrib_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSurfaceAttrib, (dpy, surface, attribute, value), (EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSurfaceAttrib_debug(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint value, const char* file, int line)
 {
@@ -343,8 +292,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSurfaceAttrib_debug(EGLDisplay dpy, 
     return rval;
 }
 #define eglSurfaceAttrib_defined
-#endif
-#ifndef eglSwapInterval_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSwapInterval, (dpy, interval), (EGLDisplay dpy, EGLint interval))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapInterval_debug(EGLDisplay dpy, EGLint interval, const char* file, int line)
 {
@@ -355,10 +302,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapInterval_debug(EGLDisplay dpy, E
     return rval;
 }
 #define eglSwapInterval_defined
-#endif
 #endif // defined(EGL_VERSION_1_1)
 #if defined(EGL_VERSION_1_2)
-#ifndef eglBindAPI_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglBindAPI, (api), (EGLenum api))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglBindAPI_debug(EGLenum api, const char* file, int line)
 {
@@ -369,8 +314,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglBindAPI_debug(EGLenum api, const cha
     return rval;
 }
 #define eglBindAPI_defined
-#endif
-#ifndef eglCreatePbufferFromClientBuffer_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreatePbufferFromClientBuffer, (dpy, buftype, buffer, config, attrib_list), (EGLDisplay dpy, EGLenum buftype, EGLClientBuffer buffer, EGLConfig config, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePbufferFromClientBuffer_debug(EGLDisplay dpy, EGLenum buftype, EGLClientBuffer buffer, EGLConfig config, const EGLint *attrib_list, const char* file, int line)
 {
@@ -381,8 +324,6 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePbufferFromClientBuffer_debug(
     return rval;
 }
 #define eglCreatePbufferFromClientBuffer_defined
-#endif
-#ifndef eglQueryAPI_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLenum, EGLAPIENTRY, eglQueryAPI, (), (void))
 GLATTER_INLINE_OR_NOT EGLenum glatter_eglQueryAPI_debug(const char* file, int line)
 {
@@ -393,8 +334,6 @@ GLATTER_INLINE_OR_NOT EGLenum glatter_eglQueryAPI_debug(const char* file, int li
     return rval;
 }
 #define eglQueryAPI_defined
-#endif
-#ifndef eglReleaseThread_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglReleaseThread, (), (void))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglReleaseThread_debug(const char* file, int line)
 {
@@ -405,8 +344,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglReleaseThread_debug(const char* file
     return rval;
 }
 #define eglReleaseThread_defined
-#endif
-#ifndef eglWaitClient_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglWaitClient, (), (void))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglWaitClient_debug(const char* file, int line)
 {
@@ -417,10 +354,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglWaitClient_debug(const char* file, i
     return rval;
 }
 #define eglWaitClient_defined
-#endif
 #endif // defined(EGL_VERSION_1_2)
 #if defined(EGL_VERSION_1_4)
-#ifndef eglGetCurrentContext_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLContext, EGLAPIENTRY, eglGetCurrentContext, (), (void))
 GLATTER_INLINE_OR_NOT EGLContext glatter_eglGetCurrentContext_debug(const char* file, int line)
 {
@@ -431,10 +366,8 @@ GLATTER_INLINE_OR_NOT EGLContext glatter_eglGetCurrentContext_debug(const char* 
     return rval;
 }
 #define eglGetCurrentContext_defined
-#endif
 #endif // defined(EGL_VERSION_1_4)
 #if defined(EGL_VERSION_1_5)
-#ifndef eglClientWaitSync_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglClientWaitSync, (dpy, sync, flags, timeout), (EGLDisplay dpy, EGLSync sync, EGLint flags, EGLTime timeout))
 GLATTER_INLINE_OR_NOT EGLint glatter_eglClientWaitSync_debug(EGLDisplay dpy, EGLSync sync, EGLint flags, EGLTime timeout, const char* file, int line)
 {
@@ -445,8 +378,6 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglClientWaitSync_debug(EGLDisplay dpy, EGL
     return rval;
 }
 #define eglClientWaitSync_defined
-#endif
-#ifndef eglCreateImage_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLImage, EGLAPIENTRY, eglCreateImage, (dpy, ctx, target, buffer, attrib_list), (EGLDisplay dpy, EGLContext ctx, EGLenum target, EGLClientBuffer buffer, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLImage glatter_eglCreateImage_debug(EGLDisplay dpy, EGLContext ctx, EGLenum target, EGLClientBuffer buffer, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -457,8 +388,6 @@ GLATTER_INLINE_OR_NOT EGLImage glatter_eglCreateImage_debug(EGLDisplay dpy, EGLC
     return rval;
 }
 #define eglCreateImage_defined
-#endif
-#ifndef eglCreatePlatformPixmapSurface_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreatePlatformPixmapSurface, (dpy, config, native_pixmap, attrib_list), (EGLDisplay dpy, EGLConfig config, void *native_pixmap, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePlatformPixmapSurface_debug(EGLDisplay dpy, EGLConfig config, void *native_pixmap, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -469,8 +398,6 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePlatformPixmapSurface_debug(EG
     return rval;
 }
 #define eglCreatePlatformPixmapSurface_defined
-#endif
-#ifndef eglCreatePlatformWindowSurface_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreatePlatformWindowSurface, (dpy, config, native_window, attrib_list), (EGLDisplay dpy, EGLConfig config, void *native_window, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePlatformWindowSurface_debug(EGLDisplay dpy, EGLConfig config, void *native_window, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -481,8 +408,6 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePlatformWindowSurface_debug(EG
     return rval;
 }
 #define eglCreatePlatformWindowSurface_defined
-#endif
-#ifndef eglCreateSync_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSync, EGLAPIENTRY, eglCreateSync, (dpy, type, attrib_list), (EGLDisplay dpy, EGLenum type, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSync glatter_eglCreateSync_debug(EGLDisplay dpy, EGLenum type, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -493,8 +418,6 @@ GLATTER_INLINE_OR_NOT EGLSync glatter_eglCreateSync_debug(EGLDisplay dpy, EGLenu
     return rval;
 }
 #define eglCreateSync_defined
-#endif
-#ifndef eglDestroyImage_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglDestroyImage, (dpy, image), (EGLDisplay dpy, EGLImage image))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyImage_debug(EGLDisplay dpy, EGLImage image, const char* file, int line)
 {
@@ -505,8 +428,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyImage_debug(EGLDisplay dpy, E
     return rval;
 }
 #define eglDestroyImage_defined
-#endif
-#ifndef eglDestroySync_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglDestroySync, (dpy, sync), (EGLDisplay dpy, EGLSync sync))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroySync_debug(EGLDisplay dpy, EGLSync sync, const char* file, int line)
 {
@@ -517,8 +438,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroySync_debug(EGLDisplay dpy, EG
     return rval;
 }
 #define eglDestroySync_defined
-#endif
-#ifndef eglGetPlatformDisplay_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLDisplay, EGLAPIENTRY, eglGetPlatformDisplay, (platform, native_display, attrib_list), (EGLenum platform, void *native_display, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLDisplay glatter_eglGetPlatformDisplay_debug(EGLenum platform, void *native_display, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -529,8 +448,6 @@ GLATTER_INLINE_OR_NOT EGLDisplay glatter_eglGetPlatformDisplay_debug(EGLenum pla
     return rval;
 }
 #define eglGetPlatformDisplay_defined
-#endif
-#ifndef eglGetSyncAttrib_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetSyncAttrib, (dpy, sync, attribute, value), (EGLDisplay dpy, EGLSync sync, EGLint attribute, EGLAttrib *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetSyncAttrib_debug(EGLDisplay dpy, EGLSync sync, EGLint attribute, EGLAttrib *value, const char* file, int line)
 {
@@ -541,8 +458,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetSyncAttrib_debug(EGLDisplay dpy, 
     return rval;
 }
 #define eglGetSyncAttrib_defined
-#endif
-#ifndef eglWaitSync_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglWaitSync, (dpy, sync, flags), (EGLDisplay dpy, EGLSync sync, EGLint flags))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglWaitSync_debug(EGLDisplay dpy, EGLSync sync, EGLint flags, const char* file, int line)
 {
@@ -553,12 +468,10 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglWaitSync_debug(EGLDisplay dpy, EGLSy
     return rval;
 }
 #define eglWaitSync_defined
-#endif
 #endif // defined(EGL_VERSION_1_5)
 #endif // defined(__egl_h_)
 #if defined(__eglext_h_)
 #if defined(EGL_ANDROID_blob_cache)
-#ifndef eglSetBlobCacheFuncsANDROID_defined
 GLATTER_FBLOCK(, EGL, EGLAPI, void, EGLAPIENTRY, eglSetBlobCacheFuncsANDROID, (dpy, set, get), (EGLDisplay dpy, EGLSetBlobFuncANDROID set, EGLGetBlobFuncANDROID get))
 GLATTER_INLINE_OR_NOT void glatter_eglSetBlobCacheFuncsANDROID_debug(EGLDisplay dpy, EGLSetBlobFuncANDROID set, EGLGetBlobFuncANDROID get, const char* file, int line)
 {
@@ -567,10 +480,8 @@ GLATTER_INLINE_OR_NOT void glatter_eglSetBlobCacheFuncsANDROID_debug(EGLDisplay 
     GLATTER_CHECK_ERROR(EGL, file, line)
 }
 #define eglSetBlobCacheFuncsANDROID_defined
-#endif
 #endif // defined(EGL_ANDROID_blob_cache)
 #if defined(EGL_ANDROID_create_native_client_buffer)
-#ifndef eglCreateNativeClientBufferANDROID_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLClientBuffer, EGLAPIENTRY, eglCreateNativeClientBufferANDROID, (attrib_list), (const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLClientBuffer glatter_eglCreateNativeClientBufferANDROID_debug(const EGLint *attrib_list, const char* file, int line)
 {
@@ -581,10 +492,8 @@ GLATTER_INLINE_OR_NOT EGLClientBuffer glatter_eglCreateNativeClientBufferANDROID
     return rval;
 }
 #define eglCreateNativeClientBufferANDROID_defined
-#endif
 #endif // defined(EGL_ANDROID_create_native_client_buffer)
 #if defined(EGL_ANDROID_get_frame_timestamps)
-#ifndef eglGetCompositorTimingANDROID_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetCompositorTimingANDROID, (dpy, surface, numTimestamps, names, values), (EGLDisplay dpy, EGLSurface surface, EGLint numTimestamps, const EGLint *names, EGLnsecsANDROID *values))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetCompositorTimingANDROID_debug(EGLDisplay dpy, EGLSurface surface, EGLint numTimestamps, const EGLint *names, EGLnsecsANDROID *values, const char* file, int line)
 {
@@ -595,8 +504,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetCompositorTimingANDROID_debug(EGL
     return rval;
 }
 #define eglGetCompositorTimingANDROID_defined
-#endif
-#ifndef eglGetCompositorTimingSupportedANDROID_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetCompositorTimingSupportedANDROID, (dpy, surface, name), (EGLDisplay dpy, EGLSurface surface, EGLint name))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetCompositorTimingSupportedANDROID_debug(EGLDisplay dpy, EGLSurface surface, EGLint name, const char* file, int line)
 {
@@ -607,8 +514,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetCompositorTimingSupportedANDROID_
     return rval;
 }
 #define eglGetCompositorTimingSupportedANDROID_defined
-#endif
-#ifndef eglGetFrameTimestampSupportedANDROID_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetFrameTimestampSupportedANDROID, (dpy, surface, timestamp), (EGLDisplay dpy, EGLSurface surface, EGLint timestamp))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetFrameTimestampSupportedANDROID_debug(EGLDisplay dpy, EGLSurface surface, EGLint timestamp, const char* file, int line)
 {
@@ -619,8 +524,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetFrameTimestampSupportedANDROID_de
     return rval;
 }
 #define eglGetFrameTimestampSupportedANDROID_defined
-#endif
-#ifndef eglGetFrameTimestampsANDROID_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetFrameTimestampsANDROID, (dpy, surface, frameId, numTimestamps, timestamps, values), (EGLDisplay dpy, EGLSurface surface, EGLuint64KHR frameId, EGLint numTimestamps, const EGLint *timestamps, EGLnsecsANDROID *values))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetFrameTimestampsANDROID_debug(EGLDisplay dpy, EGLSurface surface, EGLuint64KHR frameId, EGLint numTimestamps, const EGLint *timestamps, EGLnsecsANDROID *values, const char* file, int line)
 {
@@ -631,8 +534,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetFrameTimestampsANDROID_debug(EGLD
     return rval;
 }
 #define eglGetFrameTimestampsANDROID_defined
-#endif
-#ifndef eglGetNextFrameIdANDROID_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetNextFrameIdANDROID, (dpy, surface, frameId), (EGLDisplay dpy, EGLSurface surface, EGLuint64KHR *frameId))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetNextFrameIdANDROID_debug(EGLDisplay dpy, EGLSurface surface, EGLuint64KHR *frameId, const char* file, int line)
 {
@@ -643,10 +544,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetNextFrameIdANDROID_debug(EGLDispl
     return rval;
 }
 #define eglGetNextFrameIdANDROID_defined
-#endif
 #endif // defined(EGL_ANDROID_get_frame_timestamps)
 #if defined(EGL_ANDROID_get_native_client_buffer)
-#ifndef eglGetNativeClientBufferANDROID_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLClientBuffer, EGLAPIENTRY, eglGetNativeClientBufferANDROID, (buffer), (const struct AHardwareBuffer *buffer))
 GLATTER_INLINE_OR_NOT EGLClientBuffer glatter_eglGetNativeClientBufferANDROID_debug(const struct AHardwareBuffer *buffer, const char* file, int line)
 {
@@ -657,10 +556,8 @@ GLATTER_INLINE_OR_NOT EGLClientBuffer glatter_eglGetNativeClientBufferANDROID_de
     return rval;
 }
 #define eglGetNativeClientBufferANDROID_defined
-#endif
 #endif // defined(EGL_ANDROID_get_native_client_buffer)
 #if defined(EGL_ANDROID_native_fence_sync)
-#ifndef eglDupNativeFenceFDANDROID_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglDupNativeFenceFDANDROID, (dpy, sync), (EGLDisplay dpy, EGLSyncKHR sync))
 GLATTER_INLINE_OR_NOT EGLint glatter_eglDupNativeFenceFDANDROID_debug(EGLDisplay dpy, EGLSyncKHR sync, const char* file, int line)
 {
@@ -671,10 +568,8 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglDupNativeFenceFDANDROID_debug(EGLDisplay
     return rval;
 }
 #define eglDupNativeFenceFDANDROID_defined
-#endif
 #endif // defined(EGL_ANDROID_native_fence_sync)
 #if defined(EGL_ANDROID_presentation_time)
-#ifndef eglPresentationTimeANDROID_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglPresentationTimeANDROID, (dpy, surface, time), (EGLDisplay dpy, EGLSurface surface, EGLnsecsANDROID time))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglPresentationTimeANDROID_debug(EGLDisplay dpy, EGLSurface surface, EGLnsecsANDROID time, const char* file, int line)
 {
@@ -685,10 +580,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglPresentationTimeANDROID_debug(EGLDis
     return rval;
 }
 #define eglPresentationTimeANDROID_defined
-#endif
 #endif // defined(EGL_ANDROID_presentation_time)
 #if defined(EGL_ANGLE_query_surface_pointer)
-#ifndef eglQuerySurfacePointerANGLE_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQuerySurfacePointerANGLE, (dpy, surface, attribute, value), (EGLDisplay dpy, EGLSurface surface, EGLint attribute, void **value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQuerySurfacePointerANGLE_debug(EGLDisplay dpy, EGLSurface surface, EGLint attribute, void **value, const char* file, int line)
 {
@@ -699,10 +592,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQuerySurfacePointerANGLE_debug(EGLDi
     return rval;
 }
 #define eglQuerySurfacePointerANGLE_defined
-#endif
 #endif // defined(EGL_ANGLE_query_surface_pointer)
 #if defined(EGL_ANGLE_sync_control_rate)
-#ifndef eglGetMscRateANGLE_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetMscRateANGLE, (dpy, surface, numerator, denominator), (EGLDisplay dpy, EGLSurface surface, EGLint *numerator, EGLint *denominator))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetMscRateANGLE_debug(EGLDisplay dpy, EGLSurface surface, EGLint *numerator, EGLint *denominator, const char* file, int line)
 {
@@ -713,10 +604,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetMscRateANGLE_debug(EGLDisplay dpy
     return rval;
 }
 #define eglGetMscRateANGLE_defined
-#endif
 #endif // defined(EGL_ANGLE_sync_control_rate)
 #if defined(EGL_EXT_client_sync)
-#ifndef eglClientSignalSyncEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglClientSignalSyncEXT, (dpy, sync, attrib_list), (EGLDisplay dpy, EGLSync sync, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglClientSignalSyncEXT_debug(EGLDisplay dpy, EGLSync sync, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -727,10 +616,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglClientSignalSyncEXT_debug(EGLDisplay
     return rval;
 }
 #define eglClientSignalSyncEXT_defined
-#endif
 #endif // defined(EGL_EXT_client_sync)
 #if defined(EGL_EXT_compositor)
-#ifndef eglCompositorBindTexWindowEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglCompositorBindTexWindowEXT, (external_win_id), (EGLint external_win_id))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorBindTexWindowEXT_debug(EGLint external_win_id, const char* file, int line)
 {
@@ -741,8 +628,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorBindTexWindowEXT_debug(EGL
     return rval;
 }
 #define eglCompositorBindTexWindowEXT_defined
-#endif
-#ifndef eglCompositorSetContextAttributesEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglCompositorSetContextAttributesEXT, (external_ref_id, context_attributes, num_entries), (EGLint external_ref_id, const EGLint *context_attributes, EGLint num_entries))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetContextAttributesEXT_debug(EGLint external_ref_id, const EGLint *context_attributes, EGLint num_entries, const char* file, int line)
 {
@@ -753,8 +638,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetContextAttributesEXT_de
     return rval;
 }
 #define eglCompositorSetContextAttributesEXT_defined
-#endif
-#ifndef eglCompositorSetContextListEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglCompositorSetContextListEXT, (external_ref_ids, num_entries), (const EGLint *external_ref_ids, EGLint num_entries))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetContextListEXT_debug(const EGLint *external_ref_ids, EGLint num_entries, const char* file, int line)
 {
@@ -765,8 +648,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetContextListEXT_debug(co
     return rval;
 }
 #define eglCompositorSetContextListEXT_defined
-#endif
-#ifndef eglCompositorSetSizeEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglCompositorSetSizeEXT, (external_win_id, width, height), (EGLint external_win_id, EGLint width, EGLint height))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetSizeEXT_debug(EGLint external_win_id, EGLint width, EGLint height, const char* file, int line)
 {
@@ -777,8 +658,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetSizeEXT_debug(EGLint ex
     return rval;
 }
 #define eglCompositorSetSizeEXT_defined
-#endif
-#ifndef eglCompositorSetWindowAttributesEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglCompositorSetWindowAttributesEXT, (external_win_id, window_attributes, num_entries), (EGLint external_win_id, const EGLint *window_attributes, EGLint num_entries))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetWindowAttributesEXT_debug(EGLint external_win_id, const EGLint *window_attributes, EGLint num_entries, const char* file, int line)
 {
@@ -789,8 +668,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetWindowAttributesEXT_deb
     return rval;
 }
 #define eglCompositorSetWindowAttributesEXT_defined
-#endif
-#ifndef eglCompositorSetWindowListEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglCompositorSetWindowListEXT, (external_ref_id, external_win_ids, num_entries), (EGLint external_ref_id, const EGLint *external_win_ids, EGLint num_entries))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetWindowListEXT_debug(EGLint external_ref_id, const EGLint *external_win_ids, EGLint num_entries, const char* file, int line)
 {
@@ -801,8 +678,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSetWindowListEXT_debug(EGL
     return rval;
 }
 #define eglCompositorSetWindowListEXT_defined
-#endif
-#ifndef eglCompositorSwapPolicyEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglCompositorSwapPolicyEXT, (external_win_id, policy), (EGLint external_win_id, EGLint policy))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSwapPolicyEXT_debug(EGLint external_win_id, EGLint policy, const char* file, int line)
 {
@@ -813,10 +688,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglCompositorSwapPolicyEXT_debug(EGLint
     return rval;
 }
 #define eglCompositorSwapPolicyEXT_defined
-#endif
 #endif // defined(EGL_EXT_compositor)
 #if defined(EGL_EXT_device_base)
-#ifndef eglQueryDeviceAttribEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryDeviceAttribEXT, (device, attribute, value), (EGLDeviceEXT device, EGLint attribute, EGLAttrib *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDeviceAttribEXT_debug(EGLDeviceEXT device, EGLint attribute, EGLAttrib *value, const char* file, int line)
 {
@@ -827,8 +700,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDeviceAttribEXT_debug(EGLDevice
     return rval;
 }
 #define eglQueryDeviceAttribEXT_defined
-#endif
-#ifndef eglQueryDeviceStringEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, const char *, EGLAPIENTRY, eglQueryDeviceStringEXT, (device, name), (EGLDeviceEXT device, EGLint name))
 GLATTER_INLINE_OR_NOT const char * glatter_eglQueryDeviceStringEXT_debug(EGLDeviceEXT device, EGLint name, const char* file, int line)
 {
@@ -839,8 +710,6 @@ GLATTER_INLINE_OR_NOT const char * glatter_eglQueryDeviceStringEXT_debug(EGLDevi
     return rval;
 }
 #define eglQueryDeviceStringEXT_defined
-#endif
-#ifndef eglQueryDevicesEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryDevicesEXT, (max_devices, devices, num_devices), (EGLint max_devices, EGLDeviceEXT *devices, EGLint *num_devices))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDevicesEXT_debug(EGLint max_devices, EGLDeviceEXT *devices, EGLint *num_devices, const char* file, int line)
 {
@@ -851,8 +720,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDevicesEXT_debug(EGLint max_dev
     return rval;
 }
 #define eglQueryDevicesEXT_defined
-#endif
-#ifndef eglQueryDisplayAttribEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryDisplayAttribEXT, (dpy, attribute, value), (EGLDisplay dpy, EGLint attribute, EGLAttrib *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDisplayAttribEXT_debug(EGLDisplay dpy, EGLint attribute, EGLAttrib *value, const char* file, int line)
 {
@@ -863,10 +730,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDisplayAttribEXT_debug(EGLDispl
     return rval;
 }
 #define eglQueryDisplayAttribEXT_defined
-#endif
 #endif // defined(EGL_EXT_device_base)
 #if defined(EGL_EXT_device_persistent_id)
-#ifndef eglQueryDeviceBinaryEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryDeviceBinaryEXT, (device, name, max_size, value, size), (EGLDeviceEXT device, EGLint name, EGLint max_size, void *value, EGLint *size))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDeviceBinaryEXT_debug(EGLDeviceEXT device, EGLint name, EGLint max_size, void *value, EGLint *size, const char* file, int line)
 {
@@ -877,10 +742,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDeviceBinaryEXT_debug(EGLDevice
     return rval;
 }
 #define eglQueryDeviceBinaryEXT_defined
-#endif
 #endif // defined(EGL_EXT_device_persistent_id)
 #if defined(EGL_EXT_display_alloc)
-#ifndef eglDestroyDisplayEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglDestroyDisplayEXT, (dpy), (EGLDisplay dpy))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyDisplayEXT_debug(EGLDisplay dpy, const char* file, int line)
 {
@@ -891,10 +754,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyDisplayEXT_debug(EGLDisplay d
     return rval;
 }
 #define eglDestroyDisplayEXT_defined
-#endif
 #endif // defined(EGL_EXT_display_alloc)
 #if defined(EGL_EXT_image_dma_buf_import_modifiers)
-#ifndef eglQueryDmaBufFormatsEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryDmaBufFormatsEXT, (dpy, max_formats, formats, num_formats), (EGLDisplay dpy, EGLint max_formats, EGLint *formats, EGLint *num_formats))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDmaBufFormatsEXT_debug(EGLDisplay dpy, EGLint max_formats, EGLint *formats, EGLint *num_formats, const char* file, int line)
 {
@@ -905,8 +766,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDmaBufFormatsEXT_debug(EGLDispl
     return rval;
 }
 #define eglQueryDmaBufFormatsEXT_defined
-#endif
-#ifndef eglQueryDmaBufModifiersEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryDmaBufModifiersEXT, (dpy, format, max_modifiers, modifiers, external_only, num_modifiers), (EGLDisplay dpy, EGLint format, EGLint max_modifiers, EGLuint64KHR *modifiers, EGLBoolean *external_only, EGLint *num_modifiers))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDmaBufModifiersEXT_debug(EGLDisplay dpy, EGLint format, EGLint max_modifiers, EGLuint64KHR *modifiers, EGLBoolean *external_only, EGLint *num_modifiers, const char* file, int line)
 {
@@ -917,10 +776,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDmaBufModifiersEXT_debug(EGLDis
     return rval;
 }
 #define eglQueryDmaBufModifiersEXT_defined
-#endif
 #endif // defined(EGL_EXT_image_dma_buf_import_modifiers)
 #if defined(EGL_EXT_output_base)
-#ifndef eglGetOutputLayersEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetOutputLayersEXT, (dpy, attrib_list, layers, max_layers, num_layers), (EGLDisplay dpy, const EGLAttrib *attrib_list, EGLOutputLayerEXT *layers, EGLint max_layers, EGLint *num_layers))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetOutputLayersEXT_debug(EGLDisplay dpy, const EGLAttrib *attrib_list, EGLOutputLayerEXT *layers, EGLint max_layers, EGLint *num_layers, const char* file, int line)
 {
@@ -931,8 +788,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetOutputLayersEXT_debug(EGLDisplay 
     return rval;
 }
 #define eglGetOutputLayersEXT_defined
-#endif
-#ifndef eglGetOutputPortsEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetOutputPortsEXT, (dpy, attrib_list, ports, max_ports, num_ports), (EGLDisplay dpy, const EGLAttrib *attrib_list, EGLOutputPortEXT *ports, EGLint max_ports, EGLint *num_ports))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetOutputPortsEXT_debug(EGLDisplay dpy, const EGLAttrib *attrib_list, EGLOutputPortEXT *ports, EGLint max_ports, EGLint *num_ports, const char* file, int line)
 {
@@ -943,8 +798,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetOutputPortsEXT_debug(EGLDisplay d
     return rval;
 }
 #define eglGetOutputPortsEXT_defined
-#endif
-#ifndef eglOutputLayerAttribEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglOutputLayerAttribEXT, (dpy, layer, attribute, value), (EGLDisplay dpy, EGLOutputLayerEXT layer, EGLint attribute, EGLAttrib value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglOutputLayerAttribEXT_debug(EGLDisplay dpy, EGLOutputLayerEXT layer, EGLint attribute, EGLAttrib value, const char* file, int line)
 {
@@ -955,8 +808,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglOutputLayerAttribEXT_debug(EGLDispla
     return rval;
 }
 #define eglOutputLayerAttribEXT_defined
-#endif
-#ifndef eglOutputPortAttribEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglOutputPortAttribEXT, (dpy, port, attribute, value), (EGLDisplay dpy, EGLOutputPortEXT port, EGLint attribute, EGLAttrib value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglOutputPortAttribEXT_debug(EGLDisplay dpy, EGLOutputPortEXT port, EGLint attribute, EGLAttrib value, const char* file, int line)
 {
@@ -967,8 +818,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglOutputPortAttribEXT_debug(EGLDisplay
     return rval;
 }
 #define eglOutputPortAttribEXT_defined
-#endif
-#ifndef eglQueryOutputLayerAttribEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryOutputLayerAttribEXT, (dpy, layer, attribute, value), (EGLDisplay dpy, EGLOutputLayerEXT layer, EGLint attribute, EGLAttrib *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryOutputLayerAttribEXT_debug(EGLDisplay dpy, EGLOutputLayerEXT layer, EGLint attribute, EGLAttrib *value, const char* file, int line)
 {
@@ -979,8 +828,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryOutputLayerAttribEXT_debug(EGLD
     return rval;
 }
 #define eglQueryOutputLayerAttribEXT_defined
-#endif
-#ifndef eglQueryOutputLayerStringEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, const char *, EGLAPIENTRY, eglQueryOutputLayerStringEXT, (dpy, layer, name), (EGLDisplay dpy, EGLOutputLayerEXT layer, EGLint name))
 GLATTER_INLINE_OR_NOT const char * glatter_eglQueryOutputLayerStringEXT_debug(EGLDisplay dpy, EGLOutputLayerEXT layer, EGLint name, const char* file, int line)
 {
@@ -991,8 +838,6 @@ GLATTER_INLINE_OR_NOT const char * glatter_eglQueryOutputLayerStringEXT_debug(EG
     return rval;
 }
 #define eglQueryOutputLayerStringEXT_defined
-#endif
-#ifndef eglQueryOutputPortAttribEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryOutputPortAttribEXT, (dpy, port, attribute, value), (EGLDisplay dpy, EGLOutputPortEXT port, EGLint attribute, EGLAttrib *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryOutputPortAttribEXT_debug(EGLDisplay dpy, EGLOutputPortEXT port, EGLint attribute, EGLAttrib *value, const char* file, int line)
 {
@@ -1003,8 +848,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryOutputPortAttribEXT_debug(EGLDi
     return rval;
 }
 #define eglQueryOutputPortAttribEXT_defined
-#endif
-#ifndef eglQueryOutputPortStringEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, const char *, EGLAPIENTRY, eglQueryOutputPortStringEXT, (dpy, port, name), (EGLDisplay dpy, EGLOutputPortEXT port, EGLint name))
 GLATTER_INLINE_OR_NOT const char * glatter_eglQueryOutputPortStringEXT_debug(EGLDisplay dpy, EGLOutputPortEXT port, EGLint name, const char* file, int line)
 {
@@ -1015,10 +858,8 @@ GLATTER_INLINE_OR_NOT const char * glatter_eglQueryOutputPortStringEXT_debug(EGL
     return rval;
 }
 #define eglQueryOutputPortStringEXT_defined
-#endif
 #endif // defined(EGL_EXT_output_base)
 #if defined(EGL_EXT_platform_base)
-#ifndef eglCreatePlatformPixmapSurfaceEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreatePlatformPixmapSurfaceEXT, (dpy, config, native_pixmap, attrib_list), (EGLDisplay dpy, EGLConfig config, void *native_pixmap, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePlatformPixmapSurfaceEXT_debug(EGLDisplay dpy, EGLConfig config, void *native_pixmap, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1029,8 +870,6 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePlatformPixmapSurfaceEXT_debug
     return rval;
 }
 #define eglCreatePlatformPixmapSurfaceEXT_defined
-#endif
-#ifndef eglCreatePlatformWindowSurfaceEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreatePlatformWindowSurfaceEXT, (dpy, config, native_window, attrib_list), (EGLDisplay dpy, EGLConfig config, void *native_window, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePlatformWindowSurfaceEXT_debug(EGLDisplay dpy, EGLConfig config, void *native_window, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1041,8 +880,6 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePlatformWindowSurfaceEXT_debug
     return rval;
 }
 #define eglCreatePlatformWindowSurfaceEXT_defined
-#endif
-#ifndef eglGetPlatformDisplayEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLDisplay, EGLAPIENTRY, eglGetPlatformDisplayEXT, (platform, native_display, attrib_list), (EGLenum platform, void *native_display, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLDisplay glatter_eglGetPlatformDisplayEXT_debug(EGLenum platform, void *native_display, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1053,10 +890,8 @@ GLATTER_INLINE_OR_NOT EGLDisplay glatter_eglGetPlatformDisplayEXT_debug(EGLenum 
     return rval;
 }
 #define eglGetPlatformDisplayEXT_defined
-#endif
 #endif // defined(EGL_EXT_platform_base)
 #if defined(EGL_EXT_stream_consumer_egloutput)
-#ifndef eglStreamConsumerOutputEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamConsumerOutputEXT, (dpy, stream, layer), (EGLDisplay dpy, EGLStreamKHR stream, EGLOutputLayerEXT layer))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerOutputEXT_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLOutputLayerEXT layer, const char* file, int line)
 {
@@ -1067,10 +902,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerOutputEXT_debug(EGLDis
     return rval;
 }
 #define eglStreamConsumerOutputEXT_defined
-#endif
 #endif // defined(EGL_EXT_stream_consumer_egloutput)
 #if defined(EGL_EXT_surface_compression)
-#ifndef eglQuerySupportedCompressionRatesEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQuerySupportedCompressionRatesEXT, (dpy, config, attrib_list, rates, rate_size, num_rates), (EGLDisplay dpy, EGLConfig config, const EGLAttrib *attrib_list, EGLint *rates, EGLint rate_size, EGLint *num_rates))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQuerySupportedCompressionRatesEXT_debug(EGLDisplay dpy, EGLConfig config, const EGLAttrib *attrib_list, EGLint *rates, EGLint rate_size, EGLint *num_rates, const char* file, int line)
 {
@@ -1081,10 +914,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQuerySupportedCompressionRatesEXT_de
     return rval;
 }
 #define eglQuerySupportedCompressionRatesEXT_defined
-#endif
 #endif // defined(EGL_EXT_surface_compression)
 #if defined(EGL_EXT_swap_buffers_with_damage)
-#ifndef eglSwapBuffersWithDamageEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSwapBuffersWithDamageEXT, (dpy, surface, rects, n_rects), (EGLDisplay dpy, EGLSurface surface, const EGLint *rects, EGLint n_rects))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffersWithDamageEXT_debug(EGLDisplay dpy, EGLSurface surface, const EGLint *rects, EGLint n_rects, const char* file, int line)
 {
@@ -1095,10 +926,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffersWithDamageEXT_debug(EGLDi
     return rval;
 }
 #define eglSwapBuffersWithDamageEXT_defined
-#endif
 #endif // defined(EGL_EXT_swap_buffers_with_damage)
 #if defined(EGL_EXT_sync_reuse)
-#ifndef eglUnsignalSyncEXT_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglUnsignalSyncEXT, (dpy, sync, attrib_list), (EGLDisplay dpy, EGLSync sync, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglUnsignalSyncEXT_debug(EGLDisplay dpy, EGLSync sync, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -1109,10 +938,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglUnsignalSyncEXT_debug(EGLDisplay dpy
     return rval;
 }
 #define eglUnsignalSyncEXT_defined
-#endif
 #endif // defined(EGL_EXT_sync_reuse)
 #if defined(EGL_HI_clientpixmap)
-#ifndef eglCreatePixmapSurfaceHI_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreatePixmapSurfaceHI, (dpy, config, pixmap), (EGLDisplay dpy, EGLConfig config, struct EGLClientPixmapHI *pixmap))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePixmapSurfaceHI_debug(EGLDisplay dpy, EGLConfig config, struct EGLClientPixmapHI *pixmap, const char* file, int line)
 {
@@ -1123,10 +950,8 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreatePixmapSurfaceHI_debug(EGLDispl
     return rval;
 }
 #define eglCreatePixmapSurfaceHI_defined
-#endif
 #endif // defined(EGL_HI_clientpixmap)
 #if defined(EGL_KHR_cl_event2)
-#ifndef eglCreateSync64KHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSyncKHR, EGLAPIENTRY, eglCreateSync64KHR, (dpy, type, attrib_list), (EGLDisplay dpy, EGLenum type, const EGLAttribKHR *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSyncKHR glatter_eglCreateSync64KHR_debug(EGLDisplay dpy, EGLenum type, const EGLAttribKHR *attrib_list, const char* file, int line)
 {
@@ -1137,10 +962,8 @@ GLATTER_INLINE_OR_NOT EGLSyncKHR glatter_eglCreateSync64KHR_debug(EGLDisplay dpy
     return rval;
 }
 #define eglCreateSync64KHR_defined
-#endif
 #endif // defined(EGL_KHR_cl_event2)
 #if defined(EGL_KHR_debug)
-#ifndef eglDebugMessageControlKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglDebugMessageControlKHR, (callback, attrib_list), (EGLDEBUGPROCKHR callback, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLint glatter_eglDebugMessageControlKHR_debug(EGLDEBUGPROCKHR callback, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -1151,8 +974,6 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglDebugMessageControlKHR_debug(EGLDEBUGPRO
     return rval;
 }
 #define eglDebugMessageControlKHR_defined
-#endif
-#ifndef eglLabelObjectKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglLabelObjectKHR, (display, objectType, object, label), (EGLDisplay display, EGLenum objectType, EGLObjectKHR object, EGLLabelKHR label))
 GLATTER_INLINE_OR_NOT EGLint glatter_eglLabelObjectKHR_debug(EGLDisplay display, EGLenum objectType, EGLObjectKHR object, EGLLabelKHR label, const char* file, int line)
 {
@@ -1163,8 +984,6 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglLabelObjectKHR_debug(EGLDisplay display,
     return rval;
 }
 #define eglLabelObjectKHR_defined
-#endif
-#ifndef eglQueryDebugKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryDebugKHR, (attribute, value), (EGLint attribute, EGLAttrib *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDebugKHR_debug(EGLint attribute, EGLAttrib *value, const char* file, int line)
 {
@@ -1175,10 +994,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDebugKHR_debug(EGLint attribute
     return rval;
 }
 #define eglQueryDebugKHR_defined
-#endif
 #endif // defined(EGL_KHR_debug)
 #if defined(EGL_KHR_display_reference)
-#ifndef eglQueryDisplayAttribKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryDisplayAttribKHR, (dpy, name, value), (EGLDisplay dpy, EGLint name, EGLAttrib *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDisplayAttribKHR_debug(EGLDisplay dpy, EGLint name, EGLAttrib *value, const char* file, int line)
 {
@@ -1189,11 +1006,9 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDisplayAttribKHR_debug(EGLDispl
     return rval;
 }
 #define eglQueryDisplayAttribKHR_defined
-#endif
 #endif // defined(EGL_KHR_display_reference)
 #if defined(EGL_KHR_fence_sync)
 #if defined(KHRONOS_SUPPORT_INT64)
-#ifndef eglClientWaitSyncKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglClientWaitSyncKHR, (dpy, sync, flags, timeout), (EGLDisplay dpy, EGLSyncKHR sync, EGLint flags, EGLTimeKHR timeout))
 GLATTER_INLINE_OR_NOT EGLint glatter_eglClientWaitSyncKHR_debug(EGLDisplay dpy, EGLSyncKHR sync, EGLint flags, EGLTimeKHR timeout, const char* file, int line)
 {
@@ -1204,8 +1019,6 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglClientWaitSyncKHR_debug(EGLDisplay dpy, 
     return rval;
 }
 #define eglClientWaitSyncKHR_defined
-#endif
-#ifndef eglCreateSyncKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSyncKHR, EGLAPIENTRY, eglCreateSyncKHR, (dpy, type, attrib_list), (EGLDisplay dpy, EGLenum type, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSyncKHR glatter_eglCreateSyncKHR_debug(EGLDisplay dpy, EGLenum type, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1216,8 +1029,6 @@ GLATTER_INLINE_OR_NOT EGLSyncKHR glatter_eglCreateSyncKHR_debug(EGLDisplay dpy, 
     return rval;
 }
 #define eglCreateSyncKHR_defined
-#endif
-#ifndef eglDestroySyncKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglDestroySyncKHR, (dpy, sync), (EGLDisplay dpy, EGLSyncKHR sync))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroySyncKHR_debug(EGLDisplay dpy, EGLSyncKHR sync, const char* file, int line)
 {
@@ -1228,8 +1039,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroySyncKHR_debug(EGLDisplay dpy,
     return rval;
 }
 #define eglDestroySyncKHR_defined
-#endif
-#ifndef eglGetSyncAttribKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetSyncAttribKHR, (dpy, sync, attribute, value), (EGLDisplay dpy, EGLSyncKHR sync, EGLint attribute, EGLint *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetSyncAttribKHR_debug(EGLDisplay dpy, EGLSyncKHR sync, EGLint attribute, EGLint *value, const char* file, int line)
 {
@@ -1240,11 +1049,9 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetSyncAttribKHR_debug(EGLDisplay dp
     return rval;
 }
 #define eglGetSyncAttribKHR_defined
-#endif
 #endif // defined(KHRONOS_SUPPORT_INT64)
 #endif // defined(EGL_KHR_fence_sync)
 #if defined(EGL_KHR_image)
-#ifndef eglCreateImageKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLImageKHR, EGLAPIENTRY, eglCreateImageKHR, (dpy, ctx, target, buffer, attrib_list), (EGLDisplay dpy, EGLContext ctx, EGLenum target, EGLClientBuffer buffer, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLImageKHR glatter_eglCreateImageKHR_debug(EGLDisplay dpy, EGLContext ctx, EGLenum target, EGLClientBuffer buffer, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1255,8 +1062,6 @@ GLATTER_INLINE_OR_NOT EGLImageKHR glatter_eglCreateImageKHR_debug(EGLDisplay dpy
     return rval;
 }
 #define eglCreateImageKHR_defined
-#endif
-#ifndef eglDestroyImageKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglDestroyImageKHR, (dpy, image), (EGLDisplay dpy, EGLImageKHR image))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyImageKHR_debug(EGLDisplay dpy, EGLImageKHR image, const char* file, int line)
 {
@@ -1267,10 +1072,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyImageKHR_debug(EGLDisplay dpy
     return rval;
 }
 #define eglDestroyImageKHR_defined
-#endif
 #endif // defined(EGL_KHR_image)
 #if defined(EGL_KHR_lock_surface)
-#ifndef eglLockSurfaceKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglLockSurfaceKHR, (dpy, surface, attrib_list), (EGLDisplay dpy, EGLSurface surface, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglLockSurfaceKHR_debug(EGLDisplay dpy, EGLSurface surface, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1281,8 +1084,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglLockSurfaceKHR_debug(EGLDisplay dpy,
     return rval;
 }
 #define eglLockSurfaceKHR_defined
-#endif
-#ifndef eglUnlockSurfaceKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglUnlockSurfaceKHR, (dpy, surface), (EGLDisplay dpy, EGLSurface surface))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglUnlockSurfaceKHR_debug(EGLDisplay dpy, EGLSurface surface, const char* file, int line)
 {
@@ -1293,10 +1094,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglUnlockSurfaceKHR_debug(EGLDisplay dp
     return rval;
 }
 #define eglUnlockSurfaceKHR_defined
-#endif
 #endif // defined(EGL_KHR_lock_surface)
 #if defined(EGL_KHR_lock_surface3)
-#ifndef eglQuerySurface64KHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQuerySurface64KHR, (dpy, surface, attribute, value), (EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLAttribKHR *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQuerySurface64KHR_debug(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLAttribKHR *value, const char* file, int line)
 {
@@ -1307,10 +1106,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQuerySurface64KHR_debug(EGLDisplay d
     return rval;
 }
 #define eglQuerySurface64KHR_defined
-#endif
 #endif // defined(EGL_KHR_lock_surface3)
 #if defined(EGL_KHR_partial_update)
-#ifndef eglSetDamageRegionKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSetDamageRegionKHR, (dpy, surface, rects, n_rects), (EGLDisplay dpy, EGLSurface surface, EGLint *rects, EGLint n_rects))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSetDamageRegionKHR_debug(EGLDisplay dpy, EGLSurface surface, EGLint *rects, EGLint n_rects, const char* file, int line)
 {
@@ -1321,11 +1118,9 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSetDamageRegionKHR_debug(EGLDisplay 
     return rval;
 }
 #define eglSetDamageRegionKHR_defined
-#endif
 #endif // defined(EGL_KHR_partial_update)
 #if defined(EGL_KHR_reusable_sync)
 #if defined(KHRONOS_SUPPORT_INT64)
-#ifndef eglSignalSyncKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSignalSyncKHR, (dpy, sync, mode), (EGLDisplay dpy, EGLSyncKHR sync, EGLenum mode))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSignalSyncKHR_debug(EGLDisplay dpy, EGLSyncKHR sync, EGLenum mode, const char* file, int line)
 {
@@ -1336,12 +1131,10 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSignalSyncKHR_debug(EGLDisplay dpy, 
     return rval;
 }
 #define eglSignalSyncKHR_defined
-#endif
 #endif // defined(KHRONOS_SUPPORT_INT64)
 #endif // defined(EGL_KHR_reusable_sync)
 #if defined(EGL_KHR_stream)
 #if defined(KHRONOS_SUPPORT_INT64)
-#ifndef eglCreateStreamKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLStreamKHR, EGLAPIENTRY, eglCreateStreamKHR, (dpy, attrib_list), (EGLDisplay dpy, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLStreamKHR glatter_eglCreateStreamKHR_debug(EGLDisplay dpy, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1352,8 +1145,6 @@ GLATTER_INLINE_OR_NOT EGLStreamKHR glatter_eglCreateStreamKHR_debug(EGLDisplay d
     return rval;
 }
 #define eglCreateStreamKHR_defined
-#endif
-#ifndef eglDestroyStreamKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglDestroyStreamKHR, (dpy, stream), (EGLDisplay dpy, EGLStreamKHR stream))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyStreamKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, const char* file, int line)
 {
@@ -1364,8 +1155,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroyStreamKHR_debug(EGLDisplay dp
     return rval;
 }
 #define eglDestroyStreamKHR_defined
-#endif
-#ifndef eglQueryStreamKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryStreamKHR, (dpy, stream, attribute, value), (EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLint *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLint *value, const char* file, int line)
 {
@@ -1376,8 +1165,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamKHR_debug(EGLDisplay dpy,
     return rval;
 }
 #define eglQueryStreamKHR_defined
-#endif
-#ifndef eglQueryStreamu64KHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryStreamu64KHR, (dpy, stream, attribute, value), (EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLuint64KHR *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamu64KHR_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLuint64KHR *value, const char* file, int line)
 {
@@ -1388,8 +1175,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamu64KHR_debug(EGLDisplay d
     return rval;
 }
 #define eglQueryStreamu64KHR_defined
-#endif
-#ifndef eglStreamAttribKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamAttribKHR, (dpy, stream, attribute, value), (EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLint value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamAttribKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLint value, const char* file, int line)
 {
@@ -1400,12 +1185,10 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamAttribKHR_debug(EGLDisplay dpy
     return rval;
 }
 #define eglStreamAttribKHR_defined
-#endif
 #endif // defined(KHRONOS_SUPPORT_INT64)
 #endif // defined(EGL_KHR_stream)
 #if defined(EGL_KHR_stream_attrib)
 #if defined(KHRONOS_SUPPORT_INT64)
-#ifndef eglCreateStreamAttribKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLStreamKHR, EGLAPIENTRY, eglCreateStreamAttribKHR, (dpy, attrib_list), (EGLDisplay dpy, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLStreamKHR glatter_eglCreateStreamAttribKHR_debug(EGLDisplay dpy, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -1416,8 +1199,6 @@ GLATTER_INLINE_OR_NOT EGLStreamKHR glatter_eglCreateStreamAttribKHR_debug(EGLDis
     return rval;
 }
 #define eglCreateStreamAttribKHR_defined
-#endif
-#ifndef eglQueryStreamAttribKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryStreamAttribKHR, (dpy, stream, attribute, value), (EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLAttrib *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamAttribKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLAttrib *value, const char* file, int line)
 {
@@ -1428,8 +1209,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamAttribKHR_debug(EGLDispla
     return rval;
 }
 #define eglQueryStreamAttribKHR_defined
-#endif
-#ifndef eglSetStreamAttribKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSetStreamAttribKHR, (dpy, stream, attribute, value), (EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLAttrib value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSetStreamAttribKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLAttrib value, const char* file, int line)
 {
@@ -1440,8 +1219,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSetStreamAttribKHR_debug(EGLDisplay 
     return rval;
 }
 #define eglSetStreamAttribKHR_defined
-#endif
-#ifndef eglStreamConsumerAcquireAttribKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamConsumerAcquireAttribKHR, (dpy, stream, attrib_list), (EGLDisplay dpy, EGLStreamKHR stream, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerAcquireAttribKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -1452,8 +1229,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerAcquireAttribKHR_debug
     return rval;
 }
 #define eglStreamConsumerAcquireAttribKHR_defined
-#endif
-#ifndef eglStreamConsumerReleaseAttribKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamConsumerReleaseAttribKHR, (dpy, stream, attrib_list), (EGLDisplay dpy, EGLStreamKHR stream, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerReleaseAttribKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -1464,12 +1239,10 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerReleaseAttribKHR_debug
     return rval;
 }
 #define eglStreamConsumerReleaseAttribKHR_defined
-#endif
 #endif // defined(KHRONOS_SUPPORT_INT64)
 #endif // defined(EGL_KHR_stream_attrib)
 #if defined(EGL_KHR_stream_consumer_gltexture)
 #if defined(EGL_KHR_stream)
-#ifndef eglStreamConsumerAcquireKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamConsumerAcquireKHR, (dpy, stream), (EGLDisplay dpy, EGLStreamKHR stream))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerAcquireKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, const char* file, int line)
 {
@@ -1480,8 +1253,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerAcquireKHR_debug(EGLDi
     return rval;
 }
 #define eglStreamConsumerAcquireKHR_defined
-#endif
-#ifndef eglStreamConsumerGLTextureExternalKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamConsumerGLTextureExternalKHR, (dpy, stream), (EGLDisplay dpy, EGLStreamKHR stream))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerGLTextureExternalKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, const char* file, int line)
 {
@@ -1492,8 +1263,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerGLTextureExternalKHR_d
     return rval;
 }
 #define eglStreamConsumerGLTextureExternalKHR_defined
-#endif
-#ifndef eglStreamConsumerReleaseKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamConsumerReleaseKHR, (dpy, stream), (EGLDisplay dpy, EGLStreamKHR stream))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerReleaseKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, const char* file, int line)
 {
@@ -1504,12 +1273,10 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerReleaseKHR_debug(EGLDi
     return rval;
 }
 #define eglStreamConsumerReleaseKHR_defined
-#endif
 #endif // defined(EGL_KHR_stream)
 #endif // defined(EGL_KHR_stream_consumer_gltexture)
 #if defined(EGL_KHR_stream_cross_process_fd)
 #if defined(EGL_KHR_stream)
-#ifndef eglCreateStreamFromFileDescriptorKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLStreamKHR, EGLAPIENTRY, eglCreateStreamFromFileDescriptorKHR, (dpy, file_descriptor), (EGLDisplay dpy, EGLNativeFileDescriptorKHR file_descriptor))
 GLATTER_INLINE_OR_NOT EGLStreamKHR glatter_eglCreateStreamFromFileDescriptorKHR_debug(EGLDisplay dpy, EGLNativeFileDescriptorKHR file_descriptor, const char* file, int line)
 {
@@ -1520,8 +1287,6 @@ GLATTER_INLINE_OR_NOT EGLStreamKHR glatter_eglCreateStreamFromFileDescriptorKHR_
     return rval;
 }
 #define eglCreateStreamFromFileDescriptorKHR_defined
-#endif
-#ifndef eglGetStreamFileDescriptorKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLNativeFileDescriptorKHR, EGLAPIENTRY, eglGetStreamFileDescriptorKHR, (dpy, stream), (EGLDisplay dpy, EGLStreamKHR stream))
 GLATTER_INLINE_OR_NOT EGLNativeFileDescriptorKHR glatter_eglGetStreamFileDescriptorKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, const char* file, int line)
 {
@@ -1532,12 +1297,10 @@ GLATTER_INLINE_OR_NOT EGLNativeFileDescriptorKHR glatter_eglGetStreamFileDescrip
     return rval;
 }
 #define eglGetStreamFileDescriptorKHR_defined
-#endif
 #endif // defined(EGL_KHR_stream)
 #endif // defined(EGL_KHR_stream_cross_process_fd)
 #if defined(EGL_KHR_stream_fifo)
 #if defined(EGL_KHR_stream)
-#ifndef eglQueryStreamTimeKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryStreamTimeKHR, (dpy, stream, attribute, value), (EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLTimeKHR *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamTimeKHR_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLTimeKHR *value, const char* file, int line)
 {
@@ -1548,12 +1311,10 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamTimeKHR_debug(EGLDisplay 
     return rval;
 }
 #define eglQueryStreamTimeKHR_defined
-#endif
 #endif // defined(EGL_KHR_stream)
 #endif // defined(EGL_KHR_stream_fifo)
 #if defined(EGL_KHR_stream_producer_eglsurface)
 #if defined(EGL_KHR_stream)
-#ifndef eglCreateStreamProducerSurfaceKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSurface, EGLAPIENTRY, eglCreateStreamProducerSurfaceKHR, (dpy, config, stream, attrib_list), (EGLDisplay dpy, EGLConfig config, EGLStreamKHR stream, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreateStreamProducerSurfaceKHR_debug(EGLDisplay dpy, EGLConfig config, EGLStreamKHR stream, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1564,11 +1325,9 @@ GLATTER_INLINE_OR_NOT EGLSurface glatter_eglCreateStreamProducerSurfaceKHR_debug
     return rval;
 }
 #define eglCreateStreamProducerSurfaceKHR_defined
-#endif
 #endif // defined(EGL_KHR_stream)
 #endif // defined(EGL_KHR_stream_producer_eglsurface)
 #if defined(EGL_KHR_swap_buffers_with_damage)
-#ifndef eglSwapBuffersWithDamageKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSwapBuffersWithDamageKHR, (dpy, surface, rects, n_rects), (EGLDisplay dpy, EGLSurface surface, const EGLint *rects, EGLint n_rects))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffersWithDamageKHR_debug(EGLDisplay dpy, EGLSurface surface, const EGLint *rects, EGLint n_rects, const char* file, int line)
 {
@@ -1579,10 +1338,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffersWithDamageKHR_debug(EGLDi
     return rval;
 }
 #define eglSwapBuffersWithDamageKHR_defined
-#endif
 #endif // defined(EGL_KHR_swap_buffers_with_damage)
 #if defined(EGL_KHR_wait_sync)
-#ifndef eglWaitSyncKHR_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglWaitSyncKHR, (dpy, sync, flags), (EGLDisplay dpy, EGLSyncKHR sync, EGLint flags))
 GLATTER_INLINE_OR_NOT EGLint glatter_eglWaitSyncKHR_debug(EGLDisplay dpy, EGLSyncKHR sync, EGLint flags, const char* file, int line)
 {
@@ -1593,10 +1350,8 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglWaitSyncKHR_debug(EGLDisplay dpy, EGLSyn
     return rval;
 }
 #define eglWaitSyncKHR_defined
-#endif
 #endif // defined(EGL_KHR_wait_sync)
 #if defined(EGL_MESA_drm_image)
-#ifndef eglCreateDRMImageMESA_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLImageKHR, EGLAPIENTRY, eglCreateDRMImageMESA, (dpy, attrib_list), (EGLDisplay dpy, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLImageKHR glatter_eglCreateDRMImageMESA_debug(EGLDisplay dpy, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1607,8 +1362,6 @@ GLATTER_INLINE_OR_NOT EGLImageKHR glatter_eglCreateDRMImageMESA_debug(EGLDisplay
     return rval;
 }
 #define eglCreateDRMImageMESA_defined
-#endif
-#ifndef eglExportDRMImageMESA_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglExportDRMImageMESA, (dpy, image, name, handle, stride), (EGLDisplay dpy, EGLImageKHR image, EGLint *name, EGLint *handle, EGLint *stride))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglExportDRMImageMESA_debug(EGLDisplay dpy, EGLImageKHR image, EGLint *name, EGLint *handle, EGLint *stride, const char* file, int line)
 {
@@ -1619,10 +1372,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglExportDRMImageMESA_debug(EGLDisplay 
     return rval;
 }
 #define eglExportDRMImageMESA_defined
-#endif
 #endif // defined(EGL_MESA_drm_image)
 #if defined(EGL_MESA_image_dma_buf_export)
-#ifndef eglExportDMABUFImageMESA_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglExportDMABUFImageMESA, (dpy, image, fds, strides, offsets), (EGLDisplay dpy, EGLImageKHR image, int *fds, EGLint *strides, EGLint *offsets))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglExportDMABUFImageMESA_debug(EGLDisplay dpy, EGLImageKHR image, int *fds, EGLint *strides, EGLint *offsets, const char* file, int line)
 {
@@ -1633,8 +1384,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglExportDMABUFImageMESA_debug(EGLDispl
     return rval;
 }
 #define eglExportDMABUFImageMESA_defined
-#endif
-#ifndef eglExportDMABUFImageQueryMESA_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglExportDMABUFImageQueryMESA, (dpy, image, fourcc, num_planes, modifiers), (EGLDisplay dpy, EGLImageKHR image, int *fourcc, int *num_planes, EGLuint64KHR *modifiers))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglExportDMABUFImageQueryMESA_debug(EGLDisplay dpy, EGLImageKHR image, int *fourcc, int *num_planes, EGLuint64KHR *modifiers, const char* file, int line)
 {
@@ -1645,10 +1394,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglExportDMABUFImageQueryMESA_debug(EGL
     return rval;
 }
 #define eglExportDMABUFImageQueryMESA_defined
-#endif
 #endif // defined(EGL_MESA_image_dma_buf_export)
 #if defined(EGL_MESA_query_driver)
-#ifndef eglGetDisplayDriverConfig_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, char *, EGLAPIENTRY, eglGetDisplayDriverConfig, (dpy), (EGLDisplay dpy))
 GLATTER_INLINE_OR_NOT char * glatter_eglGetDisplayDriverConfig_debug(EGLDisplay dpy, const char* file, int line)
 {
@@ -1659,8 +1406,6 @@ GLATTER_INLINE_OR_NOT char * glatter_eglGetDisplayDriverConfig_debug(EGLDisplay 
     return rval;
 }
 #define eglGetDisplayDriverConfig_defined
-#endif
-#ifndef eglGetDisplayDriverName_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, const char *, EGLAPIENTRY, eglGetDisplayDriverName, (dpy), (EGLDisplay dpy))
 GLATTER_INLINE_OR_NOT const char * glatter_eglGetDisplayDriverName_debug(EGLDisplay dpy, const char* file, int line)
 {
@@ -1671,10 +1416,8 @@ GLATTER_INLINE_OR_NOT const char * glatter_eglGetDisplayDriverName_debug(EGLDisp
     return rval;
 }
 #define eglGetDisplayDriverName_defined
-#endif
 #endif // defined(EGL_MESA_query_driver)
 #if defined(EGL_NOK_swap_region)
-#ifndef eglSwapBuffersRegionNOK_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSwapBuffersRegionNOK, (dpy, surface, numRects, rects), (EGLDisplay dpy, EGLSurface surface, EGLint numRects, const EGLint *rects))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffersRegionNOK_debug(EGLDisplay dpy, EGLSurface surface, EGLint numRects, const EGLint *rects, const char* file, int line)
 {
@@ -1685,10 +1428,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffersRegionNOK_debug(EGLDispla
     return rval;
 }
 #define eglSwapBuffersRegionNOK_defined
-#endif
 #endif // defined(EGL_NOK_swap_region)
 #if defined(EGL_NOK_swap_region2)
-#ifndef eglSwapBuffersRegion2NOK_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSwapBuffersRegion2NOK, (dpy, surface, numRects, rects), (EGLDisplay dpy, EGLSurface surface, EGLint numRects, const EGLint *rects))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffersRegion2NOK_debug(EGLDisplay dpy, EGLSurface surface, EGLint numRects, const EGLint *rects, const char* file, int line)
 {
@@ -1699,10 +1440,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSwapBuffersRegion2NOK_debug(EGLDispl
     return rval;
 }
 #define eglSwapBuffersRegion2NOK_defined
-#endif
 #endif // defined(EGL_NOK_swap_region2)
 #if defined(EGL_NV_native_query)
-#ifndef eglQueryNativeDisplayNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryNativeDisplayNV, (dpy, display_id), (EGLDisplay dpy, EGLNativeDisplayType *display_id))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryNativeDisplayNV_debug(EGLDisplay dpy, EGLNativeDisplayType *display_id, const char* file, int line)
 {
@@ -1713,8 +1452,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryNativeDisplayNV_debug(EGLDispla
     return rval;
 }
 #define eglQueryNativeDisplayNV_defined
-#endif
-#ifndef eglQueryNativePixmapNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryNativePixmapNV, (dpy, surf, pixmap), (EGLDisplay dpy, EGLSurface surf, EGLNativePixmapType *pixmap))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryNativePixmapNV_debug(EGLDisplay dpy, EGLSurface surf, EGLNativePixmapType *pixmap, const char* file, int line)
 {
@@ -1725,8 +1462,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryNativePixmapNV_debug(EGLDisplay
     return rval;
 }
 #define eglQueryNativePixmapNV_defined
-#endif
-#ifndef eglQueryNativeWindowNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryNativeWindowNV, (dpy, surf, window), (EGLDisplay dpy, EGLSurface surf, EGLNativeWindowType *window))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryNativeWindowNV_debug(EGLDisplay dpy, EGLSurface surf, EGLNativeWindowType *window, const char* file, int line)
 {
@@ -1737,10 +1472,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryNativeWindowNV_debug(EGLDisplay
     return rval;
 }
 #define eglQueryNativeWindowNV_defined
-#endif
 #endif // defined(EGL_NV_native_query)
 #if defined(EGL_NV_post_sub_buffer)
-#ifndef eglPostSubBufferNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglPostSubBufferNV, (dpy, surface, x, y, width, height), (EGLDisplay dpy, EGLSurface surface, EGLint x, EGLint y, EGLint width, EGLint height))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglPostSubBufferNV_debug(EGLDisplay dpy, EGLSurface surface, EGLint x, EGLint y, EGLint width, EGLint height, const char* file, int line)
 {
@@ -1751,10 +1484,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglPostSubBufferNV_debug(EGLDisplay dpy
     return rval;
 }
 #define eglPostSubBufferNV_defined
-#endif
 #endif // defined(EGL_NV_post_sub_buffer)
 #if defined(EGL_NV_stream_consumer_eglimage)
-#ifndef eglQueryStreamConsumerEventNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglQueryStreamConsumerEventNV, (dpy, stream, timeout, event, aux), (EGLDisplay dpy, EGLStreamKHR stream, EGLTime timeout, EGLenum *event, EGLAttrib *aux))
 GLATTER_INLINE_OR_NOT EGLint glatter_eglQueryStreamConsumerEventNV_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLTime timeout, EGLenum *event, EGLAttrib *aux, const char* file, int line)
 {
@@ -1765,8 +1496,6 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglQueryStreamConsumerEventNV_debug(EGLDisp
     return rval;
 }
 #define eglQueryStreamConsumerEventNV_defined
-#endif
-#ifndef eglStreamAcquireImageNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamAcquireImageNV, (dpy, stream, pImage, sync), (EGLDisplay dpy, EGLStreamKHR stream, EGLImage *pImage, EGLSync sync))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamAcquireImageNV_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLImage *pImage, EGLSync sync, const char* file, int line)
 {
@@ -1777,8 +1506,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamAcquireImageNV_debug(EGLDispla
     return rval;
 }
 #define eglStreamAcquireImageNV_defined
-#endif
-#ifndef eglStreamImageConsumerConnectNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamImageConsumerConnectNV, (dpy, stream, num_modifiers, modifiers, attrib_list), (EGLDisplay dpy, EGLStreamKHR stream, EGLint num_modifiers, const EGLuint64KHR *modifiers, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamImageConsumerConnectNV_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLint num_modifiers, const EGLuint64KHR *modifiers, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -1789,8 +1516,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamImageConsumerConnectNV_debug(E
     return rval;
 }
 #define eglStreamImageConsumerConnectNV_defined
-#endif
-#ifndef eglStreamReleaseImageNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamReleaseImageNV, (dpy, stream, image, sync), (EGLDisplay dpy, EGLStreamKHR stream, EGLImage image, EGLSync sync))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamReleaseImageNV_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLImage image, EGLSync sync, const char* file, int line)
 {
@@ -1801,10 +1526,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamReleaseImageNV_debug(EGLDispla
     return rval;
 }
 #define eglStreamReleaseImageNV_defined
-#endif
 #endif // defined(EGL_NV_stream_consumer_eglimage)
 #if defined(EGL_NV_stream_consumer_gltexture_yuv)
-#ifndef eglStreamConsumerGLTextureExternalAttribsNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamConsumerGLTextureExternalAttribsNV, (dpy, stream, attrib_list), (EGLDisplay dpy, EGLStreamKHR stream, const EGLAttrib *attrib_list))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerGLTextureExternalAttribsNV_debug(EGLDisplay dpy, EGLStreamKHR stream, const EGLAttrib *attrib_list, const char* file, int line)
 {
@@ -1815,10 +1538,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamConsumerGLTextureExternalAttri
     return rval;
 }
 #define eglStreamConsumerGLTextureExternalAttribsNV_defined
-#endif
 #endif // defined(EGL_NV_stream_consumer_gltexture_yuv)
 #if defined(EGL_NV_stream_flush)
-#ifndef eglStreamFlushNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglStreamFlushNV, (dpy, stream), (EGLDisplay dpy, EGLStreamKHR stream))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamFlushNV_debug(EGLDisplay dpy, EGLStreamKHR stream, const char* file, int line)
 {
@@ -1829,10 +1550,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglStreamFlushNV_debug(EGLDisplay dpy, 
     return rval;
 }
 #define eglStreamFlushNV_defined
-#endif
 #endif // defined(EGL_NV_stream_flush)
 #if defined(EGL_NV_stream_metadata)
-#ifndef eglQueryDisplayAttribNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryDisplayAttribNV, (dpy, attribute, value), (EGLDisplay dpy, EGLint attribute, EGLAttrib *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDisplayAttribNV_debug(EGLDisplay dpy, EGLint attribute, EGLAttrib *value, const char* file, int line)
 {
@@ -1843,8 +1562,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryDisplayAttribNV_debug(EGLDispla
     return rval;
 }
 #define eglQueryDisplayAttribNV_defined
-#endif
-#ifndef eglQueryStreamMetadataNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryStreamMetadataNV, (dpy, stream, name, n, offset, size, data), (EGLDisplay dpy, EGLStreamKHR stream, EGLenum name, EGLint n, EGLint offset, EGLint size, void *data))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamMetadataNV_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLenum name, EGLint n, EGLint offset, EGLint size, void *data, const char* file, int line)
 {
@@ -1855,8 +1572,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryStreamMetadataNV_debug(EGLDispl
     return rval;
 }
 #define eglQueryStreamMetadataNV_defined
-#endif
-#ifndef eglSetStreamMetadataNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSetStreamMetadataNV, (dpy, stream, n, offset, size, data), (EGLDisplay dpy, EGLStreamKHR stream, EGLint n, EGLint offset, EGLint size, const void *data))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSetStreamMetadataNV_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLint n, EGLint offset, EGLint size, const void *data, const char* file, int line)
 {
@@ -1867,10 +1582,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSetStreamMetadataNV_debug(EGLDisplay
     return rval;
 }
 #define eglSetStreamMetadataNV_defined
-#endif
 #endif // defined(EGL_NV_stream_metadata)
 #if defined(EGL_NV_stream_reset)
-#ifndef eglResetStreamNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglResetStreamNV, (dpy, stream), (EGLDisplay dpy, EGLStreamKHR stream))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglResetStreamNV_debug(EGLDisplay dpy, EGLStreamKHR stream, const char* file, int line)
 {
@@ -1881,10 +1594,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglResetStreamNV_debug(EGLDisplay dpy, 
     return rval;
 }
 #define eglResetStreamNV_defined
-#endif
 #endif // defined(EGL_NV_stream_reset)
 #if defined(EGL_NV_stream_sync)
-#ifndef eglCreateStreamSyncNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSyncKHR, EGLAPIENTRY, eglCreateStreamSyncNV, (dpy, stream, type, attrib_list), (EGLDisplay dpy, EGLStreamKHR stream, EGLenum type, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSyncKHR glatter_eglCreateStreamSyncNV_debug(EGLDisplay dpy, EGLStreamKHR stream, EGLenum type, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1895,11 +1606,9 @@ GLATTER_INLINE_OR_NOT EGLSyncKHR glatter_eglCreateStreamSyncNV_debug(EGLDisplay 
     return rval;
 }
 #define eglCreateStreamSyncNV_defined
-#endif
 #endif // defined(EGL_NV_stream_sync)
 #if defined(EGL_NV_sync)
 #if defined(KHRONOS_SUPPORT_INT64)
-#ifndef eglClientWaitSyncNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLint, EGLAPIENTRY, eglClientWaitSyncNV, (sync, flags, timeout), (EGLSyncNV sync, EGLint flags, EGLTimeNV timeout))
 GLATTER_INLINE_OR_NOT EGLint glatter_eglClientWaitSyncNV_debug(EGLSyncNV sync, EGLint flags, EGLTimeNV timeout, const char* file, int line)
 {
@@ -1910,8 +1619,6 @@ GLATTER_INLINE_OR_NOT EGLint glatter_eglClientWaitSyncNV_debug(EGLSyncNV sync, E
     return rval;
 }
 #define eglClientWaitSyncNV_defined
-#endif
-#ifndef eglCreateFenceSyncNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLSyncNV, EGLAPIENTRY, eglCreateFenceSyncNV, (dpy, condition, attrib_list), (EGLDisplay dpy, EGLenum condition, const EGLint *attrib_list))
 GLATTER_INLINE_OR_NOT EGLSyncNV glatter_eglCreateFenceSyncNV_debug(EGLDisplay dpy, EGLenum condition, const EGLint *attrib_list, const char* file, int line)
 {
@@ -1922,8 +1629,6 @@ GLATTER_INLINE_OR_NOT EGLSyncNV glatter_eglCreateFenceSyncNV_debug(EGLDisplay dp
     return rval;
 }
 #define eglCreateFenceSyncNV_defined
-#endif
-#ifndef eglDestroySyncNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglDestroySyncNV, (sync), (EGLSyncNV sync))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroySyncNV_debug(EGLSyncNV sync, const char* file, int line)
 {
@@ -1934,8 +1639,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglDestroySyncNV_debug(EGLSyncNV sync, 
     return rval;
 }
 #define eglDestroySyncNV_defined
-#endif
-#ifndef eglFenceNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglFenceNV, (sync), (EGLSyncNV sync))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglFenceNV_debug(EGLSyncNV sync, const char* file, int line)
 {
@@ -1946,8 +1649,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglFenceNV_debug(EGLSyncNV sync, const 
     return rval;
 }
 #define eglFenceNV_defined
-#endif
-#ifndef eglGetSyncAttribNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglGetSyncAttribNV, (sync, attribute, value), (EGLSyncNV sync, EGLint attribute, EGLint *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetSyncAttribNV_debug(EGLSyncNV sync, EGLint attribute, EGLint *value, const char* file, int line)
 {
@@ -1958,8 +1659,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglGetSyncAttribNV_debug(EGLSyncNV sync
     return rval;
 }
 #define eglGetSyncAttribNV_defined
-#endif
-#ifndef eglSignalSyncNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglSignalSyncNV, (sync, mode), (EGLSyncNV sync, EGLenum mode))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSignalSyncNV_debug(EGLSyncNV sync, EGLenum mode, const char* file, int line)
 {
@@ -1970,12 +1669,10 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglSignalSyncNV_debug(EGLSyncNV sync, E
     return rval;
 }
 #define eglSignalSyncNV_defined
-#endif
 #endif // defined(KHRONOS_SUPPORT_INT64)
 #endif // defined(EGL_NV_sync)
 #if defined(EGL_NV_system_time)
 #if defined(KHRONOS_SUPPORT_INT64)
-#ifndef eglGetSystemTimeFrequencyNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLuint64NV, EGLAPIENTRY, eglGetSystemTimeFrequencyNV, (), (void))
 GLATTER_INLINE_OR_NOT EGLuint64NV glatter_eglGetSystemTimeFrequencyNV_debug(const char* file, int line)
 {
@@ -1986,8 +1683,6 @@ GLATTER_INLINE_OR_NOT EGLuint64NV glatter_eglGetSystemTimeFrequencyNV_debug(cons
     return rval;
 }
 #define eglGetSystemTimeFrequencyNV_defined
-#endif
-#ifndef eglGetSystemTimeNV_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLuint64NV, EGLAPIENTRY, eglGetSystemTimeNV, (), (void))
 GLATTER_INLINE_OR_NOT EGLuint64NV glatter_eglGetSystemTimeNV_debug(const char* file, int line)
 {
@@ -1998,11 +1693,9 @@ GLATTER_INLINE_OR_NOT EGLuint64NV glatter_eglGetSystemTimeNV_debug(const char* f
     return rval;
 }
 #define eglGetSystemTimeNV_defined
-#endif
 #endif // defined(KHRONOS_SUPPORT_INT64)
 #endif // defined(EGL_NV_system_time)
 #if defined(EGL_WL_bind_wayland_display)
-#ifndef eglBindWaylandDisplayWL_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglBindWaylandDisplayWL, (dpy, display), (EGLDisplay dpy, struct wl_display *display))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglBindWaylandDisplayWL_debug(EGLDisplay dpy, struct wl_display *display, const char* file, int line)
 {
@@ -2013,8 +1706,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglBindWaylandDisplayWL_debug(EGLDispla
     return rval;
 }
 #define eglBindWaylandDisplayWL_defined
-#endif
-#ifndef eglQueryWaylandBufferWL_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglQueryWaylandBufferWL, (dpy, buffer, attribute, value), (EGLDisplay dpy, struct wl_resource *buffer, EGLint attribute, EGLint *value))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryWaylandBufferWL_debug(EGLDisplay dpy, struct wl_resource *buffer, EGLint attribute, EGLint *value, const char* file, int line)
 {
@@ -2025,8 +1716,6 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglQueryWaylandBufferWL_debug(EGLDispla
     return rval;
 }
 #define eglQueryWaylandBufferWL_defined
-#endif
-#ifndef eglUnbindWaylandDisplayWL_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, EGLBoolean, EGLAPIENTRY, eglUnbindWaylandDisplayWL, (dpy, display), (EGLDisplay dpy, struct wl_display *display))
 GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglUnbindWaylandDisplayWL_debug(EGLDisplay dpy, struct wl_display *display, const char* file, int line)
 {
@@ -2037,10 +1726,8 @@ GLATTER_INLINE_OR_NOT EGLBoolean glatter_eglUnbindWaylandDisplayWL_debug(EGLDisp
     return rval;
 }
 #define eglUnbindWaylandDisplayWL_defined
-#endif
 #endif // defined(EGL_WL_bind_wayland_display)
 #if defined(EGL_WL_create_wayland_buffer_from_image)
-#ifndef eglCreateWaylandBufferFromImageWL_defined
 GLATTER_FBLOCK(return, EGL, EGLAPI, struct wl_buffer *, EGLAPIENTRY, eglCreateWaylandBufferFromImageWL, (dpy, image), (EGLDisplay dpy, EGLImageKHR image))
 GLATTER_INLINE_OR_NOT struct wl_buffer * glatter_eglCreateWaylandBufferFromImageWL_debug(EGLDisplay dpy, EGLImageKHR image, const char* file, int line)
 {
@@ -2051,7 +1738,6 @@ GLATTER_INLINE_OR_NOT struct wl_buffer * glatter_eglCreateWaylandBufferFromImage
     return rval;
 }
 #define eglCreateWaylandBufferFromImageWL_defined
-#endif
 #endif // defined(__eglext_h_)
 #endif // defined(EGL_WL_create_wayland_buffer_from_image)
 #endif // GLATTER_EGL

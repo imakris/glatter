@@ -9370,24 +9370,134 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
                     return "GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_NV";
 #endif
             break;
-#if defined(GL_NV_mesh_shader)
-        case 0x8e60: return "GL_MAX_MESH_UNIFORM_BLOCKS_NV";
-        case 0x8e61: return "GL_MAX_MESH_TEXTURE_IMAGE_UNITS_NV";
-        case 0x8e62: return "GL_MAX_MESH_IMAGE_UNIFORMS_NV";
-        case 0x8e63: return "GL_MAX_MESH_UNIFORM_COMPONENTS_NV";
-        case 0x8e64: return "GL_MAX_MESH_ATOMIC_COUNTER_BUFFERS_NV";
-        case 0x8e65: return "GL_MAX_MESH_ATOMIC_COUNTERS_NV";
-        case 0x8e66: return "GL_MAX_MESH_SHADER_STORAGE_BLOCKS_NV";
-        case 0x8e67: return "GL_MAX_COMBINED_MESH_UNIFORM_COMPONENTS_NV";
-        case 0x8e68: return "GL_MAX_TASK_UNIFORM_BLOCKS_NV";
-        case 0x8e69: return "GL_MAX_TASK_TEXTURE_IMAGE_UNITS_NV";
-        case 0x8e6a: return "GL_MAX_TASK_IMAGE_UNIFORMS_NV";
-        case 0x8e6b: return "GL_MAX_TASK_UNIFORM_COMPONENTS_NV";
-        case 0x8e6c: return "GL_MAX_TASK_ATOMIC_COUNTER_BUFFERS_NV";
-        case 0x8e6d: return "GL_MAX_TASK_ATOMIC_COUNTERS_NV";
-        case 0x8e6e: return "GL_MAX_TASK_SHADER_STORAGE_BLOCKS_NV";
-        case 0x8e6f: return "GL_MAX_COMBINED_TASK_UNIFORM_COMPONENTS_NV";
+        case 0x8e60:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_MESH_UNIFORM_BLOCKS_EXT";
 #endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_MESH_UNIFORM_BLOCKS_NV";
+#endif
+            break;
+        case 0x8e61:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_MESH_TEXTURE_IMAGE_UNITS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_MESH_TEXTURE_IMAGE_UNITS_NV";
+#endif
+            break;
+        case 0x8e62:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_MESH_IMAGE_UNIFORMS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_MESH_IMAGE_UNIFORMS_NV";
+#endif
+            break;
+        case 0x8e63:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_MESH_UNIFORM_COMPONENTS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_MESH_UNIFORM_COMPONENTS_NV";
+#endif
+            break;
+        case 0x8e64:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_MESH_ATOMIC_COUNTER_BUFFERS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_MESH_ATOMIC_COUNTER_BUFFERS_NV";
+#endif
+            break;
+        case 0x8e65:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_MESH_ATOMIC_COUNTERS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_MESH_ATOMIC_COUNTERS_NV";
+#endif
+            break;
+        case 0x8e66:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_MESH_SHADER_STORAGE_BLOCKS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_MESH_SHADER_STORAGE_BLOCKS_NV";
+#endif
+            break;
+        case 0x8e67:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_COMBINED_MESH_UNIFORM_COMPONENTS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_COMBINED_MESH_UNIFORM_COMPONENTS_NV";
+#endif
+            break;
+        case 0x8e68:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_TASK_UNIFORM_BLOCKS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_TASK_UNIFORM_BLOCKS_NV";
+#endif
+            break;
+        case 0x8e69:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_TASK_TEXTURE_IMAGE_UNITS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_TASK_TEXTURE_IMAGE_UNITS_NV";
+#endif
+            break;
+        case 0x8e6a:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_TASK_IMAGE_UNIFORMS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_TASK_IMAGE_UNIFORMS_NV";
+#endif
+            break;
+        case 0x8e6b:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_TASK_UNIFORM_COMPONENTS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_TASK_UNIFORM_COMPONENTS_NV";
+#endif
+            break;
+        case 0x8e6c:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_TASK_ATOMIC_COUNTER_BUFFERS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_TASK_ATOMIC_COUNTER_BUFFERS_NV";
+#endif
+            break;
+        case 0x8e6d:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_TASK_ATOMIC_COUNTERS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_TASK_ATOMIC_COUNTERS_NV";
+#endif
+            break;
+        case 0x8e6e:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_TASK_SHADER_STORAGE_BLOCKS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_TASK_SHADER_STORAGE_BLOCKS_NV";
+#endif
+            break;
+        case 0x8e6f:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_COMBINED_TASK_UNIFORM_COMPONENTS_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_COMBINED_TASK_UNIFORM_COMPONENTS_NV";
+#endif
+            break;
 #if defined(GL_VERSION_4_0)
         case 0x8e70: return "GL_MAX_TRANSFORM_FEEDBACK_BUFFERS";
         case 0x8e71: return "GL_MAX_VERTEX_STREAMS";
@@ -9652,6 +9762,9 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
             break;
 #if defined(GL_VERSION_4_3)
         case 0x8f4f: return "GL_VERTEX_BINDING_BUFFER";
+#endif
+#if defined(GL_EXT_fragment_shading_rate)
+        case 0x8f6f: return "GL_FRAGMENT_SHADING_RATE_NON_TRIVIAL_COMBINERS_SUPPORTED_EXT";
 #endif
 #if defined(GL_EXT_texture_snorm)
         case 0x8f90: return "GL_RED_SNORM";
@@ -10881,9 +10994,14 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
         case 0x92dd: return "GL_FRAGMENT_COVERAGE_TO_COLOR_NV";
         case 0x92de: return "GL_FRAGMENT_COVERAGE_COLOR_NV";
 #endif
-#if defined(GL_NV_mesh_shader)
-        case 0x92df: return "GL_MESH_OUTPUT_PER_VERTEX_GRANULARITY_NV";
+        case 0x92df:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MESH_OUTPUT_PER_VERTEX_GRANULARITY_EXT";
 #endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MESH_OUTPUT_PER_VERTEX_GRANULARITY_NV";
+#endif
+            break;
 #if defined(GL_VERSION_4_3)
         case 0x92e0: return "GL_DEBUG_OUTPUT";
         case 0x92e1: return "GL_UNIFORM";
@@ -11195,22 +11313,50 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(GL_NV_mesh_shader)
         case 0x9536: return "GL_MAX_MESH_TOTAL_MEMORY_SIZE_NV";
         case 0x9537: return "GL_MAX_TASK_TOTAL_MEMORY_SIZE_NV";
-        case 0x9538: return "GL_MAX_MESH_OUTPUT_VERTICES_NV";
+#endif
+        case 0x9538:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_MESH_OUTPUT_VERTICES_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_MESH_OUTPUT_VERTICES_NV";
+#endif
+            break;
+#if defined(GL_NV_mesh_shader)
         case 0x9539: return "GL_MAX_MESH_OUTPUT_PRIMITIVES_NV";
         case 0x953a: return "GL_MAX_TASK_OUTPUT_COUNT_NV";
         case 0x953b: return "GL_MAX_MESH_WORK_GROUP_SIZE_NV";
         case 0x953c: return "GL_MAX_TASK_WORK_GROUP_SIZE_NV";
         case 0x953d: return "GL_MAX_DRAW_MESH_TASKS_COUNT_NV";
-        case 0x953e: return "GL_MESH_WORK_GROUP_SIZE_NV";
-        case 0x953f: return "GL_TASK_WORK_GROUP_SIZE_NV";
 #endif
+        case 0x953e:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MESH_WORK_GROUP_SIZE_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MESH_WORK_GROUP_SIZE_NV";
+#endif
+            break;
+        case 0x953f:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_TASK_WORK_GROUP_SIZE_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_TASK_WORK_GROUP_SIZE_NV";
+#endif
+            break;
 #if defined(GL_NV_query_resource)
         case 0x9540: return "GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV";
         case 0x9542: return "GL_QUERY_RESOURCE_MEMTYPE_VIDMEM_NV";
 #endif
-#if defined(GL_NV_mesh_shader)
-        case 0x9543: return "GL_MESH_OUTPUT_PER_PRIMITIVE_GRANULARITY_NV";
+        case 0x9543:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MESH_OUTPUT_PER_PRIMITIVE_GRANULARITY_EXT";
 #endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MESH_OUTPUT_PER_PRIMITIVE_GRANULARITY_NV";
+#endif
+            break;
 #if defined(GL_NV_query_resource)
         case 0x9544: return "GL_QUERY_RESOURCE_SYS_RESERVED_NV";
         case 0x9545: return "GL_QUERY_RESOURCE_TEXTURE_NV";
@@ -11256,16 +11402,33 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
         case 0x9555: return "GL_SCISSOR_TEST_EXCLUSIVE_NV";
         case 0x9556: return "GL_SCISSOR_BOX_EXCLUSIVE_NV";
 #endif
-#if defined(GL_NV_mesh_shader)
-        case 0x9557: return "GL_MAX_MESH_VIEWS_NV";
+        case 0x9557:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MAX_MESH_MULTIVIEW_VIEW_COUNT_EXT";
 #endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MAX_MESH_VIEWS_NV";
+#endif
+            break;
 #if defined(GL_NV_gpu_multicast)
         case 0x9558: return "GL_RENDER_GPU_MASK_NV";
 #endif
-#if defined(GL_NV_mesh_shader)
-        case 0x9559: return "GL_MESH_SHADER_NV";
-        case 0x955a: return "GL_TASK_SHADER_NV";
+        case 0x9559:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MESH_SHADER_EXT";
 #endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MESH_SHADER_NV";
+#endif
+            break;
+        case 0x955a:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_TASK_SHADER_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_TASK_SHADER_NV";
+#endif
+            break;
 #if defined(GL_NV_shading_rate_image)
         case 0x955b: return "GL_SHADING_RATE_IMAGE_BINDING_NV";
         case 0x955c: return "GL_SHADING_RATE_IMAGE_TEXEL_WIDTH_NV";
@@ -11286,15 +11449,62 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
         case 0x956e: return "GL_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV";
         case 0x956f: return "GL_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV";
 #endif
-#if defined(GL_NV_mesh_shader)
-        case 0x9579: return "GL_MESH_VERTICES_OUT_NV";
-        case 0x957a: return "GL_MESH_PRIMITIVES_OUT_NV";
-        case 0x957b: return "GL_MESH_OUTPUT_TYPE_NV";
-        case 0x957c: return "GL_MESH_SUBROUTINE_NV";
-        case 0x957d: return "GL_TASK_SUBROUTINE_NV";
-        case 0x957e: return "GL_MESH_SUBROUTINE_UNIFORM_NV";
-        case 0x957f: return "GL_TASK_SUBROUTINE_UNIFORM_NV";
+        case 0x9579:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MESH_VERTICES_OUT_EXT";
 #endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MESH_VERTICES_OUT_NV";
+#endif
+            break;
+        case 0x957a:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MESH_PRIMITIVES_OUT_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MESH_PRIMITIVES_OUT_NV";
+#endif
+            break;
+        case 0x957b:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MESH_OUTPUT_TYPE_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MESH_OUTPUT_TYPE_NV";
+#endif
+            break;
+        case 0x957c:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MESH_SUBROUTINE_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MESH_SUBROUTINE_NV";
+#endif
+            break;
+        case 0x957d:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_TASK_SUBROUTINE_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_TASK_SUBROUTINE_NV";
+#endif
+            break;
+        case 0x957e:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_MESH_SUBROUTINE_UNIFORM_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_MESH_SUBROUTINE_UNIFORM_NV";
+#endif
+            break;
+        case 0x957f:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_TASK_SUBROUTINE_UNIFORM_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_TASK_SUBROUTINE_UNIFORM_NV";
+#endif
+            break;
 #if defined(GL_EXT_memory_object)
         case 0x9580: return "GL_TEXTURE_TILING_EXT";
         case 0x9581: return "GL_DEDICATED_MEMORY_OBJECT_EXT";
@@ -11346,13 +11556,55 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
 #if defined(GL_EXT_memory_object)
         case 0x959b: return "GL_PROTECTED_MEMORY_OBJECT_EXT";
 #endif
+        case 0x959c:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_UNIFORM_BLOCK_REFERENCED_BY_MESH_SHADER_EXT";
+#endif
 #if defined(GL_NV_mesh_shader)
-        case 0x959c: return "GL_UNIFORM_BLOCK_REFERENCED_BY_MESH_SHADER_NV";
-        case 0x959d: return "GL_UNIFORM_BLOCK_REFERENCED_BY_TASK_SHADER_NV";
-        case 0x959e: return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_MESH_SHADER_NV";
-        case 0x959f: return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TASK_SHADER_NV";
-        case 0x95a0: return "GL_REFERENCED_BY_MESH_SHADER_NV";
-        case 0x95a1: return "GL_REFERENCED_BY_TASK_SHADER_NV";
+                    return "GL_UNIFORM_BLOCK_REFERENCED_BY_MESH_SHADER_NV";
+#endif
+            break;
+        case 0x959d:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_UNIFORM_BLOCK_REFERENCED_BY_TASK_SHADER_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_UNIFORM_BLOCK_REFERENCED_BY_TASK_SHADER_NV";
+#endif
+            break;
+        case 0x959e:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_MESH_SHADER_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_MESH_SHADER_NV";
+#endif
+            break;
+        case 0x959f:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TASK_SHADER_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TASK_SHADER_NV";
+#endif
+            break;
+        case 0x95a0:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_REFERENCED_BY_MESH_SHADER_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_REFERENCED_BY_MESH_SHADER_NV";
+#endif
+            break;
+        case 0x95a1:
+#if defined(GL_EXT_mesh_shader)
+                    return "GL_REFERENCED_BY_TASK_SHADER_EXT";
+#endif
+#if defined(GL_NV_mesh_shader)
+                    return "GL_REFERENCED_BY_TASK_SHADER_NV";
+#endif
+            break;
+#if defined(GL_NV_mesh_shader)
         case 0x95a2: return "GL_MAX_MESH_WORK_GROUP_INVOCATIONS_NV";
         case 0x95a3: return "GL_MAX_TASK_WORK_GROUP_INVOCATIONS_NV";
 #endif
@@ -11388,6 +11640,65 @@ const char* enum_to_string_GL(GLATTER_ENUM_GL e)
         case 0x9631: return "GL_MAX_VIEWS_OVR";
         case 0x9632: return "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR";
         case 0x9633: return "GL_FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR";
+#endif
+#if defined(GL_EXT_fragment_shading_rate)
+        case 0x96a6: return "GL_SHADING_RATE_1X1_PIXELS_EXT";
+        case 0x96a7: return "GL_SHADING_RATE_1X2_PIXELS_EXT";
+        case 0x96a8: return "GL_SHADING_RATE_2X1_PIXELS_EXT";
+        case 0x96a9: return "GL_SHADING_RATE_2X2_PIXELS_EXT";
+        case 0x96aa: return "GL_SHADING_RATE_1X4_PIXELS_EXT";
+        case 0x96ab: return "GL_SHADING_RATE_4X1_PIXELS_EXT";
+        case 0x96ac: return "GL_SHADING_RATE_4X2_PIXELS_EXT";
+        case 0x96ad: return "GL_SHADING_RATE_2X4_PIXELS_EXT";
+        case 0x96ae: return "GL_SHADING_RATE_4X4_PIXELS_EXT";
+        case 0x96d0: return "GL_SHADING_RATE_EXT";
+        case 0x96d1: return "GL_SHADING_RATE_ATTACHMENT_EXT";
+        case 0x96d2: return "GL_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_EXT";
+        case 0x96d3: return "GL_FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_EXT";
+        case 0x96d4: return "GL_FRAGMENT_SHADING_RATE_COMBINER_OP_MIN_EXT";
+        case 0x96d5: return "GL_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_EXT";
+        case 0x96d6: return "GL_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_EXT";
+        case 0x96d7: return "GL_MIN_FRAGMENT_SHADING_RATE_ATTACHMENT_TEXEL_WIDTH_EXT";
+        case 0x96d8: return "GL_MAX_FRAGMENT_SHADING_RATE_ATTACHMENT_TEXEL_WIDTH_EXT";
+        case 0x96d9: return "GL_MIN_FRAGMENT_SHADING_RATE_ATTACHMENT_TEXEL_HEIGHT_EXT";
+        case 0x96da: return "GL_MAX_FRAGMENT_SHADING_RATE_ATTACHMENT_TEXEL_HEIGHT_EXT";
+        case 0x96db: return "GL_MAX_FRAGMENT_SHADING_RATE_ATTACHMENT_TEXEL_ASPECT_RATIO_EXT";
+        case 0x96dc: return "GL_MAX_FRAGMENT_SHADING_RATE_ATTACHMENT_LAYERS_EXT";
+        case 0x96dd: return "GL_FRAGMENT_SHADING_RATE_WITH_SHADER_DEPTH_STENCIL_WRITES_SUPPORTED_EXT";
+        case 0x96de: return "GL_FRAGMENT_SHADING_RATE_WITH_SAMPLE_MASK_SUPPORTED_EXT";
+        case 0x96df: return "GL_FRAGMENT_SHADING_RATE_ATTACHMENT_WITH_DEFAULT_FRAMEBUFFER_SUPPORTED_EXT";
+#endif
+#if defined(GL_EXT_mesh_shader)
+        case 0x9740: return "GL_MAX_TASK_WORK_GROUP_TOTAL_COUNT_EXT";
+        case 0x9741: return "GL_MAX_MESH_WORK_GROUP_TOTAL_COUNT_EXT";
+        case 0x9742: return "GL_MAX_TASK_PAYLOAD_SIZE_EXT";
+        case 0x9743: return "GL_MAX_TASK_SHARED_MEMORY_SIZE_EXT";
+        case 0x9744: return "GL_MAX_MESH_SHARED_MEMORY_SIZE_EXT";
+        case 0x9745: return "GL_MAX_TASK_PAYLOAD_AND_SHARED_MEMORY_SIZE_EXT";
+        case 0x9746: return "GL_MAX_MESH_PAYLOAD_AND_SHARED_MEMORY_SIZE_EXT";
+        case 0x9747: return "GL_MAX_MESH_OUTPUT_MEMORY_SIZE_EXT";
+        case 0x9748: return "GL_MAX_MESH_PAYLOAD_AND_OUTPUT_MEMORY_SIZE_EXT";
+        case 0x9749: return "GL_MAX_MESH_OUTPUT_COMPONENTS_EXT";
+        case 0x974a: return "GL_MAX_MESH_OUTPUT_LAYERS_EXT";
+        case 0x974b: return "GL_MAX_PREFERRED_TASK_WORK_GROUP_INVOCATIONS_EXT";
+        case 0x974c: return "GL_MAX_PREFERRED_MESH_WORK_GROUP_INVOCATIONS_EXT";
+        case 0x974d: return "GL_MESH_PREFERS_LOCAL_INVOCATION_VERTEX_OUTPUT_EXT";
+        case 0x974e: return "GL_MESH_PREFERS_LOCAL_INVOCATION_PRIMITIVE_OUTPUT_EXT";
+        case 0x974f: return "GL_MESH_PREFERS_COMPACT_VERTEX_OUTPUT_EXT";
+        case 0x9750: return "GL_MESH_PREFERS_COMPACT_PRIMITIVE_OUTPUT_EXT";
+        case 0x9751: return "GL_MAX_TASK_WORK_GROUP_COUNT_EXT";
+        case 0x9752: return "GL_MAX_MESH_WORK_GROUP_COUNT_EXT";
+        case 0x9753: return "GL_TASK_SHADER_INVOCATIONS_EXT";
+        case 0x9754: return "GL_MESH_SHADER_INVOCATIONS_EXT";
+        case 0x9755: return "GL_MESH_PRIMITIVES_GENERATED_EXT";
+        case 0x9756: return "GL_MAX_MESH_OUTPUT_PRIMITIVES_EXT";
+        case 0x9757: return "GL_MAX_MESH_WORK_GROUP_INVOCATIONS_EXT";
+        case 0x9758: return "GL_MAX_MESH_WORK_GROUP_SIZE_EXT";
+        case 0x9759: return "GL_MAX_TASK_WORK_GROUP_INVOCATIONS_EXT";
+        case 0x975a: return "GL_MAX_TASK_WORK_GROUP_SIZE_EXT";
+#endif
+#if defined(GL_EXT_fragment_shading_rate)
+        case 0x9780: return "GL_FRAGMENT_SHADING_RATE_PRIMITIVE_RATE_WITH_MULTI_VIEWPORT_SUPPORTED_EXT";
 #endif
 #if defined(GL_IBM_rasterpos_clip)
         case 0x19262: return "GL_RASTER_POSITION_UNCLIPPED_IBM";

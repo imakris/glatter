@@ -3,7 +3,9 @@
 
 /* Auto-select a platform bundle unless the user specifies one. */
 #ifndef GLATTER_PLATFORM_DIR
-# if defined(GLATTER_WINDOWS_WGL_GL)
+# if defined(GLATTER_WINDOWS_EGL_GL)
+#   define GLATTER_PLATFORM_DIR glatter_windows_egl_gl
+# elif defined(GLATTER_WINDOWS_WGL_GL)
 #   define GLATTER_PLATFORM_DIR glatter_windows_wgl_gl
 # elif defined(GLATTER_MESA_EGL_GLES)
 #   define GLATTER_PLATFORM_DIR glatter_mesa_egl_gles
@@ -33,6 +35,7 @@
    Platform selection
    One of the following platform macros must be defined in glatter_config.h:
      - GLATTER_WINDOWS_WGL_GL
+     - GLATTER_WINDOWS_EGL_GL
      - GLATTER_MESA_GLX_GL
      - GLATTER_MESA_EGL_GLES
 
@@ -93,6 +96,38 @@
 #error One of the wrappers defined is not relevant to the selected platform. Please review your glatter_config.h.
 #endif
 
+#elif defined(GLATTER_WINDOWS_EGL_GL)
+
+/* ---------------- Windows: EGL + desktop GL ---------------- */
+#undef GLATTER_PLATFORM_DIR
+#define GLATTER_PLATFORM_DIR glatter_windows_egl_gl
+
+/* Windows macros (WINGDIAPI, APIENTRY) come from <windows.h> */
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#include <windows.h>
+
+/* EGL core + extensions */
+#include "headers/khronos_egl/egl.h"
+#include "headers/khronos_egl/eglext.h"
+
+/* Core desktop GL for Windows */
+#include "headers/windows_gl_basic/GL.h"
+
+/* Khronos extension headers for GL */
+#include "headers/khronos_gl/glext.h"
+
+/* Optional GLU */
+#if defined(GLATTER_GLU)
+#include "headers/windows_gl_basic/GLU.h"
+#endif
+
+/* Sanity: no incompatible wrappers with this platform */
+#if defined(GLATTER_GLX) || defined(GLATTER_WGL)
+#error One of the wrappers defined is not relevant to the selected platform. Please review your glatter_config.h.
+#endif
+
 #elif defined(GLATTER_MESA_GLX_GL)
 
 /* ---------------- Linux/BSD: GLX + desktop GL -------------- */
@@ -136,18 +171,26 @@ typedef struct glatter_extension_support_status_EGL
 #include "headers/khronos_egl/egl.h"
 #include "headers/khronos_egl/eglext.h"
 
-/* GLES2 core + extensions (filenames corrected for your tree) */
+/* GLES core + extensions */
+#if defined(GLATTER_EGL_GLES_1_1)
+#include "headers/khronos_gles/gl.h"
+#include "headers/khronos_gles/glext.h"
+#include "headers/khronos_gles/glplatform.h"
+#else
 #include "headers/khronos_gles2/gl2.h"
 #include "headers/khronos_gles2/gl2ext.h"
+#endif
 
 /* (Optional) GLES3 core headers if you enable them in glatter_config.h */
-#if defined(GLATTER_EGL_GLES_3_0) || defined(GLATTER_EGL_GLES_3_1) || defined(GLATTER_EGL_GLES_3_2)
+#if !defined(GLATTER_EGL_GLES_1_1) && (defined(GLATTER_EGL_GLES_3_0) || \
+    defined(GLATTER_EGL_GLES_3_1) || defined(GLATTER_EGL_GLES_3_2))
 #include "headers/khronos_gles3/gl3.h"
 #endif
-#if defined(GLATTER_EGL_GLES_3_1) || defined(GLATTER_EGL_GLES_3_2)
+#if !defined(GLATTER_EGL_GLES_1_1) && (defined(GLATTER_EGL_GLES_3_1) || \
+    defined(GLATTER_EGL_GLES_3_2))
 #include "headers/khronos_gles3/gl31.h"
 #endif
-#if defined(GLATTER_EGL_GLES_3_2)
+#if !defined(GLATTER_EGL_GLES_1_1) && defined(GLATTER_EGL_GLES_3_2)
 #include "headers/khronos_gles3/gl32.h"
 #endif
 
@@ -157,7 +200,7 @@ typedef struct glatter_extension_support_status_EGL
 #endif
 
 #else
-#error No supported platform selected. Define one of GLATTER_WINDOWS_WGL_GL, GLATTER_MESA_GLX_GL, or GLATTER_MESA_EGL_GLES in glatter_config.h.
+#error No supported platform selected. Define one of GLATTER_WINDOWS_WGL_GL, GLATTER_WINDOWS_EGL_GL, GLATTER_MESA_GLX_GL, or GLATTER_MESA_EGL_GLES in glatter_config.h.
 #endif /* platform selection */
 
 /* -----------------------------------------------------------

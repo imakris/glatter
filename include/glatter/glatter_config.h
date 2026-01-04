@@ -153,6 +153,7 @@
 // NOTE: For GLES the platform must be specified explicitly.
 //
 // #define GLATTER_WINDOWS_WGL_GL
+// #define GLATTER_WINDOWS_EGL_GL
 // #define GLATTER_MESA_GLX_GL
 // #define GLATTER_MESA_EGL_GLES
 // #define GLATTER_EGL_GLES_1_1
@@ -167,6 +168,7 @@
  * Split for readability; behavior is deterministic.
  */
 #if !defined(GLATTER_WINDOWS_WGL_GL) &&\
+    !defined(GLATTER_WINDOWS_EGL_GL) &&\
     !defined(GLATTER_MESA_GLX_GL)    &&\
     !defined(GLATTER_MESA_EGL_GLES)  &&\
     !defined(GLATTER_EGL_GLES_1_1)   &&\
@@ -217,6 +219,10 @@
 #   if defined(GLATTER_WINDOWS_WGL_GL) && !defined(GLATTER_CFG_USER_NO_WGL)
 #       ifndef GLATTER_WGL
 #           define GLATTER_WGL 1
+#       endif
+#   elif defined(GLATTER_WINDOWS_EGL_GL) && !defined(GLATTER_CFG_USER_NO_EGL)
+#       ifndef GLATTER_EGL
+#           define GLATTER_EGL 1
 #       endif
 #   elif defined (GLATTER_MESA_GLX_GL) && !defined(GLATTER_CFG_USER_NO_GLX)
 #       ifndef GLATTER_GLX
@@ -287,6 +293,12 @@
 #if defined(GLATTER_WGL) && GLATTER_WGL
   #if !defined(_WIN32)
     #error "GLATTER_WGL is enabled but this is not a Windows (_WIN32) build."
+  #endif
+#endif
+
+#if defined(GLATTER_WINDOWS_EGL_GL)
+  #if !defined(_WIN32)
+    #error "GLATTER_WINDOWS_EGL_GL is enabled but this is not a Windows (_WIN32) build."
   #endif
 #endif
 
