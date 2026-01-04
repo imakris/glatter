@@ -22,6 +22,30 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
+def _khronos_static_flags() -> list[str]:
+    if os.name == "nt":
+        return ["-DKHRONOS_STATIC=1"]
+    return []
+
+
+def _thread_flags() -> list[str]:
+    if os.name == "nt":
+        return []
+    return ["-pthread"]
+
+
+def _dl_flags() -> list[str]:
+    if os.name == "nt" or sys.platform == "darwin":
+        return []
+    return ["-ldl"]
+
+
+def _opengl_libs() -> list[str]:
+    if os.name == "nt":
+        return ["-lopengl32"]
+    return []
+
+
 def _require_tool(executable: str) -> str:
     """Return the path to *executable* or skip the test if it is missing."""
 
@@ -62,6 +86,8 @@ def _write_egl_stub(directory: Path) -> Path:
     stub_path.write_text(
         textwrap.dedent(
             """
+            #include <stddef.h>
+            #define KHRONOS_STATIC 1
             #include <EGL/egl.h>
 
             __eglMustCastToProperFunctionPointerType eglGetProcAddress(const char* name)
@@ -122,7 +148,7 @@ EXAMPLE_PROGRAMS: tuple[ExampleProgram, ...] = (
             "-DGLATTER_GL=1",
             "-DGLATTER_EGL=1",
             "-DGLATTER_MESA_EGL_GLES=1",
-            "-DGLATTER_EGL_GLES2_2_0=1",
+            "-DGLATTER_EGL_GLES_1_1=1",
         ),
         platform="win32",
     ),
@@ -149,6 +175,7 @@ def test_c_program_compiles_with_glatter_c(tmp_path: Path) -> None:
     c_source.write_text(
         textwrap.dedent(
             """
+            #include <stddef.h>
             #include <glatter/glatter.h>
 
             static void noop_logger(const char* message) {
@@ -171,6 +198,7 @@ def test_c_program_compiles_with_glatter_c(tmp_path: Path) -> None:
         "-DGLATTER_CONFIG_H_DEFINED",
         "-DGLATTER_EGL_GLES2_2_0",
         "-DGLATTER_EGL",
+        *_khronos_static_flags(),
     ]
     _run_command(
         [
@@ -181,11 +209,12 @@ def test_c_program_compiles_with_glatter_c(tmp_path: Path) -> None:
             str(REPO_ROOT / "include"),
             "-I",
             str(REPO_ROOT / "tests" / "include"),
-            "-pthread",
+            *_thread_flags(),
             str(REPO_ROOT / "src" / "glatter" / "glatter.c"),
             str(egl_stub),
             str(c_source),
-            "-ldl",
+            *_dl_flags(),
+            *_opengl_libs(),
             "-o",
             str(output_binary),
         ]
@@ -233,6 +262,7 @@ def test_header_only_cpp_compiles_across_translation_units(tmp_path: Path) -> No
         "-DGLATTER_HEADER_ONLY",
         "-DGLATTER_EGL_GLES2_2_0",
         "-DGLATTER_EGL",
+        *_khronos_static_flags(),
     ]
 
     cc = _require_tool("cc")
@@ -246,6 +276,7 @@ def test_header_only_cpp_compiles_across_translation_units(tmp_path: Path) -> No
             str(REPO_ROOT / "include"),
             "-I",
             str(REPO_ROOT / "tests" / "include"),
+            *_khronos_static_flags(),
             "-c",
             str(egl_stub),
             "-o",
@@ -261,7 +292,7 @@ def test_header_only_cpp_compiles_across_translation_units(tmp_path: Path) -> No
         str(REPO_ROOT / "include"),
         "-I",
         str(REPO_ROOT / "tests" / "include"),
-        "-pthread",
+        *_thread_flags(),
     ]
 
     objects: list[Path] = []
@@ -276,10 +307,11 @@ def test_header_only_cpp_compiles_across_translation_units(tmp_path: Path) -> No
     _run_command(
         [
             cxx,
-            "-pthread",
-            "-ldl",
+            *_thread_flags(),
+            *_dl_flags(),
             *map(str, objects),
             str(stub_object),
+            *_opengl_libs(),
             "-o",
             str(tmp_path / "header_only"),
         ]
@@ -330,7 +362,7 @@ def test_header_only_cpp_compiles_via_glatter_solo(tmp_path: Path) -> None:
         str(REPO_ROOT / "include"),
         "-I",
         str(REPO_ROOT / "tests" / "include"),
-        "-pthread",
+        *_thread_flags(),
     ]
 
     objects: list[Path] = []
@@ -345,9 +377,10 @@ def test_header_only_cpp_compiles_via_glatter_solo(tmp_path: Path) -> None:
     _run_command(
         [
             cxx,
-            "-pthread",
-            "-ldl",
+            *_thread_flags(),
+            *_dl_flags(),
             *map(str, objects),
+            *_opengl_libs(),
             "-o",
             str(tmp_path / "header_only_zeroconfig"),
         ]
@@ -399,6 +432,7 @@ def test_header_only_wsi_state_shared_across_tus(tmp_path: Path) -> None:
         "-DGLATTER_HEADER_ONLY",
         "-DGLATTER_EGL_GLES2_2_0",
         "-DGLATTER_EGL",
+        *_khronos_static_flags(),
     ]
 
     egl_stub = _write_egl_stub(tmp_path)
@@ -411,6 +445,7 @@ def test_header_only_wsi_state_shared_across_tus(tmp_path: Path) -> None:
             str(REPO_ROOT / "include"),
             "-I",
             str(REPO_ROOT / "tests" / "include"),
+            *_khronos_static_flags(),
             "-c",
             str(egl_stub),
             "-o",
@@ -426,7 +461,7 @@ def test_header_only_wsi_state_shared_across_tus(tmp_path: Path) -> None:
         str(REPO_ROOT / "include"),
         "-I",
         str(REPO_ROOT / "tests" / "include"),
-        "-pthread",
+        *_thread_flags(),
     ]
 
     objects: list[Path] = []
@@ -441,10 +476,11 @@ def test_header_only_wsi_state_shared_across_tus(tmp_path: Path) -> None:
     _run_command(
         [
             cxx,
-            "-pthread",
-            "-ldl",
+            *_thread_flags(),
+            *_dl_flags(),
             *map(str, objects),
             str(stub_object),
+            *_opengl_libs(),
             "-o",
             str(binary_path),
         ]
@@ -464,6 +500,7 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
         "-DGLATTER_CONFIG_H_DEFINED",
         "-DGLATTER_EGL_GLES2_2_0",
         "-DGLATTER_EGL",
+        *_khronos_static_flags(),
     ]
 
     glatter_object = tmp_path / "glatter.o"
@@ -496,6 +533,7 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
             str(REPO_ROOT / "include"),
             "-I",
             str(REPO_ROOT / "tests" / "include"),
+            *_khronos_static_flags(),
             "-c",
             str(stub_source),
             "-o",
@@ -543,7 +581,7 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
                 str(REPO_ROOT / "include"),
                 "-I",
                 str(REPO_ROOT / "tests" / "include"),
-                "-pthread",
+                *_thread_flags(),
                 "-c",
                 str(source_path),
                 "-o",
@@ -555,11 +593,12 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
     _run_command(
         [
             cxx,
-            "-pthread",
-            "-ldl",
+            *_thread_flags(),
+            *_dl_flags(),
             *map(str, object_files),
             str(stub_object),
             str(static_lib),
+            *_opengl_libs(),
             "-o",
             str(tmp_path / "linked_consumer"),
         ]
@@ -568,6 +607,9 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
 
 def test_context_key_mixer_behaves_with_stubbed_egl(tmp_path: Path) -> None:
     """Exercise glatter_current_gl_context_key_() under controlled EGL stubs."""
+
+    if os.name == "nt":
+        pytest.skip("glatter_current_gl_context_key_ uses WGL on Windows")
 
     cc = _require_tool("cc")
 
@@ -655,6 +697,7 @@ def test_context_key_mixer_behaves_with_stubbed_egl(tmp_path: Path) -> None:
         "-DGLATTER_GL=0",
         "-DGLATTER_EGL=1",
         "-DGLATTER_EGL_GLES2_2_0=1",
+        *_khronos_static_flags(),
     ]
 
     output = tmp_path / "context_key_test"
@@ -667,10 +710,11 @@ def test_context_key_mixer_behaves_with_stubbed_egl(tmp_path: Path) -> None:
             str(REPO_ROOT / "include"),
             "-I",
             str(REPO_ROOT / "tests" / "include"),
-            "-pthread",
+            *_thread_flags(),
             str(REPO_ROOT / "src" / "glatter" / "glatter.c"),
             str(source),
-            "-ldl",
+            *_dl_flags(),
+            *_opengl_libs(),
             "-o",
             str(output),
         ]
@@ -748,6 +792,7 @@ def test_examples_compile(example: ExampleProgram, tmp_path: Path) -> None:
         cc,
         "-std=c11",
         *example.defines,
+        *_khronos_static_flags(),
         "-I",
         str(REPO_ROOT / "include"),
         "-I",
@@ -759,3 +804,61 @@ def test_examples_compile(example: ExampleProgram, tmp_path: Path) -> None:
     ]
 
     _run_command(command)
+
+
+def test_windows_egl_gl_compiles_with_glatter_c(tmp_path: Path) -> None:
+    """Verify that the Windows EGL+GL platform compiles end-to-end."""
+
+    if os.name != "nt":
+        pytest.skip("Windows EGL+GL compile test only runs on Windows")
+
+    cc = _require_tool("cc")
+
+    c_source = tmp_path / "egl_gl_compile.c"
+    c_source.write_text(
+        textwrap.dedent(
+            """
+            #include <stddef.h>
+            #include <glatter/glatter.h>
+
+            static void noop_logger(const char* message) {
+                (void)message;
+            }
+
+            int main(void) {
+                glatter_set_log_handler(noop_logger);
+                glatter_set_log_handler(NULL);
+                return 0;
+            }
+            """
+        ).strip()
+        + "\n"
+    )
+
+    egl_stub = _write_egl_stub(tmp_path)
+    config_flags = [
+        "-DGLATTER_CONFIG_H_DEFINED",
+        "-DGLATTER_GL=1",
+        "-DGLATTER_EGL=1",
+        "-DGLATTER_WINDOWS_EGL_GL=1",
+        *_khronos_static_flags(),
+    ]
+
+    output_binary = tmp_path / "egl_gl_program"
+    _run_command(
+        [
+            cc,
+            "-std=c11",
+            *config_flags,
+            "-I",
+            str(REPO_ROOT / "include"),
+            "-I",
+            str(REPO_ROOT / "tests" / "include"),
+            str(REPO_ROOT / "src" / "glatter" / "glatter.c"),
+            str(egl_stub),
+            str(c_source),
+            *_opengl_libs(),
+            "-o",
+            str(output_binary),
+        ]
+    )

@@ -310,6 +310,7 @@ typedef struct glatter_extension_support_status_GL
         int has_GL_EXT_draw_range_elements;
         int has_GL_EXT_external_buffer;
         int has_GL_EXT_fog_coord;
+        int has_GL_EXT_fragment_shading_rate;
         int has_GL_EXT_framebuffer_blit;
         int has_GL_EXT_framebuffer_blit_layers;
         int has_GL_EXT_framebuffer_multisample;
@@ -328,6 +329,7 @@ typedef struct glatter_extension_support_status_GL
         int has_GL_EXT_memory_object;
         int has_GL_EXT_memory_object_fd;
         int has_GL_EXT_memory_object_win32;
+        int has_GL_EXT_mesh_shader;
         int has_GL_EXT_misc_attribute;
         int has_GL_EXT_multi_draw_arrays;
         int has_GL_EXT_multisample;
@@ -940,6 +942,7 @@ typedef struct glatter_extension_support_status_GL
 #define glatter_GL_EXT_draw_range_elements glatter_get_extension_support_GL().has_GL_EXT_draw_range_elements
 #define glatter_GL_EXT_external_buffer glatter_get_extension_support_GL().has_GL_EXT_external_buffer
 #define glatter_GL_EXT_fog_coord glatter_get_extension_support_GL().has_GL_EXT_fog_coord
+#define glatter_GL_EXT_fragment_shading_rate glatter_get_extension_support_GL().has_GL_EXT_fragment_shading_rate
 #define glatter_GL_EXT_framebuffer_blit glatter_get_extension_support_GL().has_GL_EXT_framebuffer_blit
 #define glatter_GL_EXT_framebuffer_blit_layers glatter_get_extension_support_GL().has_GL_EXT_framebuffer_blit_layers
 #define glatter_GL_EXT_framebuffer_multisample glatter_get_extension_support_GL().has_GL_EXT_framebuffer_multisample
@@ -958,6 +961,7 @@ typedef struct glatter_extension_support_status_GL
 #define glatter_GL_EXT_memory_object glatter_get_extension_support_GL().has_GL_EXT_memory_object
 #define glatter_GL_EXT_memory_object_fd glatter_get_extension_support_GL().has_GL_EXT_memory_object_fd
 #define glatter_GL_EXT_memory_object_win32 glatter_get_extension_support_GL().has_GL_EXT_memory_object_win32
+#define glatter_GL_EXT_mesh_shader glatter_get_extension_support_GL().has_GL_EXT_mesh_shader
 #define glatter_GL_EXT_misc_attribute glatter_get_extension_support_GL().has_GL_EXT_misc_attribute
 #define glatter_GL_EXT_multi_draw_arrays glatter_get_extension_support_GL().has_GL_EXT_multi_draw_arrays
 #define glatter_GL_EXT_multisample glatter_get_extension_support_GL().has_GL_EXT_multisample

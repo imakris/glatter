@@ -5517,6 +5517,24 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFogCoordfvEXT, (coord), (const GLf
 #define glFogCoordfvEXT_defined
 #endif
 #endif // defined(GL_EXT_fog_coord)
+#if defined(GL_EXT_fragment_shading_rate)
+#ifndef glFramebufferShadingRateEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferShadingRateEXT, (target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight), (GLenum target, GLenum attachment, GLuint texture, GLint baseLayer, GLsizei numLayers, GLsizei texelWidth, GLsizei texelHeight))
+#define glFramebufferShadingRateEXT_defined
+#endif
+#ifndef glGetFragmentShadingRatesEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFragmentShadingRatesEXT, (samples, maxCount, count, shadingRates), (GLsizei samples, GLsizei maxCount, GLsizei *count, GLenum *shadingRates))
+#define glGetFragmentShadingRatesEXT_defined
+#endif
+#ifndef glShadingRateCombinerOpsEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShadingRateCombinerOpsEXT, (combinerOp0, combinerOp1), (GLenum combinerOp0, GLenum combinerOp1))
+#define glShadingRateCombinerOpsEXT_defined
+#endif
+#ifndef glShadingRateEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShadingRateEXT, (rate), (GLenum rate))
+#define glShadingRateEXT_defined
+#endif
+#endif // defined(GL_EXT_fragment_shading_rate)
 #if defined(GL_EXT_framebuffer_blit)
 #ifndef glBlitFramebufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlitFramebufferEXT, (srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
@@ -5925,6 +5943,24 @@ GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glImportMemoryWin32NameEXT, (memory,
 #define glImportMemoryWin32NameEXT_defined
 #endif
 #endif // defined(GL_EXT_memory_object_win32)
+#if defined(GL_EXT_mesh_shader)
+#ifndef glDrawMeshTasksEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawMeshTasksEXT, (num_groups_x, num_groups_y, num_groups_z), (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z))
+#define glDrawMeshTasksEXT_defined
+#endif
+#ifndef glDrawMeshTasksIndirectEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawMeshTasksIndirectEXT, (indirect), (GLintptr indirect))
+#define glDrawMeshTasksIndirectEXT_defined
+#endif
+#ifndef glMultiDrawMeshTasksIndirectCountEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawMeshTasksIndirectCountEXT, (indirect, drawcount, maxdrawcount, stride), (GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+#define glMultiDrawMeshTasksIndirectCountEXT_defined
+#endif
+#ifndef glMultiDrawMeshTasksIndirectEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawMeshTasksIndirectEXT, (indirect, drawcount, stride), (GLintptr indirect, GLsizei drawcount, GLsizei stride))
+#define glMultiDrawMeshTasksIndirectEXT_defined
+#endif
+#endif // defined(GL_EXT_mesh_shader)
 #if defined(GL_EXT_multi_draw_arrays)
 #ifndef glMultiDrawArraysEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysEXT, (mode, first, count, primcount), (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount))

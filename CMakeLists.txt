@@ -59,6 +59,9 @@ install(TARGETS glatter
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 install(DIRECTORY include/glatter DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY include/KHR include/EGL include/GLES include/GLES2 include/GLES3
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
 
 # --- Simple Integration Test ---
 add_executable(glatter-test tests/main.cpp)

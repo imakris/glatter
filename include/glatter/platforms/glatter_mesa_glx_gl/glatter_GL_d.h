@@ -5519,6 +5519,24 @@ GLATTER_INLINE_OR_NOT void glatter_glFogCoordfEXT_debug(GLfloat coord, const cha
 #endif
 GLATTER_INLINE_OR_NOT void glatter_glFogCoordfvEXT_debug(const GLfloat *coord, const char* file, int line);
 #endif // defined(GL_EXT_fog_coord)
+#if defined(GL_EXT_fragment_shading_rate)
+#ifndef glFramebufferShadingRateEXT
+#define glFramebufferShadingRateEXT(target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight) glatter_glFramebufferShadingRateEXT_debug((target), (attachment), (texture), (baseLayer), (numLayers), (texelWidth), (texelHeight), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glFramebufferShadingRateEXT_debug(GLenum target, GLenum attachment, GLuint texture, GLint baseLayer, GLsizei numLayers, GLsizei texelWidth, GLsizei texelHeight, const char* file, int line);
+#ifndef glGetFragmentShadingRatesEXT
+#define glGetFragmentShadingRatesEXT(samples, maxCount, count, shadingRates) glatter_glGetFragmentShadingRatesEXT_debug((samples), (maxCount), (count), (shadingRates), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glGetFragmentShadingRatesEXT_debug(GLsizei samples, GLsizei maxCount, GLsizei *count, GLenum *shadingRates, const char* file, int line);
+#ifndef glShadingRateCombinerOpsEXT
+#define glShadingRateCombinerOpsEXT(combinerOp0, combinerOp1) glatter_glShadingRateCombinerOpsEXT_debug((combinerOp0), (combinerOp1), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glShadingRateCombinerOpsEXT_debug(GLenum combinerOp0, GLenum combinerOp1, const char* file, int line);
+#ifndef glShadingRateEXT
+#define glShadingRateEXT(rate) glatter_glShadingRateEXT_debug((rate), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glShadingRateEXT_debug(GLenum rate, const char* file, int line);
+#endif // defined(GL_EXT_fragment_shading_rate)
 #if defined(GL_EXT_framebuffer_blit)
 #ifndef glBlitFramebufferEXT
 #define glBlitFramebufferEXT(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) glatter_glBlitFramebufferEXT_debug((srcX0), (srcY0), (srcX1), (srcY1), (dstX0), (dstY0), (dstX1), (dstY1), (mask), (filter), __FILE__, __LINE__)
@@ -5927,6 +5945,24 @@ GLATTER_INLINE_OR_NOT void glatter_glImportMemoryWin32HandleEXT_debug(GLuint mem
 #endif
 GLATTER_INLINE_OR_NOT void glatter_glImportMemoryWin32NameEXT_debug(GLuint memory, GLuint64 size, GLenum handleType, const void *name, const char* file, int line);
 #endif // defined(GL_EXT_memory_object_win32)
+#if defined(GL_EXT_mesh_shader)
+#ifndef glDrawMeshTasksEXT
+#define glDrawMeshTasksEXT(num_groups_x, num_groups_y, num_groups_z) glatter_glDrawMeshTasksEXT_debug((num_groups_x), (num_groups_y), (num_groups_z), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDrawMeshTasksEXT_debug(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, const char* file, int line);
+#ifndef glDrawMeshTasksIndirectEXT
+#define glDrawMeshTasksIndirectEXT(indirect) glatter_glDrawMeshTasksIndirectEXT_debug((indirect), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glDrawMeshTasksIndirectEXT_debug(GLintptr indirect, const char* file, int line);
+#ifndef glMultiDrawMeshTasksIndirectCountEXT
+#define glMultiDrawMeshTasksIndirectCountEXT(indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawMeshTasksIndirectCountEXT_debug((indirect), (drawcount), (maxdrawcount), (stride), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiDrawMeshTasksIndirectCountEXT_debug(GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line);
+#ifndef glMultiDrawMeshTasksIndirectEXT
+#define glMultiDrawMeshTasksIndirectEXT(indirect, drawcount, stride) glatter_glMultiDrawMeshTasksIndirectEXT_debug((indirect), (drawcount), (stride), __FILE__, __LINE__)
+#endif
+GLATTER_INLINE_OR_NOT void glatter_glMultiDrawMeshTasksIndirectEXT_debug(GLintptr indirect, GLsizei drawcount, GLsizei stride, const char* file, int line);
+#endif // defined(GL_EXT_mesh_shader)
 #if defined(GL_EXT_multi_draw_arrays)
 #ifndef glMultiDrawArraysEXT
 #define glMultiDrawArraysEXT(mode, first, count, primcount) glatter_glMultiDrawArraysEXT_debug((mode), (first), (count), (primcount), __FILE__, __LINE__)

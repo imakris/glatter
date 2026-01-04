@@ -13555,6 +13555,48 @@ GLATTER_INLINE_OR_NOT void glatter_glFogCoordfvEXT_debug(const GLfloat *coord, c
 #define glFogCoordfvEXT_defined
 #endif
 #endif // defined(GL_EXT_fog_coord)
+#if defined(GL_EXT_fragment_shading_rate)
+#ifndef glFramebufferShadingRateEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glFramebufferShadingRateEXT, (target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight), (GLenum target, GLenum attachment, GLuint texture, GLint baseLayer, GLsizei numLayers, GLsizei texelWidth, GLsizei texelHeight))
+GLATTER_INLINE_OR_NOT void glatter_glFramebufferShadingRateEXT_debug(GLenum target, GLenum attachment, GLuint texture, GLint baseLayer, GLsizei numLayers, GLsizei texelWidth, GLsizei texelHeight, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glFramebufferShadingRateEXT, "(%s, %s, %u, %d, %d, %d, %d)", enum_to_string_GL(target), enum_to_string_GL(attachment), (unsigned int)texture, (int)baseLayer, (int)numLayers, (int)texelWidth, (int)texelHeight)
+    glatter_glFramebufferShadingRateEXT(target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glFramebufferShadingRateEXT_defined
+#endif
+#ifndef glGetFragmentShadingRatesEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glGetFragmentShadingRatesEXT, (samples, maxCount, count, shadingRates), (GLsizei samples, GLsizei maxCount, GLsizei *count, GLenum *shadingRates))
+GLATTER_INLINE_OR_NOT void glatter_glGetFragmentShadingRatesEXT_debug(GLsizei samples, GLsizei maxCount, GLsizei *count, GLenum *shadingRates, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glGetFragmentShadingRatesEXT, "(%d, %d, %p, %p)", (int)samples, (int)maxCount, (void*)count, (void*)shadingRates)
+    glatter_glGetFragmentShadingRatesEXT(samples, maxCount, count, shadingRates);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glGetFragmentShadingRatesEXT_defined
+#endif
+#ifndef glShadingRateCombinerOpsEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShadingRateCombinerOpsEXT, (combinerOp0, combinerOp1), (GLenum combinerOp0, GLenum combinerOp1))
+GLATTER_INLINE_OR_NOT void glatter_glShadingRateCombinerOpsEXT_debug(GLenum combinerOp0, GLenum combinerOp1, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glShadingRateCombinerOpsEXT, "(%s, %s)", enum_to_string_GL(combinerOp0), enum_to_string_GL(combinerOp1))
+    glatter_glShadingRateCombinerOpsEXT(combinerOp0, combinerOp1);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glShadingRateCombinerOpsEXT_defined
+#endif
+#ifndef glShadingRateEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glShadingRateEXT, (rate), (GLenum rate))
+GLATTER_INLINE_OR_NOT void glatter_glShadingRateEXT_debug(GLenum rate, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glShadingRateEXT, "(%s)", enum_to_string_GL(rate))
+    glatter_glShadingRateEXT(rate);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glShadingRateEXT_defined
+#endif
+#endif // defined(GL_EXT_fragment_shading_rate)
 #if defined(GL_EXT_framebuffer_blit)
 #ifndef glBlitFramebufferEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glBlitFramebufferEXT, (srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter), (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter))
@@ -14543,6 +14585,48 @@ GLATTER_INLINE_OR_NOT void glatter_glImportMemoryWin32NameEXT_debug(GLuint memor
 #define glImportMemoryWin32NameEXT_defined
 #endif
 #endif // defined(GL_EXT_memory_object_win32)
+#if defined(GL_EXT_mesh_shader)
+#ifndef glDrawMeshTasksEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawMeshTasksEXT, (num_groups_x, num_groups_y, num_groups_z), (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z))
+GLATTER_INLINE_OR_NOT void glatter_glDrawMeshTasksEXT_debug(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawMeshTasksEXT, "(%u, %u, %u)", (unsigned int)num_groups_x, (unsigned int)num_groups_y, (unsigned int)num_groups_z)
+    glatter_glDrawMeshTasksEXT(num_groups_x, num_groups_y, num_groups_z);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawMeshTasksEXT_defined
+#endif
+#ifndef glDrawMeshTasksIndirectEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glDrawMeshTasksIndirectEXT, (indirect), (GLintptr indirect))
+GLATTER_INLINE_OR_NOT void glatter_glDrawMeshTasksIndirectEXT_debug(GLintptr indirect, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glDrawMeshTasksIndirectEXT, "(%s)", GET_PRS(indirect))
+    glatter_glDrawMeshTasksIndirectEXT(indirect);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glDrawMeshTasksIndirectEXT_defined
+#endif
+#ifndef glMultiDrawMeshTasksIndirectCountEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawMeshTasksIndirectCountEXT, (indirect, drawcount, maxdrawcount, stride), (GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+GLATTER_INLINE_OR_NOT void glatter_glMultiDrawMeshTasksIndirectCountEXT_debug(GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawMeshTasksIndirectCountEXT, "(%s, %s, %d, %d)", GET_PRS(indirect), GET_PRS(drawcount), (int)maxdrawcount, (int)stride)
+    glatter_glMultiDrawMeshTasksIndirectCountEXT(indirect, drawcount, maxdrawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawMeshTasksIndirectCountEXT_defined
+#endif
+#ifndef glMultiDrawMeshTasksIndirectEXT_defined
+GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawMeshTasksIndirectEXT, (indirect, drawcount, stride), (GLintptr indirect, GLsizei drawcount, GLsizei stride))
+GLATTER_INLINE_OR_NOT void glatter_glMultiDrawMeshTasksIndirectEXT_debug(GLintptr indirect, GLsizei drawcount, GLsizei stride, const char* file, int line)
+{
+    GLATTER_DBLOCK(file, line, glMultiDrawMeshTasksIndirectEXT, "(%s, %d, %d)", GET_PRS(indirect), (int)drawcount, (int)stride)
+    glatter_glMultiDrawMeshTasksIndirectEXT(indirect, drawcount, stride);
+    GLATTER_CHECK_ERROR(GL, file, line)
+}
+#define glMultiDrawMeshTasksIndirectEXT_defined
+#endif
+#endif // defined(GL_EXT_mesh_shader)
 #if defined(GL_EXT_multi_draw_arrays)
 #ifndef glMultiDrawArraysEXT_defined
 GLATTER_FBLOCK(, GL, GLAPI, void, APIENTRY, glMultiDrawArraysEXT, (mode, first, count, primcount), (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount))

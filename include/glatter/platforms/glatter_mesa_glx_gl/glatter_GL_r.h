@@ -5519,6 +5519,24 @@ GLATTER_UBLOCK(void, APIENTRY, glFogCoordfEXT, (GLfloat coord))
 #endif
 GLATTER_UBLOCK(void, APIENTRY, glFogCoordfvEXT, (const GLfloat *coord))
 #endif // defined(GL_EXT_fog_coord)
+#if defined(GL_EXT_fragment_shading_rate)
+#ifndef glFramebufferShadingRateEXT
+#define glFramebufferShadingRateEXT(target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight) glatter_glFramebufferShadingRateEXT((target), (attachment), (texture), (baseLayer), (numLayers), (texelWidth), (texelHeight))
+#endif
+GLATTER_UBLOCK(void, APIENTRY, glFramebufferShadingRateEXT, (GLenum target, GLenum attachment, GLuint texture, GLint baseLayer, GLsizei numLayers, GLsizei texelWidth, GLsizei texelHeight))
+#ifndef glGetFragmentShadingRatesEXT
+#define glGetFragmentShadingRatesEXT(samples, maxCount, count, shadingRates) glatter_glGetFragmentShadingRatesEXT((samples), (maxCount), (count), (shadingRates))
+#endif
+GLATTER_UBLOCK(void, APIENTRY, glGetFragmentShadingRatesEXT, (GLsizei samples, GLsizei maxCount, GLsizei *count, GLenum *shadingRates))
+#ifndef glShadingRateCombinerOpsEXT
+#define glShadingRateCombinerOpsEXT(combinerOp0, combinerOp1) glatter_glShadingRateCombinerOpsEXT((combinerOp0), (combinerOp1))
+#endif
+GLATTER_UBLOCK(void, APIENTRY, glShadingRateCombinerOpsEXT, (GLenum combinerOp0, GLenum combinerOp1))
+#ifndef glShadingRateEXT
+#define glShadingRateEXT(rate) glatter_glShadingRateEXT((rate))
+#endif
+GLATTER_UBLOCK(void, APIENTRY, glShadingRateEXT, (GLenum rate))
+#endif // defined(GL_EXT_fragment_shading_rate)
 #if defined(GL_EXT_framebuffer_blit)
 #ifndef glBlitFramebufferEXT
 #define glBlitFramebufferEXT(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) glatter_glBlitFramebufferEXT((srcX0), (srcY0), (srcX1), (srcY1), (dstX0), (dstY0), (dstX1), (dstY1), (mask), (filter))
@@ -5927,6 +5945,24 @@ GLATTER_UBLOCK(void, APIENTRY, glImportMemoryWin32HandleEXT, (GLuint memory, GLu
 #endif
 GLATTER_UBLOCK(void, APIENTRY, glImportMemoryWin32NameEXT, (GLuint memory, GLuint64 size, GLenum handleType, const void *name))
 #endif // defined(GL_EXT_memory_object_win32)
+#if defined(GL_EXT_mesh_shader)
+#ifndef glDrawMeshTasksEXT
+#define glDrawMeshTasksEXT(num_groups_x, num_groups_y, num_groups_z) glatter_glDrawMeshTasksEXT((num_groups_x), (num_groups_y), (num_groups_z))
+#endif
+GLATTER_UBLOCK(void, APIENTRY, glDrawMeshTasksEXT, (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z))
+#ifndef glDrawMeshTasksIndirectEXT
+#define glDrawMeshTasksIndirectEXT(indirect) glatter_glDrawMeshTasksIndirectEXT((indirect))
+#endif
+GLATTER_UBLOCK(void, APIENTRY, glDrawMeshTasksIndirectEXT, (GLintptr indirect))
+#ifndef glMultiDrawMeshTasksIndirectCountEXT
+#define glMultiDrawMeshTasksIndirectCountEXT(indirect, drawcount, maxdrawcount, stride) glatter_glMultiDrawMeshTasksIndirectCountEXT((indirect), (drawcount), (maxdrawcount), (stride))
+#endif
+GLATTER_UBLOCK(void, APIENTRY, glMultiDrawMeshTasksIndirectCountEXT, (GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride))
+#ifndef glMultiDrawMeshTasksIndirectEXT
+#define glMultiDrawMeshTasksIndirectEXT(indirect, drawcount, stride) glatter_glMultiDrawMeshTasksIndirectEXT((indirect), (drawcount), (stride))
+#endif
+GLATTER_UBLOCK(void, APIENTRY, glMultiDrawMeshTasksIndirectEXT, (GLintptr indirect, GLsizei drawcount, GLsizei stride))
+#endif // defined(GL_EXT_mesh_shader)
 #if defined(GL_EXT_multi_draw_arrays)
 #ifndef glMultiDrawArraysEXT
 #define glMultiDrawArraysEXT(mode, first, count, primcount) glatter_glMultiDrawArraysEXT((mode), (first), (count), (primcount))
