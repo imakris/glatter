@@ -1,0 +1,28 @@
+name: Build & Test - FreeBSD
+
+on:
+  push:
+    branches: [ main, master, dev ]
+  pull_request:
+    branches: [ main, master, dev ]
+
+jobs:
+  build-and-test:
+    name: FreeBSD CMake Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build and test (FreeBSD 15.0)
+        uses: vmactions/freebsd-vm@v1
+        with:
+          release: "15.0"
+          usesh: true
+          prepare: |
+            pkg install -y git cmake mesa-libs pkgconf freeglut
+          run: |
+            cmake -S . -B build
+            cmake --build build
+            ctest --test-dir build --output-on-failure
