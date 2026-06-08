@@ -26,8 +26,15 @@ jobs:
 
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
-        # This will install XQuartz, which provides the missing X11 headers.
-        run: brew install --cask xquartz
+        # XQuartz provides the X11 headers needed for the GLX build.
+        # Retry to ride out transient 5xx errors from the release download CDN.
+        run: |
+          for attempt in 1 2 3; do
+            brew install --cask xquartz && exit 0
+            echo "xquartz install attempt $attempt failed; retrying in 15s..."
+            sleep 15
+          done
+          exit 1
 
       - name: Setup MSYS2 (Windows)
         if: runner.os == 'Windows'
