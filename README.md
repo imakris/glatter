@@ -10,10 +10,10 @@ A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, opt
 
 | Platform    | Status | Notes |
 | :---        | :--- | :--- |
-| **Windows** | ![alt text](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg) | Tested with WGL via GitHub Actions. |
-| **Linux**   | ![alt text](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg) | Tested with GLX via GitHub Actions. |
-| **FreeBSD** | ![alt text](https://github.com/imakris/glatter/actions/workflows/freebsd.yaml/badge.svg) | Tested with GLX via GitHub Actions (QEMU VM). |
-| **macOS**   | ![alt text](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg) | Tested with GLX via GitHub Actions, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
+| **Windows** | [![Windows build status](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml) | Tested with WGL via GitHub Actions. |
+| **Linux**   | [![Linux build status](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml) | Tested with GLX via GitHub Actions. |
+| **FreeBSD** | [![FreeBSD build status](https://github.com/imakris/glatter/actions/workflows/freebsd.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/freebsd.yaml) | Tested with GLX via GitHub Actions (QEMU VM). |
+| **macOS**   | [![macOS build status](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml) | Tested with GLX via GitHub Actions, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
 
 ---
 
