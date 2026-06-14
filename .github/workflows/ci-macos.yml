@@ -1,0 +1,35 @@
+name: CI macOS
+
+on:
+  push:
+    branches: [main, master, dev]
+  pull_request:
+    branches: [main, master, dev]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: macOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: |
+          for attempt in 1 2 3; do
+            brew install --cask xquartz && exit 0
+            echo "xquartz install attempt $attempt failed; retrying in 15s..."
+            sleep 15
+          done
+          exit 1
+
+      - name: Configure CMake
+        run: cmake -B build -S . -DCMAKE_PREFIX_PATH=/opt/X11
+
+      - name: Build with CMake
+        run: cmake --build build --config Release

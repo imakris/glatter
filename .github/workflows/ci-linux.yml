@@ -1,0 +1,35 @@
+name: CI Linux
+
+on:
+  push:
+    branches: [main, master, dev]
+  pull_request:
+    branches: [main, master, dev]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y libgl-dev libx11-dev
+
+      - name: Install pytest
+        run: python -m pip install pytest
+
+      - name: Configure CMake
+        run: cmake -B build -S . -DCMAKE_PREFIX_PATH=/opt/X11
+
+      - name: Build with CMake
+        run: cmake --build build --config Release
+
+      - name: Run build smoke tests
+        run: python -m pytest tests/test_build.py

@@ -1,0 +1,41 @@
+name: CI Windows
+
+on:
+  push:
+    branches: [main, master, dev]
+  pull_request:
+    branches: [main, master, dev]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          update: false
+          install: mingw-w64-x86_64-gcc
+
+      - name: Install pytest
+        run: python -m pip install pytest
+
+      - name: Configure CMake
+        run: cmake -B build -S . -A x64
+
+      - name: Build with CMake
+        run: cmake --build build --config Release
+
+      - name: Run build smoke tests
+        env:
+          CC: C:\msys64\mingw64\bin\gcc.exe
+          CXX: C:\msys64\mingw64\bin\g++.exe
+        run: python -m pytest tests/test_build.py

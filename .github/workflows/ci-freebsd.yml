@@ -1,21 +1,25 @@
-name: Build & Test - FreeBSD
+name: CI FreeBSD
 
 on:
   push:
-    branches: [ main, master, dev ]
+    branches: [main, master, dev]
   pull_request:
-    branches: [ main, master, dev ]
+    branches: [main, master, dev]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build-and-test:
-    name: FreeBSD CMake Build & Test
+  build:
+    name: FreeBSD 15.0
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Build and test (FreeBSD 15.0)
+      - name: Build and test
         uses: vmactions/freebsd-vm@v1
         with:
           release: "15.0"

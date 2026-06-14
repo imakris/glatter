@@ -10,10 +10,10 @@ A practical loader and tracer for GL‑family APIs (GL, GLX, WGL, EGL, GLES, opt
 
 | Platform    | Status | Notes |
 | :---        | :--- | :--- |
-| **Windows** | [![Windows build status](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml) | Tested with WGL via GitHub Actions. |
-| **Linux**   | [![Linux build status](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml) | Tested with GLX via GitHub Actions. |
-| **FreeBSD** | [![FreeBSD build status](https://github.com/imakris/glatter/actions/workflows/freebsd.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/freebsd.yaml) | Tested with GLX via GitHub Actions (QEMU VM). |
-| **macOS**   | [![macOS build status](https://github.com/imakris/glatter/actions/workflows/main.yaml/badge.svg)](https://github.com/imakris/glatter/actions/workflows/main.yaml) | Tested with GLX via GitHub Actions, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
+| **Windows** | [![Windows build status](https://github.com/imakris/glatter/actions/workflows/ci-windows.yml/badge.svg?branch=master)](https://github.com/imakris/glatter/actions/workflows/ci-windows.yml) | Tested with WGL via GitHub Actions. |
+| **Linux**   | [![Linux build status](https://github.com/imakris/glatter/actions/workflows/ci-linux.yml/badge.svg?branch=master)](https://github.com/imakris/glatter/actions/workflows/ci-linux.yml) | Tested with GLX via GitHub Actions. |
+| **FreeBSD** | [![FreeBSD build status](https://github.com/imakris/glatter/actions/workflows/ci-freebsd.yml/badge.svg?branch=master)](https://github.com/imakris/glatter/actions/workflows/ci-freebsd.yml) | Tested with GLX via GitHub Actions (QEMU VM). |
+| **macOS**   | [![macOS build status](https://github.com/imakris/glatter/actions/workflows/ci-macos.yml/badge.svg?branch=master)](https://github.com/imakris/glatter/actions/workflows/ci-macos.yml) | Tested with GLX via GitHub Actions, but requires XQuartz for GLX compatibility. Not a native (CGL) build. |
 
 ---
 
