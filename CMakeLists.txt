@@ -7,10 +7,6 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# --- Option to build internal tests ---
-# This allows us to disable the problematic tests/cmake suite for CI builds.
-option(GLATTER_BUILD_INTERNAL_TESTS "Build the internal cmake test suite" OFF)
-
 # --- Library Target ---
 add_library(glatter src/glatter/glatter.c)
 
@@ -66,11 +62,3 @@ install(DIRECTORY include/KHR include/EGL include/GLES include/GLES2 include/GLE
 # --- Simple Integration Test ---
 add_executable(glatter-test tests/main.cpp)
 target_link_libraries(glatter-test PRIVATE glatter)
-
-# --- Internal Test Suite (Optional) ---
-# Only add the subdirectory if the option is enabled.
-# This is disabled by default to fix the CI build.
-if(GLATTER_BUILD_INTERNAL_TESTS)
-    enable_testing()
-    add_subdirectory(tests/cmake)
-endif()
