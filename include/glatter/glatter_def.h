@@ -322,9 +322,21 @@ static const char* glatter_pr_tstr(const TCHAR* ts)
 
 typedef int glatter_wsi_t;
 
-#ifndef GLATTER_WSI_DECIDING_VALUE
-#define GLATTER_WSI_DECIDING_VALUE (-1)
-#endif
+/* Process configuration phase.
+ *
+ * CONFIGURABLE: no entry point has resolved yet, so the WSI, the GLATTER_WSI
+ *               environment override and the loader handles may still change.
+ * DECIDING:     one thread owns the configuration and is running the WSI
+ *               decision together with the first resolution attempt. No other
+ *               thread reads or writes configuration while this is published.
+ * RESOLVED:     an entry point resolved through the active WSI. This is the
+ *               latch README.md documents at "first successful resolution";
+ *               configuration is immutable from here on. A failed first attempt
+ *               returns the phase to CONFIGURABLE, because nothing latched.
+ */
+#define GLATTER_PHASE_CONFIGURABLE 0
+#define GLATTER_PHASE_DECIDING     1
+#define GLATTER_PHASE_RESOLVED     2
 
 #ifndef GLATTER_WSI_AUTO_VALUE
 #define GLATTER_WSI_AUTO_VALUE 0
@@ -371,8 +383,11 @@ static const char* const glatter_gles_sonames[GLATTER_GLES_SONAME_COUNT] = {
 #endif
 
 typedef struct glatter_loader_state {
-    /* Loader WSI fields are atomic to avoid UB when multiple threads first-touch AUTO.
-     * glatter_wsi_gate still serializes the ?decide once? phase. */
+    /* The phase owns every WSI field below it: they are written only by the
+     * thread holding GLATTER_PHASE_DECIDING, so no thread can observe a
+     * half-applied decision. They stay atomic because readers outside the phase
+     * (the resolution fast path, glatter_get_wsi) load them without it. */
+    glatter_atomic_int phase;        /* GLATTER_PHASE_* values */
     glatter_atomic_int requested;    /* GLATTER_WSI_* enum values */
     glatter_atomic_int active;       /* GLATTER_WSI_* enum values */
     glatter_atomic_int wsi_explicit; /* 0/1 */
@@ -401,21 +416,10 @@ typedef struct glatter_loader_state {
 
 /* THREADING NOTE:
  * Per-entry resolution uses atomic CAS and is thread-safe.
- * Loader state is static and updated in a read-mostly, idempotent way.
+ * Process configuration is serialized by glatter_configuration_enter_ below.
  */
-/* WSI decision gate:
-
- * 0 = undecided, 1 = deciding, 2 = decided
- * In header-only builds this accessor returns the process-wide gate, ensuring
- * that all translation units share the same latch state.
- */
-static glatter_atomic_int* glatter_wsi_gate_get(void)
-{
-    static glatter_atomic_int gate = GLATTER_ATOMIC_INT_INIT(0);
-    return &gate;
-}
-
 GLATTER_LINKONCE glatter_loader_state glatter_loader_state_singleton = {
+        /* phase */ GLATTER_ATOMIC_INT_INIT(GLATTER_PHASE_CONFIGURABLE),
 #if defined(GLATTER_WGL) && !defined(GLATTER_GLX) && !defined(GLATTER_EGL)
         GLATTER_ATOMIC_INT_INIT(GLATTER_WSI_WGL_VALUE),
 #elif defined(GLATTER_GLX) && !defined(GLATTER_EGL) && !defined(GLATTER_WGL)
@@ -462,6 +466,39 @@ static glatter_loader_state* glatter_loader_state_get(void)
 #undef GLATTER_LINKONCE
 #undef GLATTER_LINKONCE_STORAGE
 #undef GLATTER_LINKONCE_DECORATION
+
+/* Take exclusive ownership of the process configuration.
+ *
+ * Returns 1 when the caller now owns it and must release it with
+ * glatter_configuration_leave_(), and 0 when the configuration is already
+ * latched and must not be changed. A caller that finds another thread mid
+ * decision waits for that thread to publish its outcome, so a configuration
+ * read after this call never sees a partially applied decision.
+ */
+static int glatter_configuration_enter_(glatter_loader_state* state)
+{
+    for (;;) {
+        int phase = GLATTER_ATOMIC_INT_LOAD(state->phase);
+        if (phase == GLATTER_PHASE_RESOLVED) {
+            return 0;
+        }
+        if (phase == GLATTER_PHASE_CONFIGURABLE) {
+            int expected = GLATTER_PHASE_CONFIGURABLE;
+            if (GLATTER_ATOMIC_INT_CAS(state->phase, expected, GLATTER_PHASE_DECIDING)) {
+                return 1;
+            }
+        }
+        /* Another thread is deciding; spin until it publishes an outcome. */
+    }
+}
+
+/* Release the configuration. `resolved` latches it permanently; anything else
+ * reopens it, because nothing resolved and no entry point is bound to a WSI. */
+static void glatter_configuration_leave_(glatter_loader_state* state, int resolved)
+{
+    GLATTER_ATOMIC_INT_STORE(state->phase,
+        resolved ? GLATTER_PHASE_RESOLVED : GLATTER_PHASE_CONFIGURABLE);
+}
 
 static int glatter_equals_ignore_case(const char* a, const char* b)
 {
@@ -811,25 +848,10 @@ static int glatter_normalize_requested_wsi_(int requested)
     return requested;
 }
 
-/* Lock in WSI exactly once: {AUTO, DECIDING} -> {WGL,GLX,EGL}. Returns 1 if we won. */
-static int glatter_select_wsi_once_(glatter_loader_state* state, int chosen)
-{
-    int expected = GLATTER_WSI_AUTO_VALUE;
-    if (GLATTER_ATOMIC_INT_CAS(state->requested, expected, chosen)) {
-        GLATTER_ATOMIC_INT_STORE(state->wsi_explicit, 1);
-        return 1;
-    }
-
-    expected = GLATTER_WSI_DECIDING_VALUE;
-    if (GLATTER_ATOMIC_INT_CAS(state->requested, expected, chosen)) {
-        GLATTER_ATOMIC_INT_STORE(state->wsi_explicit, 1);
-        return 1;
-    }
-
-    return 0;
-}
-
-static void glatter_decide_wsi_once_(glatter_loader_state* state)
+/* Auto-detect the WSI. Callers hold the configuration phase, so the loads and
+ * stores below cannot interleave with another thread's decision or with
+ * glatter_set_wsi(). */
+static void glatter_decide_wsi_(glatter_loader_state* state)
 {
     int requested = GLATTER_ATOMIC_INT_LOAD(state->requested);
     requested = glatter_normalize_requested_wsi_(requested);
@@ -871,6 +893,8 @@ static void glatter_decide_wsi_once_(glatter_loader_state* state)
     GLATTER_ATOMIC_INT_STORE(state->wsi_explicit, wsi_explicit);
 }
 
+/* Apply the GLATTER_WSI override. Callers hold the configuration phase, so the
+ * env_checked test and set cannot both be won by two threads. */
 static void glatter_detect_wsi_from_env(glatter_loader_state* state)
 {
     int wsi_explicit = GLATTER_ATOMIC_INT_LOAD(state->wsi_explicit);
@@ -916,17 +940,32 @@ void glatter_set_wsi(int wsi)
             value = GLATTER_WSI_AUTO_VALUE;
             break;
     }
-    int normalized = glatter_normalize_requested_wsi_(value);
-    GLATTER_ATOMIC_INT_STORE(state->requested, normalized);
+
+    if (!glatter_configuration_enter_(state)) {
+        /* README.md documents the WSI as latched at the first successful
+         * resolution. Applying the request now would dispatch new entry points
+         * through a different provider than the ones already resolved, so
+         * report the refusal rather than accept a call that silently does
+         * something other than what it says. */
+        glatter_log(
+            "GLATTER: glatter_set_wsi() ignored; the WSI was latched at the first successful resolution.\n");
+        return;
+    }
+
+    GLATTER_ATOMIC_INT_STORE(state->requested,    glatter_normalize_requested_wsi_(value));
     GLATTER_ATOMIC_INT_STORE(state->wsi_explicit, 1);
-    GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_AUTO_VALUE);
+    glatter_configuration_leave_(state, 0);
 }
 
 GLATTER_INLINE_OR_NOT
 int glatter_get_wsi(void)
 {
     glatter_loader_state* state = glatter_loader_state_get();
-    glatter_detect_wsi_from_env(state);
+    if (glatter_configuration_enter_(state)) {
+        glatter_detect_wsi_from_env(state);
+        glatter_configuration_leave_(state, 0);
+    }
+
     int active = GLATTER_ATOMIC_INT_LOAD(state->active);
     if (active != GLATTER_WSI_AUTO_VALUE) {
         return active;
@@ -934,106 +973,74 @@ int glatter_get_wsi(void)
     return GLATTER_ATOMIC_INT_LOAD(state->requested);
 }
 
+/* Resolve through one decided WSI. AUTO has no provider of its own, so it is
+ * handled by the probe loop in glatter_resolve_first_ instead. */
+static void* glatter_resolve_through_(glatter_loader_state* state, int wsi, const char* function_name)
+{
+    switch (wsi) {
+#if defined(_WIN32)
+        case GLATTER_WSI_WGL_VALUE: return glatter_windows_resolve_wgl(state, function_name);
+        case GLATTER_WSI_EGL_VALUE: return glatter_windows_resolve_egl(state, function_name);
+#else
+        case GLATTER_WSI_GLX_VALUE: return glatter_linux_lookup_glx(state, function_name);
+        case GLATTER_WSI_EGL_VALUE: return glatter_linux_lookup_egl(state, function_name);
+#endif
+        default:                    return NULL;
+    }
+}
+
+/* The first resolution attempt, run by the thread holding the configuration
+ * phase. On success it publishes the WSI that produced the pointer, which is
+ * what the caller latches. */
+static void* glatter_resolve_first_(glatter_loader_state* state, const char* function_name)
+{
+    static const int probe_order[] = {
+#if defined(_WIN32)
+        GLATTER_WSI_WGL_VALUE,
+        GLATTER_WSI_EGL_VALUE
+#else
+        GLATTER_WSI_GLX_VALUE,
+        GLATTER_WSI_EGL_VALUE
+#endif
+    };
+
+    int requested = GLATTER_ATOMIC_INT_LOAD(state->requested);
+    if (requested != GLATTER_WSI_AUTO_VALUE) {
+        void* ptr = glatter_resolve_through_(state, requested, function_name);
+        if (ptr) {
+            GLATTER_ATOMIC_INT_STORE(state->active, requested);
+        }
+        return ptr;
+    }
+
+    for (size_t i = 0; i < sizeof(probe_order) / sizeof(probe_order[0]); ++i) {
+        void* ptr = glatter_resolve_through_(state, probe_order[i], function_name);
+        if (ptr) {
+            GLATTER_ATOMIC_INT_STORE(state->requested,    probe_order[i]);
+            GLATTER_ATOMIC_INT_STORE(state->wsi_explicit, 1);
+            GLATTER_ATOMIC_INT_STORE(state->active,       probe_order[i]);
+            return ptr;
+        }
+    }
+
+    return NULL;
+}
+
 GLATTER_INLINE_OR_NOT
 void* glatter_get_proc_address(const char* function_name)
 {
     glatter_loader_state* state = glatter_loader_state_get();
+
+    if (!glatter_configuration_enter_(state)) {
+        return glatter_resolve_through_(state, GLATTER_ATOMIC_INT_LOAD(state->active), function_name);
+    }
+
     glatter_detect_wsi_from_env(state);
+    glatter_decide_wsi_(state);
 
-    glatter_atomic_int* gate = glatter_wsi_gate_get();
-    if (GLATTER_ATOMIC_INT_LOAD(*gate) != 2) {
-        int expected = 0;
-        if (GLATTER_ATOMIC_INT_CAS(*gate, expected, 1)) {
-            glatter_decide_wsi_once_(state);
-            GLATTER_ATOMIC_INT_STORE(*gate, 2);
-        }
-        else {
-            while (GLATTER_ATOMIC_INT_LOAD(*gate) != 2) { /* spin */ }
-        }
-    }
-
-    for (;;) {
-        int requested = GLATTER_ATOMIC_INT_LOAD(state->requested);
-
-        if (requested == GLATTER_WSI_DECIDING_VALUE) {
-            while (GLATTER_ATOMIC_INT_LOAD(state->requested) == GLATTER_WSI_DECIDING_VALUE) { /* spin */ }
-            continue;
-        }
-
-#if defined(_WIN32)
-        if (requested == GLATTER_WSI_WGL_VALUE) {
-            void* ptr = glatter_windows_resolve_wgl(state, function_name);
-            if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_WGL_VALUE);
-            return ptr;
-        }
-        if (requested == GLATTER_WSI_EGL_VALUE) {
-            void* ptr = glatter_windows_resolve_egl(state, function_name);
-            if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
-            return ptr;
-        }
-
-        if (requested == GLATTER_WSI_AUTO_VALUE) {
-            int expected = GLATTER_WSI_AUTO_VALUE;
-            if (GLATTER_ATOMIC_INT_CAS(state->requested, expected, GLATTER_WSI_DECIDING_VALUE)) {
-                void* ptr = glatter_windows_resolve_wgl(state, function_name);
-                if (ptr) {
-                    GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_WGL_VALUE);
-                    (void)glatter_select_wsi_once_(state, GLATTER_WSI_WGL_VALUE);
-                    return ptr;
-                }
-
-                ptr = glatter_windows_resolve_egl(state, function_name);
-                if (ptr) {
-                    GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
-                    (void)glatter_select_wsi_once_(state, GLATTER_WSI_EGL_VALUE);
-                    return ptr;
-                }
-
-                GLATTER_ATOMIC_INT_STORE(state->requested, GLATTER_WSI_AUTO_VALUE);
-                return NULL;
-            }
-
-            continue;
-        }
-#else
-        if (requested == GLATTER_WSI_GLX_VALUE) {
-            void* ptr = glatter_linux_lookup_glx(state, function_name);
-            if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_GLX_VALUE);
-            return ptr;
-        }
-        if (requested == GLATTER_WSI_EGL_VALUE) {
-            void* ptr = glatter_linux_lookup_egl(state, function_name);
-            if (ptr) GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
-            return ptr;
-        }
-
-        if (requested == GLATTER_WSI_AUTO_VALUE) {
-            int expected = GLATTER_WSI_AUTO_VALUE;
-            if (GLATTER_ATOMIC_INT_CAS(state->requested, expected, GLATTER_WSI_DECIDING_VALUE)) {
-                void* ptr = glatter_linux_lookup_glx(state, function_name);
-                if (ptr) {
-                    GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_GLX_VALUE);
-                    (void)glatter_select_wsi_once_(state, GLATTER_WSI_GLX_VALUE);
-                    return ptr;
-                }
-
-                ptr = glatter_linux_lookup_egl(state, function_name);
-                if (ptr) {
-                    GLATTER_ATOMIC_INT_STORE(state->active, GLATTER_WSI_EGL_VALUE);
-                    (void)glatter_select_wsi_once_(state, GLATTER_WSI_EGL_VALUE);
-                    return ptr;
-                }
-
-                GLATTER_ATOMIC_INT_STORE(state->requested, GLATTER_WSI_AUTO_VALUE);
-                return NULL;
-            }
-
-            continue;
-        }
-#endif
-
-        return NULL;
-    }
+    void* ptr = glatter_resolve_first_(state, function_name);
+    glatter_configuration_leave_(state, ptr != NULL);
+    return ptr;
 }
 
 #if defined(GLATTER_GL)
