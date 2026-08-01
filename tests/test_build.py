@@ -221,6 +221,30 @@ def test_c_program_compiles_with_glatter_c(tmp_path: Path) -> None:
     )
 
 
+def test_log_handler_can_be_replaced_and_removed(tmp_path: Path) -> None:
+    """Ensure a log sink stays replaceable and removable after the first log."""
+
+    cc = _require_tool("cc")
+
+    output_binary = tmp_path / "log_handler_contract"
+    _run_command(
+        [
+            cc,
+            "-std=c11",
+            "-I",
+            str(REPO_ROOT / "include"),
+            *_thread_flags(),
+            str(REPO_ROOT / "tests" / "test_glatter_log_null.c"),
+            *_dl_flags(),
+            *_opengl_libs(),
+            "-o",
+            str(output_binary),
+        ]
+    )
+
+    _run_command([output_binary])
+
+
 def test_header_only_cpp_compiles_across_translation_units(tmp_path: Path) -> None:
     """Ensure the header-only configuration builds in multiple C++ units."""
 

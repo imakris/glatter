@@ -172,6 +172,11 @@ int main() {
 }
 ```
 
+The sink can be replaced at any time, and `glatter_set_log_handler(NULL)` restores the built‑in
+stdout/stderr sink. A sink must stay callable until it has been replaced and no thread is inside a
+glatter call, so a sink that lives in a dynamically loaded module has to be uninstalled before that
+module is unloaded.
+
 > Note: ARB/KHR debug output still needs a debug context; glatter’s error checks work independently.
 
 For WGL wrappers, glatter sets `SetLastError(0)` immediately before the call so the subsequent

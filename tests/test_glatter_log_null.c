@@ -1,4 +1,6 @@
+#if !defined(_WIN32)
 #include <pthread.h>
+#endif
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,8 +29,14 @@ char* glatter_masprintf(const char* format, ...);
 #define GLATTER_MASPRINTF_H
 #include <glatter/glatter_def.h>
 
+/* glatter_def.h declares the owner-thread objects extern in compiled TU mode. */
+#if defined(_WIN32)
+INIT_ONCE      glatter_thread_once = INIT_ONCE_STATIC_INIT;
+DWORD          glatter_thread_id;
+#else
 pthread_once_t glatter_thread_once = PTHREAD_ONCE_INIT;
 pthread_t      glatter_thread_id;
+#endif
 glatter_atomic_int            glatter_owner_bound_explicitly   = GLATTER_ATOMIC_INT_INIT(0);
 glatter_atomic_int            glatter_owner_thread_initialized = GLATTER_ATOMIC_INT_INIT(0);
 

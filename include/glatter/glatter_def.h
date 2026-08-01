@@ -164,11 +164,12 @@ void glatter_default_log_handler(const char* str)
 
 typedef void (*glatter_log_handler_fn)(const char*);
 
+/* The sink is installed and removed at will, so it must stay callable until it
+ * has been replaced and no thread is inside a log call. Callers that install a
+ * sink from a module they unload are responsible for calling
+ * glatter_set_log_handler(NULL) first. */
 static glatter_atomic(glatter_log_handler_fn) glatter_log_handler_state =
     GLATTER_ATOMIC_INIT_PTR(glatter_default_log_handler);
-
-/* Log handler is frozen after the first log to avoid races with late setters. */
-static glatter_atomic_int glatter_log_handler_frozen = GLATTER_ATOMIC_INT_INIT(0);
 
 GLATTER_INLINE_OR_NOT
 void glatter_log_handler_store(glatter_log_handler_fn handler_ptr)
@@ -233,9 +234,6 @@ const char* glatter_log(const char* str)
             stable = glatter_log_fallback_message;
         }
     }
-    /* Freeze the handler on first log, race-free. */
-    int expected = 0;
-    (void)GLATTER_ATOMIC_INT_CAS(glatter_log_handler_frozen, expected, 1);
     glatter_log_handler_fn handler = glatter_log_handler_load();
     handler(stable);
     return str;
@@ -278,10 +276,6 @@ void glatter_log_printf(const char* fmt, ...)
 GLATTER_INLINE_OR_NOT
 void glatter_set_log_handler(void(*handler_ptr)(const char*))
 {
-    /* If already frozen by the first log, ignore late changes. */
-    if (GLATTER_ATOMIC_INT_LOAD(glatter_log_handler_frozen)) {
-        return;
-    }
     if (handler_ptr == NULL) {
         handler_ptr = glatter_default_log_handler;
     }
