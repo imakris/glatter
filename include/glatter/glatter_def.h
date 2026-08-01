@@ -112,6 +112,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define GLATTER_LINKONCE GLATTER_LINKONCE_DECORATION GLATTER_LINKONCE_STORAGE
 
+/* Function counterpart of GLATTER_LINKONCE, for the few functions whose ADDRESS
+ * is stored in process-wide state or compared by callers. Header-only mode is
+ * C++ by construction (see glatter.h), so `inline` is available and gives one
+ * function per program; compiled-TU mode already has exactly one definition. */
+#if defined(GLATTER_HEADER_ONLY)
+#   define GLATTER_LINKONCE_FN inline
+#else
+#   define GLATTER_LINKONCE_FN
+#endif
+
 #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
     #include <dlfcn.h>
     #include <pthread.h>
@@ -155,7 +165,7 @@ GLATTER_EXTERN_C_BEGIN
 
 
 
-GLATTER_INLINE_OR_NOT
+GLATTER_LINKONCE_FN
 void glatter_default_log_handler(const char* str)
 {
     fprintf(stderr, "%s", str);
@@ -168,7 +178,7 @@ typedef void (*glatter_log_handler_fn)(const char*);
  * has been replaced and no thread is inside a log call. Callers that install a
  * sink from a module they unload are responsible for calling
  * glatter_set_log_handler(NULL) first. */
-static glatter_atomic(glatter_log_handler_fn) glatter_log_handler_state =
+GLATTER_LINKONCE glatter_atomic(glatter_log_handler_fn) glatter_log_handler_state =
     GLATTER_ATOMIC_INIT_PTR(glatter_default_log_handler);
 
 GLATTER_INLINE_OR_NOT
@@ -457,10 +467,6 @@ static glatter_loader_state* glatter_loader_state_get(void)
     return &glatter_loader_state_singleton;
 }
 
-#undef GLATTER_LINKONCE
-#undef GLATTER_LINKONCE_STORAGE
-#undef GLATTER_LINKONCE_DECORATION
-
 /* Take exclusive ownership of the process configuration.
  *
  * Returns 1 when the caller now owns it and must release it with
@@ -544,9 +550,12 @@ static HMODULE glatter_load_system32_dll_(const wchar_t* dll_w)
 static BOOL CALLBACK glatter_init_wgl_loader_once(PINIT_ONCE once, PVOID param, PVOID* context);
 static BOOL CALLBACK glatter_init_egl_loader_once(PINIT_ONCE once, PVOID param, PVOID* context);
 static BOOL CALLBACK glatter_init_gles_loader_once(PINIT_ONCE o, PVOID p, PVOID* c);
-static INIT_ONCE glatter_wgl_loader_once = INIT_ONCE_STATIC_INIT;
-static INIT_ONCE glatter_egl_loader_once = INIT_ONCE_STATIC_INIT;
-static INIT_ONCE glatter_gles_loader_once = INIT_ONCE_STATIC_INIT;
+/* The once objects guard fields of the shared loader state, so they have to be
+ * shared too; one per translation unit would let several of them admit their
+ * callback at the same time and race on the same handles. */
+GLATTER_LINKONCE INIT_ONCE glatter_wgl_loader_once = INIT_ONCE_STATIC_INIT;
+GLATTER_LINKONCE INIT_ONCE glatter_egl_loader_once = INIT_ONCE_STATIC_INIT;
+GLATTER_LINKONCE INIT_ONCE glatter_gles_loader_once = INIT_ONCE_STATIC_INIT;
 
 static void* glatter_windows_resolve_wgl(glatter_loader_state* state, const char* name)
 {
@@ -684,8 +693,11 @@ static int glatter_windows_probe_egl_(void)
 
 static void glatter_init_posix_loader_once(void);
 static void glatter_init_gles_loader_once(void);
-static pthread_once_t glatter_posix_loader_once = PTHREAD_ONCE_INIT;
-static pthread_once_t glatter_gles_loader_once = PTHREAD_ONCE_INIT;
+/* The once objects guard fields of the shared loader state, so they have to be
+ * shared too; one per translation unit would let several of them admit their
+ * callback at the same time and race on the same handles. */
+GLATTER_LINKONCE pthread_once_t glatter_posix_loader_once = PTHREAD_ONCE_INIT;
+GLATTER_LINKONCE pthread_once_t glatter_gles_loader_once = PTHREAD_ONCE_INIT;
 
 static void* glatter_linux_lookup_in_handles(void** handles, size_t count, const char* name)
 {
@@ -1071,7 +1083,10 @@ const char* enum_to_string_GLX(GLATTER_ENUM_GLX e);
 /* ---- GLX error accounting across threads (per-Display) ---- */
 
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
-static int (*glatter_prev_x_error_handler)(Display*, XErrorEvent*) = NULL;
+/* Shared with the install gate in the loader state: exactly one translation unit
+ * wins the CAS and installs its handler, so the chained predecessor it captured
+ * has to be visible to that handler wherever it runs. */
+GLATTER_LINKONCE int (*glatter_prev_x_error_handler)(Display*, XErrorEvent*) = NULL;
 #endif
 
 typedef struct {
@@ -1079,8 +1094,12 @@ typedef struct {
     glatter_atomic_int    count;   /* monotonic error counter for that Display */
 } glatter_glx_err_slot;
 
-/* Keep it small: most apps have 1 display; 8 covers unusual cases. */
-static glatter_glx_err_slot glatter_glx_err_table[8] = {
+/* Keep it small: most apps have 1 display; 8 covers unusual cases.
+ * Shared, because only the translation unit that won the install gate runs the
+ * handler that increments it. A per-translation-unit table would leave
+ * glatter_check_error_GLX in every other unit comparing a counter that can
+ * never move, and reporting success for every GLX error. */
+GLATTER_LINKONCE glatter_glx_err_slot glatter_glx_err_table[8] = {
     { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
     { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
     { GLATTER_ATOMIC_INIT_PTR(NULL), GLATTER_ATOMIC_INT_INIT(0) },
@@ -1271,24 +1290,17 @@ void glatter_check_error_GLU(const char* file, int line)
 
 
 #if defined(__linux__)
-static pthread_once_t* glatter_glu_once_slot(void)
-{
-    static pthread_once_t once = PTHREAD_ONCE_INIT;
-    return &once;
-}
-
-static void** glatter_glu_handle_slot(void)
-{
-    static void* handle = NULL;
-    return &handle;
-}
+/* Same reason as the GL/EGL loaders: the once object guards a shared library
+ * handle, so both are one per program. Per-translation-unit copies made every
+ * unit dlopen libGLU independently. */
+GLATTER_LINKONCE pthread_once_t glatter_glu_loader_once = PTHREAD_ONCE_INIT;
+GLATTER_LINKONCE void*          glatter_glu_handle      = NULL;
 
 static void glatter_open_glu_handle(void)
 {
-    void** handle = glatter_glu_handle_slot();
-    *handle = dlopen("libGLU.so", RTLD_LAZY | RTLD_LOCAL);
-    if (*handle == NULL) {
-        *handle = dlopen("libGLU.so.1", RTLD_LAZY | RTLD_LOCAL);
+    glatter_glu_handle = dlopen("libGLU.so", RTLD_LAZY | RTLD_LOCAL);
+    if (glatter_glu_handle == NULL) {
+        glatter_glu_handle = dlopen("libGLU.so.1", RTLD_LAZY | RTLD_LOCAL);
     }
 }
 #endif
@@ -1299,9 +1311,8 @@ void* glatter_get_proc_address_GLU(const char* function_name)
     void* ptr = NULL;
 
 #if defined(__linux__)
-    pthread_once(glatter_glu_once_slot(), glatter_open_glu_handle);
-    void* handle = *glatter_glu_handle_slot();
-    ptr = handle ? dlsym(handle, function_name) : NULL;
+    pthread_once(&glatter_glu_loader_once, glatter_open_glu_handle);
+    ptr = glatter_glu_handle ? dlsym(glatter_glu_handle, function_name) : NULL;
 #elif defined(_WIN32)
     HMODULE module = GetModuleHandleA("glu32.dll");
     if (module == NULL) {
@@ -1319,6 +1330,12 @@ void* glatter_get_proc_address_GLU(const char* function_name)
     return ptr;
 }
 #endif
+
+/* Every process-scoped object is declared by now. */
+#undef GLATTER_LINKONCE
+#undef GLATTER_LINKONCE_FN
+#undef GLATTER_LINKONCE_STORAGE
+#undef GLATTER_LINKONCE_DECORATION
 
 GLATTER_EXTERN_C_END
 

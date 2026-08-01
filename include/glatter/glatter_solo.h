@@ -7,8 +7,11 @@
  * NOTE 1: Do not mix header-only and compiled-TU modes in the same binary.
  * If you compile glatter.c (compiled mode), do NOT include this header anywhere.
  *
- * NOTE 2: Header-only builds now share a single loader state via link-once
- * storage so every translation unit observes the same WSI decision.
+ * NOTE 2: Header-only builds share their process state via link-once storage,
+ * so every translation unit observes the same WSI decision, the same loader
+ * handles, the same log sink and the same GLX error counters. Link-once means
+ * one instance per link unit: a program that links glatter into two separate
+ * binaries gets one set per binary.
  * You can still use the compiled C translation unit variant if you prefer
  * slightly smaller binaries, but not for correctness.
  */

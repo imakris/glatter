@@ -411,6 +411,100 @@ def test_header_only_cpp_compiles_via_glatter_solo(tmp_path: Path) -> None:
     )
 
 
+def test_header_only_log_sink_and_wsi_latch_are_process_wide(tmp_path: Path) -> None:
+    """A sink installed in one TU must see another TU's logs, and the WSI must stay latched."""
+
+    cxx = _require_tool("c++")
+
+    sources = {
+        "main.cpp": textwrap.dedent(
+            """
+            #include <glatter/glatter_solo.h>
+
+            int  helper_log_once();
+            void helper_set_wsi_auto();
+
+            static int g_sink_calls = 0;
+
+            static void counting_sink(const char*) { ++g_sink_calls; }
+
+            int main()
+            {
+                glatter_set_log_handler(counting_sink);
+                helper_log_once();
+                if (g_sink_calls == 0) {
+                    return 1; /* the log sink is not process-wide */
+                }
+
+                const bool resolved   = glatter_get_proc_address("glClear") != nullptr;
+                const int  wsi_before = glatter_get_wsi();
+
+                helper_set_wsi_auto();
+
+                if (resolved && glatter_get_wsi() != wsi_before) {
+                    return 2; /* a late glatter_set_wsi() broke the documented latch */
+                }
+                return 0;
+            }
+            """
+        ).strip()
+        + "\n",
+        "helper.cpp": textwrap.dedent(
+            """
+            #include <glatter/glatter_solo.h>
+
+            int helper_log_once()
+            {
+                glatter_log("GLATTER: cross translation unit log probe\\n");
+                return 0;
+            }
+
+            void helper_set_wsi_auto()
+            {
+                glatter_set_wsi(GLATTER_WSI_AUTO);
+            }
+            """
+        ).strip()
+        + "\n",
+    }
+
+    for name, content in sources.items():
+        (tmp_path / name).write_text(content)
+
+    compile_args = [
+        cxx,
+        "-std=c++17",
+        "-I",
+        str(REPO_ROOT / "include"),
+        "-I",
+        str(REPO_ROOT / "tests" / "include"),
+        *_thread_flags(),
+    ]
+
+    objects: list[Path] = []
+    for source_name in sources:
+        object_path = tmp_path / (Path(source_name).stem + ".o")
+        _run_command(
+            compile_args + ["-c", str(tmp_path / source_name), "-o", str(object_path)],
+        )
+        objects.append(object_path)
+
+    binary_path = tmp_path / "process_wide_state"
+    _run_command(
+        [
+            cxx,
+            *_thread_flags(),
+            *_dl_flags(),
+            *map(str, objects),
+            *_opengl_libs(),
+            "-o",
+            str(binary_path),
+        ]
+    )
+
+    _run_command([binary_path])
+
+
 def test_header_only_wsi_state_shared_across_tus(tmp_path: Path) -> None:
     """Ensure glatter_set_wsi/glatter_get_wsi share state across TUs."""
 

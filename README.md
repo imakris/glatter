@@ -109,13 +109,22 @@ Optional WSI override (function call or env var):
 glatter_set_wsi(GLATTER_WSI_EGL); /* or WGL, GLX, AUTO */
 ```
 
-WSI is latched at **first successful resolution** in the process. Changes to the environment variable or calls to
-`glatter_set_wsi()` after first use have no effect for the remainder of the process.
+WSI is latched at **first successful resolution**. Changes to the environment variable or calls to
+`glatter_set_wsi()` after that point have no effect for the remainder of the process, and an ignored
+`glatter_set_wsi()` is reported through the log sink. A resolution attempt that finds nothing latches
+nothing, so an override issued after a failed attempt is still honoured.
 
-**Thread-safety & determinism:** In `AUTO` mode, WSI detection is fully thread-safe. A tiny atomic gate ensures the decision is made exactly once, proceeding in a fixed order (Windows: WGL→EGL; POSIX: GLX→EGL). Both header-only and compiled TU modes are functionally correct and thread-safe. The choice is one of project architecture:
+**Thread-safety & determinism:** In `AUTO` mode, WSI detection is fully thread-safe. One configuration
+phase makes the decision exactly once, proceeding in a fixed order (Windows: WGL→EGL; POSIX: GLX→EGL),
+and holds it for the whole first resolution attempt so no thread can observe a half-applied decision.
+Both header-only and compiled TU modes are functionally correct and thread-safe. The choice is one of
+project architecture:
 
-*   **Header-only (C++):** State is managed per translation unit. All TUs will deterministically converge to the same WSI.
-*   **Compiled TU (C/C++):** State is centralized in a single, shared object, which can reduce code size.
+*   **Header-only (C++):** State is shared through link-once storage, so every translation unit in a
+    link unit sees one WSI decision, one loader, one log sink and one GLX error counter. A library
+    that is linked into two separate binaries (for example two shared objects) gets one set per
+    binary, as it would for any other link-once data.
+*   **Compiled TU (C/C++):** State lives in a single object file, which can reduce code size.
 
 
 ## Typical single‑context app
