@@ -1083,10 +1083,22 @@ const char* enum_to_string_GLX(GLATTER_ENUM_GLX e);
 /* ---- GLX error accounting across threads (per-Display) ---- */
 
 #if !defined(GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER)
+typedef int (*glatter_x_error_handler_fn)(Display*, XErrorEvent*);
+
 /* Shared with the install gate in the loader state: exactly one translation unit
  * wins the CAS and installs its handler, so the chained predecessor it captured
- * has to be visible to that handler wherever it runs. */
-GLATTER_LINKONCE int (*glatter_prev_x_error_handler)(Display*, XErrorEvent*) = NULL;
+ * has to be visible to that handler wherever it runs.
+ *
+ * Atomic because x_error_handler reads it from whichever thread Xlib happens to
+ * dispatch on while the installing thread is still storing it. Xlib only hands
+ * back the previous handler as the return value of installing a new one, so our
+ * handler is reachable before the predecessor can be recorded; that one-error
+ * window cannot be closed without leaving Xlib's own handler installed, which
+ * exits the process on error. What is fixed here is the data race, not the
+ * window: an X error dispatched inside it still skips the application's handler
+ * once. */
+GLATTER_LINKONCE glatter_atomic(glatter_x_error_handler_fn) glatter_prev_x_error_handler =
+    GLATTER_ATOMIC_INIT_PTR(NULL);
 #endif
 
 typedef struct {
@@ -1164,8 +1176,10 @@ int x_error_handler(Display *dsp, XErrorEvent *error)
         glatter_glx_err_increment(dsp);
     }
 
-    if (glatter_prev_x_error_handler) {
-        return glatter_prev_x_error_handler(dsp, error);
+    glatter_x_error_handler_fn previous =
+        (glatter_x_error_handler_fn)GLATTER_ATOMIC_LOAD(glatter_prev_x_error_handler);
+    if (previous) {
+        return previous(dsp, error);
     }
     return 0;
 }
@@ -1182,7 +1196,8 @@ void* glatter_get_proc_address_GLX(const char* function_name)
         if (GLATTER_ATOMIC_INT_LOAD(state->active) == GLATTER_WSI_GLX_VALUE) {
             int expected = 0;
             if (GLATTER_ATOMIC_INT_CAS(state->glx_error_handler_installed, expected, 1)) {
-                glatter_prev_x_error_handler = XSetErrorHandler(x_error_handler);
+                GLATTER_ATOMIC_STORE(glatter_prev_x_error_handler,
+                    (glatter_x_error_handler_fn)XSetErrorHandler(x_error_handler));
                 glatter_log("GLATTER: installed cooperative X error handler (define GLATTER_DO_NOT_INSTALL_X_ERROR_HANDLER to disable).\n");
             }
         }
