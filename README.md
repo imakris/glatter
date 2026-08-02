@@ -314,8 +314,8 @@ If `GLATTER_HAS_EGL_GENERATED_HEADERS` is off for a target, EGL/GLES helpers are
 * **Missing EGL/GLES generated headers** Builds still succeed; EGL/GLES helpers are unavailable until the headers are generated.
 * **Platform family mismatch** Enabling a platform wrapper that is unavailable on the target (e.g., WGL on Linux,
   GLX on Windows) leads to failures. Enable only the families that exist on the current platform.
-* **WSI override not taking effect** The WSI is latched at first use. Set `GLATTER_WSI` or call `glatter_set_wsi()` **before**
-  the first GL/WSI call.
+* **WSI override not taking effect** The WSI is latched at the first successful resolution. Set `GLATTER_WSI` or call
+  `glatter_set_wsi()` **before** the first GL/WSI call.
 ---
 
 ## License
