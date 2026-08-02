@@ -125,6 +125,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
     #include <dlfcn.h>
     #include <pthread.h>
+    #include <sched.h>
+    #include <sys/select.h>
 #endif
 
 /*
@@ -467,6 +469,72 @@ static glatter_loader_state* glatter_loader_state_get(void)
     return &glatter_loader_state_singleton;
 }
 
+/* Turn counts at which the configuration wait escalates: up to the first it
+ * only hints to the CPU, up to the second it also offers the core to any other
+ * runnable thread, and past it the waiter sleeps. */
+#define GLATTER_CONFIGURATION_SPIN_HINT_TURNS    64u
+#define GLATTER_CONFIGURATION_SPIN_YIELD_TURNS 1024u
+
+/* Tell the CPU that this thread is spinning, which mainly buys a hyperthreaded
+ * sibling the pipeline. It is a pure hint with no effect on program state, so a
+ * target whose spelling is not known here can go without one; the yield and the
+ * sleep below, not this hint, are what bound the wait. */
+#if defined(_WIN32)
+    #define GLATTER_CPU_RELAX() YieldProcessor()
+#elif defined(__GNUC__) && (defined(__i386__) || defined(__x86_64__))
+    #define GLATTER_CPU_RELAX() __builtin_ia32_pause()
+#elif defined(__GNUC__) && defined(__aarch64__)
+    #define GLATTER_CPU_RELAX() __asm__ __volatile__("yield" ::: "memory")
+#else
+    #define GLATTER_CPU_RELAX() ((void)0)
+#endif
+
+/* Wait one turn for the deciding thread. This reads no state and imposes no
+ * ordering, so it cannot affect the latch protocol.
+ *
+ * The wait has to survive a long hold: the deciding thread keeps the phase
+ * across the WSI probes and the first resolution attempt, and those
+ * dlopen()/LoadLibrary() every candidate library, which is milliseconds on a
+ * cold cache. Yielding alone does not bound that, because both SwitchToThread()
+ * and sched_yield() return immediately when the waiter's own core has nothing
+ * else to run, which is the usual case on a multi-core machine; the waiter
+ * would still burn that core for the whole load. Only the sleep bounds it, so
+ * the wait ends up there. The two cheaper steps come first because the short
+ * handoffs, such as the gap between the winning CAS and the phase store, must
+ * not pay a millisecond to observe an outcome that is already a few hundred
+ * cycles away.
+ */
+static void glatter_configuration_wait_(unsigned turn)
+{
+    GLATTER_CPU_RELAX();
+    if (turn < GLATTER_CONFIGURATION_SPIN_HINT_TURNS) {
+        return;
+    }
+    if (turn < GLATTER_CONFIGURATION_SPIN_YIELD_TURNS) {
+#if defined(_WIN32)
+        SwitchToThread();
+#else
+        sched_yield();
+#endif
+        return;
+    }
+#if defined(_WIN32)
+    Sleep(1);
+#else
+    {
+        /* select() rather than nanosleep(): glibc and musl declare nanosleep()
+         * only when a POSIX feature test macro is set, which a consumer that
+         * compiles this header as strict ISO C does not get, while select() is
+         * declared unconditionally. An early return on EINTR costs nothing, as
+         * the caller rechecks the phase and waits again. */
+        struct timeval delay;
+        delay.tv_sec  = 0;
+        delay.tv_usec = 1000;
+        (void)select(0, NULL, NULL, NULL, &delay);
+    }
+#endif
+}
+
 /* Take exclusive ownership of the process configuration.
  *
  * Returns 1 when the caller now owns it and must release it with
@@ -477,7 +545,7 @@ static glatter_loader_state* glatter_loader_state_get(void)
  */
 static int glatter_configuration_enter_(glatter_loader_state* state)
 {
-    for (;;) {
+    for (unsigned turn = 0; ; ++turn) {
         int phase = GLATTER_ATOMIC_INT_LOAD(state->phase);
         if (phase == GLATTER_PHASE_RESOLVED) {
             return 0;
@@ -488,7 +556,8 @@ static int glatter_configuration_enter_(glatter_loader_state* state)
                 return 1;
             }
         }
-        /* Another thread is deciding; spin until it publishes an outcome. */
+        /* Another thread is deciding; wait until it publishes an outcome. */
+        glatter_configuration_wait_(turn);
     }
 }
 

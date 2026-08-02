@@ -225,6 +225,11 @@ HMODULE LoadLibraryExW(LPCWSTR name, HANDLE file, DWORD flags);
 FARPROC GetProcAddress(HMODULE module, LPCSTR name);
 UINT GetSystemDirectoryW(WCHAR* buffer, UINT size);
 DWORD GetCurrentThreadId(void);
+BOOL SwitchToThread(void);
+void Sleep(DWORD milliseconds);
+/* The real SDK spells this as a macro over a CPU intrinsic, so there is nothing
+ * to import; a spin hint has no observable effect to reproduce here. */
+static inline void YieldProcessor(void) {}
 static inline DWORD GetTickCount(void) { return 0; }
 static inline DWORD GetLastError(void) { return 0; }
 static inline void SetLastError(DWORD error) { (void)error; }
