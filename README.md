@@ -110,9 +110,10 @@ glatter_set_wsi(GLATTER_WSI_EGL); /* or WGL, GLX, AUTO */
 ```
 
 WSI is latched at **first successful resolution**. Changes to the environment variable or calls to
-`glatter_set_wsi()` after that point have no effect for the remainder of the process, and an ignored
-`glatter_set_wsi()` is reported through the log sink. A resolution attempt that finds nothing latches
-nothing, so an override issued after a failed attempt is still honoured.
+`glatter_set_wsi()` after that point have no effect for the remainder of the process (per link unit in
+header-only mode, see below), and an ignored `glatter_set_wsi()` is reported through the log sink. A
+resolution attempt that finds nothing latches nothing, so an override issued after a failed attempt is
+still honoured.
 
 **Thread-safety & determinism:** In `AUTO` mode, WSI detection is fully thread-safe. One configuration
 phase makes the decision exactly once, proceeding in a fixed order (Windows: WGL→EGL; POSIX: GLX→EGL),
