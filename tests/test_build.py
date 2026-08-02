@@ -79,6 +79,81 @@ def _run_command(command: list[str | Path], *, cwd: Path | None = None) -> None:
         pytest.fail(message)
 
 
+def _cmake_generator_arguments() -> list[str]:
+    """Prefer Ninja so CMake honors the compilers used by the portable smoke tests."""
+
+    if shutil.which("ninja") is not None:
+        return ["-G", "Ninja"]
+    return []
+
+
+def _install_glatter(directory: Path, *, build_shared_libs: bool = False) -> Path:
+    """Build and install glatter into a clean prefix."""
+
+    cmake = _require_tool("cmake")
+    build_directory = directory / "provider-build"
+    install_prefix = directory / "provider-prefix"
+
+    _run_command(
+        [
+            cmake,
+            *_cmake_generator_arguments(),
+            "-S",
+            REPO_ROOT,
+            "-B",
+            build_directory,
+            "-DCMAKE_BUILD_TYPE=Release",
+            f"-DBUILD_SHARED_LIBS={'ON' if build_shared_libs else 'OFF'}",
+            "-DGLATTER_BUILD_TESTING=OFF",
+            "-DBUILD_TESTING=OFF",
+            f"-DCMAKE_INSTALL_PREFIX={install_prefix}",
+        ]
+    )
+    _run_command([cmake, "--build", build_directory, "--config", "Release"])
+    _run_command([cmake, "--install", build_directory, "--config", "Release"])
+
+    return install_prefix
+
+
+def _write_installed_consumer(directory: Path) -> None:
+    """Write a consumer for the documented installed target and GL headers."""
+
+    (directory / "CMakeLists.txt").write_text(
+        textwrap.dedent(
+            """
+            cmake_minimum_required(VERSION 3.16)
+            project(glatter_installed_consumer LANGUAGES C)
+
+            find_package(glatter 1.0 CONFIG REQUIRED)
+
+            get_target_property(GLATTER_TARGET_TYPE glatter::glatter TYPE)
+            if(NOT GLATTER_TARGET_TYPE STREQUAL "STATIC_LIBRARY")
+                message(FATAL_ERROR "glatter::glatter must remain a static compiled loader")
+            endif()
+
+            add_executable(glatter-installed-consumer main.c)
+            target_link_libraries(glatter-installed-consumer PRIVATE glatter::glatter)
+            """
+        ).strip()
+        + "\n"
+    )
+    (directory / "main.c").write_text(
+        textwrap.dedent(
+            """
+            #include <GL/gl.h>
+            #include <glatter/glatter.h>
+
+            int main(void)
+            {
+                (void)glatter_get_wsi();
+                return 0;
+            }
+            """
+        ).strip()
+        + "\n"
+    )
+
+
 def _write_egl_stub(directory: Path) -> Path:
     """Create a minimal EGL shim used to satisfy dynamic loader symbols."""
 
@@ -164,6 +239,115 @@ EXAMPLE_PROGRAMS: tuple[ExampleProgram, ...] = (
         platform="win32",
     ),
 )
+
+
+@pytest.mark.parametrize(
+    ("relocate", "build_shared_libs"),
+    [
+        (False, False),
+        (True, False),
+        (False, True),
+    ],
+    ids=["clean-prefix", "relocated-prefix", "host-shared-policy"],
+)
+def test_installed_cmake_package_builds_documented_consumer(
+    tmp_path: Path, relocate: bool, build_shared_libs: bool
+) -> None:
+    """The installed package must remain usable from its original or relocated prefix."""
+
+    cmake = _require_tool("cmake")
+    install_prefix = _install_glatter(tmp_path, build_shared_libs=build_shared_libs)
+
+    assert (install_prefix / "include" / "GL" / "gl.h").is_file()
+    assert len(list(install_prefix.rglob("glatter-config.cmake"))) == 1
+    assert len(list(install_prefix.rglob("glatter-config-version.cmake"))) == 1
+    assert len(list(install_prefix.rglob("glatter-targets.cmake"))) == 1
+
+    if relocate:
+        relocated_prefix = tmp_path / "relocated-prefix"
+        shutil.copytree(install_prefix, relocated_prefix)
+        install_prefix.rename(tmp_path / "unavailable-original-prefix")
+        install_prefix = relocated_prefix
+
+    consumer_source = tmp_path / "consumer"
+    consumer_source.mkdir()
+    _write_installed_consumer(consumer_source)
+
+    consumer_build = tmp_path / "consumer-build"
+    _run_command(
+        [
+            cmake,
+            *_cmake_generator_arguments(),
+            "-S",
+            consumer_source,
+            "-B",
+            consumer_build,
+            "-DCMAKE_BUILD_TYPE=Release",
+            f"-DCMAKE_PREFIX_PATH={install_prefix}",
+        ]
+    )
+    _run_command([cmake, "--build", consumer_build, "--config", "Release"])
+
+
+@pytest.mark.parametrize(
+    ("glatter_build_testing", "build_testing", "expect_target"),
+    [
+        (None, True, False),
+        (True, False, False),
+        (True, True, True),
+    ],
+    ids=["dependency-default", "host-disabled", "explicit-opt-in"],
+)
+def test_source_consumer_controls_glatter_test_target(
+    tmp_path: Path,
+    glatter_build_testing: bool | None,
+    build_testing: bool,
+    expect_target: bool,
+) -> None:
+    """A source consumer receives glatter-test only when both test gates are enabled."""
+
+    cmake = _require_tool("cmake")
+    source_directory = tmp_path / "consumer"
+    source_directory.mkdir()
+    (source_directory / "CMakeLists.txt").write_text(
+        textwrap.dedent(
+            """
+            cmake_minimum_required(VERSION 3.16)
+            project(glatter_source_consumer LANGUAGES C CXX)
+
+            include(CTest)
+            add_subdirectory("${GLATTER_SOURCE}" glatter)
+
+            if(EXPECT_GLATTER_TEST_TARGET)
+                if(NOT TARGET glatter-test)
+                    message(FATAL_ERROR "glatter-test was not created after explicit opt-in")
+                endif()
+            elseif(TARGET glatter-test)
+                message(FATAL_ERROR "glatter-test was injected into a source consumer")
+            endif()
+            """
+        ).strip()
+        + "\n"
+    )
+
+    command: list[str | Path] = [
+        cmake,
+        *_cmake_generator_arguments(),
+        "-S",
+        source_directory,
+        "-B",
+        tmp_path / "consumer-build",
+        "-DCMAKE_BUILD_TYPE=Release",
+        f"-DGLATTER_SOURCE={REPO_ROOT.as_posix()}",
+        f"-DBUILD_TESTING={'ON' if build_testing else 'OFF'}",
+        f"-DEXPECT_GLATTER_TEST_TARGET={'ON' if expect_target else 'OFF'}",
+    ]
+    if glatter_build_testing is not None:
+        command.append(
+            f"-DGLATTER_BUILD_TESTING={'ON' if glatter_build_testing else 'OFF'}"
+        )
+
+    _run_command(command)
 
 
 def test_c_program_compiles_with_glatter_c(tmp_path: Path) -> None:
