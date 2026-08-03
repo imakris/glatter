@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Setup MSYS2
+        id: msys2
         uses: msys2/setup-msys2@v2
         with:
           update: false
@@ -34,8 +35,13 @@ jobs:
       - name: Build with CMake
         run: cmake --build build --config Release
 
+      # The smoke tests execute the programs they compile, and MinGW binaries
+      # import libwinpthread-1.dll from the compiler's own bin directory.
+      - name: Put the MinGW runtime on PATH
+        run: Add-Content -Path $env:GITHUB_PATH -Value '${{ steps.msys2.outputs.msys2-location }}\mingw64\bin'
+
       - name: Run build smoke tests
         env:
-          CC: C:\msys64\mingw64\bin\gcc.exe
-          CXX: C:\msys64\mingw64\bin\g++.exe
+          CC: ${{ steps.msys2.outputs.msys2-location }}\mingw64\bin\gcc.exe
+          CXX: ${{ steps.msys2.outputs.msys2-location }}\mingw64\bin\g++.exe
         run: python -m pytest tests/test_build.py
