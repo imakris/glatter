@@ -47,14 +47,22 @@ def _opengl_libs() -> list[str]:
 
 
 def _require_tool(executable: str) -> str:
-    """Return the path to *executable* or skip the test if it is missing."""
+    """Return the path to *executable*, skipping when it is simply absent.
+
+    A compiler named through CC or CXX was asked for on purpose, so an
+    unresolvable value there is a broken configuration rather than a
+    missing optional tool, and it fails instead of skipping.
+    """
 
     env_var_map = {"cc": "CC", "c++": "CXX"}
     lookup = env_var_map.get(executable, "")
-    candidate = os.environ.get(lookup, executable) if lookup else executable
+    requested = os.environ.get(lookup) if lookup else None
+    candidate = requested or executable
 
     path = shutil.which(candidate)
     if path is None:
+        if requested:
+            pytest.fail(f"{lookup} names '{requested}', which cannot be resolved")
         pytest.skip(f"required build tool '{candidate}' is not available")
     return path
 
