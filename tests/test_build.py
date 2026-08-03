@@ -410,11 +410,18 @@ def test_log_handler_can_be_replaced_and_removed(tmp_path: Path) -> None:
 
     cc = _require_tool("cc")
 
+    config_flags = [
+        "-DGLATTER_CONFIG_H_DEFINED",
+        "-DGLATTER_WINDOWS_WGL_GL=1" if os.name == "nt" else "-DGLATTER_MESA_GLX_GL=1",
+        *_khronos_static_flags(),
+    ]
+
     output_binary = tmp_path / "log_handler_contract"
     _run_command(
         [
             cc,
             "-std=c11",
+            *config_flags,
             "-I",
             str(REPO_ROOT / "include"),
             *_thread_flags(),

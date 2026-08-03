@@ -7,23 +7,12 @@
 #include <string.h>
 
 /*
- * Provide a minimal configuration for the test. We skip the default
- * configuration header so we can compile without depending on any
- * platform-specific GL/EGL headers that may not be available.
+ * Substitute a failing glatter_masprintf so the formatting-failure path of
+ * glatter_log is reachable. GLATTER_MASPRINTF_H suppresses the real
+ * implementation; the definition below takes its place. The platform
+ * configuration is supplied on the compiler command line, as it is for the
+ * other compile tests.
  */
-#define GLATTER_CONFIG_H_DEFINED
-
-/*
- * Pretend the platform headers are already provided and supply the enum
- * aliases glatter_def.h expects. This keeps the test focused on the logging
- * helpers without pulling real GL headers.
- */
-#define GLATTER_PLATFORM_HEADERS_H_DEFINED
-typedef unsigned int GLATTER_ENUM_GL;
-typedef unsigned int GLATTER_ENUM_GLX;
-typedef unsigned int GLATTER_ENUM_WGL;
-typedef unsigned int GLATTER_ENUM_GLU;
-typedef int          GLATTER_ENUM_EGL;
 char* glatter_masprintf(const char* format, ...);
 
 #define GLATTER_MASPRINTF_H
