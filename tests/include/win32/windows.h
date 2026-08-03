@@ -122,7 +122,7 @@ typedef struct _WNDCLASS {
     HCURSOR hCursor;
     HBRUSH hbrBackground;
     LPCSTR lpszMenuName;
-    LPCWSTR lpszClassName;
+    LPCSTR lpszClassName;
 } WNDCLASS;
 
 typedef struct tagPIXELFORMATDESCRIPTOR {
@@ -203,8 +203,9 @@ typedef struct tagMSG {
 
 #define WHITE_BRUSH 0
 
-#define IDI_WINLOGO 0x007D
-#define IDC_ARROW 0x007F
+#define MAKEINTRESOURCE(id) ((LPSTR)(ULONG_PTR)(WORD)(id))
+#define IDI_WINLOGO MAKEINTRESOURCE(32517)
+#define IDC_ARROW MAKEINTRESOURCE(32512)
 
 #define FORMAT_MESSAGE_ALLOCATE_BUFFER 0x00000100
 #define FORMAT_MESSAGE_FROM_SYSTEM 0x00001000
@@ -248,7 +249,7 @@ HINSTANCE GetModuleHandle(LPCSTR name);
 ATOM RegisterClass(const WNDCLASS* wnd_class);
 BOOL SetRect(RECT* rect, INT left, INT top, INT right, INT bottom);
 BOOL AdjustWindowRectEx(RECT* rect, DWORD style, BOOL menu, DWORD ex_style);
-HWND CreateWindowEx(DWORD ex_style, LPCWSTR class_name, LPCWSTR window_name, DWORD style,
+HWND CreateWindowEx(DWORD ex_style, LPCSTR class_name, LPCSTR window_name, DWORD style,
                     INT x, INT y, INT width, INT height, HWND parent, HMENU menu,
                     HINSTANCE instance, LPVOID param);
 HDC GetDC(HWND window);
@@ -289,7 +290,7 @@ HICON LoadIcon(HINSTANCE instance, LPCSTR name);
 HCURSOR LoadCursor(HINSTANCE instance, LPCSTR name);
 BOOL SetForegroundWindow(HWND window);
 HWND SetFocus(HWND window);
-HWND CreateWindow(LPCWSTR class_name, LPCWSTR window_name, DWORD style,
+HWND CreateWindow(LPCSTR class_name, LPCSTR window_name, DWORD style,
                   INT x, INT y, INT width, INT height, HWND parent, HMENU menu,
                   HINSTANCE instance, LPVOID param);
 

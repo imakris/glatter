@@ -46,6 +46,20 @@ def _opengl_libs() -> list[str]:
     return []
 
 
+def _stub_include_flags() -> list[str]:
+    """Include paths for headers the host does not provide on its own.
+
+    tests/include carries EGL, GLES and KHR headers that no platform ships
+    by default. tests/include/win32 additionally stands in for the Windows
+    SDK, so it is offered only where there is no real SDK to shadow.
+    """
+
+    flags = ["-I", str(REPO_ROOT / "tests" / "include")]
+    if os.name != "nt":
+        flags += ["-I", str(REPO_ROOT / "tests" / "include" / "win32")]
+    return flags
+
+
 def _require_tool(executable: str) -> str:
     """Return the path to *executable*, skipping when it is simply absent.
 
@@ -399,8 +413,7 @@ def test_c_program_compiles_with_glatter_c(tmp_path: Path) -> None:
             *config_flags,
             "-I",
             str(REPO_ROOT / "include"),
-            "-I",
-            str(REPO_ROOT / "tests" / "include"),
+            *_stub_include_flags(),
             *_thread_flags(),
             str(REPO_ROOT / "src" / "glatter" / "glatter.c"),
             str(egl_stub),
@@ -497,8 +510,7 @@ def test_header_only_cpp_compiles_across_translation_units(tmp_path: Path) -> No
             "-std=c11",
             "-I",
             str(REPO_ROOT / "include"),
-            "-I",
-            str(REPO_ROOT / "tests" / "include"),
+            *_stub_include_flags(),
             *_khronos_static_flags(),
             "-c",
             str(egl_stub),
@@ -513,8 +525,7 @@ def test_header_only_cpp_compiles_across_translation_units(tmp_path: Path) -> No
         *config_flags,
         "-I",
         str(REPO_ROOT / "include"),
-        "-I",
-        str(REPO_ROOT / "tests" / "include"),
+        *_stub_include_flags(),
         *_thread_flags(),
     ]
 
@@ -583,8 +594,7 @@ def test_header_only_cpp_compiles_via_glatter_solo(tmp_path: Path) -> None:
         "-std=c++17",
         "-I",
         str(REPO_ROOT / "include"),
-        "-I",
-        str(REPO_ROOT / "tests" / "include"),
+        *_stub_include_flags(),
         *_thread_flags(),
     ]
 
@@ -675,8 +685,7 @@ def test_header_only_log_sink_and_wsi_latch_are_process_wide(tmp_path: Path) -> 
         "-std=c++17",
         "-I",
         str(REPO_ROOT / "include"),
-        "-I",
-        str(REPO_ROOT / "tests" / "include"),
+        *_stub_include_flags(),
         *_thread_flags(),
     ]
 
@@ -760,8 +769,7 @@ def test_header_only_wsi_state_shared_across_tus(tmp_path: Path) -> None:
             "-std=c11",
             "-I",
             str(REPO_ROOT / "include"),
-            "-I",
-            str(REPO_ROOT / "tests" / "include"),
+            *_stub_include_flags(),
             *_khronos_static_flags(),
             "-c",
             str(egl_stub),
@@ -776,8 +784,7 @@ def test_header_only_wsi_state_shared_across_tus(tmp_path: Path) -> None:
         *config_flags,
         "-I",
         str(REPO_ROOT / "include"),
-        "-I",
-        str(REPO_ROOT / "tests" / "include"),
+        *_stub_include_flags(),
         *_thread_flags(),
     ]
 
@@ -828,8 +835,7 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
             *config_flags,
             "-I",
             str(REPO_ROOT / "include"),
-            "-I",
-            str(REPO_ROOT / "tests" / "include"),
+            *_stub_include_flags(),
             "-c",
             str(REPO_ROOT / "src" / "glatter" / "glatter.c"),
             "-o",
@@ -848,8 +854,7 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
             "-std=c11",
             "-I",
             str(REPO_ROOT / "include"),
-            "-I",
-            str(REPO_ROOT / "tests" / "include"),
+            *_stub_include_flags(),
             *_khronos_static_flags(),
             "-c",
             str(stub_source),
@@ -896,8 +901,7 @@ def test_cpp_program_links_against_static_library(tmp_path: Path) -> None:
                 *config_flags,
                 "-I",
                 str(REPO_ROOT / "include"),
-                "-I",
-                str(REPO_ROOT / "tests" / "include"),
+                *_stub_include_flags(),
                 *_thread_flags(),
                 "-c",
                 str(source_path),
@@ -1025,8 +1029,7 @@ def test_context_key_mixer_behaves_with_stubbed_egl(tmp_path: Path) -> None:
             *config_flags,
             "-I",
             str(REPO_ROOT / "include"),
-            "-I",
-            str(REPO_ROOT / "tests" / "include"),
+            *_stub_include_flags(),
             *_thread_flags(),
             str(REPO_ROOT / "src" / "glatter" / "glatter.c"),
             str(source),
@@ -1082,8 +1085,7 @@ def test_wgl_headers_compile_with_stubs(tmp_path: Path) -> None:
             *config_flags,
             "-I",
             str(REPO_ROOT / "include"),
-            "-I",
-            str(REPO_ROOT / "tests" / "include"),
+            *_stub_include_flags(),
             "-c",
             str(source),
             "-o",
@@ -1112,8 +1114,7 @@ def test_examples_compile(example: ExampleProgram, tmp_path: Path) -> None:
         *_khronos_static_flags(),
         "-I",
         str(REPO_ROOT / "include"),
-        "-I",
-        str(REPO_ROOT / "tests" / "include"),
+        *_stub_include_flags(),
         "-c",
         str(REPO_ROOT / example.source),
         "-o",
@@ -1169,8 +1170,7 @@ def test_windows_egl_gl_compiles_with_glatter_c(tmp_path: Path) -> None:
             *config_flags,
             "-I",
             str(REPO_ROOT / "include"),
-            "-I",
-            str(REPO_ROOT / "tests" / "include"),
+            *_stub_include_flags(),
             str(REPO_ROOT / "src" / "glatter" / "glatter.c"),
             str(egl_stub),
             str(c_source),
