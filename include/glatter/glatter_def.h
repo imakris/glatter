@@ -1906,7 +1906,7 @@ void glatter_dbg_return(const char* fmt, ...)
 GLATTER_INLINE_OR_NOT uintptr_t glatter_current_gl_context_key_(void) {
     uintptr_t a = (uintptr_t)0, b = (uintptr_t)0;
 
-#if defined(_WIN32)
+#if defined(_WIN32) && !defined(GLATTER_WINDOWS_EGL_GL)
     /* WGL: combine context and DC */
     a = (uintptr_t)wglGetCurrentContext();
     b = (uintptr_t)wglGetCurrentDC();
@@ -1914,7 +1914,7 @@ GLATTER_INLINE_OR_NOT uintptr_t glatter_current_gl_context_key_(void) {
     /* GLX: combine context and Display* */
     a = (uintptr_t)glXGetCurrentContext();
     b = (uintptr_t)glXGetCurrentDisplay();
-#elif defined(GLATTER_EGL)
+#elif defined(GLATTER_EGL) || defined(GLATTER_WINDOWS_EGL_GL)
     /* EGL: combine context and Display* */
     a = (uintptr_t)eglGetCurrentContext();
     b = (uintptr_t)eglGetCurrentDisplay();

@@ -1124,6 +1124,119 @@ def test_examples_compile(example: ExampleProgram, tmp_path: Path) -> None:
     _run_command(command)
 
 
+def test_windows_egl_gl_context_key_follows_current_egl_context(tmp_path: Path) -> None:
+    """A Windows EGL+GL context must yield a context key from EGL, not WGL.
+
+    The key gates the extension cache: zero means "no current context", and
+    glatter_get_extension_support_GL() then reports every extension absent.
+    An EGL context never makes a WGL context current, so asking WGL for the
+    key of a Windows EGL+GL application always yields zero.
+    """
+
+    if os.name != "nt":
+        pytest.skip("Windows EGL+GL context key test only runs on Windows")
+
+    cc = _require_tool("cc")
+
+    source = tmp_path / "egl_gl_context_key.c"
+    source.write_text(
+        textwrap.dedent(
+            """
+            #include <inttypes.h>
+            #include <stdint.h>
+            #include <stdio.h>
+            #define KHRONOS_STATIC 1
+            #include <EGL/egl.h>
+            #include <glatter/glatter.h>
+
+            #undef eglGetCurrentContext
+            #undef eglGetCurrentDisplay
+            #undef eglGetError
+            #undef eglGetProcAddress
+
+            extern uintptr_t glatter_current_gl_context_key_(void);
+
+            static uintptr_t g_fake_context = (uintptr_t)0;
+            static uintptr_t g_fake_display = (uintptr_t)0;
+
+            __eglMustCastToProperFunctionPointerType EGLAPIENTRY eglGetProcAddress(const char* name)
+            {
+                (void)name;
+                return NULL;
+            }
+
+            EGLint EGLAPIENTRY eglGetError(void)
+            {
+                return EGL_SUCCESS;
+            }
+
+            EGLContext EGLAPIENTRY eglGetCurrentContext(void)
+            {
+                return (EGLContext)g_fake_context;
+            }
+
+            EGLDisplay EGLAPIENTRY eglGetCurrentDisplay(void)
+            {
+                return (EGLDisplay)g_fake_display;
+            }
+
+            int main(void)
+            {
+                if (glatter_current_gl_context_key_() != (uintptr_t)0) {
+                    fprintf(stderr, "expected zero key when no EGL context is current\\n");
+                    return 1;
+                }
+
+                g_fake_context = (uintptr_t)0x1234u;
+                g_fake_display = (uintptr_t)0x5678u;
+
+                const uintptr_t first = glatter_current_gl_context_key_();
+                if (first == (uintptr_t)0) {
+                    fprintf(stderr, "current EGL context produced a zero key\\n");
+                    return 2;
+                }
+
+                g_fake_context = (uintptr_t)0x9abcu;
+                if (glatter_current_gl_context_key_() == first) {
+                    fprintf(stderr, "a different EGL context produced the same key\\n");
+                    return 3;
+                }
+
+                return 0;
+            }
+            """
+        ).strip()
+        + "\n"
+    )
+
+    config_flags = [
+        "-DGLATTER_CONFIG_H_DEFINED",
+        "-DGLATTER_GL=1",
+        "-DGLATTER_EGL=1",
+        "-DGLATTER_WINDOWS_EGL_GL=1",
+        *_khronos_static_flags(),
+    ]
+
+    output = tmp_path / "egl_gl_context_key"
+    _run_command(
+        [
+            cc,
+            "-std=c11",
+            *config_flags,
+            "-I",
+            str(REPO_ROOT / "include"),
+            *_stub_include_flags(),
+            str(REPO_ROOT / "src" / "glatter" / "glatter.c"),
+            str(source),
+            *_opengl_libs(),
+            "-o",
+            str(output),
+        ]
+    )
+
+    _run_command([output])
+
+
 def test_windows_egl_gl_compiles_with_glatter_c(tmp_path: Path) -> None:
     """Verify that the Windows EGL+GL platform compiles end-to-end."""
 
